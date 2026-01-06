@@ -57,22 +57,30 @@ body {
     justify-content: space-between;
     align-items: center;
     height: 70px;
+    overflow: hidden;
 }
 
 .nav-brand {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
     font-size: 1.25rem;
     font-weight: 700;
+    color: var(--primary-color);
+    flex-shrink: 0;
+}
+
+.nav-icon {
+    font-size: 1.5rem;
     color: var(--primary-color);
 }
 
 .nav-logo {
-    height: 35px;
-    width: 35px;
+    height: 25px;
+    width: 25px;
     border-radius: 50%;
     object-fit: cover;
+    flex-shrink: 0;
 }
 
 .nav-links {
@@ -441,6 +449,11 @@ body {
     margin-bottom: 15px;
 }
 
+.footer-icon {
+    color: var(--secondary-color);
+    font-size: 1.5rem;
+}
+
 .footer-logo {
     height: 30px;
     width: 30px;
@@ -487,8 +500,8 @@ body {
     }
     
     .nav-logo {
-        height: 30px;
-        width: 30px;
+        height: 20px;
+        width: 20px;
     }
     
     .footer-logo {
