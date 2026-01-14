@@ -73,7 +73,7 @@ h1, h2, h3, h4, h5, h6 {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    min-height: 170px;
+    min-height: 120px;
     overflow: visible;
 }
 
@@ -93,7 +93,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .nav-logo {
-    height: 150px;
+    height: 100px;
     width: auto;
     object-fit: contain;
     flex-shrink: 0;
@@ -229,7 +229,7 @@ h1, h2, h3, h4, h5, h6 {
 .hero {
     background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary-color) 50%, var(--primary-dark) 100%);
     color: white;
-    padding: 210px 0 80px;
+    padding: 170px 0 80px;
     text-align: center;
     position: relative;
     overflow: hidden;
@@ -946,7 +946,7 @@ h1, h2, h3, h4, h5, h6 {
     }
 
     .nav-logo {
-        height: 80px;
+        height: 65px;
         width: auto;
     }
 
