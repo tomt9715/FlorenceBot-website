@@ -154,7 +154,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (response.ok) {
                     // Success message
                     const formGroup = newsletterForm.querySelector('.form-group');
-                    formGroup.innerHTML = '<p style="color: var(--secondary-color); font-weight: 600; font-size: 1.1rem;"><i class="fas fa-check-circle"></i> Thanks for subscribing! Check your email for confirmation.</p>';
+                    formGroup.innerHTML = '<p style="color: var(--secondary-color); font-weight: 600; font-size: 1.1rem;"><i class="fas fa-check-circle"></i> Thanks for subscribing! You\'re all set.</p>';
                 } else {
                     throw new Error('Subscription failed');
                 }
