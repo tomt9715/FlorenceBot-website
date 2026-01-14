@@ -104,14 +104,23 @@ async function loadGuideContent(file) {
     const contentElement = document.getElementById('guide-content');
 
     try {
+        console.log('Fetching guide from:', file);
         const response = await fetch(file);
         if (!response.ok) throw new Error('Failed to load guide');
 
         const markdown = await response.text();
+        console.log('Loaded markdown, length:', markdown.length);
 
         // Extract free preview (first 30% of content)
         const freePreview = extractFreePreview(markdown);
-        const html = marked.parse(freePreview);
+        console.log('Free preview length:', freePreview.length);
+
+        // Parse markdown - handle both marked() and marked.parse() API
+        const html = typeof marked.parse === 'function'
+            ? marked.parse(freePreview)
+            : marked(freePreview);
+
+        console.log('Rendered HTML length:', html.length);
 
         // Add free preview badge at top
         const previewBadge = `
@@ -257,12 +266,22 @@ function hideLoader() {
     }
 }
 
-// Configure marked.js
+// Configure marked.js - do this before DOMContentLoaded
 if (typeof marked !== 'undefined') {
-    marked.setOptions({
-        breaks: true,
-        gfm: true,
-        headerIds: true,
-        mangle: false
-    });
+    if (typeof marked.setOptions === 'function') {
+        marked.setOptions({
+            breaks: true,
+            gfm: true,
+            headerIds: true,
+            mangle: false
+        });
+    } else if (typeof marked.use === 'function') {
+        // Newer marked.js API
+        marked.use({
+            breaks: true,
+            gfm: true,
+            headerIds: true,
+            mangle: false
+        });
+    }
 }
