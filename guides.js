@@ -148,7 +148,10 @@ function renderGuides(guides = guidesData) {
         <div class="guide-card category-${guide.category}" data-guide-id="${guide.id}">
             <div class="guide-card-header">
                 <div class="guide-icon">${guide.icon}</div>
-                <span class="guide-category">${formatCategory(guide.category)}</span>
+                <div class="d-flex justify-content-between align-items-center w-100">
+                    <span class="guide-category">${formatCategory(guide.category)}</span>
+                    <span class="badge bg-success" style="font-size: 0.7rem;">FREE PREVIEW</span>
+                </div>
             </div>
             <div class="guide-card-body">
                 <h3>${guide.title}</h3>
@@ -161,23 +164,37 @@ function renderGuides(guides = guidesData) {
                 </div>
             </div>
             <div class="guide-card-footer">
-                <div class="guide-meta">
+                <div class="guide-meta mb-3">
                     <span><i class="fas fa-clock"></i> ${guide.readTime}</span>
                     <span><i class="fas fa-signal"></i> ${guide.difficulty}</span>
                 </div>
-                <span class="read-guide">
-                    Read Guide <i class="fas fa-arrow-right"></i>
-                </span>
+                <div class="d-grid gap-2">
+                    <button class="btn btn-outline-primary btn-sm preview-btn" data-guide-id="${guide.id}" style="border-radius: 8px;">
+                        <i class="fas fa-book-open"></i> Read Free Preview
+                    </button>
+                    <button class="btn btn-primary btn-sm premium-btn" style="border-radius: 8px; background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); border: none;">
+                        <i class="fas fa-star"></i> Get Full NCLEX Guide - $29
+                    </button>
+                </div>
             </div>
         </div>
     `).join('');
 
-    // Add click listeners to cards
-    document.querySelectorAll('.guide-card').forEach(card => {
-        card.addEventListener('click', () => {
-            const guideId = card.dataset.guideId;
-            // Navigate to guide page instead of opening modal
+    // Add click listeners for preview buttons
+    document.querySelectorAll('.preview-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const guideId = btn.dataset.guideId;
             window.location.href = `guide.html?id=${guideId}`;
+        });
+    });
+
+    // Add click listeners for premium buttons
+    document.querySelectorAll('.premium-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            // Scroll to pricing section or open payment modal
+            alert('Premium purchase coming soon! This will open a payment modal for the NCLEX-Ready bundle.');
         });
     });
 }

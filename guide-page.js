@@ -108,9 +108,80 @@ async function loadGuideContent(file) {
         if (!response.ok) throw new Error('Failed to load guide');
 
         const markdown = await response.text();
-        const html = marked.parse(markdown);
 
-        contentElement.innerHTML = html;
+        // Extract free preview (first 30% of content)
+        const freePreview = extractFreePreview(markdown);
+        const html = marked.parse(freePreview);
+
+        // Add free preview badge at top
+        const previewBadge = `
+            <div class="alert alert-info d-flex align-items-center mb-4" style="background: linear-gradient(135deg, #e0f2fe, #dbeafe); border: none; border-radius: 12px;">
+                <i class="fas fa-info-circle me-3" style="font-size: 1.5rem; color: var(--primary-color);"></i>
+                <div>
+                    <h5 class="mb-1" style="color: var(--primary-color); font-weight: 600;">Free Preview Version</h5>
+                    <p class="mb-0" style="font-size: 0.9rem;">You're viewing the free preview with basic content. Upgrade to get full NCLEX-style questions, advanced clinical pearls, and test-taking strategies.</p>
+                </div>
+            </div>
+        `;
+
+        // Add premium CTA at bottom
+        const premiumCTA = `
+            <div class="premium-cta-section" style="margin-top: 60px; padding: 50px; background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); border-radius: 20px; color: white; text-align: center;">
+                <div class="mb-4">
+                    <i class="fas fa-lock" style="font-size: 3rem; opacity: 0.9;"></i>
+                </div>
+                <h2 class="mb-3" style="font-weight: 700;">Want the Complete NCLEX-Ready Guide?</h2>
+                <p class="mb-4" style="font-size: 1.1rem; opacity: 0.95; max-width: 600px; margin: 0 auto;">
+                    Unlock the full guide with comprehensive content including:
+                </p>
+                <div class="row g-3 mb-4" style="max-width: 700px; margin: 0 auto;">
+                    <div class="col-md-6">
+                        <div class="d-flex align-items-start">
+                            <i class="fas fa-check-circle me-2 mt-1"></i>
+                            <span style="text-align: left;">50+ NCLEX-style practice questions</span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="d-flex align-items-start">
+                            <i class="fas fa-check-circle me-2 mt-1"></i>
+                            <span style="text-align: left;">Detailed answer explanations</span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="d-flex align-items-start">
+                            <i class="fas fa-check-circle me-2 mt-1"></i>
+                            <span style="text-align: left;">Test-taking strategies & tips</span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="d-flex align-items-start">
+                            <i class="fas fa-check-circle me-2 mt-1"></i>
+                            <span style="text-align: left;">Advanced clinical pearls</span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="d-flex align-items-start">
+                            <i class="fas fa-check-circle me-2 mt-1"></i>
+                            <span style="text-align: left;">Priority nursing interventions</span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="d-flex align-items-start">
+                            <i class="fas fa-check-circle me-2 mt-1"></i>
+                            <span style="text-align: left;">Printable PDF study cards</span>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-light btn-lg px-5 mb-3" style="border-radius: 12px; font-weight: 600; color: var(--primary-color);">
+                    <i class="fas fa-star"></i> Get NCLEX-Ready Bundle - $29
+                </button>
+                <p class="mb-0" style="font-size: 0.9rem; opacity: 0.8;">
+                    <i class="fas fa-shield-alt"></i> 30-day money-back guarantee • <i class="fas fa-sync"></i> Free lifetime updates
+                </p>
+            </div>
+        `;
+
+        contentElement.innerHTML = previewBadge + html + premiumCTA;
 
         // Smooth scroll to anchor links
         contentElement.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -135,6 +206,24 @@ async function loadGuideContent(file) {
             </div>
         `;
     }
+}
+
+// Extract free preview (first ~30% of content)
+function extractFreePreview(markdown) {
+    // Split by main sections (##)
+    const sections = markdown.split(/(?=^##\s)/m);
+
+    // Take title + first 2-3 main sections (excluding NCLEX tips and advanced content)
+    const previewSections = sections.slice(0, 4).join('');
+
+    // Remove any NCLEX-specific sections
+    let preview = previewSections
+        .replace(/###?\s*NCLEX.*?(?=###|$)/gis, '')
+        .replace(/###?\s*Test-Taking.*?(?=###|$)/gis, '')
+        .replace(/###?\s*Clinical Pearls.*?(?=###|$)/gis, '')
+        .replace(/###?\s*Practice Questions.*?(?=###|$)/gis, '');
+
+    return preview;
 }
 
 // Render related guides
