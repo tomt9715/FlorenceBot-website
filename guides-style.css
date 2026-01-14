@@ -18,7 +18,7 @@
 
 /* Guides Hero Section */
 .guides-hero {
-    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 50%, #1d4ed8 100%);
+    background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary-color) 50%, var(--primary-dark) 100%);
     color: white;
     padding: 120px 0 60px;
     text-align: center;
@@ -99,7 +99,7 @@
 .search-input:focus {
     outline: none;
     border-color: var(--primary-color);
-    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+    box-shadow: 0 0 0 4px rgba(46, 134, 171, 0.1);
 }
 
 .clear-search {
@@ -253,13 +253,13 @@
 
 /* Category Colors */
 .category-lab-values .guide-icon {
-    background: linear-gradient(135deg, #3b82f6, #2563eb);
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
     color: white;
 }
 
 .category-lab-values .guide-category {
-    background: #dbeafe;
-    color: #1e40af;
+    background: rgba(46, 134, 171, 0.1);
+    color: var(--primary-dark);
 }
 
 .category-clinical-skills .guide-icon {
@@ -566,7 +566,7 @@
 }
 
 .modal-body table tr:hover {
-    background: #e0f2fe;
+    background: rgba(46, 134, 171, 0.1);
 }
 
 .modal-body code {
@@ -617,7 +617,7 @@
 
 /* Guides CTA Section */
 .guides-cta {
-    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 50%, #1d4ed8 100%);
+    background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary-color) 50%, var(--primary-dark) 100%);
     color: white;
     padding: 80px 0;
     text-align: center;

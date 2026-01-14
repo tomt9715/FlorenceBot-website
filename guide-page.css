@@ -1,9 +1,9 @@
 /* Professional Medical Reference Guide Styling */
 
 :root {
-    --guide-primary: #1e40af;
+    --guide-primary: #2E86AB;
     --guide-secondary: #64748b;
-    --guide-accent: #0ea5e9;
+    --guide-accent: #A23B72;
     --guide-text: #1e293b;
     --guide-text-light: #64748b;
     --guide-bg: #ffffff;
@@ -51,7 +51,7 @@
 
 /* Guide Header */
 .guide-header {
-    background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);
+    background: linear-gradient(135deg, var(--guide-primary) 0%, #236b8a 100%);
     color: white;
     padding: 60px 0 40px;
     margin-bottom: 40px;
