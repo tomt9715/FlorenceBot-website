@@ -6,17 +6,21 @@
 }
 
 :root {
-    /* Nursing-inspired color palette */
-    --primary-color: #2563eb;
-    --primary-dark: #1d4ed8;
-    --secondary-color: #10b981;
-    --accent-color: #f59e0b;
-    --text-primary: #1f2937;
-    --text-secondary: #6b7280;
-    --text-light: #9ca3af;
-    --background-light: #f8fafc;
-    --background-white: #ffffff;
-    --border-color: #e5e7eb;
+    /* FlorenceBot Pro Brand Colors */
+    --primary-color: #2E86AB;        /* Medical Blue - Primary brand color */
+    --primary-dark: #236b8a;         /* Darker blue for hover states */
+    --primary-light: #5ba3c4;        /* Lighter blue for backgrounds */
+    --secondary-color: #A23B72;      /* Healthcare Accent - Secondary brand color */
+    --secondary-dark: #81305b;       /* Darker accent for hover */
+    --secondary-light: #c96f9f;      /* Lighter accent */
+    --accent-color: #f59e0b;         /* Warm accent for highlights */
+    --white: #FFFFFF;                /* Pure white */
+    --text-primary: #1f2937;         /* Dark gray for body text */
+    --text-secondary: #6b7280;       /* Medium gray for secondary text */
+    --text-light: #9ca3af;           /* Light gray for tertiary text */
+    --background-light: #f8fafc;     /* Very light blue-gray background */
+    --background-white: #ffffff;     /* White background */
+    --border-color: #e5e7eb;         /* Light border color */
     --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
     --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
     --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
@@ -223,7 +227,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Hero Section */
 .hero {
-    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 50%, #1d4ed8 100%);
+    background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary-color) 50%, var(--primary-dark) 100%);
     color: white;
     padding: 140px 0 80px;
     text-align: center;
@@ -478,7 +482,7 @@ h1, h2, h3, h4, h5, h6 {
 .feature-icon {
     width: 70px;
     height: 70px;
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -491,7 +495,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .feature-card:hover .feature-icon {
     transform: scale(1.1) rotate(5deg);
-    box-shadow: 0 8px 16px rgba(37, 99, 235, 0.3);
+    box-shadow: 0 8px 16px rgba(46, 134, 171, 0.3);
 }
 
 .feature-card h3 {
@@ -617,7 +621,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .command-card:hover {
     transform: translateY(-5px) scale(1.02);
-    box-shadow: 0 20px 40px rgba(37, 99, 235, 0.2);
+    box-shadow: 0 20px 40px rgba(46, 134, 171, 0.2);
     border-color: var(--primary-color);
 }
 
@@ -779,7 +783,7 @@ h1, h2, h3, h4, h5, h6 {
 .newsletter-input:focus {
     outline: none;
     border-color: var(--primary-color);
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    box-shadow: 0 0 0 3px rgba(46, 134, 171, 0.1);
 }
 
 .newsletter-form .btn {
@@ -794,7 +798,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* CTA Section */
 .cta {
-    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 50%, #1d4ed8 100%);
+    background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary-color) 50%, var(--primary-dark) 100%);
     color: white;
     padding: 80px 0;
     text-align: center;
@@ -903,7 +907,7 @@ h1, h2, h3, h4, h5, h6 {
 .social-links a:hover {
     background: var(--primary-color);
     transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(37, 99, 235, 0.3);
+    box-shadow: 0 5px 15px rgba(46, 134, 171, 0.3);
 }
 
 .footer-bottom {
@@ -1061,7 +1065,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .floating-cta .btn {
-    box-shadow: 0 10px 25px rgba(37, 99, 235, 0.4);
+    box-shadow: 0 10px 25px rgba(46, 134, 171, 0.4);
     animation: floatingPulse 2s ease-in-out infinite;
 }
 
