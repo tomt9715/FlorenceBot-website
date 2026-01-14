@@ -2,13 +2,26 @@
 if (history.scrollRestoration) {
     history.scrollRestoration = 'manual';
 }
+
+// Immediate scroll to top
 window.scrollTo(0, 0);
+document.documentElement.scrollTop = 0;
+document.body.scrollTop = 0;
 
 // Page loader
 window.addEventListener('load', function() {
+    // Ensure we're at top when page loads
+    window.scrollTo(0, 0);
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+
     const pageLoader = document.getElementById('page-loader');
     setTimeout(() => {
         pageLoader.classList.add('hidden');
+        // Final scroll to top after loader hides
+        window.scrollTo(0, 0);
+        document.documentElement.scrollTop = 0;
+        document.body.scrollTop = 0;
     }, 300);
 });
 
