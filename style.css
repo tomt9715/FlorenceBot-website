@@ -388,17 +388,35 @@ h1, h2, h3, h4, h5, h6 {
 
 .stat {
     text-align: center;
+    padding: 20px 30px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+}
+
+.stat:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-5px);
 }
 
 .stat-number {
     display: block;
-    font-size: 2.5rem;
+    font-size: 3rem;
     font-weight: 700;
+    background: linear-gradient(135deg, #fff, rgba(255,255,255,0.8));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: -0.02em;
 }
 
 .stat-label {
-    font-size: 0.9rem;
-    opacity: 0.8;
+    font-size: 1rem;
+    opacity: 0.9;
+    margin-top: 5px;
+    font-weight: 500;
 }
 
 /* Problem/Solution Section */
@@ -508,19 +526,28 @@ h1, h2, h3, h4, h5, h6 {
 .section-title {
     font-family: 'Outfit', sans-serif;
     text-align: center;
-    font-size: 2.5rem;
+    font-size: 3rem;
     font-weight: 700;
-    margin-bottom: 15px;
-    letter-spacing: -0.03em;
+    margin-bottom: 20px;
+    letter-spacing: -0.02em;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.2;
 }
 
 .section-subtitle {
     font-family: 'Source Sans 3', sans-serif;
     text-align: center;
-    font-size: 1.15rem;
+    font-size: 1.25rem;
     color: var(--text-secondary);
-    margin-bottom: 60px;
+    margin-bottom: 70px;
     font-weight: 400;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
 }
 
 .features-grid {
@@ -715,16 +742,33 @@ h1, h2, h3, h4, h5, h6 {
     background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
     border-radius: 16px;
     padding: 0;
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     overflow: hidden;
-    box-shadow: var(--shadow-lg);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
     border: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+}
+
+.command-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(46, 134, 171, 0.1), rgba(162, 59, 114, 0.1));
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.command-card:hover::before {
+    opacity: 1;
 }
 
 .command-card:hover {
-    transform: translateY(-5px) scale(1.02);
-    box-shadow: 0 20px 40px rgba(46, 134, 171, 0.2);
-    border-color: var(--primary-color);
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 25px 50px rgba(46, 134, 171, 0.3);
+    border-color: rgba(46, 134, 171, 0.5);
 }
 
 .command-header {
@@ -1248,4 +1292,48 @@ body {
 .command-card:nth-child(1) { transition-delay: 0.15s; }
 .command-card:nth-child(2) { transition-delay: 0.3s; }
 .command-card:nth-child(3) { transition-delay: 0.45s; }
+
+
+/* Mobile Enhancements for Glassmorphism */
+@media (max-width: 768px) {
+    .hero-content {
+        padding: 40px 24px;
+        border-radius: 20px;
+    }
+    
+    .hero-content h1 {
+        font-size: 2.5rem;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+    
+    .stat {
+        padding: 15px 20px;
+    }
+    
+    .stat-number {
+        font-size: 2.5rem;
+    }
+    
+    .feature-card:hover {
+        transform: translateY(-8px) scale(1.01);
+    }
+    
+    .command-card:hover {
+        transform: translateY(-5px) scale(1.01);
+    }
+}
+
+/* Reduced motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
 
