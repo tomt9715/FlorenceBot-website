@@ -251,12 +251,14 @@ const statsObserver = new IntersectionObserver((entries) => {
         if (entry.isIntersecting) {
             const statNumbers = entry.target.querySelectorAll('.stat-number');
             statNumbers.forEach(stat => {
-                const text = stat.textContent;
-                const number = parseInt(text.replace(/\D/g, ''));
-                if (number) {
+                const text = stat.textContent.trim();
+                // Only animate if it's purely numeric (no special characters)
+                if (/^\d+$/.test(text)) {
+                    const number = parseInt(text);
                     stat.textContent = '0';
                     animateCounter(stat, number);
                 }
+                // Otherwise leave as-is (preserves "24/7", "100%", "Instant", etc.)
             });
             statsObserver.unobserve(entry.target);
         }
@@ -267,4 +269,43 @@ const heroStats = document.querySelector('.hero-stats');
 if (heroStats) {
     statsObserver.observe(heroStats);
 }
+
+// Back to Top Button
+const backToTopBtn = document.getElementById('backToTop');
+
+if (backToTopBtn) {
+    // Show/hide button on scroll
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) {
+            backToTopBtn.style.display = 'block';
+        } else {
+            backToTopBtn.style.display = 'none';
+        }
+    });
+
+    // Smooth scroll to top
+    backToTopBtn.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+}
+
+// Smooth scroll for all anchor links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        const href = this.getAttribute('href');
+        if (href !== '#' && href.length > 1) {
+            e.preventDefault();
+            const target = document.querySelector(href);
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        }
+    });
+});
 

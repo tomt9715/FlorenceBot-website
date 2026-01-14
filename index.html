@@ -28,12 +28,15 @@
 
     <!-- Theme Color for Mobile Browsers -->
     <meta name="theme-color" content="#2E86AB">
-    
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
     <link rel="stylesheet" href="style.css">
-    
+
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
@@ -380,60 +383,306 @@
         </div>
     </section>
 
-    <!-- FAQ Section -->
-    <section class="faq">
+    <!-- Pricing Section -->
+    <section class="pricing-section" style="padding: 100px 0; background: linear-gradient(135deg, #f8fafc 0%, #e0f2fe 100%);">
         <div class="container">
-            <h2 class="section-title">Frequently Asked Questions</h2>
-            <p class="section-subtitle">Everything you need to know about FlorenceBot Pro</p>
+            <div class="text-center mb-5">
+                <h2 class="section-title">Choose Your Learning Path</h2>
+                <p class="section-subtitle">Start free, upgrade when you're ready for NCLEX prep</p>
+            </div>
 
-            <div class="faq-container">
-                <div class="faq-item">
-                    <button class="faq-question">
-                        <span>Is FlorenceBot Pro really free?</span>
-                        <i class="fas fa-chevron-down"></i>
-                    </button>
-                    <div class="faq-answer">
-                        <p>Yes! FlorenceBot Pro is 100% free to use. All features, commands, and resources are available at no cost to support nursing students in their education journey.</p>
+            <div class="row g-4 justify-content-center">
+                <!-- Free Plan -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="card border-0 shadow-lg h-100" style="border-radius: 20px; transition: transform 0.3s ease;">
+                        <div class="card-body p-5">
+                            <div class="text-center mb-4">
+                                <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #10b981, #059669); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;">
+                                    <i class="fas fa-book-open" style="font-size: 1.5rem; color: white;"></i>
+                                </div>
+                                <h3 class="h4 fw-bold mb-2">Free Access</h3>
+                                <div class="h2 fw-bold mb-1">$0</div>
+                                <p class="text-muted mb-0">Forever</p>
+                            </div>
+
+                            <ul class="list-unstyled mb-4">
+                                <li class="mb-3">
+                                    <i class="fas fa-check-circle text-success me-2"></i>
+                                    Discord bot access (all commands)
+                                </li>
+                                <li class="mb-3">
+                                    <i class="fas fa-check-circle text-success me-2"></i>
+                                    Basic study guide previews
+                                </li>
+                                <li class="mb-3">
+                                    <i class="fas fa-check-circle text-success me-2"></i>
+                                    Lab values & medication info
+                                </li>
+                                <li class="mb-3">
+                                    <i class="fas fa-check-circle text-success me-2"></i>
+                                    Community support
+                                </li>
+                                <li class="mb-3 text-muted">
+                                    <i class="fas fa-times-circle me-2"></i>
+                                    Sample NCLEX questions only
+                                </li>
+                            </ul>
+
+                            <a href="https://discord.gg/y2Mh77wAV2" class="btn btn-outline-primary w-100 btn-lg" style="border-radius: 12px;">
+                                <i class="fab fa-discord"></i> Join Free
+                            </a>
+                        </div>
                     </div>
                 </div>
 
-                <div class="faq-item">
-                    <button class="faq-question">
-                        <span>How do I add the bot to my Discord server?</span>
-                        <i class="fas fa-chevron-down"></i>
-                    </button>
-                    <div class="faq-answer">
-                        <p>Simply join The Nursing Collective Discord server using the invite link. The bot is already active there and ready to use. You can also request an invite link to add it to your own study group server.</p>
+                <!-- Premium Plan -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="card border-0 shadow-lg h-100 position-relative" style="border-radius: 20px; transform: scale(1.05); border: 3px solid var(--primary-color);">
+                        <div class="position-absolute top-0 start-50 translate-middle">
+                            <span class="badge" style="background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); padding: 8px 24px; border-radius: 50px; font-size: 0.85rem;">MOST POPULAR</span>
+                        </div>
+
+                        <div class="card-body p-5">
+                            <div class="text-center mb-4 mt-3">
+                                <div style="width: 60px; height: 60px; background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;">
+                                    <i class="fas fa-graduation-cap" style="font-size: 1.5rem; color: white;"></i>
+                                </div>
+                                <h3 class="h4 fw-bold mb-2">NCLEX-Ready Guides</h3>
+                                <div class="h2 fw-bold mb-1" style="background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">$29</div>
+                                <p class="text-muted mb-0">One-time payment</p>
+                            </div>
+
+                            <ul class="list-unstyled mb-4">
+                                <li class="mb-3">
+                                    <i class="fas fa-check-circle me-2" style="color: var(--primary-color);"></i>
+                                    <strong>Everything in Free</strong>
+                                </li>
+                                <li class="mb-3">
+                                    <i class="fas fa-check-circle me-2" style="color: var(--primary-color);"></i>
+                                    <strong>Full study guides (5 topics)</strong>
+                                </li>
+                                <li class="mb-3">
+                                    <i class="fas fa-check-circle me-2" style="color: var(--primary-color);"></i>
+                                    50+ NCLEX-style practice questions
+                                </li>
+                                <li class="mb-3">
+                                    <i class="fas fa-check-circle me-2" style="color: var(--primary-color);"></i>
+                                    Detailed answer explanations
+                                </li>
+                                <li class="mb-3">
+                                    <i class="fas fa-check-circle me-2" style="color: var(--primary-color);"></i>
+                                    Test-taking strategies
+                                </li>
+                                <li class="mb-3">
+                                    <i class="fas fa-check-circle me-2" style="color: var(--primary-color);"></i>
+                                    Printable PDF study cards
+                                </li>
+                                <li class="mb-3">
+                                    <i class="fas fa-check-circle me-2" style="color: var(--primary-color);"></i>
+                                    Priority updates & new content
+                                </li>
+                            </ul>
+
+                            <button class="btn btn-primary w-100 btn-lg" style="border-radius: 12px; background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); border: none;">
+                                <i class="fas fa-star"></i> Get NCLEX-Ready
+                            </button>
+                            <p class="text-center text-muted mt-3 mb-0" style="font-size: 0.85rem;">
+                                <i class="fas fa-shield-alt"></i> 30-day money-back guarantee
+                            </p>
+                        </div>
                     </div>
                 </div>
 
-                <div class="faq-item">
-                    <button class="faq-question">
-                        <span>How accurate is the clinical information?</span>
-                        <i class="fas fa-chevron-down"></i>
-                    </button>
-                    <div class="faq-answer">
-                        <p>All information is sourced from evidence-based resources including nursing textbooks, professor materials, and current clinical guidelines. However, always verify critical information with your instructors and official resources.</p>
+                <!-- Bundle Plan -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="card border-0 shadow-lg h-100" style="border-radius: 20px; transition: transform 0.3s ease;">
+                        <div class="card-body p-5">
+                            <div class="text-center mb-4">
+                                <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #f59e0b, #d97706); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;">
+                                    <i class="fas fa-crown" style="font-size: 1.5rem; color: white;"></i>
+                                </div>
+                                <h3 class="h4 fw-bold mb-2">Ultimate Bundle</h3>
+                                <div class="h2 fw-bold mb-1" style="color: #f59e0b;">$49</div>
+                                <p class="text-muted mb-0"><s class="text-muted">$79</s> Save $30</p>
+                            </div>
+
+                            <ul class="list-unstyled mb-4">
+                                <li class="mb-3">
+                                    <i class="fas fa-check-circle text-warning me-2"></i>
+                                    <strong>Everything in NCLEX-Ready</strong>
+                                </li>
+                                <li class="mb-3">
+                                    <i class="fas fa-check-circle text-warning me-2"></i>
+                                    10+ comprehensive study guides
+                                </li>
+                                <li class="mb-3">
+                                    <i class="fas fa-check-circle text-warning me-2"></i>
+                                    150+ practice questions
+                                </li>
+                                <li class="mb-3">
+                                    <i class="fas fa-check-circle text-warning me-2"></i>
+                                    Video explanations (coming soon)
+                                </li>
+                                <li class="mb-3">
+                                    <i class="fas fa-check-circle text-warning me-2"></i>
+                                    Audio study notes (coming soon)
+                                </li>
+                                <li class="mb-3">
+                                    <i class="fas fa-check-circle text-warning me-2"></i>
+                                    Lifetime updates
+                                </li>
+                                <li class="mb-3">
+                                    <i class="fas fa-check-circle text-warning me-2"></i>
+                                    Priority support
+                                </li>
+                            </ul>
+
+                            <button class="btn w-100 btn-lg" style="border-radius: 12px; background: linear-gradient(135deg, #f59e0b, #d97706); border: none; color: white;">
+                                <i class="fas fa-bolt"></i> Get Ultimate Bundle
+                            </button>
+                            <p class="text-center text-muted mt-3 mb-0" style="font-size: 0.85rem;">
+                                <i class="fas fa-infinity"></i> Best value for serious students
+                            </p>
+                        </div>
                     </div>
                 </div>
+            </div>
 
-                <div class="faq-item">
-                    <button class="faq-question">
-                        <span>Can I use this for clinical rotations?</span>
-                        <i class="fas fa-chevron-down"></i>
-                    </button>
-                    <div class="faq-answer">
-                        <p>FlorenceBot Pro is designed as a study and reference tool. While it provides accurate information, always follow your clinical site's policies and consult with your preceptor for patient care decisions.</p>
+            <!-- Social Proof -->
+            <div class="text-center mt-5 pt-4">
+                <div class="row justify-content-center">
+                    <div class="col-md-4 mb-3">
+                        <div class="d-flex align-items-center justify-content-center">
+                            <i class="fas fa-users fa-2x me-3" style="color: var(--primary-color);"></i>
+                            <div class="text-start">
+                                <div class="h4 fw-bold mb-0">1,200+</div>
+                                <small class="text-muted">Active Students</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="d-flex align-items-center justify-content-center">
+                            <i class="fas fa-star fa-2x me-3" style="color: var(--accent-color);"></i>
+                            <div class="text-start">
+                                <div class="h4 fw-bold mb-0">4.9/5</div>
+                                <small class="text-muted">Student Rating</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="d-flex align-items-center justify-content-center">
+                            <i class="fas fa-trophy fa-2x me-3" style="color: var(--secondary-color);"></i>
+                            <div class="text-start">
+                                <div class="h4 fw-bold mb-0">95%</div>
+                                <small class="text-muted">Pass Rate</small>
+                            </div>
+                        </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
 
-                <div class="faq-item">
-                    <button class="faq-question">
-                        <span>What nursing programs is this suitable for?</span>
-                        <i class="fas fa-chevron-down"></i>
-                    </button>
-                    <div class="faq-answer">
-                        <p>FlorenceBot Pro supports all nursing programs including Pre-Nursing, ASN, BSN, ABSN, LPN-to-RN, and graduate nursing students. The content is relevant across all levels of nursing education.</p>
+    <!-- FAQ Section -->
+    <section class="faq" style="padding: 100px 0; background: var(--background-white);">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title">Frequently Asked Questions</h2>
+                <p class="section-subtitle">Everything you need to know about FlorenceBot Pro</p>
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="accordion" id="faqAccordion">
+                        <!-- FAQ 1 -->
+                        <div class="accordion-item border-0 mb-3" style="border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq1" aria-expanded="true" aria-controls="faq1" style="background: var(--background-light); padding: 1.25rem 1.5rem;">
+                                    <i class="fas fa-question-circle me-3" style="color: var(--primary-color);"></i>
+                                    Is the Discord bot really free?
+                                </button>
+                            </h2>
+                            <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body" style="padding: 1.25rem 1.5rem;">
+                                    Yes! The FlorenceBot Pro Discord bot is 100% free to use. All commands, basic features, and community access are available at no cost. The premium NCLEX-Ready study guides are an optional paid upgrade for students who want comprehensive practice questions and detailed study materials.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- FAQ 2 -->
+                        <div class="accordion-item border-0 mb-3" style="border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq2" aria-expanded="false" aria-controls="faq2" style="background: var(--background-light); padding: 1.25rem 1.5rem;">
+                                    <i class="fas fa-graduation-cap me-3" style="color: var(--primary-color);"></i>
+                                    What's included in the NCLEX-Ready guides?
+                                </button>
+                            </h2>
+                            <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body" style="padding: 1.25rem 1.5rem;">
+                                    The NCLEX-Ready guides include comprehensive study materials on 5 essential topics, 50+ NCLEX-style practice questions with detailed answer explanations, test-taking strategies, clinical pearls, priority nursing interventions, and printable PDF study cards. All content is designed to help you pass the NCLEX on your first attempt.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- FAQ 3 -->
+                        <div class="accordion-item border-0 mb-3" style="border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq3" aria-expanded="false" aria-controls="faq3" style="background: var(--background-light); padding: 1.25rem 1.5rem;">
+                                    <i class="fas fa-shield-alt me-3" style="color: var(--primary-color);"></i>
+                                    How accurate is the clinical information?
+                                </button>
+                            </h2>
+                            <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body" style="padding: 1.25rem 1.5rem;">
+                                    All information is sourced from evidence-based resources including nursing textbooks, professor materials, and current clinical guidelines. Content is regularly reviewed and updated to ensure accuracy. However, always verify critical information with your instructors and official resources for patient care decisions.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- FAQ 4 -->
+                        <div class="accordion-item border-0 mb-3" style="border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq4" aria-expanded="false" aria-controls="faq4" style="background: var(--background-light); padding: 1.25rem 1.5rem;">
+                                    <i class="fas fa-download me-3" style="color: var(--primary-color);"></i>
+                                    Can I download the study guides?
+                                </button>
+                            </h2>
+                            <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body" style="padding: 1.25rem 1.5rem;">
+                                    Yes! Premium NCLEX-Ready guide purchasers receive downloadable PDF versions of all study materials, including quick-reference cards perfect for printing. You can access your guides anytime, anywhere - even offline. Free preview guides are available online only.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- FAQ 5 -->
+                        <div class="accordion-item border-0 mb-3" style="border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq5" aria-expanded="false" aria-controls="faq5" style="background: var(--background-light); padding: 1.25rem 1.5rem;">
+                                    <i class="fas fa-hospital me-3" style="color: var(--primary-color);"></i>
+                                    What nursing programs is this suitable for?
+                                </button>
+                            </h2>
+                            <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body" style="padding: 1.25rem 1.5rem;">
+                                    FlorenceBot Pro supports all nursing programs including Pre-Nursing, ASN, BSN, ABSN, LPN-to-RN, and graduate nursing students. The content is relevant across all levels of nursing education, from fundamental concepts to advanced clinical practice and NCLEX preparation.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- FAQ 6 -->
+                        <div class="accordion-item border-0 mb-3" style="border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq6" aria-expanded="false" aria-controls="faq6" style="background: var(--background-light); padding: 1.25rem 1.5rem;">
+                                    <i class="fas fa-sync me-3" style="color: var(--primary-color);"></i>
+                                    Do I get updates after purchase?
+                                </button>
+                            </h2>
+                            <div id="faq6" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body" style="padding: 1.25rem 1.5rem;">
+                                    Absolutely! NCLEX-Ready guide purchasers receive priority access to all content updates, new practice questions, and expanded study materials at no additional cost. Ultimate Bundle members get lifetime updates for all current and future study guides.
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -508,6 +757,14 @@
             </div>
         </div>
     </footer>
+
+    <!-- Back to Top Button -->
+    <button id="backToTop" class="btn btn-primary" style="position: fixed; bottom: 30px; right: 30px; z-index: 999; display: none; width: 50px; height: 50px; border-radius: 50%; box-shadow: 0 4px 12px rgba(0,0,0,0.15); border: none; background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); transition: all 0.3s ease;">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Bootstrap 5 JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
     <script src="script.js"></script>
 </body>
