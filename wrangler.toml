@@ -1,0 +1,6 @@
+name = "florencebot-newsletter"
+main = "worker.js"
+compatibility_date = "2025-01-13"
+
+[vars]
+CONVERTKIT_FORM_ID = "8971636"
