@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing - FlorenceBot Pro</title>
+    <meta name="description" content="Choose the perfect plan for your nursing education journey. Free Discord bot access or upgrade to NCLEX-Ready guides with practice questions.">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/images/apple-touch-icon.png">
+
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#2E86AB">
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="pricing-styles.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Page Loader -->
+    <div class="page-loader" id="page-loader">
+        <div class="loader-spinner"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <a href="index.html">
+                    <img src="assets/images/header logo.png" alt="FlorenceBot Pro Logo" class="nav-logo">
+                </a>
+            </div>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link-home">Home</a>
+                <a href="index.html#features">Features</a>
+                <a href="guides.html">Study Guides</a>
+                <a href="pricing.html" class="active">Pricing</a>
+                <a href="index.html#contact">Contact</a>
+                <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+                    <i class="fas fa-sun light-icon"></i>
+                    <i class="fas fa-moon dark-icon"></i>
+                </button>
+                <a href="https://discord.gg/y2Mh77wAV2" class="btn btn-primary">Join Discord</a>
+            </div>
+            <button class="mobile-menu-btn" id="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Pricing Hero Section -->
+    <section class="pricing-hero">
+        <div class="container">
+            <div class="pricing-hero-content">
+                <h1>Choose Your Learning Path</h1>
+                <p class="pricing-subtitle">
+                    Start with free access to our Discord bot and community. Upgrade anytime for comprehensive NCLEX prep materials.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Cards Section -->
+    <section class="pricing-section">
+        <div class="container">
+            <div class="pricing-grid">
+                <!-- Free Plan -->
+                <div class="pricing-card">
+                    <div class="card-header">
+                        <div class="plan-icon">
+                            <i class="fas fa-book-open"></i>
+                        </div>
+                        <h3 class="plan-name">Free Access</h3>
+                        <div class="price-display">
+                            <span class="currency">$</span>0
+                            <span class="period">/forever</span>
+                        </div>
+                        <p class="plan-description">Perfect for getting started with clinical references</p>
+                    </div>
+
+                    <ul class="features-list">
+                        <li><i class="fas fa-check"></i> Discord bot access (all commands)</li>
+                        <li><i class="fas fa-check"></i> Basic study guide previews</li>
+                        <li><i class="fas fa-check"></i> Lab values & medication info</li>
+                        <li><i class="fas fa-check"></i> Community support</li>
+                        <li><i class="fas fa-check"></i> ABG interpretation guide</li>
+                        <li class="disabled"><i class="fas fa-times"></i> Sample NCLEX questions only</li>
+                        <li class="disabled"><i class="fas fa-times"></i> Full study guides</li>
+                    </ul>
+
+                    <button class="pricing-cta secondary" onclick="window.location.href='https://discord.gg/y2Mh77wAV2'">
+                        <i class="fab fa-discord"></i> Join Free
+                    </button>
+                </div>
+
+                <!-- Premium Plan (Most Popular) -->
+                <div class="pricing-card popular">
+                    <div class="popular-badge">
+                        <i class="fas fa-star"></i> Most Popular
+                    </div>
+                    <div class="card-header">
+                        <div class="plan-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <h3 class="plan-name">NCLEX-Ready</h3>
+                        <div class="price-display">
+                            <span class="currency">$</span>29
+                            <span class="period">/one-time</span>
+                        </div>
+                        <p class="plan-description">Everything you need to pass the NCLEX</p>
+                    </div>
+
+                    <ul class="features-list">
+                        <li><i class="fas fa-check"></i> <strong>Everything in Free</strong></li>
+                        <li><i class="fas fa-check"></i> <strong>Full study guides (5 topics)</strong></li>
+                        <li><i class="fas fa-check"></i> 50+ NCLEX-style practice questions</li>
+                        <li><i class="fas fa-check"></i> Detailed answer explanations</li>
+                        <li><i class="fas fa-check"></i> Test-taking strategies</li>
+                        <li><i class="fas fa-check"></i> Printable PDF study cards</li>
+                        <li><i class="fas fa-check"></i> Priority updates & new content</li>
+                    </ul>
+
+                    <button class="pricing-cta primary">
+                        <i class="fas fa-rocket"></i> Get NCLEX-Ready
+                    </button>
+                    <p class="money-back">
+                        <i class="fas fa-shield-alt"></i> 30-day money-back guarantee
+                    </p>
+                </div>
+
+                <!-- Ultimate Bundle -->
+                <div class="pricing-card">
+                    <div class="savings-badge">Save $30</div>
+                    <div class="card-header">
+                        <div class="plan-icon">
+                            <i class="fas fa-crown"></i>
+                        </div>
+                        <h3 class="plan-name">Ultimate Bundle</h3>
+                        <div class="price-display">
+                            <span class="currency">$</span>49
+                            <span class="period">/one-time</span>
+                        </div>
+                        <p class="plan-description original-price">
+                            <s>$79</s> Best value for serious students
+                        </p>
+                    </div>
+
+                    <ul class="features-list">
+                        <li><i class="fas fa-check"></i> <strong>Everything in NCLEX-Ready</strong></li>
+                        <li><i class="fas fa-check"></i> 10+ comprehensive study guides</li>
+                        <li><i class="fas fa-check"></i> 150+ practice questions</li>
+                        <li><i class="fas fa-check"></i> Video explanations (coming soon)</li>
+                        <li><i class="fas fa-check"></i> Audio study notes (coming soon)</li>
+                        <li><i class="fas fa-check"></i> Lifetime updates</li>
+                        <li><i class="fas fa-check"></i> Priority support</li>
+                    </ul>
+
+                    <button class="pricing-cta secondary">
+                        <i class="fas fa-bolt"></i> Get Ultimate Bundle
+                    </button>
+                    <p class="money-back">
+                        <i class="fas fa-infinity"></i> Lifetime access & updates
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Proof -->
+    <section class="social-proof">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-number">1,200+</div>
+                        <div class="stat-label">Active Students</div>
+                    </div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-number">4.9/5</div>
+                        <div class="stat-label">Student Rating</div>
+                    </div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-number">95%</div>
+                        <div class="stat-label">Pass Rate</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="container">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            <p class="section-subtitle">Everything you need to know about our pricing</p>
+
+            <div class="faq-accordion">
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Is the Discord bot really free forever?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Yes! The FlorenceBot Pro Discord bot will always be 100% free to use. All commands, basic features, and community access are available at no cost. The premium study guides are an optional upgrade for students who want comprehensive NCLEX prep materials.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>What's the difference between NCLEX-Ready and Ultimate Bundle?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>NCLEX-Ready includes 5 essential study guides with 50+ practice questions - perfect for focused exam prep. Ultimate Bundle includes 10+ guides with 150+ questions, plus future video/audio content and lifetime updates. It's our best value for students who want comprehensive coverage.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Can I upgrade from NCLEX-Ready to Ultimate Bundle later?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Yes! You can upgrade anytime by paying the difference ($20). Contact us through Discord or email and we'll process your upgrade within 24 hours.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>How does the 30-day money-back guarantee work?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>If you're not completely satisfied with your purchase within 30 days, simply email us at support@florencebot.pro and we'll issue a full refund, no questions asked. We want you to be confident in your investment.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Do I need a subscription or is it really one-time?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>It's truly one-time! No subscriptions, no recurring charges. Pay once and access your study guides forever. Ultimate Bundle members also get all future updates at no additional cost.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Can I download the study guides?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Yes! All premium purchases include downloadable PDF versions of study materials. You can print them, access them offline, or read them on any device.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="final-cta">
+        <div class="container">
+            <div class="cta-card">
+                <h2>Ready to Ace Your NCLEX?</h2>
+                <p>Join 1,200+ nursing students who are studying smarter with FlorenceBot Pro</p>
+                <div class="cta-buttons">
+                    <a href="https://discord.gg/y2Mh77wAV2" class="btn btn-primary btn-large">
+                        <i class="fab fa-discord"></i> Start Free Today
+                    </a>
+                    <a href="guides.html" class="btn btn-secondary btn-large">
+                        <i class="fas fa-book-open"></i> Browse Study Guides
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-brand">
+                        <img src="assets/images/favicon.png" alt="FlorenceBot Pro" class="footer-logo">
+                        <span>FlorenceBot Pro</span>
+                    </div>
+                    <p>Empowering nursing students with AI-powered clinical references and study tools.</p>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html#features">Features</a></li>
+                        <li><a href="guides.html">Study Guides</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
+                        <li><a href="https://discord.gg/y2Mh77wAV2">Discord Server</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p>
+                        <i class="fas fa-envelope"></i>
+                        <a href="mailto:support@florencebot.pro">support@florencebot.pro</a>
+                    </p>
+                    <div class="social-links">
+                        <a href="https://discord.gg/y2Mh77wAV2" aria-label="Discord" target="_blank" rel="noopener">
+                            <i class="fab fa-discord"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 FlorenceBot Pro. Built with ❤️ for nursing students.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Dark Mode Manager -->
+    <script src="dark-mode.js"></script>
+
+    <script src="script.js"></script>
+    <script src="pricing-script.js"></script>
+</body>
+</html>
