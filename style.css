@@ -228,6 +228,17 @@ h1, h2, h3, h4, h5, h6 {
     color: var(--text-primary);
 }
 
+/* Mobile menu button when menu is open - ensure visibility */
+@media (max-width: 768px) {
+    .nav-links.mobile-open ~ .mobile-menu-btn {
+        color: var(--text-primary) !important;
+    }
+
+    [data-theme="dark"] .nav-links.mobile-open ~ .mobile-menu-btn {
+        color: #f9fafb !important;
+    }
+}
+
 /* Dark mode mobile menu overlay and text colors */
 @media (max-width: 768px) {
     [data-theme="dark"] .nav-links {
