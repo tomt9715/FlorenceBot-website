@@ -98,7 +98,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Simple navbar background change on scroll
     const navbar = document.querySelector('.navbar');
-    const floatingCta = document.getElementById('floating-cta');
 
     window.addEventListener('scroll', function() {
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
@@ -108,13 +107,6 @@ document.addEventListener('DOMContentLoaded', function() {
             navbar.style.boxShadow = '0 4px 6px -1px rgb(0 0 0 / 0.1)';
         } else {
             navbar.style.boxShadow = '0 1px 2px 0 rgb(0 0 0 / 0.05)';
-        }
-
-        // Floating CTA visibility - show after scrolling past hero
-        if (scrollTop > 600) {
-            floatingCta.classList.add('visible');
-        } else {
-            floatingCta.classList.remove('visible');
         }
     });
 
@@ -294,28 +286,6 @@ const statsObserver = new IntersectionObserver((entries) => {
 const heroStats = document.querySelector('.hero-stats');
 if (heroStats) {
     statsObserver.observe(heroStats);
-}
-
-// Back to Top Button
-const backToTopBtn = document.getElementById('backToTop');
-
-if (backToTopBtn) {
-    // Show/hide button on scroll
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 300) {
-            backToTopBtn.style.display = 'block';
-        } else {
-            backToTopBtn.style.display = 'none';
-        }
-    });
-
-    // Smooth scroll to top
-    backToTopBtn.addEventListener('click', () => {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-    });
 }
 
 // Smooth scroll for all anchor links
