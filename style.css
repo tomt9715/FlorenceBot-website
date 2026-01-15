@@ -1596,6 +1596,38 @@ h1, h2, h3, h4, h5, h6 {
     animation: none;
 }
 
+/* Back to Top Button Positioning */
+#backToTop {
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    z-index: 999;
+}
+
+/* Mobile adjustments for fixed buttons */
+@media (max-width: 768px) {
+    #backToTop {
+        bottom: 20px;
+        left: 20px;
+        width: 48px;
+        height: 48px;
+    }
+}
+
+@media (max-width: 480px) {
+    #backToTop {
+        bottom: 15px;
+        left: 15px;
+        width: 44px;
+        height: 44px;
+    }
+
+    .floating-cta {
+        bottom: 15px !important;
+        right: 15px !important;
+    }
+}
+
 /* Smooth scrolling */
 html {
     scroll-behavior: smooth;
