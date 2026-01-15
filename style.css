@@ -1785,6 +1785,77 @@ body {
     background: #36393f;
 }
 
+/* Dark Mode CTA Section */
+[data-theme="dark"] .cta {
+    background: linear-gradient(135deg, #1e3a5f 0%, #2E86AB 50%, #236b8a 100%);
+}
+
+[data-theme="dark"] .cta-content h2,
+[data-theme="dark"] .cta-content p {
+    color: #ffffff;
+}
+
+/* Dark Mode Study Guides Highlight */
+[data-theme="dark"] .study-guides-highlight {
+    background: linear-gradient(135deg, #1e3a5f 0%, #2a4455 100%) !important;
+    border-color: var(--primary-color) !important;
+}
+
+[data-theme="dark"] .study-guides-highlight h2,
+[data-theme="dark"] .study-guides-highlight p {
+    color: #f9fafb !important;
+}
+
+/* Dark Mode Pricing Section */
+[data-theme="dark"] .pricing-section {
+    background: linear-gradient(135deg, #1f2937 0%, #111827 100%) !important;
+}
+
+[data-theme="dark"] .card {
+    background: var(--card-bg) !important;
+    border-color: var(--border-color) !important;
+}
+
+[data-theme="dark"] .card-body h3,
+[data-theme="dark"] .card-body .h4,
+[data-theme="dark"] .card-body .h2 {
+    color: var(--text-primary) !important;
+}
+
+[data-theme="dark"] .card-body p,
+[data-theme="dark"] .card-body li {
+    color: var(--text-secondary) !important;
+}
+
+[data-theme="dark"] .text-muted {
+    color: var(--text-light) !important;
+}
+
+/* Dark Mode FAQ Section */
+[data-theme="dark"] .faq {
+    background: var(--background-light) !important;
+}
+
+[data-theme="dark"] .accordion-item {
+    background: var(--card-bg) !important;
+    border-color: var(--border-color) !important;
+}
+
+[data-theme="dark"] .accordion-button {
+    background: var(--card-bg) !important;
+    color: var(--text-primary) !important;
+}
+
+[data-theme="dark"] .accordion-button:not(.collapsed) {
+    background: var(--background-light) !important;
+    color: var(--text-primary) !important;
+}
+
+[data-theme="dark"] .accordion-body {
+    background: var(--card-bg) !important;
+    color: var(--text-secondary) !important;
+}
+
 /* Reduced motion for accessibility */
 @media (prefers-reduced-motion: reduce) {
     *,
