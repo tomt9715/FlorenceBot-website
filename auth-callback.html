@@ -335,7 +335,7 @@
 
         // Track when page loaded to ensure minimum display time
         const pageLoadTime = Date.now();
-        const MIN_LOADING_TIME = 1500; // 1.5 seconds minimum
+        const MIN_LOADING_TIME = 500; // 0.5 seconds minimum - just enough to avoid flashing
 
         // Helper function to ensure minimum loading time before redirect
         async function redirectWithMinTime(redirectFn) {
