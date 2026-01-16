@@ -131,6 +131,9 @@ async function loadUserProfile() {
         // Show getting started card for new users (less than 2 days old)
         showGettingStartedCard(user);
 
+        // Load accessible guides based on user subscription
+        loadAccessibleGuides(user);
+
         // Load admin dashboard if admin
         if (user.is_admin) {
             await loadAdminDashboard();
@@ -328,6 +331,135 @@ function showGettingStartedCard(user) {
             gettingStartedCard.style.display = 'none';
             localStorage.setItem('gettingStartedDismissed', 'true');
         };
+    }
+}
+
+// Guides data - synced with guides.js
+const guidesData = [
+    {
+        id: 'electrolytes',
+        title: 'Electrolyte Management Guide',
+        description: 'Essential electrolyte ranges, nursing interventions, and clinical priorities. Includes sodium, potassium, calcium, magnesium, and phosphorus management.',
+        category: 'lab-values',
+        icon: '⚡',
+        file: 'content/guides/electrolytes.md',
+        topics: ['Sodium', 'Potassium', 'Calcium', 'Magnesium', 'Phosphorus'],
+        readTime: '8 min',
+        difficulty: 'Intermediate',
+        accessLevel: 'free'
+    },
+    {
+        id: 'vital-signs',
+        title: 'Vital Signs Assessment Guide',
+        description: 'Normal ranges, assessment techniques, and critical values for all age groups. Covers heart rate, blood pressure, respiratory rate, temperature, and oxygen saturation.',
+        category: 'clinical-skills',
+        icon: '💓',
+        file: 'content/guides/vital-signs.md',
+        topics: ['Heart Rate', 'Blood Pressure', 'Respiratory Rate', 'Temperature', 'SpO₂'],
+        readTime: '7 min',
+        difficulty: 'Beginner',
+        accessLevel: 'free'
+    },
+    {
+        id: 'critical-lab-values',
+        title: 'Critical Laboratory Values',
+        description: 'Life-threatening lab values that require immediate notification and intervention. Essential reference for clinical practice and NCLEX preparation.',
+        category: 'lab-values',
+        icon: '🧪',
+        file: 'content/guides/critical-lab-values.md',
+        topics: ['Critical Values', 'Lab Ranges', 'Emergency Response'],
+        readTime: '6 min',
+        difficulty: 'Intermediate',
+        accessLevel: 'premium'
+    },
+    {
+        id: 'isolation-precautions',
+        title: 'Isolation Precautions Guide',
+        description: 'Comprehensive guide to standard, contact, droplet, and airborne precautions. Includes PPE requirements and infection control protocols.',
+        category: 'safety',
+        icon: '🛡️',
+        file: 'content/guides/isolation-precautions.md',
+        topics: ['Standard Precautions', 'Contact', 'Droplet', 'Airborne', 'PPE'],
+        readTime: '9 min',
+        difficulty: 'Intermediate',
+        accessLevel: 'premium'
+    },
+    {
+        id: 'medication-math',
+        title: 'Medication Dosage Calculations',
+        description: 'Essential drug calculations with step-by-step examples and practice problems. Covers dosage calculations, IV rates, and weight-based dosing.',
+        category: 'medications',
+        icon: '🧮',
+        file: 'content/guides/medication-math.md',
+        topics: ['Dosage Calculations', 'IV Flow Rates', 'Weight-Based Dosing', 'Conversions'],
+        readTime: '12 min',
+        difficulty: 'Advanced',
+        accessLevel: 'premium'
+    }
+];
+
+// Load accessible guides based on user subscription
+function loadAccessibleGuides(user) {
+    const guideList = document.getElementById('guide-list');
+    if (!guideList) return;
+
+    // Filter guides based on access level
+    const accessibleGuides = guidesData.filter(guide => {
+        if (guide.accessLevel === 'free') return true;
+        if (guide.accessLevel === 'premium' && user.is_premium) return true;
+        return false;
+    });
+
+    // Update study guides stat
+    const guidesCountStat = document.querySelector('.user-stats .stat:first-child .number');
+    if (guidesCountStat) {
+        guidesCountStat.textContent = accessibleGuides.length;
+    }
+
+    // If user has accessible guides, render them
+    if (accessibleGuides.length > 0) {
+        guideList.innerHTML = accessibleGuides.map(guide => `
+            <div class="guide-item" style="padding: 16px; background: var(--background-light); border-radius: 12px; margin-bottom: 12px; cursor: pointer; transition: all 0.3s ease; border: 2px solid transparent;" onclick="window.location.href='guide.html?id=${guide.id}'">
+                <div style="display: flex; align-items: center; gap: 16px;">
+                    <div style="font-size: 32px; flex-shrink: 0;">${guide.icon}</div>
+                    <div style="flex: 1;">
+                        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+                            <h4 style="margin: 0; font-size: 1rem; color: var(--text-primary);">${guide.title}</h4>
+                            ${guide.accessLevel === 'free' ? '<span class="badge bg-success" style="font-size: 0.65rem; padding: 3px 8px;">FREE</span>' : '<span class="badge bg-warning" style="font-size: 0.65rem; padding: 3px 8px;">PREMIUM</span>'}
+                        </div>
+                        <p style="margin: 0; font-size: 0.85rem; color: var(--text-secondary); line-height: 1.4;">${guide.description}</p>
+                        <div style="display: flex; align-items: center; gap: 16px; margin-top: 8px; font-size: 0.8rem; color: var(--text-secondary);">
+                            <span><i class="fas fa-clock"></i> ${guide.readTime}</span>
+                            <span><i class="fas fa-signal"></i> ${guide.difficulty}</span>
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-right" style="color: var(--text-secondary); opacity: 0.5;"></i>
+                </div>
+            </div>
+        `).join('');
+
+        // Add hover effect
+        guideList.querySelectorAll('.guide-item').forEach(item => {
+            item.addEventListener('mouseenter', function() {
+                this.style.borderColor = 'var(--primary-color)';
+                this.style.background = 'var(--card-background)';
+                this.style.transform = 'translateX(4px)';
+            });
+            item.addEventListener('mouseleave', function() {
+                this.style.borderColor = 'transparent';
+                this.style.background = 'var(--background-light)';
+                this.style.transform = 'translateX(0)';
+            });
+        });
+    } else {
+        // Show empty state (shouldn't happen but just in case)
+        guideList.innerHTML = `
+            <div class="empty-state" style="text-align: center; padding: 60px 20px;">
+                <i class="fas fa-book-open" style="font-size: 64px; color: var(--primary-color); opacity: 0.3; margin-bottom: 20px;"></i>
+                <h4 style="color: var(--text-primary); margin-bottom: 12px;">No Study Guides Yet</h4>
+                <p style="color: var(--text-secondary); margin-bottom: 24px;">Get started by browsing our collection of NCLEX-focused study materials</p>
+            </div>
+        `;
     }
 }
 
