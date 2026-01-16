@@ -329,6 +329,22 @@
         const errorState = document.getElementById('error-state');
         const errorMessage = document.getElementById('error-message');
 
+        // Track when page loaded to ensure minimum display time
+        const pageLoadTime = Date.now();
+        const MIN_LOADING_TIME = 1500; // 1.5 seconds minimum
+
+        // Helper function to ensure minimum loading time before redirect
+        async function redirectWithMinTime(redirectFn) {
+            const elapsedTime = Date.now() - pageLoadTime;
+            const remainingTime = Math.max(0, MIN_LOADING_TIME - elapsedTime);
+
+            if (remainingTime > 0) {
+                await new Promise(resolve => setTimeout(resolve, remainingTime));
+            }
+
+            redirectFn();
+        }
+
         // Check for errors in URL
         if (error) {
             console.error('OAuth error:', error);
@@ -363,8 +379,10 @@
                         localStorage.setItem('user', JSON.stringify(data.user));
                         console.log('User data stored, redirecting to dashboard');
 
-                        // Redirect to dashboard
-                        window.location.href = 'dashboard.html';
+                        // Redirect to dashboard with minimum loading time
+                        redirectWithMinTime(() => {
+                            window.location.href = 'dashboard.html';
+                        });
                     } else {
                         throw new Error('Failed to fetch user data');
                     }
@@ -373,7 +391,9 @@
                     console.error('Error fetching user data:', error);
                     // Still redirect to dashboard even if user fetch fails
                     // The dashboard can try to fetch user data again
-                    window.location.href = 'dashboard.html';
+                    redirectWithMinTime(() => {
+                        window.location.href = 'dashboard.html';
+                    });
                 });
 
             } catch (error) {
