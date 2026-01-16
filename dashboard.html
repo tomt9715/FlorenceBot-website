@@ -214,6 +214,44 @@
         </div>
     </section>
 
+    <!-- Admin User Management Modal -->
+    <div class="modal-overlay" id="admin-user-modal" style="display: none;">
+        <div class="modal-content" style="max-width: 900px; max-height: 80vh; overflow-y: auto;">
+            <div class="modal-header">
+                <h2 id="modal-title">Users</h2>
+                <button class="modal-close" onclick="closeAdminModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="user-filters" style="display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap;">
+                    <button class="filter-btn active" data-filter="all">All Users</button>
+                    <button class="filter-btn" data-filter="today">Joined Today</button>
+                    <button class="filter-btn" data-filter="yesterday">Joined Yesterday</button>
+                    <button class="filter-btn" data-filter="week">This Week</button>
+                    <button class="filter-btn" data-filter="premium">Premium</button>
+                    <button class="filter-btn" data-filter="free">Free</button>
+                </div>
+                <div id="users-table-container">
+                    <table class="users-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Status</th>
+                                <th>Joined</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="users-table-body">
+                            <!-- Users will be loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Footer -->
     <footer class="footer">
         <div class="container">

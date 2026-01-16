@@ -173,15 +173,15 @@ async function loadAdminDashboard() {
             adminCard.innerHTML = `
                 <h3 style="color: white;"><i class="fas fa-crown"></i> Admin Overview</h3>
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-top: 20px;">
-                    <div style="text-align: center; padding: 20px; background: rgba(255,255,255,0.1); border-radius: 12px;">
+                    <div class="admin-stat-box" onclick="openAdminModal('all')" style="text-align: center; padding: 20px; background: rgba(255,255,255,0.1); border-radius: 12px;">
                         <div style="font-size: 36px; font-weight: 700;">${stats.total_users}</div>
                         <div style="opacity: 0.9; margin-top: 8px;">Total Users</div>
                     </div>
-                    <div style="text-align: center; padding: 20px; background: rgba(255,255,255,0.1); border-radius: 12px;">
+                    <div class="admin-stat-box" onclick="openAdminModal('premium')" style="text-align: center; padding: 20px; background: rgba(255,255,255,0.1); border-radius: 12px;">
                         <div style="font-size: 36px; font-weight: 700;">${stats.premium_users}</div>
                         <div style="opacity: 0.9; margin-top: 8px;">Premium Users</div>
                     </div>
-                    <div style="text-align: center; padding: 20px; background: rgba(255,255,255,0.1); border-radius: 12px;">
+                    <div class="admin-stat-box" onclick="openAdminModal('today')" style="text-align: center; padding: 20px; background: rgba(255,255,255,0.1); border-radius: 12px;">
                         <div style="font-size: 36px; font-weight: 700;">${stats.new_users_today}</div>
                         <div style="opacity: 0.9; margin-top: 8px;">New Today</div>
                     </div>
@@ -212,7 +212,7 @@ function updateUserStats(user) {
     // Calculate days active (days since account creation)
     const createdDate = new Date(user.created_at);
     const today = new Date();
-    const daysActive = Math.floor((today - createdDate) / (1000 * 60 * 60 * 24));
+    const daysActive = Math.max(0, Math.floor((today - createdDate) / (1000 * 60 * 60 * 24)));
 
     // Format member since date
     const memberSince = createdDate.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
@@ -330,4 +330,242 @@ function showGettingStartedCard(user) {
             localStorage.setItem('gettingStartedDismissed', 'true');
         };
     }
+}
+
+// Admin User Management Functions
+let allUsersData = [];
+let currentFilter = 'all';
+
+async function openAdminModal(filter = 'all') {
+    currentFilter = filter;
+    const modal = document.getElementById('admin-user-modal');
+    const modalTitle = document.getElementById('modal-title');
+
+    // Set modal title based on filter
+    const titles = {
+        'all': 'All Users',
+        'today': 'Users Joined Today',
+        'yesterday': 'Users Joined Yesterday',
+        'week': 'Users Joined This Week',
+        'premium': 'Premium Users',
+        'free': 'Free Users'
+    };
+    modalTitle.textContent = titles[filter] || 'Users';
+
+    // Show modal
+    modal.style.display = 'flex';
+
+    // Load users
+    await loadAdminUsers(filter);
+
+    // Update active filter button
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.dataset.filter === filter) {
+            btn.classList.add('active');
+        }
+    });
+
+    // Attach filter button listeners
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.onclick = () => {
+            filterUsers(btn.dataset.filter);
+        };
+    });
+}
+
+function closeAdminModal() {
+    document.getElementById('admin-user-modal').style.display = 'none';
+}
+
+// Close modal when clicking outside
+document.addEventListener('click', function(e) {
+    const modal = document.getElementById('admin-user-modal');
+    if (e.target === modal) {
+        closeAdminModal();
+    }
+});
+
+async function loadAdminUsers(filter = 'all') {
+    try {
+        const response = await fetch(`${API_URL}/admin/users?filter=${filter}`, {
+            headers: {
+                'Authorization': `Bearer ${accessToken}`,
+                'Content-Type': 'application/json'
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to load users');
+        }
+
+        const data = await response.json();
+        allUsersData = data.users;
+
+        renderUsersTable(allUsersData);
+
+    } catch (error) {
+        console.error('Error loading users:', error);
+        document.getElementById('users-table-body').innerHTML = `
+            <tr>
+                <td colspan="5" style="text-align: center; padding: 40px; color: var(--text-secondary);">
+                    <i class="fas fa-exclamation-circle" style="font-size: 48px; margin-bottom: 12px; display: block;"></i>
+                    Failed to load users
+                </td>
+            </tr>
+        `;
+    }
+}
+
+function filterUsers(filter) {
+    currentFilter = filter;
+    const modalTitle = document.getElementById('modal-title');
+
+    const titles = {
+        'all': 'All Users',
+        'today': 'Users Joined Today',
+        'yesterday': 'Users Joined Yesterday',
+        'week': 'Users Joined This Week',
+        'premium': 'Premium Users',
+        'free': 'Free Users'
+    };
+    modalTitle.textContent = titles[filter] || 'Users';
+
+    // Filter users on client side
+    let filteredUsers = [...allUsersData];
+    const now = new Date();
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    const yesterday = new Date(today);
+    yesterday.setDate(yesterday.getDate() - 1);
+    const weekAgo = new Date(today);
+    weekAgo.setDate(weekAgo.getDate() - 7);
+
+    switch(filter) {
+        case 'today':
+            filteredUsers = allUsersData.filter(u => new Date(u.created_at) >= today);
+            break;
+        case 'yesterday':
+            filteredUsers = allUsersData.filter(u => {
+                const date = new Date(u.created_at);
+                return date >= yesterday && date < today;
+            });
+            break;
+        case 'week':
+            filteredUsers = allUsersData.filter(u => new Date(u.created_at) >= weekAgo);
+            break;
+        case 'premium':
+            filteredUsers = allUsersData.filter(u => u.is_premium);
+            break;
+        case 'free':
+            filteredUsers = allUsersData.filter(u => !u.is_premium);
+            break;
+    }
+
+    renderUsersTable(filteredUsers);
+
+    // Update active button
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.dataset.filter === filter) {
+            btn.classList.add('active');
+        }
+    });
+}
+
+function renderUsersTable(users) {
+    const tbody = document.getElementById('users-table-body');
+
+    if (users.length === 0) {
+        tbody.innerHTML = `
+            <tr>
+                <td colspan="5" style="text-align: center; padding: 40px; color: var(--text-secondary);">
+                    <i class="fas fa-users" style="font-size: 48px; margin-bottom: 12px; display: block; opacity: 0.3;"></i>
+                    No users found
+                </td>
+            </tr>
+        `;
+        return;
+    }
+
+    tbody.innerHTML = users.map(user => {
+        const badges = [];
+        if (user.is_admin) badges.push('<span class="user-badge admin"><i class="fas fa-crown"></i> Admin</span>');
+        if (user.is_premium) badges.push('<span class="user-badge premium"><i class="fas fa-star"></i> Premium</span>');
+        if (!user.is_premium && !user.is_admin) badges.push('<span class="user-badge free">Free</span>');
+
+        const joinedDate = new Date(user.created_at).toLocaleDateString('en-US', {
+            month: 'short',
+            day: 'numeric',
+            year: 'numeric'
+        });
+
+        return `
+            <tr>
+                <td><strong>${user.first_name} ${user.last_name}</strong></td>
+                <td>${user.email}</td>
+                <td>${badges.join(' ')}</td>
+                <td>${joinedDate}</td>
+                <td>
+                    <div class="user-actions">
+                        <button class="action-btn" onclick="viewUserDetails('${user.id}')">
+                            <i class="fas fa-eye"></i> View
+                        </button>
+                        ${!user.is_premium ? `<button class="action-btn" onclick="togglePremium('${user.id}', true)">
+                            <i class="fas fa-crown"></i> Grant Premium
+                        </button>` : `<button class="action-btn danger" onclick="togglePremium('${user.id}', false)">
+                            <i class="fas fa-times"></i> Remove Premium
+                        </button>`}
+                    </div>
+                </td>
+            </tr>
+        `;
+    }).join('');
+}
+
+async function togglePremium(userId, grantPremium) {
+    if (!confirm(`Are you sure you want to ${grantPremium ? 'grant' : 'remove'} premium status for this user?`)) {
+        return;
+    }
+
+    try {
+        const response = await fetch(`${API_URL}/admin/users/${userId}/premium`, {
+            method: 'PUT',
+            headers: {
+                'Authorization': `Bearer ${accessToken}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ is_premium: grantPremium })
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to update user');
+        }
+
+        // Reload users
+        await loadAdminUsers(currentFilter);
+
+        alert(`Premium status ${grantPremium ? 'granted' : 'removed'} successfully!`);
+
+    } catch (error) {
+        console.error('Error updating user:', error);
+        alert('Failed to update user. Please try again.');
+    }
+}
+
+function viewUserDetails(userId) {
+    const user = allUsersData.find(u => u.id === userId);
+    if (!user) return;
+
+    const details = `
+Name: ${user.first_name} ${user.last_name}
+Email: ${user.email}
+Nursing Program: ${user.nursing_program || 'Not specified'}
+Account Type: ${user.is_premium ? 'Premium' : 'Free'}
+Admin: ${user.is_admin ? 'Yes' : 'No'}
+Verified: ${user.is_verified ? 'Yes' : 'No'}
+Discord Connected: ${user.has_discord ? 'Yes' : 'No'}
+Joined: ${new Date(user.created_at).toLocaleString()}
+    `;
+
+    alert(details);
 }
