@@ -475,6 +475,20 @@ h1, h2, h3, h4, h5, h6 {
     transform: translateY(-2px);
 }
 
+/* Pulse animation for call-to-action buttons */
+.btn-pulse {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        box-shadow: 0 0 0 0 rgba(46, 134, 171, 0.4);
+    }
+    50% {
+        box-shadow: 0 0 0 8px rgba(46, 134, 171, 0);
+    }
+}
+
 .btn-light {
     background: white;
     color: var(--primary-color);

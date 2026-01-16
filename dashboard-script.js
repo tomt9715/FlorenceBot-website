@@ -129,6 +129,9 @@ async function loadUserProfile() {
             userAvatar.innerHTML = `<span style="font-weight: 600; font-size: 18px;">${user.first_name.charAt(0)}</span>`;
         }
 
+        // Show getting started card for new users (less than 2 days old)
+        showGettingStartedCard(user);
+
         // Load admin dashboard if admin
         if (user.is_admin) {
             await loadAdminDashboard();
@@ -295,4 +298,36 @@ function animateStats() {
             }, stepTime);
         }
     });
+}
+
+// Show getting started card for new users
+function showGettingStartedCard(user) {
+    const gettingStartedCard = document.getElementById('getting-started-card');
+    if (!gettingStartedCard) return;
+
+    // Check if user is new (account created less than 2 days ago)
+    const createdDate = new Date(user.created_at);
+    const today = new Date();
+    const daysOld = Math.floor((today - createdDate) / (1000 * 60 * 60 * 24));
+
+    // Check if user has already dismissed the card
+    const dismissed = localStorage.getItem('gettingStartedDismissed');
+
+    if (daysOld < 2 && !dismissed) {
+        // Show the card
+        gettingStartedCard.style.display = 'block';
+
+        // Customize third step based on account type
+        if (user.is_premium) {
+            document.getElementById('premium-step-title').textContent = 'Explore Premium Features';
+            document.getElementById('premium-step-desc').textContent = 'You have access to all study guides and features';
+        }
+
+        // Store dismissal in localStorage when user clicks "Got it!"
+        const dismissBtn = gettingStartedCard.querySelector('button');
+        dismissBtn.onclick = function() {
+            gettingStartedCard.style.display = 'none';
+            localStorage.setItem('gettingStartedDismissed', 'true');
+        };
+    }
 }

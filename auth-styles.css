@@ -781,6 +781,37 @@
     .btn-small {
         width: 100%;
     }
+
+    /* Mobile: Stack user stats vertically */
+    .user-stats {
+        flex-direction: column;
+        align-items: center;
+        gap: 24px;
+    }
+
+    /* Mobile: Getting started card adjustments */
+    #getting-started-card h3 {
+        font-size: 1.3rem;
+    }
+
+    #getting-started-card > div[style*="grid-template-columns"] {
+        grid-template-columns: 1fr !important;
+        gap: 12px !important;
+    }
+
+    /* Mobile: Activity list padding */
+    .activity-list {
+        gap: 12px;
+    }
+
+    .activity-item {
+        padding: 12px;
+    }
+
+    /* Mobile: Quick actions single column */
+    .quick-actions {
+        grid-template-columns: 1fr;
+    }
 }
 
 /* User Menu Dropdown */
@@ -977,5 +1008,38 @@
 
     .quick-actions {
         grid-template-columns: 1fr;
+    }
+
+    /* Extra small screens: Reduce padding and spacing */
+    .dashboard {
+        padding: 100px 0 60px;
+    }
+
+    .dashboard-header {
+        margin-bottom: 40px;
+    }
+
+    .dashboard-card {
+        padding: 20px;
+    }
+
+    #getting-started-card {
+        padding: 16px !important;
+    }
+
+    #getting-started-card h3 {
+        font-size: 1.1rem;
+    }
+
+    #getting-started-card p {
+        font-size: 0.9rem;
+    }
+
+    .empty-state h4 {
+        font-size: 1rem;
+    }
+
+    .empty-state p {
+        font-size: 0.85rem;
     }
 }
