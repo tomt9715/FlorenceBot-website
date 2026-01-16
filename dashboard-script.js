@@ -2,7 +2,7 @@
 // User menu toggle and dashboard interactions
 
 // API Configuration
-const API_URL = 'http://localhost:8000';
+const API_URL = 'https://web-production-592c07.up.railway.app';
 
 // Check authentication
 const accessToken = localStorage.getItem('accessToken');
