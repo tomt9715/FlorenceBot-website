@@ -775,8 +775,8 @@ node scripts/convert-images.js
   "@type": "Organization",
   "name": "The Nursing Collective",
   "description": "AI-Powered Nursing Study Companion",
-  "url": "https://florencebot.pro",
-  "logo": "https://florencebot.pro/assets/images/logo.png",
+  "url": "https://thenursingcollective.pro",
+  "logo": "https://thenursingcollective.pro/assets/images/logo.png",
   "sameAs": [
     "https://discord.gg/y2Mh77wAV2"
   ]
@@ -834,17 +834,17 @@ node scripts/convert-images.js
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://florencebot.pro/</loc>
+    <loc>https://thenursingcollective.pro/</loc>
     <lastmod>2026-01-16</lastmod>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://florencebot.pro/guides.html</loc>
+    <loc>https://thenursingcollective.pro/guides.html</loc>
     <lastmod>2026-01-16</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://florencebot.pro/pricing.html</loc>
+    <loc>https://thenursingcollective.pro/pricing.html</loc>
     <lastmod>2026-01-16</lastmod>
     <priority>0.8</priority>
   </url>
@@ -857,7 +857,7 @@ node scripts/convert-images.js
 User-agent: *
 Allow: /
 
-Sitemap: https://florencebot.pro/sitemap.xml
+Sitemap: https://thenursingcollective.pro/sitemap.xml
 ```
 
 ---

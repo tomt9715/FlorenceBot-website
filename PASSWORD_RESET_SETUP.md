@@ -100,7 +100,7 @@ async def forgot_password():
     )
 
     # 5. Create reset URL
-    reset_url = f"https://florencebot.pro/reset-password.html?token={reset_token}"
+    reset_url = f"https://thenursingcollective.pro/reset-password.html?token={reset_token}"
 
     # 6. Read email template
     with open('email-templates/password-reset.html', 'r') as f:
