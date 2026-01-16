@@ -149,13 +149,13 @@
     position: absolute;
     top: 20px;
     right: 20px;
-    background: #10b981;
+    background: linear-gradient(135deg, #f59e0b, #d97706);
     color: white;
     padding: 8px 16px;
     border-radius: 20px;
     font-size: 0.85rem;
     font-weight: 600;
-    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+    box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4);
 }
 
 /* Card Header */
