@@ -195,7 +195,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-console.log('🏥 FlorenceBot Pro Website - Ready!');
 // ============================================
 // PROFESSIONAL SAAS ENHANCEMENTS
 // ============================================

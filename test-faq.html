@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FAQ Test</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container" style="padding: 50px;">
+        <h2>FAQ Test</h2>
+        <div class="faq-item" style="margin-bottom: 16px; background: var(--card-background); border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color);">
+            <button class="faq-question" style="width: 100%; padding: 24px; text-align: left; background: none; border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
+                <span style="font-size: 1.1rem; font-weight: 600; color: var(--text-primary);">Test Question 1</span>
+                <i class="fas fa-chevron-down" style="color: var(--primary-color); transition: transform 0.3s ease;"></i>
+            </button>
+            <div class="faq-answer" style="padding: 0 24px 24px; display: none;">
+                <p style="color: var(--text-secondary); line-height: 1.7; margin: 0;">This is the answer to question 1.</p>
+            </div>
+        </div>
+
+        <div class="faq-item" style="margin-bottom: 16px; background: var(--card-background); border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color);">
+            <button class="faq-question" style="width: 100%; padding: 24px; text-align: left; background: none; border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
+                <span style="font-size: 1.1rem; font-weight: 600; color: var(--text-primary);">Test Question 2</span>
+                <i class="fas fa-chevron-down" style="color: var(--primary-color); transition: transform 0.3s ease;"></i>
+            </button>
+            <div class="faq-answer" style="padding: 0 24px 24px; display: none;">
+                <p style="color: var(--text-secondary); line-height: 1.7; margin: 0;">This is the answer to question 2.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="dark-mode.js"></script>
+    <script src="pricing-script.js"></script>
+</body>
+</html>

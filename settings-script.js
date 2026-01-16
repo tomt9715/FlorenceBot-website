@@ -14,7 +14,6 @@ if (!accessToken) {
 }
 
 document.addEventListener('DOMContentLoaded', async function() {
-    console.log('Settings script loaded');
 
     // Load user profile
     await loadUserProfile();

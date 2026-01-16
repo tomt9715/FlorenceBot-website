@@ -100,4 +100,3 @@ if (document.readyState === 'loading') {
     window.darkModeManager = new DarkModeManager();
 }
 
-console.log('🌓 Dark Mode Manager loaded - Manual toggle mode');

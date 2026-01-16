@@ -14,7 +14,6 @@ if (!accessToken) {
 }
 
 document.addEventListener('DOMContentLoaded', async function() {
-    console.log('Dashboard script loaded');
 
     // Load user profile from API
     await loadUserProfile();

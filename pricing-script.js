@@ -2,7 +2,6 @@
 // Class-based Package System with Tier Toggle
 
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('Pricing script loaded');
 
     // Tier Toggle functionality
     const tierToggles = document.querySelectorAll('.tier-toggle');
@@ -56,13 +55,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
 
-            console.log('Switched to tier:', selectedTier);
         });
     });
 
     // FAQ Accordion
     const faqItems = document.querySelectorAll('.faq-item');
-    console.log('Found FAQ items:', faqItems.length);
 
     faqItems.forEach((item, index) => {
         const question = item.querySelector('.faq-question');
@@ -72,7 +69,6 @@ document.addEventListener('DOMContentLoaded', function() {
             question.addEventListener('click', function(e) {
                 e.preventDefault();
                 e.stopPropagation();
-                console.log('FAQ clicked:', index);
 
                 const isActive = item.classList.contains('active');
 
@@ -97,7 +93,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     if (icon) icon.style.transform = 'rotate(180deg)';
                 }
 
-                console.log('Item active:', item.classList.contains('active'));
             });
         }
     });
@@ -109,7 +104,6 @@ document.addEventListener('DOMContentLoaded', function() {
         faqItems[0].classList.add('active');
         if (firstAnswer) firstAnswer.style.display = 'block';
         if (firstIcon) firstIcon.style.transform = 'rotate(180deg)';
-        console.log('First FAQ opened by default');
     }
 
     // Add ripple effect to pricing CTAs

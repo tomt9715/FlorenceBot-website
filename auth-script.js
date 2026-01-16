@@ -10,7 +10,6 @@ if (localStorage.getItem('accessToken')) {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('Auth script loaded');
 
     // Current auth mode: 'signin' or 'signup'
     let currentMode = 'signin'; // Default to sign in mode for returning users
@@ -154,7 +153,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // Toggle to email form
     if (emailToggleBtn) {
         emailToggleBtn.addEventListener('click', function() {
-            console.log('Email toggle clicked');
             authOptions.style.display = 'none';
             emailForm.classList.add('active');
             localStorage.setItem('lastAuthMethod', 'email');
@@ -164,7 +162,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // Back to all options
     if (backBtn) {
         backBtn.addEventListener('click', function() {
-            console.log('Back button clicked');
             emailForm.classList.remove('active');
             authOptions.style.display = 'flex';
             // Reset form
@@ -386,7 +383,6 @@ document.addEventListener('DOMContentLoaded', function() {
 // Handle Login
 async function handleLogin(email, password) {
     try {
-        console.log('Attempting login for:', email);
 
         const response = await fetch(`${API_URL}/auth/login`, {
             method: 'POST',
@@ -397,14 +393,12 @@ async function handleLogin(email, password) {
         });
 
         const data = await response.json();
-        console.log('Login response:', { status: response.status, hasToken: !!data.access_token });
 
         if (!response.ok) {
             console.error('Login failed:', data.error);
             throw new Error(data.error || 'Login failed');
         }
 
-        console.log('Login successful, storing tokens and redirecting...');
 
         // Store tokens and user data
         localStorage.setItem('accessToken', data.access_token);
@@ -423,7 +417,6 @@ async function handleLogin(email, password) {
 // Handle Registration
 async function handleRegister(email, password, firstName, lastName) {
     try {
-        console.log('Starting registration for:', email);
 
         const response = await fetch(`${API_URL}/auth/register`, {
             method: 'POST',
@@ -440,14 +433,12 @@ async function handleRegister(email, password, firstName, lastName) {
         });
 
         const data = await response.json();
-        console.log('Registration response:', { status: response.status, data });
 
         if (!response.ok) {
             console.error('Registration failed:', data.error);
             throw new Error(data.error || 'Registration failed');
         }
 
-        console.log('Registration successful, attempting auto-login...');
         showSuccess('Registration successful! Logging you in...');
 
         // Auto-login after registration (for testing)
@@ -461,7 +452,6 @@ async function handleRegister(email, password, firstName, lastName) {
 
 // Handle social authentication
 async function handleSocialAuth(provider) {
-    console.log(`${provider} authentication initiated`);
 
     // Remember last used auth method
     localStorage.setItem('lastAuthMethod', provider);
@@ -494,7 +484,6 @@ async function handleSocialAuth(provider) {
         }
 
         // Redirect to OAuth provider (Google)
-        console.log('Redirecting to OAuth authorization URL');
         window.location.href = data.authorization_url;
 
     } catch (error) {

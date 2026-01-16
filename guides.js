@@ -213,5 +213,3 @@ function hideLoader() {
 }
 
 // Add keyboard shortcut hint
-console.log('%c💡 Keyboard Shortcuts', 'font-size: 14px; font-weight: bold; color: #2563eb;');
-console.log('%c/ - Focus search', 'font-size: 12px; color: #6b7280;');

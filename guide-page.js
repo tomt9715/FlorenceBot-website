@@ -119,13 +119,10 @@ async function loadGuideContent(file, hasAccess, guideId) {
     const contentElement = document.getElementById('guide-content');
 
     try {
-        console.log('Fetching guide from:', file);
-        console.log('User has access:', hasAccess);
         const response = await fetch(file);
         if (!response.ok) throw new Error('Failed to load guide');
 
         const markdown = await response.text();
-        console.log('Loaded markdown, length:', markdown.length);
 
         let contentToRender = markdown;
         let previewBadge = '';
@@ -133,7 +130,6 @@ async function loadGuideContent(file, hasAccess, guideId) {
         // Show preview for users who haven't purchased
         if (!hasAccess) {
             contentToRender = extractFreePreview(markdown);
-            console.log('Preview length:', contentToRender.length);
 
             // Add preview badge
             previewBadge = `
@@ -163,7 +159,6 @@ async function loadGuideContent(file, hasAccess, guideId) {
             ? marked.parse(contentToRender)
             : marked(contentToRender);
 
-        console.log('Rendered HTML length:', html.length);
 
         // Add purchase CTA at bottom only if user doesn't have access
         let purchaseCTA = '';
