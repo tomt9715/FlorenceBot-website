@@ -459,24 +459,48 @@ async function handleRegister(email, password, firstName, lastName) {
     }
 }
 
-// Handle social authentication (placeholder)
-function handleSocialAuth(provider) {
+// Handle social authentication
+async function handleSocialAuth(provider) {
     console.log(`${provider} authentication initiated`);
 
     // Remember last used auth method
     localStorage.setItem('lastAuthMethod', provider);
 
-    // Placeholder - replace with actual OAuth flow
-    const providerNames = {
-        'google': 'Google',
-        'discord': 'Discord',
-        'apple': 'Apple'
-    };
+    // Currently supported providers
+    const supportedProviders = ['google'];
 
-    alert(`${providerNames[provider]} authentication\n\nThis feature will be available soon. Please use email authentication for now.`);
+    if (!supportedProviders.includes(provider)) {
+        const providerNames = {
+            'discord': 'Discord',
+            'apple': 'Apple'
+        };
+        alert(`${providerNames[provider]} authentication\n\nThis feature will be available soon. Please use Google or email authentication for now.`);
+        return;
+    }
 
-    // In production, you would redirect to OAuth endpoints:
-    // window.location.href = `${API_URL}/auth/oauth/${provider}`;
+    try {
+        // Get OAuth authorization URL from backend
+        const response = await fetch(`${API_URL}/auth/oauth/${provider}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(data.error || `Failed to initiate ${provider} authentication`);
+        }
+
+        // Redirect to OAuth provider (Google)
+        console.log('Redirecting to OAuth authorization URL');
+        window.location.href = data.authorization_url;
+
+    } catch (error) {
+        console.error(`${provider} OAuth initiation error:`, error);
+        alert(`Failed to sign in with ${provider}. Please try again or use email authentication.`);
+    }
 }
 
 // Add ripple effect to buttons (matching site interaction)
