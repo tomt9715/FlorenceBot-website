@@ -113,6 +113,23 @@ document.addEventListener('DOMContentLoaded', function() {
             const submitBtn = signupForm.querySelector('button[type="submit"]');
             const isSignIn = submitBtn.querySelector('i').classList.contains('fa-sign-in-alt');
 
+            // Get name fields (only needed for signup)
+            let firstName = '';
+            let lastName = '';
+            if (!isSignIn) {
+                const firstNameInput = document.getElementById('first-name');
+                const lastNameInput = document.getElementById('last-name');
+
+                if (firstNameInput) firstName = firstNameInput.value.trim();
+                if (lastNameInput) lastName = lastNameInput.value.trim();
+
+                // Validate names for signup
+                if (!firstName || !lastName) {
+                    alert('Please enter your first and last name.');
+                    return;
+                }
+            }
+
             // Validate password match for signup
             if (!isSignIn && password !== confirmPassword) {
                 alert('Passwords do not match. Please try again.');
@@ -137,7 +154,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     await handleLogin(email, password);
                 } else {
                     // Register
-                    await handleRegister(email, password);
+                    await handleRegister(email, password, firstName, lastName);
                 }
             } catch (error) {
                 console.error('Auth error:', error);
@@ -158,7 +175,10 @@ document.addEventListener('DOMContentLoaded', function() {
             const authHeader = document.querySelector('.auth-header h1');
             const submitBtn = signupForm.querySelector('button[type="submit"]');
             const confirmPasswordGroup = document.querySelector('#confirm-password').closest('.form-group');
+            const nameFieldsGroup = document.querySelector('#first-name')?.closest('div[style*="grid"]');
             const termsCheckbox = document.querySelector('.form-checkbox');
+            const firstNameInput = document.getElementById('first-name');
+            const lastNameInput = document.getElementById('last-name');
 
             if (this.textContent === 'Sign In') {
                 // Switch to sign in mode
@@ -166,6 +186,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 submitBtn.innerHTML = '<i class="fas fa-sign-in-alt"></i><span>Sign In</span>';
                 confirmPasswordGroup.style.display = 'none';
                 confirmPasswordInput.removeAttribute('required');
+                if (nameFieldsGroup) nameFieldsGroup.style.display = 'none';
+                if (firstNameInput) firstNameInput.removeAttribute('required');
+                if (lastNameInput) lastNameInput.removeAttribute('required');
                 passwordStrength.classList.remove('visible'); // Hide password strength for sign in
                 if (termsCheckbox) termsCheckbox.style.display = 'none';
                 this.parentElement.innerHTML = 'Don\'t have an account? <a href="#" id="toggle-signin">Sign Up</a>';
@@ -178,6 +201,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 submitBtn.innerHTML = '<i class="fas fa-user-plus"></i><span>Create Account</span>';
                 confirmPasswordGroup.style.display = 'block';
                 confirmPasswordInput.setAttribute('required', '');
+                if (nameFieldsGroup) nameFieldsGroup.style.display = 'grid';
+                if (firstNameInput) firstNameInput.setAttribute('required', '');
+                if (lastNameInput) lastNameInput.setAttribute('required', '');
                 // Password strength will show when user types
                 if (termsCheckbox) termsCheckbox.style.display = 'flex';
                 this.parentElement.innerHTML = 'Already have an account? <a href="#" id="toggle-signin">Sign In</a>';
@@ -215,7 +241,7 @@ async function handleLogin(email, password) {
 }
 
 // Handle Registration
-async function handleRegister(email, password) {
+async function handleRegister(email, password, firstName, lastName) {
     const response = await fetch(`${API_URL}/auth/register`, {
         method: 'POST',
         headers: {
@@ -224,8 +250,8 @@ async function handleRegister(email, password) {
         body: JSON.stringify({
             email,
             password,
-            first_name: 'Student',
-            last_name: 'User',
+            first_name: firstName,
+            last_name: lastName,
             nursing_program: 'BSN'
         })
     });
