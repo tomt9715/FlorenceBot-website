@@ -116,6 +116,13 @@ async function loadUserProfile() {
             }
         }
 
+        // Update user stats with real data
+        updateUserStats(user);
+
+        // Update subscription and Discord status
+        updateSubscriptionStatus(user);
+        updateDiscordStatus(user);
+
         // Update user avatar with initials
         const userAvatar = document.querySelector('.user-avatar');
         if (userAvatar && user.first_name) {
@@ -197,6 +204,72 @@ async function loadAdminDashboard() {
     }
 }
 
+// Update user stats with real data
+function updateUserStats(user) {
+    // Calculate days active (days since account creation)
+    const createdDate = new Date(user.created_at);
+    const today = new Date();
+    const daysActive = Math.floor((today - createdDate) / (1000 * 60 * 60 * 24));
+
+    // Format member since date
+    const memberSince = createdDate.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+
+    // Update stats
+    const stats = document.querySelectorAll('.user-stats .stat');
+    if (stats[0]) {
+        stats[0].querySelector('.number').textContent = '0'; // TODO: Will be dynamic when guides are tracked
+    }
+    if (stats[1]) {
+        stats[1].querySelector('.number').textContent = daysActive;
+    }
+    if (stats[2]) {
+        stats[2].querySelector('.number').textContent = memberSince;
+    }
+
+    // Animate the numeric stats
+    animateStats();
+}
+
+// Update subscription status card
+function updateSubscriptionStatus(user) {
+    const createdDate = new Date(user.created_at);
+    const memberDate = createdDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+
+    const subscriptionTitle = document.getElementById('subscription-title');
+    const subscriptionStatus = document.getElementById('subscription-status');
+    const subscriptionInfo = document.getElementById('subscription-info');
+    const accountType = document.getElementById('account-type');
+    const memberDateEl = document.getElementById('member-date');
+    const subscriptionAction = document.getElementById('subscription-action');
+
+    if (user.is_premium) {
+        subscriptionTitle.innerHTML = '<i class="fas fa-crown"></i> Premium Account';
+        subscriptionStatus.className = 'status active';
+        subscriptionStatus.innerHTML = '<i class="fas fa-check-circle"></i> Active';
+        subscriptionInfo.textContent = 'You have full access to all study guides and premium Discord features';
+        accountType.textContent = 'Premium';
+        memberDateEl.textContent = memberDate;
+        subscriptionAction.innerHTML = '<i class="fas fa-heart"></i> Thank You for Being Premium!';
+        subscriptionAction.style.cursor = 'default';
+        subscriptionAction.onclick = null;
+    } else {
+        accountType.textContent = 'Free';
+        memberDateEl.textContent = memberDate;
+    }
+}
+
+// Update Discord connection status
+function updateDiscordStatus(user) {
+    const discordStatus = document.getElementById('discord-status');
+    const discordInfo = document.getElementById('discord-info');
+
+    if (user.has_discord) {
+        discordStatus.className = 'status connected';
+        discordStatus.innerHTML = '<i class="fas fa-check-circle"></i> Connected';
+        discordInfo.innerHTML = '<strong>Discord Account Linked</strong><br>Access FlorenceBot in The Nursing Collective server';
+    }
+}
+
 // Animate dashboard stats
 function animateStats() {
     const statNumbers = document.querySelectorAll('.user-stats .number');
@@ -208,7 +281,7 @@ function animateStats() {
 
         if (!isNaN(numericValue)) {
             let currentValue = 0;
-            const increment = Math.ceil(numericValue / 30);
+            const increment = Math.ceil(numericValue / 30) || 1;
             const duration = 1000; // 1 second
             const stepTime = duration / (numericValue / increment);
 

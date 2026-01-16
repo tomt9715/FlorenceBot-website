@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Settings - FlorenceBot Pro</title>
+    <meta name="description" content="Manage your account settings, profile information, and security options.">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/images/apple-touch-icon.png">
+
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#2E86AB">
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="auth-styles.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Page Loader -->
+    <div class="page-loader" id="page-loader">
+        <div class="loader-spinner"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <a href="index.html">
+                    <img src="assets/images/new-logo.png" alt="FlorenceBot Pro Logo" class="nav-logo">
+                </a>
+            </div>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="guides.html">Study Guides</a>
+                <a href="pricing.html">Pricing</a>
+                <a href="about-florencebot.html">About FlorenceBot</a>
+                <a href="dashboard.html">Dashboard</a>
+                <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+                    <i class="fas fa-sun light-icon"></i>
+                    <i class="fas fa-moon dark-icon"></i>
+                </button>
+                <div class="user-menu">
+                    <button class="user-avatar" id="user-menu-btn">
+                        <i class="fas fa-user-circle"></i>
+                    </button>
+                    <div class="user-dropdown" id="user-dropdown">
+                        <a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                        <a href="settings.html" class="active"><i class="fas fa-cog"></i> Settings</a>
+                        <a href="#logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                    </div>
+                </div>
+            </div>
+            <button class="mobile-menu-btn" id="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Settings Section -->
+    <section class="dashboard" style="padding-top: 120px;">
+        <div class="container" style="max-width: 900px;">
+            <div class="dashboard-header" style="margin-bottom: 40px;">
+                <h1><i class="fas fa-cog"></i> Account Settings</h1>
+                <p style="color: var(--text-secondary); margin-top: 12px;">Manage your profile, security, and preferences</p>
+            </div>
+
+            <!-- Profile Information Card -->
+            <div class="dashboard-card" style="margin-bottom: 24px;">
+                <h3><i class="fas fa-user"></i> Profile Information</h3>
+                <form id="profile-form" style="margin-top: 24px;">
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+                        <div class="form-group">
+                            <label for="first-name" style="display: block; margin-bottom: 8px; color: var(--text-primary); font-weight: 500;">First Name</label>
+                            <input type="text" id="first-name" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="last-name" style="display: block; margin-bottom: 8px; color: var(--text-primary); font-weight: 500;">Last Name</label>
+                            <input type="text" id="last-name" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-top: 20px;">
+                        <label for="email" style="display: block; margin-bottom: 8px; color: var(--text-primary); font-weight: 500;">Email Address</label>
+                        <input type="email" id="email" class="form-control" disabled>
+                        <small style="color: var(--text-secondary); display: block; margin-top: 6px;">Email cannot be changed</small>
+                    </div>
+                    <div class="form-group" style="margin-top: 20px;">
+                        <label for="nursing-program" style="display: block; margin-bottom: 8px; color: var(--text-primary); font-weight: 500;">Nursing Program</label>
+                        <select id="nursing-program" class="form-control">
+                            <option value="">Select your program</option>
+                            <option value="ASN">ASN - Associate Degree in Nursing</option>
+                            <option value="BSN">BSN - Bachelor of Science in Nursing</option>
+                            <option value="ABSN">ABSN - Accelerated BSN</option>
+                            <option value="LPN-to-RN">LPN to RN Bridge</option>
+                            <option value="RN-to-BSN">RN to BSN Bridge</option>
+                            <option value="MSN">MSN - Master of Science in Nursing</option>
+                            <option value="DNP">DNP - Doctor of Nursing Practice</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn-primary" style="margin-top: 24px;">
+                        <i class="fas fa-save"></i> Save Changes
+                    </button>
+                </form>
+            </div>
+
+            <!-- Change Password Card -->
+            <div class="dashboard-card" style="margin-bottom: 24px;">
+                <h3><i class="fas fa-lock"></i> Change Password</h3>
+                <form id="password-form" style="margin-top: 24px;">
+                    <div class="form-group">
+                        <label for="current-password" style="display: block; margin-bottom: 8px; color: var(--text-primary); font-weight: 500;">Current Password</label>
+                        <input type="password" id="current-password" class="form-control" required>
+                    </div>
+                    <div class="form-group" style="margin-top: 20px;">
+                        <label for="new-password" style="display: block; margin-bottom: 8px; color: var(--text-primary); font-weight: 500;">New Password</label>
+                        <input type="password" id="new-password" class="form-control" required minlength="8">
+                        <small style="color: var(--text-secondary); display: block; margin-top: 6px;">Must be at least 8 characters</small>
+                    </div>
+                    <div class="form-group" style="margin-top: 20px;">
+                        <label for="confirm-new-password" style="display: block; margin-bottom: 8px; color: var(--text-primary); font-weight: 500;">Confirm New Password</label>
+                        <input type="password" id="confirm-new-password" class="form-control" required minlength="8">
+                    </div>
+                    <button type="submit" class="btn-primary" style="margin-top: 24px;">
+                        <i class="fas fa-key"></i> Update Password
+                    </button>
+                </form>
+            </div>
+
+            <!-- Connected Accounts Card -->
+            <div class="dashboard-card">
+                <h3><i class="fas fa-link"></i> Connected Accounts</h3>
+                <div style="margin-top: 24px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 16px; background: var(--background-light); border-radius: 12px; margin-bottom: 12px;">
+                        <div style="display: flex; align-items: center; gap: 12px;">
+                            <i class="fab fa-discord" style="font-size: 24px; color: #5865F2;"></i>
+                            <div>
+                                <div style="font-weight: 600; color: var(--text-primary);">Discord</div>
+                                <div style="font-size: 0.9rem; color: var(--text-secondary);" id="discord-connection-status">Not connected</div>
+                            </div>
+                        </div>
+                        <button class="btn-small secondary" id="discord-connect-btn" onclick="alert('Discord OAuth coming soon!')">
+                            <i class="fab fa-discord"></i> Connect
+                        </button>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 16px; background: var(--background-light); border-radius: 12px; margin-bottom: 12px;">
+                        <div style="display: flex; align-items: center; gap: 12px;">
+                            <i class="fab fa-google" style="font-size: 24px; color: #DB4437;"></i>
+                            <div>
+                                <div style="font-weight: 600; color: var(--text-primary);">Google</div>
+                                <div style="font-size: 0.9rem; color: var(--text-secondary);" id="google-connection-status">Not connected</div>
+                            </div>
+                        </div>
+                        <button class="btn-small secondary" id="google-connect-btn" onclick="alert('Google OAuth coming soon!')">
+                            <i class="fab fa-google"></i> Connect
+                        </button>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 16px; background: var(--background-light); border-radius: 12px;">
+                        <div style="display: flex; align-items: center; gap: 12px;">
+                            <i class="fab fa-apple" style="font-size: 24px; color: var(--text-primary);"></i>
+                            <div>
+                                <div style="font-weight: 600; color: var(--text-primary);">Apple</div>
+                                <div style="font-size: 0.9rem; color: var(--text-secondary);" id="apple-connection-status">Not connected</div>
+                            </div>
+                        </div>
+                        <button class="btn-small secondary" id="apple-connect-btn" onclick="alert('Apple OAuth coming soon!')">
+                            <i class="fab fa-apple"></i> Connect
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-brand">
+                        <img src="assets/images/favicon.png" alt="FlorenceBot Pro" class="footer-logo">
+                        <span>FlorenceBot Pro</span>
+                    </div>
+                    <p>Empowering nursing students with AI-powered clinical references and study tools.</p>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="guides.html">Study Guides</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
+                        <li><a href="https://discord.gg/y2Mh77wAV2">Discord Server</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p>
+                        <i class="fas fa-envelope"></i>
+                        <a href="mailto:support@florencebot.pro">support@florencebot.pro</a>
+                    </p>
+                    <div class="social-links">
+                        <a href="https://discord.gg/y2Mh77wAV2" aria-label="Discord" target="_blank" rel="noopener">
+                            <i class="fab fa-discord"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 FlorenceBot Pro. Built with ❤️ for nursing students.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Dark Mode Manager -->
+    <script src="dark-mode.js"></script>
+
+    <script src="script.js"></script>
+    <script src="settings-script.js"></script>
+</body>
+</html>
