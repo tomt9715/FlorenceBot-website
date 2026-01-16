@@ -1032,3 +1032,30 @@
         justify-content: center;
     }
 }
+
+/* Locked Premium Guides */
+.guide-card.locked {
+    opacity: 0.85;
+    position: relative;
+}
+
+.guide-card.locked::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255, 193, 7, 0.05) 0%, rgba(255, 193, 7, 0.02) 100%);
+    pointer-events: none;
+    border-radius: 16px;
+}
+
+.guide-card.locked:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+}
+
+.guide-card.locked .guide-card-body h3 {
+    color: var(--text-primary);
+}
