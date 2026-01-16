@@ -113,7 +113,7 @@ async def forgot_password():
     # 8. Send email via Resend
     try:
         params = {
-            "from": "The Nursing Collective <noreply@florencebot.pro>",  # Use your verified domain
+            "from": "The Nursing Collective <noreply@thenursingcollective.pro>",  # Use your verified domain
             "to": [email],
             "subject": "Reset your The Nursing Collective password",
             "html": html_content
@@ -270,7 +270,7 @@ from sendgrid.helpers.mail import Mail
 sg = sendgrid.SendGridAPIClient(api_key=os.getenv('SENDGRID_API_KEY'))
 
 message = Mail(
-    from_email='noreply@florencebot.pro',
+    from_email='noreply@thenursingcollective.pro',
     to_emails=email,
     subject='Reset your password',
     html_content=html_content
@@ -286,7 +286,7 @@ import boto3
 ses = boto3.client('ses', region_name='us-east-1')
 
 ses.send_email(
-    Source='noreply@florencebot.pro',
+    Source='noreply@thenursingcollective.pro',
     Destination={'ToAddresses': [email]},
     Message={
         'Subject': {'Data': 'Reset your password'},

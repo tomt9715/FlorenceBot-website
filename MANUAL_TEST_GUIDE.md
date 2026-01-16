@@ -225,7 +225,7 @@ Footer must still be perfectly centered
    → Should open Discord invite
 
 6. Click footer email
-   → Should open mail client to support@florencebot.pro
+   → Should open mail client to support@thenursingcollective.pro
 ```
 
 ---
