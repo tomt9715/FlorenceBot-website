@@ -42,13 +42,11 @@ document.addEventListener('DOMContentLoaded', async function() {
                 // Handle logout
                 if (this.getAttribute('href') === '#logout') {
                     e.preventDefault();
-                    if (confirm('Are you sure you want to logout?')) {
-                        // Clear auth tokens
-                        localStorage.removeItem('accessToken');
-                        localStorage.removeItem('refreshToken');
-                        localStorage.removeItem('user');
-                        window.location.href = 'login.html';
-                    }
+                    // Clear auth tokens and redirect (no confirmation needed)
+                    localStorage.removeItem('accessToken');
+                    localStorage.removeItem('refreshToken');
+                    localStorage.removeItem('user');
+                    window.location.href = 'login.html';
                 }
                 userDropdown.classList.remove('active');
             });
