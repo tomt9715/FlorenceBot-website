@@ -1,17 +1,27 @@
 /* Store Page Styles */
 
 .store-hero {
-    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    background: linear-gradient(135deg, #2E86AB 0%, #4A90E2 25%, #7B68EE 50%, #A23B72 75%, #2E86AB 100%);
+    background-size: 200% 200%;
+    animation: gradientShift 15s ease infinite;
     color: white;
     padding: 110px 0 60px;
     text-align: center;
 }
 
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
 .store-hero h1 {
+    font-family: 'Outfit', sans-serif;
     font-size: 3rem;
     font-weight: 700;
     margin-bottom: 20px;
     line-height: 1.2;
+    text-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
 }
 
 .store-hero p {
@@ -19,6 +29,7 @@
     max-width: 700px;
     margin: 0 auto;
     opacity: 0.95;
+    line-height: 1.6;
 }
 
 .store-section {
