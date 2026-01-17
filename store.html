@@ -77,7 +77,20 @@
             <div class="store-layout">
                 <!-- Sidebar -->
                 <aside class="store-sidebar">
+                    <!-- Shopping Type Selection -->
                     <div class="sidebar-section">
+                        <h3><i class="fas fa-shopping-bag"></i> Shop By</h3>
+                        <div class="filter-list">
+                            <button class="filter-item active" data-shop-type="guides" id="shop-guides-btn">
+                                <i class="fas fa-book"></i> Individual Guides
+                            </button>
+                            <button class="filter-item" data-shop-type="packages" id="shop-packages-btn">
+                                <i class="fas fa-box"></i> Class Packages
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="sidebar-section" id="category-filter-section">
                         <h3><i class="fas fa-filter"></i> Filter by Category</h3>
                         <div class="filter-list">
                             <button class="filter-item active" data-filter="all">
@@ -111,10 +124,10 @@
                         </div>
                     </div>
 
-                    <div class="sidebar-section">
+                    <div class="sidebar-section" id="package-callout-section">
                         <h3><i class="fas fa-info-circle"></i> Need Everything?</h3>
                         <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 16px;">Save money with our class packages that include all guides plus NCLEX prep.</p>
-                        <a href="pricing.html" class="btn btn-outline-primary btn-sm" style="width: 100%;">
+                        <a href="#" class="btn btn-outline-primary btn-sm" style="width: 100%;" id="switch-to-packages-btn">
                             <i class="fas fa-box"></i> View Packages
                         </a>
                     </div>
@@ -323,6 +336,211 @@
                                 <span class="guide-price">$5.99</span>
                                 <button class="btn btn-primary btn-sm" onclick="alert('Purchase individual guide - Coming soon!')">
                                     <i class="fas fa-shopping-cart"></i> Buy Guide
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Class Packages Grid (Hidden by default) -->
+                    <div class="packages-grid" id="packages-grid" style="display: none;">
+                        <!-- Fundamentals Package -->
+                        <div class="package-card" data-category="fundamentals">
+                            <div style="text-align: center; margin-bottom: 20px;">
+                                <div style="font-size: 3rem; margin-bottom: 12px;">📚</div>
+                                <h3 style="font-size: 1.4rem; font-weight: 700; margin-bottom: 8px; color: var(--text-primary);">Fundamentals of Nursing</h3>
+                                <p style="color: var(--text-secondary); font-size: 0.9rem; margin: 0;">Foundation & basics</p>
+                            </div>
+
+                            <div style="margin-bottom: 20px; padding: 16px; background: var(--background-light); border-radius: 12px;">
+                                <div style="font-size: 0.8rem; color: var(--text-secondary); font-weight: 600; margin-bottom: 8px; text-transform: uppercase;">Includes:</div>
+                                <div style="font-size: 0.85rem; color: var(--text-primary); line-height: 1.6;">
+                                    Vital Signs • Infection Control • Documentation • Nursing Process • + more being added
+                                </div>
+                            </div>
+
+                            <div style="border-top: 1px solid var(--border-color); padding-top: 16px; margin-bottom: 16px;">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                                    <span style="font-weight: 600; color: var(--text-primary);">Full Package</span>
+                                    <span style="font-size: 1.3rem; font-weight: 700; color: var(--primary-color);">$49.99</span>
+                                </div>
+                                <button class="btn btn-primary btn-sm" style="width: 100%; margin-bottom: 8px;" onclick="alert('Coming soon!')">
+                                    Get Full Package
+                                </button>
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                                    <span style="font-weight: 600; color: var(--text-primary);">Lite Package</span>
+                                    <span style="font-size: 1.1rem; font-weight: 700; color: var(--text-secondary);">$24.99</span>
+                                </div>
+                                <button class="btn btn-outline-primary btn-sm" style="width: 100%;" onclick="alert('Coming soon!')">
+                                    Get Lite Package
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Med-Surg Package (Popular) -->
+                        <div class="package-card" data-category="med-surg" style="position: relative; border: 2px solid var(--primary-color);">
+                            <div style="position: absolute; top: -12px; right: 16px; background: linear-gradient(135deg, #f59e0b, #d97706); color: white; padding: 4px 12px; border-radius: 20px; font-size: 0.7rem; font-weight: 700; box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);">
+                                <i class="fas fa-star"></i> POPULAR
+                            </div>
+
+                            <div style="text-align: center; margin-bottom: 20px;">
+                                <div style="font-size: 3rem; margin-bottom: 12px;">🏥</div>
+                                <h3 style="font-size: 1.4rem; font-weight: 700; margin-bottom: 8px; color: var(--text-primary);">Medical-Surgical Nursing</h3>
+                                <p style="color: var(--text-secondary); font-size: 0.9rem; margin: 0;">Complex disease management</p>
+                            </div>
+
+                            <div style="margin-bottom: 20px; padding: 16px; background: var(--background-light); border-radius: 12px;">
+                                <div style="font-size: 0.8rem; color: var(--text-secondary); font-weight: 600; margin-bottom: 8px; text-transform: uppercase;">Includes:</div>
+                                <div style="font-size: 0.85rem; color: var(--text-primary); line-height: 1.6;">
+                                    Electrolytes • Critical Labs • Cardiac Care • Respiratory • + more being added
+                                </div>
+                            </div>
+
+                            <div style="border-top: 1px solid var(--border-color); padding-top: 16px; margin-bottom: 16px;">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                                    <span style="font-weight: 600; color: var(--text-primary);">Full Package</span>
+                                    <span style="font-size: 1.3rem; font-weight: 700; color: var(--primary-color);">$49.99</span>
+                                </div>
+                                <button class="btn btn-primary btn-sm" style="width: 100%; margin-bottom: 8px;" onclick="alert('Coming soon!')">
+                                    Get Full Package
+                                </button>
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                                    <span style="font-weight: 600; color: var(--text-primary);">Lite Package</span>
+                                    <span style="font-size: 1.1rem; font-weight: 700; color: var(--text-secondary);">$24.99</span>
+                                </div>
+                                <button class="btn btn-outline-primary btn-sm" style="width: 100%;" onclick="alert('Coming soon!')">
+                                    Get Lite Package
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Pharmacology Package -->
+                        <div class="package-card" data-category="pharmacology">
+                            <div style="text-align: center; margin-bottom: 20px;">
+                                <div style="font-size: 3rem; margin-bottom: 12px;">💊</div>
+                                <h3 style="font-size: 1.4rem; font-weight: 700; margin-bottom: 8px; color: var(--text-primary);">Pharmacology</h3>
+                                <p style="color: var(--text-secondary); font-size: 0.9rem; margin: 0;">Drug classes & calculations</p>
+                            </div>
+
+                            <div style="margin-bottom: 20px; padding: 16px; background: var(--background-light); border-radius: 12px;">
+                                <div style="font-size: 0.8rem; color: var(--text-secondary); font-weight: 600; margin-bottom: 8px; text-transform: uppercase;">Includes:</div>
+                                <div style="font-size: 0.85rem; color: var(--text-primary); line-height: 1.6;">
+                                    Medication Calculations • Drug Classes • Common Meds • Side Effects • + more being added
+                                </div>
+                            </div>
+
+                            <div style="border-top: 1px solid var(--border-color); padding-top: 16px; margin-bottom: 16px;">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                                    <span style="font-weight: 600; color: var(--text-primary);">Full Package</span>
+                                    <span style="font-size: 1.3rem; font-weight: 700; color: var(--primary-color);">$49.99</span>
+                                </div>
+                                <button class="btn btn-primary btn-sm" style="width: 100%; margin-bottom: 8px;" onclick="alert('Coming soon!')">
+                                    Get Full Package
+                                </button>
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                                    <span style="font-weight: 600; color: var(--text-primary);">Lite Package</span>
+                                    <span style="font-size: 1.1rem; font-weight: 700; color: var(--text-secondary);">$24.99</span>
+                                </div>
+                                <button class="btn btn-outline-primary btn-sm" style="width: 100%;" onclick="alert('Coming soon!')">
+                                    Get Lite Package
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Maternity Package -->
+                        <div class="package-card" data-category="maternity">
+                            <div style="text-align: center; margin-bottom: 20px;">
+                                <div style="font-size: 3rem; margin-bottom: 12px;">👶</div>
+                                <h3 style="font-size: 1.4rem; font-weight: 700; margin-bottom: 8px; color: var(--text-primary);">Maternal/OB Nursing</h3>
+                                <p style="color: var(--text-secondary); font-size: 0.9rem; margin: 0;">Pregnancy & childbirth</p>
+                            </div>
+
+                            <div style="margin-bottom: 20px; padding: 16px; background: var(--background-light); border-radius: 12px;">
+                                <div style="font-size: 0.8rem; color: var(--text-secondary); font-weight: 600; margin-bottom: 8px; text-transform: uppercase;">Includes:</div>
+                                <div style="font-size: 0.85rem; color: var(--text-primary); line-height: 1.6;">
+                                    Antepartum Care • Labor & Delivery • Postpartum • Newborn Care • + more being added
+                                </div>
+                            </div>
+
+                            <div style="border-top: 1px solid var(--border-color); padding-top: 16px; margin-bottom: 16px;">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                                    <span style="font-weight: 600; color: var(--text-primary);">Full Package</span>
+                                    <span style="font-size: 1.3rem; font-weight: 700; color: var(--primary-color);">$49.99</span>
+                                </div>
+                                <button class="btn btn-primary btn-sm" style="width: 100%; margin-bottom: 8px;" onclick="alert('Coming soon!')">
+                                    Get Full Package
+                                </button>
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                                    <span style="font-weight: 600; color: var(--text-primary);">Lite Package</span>
+                                    <span style="font-size: 1.1rem; font-weight: 700; color: var(--text-secondary);">$24.99</span>
+                                </div>
+                                <button class="btn btn-outline-primary btn-sm" style="width: 100%;" onclick="alert('Coming soon!')">
+                                    Get Lite Package
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Pediatrics Package -->
+                        <div class="package-card" data-category="pediatrics">
+                            <div style="text-align: center; margin-bottom: 20px;">
+                                <div style="font-size: 3rem; margin-bottom: 12px;">🧸</div>
+                                <h3 style="font-size: 1.4rem; font-weight: 700; margin-bottom: 8px; color: var(--text-primary);">Pediatric Nursing</h3>
+                                <p style="color: var(--text-secondary); font-size: 0.9rem; margin: 0;">Children's health & development</p>
+                            </div>
+
+                            <div style="margin-bottom: 20px; padding: 16px; background: var(--background-light); border-radius: 12px;">
+                                <div style="font-size: 0.8rem; color: var(--text-secondary); font-weight: 600; margin-bottom: 8px; text-transform: uppercase;">Includes:</div>
+                                <div style="font-size: 0.85rem; color: var(--text-primary); line-height: 1.6;">
+                                    Growth & Development • Pediatric Assessment • Conditions • Immunizations • + more being added
+                                </div>
+                            </div>
+
+                            <div style="border-top: 1px solid var(--border-color); padding-top: 16px; margin-bottom: 16px;">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                                    <span style="font-weight: 600; color: var(--text-primary);">Full Package</span>
+                                    <span style="font-size: 1.3rem; font-weight: 700; color: var(--primary-color);">$49.99</span>
+                                </div>
+                                <button class="btn btn-primary btn-sm" style="width: 100%; margin-bottom: 8px;" onclick="alert('Coming soon!')">
+                                    Get Full Package
+                                </button>
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                                    <span style="font-weight: 600; color: var(--text-primary);">Lite Package</span>
+                                    <span style="font-size: 1.1rem; font-weight: 700; color: var(--text-secondary);">$24.99</span>
+                                </div>
+                                <button class="btn btn-outline-primary btn-sm" style="width: 100%;" onclick="alert('Coming soon!')">
+                                    Get Lite Package
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Mental Health Package -->
+                        <div class="package-card" data-category="mental-health">
+                            <div style="text-align: center; margin-bottom: 20px;">
+                                <div style="font-size: 3rem; margin-bottom: 12px;">🧠</div>
+                                <h3 style="font-size: 1.4rem; font-weight: 700; margin-bottom: 8px; color: var(--text-primary);">Mental Health Nursing</h3>
+                                <p style="color: var(--text-secondary); font-size: 0.9rem; margin: 0;">Psychiatric care & therapy</p>
+                            </div>
+
+                            <div style="margin-bottom: 20px; padding: 16px; background: var(--background-light); border-radius: 12px;">
+                                <div style="font-size: 0.8rem; color: var(--text-secondary); font-weight: 600; margin-bottom: 8px; text-transform: uppercase;">Includes:</div>
+                                <div style="font-size: 0.85rem; color: var(--text-primary); line-height: 1.6;">
+                                    Psychiatric Disorders • Therapeutic Communication • Psychotropics • Crisis Intervention • + more being added
+                                </div>
+                            </div>
+
+                            <div style="border-top: 1px solid var(--border-color); padding-top: 16px; margin-bottom: 16px;">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                                    <span style="font-weight: 600; color: var(--text-primary);">Full Package</span>
+                                    <span style="font-size: 1.3rem; font-weight: 700; color: var(--primary-color);">$49.99</span>
+                                </div>
+                                <button class="btn btn-primary btn-sm" style="width: 100%; margin-bottom: 8px;" onclick="alert('Coming soon!')">
+                                    Get Full Package
+                                </button>
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                                    <span style="font-weight: 600; color: var(--text-primary);">Lite Package</span>
+                                    <span style="font-size: 1.1rem; font-weight: 700; color: var(--text-secondary);">$24.99</span>
+                                </div>
+                                <button class="btn btn-outline-primary btn-sm" style="width: 100%;" onclick="alert('Coming soon!')">
+                                    Get Lite Package
                                 </button>
                             </div>
                         </div>
