@@ -222,7 +222,49 @@ document.addEventListener('DOMContentLoaded', function() {
                 strengthText.textContent = 'Strong password';
                 strengthText.style.color = '#10b981';
             }
+
+            // Check password match if confirm password has a value
+            if (confirmPasswordInput && confirmPasswordInput.value && currentMode === 'signup') {
+                checkPasswordMatch(password, confirmPasswordInput.value);
+            }
         });
+    }
+
+    // Password match indicator
+    if (confirmPasswordInput) {
+        confirmPasswordInput.addEventListener('input', function() {
+            const password = passwordInput.value;
+            const confirmPassword = this.value;
+
+            // Only check during signup mode
+            if (currentMode === 'signup' && confirmPassword) {
+                checkPasswordMatch(password, confirmPassword);
+            } else {
+                clearPasswordMatch();
+            }
+        });
+    }
+
+    // Helper function to check password match
+    function checkPasswordMatch(password1, password2) {
+        const matchIndicator = document.getElementById('password-match');
+        if (!matchIndicator) return;
+
+        if (password1 === password2) {
+            matchIndicator.textContent = '✓ Passwords match';
+            matchIndicator.style.color = '#10b981';
+        } else {
+            matchIndicator.textContent = '✗ Passwords do not match';
+            matchIndicator.style.color = '#ef4444';
+        }
+    }
+
+    // Helper function to clear password match indicator
+    function clearPasswordMatch() {
+        const matchIndicator = document.getElementById('password-match');
+        if (matchIndicator) {
+            matchIndicator.textContent = '';
+        }
     }
 
     // Form validation

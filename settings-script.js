@@ -62,6 +62,28 @@ document.addEventListener('DOMContentLoaded', async function() {
     const passwordForm = document.getElementById('password-form');
     if (passwordForm) {
         passwordForm.addEventListener('submit', handlePasswordChange);
+
+        // Add password strength indicator
+        const newPasswordInput = document.getElementById('new-password');
+        const confirmPasswordInput = document.getElementById('confirm-new-password');
+
+        if (newPasswordInput) {
+            newPasswordInput.addEventListener('input', function() {
+                updatePasswordStrength(this.value, 'settings-password-strength');
+            });
+        }
+
+        // Add password match indicator
+        if (confirmPasswordInput && newPasswordInput) {
+            confirmPasswordInput.addEventListener('input', function() {
+                checkPasswordMatch(newPasswordInput.value, this.value, 'settings-password-match');
+            });
+            newPasswordInput.addEventListener('input', function() {
+                if (confirmPasswordInput.value) {
+                    checkPasswordMatch(this.value, confirmPasswordInput.value, 'settings-password-match');
+                }
+            });
+        }
     }
 });
 
@@ -270,5 +292,74 @@ async function handlePasswordChange(e) {
     } finally {
         submitBtn.disabled = false;
         submitBtn.innerHTML = '<i class="fas fa-key"></i> Update Password';
+    }
+}
+
+// Password strength checker
+function updatePasswordStrength(password, containerId) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+
+    const strengthBar = container.querySelector('.strength-bar');
+    const strengthText = container.querySelector('.strength-text');
+
+    if (!password) {
+        strengthBar.style.width = '0%';
+        strengthText.textContent = '';
+        return;
+    }
+
+    let strength = 0;
+    let label = '';
+    let color = '';
+
+    // Check password criteria
+    if (password.length >= 8) strength++;
+    if (password.length >= 12) strength++;
+    if (/[a-z]/.test(password) && /[A-Z]/.test(password)) strength++;
+    if (/\d/.test(password)) strength++;
+    if (/[^a-zA-Z0-9]/.test(password)) strength++;
+
+    // Determine strength level
+    if (strength <= 1) {
+        label = 'Weak';
+        color = '#ef4444';
+    } else if (strength === 2) {
+        label = 'Fair';
+        color = '#f59e0b';
+    } else if (strength === 3) {
+        label = 'Good';
+        color = '#3b82f6';
+    } else if (strength === 4) {
+        label = 'Strong';
+        color = '#10b981';
+    } else {
+        label = 'Very Strong';
+        color = '#059669';
+    }
+
+    const width = (strength / 5) * 100;
+    strengthBar.style.width = width + '%';
+    strengthBar.style.backgroundColor = color;
+    strengthText.textContent = label;
+    strengthText.style.color = color;
+}
+
+// Check if passwords match
+function checkPasswordMatch(password1, password2, containerId) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+
+    if (!password2) {
+        container.textContent = '';
+        return;
+    }
+
+    if (password1 === password2) {
+        container.textContent = '✓ Passwords match';
+        container.style.color = '#10b981';
+    } else {
+        container.textContent = '✗ Passwords do not match';
+        container.style.color = '#ef4444';
     }
 }
