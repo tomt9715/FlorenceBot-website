@@ -165,6 +165,8 @@ function updateOAuthStatus(user) {
 async function connectOAuthProvider(provider) {
     try {
         const response = await fetch(`${API_URL}/auth/oauth/${provider}`, {
+            method: 'GET',
+            credentials: 'include',  // Include cookies for session
             headers: {
                 'Content-Type': 'application/json'
             }
