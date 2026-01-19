@@ -258,7 +258,10 @@ function updateEmailVerificationBanner(user) {
                         headers: {
                             'Authorization': `Bearer ${accessToken}`,
                             'Content-Type': 'application/json'
-                        }
+                        },
+                        body: JSON.stringify({
+                            email: user.email
+                        })
                     });
 
                     const data = await response.json();
