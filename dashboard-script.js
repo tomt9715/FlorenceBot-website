@@ -117,9 +117,14 @@ async function loadUserProfile() {
         // Update user stats with real data
         updateUserStats(user);
 
-        // Update subscription and Discord status
-        updateSubscriptionStatus(user);
+        // Update email verification status
+        updateEmailVerificationBanner(user);
+
+        // Update Discord status
         updateDiscordStatus(user);
+
+        // Load purchases
+        loadPurchases(user);
 
         // Update user avatar with initials
         const userAvatar = document.querySelector('.user-avatar');
@@ -210,55 +215,93 @@ async function loadAdminDashboard() {
 
 // Update user stats with real data
 function updateUserStats(user) {
-    // Calculate days active (days since account creation)
-    const createdDate = new Date(user.created_at);
-    const today = new Date();
-    const daysActive = Math.max(0, Math.floor((today - createdDate) / (1000 * 60 * 60 * 24)));
-
     // Format member since date
+    const createdDate = new Date(user.created_at);
     const memberSince = createdDate.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
 
     // Update stats
-    const stats = document.querySelectorAll('.user-stats .stat');
-    if (stats[0]) {
-        stats[0].querySelector('.number').textContent = '0'; // TODO: Will be dynamic when guides are tracked
+    const guidesOwnedEl = document.getElementById('guides-owned');
+    const totalPurchasesEl = document.getElementById('total-purchases');
+    const memberSinceEl = document.getElementById('member-since');
+
+    if (guidesOwnedEl) {
+        guidesOwnedEl.textContent = '0'; // TODO: Will be dynamic when purchases are tracked
     }
-    if (stats[1]) {
-        stats[1].querySelector('.number').textContent = daysActive;
+    if (totalPurchasesEl) {
+        totalPurchasesEl.textContent = '0'; // TODO: Will be dynamic when purchases are tracked
     }
-    if (stats[2]) {
-        stats[2].querySelector('.number').textContent = memberSince;
+    if (memberSinceEl) {
+        memberSinceEl.textContent = memberSince;
     }
 
     // Animate the numeric stats
     animateStats();
 }
 
-// Update subscription status card
-function updateSubscriptionStatus(user) {
-    const createdDate = new Date(user.created_at);
-    const memberDate = createdDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+// Update email verification banner
+function updateEmailVerificationBanner(user) {
+    const banner = document.getElementById('email-verification-banner');
+    const resendBtn = document.getElementById('resend-verification-btn');
 
-    const subscriptionTitle = document.getElementById('subscription-title');
-    const subscriptionStatus = document.getElementById('subscription-status');
-    const subscriptionInfo = document.getElementById('subscription-info');
-    const accountType = document.getElementById('account-type');
-    const memberDateEl = document.getElementById('member-date');
-    const subscriptionAction = document.getElementById('subscription-action');
+    if (!user.is_verified && banner) {
+        banner.style.display = 'block';
 
-    if (user.is_premium) {
-        subscriptionTitle.innerHTML = '<i class="fas fa-crown"></i> Premium Account';
-        subscriptionStatus.className = 'status active';
-        subscriptionStatus.innerHTML = '<i class="fas fa-check-circle"></i> Active';
-        subscriptionInfo.textContent = 'You have full access to all study guides and premium Discord features';
-        accountType.textContent = 'Premium';
-        memberDateEl.textContent = memberDate;
-        subscriptionAction.innerHTML = '<i class="fas fa-heart"></i> Thank You for Being Premium!';
-        subscriptionAction.style.cursor = 'default';
-        subscriptionAction.onclick = null;
-    } else {
-        accountType.textContent = 'Free';
-        memberDateEl.textContent = memberDate;
+        // Add resend email handler
+        if (resendBtn) {
+            resendBtn.onclick = async function() {
+                resendBtn.disabled = true;
+                resendBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+
+                try {
+                    const response = await fetch(`${API_URL}/auth/resend-verification`, {
+                        method: 'POST',
+                        headers: {
+                            'Authorization': `Bearer ${accessToken}`,
+                            'Content-Type': 'application/json'
+                        }
+                    });
+
+                    const data = await response.json();
+
+                    if (response.ok) {
+                        showSuccess('Verification email sent! Please check your inbox.');
+                    } else {
+                        throw new Error(data.error || 'Failed to resend verification email');
+                    }
+                } catch (error) {
+                    console.error('Error resending verification:', error);
+                    showAlert('Error', error.message || 'Failed to resend verification email. Please try again.', 'error');
+                } finally {
+                    resendBtn.disabled = false;
+                    resendBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Resend Email';
+                }
+            };
+        }
+    }
+}
+
+// Load user purchases
+function loadPurchases(user) {
+    // TODO: Implement when purchase tracking is added to backend
+    // For now, just show empty state
+    const purchasesList = document.getElementById('purchases-list');
+    if (purchasesList && user.is_premium) {
+        // If user has premium, show a placeholder purchase
+        purchasesList.innerHTML = `
+            <div style="padding: 16px; background: var(--background-light); border-radius: 12px; margin-bottom: 12px;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 4px;">
+                            <i class="fas fa-crown" style="color: var(--primary-color);"></i> Premium Access
+                        </div>
+                        <div style="font-size: 0.9rem; color: var(--text-secondary);">Full access to all study guides</div>
+                    </div>
+                    <button class="btn-small" onclick="window.location.href='guides.html'" style="background: var(--primary-color); color: white;">
+                        <i class="fas fa-book-open"></i> View Guides
+                    </button>
+                </div>
+            </div>
+        `;
     }
 }
 
