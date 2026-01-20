@@ -570,10 +570,8 @@
 
 /* CTA Section */
 .cta {
-    background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary-color) 50%, var(--primary-dark) 100%);
-    color: white;
-    padding: 80px 0;
-    text-align: center;
+    background: var(--background-light);
+    padding: 100px 0;
 }
 
 .cta-content h2 {

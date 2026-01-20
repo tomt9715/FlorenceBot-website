@@ -1159,6 +1159,27 @@ pre code {
 
 
 /* ============================================
+   UTILITY CLASSES
+   Common utility classes for layout and spacing
+   ============================================ */
+
+.text-center {
+    text-align: center;
+}
+
+.mt-40 {
+    margin-top: 40px;
+}
+
+.w-100 {
+    width: 100%;
+}
+
+.mb-8 {
+    margin-bottom: 8px;
+}
+
+/* ============================================
    INLINE STYLE REPLACEMENTS
    Utility classes for common inline styles
    ============================================ */
@@ -1227,6 +1248,11 @@ pre code {
     border: 1px solid rgba(255, 255, 255, 0.1);
     position: relative;
     overflow: hidden;
+}
+
+.cta-card-content {
+    position: relative;
+    z-index: 1;
 }
 
 .cta-decorative-blur {
