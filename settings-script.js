@@ -5,13 +5,158 @@
 const API_URL = 'https://web-production-592c07.up.railway.app';
 
 // Check authentication
-const accessToken = localStorage.getItem('accessToken');
+let accessToken = localStorage.getItem('accessToken');
 const storedUser = JSON.parse(localStorage.getItem('user') || '{}');
 
 if (!accessToken) {
     // Not logged in, redirect to login
     window.location.href = 'login.html';
 }
+
+// ==========================================
+// API Service Layer with Auto-Refresh
+// ==========================================
+
+/**
+ * Centralized API calling function with automatic token refresh
+ * @param {string} endpoint - API endpoint (e.g., '/user/profile')
+ * @param {object} options - Fetch options (method, body, etc.)
+ * @param {boolean} isRetry - Internal flag to prevent infinite retry loops
+ * @returns {Promise<object>} - Response data
+ */
+async function apiCall(endpoint, options = {}, isRetry = false) {
+    const token = localStorage.getItem('accessToken');
+
+    // Default headers
+    const headers = {
+        'Content-Type': 'application/json',
+        ...options.headers
+    };
+
+    // Add authorization header if token exists
+    if (token) {
+        headers['Authorization'] = `Bearer ${token}`;
+    }
+
+    try {
+        const response = await fetch(`${API_URL}${endpoint}`, {
+            ...options,
+            headers
+        });
+
+        // Handle 401 Unauthorized - Token expired
+        if (response.status === 401 && !isRetry) {
+            console.log('Access token expired, attempting refresh...');
+
+            try {
+                // Attempt to refresh the token
+                const newToken = await refreshToken();
+
+                // Retry the original request with new token
+                return await apiCall(endpoint, options, true);
+
+            } catch (refreshError) {
+                console.error('Token refresh failed:', refreshError);
+                // Refresh failed, logout user
+                performLogout();
+                throw new Error('Session expired. Please login again.');
+            }
+        }
+
+        // Parse response
+        const data = await response.json();
+
+        // Handle other errors
+        if (!response.ok) {
+            throw new Error(data.error || `Request failed with status ${response.status}`);
+        }
+
+        return data;
+
+    } catch (error) {
+        // Network or parsing error
+        if (error.message.includes('Session expired')) {
+            throw error;
+        }
+        console.error('API call error:', error);
+        throw error;
+    }
+}
+
+/**
+ * Refresh the access token using the refresh token
+ * @returns {Promise<string>} - New access token
+ */
+async function refreshToken() {
+    const refreshToken = localStorage.getItem('refreshToken');
+
+    if (!refreshToken) {
+        throw new Error('No refresh token available');
+    }
+
+    try {
+        const response = await fetch(`${API_URL}/auth/refresh`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ refresh_token: refreshToken })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(data.error || 'Token refresh failed');
+        }
+
+        // Update tokens
+        localStorage.setItem('accessToken', data.access_token);
+        if (data.refresh_token) {
+            localStorage.setItem('refreshToken', data.refresh_token);
+        }
+        localStorage.setItem('tokenTimestamp', Date.now().toString());
+
+        // Update global accessToken variable
+        accessToken = data.access_token;
+
+        console.log('Token refreshed successfully');
+        return data.access_token;
+
+    } catch (error) {
+        console.error('Token refresh error:', error);
+        throw error;
+    }
+}
+
+/**
+ * Logout function with cross-tab synchronization
+ */
+function performLogout() {
+    // Clear all auth data
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('refreshToken');
+    localStorage.removeItem('user');
+    localStorage.removeItem('tokenTimestamp');
+
+    // Set logout flag for cross-tab sync
+    localStorage.setItem('logoutEvent', Date.now().toString());
+
+    // Redirect to login
+    window.location.href = 'login.html';
+}
+
+// Listen for cross-tab logout events
+window.addEventListener('storage', function(e) {
+    if (e.key === 'logoutEvent' && e.newValue) {
+        // Another tab logged out, clear local data and redirect
+        console.log('Logout detected in another tab');
+        localStorage.removeItem('accessToken');
+        localStorage.removeItem('refreshToken');
+        localStorage.removeItem('user');
+        localStorage.removeItem('tokenTimestamp');
+        window.location.href = 'login.html';
+    }
+});
 
 document.addEventListener('DOMContentLoaded', async function() {
 
@@ -41,11 +186,8 @@ document.addEventListener('DOMContentLoaded', async function() {
                 // Handle logout
                 if (this.getAttribute('href') === '#logout') {
                     e.preventDefault();
-                    // Clear auth tokens and redirect (no confirmation needed)
-                    localStorage.removeItem('accessToken');
-                    localStorage.removeItem('refreshToken');
-                    localStorage.removeItem('user');
-                    window.location.href = 'login.html';
+                    // Use performLogout for cross-tab sync
+                    performLogout();
                 }
                 userDropdown.classList.remove('active');
             });
@@ -90,24 +232,11 @@ document.addEventListener('DOMContentLoaded', async function() {
 // Load user profile and populate form
 async function loadUserProfile() {
     try {
-        const response = await fetch(`${API_URL}/user/profile`, {
-            headers: {
-                'Authorization': `Bearer ${accessToken}`,
-                'Content-Type': 'application/json'
-            }
+        // Use apiCall for automatic token refresh
+        const data = await apiCall('/user/profile', {
+            method: 'GET'
         });
 
-        if (!response.ok) {
-            if (response.status === 401) {
-                // Token expired
-                localStorage.clear();
-                window.location.href = 'login.html';
-                return;
-            }
-            throw new Error('Failed to load profile');
-        }
-
-        const data = await response.json();
         const user = data.user;
 
         // Populate profile form
@@ -199,24 +328,15 @@ async function handleProfileUpdate(e) {
     submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving...';
 
     try {
-        const response = await fetch(`${API_URL}/user/profile`, {
+        // Use apiCall for automatic token refresh
+        const data = await apiCall('/user/profile', {
             method: 'PUT',
-            headers: {
-                'Authorization': `Bearer ${accessToken}`,
-                'Content-Type': 'application/json'
-            },
             body: JSON.stringify({
                 first_name: document.getElementById('first-name').value,
                 last_name: document.getElementById('last-name').value,
                 nursing_program: document.getElementById('nursing-program').value
             })
         });
-
-        const data = await response.json();
-
-        if (!response.ok) {
-            throw new Error(data.error || 'Failed to update profile');
-        }
 
         // Update local storage
         localStorage.setItem('user', JSON.stringify(data.user));
@@ -264,23 +384,14 @@ async function handlePasswordChange(e) {
     submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Updating...';
 
     try {
-        const response = await fetch(`${API_URL}/user/change-password`, {
+        // Use apiCall for automatic token refresh
+        await apiCall('/user/change-password', {
             method: 'POST',
-            headers: {
-                'Authorization': `Bearer ${accessToken}`,
-                'Content-Type': 'application/json'
-            },
             body: JSON.stringify({
                 current_password: currentPassword,
                 new_password: newPassword
             })
         });
-
-        const data = await response.json();
-
-        if (!response.ok) {
-            throw new Error(data.error || 'Failed to update password');
-        }
 
         // Show success message
         showSuccess('Password updated successfully!');
