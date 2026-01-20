@@ -3,8 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Heart & Lung Sounds Guide - The Nursing Collective</title>
+    <title>Heart & Lung Sounds Guide</title>
     <style>
+        @page {
+            margin: 0.75in;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -12,144 +16,131 @@
         }
 
         body {
-            font-family: 'Helvetica', 'Arial', sans-serif;
-            line-height: 1.6;
+            font-family: 'Helvetica Neue', 'Arial', sans-serif;
+            line-height: 1.5;
             color: #2c3e50;
             background: white;
-            padding: 40px;
-            max-width: 800px;
-            margin: 0 auto;
         }
 
         .header {
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
             padding-bottom: 20px;
             border-bottom: 3px solid #2E86AB;
         }
 
         .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #2E86AB;
-            margin-bottom: 10px;
+            max-width: 300px;
+            height: auto;
+            margin: 0 auto 15px;
+            display: block;
         }
 
         h1 {
             color: #2E86AB;
-            font-size: 2.2rem;
-            margin-bottom: 10px;
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+            font-weight: 600;
         }
 
         .subtitle {
             color: #6c757d;
-            font-size: 1rem;
+            font-size: 0.95rem;
+            font-weight: 400;
         }
 
         h2 {
             color: #2E86AB;
-            font-size: 1.6rem;
-            margin-top: 30px;
-            margin-bottom: 15px;
-            padding-bottom: 8px;
+            font-size: 1.3rem;
+            margin-top: 25px;
+            margin-bottom: 12px;
+            padding-bottom: 6px;
             border-bottom: 2px solid #A23B72;
+            font-weight: 600;
         }
 
         h3 {
             color: #A23B72;
-            font-size: 1.2rem;
-            margin-top: 20px;
+            font-size: 1.05rem;
+            margin-top: 16px;
             margin-bottom: 10px;
+            font-weight: 600;
         }
 
         .sound-box {
             background: #f8f9fa;
-            border-left: 4px solid #2E86AB;
-            padding: 15px;
-            margin: 15px 0;
-            border-radius: 4px;
+            border-left: 3px solid #2E86AB;
+            padding: 12px 15px;
+            margin: 12px 0;
+            border-radius: 3px;
         }
 
         .sound-name {
-            font-weight: bold;
+            font-weight: 600;
             color: #2E86AB;
-            font-size: 1.1rem;
-            margin-bottom: 8px;
+            font-size: 1rem;
+            margin-bottom: 6px;
         }
 
-        .sound-description {
-            margin-bottom: 8px;
-        }
-
-        .sound-characteristics {
-            background: white;
-            padding: 10px;
-            border-radius: 4px;
-            margin-top: 10px;
-        }
-
-        .characteristic {
-            display: flex;
-            margin: 5px 0;
-        }
-
-        .char-label {
-            font-weight: bold;
-            min-width: 120px;
+        .sound-detail {
+            font-size: 0.9rem;
             color: #495057;
+            margin: 4px 0;
         }
 
-        .char-value {
+        .sound-detail strong {
             color: #2c3e50;
+            font-weight: 600;
         }
 
         .tip-box {
-            background: #fff3cd;
-            border-left: 4px solid #ffc107;
-            padding: 15px;
-            margin: 20px 0;
-            border-radius: 4px;
+            background: #fff9e6;
+            border-left: 3px solid #ffc107;
+            padding: 12px 15px;
+            margin: 15px 0;
+            border-radius: 3px;
         }
 
         .tip-title {
-            font-weight: bold;
+            font-weight: 600;
             color: #856404;
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            margin-bottom: 6px;
+            font-size: 0.95rem;
         }
 
-        .warning-box {
-            background: #f8d7da;
-            border-left: 4px solid #dc3545;
-            padding: 15px;
-            margin: 20px 0;
-            border-radius: 4px;
+        .tip-content {
+            font-size: 0.9rem;
+            color: #856404;
         }
 
-        .warning-title {
-            font-weight: bold;
-            color: #721c24;
-            margin-bottom: 8px;
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 12px 0;
         }
 
         ul {
             margin-left: 20px;
-            margin-top: 10px;
+            margin-top: 8px;
         }
 
         li {
-            margin: 8px 0;
+            margin: 6px 0;
+            font-size: 0.9rem;
         }
 
         .footer {
-            margin-top: 50px;
-            padding-top: 20px;
+            margin-top: 35px;
+            padding-top: 15px;
             border-top: 2px solid #dee2e6;
             text-align: center;
             color: #6c757d;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
+        }
+
+        .footer p {
+            margin: 5px 0;
         }
 
         .page-break {
@@ -158,132 +149,78 @@
 
         @media print {
             body {
-                padding: 20px;
-            }
-
-            .page-break {
-                page-break-after: always;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
             }
         }
     </style>
 </head>
 <body>
     <div class="header">
-        <div class="logo">🩺 The Nursing Collective</div>
-        <h1>Heart & Lung Sounds Guide</h1>
-        <div class="subtitle">Essential Reference for Clinical Assessment</div>
+        <img src="../images/the-nursing-collective-logo.png" alt="The Nursing Collective" class="logo">
+        <h1>Heart & Lung Sounds Quick Reference</h1>
+        <div class="subtitle">Essential Clinical Assessment Guide</div>
     </div>
 
     <section>
-        <h2>🫀 Heart Sounds</h2>
+        <h2>Heart Sounds</h2>
 
-        <h3>Normal Heart Sounds</h3>
+        <h3>Normal Sounds</h3>
 
-        <div class="sound-box">
-            <div class="sound-name">S1 (First Heart Sound) - "Lub"</div>
-            <div class="sound-description">
-                Occurs at the beginning of systole when the AV valves (mitral and tricuspid) close.
+        <div class="two-column">
+            <div class="sound-box">
+                <div class="sound-name">S1 - "Lub"</div>
+                <div class="sound-detail"><strong>Caused by:</strong> AV valves closing (mitral, tricuspid)</div>
+                <div class="sound-detail"><strong>Best heard:</strong> Apex</div>
+                <div class="sound-detail"><strong>Timing:</strong> Start of systole</div>
             </div>
-            <div class="sound-characteristics">
-                <div class="characteristic">
-                    <span class="char-label">Best heard:</span>
-                    <span class="char-value">Apex (mitral area) and left lower sternal border (tricuspid area)</span>
-                </div>
-                <div class="characteristic">
-                    <span class="char-label">Timing:</span>
-                    <span class="char-value">Beginning of systole, coincides with carotid pulse</span>
-                </div>
-                <div class="characteristic">
-                    <span class="char-label">Quality:</span>
-                    <span class="char-value">Louder, longer, and lower pitched than S2</span>
-                </div>
+
+            <div class="sound-box">
+                <div class="sound-name">S2 - "Dub"</div>
+                <div class="sound-detail"><strong>Caused by:</strong> Semilunar valves closing (aortic, pulmonic)</div>
+                <div class="sound-detail"><strong>Best heard:</strong> Base</div>
+                <div class="sound-detail"><strong>Timing:</strong> End of systole</div>
             </div>
         </div>
 
-        <div class="sound-box">
-            <div class="sound-name">S2 (Second Heart Sound) - "Dub"</div>
-            <div class="sound-description">
-                Occurs at the end of systole when the semilunar valves (aortic and pulmonic) close.
-            </div>
-            <div class="sound-characteristics">
-                <div class="characteristic">
-                    <span class="char-label">Best heard:</span>
-                    <span class="char-value">Base of heart (aortic and pulmonic areas)</span>
-                </div>
-                <div class="characteristic">
-                    <span class="char-label">Timing:</span>
-                    <span class="char-value">End of systole, beginning of diastole</span>
-                </div>
-                <div class="characteristic">
-                    <span class="char-label">Quality:</span>
-                    <span class="char-value">Shorter, snappier, higher pitched than S1</span>
-                </div>
-                <div class="characteristic">
-                    <span class="char-label">Normal split:</span>
-                    <span class="char-value">May split during inspiration (physiologic)</span>
-                </div>
-            </div>
-        </div>
+        <h3>Abnormal Sounds</h3>
 
-        <h3>Abnormal Heart Sounds</h3>
+        <div class="two-column">
+            <div class="sound-box">
+                <div class="sound-name">S3 - "Ken-TUC-ky"</div>
+                <div class="sound-detail"><strong>Timing:</strong> Early diastole</div>
+                <div class="sound-detail"><strong>Clinical:</strong> Heart failure, volume overload</div>
+                <div class="sound-detail"><strong>Normal in:</strong> Children & young adults</div>
+            </div>
 
-        <div class="sound-box">
-            <div class="sound-name">S3 (Third Heart Sound) - Ventricular Gallop</div>
-            <div class="sound-description">
-                Occurs early in diastole during rapid ventricular filling. Sounds like "Ken-tuck-y" (S1-S2-S3).
-            </div>
-            <div class="sound-characteristics">
-                <div class="characteristic">
-                    <span class="char-label">Best heard:</span>
-                    <span class="char-value">Apex with bell of stethoscope, patient in left lateral position</span>
-                </div>
-                <div class="characteristic">
-                    <span class="char-label">Clinical significance:</span>
-                    <span class="char-value">Heart failure, volume overload; Normal in children & young adults</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="sound-box">
-            <div class="sound-name">S4 (Fourth Heart Sound) - Atrial Gallop</div>
-            <div class="sound-description">
-                Occurs late in diastole just before S1 during atrial contraction. Sounds like "Ten-nes-see" (S4-S1-S2).
-            </div>
-            <div class="sound-characteristics">
-                <div class="characteristic">
-                    <span class="char-label">Best heard:</span>
-                    <span class="char-value">Apex with bell of stethoscope</span>
-                </div>
-                <div class="characteristic">
-                    <span class="char-label">Clinical significance:</span>
-                    <span class="char-value">Hypertension, MI, aortic stenosis, hypertrophic cardiomyopathy</span>
-                </div>
+            <div class="sound-box">
+                <div class="sound-name">S4 - "TEN-nes-see"</div>
+                <div class="sound-detail"><strong>Timing:</strong> Late diastole (before S1)</div>
+                <div class="sound-detail"><strong>Clinical:</strong> Hypertension, MI, aortic stenosis</div>
+                <div class="sound-detail"><strong>Never normal</strong></div>
             </div>
         </div>
 
         <div class="tip-box">
-            <div class="tip-title">💡 Assessment Tip</div>
-            <div>To differentiate S1 from S2, palpate the carotid pulse while auscultating. S1 coincides with the carotid upstroke.</div>
+            <div class="tip-title">Tip: Identifying S1 vs S2</div>
+            <div class="tip-content">Palpate carotid pulse while listening - S1 occurs with carotid upstroke</div>
         </div>
 
-        <h3>Heart Murmurs - Basic Classification</h3>
+        <h3>Common Murmurs</h3>
 
         <div class="sound-box">
-            <div class="sound-name">Systolic Murmurs</div>
-            <div class="sound-description">Occur between S1 and S2</div>
-            <ul>
-                <li><strong>Aortic Stenosis:</strong> Crescendo-decrescendo, harsh, radiates to neck</li>
-                <li><strong>Mitral Regurgitation:</strong> Holosystolic, blowing, radiates to axilla</li>
-                <li><strong>Tricuspid Regurgitation:</strong> Holosystolic, increases with inspiration</li>
+            <div class="sound-name">Systolic Murmurs (Between S1 & S2)</div>
+            <ul style="margin-top: 8px;">
+                <li><strong>Aortic Stenosis:</strong> Harsh, radiates to neck</li>
+                <li><strong>Mitral Regurgitation:</strong> Blowing, radiates to axilla</li>
             </ul>
         </div>
 
         <div class="sound-box">
-            <div class="sound-name">Diastolic Murmurs</div>
-            <div class="sound-description">Occur between S2 and S1 (always pathologic)</div>
-            <ul>
-                <li><strong>Aortic Regurgitation:</strong> Early diastolic, decrescendo, blowing</li>
-                <li><strong>Mitral Stenosis:</strong> Mid-diastolic, rumbling, opening snap</li>
+            <div class="sound-name">Diastolic Murmurs (Between S2 & S1) - Always Pathologic</div>
+            <ul style="margin-top: 8px;">
+                <li><strong>Aortic Regurgitation:</strong> Early diastolic, decrescendo</li>
+                <li><strong>Mitral Stenosis:</strong> Mid-diastolic, rumbling</li>
             </ul>
         </div>
     </section>
@@ -291,248 +228,96 @@
     <div class="page-break"></div>
 
     <section>
-        <h2>🫁 Lung Sounds</h2>
+        <h2>Lung Sounds</h2>
 
         <h3>Normal Breath Sounds</h3>
 
         <div class="sound-box">
             <div class="sound-name">Vesicular</div>
-            <div class="sound-description">
-                Soft, low-pitched sounds heard over most lung fields
-            </div>
-            <div class="sound-characteristics">
-                <div class="characteristic">
-                    <span class="char-label">Location:</span>
-                    <span class="char-value">Peripheral lung fields</span>
-                </div>
-                <div class="characteristic">
-                    <span class="char-label">Characteristics:</span>
-                    <span class="char-value">Inspiration longer than expiration (3:1 ratio)</span>
-                </div>
-            </div>
+            <div class="sound-detail"><strong>Location:</strong> Peripheral lung fields</div>
+            <div class="sound-detail"><strong>Quality:</strong> Soft, low-pitched; inspiration longer than expiration (3:1)</div>
         </div>
 
         <div class="sound-box">
             <div class="sound-name">Bronchial</div>
-            <div class="sound-description">
-                Loud, high-pitched, tubular sounds
-            </div>
-            <div class="sound-characteristics">
-                <div class="characteristic">
-                    <span class="char-label">Location:</span>
-                    <span class="char-value">Over trachea and large airways</span>
-                </div>
-                <div class="characteristic">
-                    <span class="char-label">Characteristics:</span>
-                    <span class="char-value">Expiration longer than inspiration; abnormal if heard over peripheral lung</span>
-                </div>
-            </div>
+            <div class="sound-detail"><strong>Location:</strong> Over trachea (abnormal if heard peripherally)</div>
+            <div class="sound-detail"><strong>Quality:</strong> Loud, high-pitched; expiration longer than inspiration</div>
         </div>
 
-        <div class="sound-box">
-            <div class="sound-name">Bronchovesicular</div>
-            <div class="sound-description">
-                Medium-pitched, blowing sounds
-            </div>
-            <div class="sound-characteristics">
-                <div class="characteristic">
-                    <span class="char-label">Location:</span>
-                    <span class="char-value">Between scapulae, near sternum</span>
-                </div>
-                <div class="characteristic">
-                    <span class="char-label">Characteristics:</span>
-                    <span class="char-value">Inspiration equals expiration (1:1 ratio)</span>
-                </div>
-            </div>
-        </div>
-
-        <h3>Abnormal (Adventitious) Lung Sounds</h3>
+        <h3>Abnormal (Adventitious) Sounds</h3>
 
         <div class="sound-box">
             <div class="sound-name">Crackles (Rales)</div>
-            <div class="sound-description">
-                Discontinuous, popping sounds caused by fluid in alveoli or sudden opening of small airways
-            </div>
-            <div class="sound-characteristics">
-                <div class="characteristic">
-                    <span class="char-label">Fine crackles:</span>
-                    <span class="char-value">High-pitched, brief; heard in pneumonia, pulmonary fibrosis, CHF</span>
-                </div>
-                <div class="characteristic">
-                    <span class="char-label">Coarse crackles:</span>
-                    <span class="char-value">Lower-pitched, longer; heard in bronchitis, pulmonary edema</span>
-                </div>
-                <div class="characteristic">
-                    <span class="char-label">Timing:</span>
-                    <span class="char-value">Usually on inspiration</span>
-                </div>
-            </div>
+            <div class="sound-detail"><strong>Sound:</strong> Popping, discontinuous (like "Rice Krispies")</div>
+            <div class="sound-detail"><strong>Causes:</strong> Fluid in alveoli, pneumonia, CHF, pulmonary fibrosis</div>
+            <div class="sound-detail"><strong>Timing:</strong> Usually inspiration</div>
         </div>
 
         <div class="sound-box">
             <div class="sound-name">Wheezes</div>
-            <div class="sound-description">
-                Continuous, musical sounds caused by narrowed airways
-            </div>
-            <div class="sound-characteristics">
-                <div class="characteristic">
-                    <span class="char-label">Sound:</span>
-                    <span class="char-value">High-pitched whistling or squeaking</span>
-                </div>
-                <div class="characteristic">
-                    <span class="char-label">Causes:</span>
-                    <span class="char-value">Asthma, COPD, bronchospasm, airway obstruction</span>
-                </div>
-                <div class="characteristic">
-                    <span class="char-label">Timing:</span>
-                    <span class="char-value">Usually on expiration (more severe if on inspiration too)</span>
-                </div>
-            </div>
+            <div class="sound-detail"><strong>Sound:</strong> High-pitched, musical, continuous</div>
+            <div class="sound-detail"><strong>Causes:</strong> Narrowed airways - asthma, COPD, bronchospasm</div>
+            <div class="sound-detail"><strong>Timing:</strong> Usually expiration (worse if also on inspiration)</div>
         </div>
 
         <div class="sound-box">
             <div class="sound-name">Rhonchi</div>
-            <div class="sound-description">
-                Continuous, low-pitched sounds caused by secretions in large airways
-            </div>
-            <div class="sound-characteristics">
-                <div class="characteristic">
-                    <span class="char-label">Sound:</span>
-                    <span class="char-value">Snoring or rattling quality</span>
-                </div>
-                <div class="characteristic">
-                    <span class="char-label">Causes:</span>
-                    <span class="char-value">Mucus in airways, bronchitis</span>
-                </div>
-                <div class="characteristic">
-                    <span class="char-label">Note:</span>
-                    <span class="char-value">May clear with coughing</span>
-                </div>
-            </div>
+            <div class="sound-detail"><strong>Sound:</strong> Low-pitched, snoring/rattling, continuous</div>
+            <div class="sound-detail"><strong>Causes:</strong> Secretions in large airways</div>
+            <div class="sound-detail"><strong>Note:</strong> May clear with coughing</div>
         </div>
 
         <div class="sound-box">
-            <div class="sound-name">Stridor</div>
-            <div class="sound-description">
-                High-pitched, harsh sound heard on inspiration
-            </div>
-            <div class="sound-characteristics">
-                <div class="characteristic">
-                    <span class="char-label">Causes:</span>
-                    <span class="char-value">Upper airway obstruction (croup, epiglottitis, foreign body)</span>
-                </div>
-                <div class="characteristic">
-                    <span class="char-label">Audibility:</span>
-                    <span class="char-value">Often heard without stethoscope</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="warning-box">
-            <div class="warning-title">⚠️ Emergency: Stridor</div>
-            <div>Stridor indicates upper airway obstruction and requires immediate intervention. Notify physician immediately!</div>
+            <div class="sound-name">Stridor - EMERGENCY</div>
+            <div class="sound-detail"><strong>Sound:</strong> High-pitched, harsh (often heard without stethoscope)</div>
+            <div class="sound-detail"><strong>Causes:</strong> Upper airway obstruction (croup, epiglottitis, foreign body)</div>
+            <div class="sound-detail"><strong>Action:</strong> Notify physician immediately</div>
         </div>
 
         <div class="sound-box">
             <div class="sound-name">Pleural Friction Rub</div>
-            <div class="sound-description">
-                Grating, rubbing sound caused by inflamed pleural surfaces
-            </div>
-            <div class="sound-characteristics">
-                <div class="characteristic">
-                    <span class="char-label">Sound:</span>
-                    <span class="char-value">Like walking on fresh snow or leather rubbing</span>
-                </div>
-                <div class="characteristic">
-                    <span class="char-label">Causes:</span>
-                    <span class="char-value">Pleurisy, pneumonia, pulmonary infarction</span>
-                </div>
-                <div class="characteristic">
-                    <span class="char-label">Timing:</span>
-                    <span class="char-value">Both inspiration and expiration</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="tip-box">
-            <div class="tip-title">💡 Assessment Tips</div>
-            <ul>
-                <li>Use the diaphragm for high-pitched sounds (most breath sounds, S2)</li>
-                <li>Use the bell for low-pitched sounds (S3, S4)</li>
-                <li>Compare side to side for symmetry</li>
-                <li>Have patient breathe through mouth, slightly deeper than normal</li>
-                <li>Listen through at least one full respiratory cycle at each location</li>
-                <li>Warm your stethoscope before use!</li>
-            </ul>
-        </div>
-    </section>
-
-    <div class="page-break"></div>
-
-    <section>
-        <h2>📋 Quick Reference Chart</h2>
-
-        <h3>When to Report Immediately</h3>
-        <div class="warning-box">
-            <ul style="margin-left: 20px;">
-                <li><strong>Stridor</strong> - Upper airway obstruction</li>
-                <li><strong>New S3</strong> - Possible heart failure</li>
-                <li><strong>Absent breath sounds</strong> - Pneumothorax, pleural effusion</li>
-                <li><strong>Sudden change in sounds</strong> - Clinical deterioration</li>
-                <li><strong>Diminished sounds + respiratory distress</strong> - Emergency</li>
-            </ul>
-        </div>
-
-        <h3>Common Sound Mnemonics</h3>
-        <div class="tip-box">
-            <ul style="margin-left: 20px;">
-                <li><strong>S3:</strong> "Ken-TUC-ky" - Think CHF = "Can't Handle Fluid"</li>
-                <li><strong>S4:</strong> "TEN-nes-see" - Think "TEN-sion" (hypertension)</li>
-                <li><strong>Crackles:</strong> "Rice Krispies" - Snap, crackle, pop!</li>
-                <li><strong>Wheezes:</strong> "Musical airways" - Asthma & COPD</li>
-            </ul>
+            <div class="sound-detail"><strong>Sound:</strong> Grating, like leather rubbing or walking on snow</div>
+            <div class="sound-detail"><strong>Causes:</strong> Inflamed pleural surfaces - pleurisy, pneumonia</div>
+            <div class="sound-detail"><strong>Timing:</strong> Both inspiration and expiration</div>
         </div>
 
         <h3>Assessment Locations</h3>
 
         <div class="sound-box">
-            <div class="sound-name">Heart Auscultation Points (APE To Man)</div>
-            <ul style="margin-left: 20px; margin-top: 10px;">
+            <div class="sound-name">Heart: "APE To Man"</div>
+            <ul style="margin-top: 6px; font-size: 0.88rem;">
                 <li><strong>A</strong>ortic: 2nd ICS, right sternal border</li>
                 <li><strong>P</strong>ulmonic: 2nd ICS, left sternal border</li>
                 <li><strong>E</strong>rb's Point: 3rd ICS, left sternal border</li>
                 <li><strong>T</strong>ricuspid: 4th ICS, left sternal border</li>
-                <li><strong>M</strong>itral (Apical): 5th ICS, midclavicular line</li>
+                <li><strong>M</strong>itral: 5th ICS, midclavicular line</li>
             </ul>
         </div>
 
         <div class="sound-box">
-            <div class="sound-name">Lung Auscultation</div>
-            <ul style="margin-left: 20px; margin-top: 10px;">
-                <li><strong>Anterior:</strong> Upper, middle, and lower lobes bilaterally</li>
-                <li><strong>Posterior:</strong> Upper, middle, and lower lobes bilaterally</li>
-                <li><strong>Lateral:</strong> Right middle lobe, left upper lobe</li>
-                <li><strong>Sequence:</strong> Always compare side to side</li>
+            <div class="sound-name">Lungs: Compare Side to Side</div>
+            <ul style="margin-top: 6px; font-size: 0.88rem;">
+                <li>Anterior: upper, middle, lower lobes bilaterally</li>
+                <li>Posterior: upper, middle, lower lobes bilaterally</li>
+                <li>Lateral: right middle lobe, left upper lobe</li>
             </ul>
         </div>
 
-        <h3>Documentation Tips</h3>
         <div class="tip-box">
-            <ul style="margin-left: 20px;">
-                <li>Describe location, timing (systolic/diastolic or inspiratory/expiratory)</li>
-                <li>Note quality (harsh, blowing, musical, crackles, etc.)</li>
-                <li>Compare to previous assessments</li>
-                <li>Document patient position during assessment</li>
-                <li>Include clinical context (symptoms, vital signs, O2 sat)</li>
+            <div class="tip-title">Quick Assessment Tips</div>
+            <ul style="margin-top: 6px; font-size: 0.88rem;">
+                <li>Use diaphragm for high-pitched sounds (breath sounds, S2)</li>
+                <li>Use bell for low-pitched sounds (S3, S4)</li>
+                <li>Always compare side to side for symmetry</li>
+                <li>Warm stethoscope before use</li>
             </ul>
         </div>
     </section>
 
     <div class="footer">
         <p><strong>The Nursing Collective</strong></p>
-        <p>For educational purposes only. Always follow your clinical protocols and notify your instructor or physician of abnormal findings.</p>
-        <p style="margin-top: 10px;">© 2026 The Nursing Collective • thenursingcollective.pro</p>
-        <p style="margin-top: 10px; font-size: 0.85rem;">Join our Discord community at discord.gg/y2Mh77wAV2 for more free resources!</p>
+        <p>For educational purposes only. Always follow clinical protocols and notify instructors/physicians of abnormal findings.</p>
+        <p style="margin-top: 8px;">thenursingcollective.pro • discord.gg/y2Mh77wAV2</p>
     </div>
 </body>
 </html>
