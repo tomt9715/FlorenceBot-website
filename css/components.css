@@ -3,6 +3,77 @@
    ============================================ */
 
 /* ============================================
+   LOADING STATES
+   ============================================ */
+
+/* Spinner */
+.spinner {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+}
+
+.spinner-primary {
+    border-color: rgba(46, 134, 171, 0.3);
+    border-top-color: var(--primary-color);
+}
+
+/* Skeleton Loader */
+.skeleton {
+    background: linear-gradient(90deg, var(--background-light) 25%, var(--card-bg) 50%, var(--background-light) 75%);
+    background-size: 200% 100%;
+    animation: skeleton-loading 1.5s ease-in-out infinite;
+    border-radius: 8px;
+}
+
+.skeleton-text {
+    height: 16px;
+    margin-bottom: 8px;
+}
+
+.skeleton-title {
+    height: 24px;
+    width: 60%;
+    margin-bottom: 12px;
+}
+
+.skeleton-card {
+    height: 200px;
+}
+
+/* Button Loading State */
+.btn-loading {
+    position: relative;
+    pointer-events: none;
+    opacity: 0.7;
+}
+
+.btn-loading::after {
+    content: '';
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    border: 2px solid transparent;
+    border-top-color: currentColor;
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+    margin-left: 8px;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+@keyframes skeleton-loading {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+/* ============================================
    BUTTONS
    ============================================ */
 

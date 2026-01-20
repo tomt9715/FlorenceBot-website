@@ -578,6 +578,10 @@ function loadAccessibleGuides(user) {
     const guideList = document.getElementById('guide-list');
     if (!guideList) return;
 
+    // Remove skeleton loader
+    const skeleton = guideList.querySelector('.skeleton-loader');
+    if (skeleton) skeleton.remove();
+
     // Get purchased guides from localStorage (will be synced with backend later)
     const purchasedGuides = JSON.parse(localStorage.getItem('purchasedGuides') || '[]');
 
