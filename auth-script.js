@@ -413,10 +413,15 @@ document.addEventListener('DOMContentLoaded', function() {
             } catch (error) {
                 console.error('Forgot password error:', error);
                 messageDiv.style.display = 'block';
-                messageDiv.className = 'error-message';
+                messageDiv.className = 'error-message error';
                 messageDiv.innerHTML = `
                     <i class="fas fa-exclamation-circle"></i>
-                    <span>${error.message || 'Failed to send reset email. Please try again.'}</span>
+                    <div>
+                        <span>${error.message || 'Failed to send reset email. Please try again.'}</span>
+                        <button class="retry-button" onclick="document.getElementById('forgot-password-form').requestSubmit()">
+                            <i class="fas fa-redo"></i> Try Again
+                        </button>
+                    </div>
                 `;
             } finally {
                 submitBtn.disabled = false;
@@ -466,72 +471,8 @@ async function handleLogin(email, password) {
     }
 }
 
-// Token Refresh Function
-async function refreshToken() {
-    const refreshToken = localStorage.getItem('refreshToken');
-
-    if (!refreshToken) {
-        throw new Error('No refresh token available');
-    }
-
-    try {
-        const response = await fetch(`${API_URL}/auth/refresh`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ refresh_token: refreshToken })
-        });
-
-        const data = await response.json();
-
-        if (!response.ok) {
-            throw new Error(data.error || 'Token refresh failed');
-        }
-
-        // Update tokens
-        localStorage.setItem('accessToken', data.access_token);
-        if (data.refresh_token) {
-            localStorage.setItem('refreshToken', data.refresh_token);
-        }
-        localStorage.setItem('tokenTimestamp', Date.now().toString());
-
-        return data.access_token;
-
-    } catch (error) {
-        console.error('Token refresh error:', error);
-        // Clear tokens and redirect to login
-        performLogout();
-        throw error;
-    }
-}
-
-// Logout function with cross-tab sync
-function performLogout() {
-    // Clear all auth data
-    localStorage.removeItem('accessToken');
-    localStorage.removeItem('refreshToken');
-    localStorage.removeItem('user');
-    localStorage.removeItem('tokenTimestamp');
-
-    // Set logout flag for cross-tab sync
-    localStorage.setItem('logoutEvent', Date.now().toString());
-
-    // Redirect to login
-    window.location.href = 'login.html';
-}
-
-// Listen for cross-tab logout events
-window.addEventListener('storage', function(e) {
-    if (e.key === 'logoutEvent' && e.newValue) {
-        // Another tab logged out, clear local data and redirect
-        localStorage.removeItem('accessToken');
-        localStorage.removeItem('refreshToken');
-        localStorage.removeItem('user');
-        localStorage.removeItem('tokenTimestamp');
-        window.location.href = 'login.html';
-    }
-});
+// Note: refreshToken() and performLogout() are now in api-service.js
+// Note: Cross-tab logout listener is in api-service.js
 
 // Handle Registration
 async function handleRegister(email, password, firstName, lastName) {
