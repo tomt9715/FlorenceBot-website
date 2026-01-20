@@ -1179,6 +1179,44 @@ pre code {
     margin-bottom: 8px;
 }
 
+/* Auth Page Specific Utilities */
+.name-fields-grid {
+    display: none;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.password-match-indicator {
+    margin-top: 6px;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.forgot-password-message {
+    display: none;
+    margin-top: 16px;
+}
+
+.modal-content-small {
+    max-width: 480px;
+}
+
+.modal-description {
+    color: var(--text-secondary);
+    margin-bottom: 24px;
+}
+
+.footer-attribution {
+    font-size: 0.7rem;
+    margin-top: 8px;
+    opacity: 0.5;
+}
+
+.footer-attribution a {
+    color: inherit;
+    text-decoration: none;
+}
+
 /* ============================================
    INLINE STYLE REPLACEMENTS
    Utility classes for common inline styles

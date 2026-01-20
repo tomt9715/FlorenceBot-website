@@ -854,6 +854,55 @@
     margin: 0;
 }
 
+/* Auth Mode Toggle */
+.auth-mode-toggle {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 32px;
+    padding: 6px;
+    background: var(--background-light);
+    border-radius: 12px;
+}
+
+.mode-btn {
+    flex: 1;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    background: transparent;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    font-weight: 600;
+    font-family: 'Source Sans 3', sans-serif;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.mode-btn:hover {
+    color: var(--text-primary);
+}
+
+.mode-btn.active {
+    background: var(--card-bg);
+    color: var(--primary-color);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.mode-btn i {
+    font-size: 1rem;
+}
+
+/* Auth Options */
+.auth-options {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
 .auth-btn {
     width: 100%;
     padding: 14px 20px;
@@ -906,9 +955,45 @@
     color: #5865F2;
 }
 
+.auth-btn.email {
+    border-color: var(--primary-color);
+}
+
+.auth-btn.email:hover {
+    background: rgba(46, 134, 171, 0.05);
+}
+
+.auth-btn.email .auth-icon {
+    color: var(--primary-color);
+}
+
+.auth-btn.primary {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    border: none;
+    box-shadow: 0 4px 15px rgba(46, 134, 171, 0.4);
+}
+
+.auth-btn.primary:hover {
+    background: linear-gradient(135deg, var(--primary-dark), var(--secondary-dark));
+    box-shadow: 0 6px 20px rgba(46, 134, 171, 0.5);
+}
+
+.auth-btn.full-width {
+    width: 100%;
+}
+
 .auth-btn .auth-icon {
     font-size: 1.25rem;
     flex-shrink: 0;
+}
+
+.auth-btn svg.auth-icon {
+    flex-shrink: 0;
+}
+
+.auth-btn-text {
+    flex: 1;
 }
 
 .auth-divider {
@@ -943,6 +1028,72 @@
     font-weight: 500;
 }
 
+.auth-divider-text {
+    margin: 28px 0 24px;
+    text-align: center;
+}
+
+.auth-divider-text span {
+    color: var(--text-primary);
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+/* Email Auth Section */
+.email-auth-section {
+    display: none;
+}
+
+.email-auth-section.active {
+    display: block;
+}
+
+.email-auth {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Back Button */
+.back-btn {
+    width: 100%;
+    margin-top: 16px;
+    padding: 12px;
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.back-btn:hover {
+    color: var(--primary-color);
+}
+
+/* Forgot Password */
+.forgot-password-link {
+    text-align: right;
+    margin-top: -8px;
+    margin-bottom: 12px;
+}
+
+.forgot-password-link a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.forgot-password-link a:hover {
+    text-decoration: underline;
+}
+
 .auth-footer {
     margin-top: 32px;
     padding-top: 24px;
@@ -964,6 +1115,51 @@
 
 .toggle-mode a:hover {
     text-decoration: underline;
+}
+
+.auth-links {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 0.875rem;
+}
+
+.auth-links a {
+    color: var(--text-secondary);
+    text-decoration: none;
+}
+
+.auth-links a:hover {
+    color: var(--primary-color);
+    text-decoration: underline;
+}
+
+.auth-links .divider {
+    color: var(--text-light);
+}
+
+/* Trust Badges */
+.trust-badges {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 32px;
+    margin-top: 40px;
+    flex-wrap: wrap;
+}
+
+.trust-badge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.trust-badge i {
+    color: var(--primary-color);
+    font-size: 1.1rem;
 }
 
 /* Dashboard */
@@ -1040,6 +1236,11 @@
     .auth-btn {
         padding: 12px 16px;
         font-size: 0.95rem;
+    }
+
+    .trust-badges {
+        flex-direction: column;
+        gap: 16px;
     }
 
     .dashboard-header h1 {
