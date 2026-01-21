@@ -211,7 +211,8 @@ def create_clinical_survival_guide_pdf(output_path):
     nurse_section.append(Paragraph("Working with Your Nurse", section_header_style))
 
     # Do's in a colored box
-    dos_content = [Paragraph("<b>Do's:</b>", subsection_style)]
+    dos_table_data = []
+    dos_table_data.append([Paragraph("<b>Do's:</b>", subsection_style)])
     dos = [
         "Ask questions, but pick appropriate times (not during emergencies or med pass)",
         "Volunteer to help before being asked",
@@ -220,22 +221,24 @@ def create_clinical_survival_guide_pdf(output_path):
         "Thank them at the end of the day"
     ]
     for item in dos:
-        dos_content.append(Paragraph(f"• {item}", bullet_style))
+        dos_table_data.append([Paragraph(f"• {item}", bullet_style)])
 
-    dos_table = Table([dos_content], colWidths=[6.5*inch])
+    dos_table = Table(dos_table_data, colWidths=[6.5*inch])
     dos_table.setStyle(TableStyle([
         ('BACKGROUND', (0, 0), (-1, -1), colors.HexColor('#ecfdf5')),  # Light teal
         ('BOX', (0, 0), (-1, -1), 1.5, highlight_color),
-        ('TOPPADDING', (0, 0), (-1, -1), 10),
-        ('BOTTOMPADDING', (0, 0), (-1, -1), 10),
+        ('TOPPADDING', (0, 0), (-1, -1), 6),
+        ('BOTTOMPADDING', (0, 0), (-1, -1), 6),
         ('LEFTPADDING', (0, 0), (-1, -1), 12),
         ('RIGHTPADDING', (0, 0), (-1, -1), 12),
+        ('VALIGN', (0, 0), (-1, -1), 'TOP'),
     ]))
     nurse_section.append(dos_table)
     nurse_section.append(Spacer(1, 0.12*inch))
 
     # Don'ts in a colored box
-    donts_content = [Paragraph("<b>Don'ts:</b>", subsection_style)]
+    donts_table_data = []
+    donts_table_data.append([Paragraph("<b>Don'ts:</b>", subsection_style)])
     donts = [
         "Don't hide in the corner or disappear from the floor",
         "Don't pretend to know something you don't",
@@ -244,16 +247,17 @@ def create_clinical_survival_guide_pdf(output_path):
         "Don't check your phone except during designated breaks"
     ]
     for item in donts:
-        donts_content.append(Paragraph(f"• {item}", bullet_style))
+        donts_table_data.append([Paragraph(f"• {item}", bullet_style)])
 
-    donts_table = Table([donts_content], colWidths=[6.5*inch])
+    donts_table = Table(donts_table_data, colWidths=[6.5*inch])
     donts_table.setStyle(TableStyle([
         ('BACKGROUND', (0, 0), (-1, -1), colors.HexColor('#fef2f2')),  # Light red/pink
         ('BOX', (0, 0), (-1, -1), 1.5, colors.HexColor('#dc2626')),  # Red border
-        ('TOPPADDING', (0, 0), (-1, -1), 10),
-        ('BOTTOMPADDING', (0, 0), (-1, -1), 10),
+        ('TOPPADDING', (0, 0), (-1, -1), 6),
+        ('BOTTOMPADDING', (0, 0), (-1, -1), 6),
         ('LEFTPADDING', (0, 0), (-1, -1), 12),
         ('RIGHTPADDING', (0, 0), (-1, -1), 12),
+        ('VALIGN', (0, 0), (-1, -1), 'TOP'),
     ]))
     nurse_section.append(donts_table)
     nurse_section.append(Spacer(1, 0.12*inch))
@@ -298,19 +302,20 @@ def create_clinical_survival_guide_pdf(output_path):
          "Never fake competence.")
     ]
 
-    anxiety_content = []
+    anxiety_table_data = []
     for header, text in anxiety_strategies:
-        anxiety_content.append(Paragraph(f"<b>{header}:</b> {text}", bullet_style))
+        anxiety_table_data.append([Paragraph(f"<b>{header}:</b> {text}", bullet_style)])
 
     # Wrap anxiety strategies in a calming colored box
-    anxiety_table = Table([anxiety_content], colWidths=[6.5*inch])
+    anxiety_table = Table(anxiety_table_data, colWidths=[6.5*inch])
     anxiety_table.setStyle(TableStyle([
         ('BACKGROUND', (0, 0), (-1, -1), colors.HexColor('#f0f9ff')),  # Light blue - calming
         ('BOX', (0, 0), (-1, -1), 1.5, PRIMARY_COLOR),
-        ('TOPPADDING', (0, 0), (-1, -1), 10),
-        ('BOTTOMPADDING', (0, 0), (-1, -1), 10),
+        ('TOPPADDING', (0, 0), (-1, -1), 6),
+        ('BOTTOMPADDING', (0, 0), (-1, -1), 6),
         ('LEFTPADDING', (0, 0), (-1, -1), 12),
         ('RIGHTPADDING', (0, 0), (-1, -1), 12),
+        ('VALIGN', (0, 0), (-1, -1), 'TOP'),
     ]))
     anxiety_section.append(anxiety_table)
 
