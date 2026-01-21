@@ -586,7 +586,7 @@ function loadAccessibleGuides(user) {
                 </div>
                 <h3>Start Your NCLEX Journey</h3>
                 <p>Browse our collection of comprehensive study guides designed to help you pass the NCLEX on your first try.</p>
-                <button class="btn-secondary" onclick="window.location.href='guides.html'">
+                <button class="btn btn-secondary" onclick="window.location.href='guides.html'">
                     <i class="fas fa-search"></i> Explore Study Guides
                 </button>
             </div>
