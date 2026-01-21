@@ -7,7 +7,7 @@ Comprehensive supply list organized by program level with practical recommendati
 from reportlab.lib.pagesizes import letter
 from reportlab.lib.units import inch
 from reportlab.lib import colors
-from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle, KeepTogether
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib.enums import TA_CENTER, TA_LEFT, TA_JUSTIFY
 from reportlab.pdfgen import canvas
@@ -153,8 +153,10 @@ def create_nursing_supply_list_pdf(output_path):
             ("Small Notebook", "Pocket-sized for clinical notes and patient information. Keep it HIPAA-compliant."),
             ("Highlighters & Pens", "Multiple colors for color-coding notes. Black pens for documentation."),
         ]),
-        ("Tech & Essentials", [
+        ("Tech", [
             ("Laptop or Tablet", "For care plans, research, and online exams. Ensure it meets school requirements."),
+        ]),
+        ("Clinical Logistics", [
             ("Parking Strategy", "Scout parking spots early or arrange rideshares with classmates. Hospitals often reserve parking for employees only."),
         ]),
     ]
@@ -282,14 +284,14 @@ def create_nursing_supply_list_pdf(output_path):
 
     tips_content = [
         [Paragraph("Money-Saving Tips", tips_header_style)],
+        [Paragraph("• Most schools provide a basic Littmann stethoscope. You can use your own if preferred.", tips_style)],
         [Paragraph("• Split costs with classmates for optional reference materials and pocket guides.", tips_style)],
         [Paragraph("• Wait until you actually need optional items before buying them.", tips_style)],
         [Paragraph("• Check if your school provides any supplies or tool kits at orientation.", tips_style)],
         [Paragraph("• Look for student discounts at medical supply stores and online retailers.", tips_style)],
-        [Paragraph("• Consider gently used stethoscopes and equipment from graduating students.", tips_style)],
     ]
 
-    tips_table = Table(tips_content, colWidths=[6.5*inch])
+    tips_table = Table(tips_content, colWidths=[6.5*inch], repeatRows=1)
     tips_table.setStyle(TableStyle([
         ('BACKGROUND', (0, 0), (-1, -1), colors.HexColor('#fef3c7')),
         ('BOX', (0, 0), (-1, -1), 2, ACCENT_COLOR),
@@ -299,7 +301,8 @@ def create_nursing_supply_list_pdf(output_path):
         ('RIGHTPADDING', (0, 0), (-1, -1), 12),
     ]))
 
-    elements.append(tips_table)
+    # Keep the entire tips box together to prevent page breaks
+    elements.append(KeepTogether([tips_table]))
 
     # Build PDF
     doc.build(elements, canvasmaker=HeaderFooterCanvas)
