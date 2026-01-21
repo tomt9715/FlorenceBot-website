@@ -262,30 +262,19 @@ async function handleSubmit(event) {
         }
 
         // Handle one-time payment
-        // Confirm payment with Stripe using the existing payment intent
-        const { error: confirmError, paymentIntent } = await stripe.confirmPayment({
+        // Confirm payment with Stripe - always redirect to ensure payment completes
+        const { error: confirmError } = await stripe.confirmPayment({
             elements,
             confirmParams: {
-                return_url: `${window.location.origin}/success.html?product=${currentProduct.id}`,
+                return_url: `${window.location.origin}/success.html?product=${currentProduct.id}&payment_intent=${currentPaymentIntentId}`,
                 receipt_email: email,
             },
-            redirect: 'if_required',
+            redirect: 'always',
         });
 
+        // If we get here, there was an error (successful payments redirect)
         if (confirmError) {
             throw new Error(confirmError.message);
-        }
-
-        // If we reach here without redirect, payment succeeded
-        // This can happen with some payment methods that don't require redirect (like cards)
-        if (paymentIntent && paymentIntent.status === 'succeeded') {
-            window.location.href = `${window.location.origin}/success.html?product=${currentProduct.id}&payment_intent=${paymentIntent.id}`;
-        } else if (paymentIntent) {
-            // Payment requires additional action or is processing
-            window.location.href = `${window.location.origin}/success.html?product=${currentProduct.id}&payment_intent=${paymentIntent.id}`;
-        } else {
-            // Fallback using the stored payment intent ID
-            window.location.href = `${window.location.origin}/success.html?product=${currentProduct.id}&payment_intent=${currentPaymentIntentId}`;
         }
 
     } catch (error) {
