@@ -459,8 +459,23 @@ async function handleLogin(email, password) {
         // Store login timestamp for token expiry tracking
         localStorage.setItem('tokenTimestamp', Date.now().toString());
 
-        // Redirect to dashboard
-        window.location.href = 'dashboard.html';
+        // Merge guest cart if cartManager is available
+        if (typeof cartManager !== 'undefined') {
+            try {
+                await cartManager.mergeGuestCart();
+            } catch (cartError) {
+                console.warn('Failed to merge cart:', cartError);
+            }
+        }
+
+        // Check for redirect URL (e.g., from checkout)
+        const urlParams = new URLSearchParams(window.location.search);
+        const redirectTo = urlParams.get('redirect');
+        if (redirectTo === 'checkout') {
+            window.location.href = 'checkout.html';
+        } else {
+            window.location.href = 'dashboard.html';
+        }
 
         // Return to prevent any further execution
         return;

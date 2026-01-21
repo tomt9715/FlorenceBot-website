@@ -1,7 +1,12 @@
 // Store Page JavaScript
-// Sidebar Filter Functionality & Shop Type Toggle
+// Sidebar Filter Functionality, Shop Type Toggle & Cart Integration
 
 document.addEventListener('DOMContentLoaded', function() {
+    // Convert "Buy Guide" links to "Add to Cart" buttons
+    initializeAddToCartButtons();
+
+    // Initialize package add-to-cart buttons
+    initializePackageButtons();
     const filterButtons = document.querySelectorAll('.filter-item[data-filter]');
     const shopTypeButtons = document.querySelectorAll('.filter-item[data-shop-type]');
     const guideCards = document.querySelectorAll('.guide-card');
@@ -190,3 +195,150 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
+
+/**
+ * Convert existing "Buy Guide" links to "Add to Cart" buttons
+ */
+function initializeAddToCartButtons() {
+    // Product ID to name mapping (for individual guides)
+    const productNames = {
+        'cardiovascular-system': 'Cardiovascular System',
+        'respiratory-system': 'Respiratory System',
+        'endocrine-diabetes': 'Endocrine & Diabetes',
+        'neurological-system': 'Neurological System',
+        'renal-urinary': 'Renal & Urinary System',
+        'gastrointestinal': 'Gastrointestinal System',
+        'musculoskeletal': 'Musculoskeletal System',
+        'cardiac-medications': 'Cardiac Medications',
+        'antibiotics-antivirals': 'Antibiotics & Antivirals',
+        'pain-management': 'Pain Management',
+        'iv-medications': 'IV Medications & Solutions',
+        'psychotropic-medications': 'Psychotropic Medications',
+        'emergency-medications': 'Emergency Medications',
+        'assessment-skills': 'Assessment Skills',
+        'infection-control': 'Infection Control',
+        'documentation-charting': 'Documentation & Charting',
+        'patient-safety': 'Patient Safety',
+        'mobility-transfers': 'Mobility & Transfers',
+        'labor-delivery': 'Labor & Delivery',
+        'postpartum-care': 'Postpartum Care',
+        'high-risk-pregnancy': 'High-Risk Pregnancy',
+        'antepartum-care': 'Antepartum Care',
+        'growth-development': 'Growth & Development',
+        'pediatric-emergencies': 'Pediatric Emergencies',
+        'infant-care': 'Infant Care',
+        'adolescent-health': 'Adolescent Health',
+        'depression-anxiety': 'Depression & Anxiety',
+        'crisis-intervention': 'Crisis Intervention',
+        'therapeutic-communication': 'Therapeutic Communication',
+        'substance-abuse': 'Substance Abuse',
+        'eating-disorders': 'Eating Disorders'
+    };
+
+    // Find all "Buy Guide" links in guide cards
+    const buyLinks = document.querySelectorAll('.guide-card .guide-footer a[href^="checkout.html"]');
+
+    buyLinks.forEach(link => {
+        // Extract product ID from URL
+        const url = new URL(link.href, window.location.origin);
+        const productId = url.searchParams.get('product');
+
+        if (!productId) return;
+
+        // Create new button
+        const button = document.createElement('button');
+        button.className = 'add-to-cart-btn';
+        button.setAttribute('data-product-id', productId);
+        button.setAttribute('data-product-name', productNames[productId] || productId);
+        button.setAttribute('data-product-type', 'individual');
+        button.setAttribute('data-product-price', '5.99');
+        button.innerHTML = '<i class="fas fa-cart-plus"></i> Add to Cart';
+
+        // Add click handler
+        button.addEventListener('click', handleAddToCartClick);
+
+        // Replace link with button
+        link.parentNode.replaceChild(button, link);
+    });
+
+    // Update button states based on cart contents
+    if (typeof cartUI !== 'undefined') {
+        setTimeout(() => {
+            cartUI.updateAddToCartButtons();
+        }, 200);
+    }
+}
+
+/**
+ * Initialize package add-to-cart buttons
+ */
+function initializePackageButtons() {
+    // Package product data
+    const packages = {
+        'fundamentals-full': { name: 'Fundamentals Full Package', type: 'full-package', price: 49.99 },
+        'fundamentals-lite': { name: 'Fundamentals Lite Package', type: 'lite-package', price: 24.99 },
+        'medsurg-full': { name: 'Med-Surg Full Package', type: 'full-package', price: 49.99 },
+        'medsurg-lite': { name: 'Med-Surg Lite Package', type: 'lite-package', price: 24.99 },
+        'pharmacology-full': { name: 'Pharmacology Full Package', type: 'full-package', price: 49.99 },
+        'pharmacology-lite': { name: 'Pharmacology Lite Package', type: 'lite-package', price: 24.99 },
+        'maternal-full': { name: 'Maternal/OB Full Package', type: 'full-package', price: 49.99 },
+        'maternal-lite': { name: 'Maternal/OB Lite Package', type: 'lite-package', price: 24.99 },
+        'pediatrics-full': { name: 'Pediatrics Full Package', type: 'full-package', price: 49.99 },
+        'pediatrics-lite': { name: 'Pediatrics Lite Package', type: 'lite-package', price: 24.99 },
+        'mental-health-full': { name: 'Mental Health Full Package', type: 'full-package', price: 49.99 },
+        'mental-health-lite': { name: 'Mental Health Lite Package', type: 'lite-package', price: 24.99 }
+    };
+
+    // Find all package links
+    const packageLinks = document.querySelectorAll('.package-card a[href^="checkout.html"]');
+
+    packageLinks.forEach(link => {
+        // Extract product ID from URL
+        const url = new URL(link.href, window.location.origin);
+        const productId = url.searchParams.get('product');
+
+        if (!productId || !packages[productId]) return;
+
+        const pkg = packages[productId];
+
+        // Create new button
+        const button = document.createElement('button');
+        button.className = 'add-to-cart-btn';
+        button.setAttribute('data-product-id', productId);
+        button.setAttribute('data-product-name', pkg.name);
+        button.setAttribute('data-product-type', pkg.type);
+        button.setAttribute('data-product-price', pkg.price.toString());
+
+        // Preserve original button text for packages
+        const isFullPackage = productId.includes('-full');
+        button.innerHTML = isFullPackage
+            ? '<i class="fas fa-cart-plus"></i> Get Full Package'
+            : '<i class="fas fa-cart-plus"></i> Get Lite Package';
+
+        // Add click handler
+        button.addEventListener('click', handleAddToCartClick);
+
+        // Replace link with button
+        link.parentNode.replaceChild(button, link);
+    });
+}
+
+/**
+ * Handle add to cart button click
+ * @param {Event} e - Click event
+ */
+async function handleAddToCartClick(e) {
+    const button = e.currentTarget;
+    const productId = button.dataset.productId;
+    const productName = button.dataset.productName;
+    const productType = button.dataset.productType;
+    const price = parseFloat(button.dataset.price || button.dataset.productPrice);
+
+    if (typeof cartUI !== 'undefined') {
+        await cartUI.addToCart(productId, productName, productType, price, button);
+    } else {
+        // Fallback if cart UI not loaded
+        console.error('Cart UI not available');
+        alert('Unable to add to cart. Please try again.');
+    }
+}

@@ -1,17 +1,20 @@
 /**
  * FlorenceBot Pro Checkout
- * Handles Stripe Payment Element integration for embedded payments.
+ * Handles cart-based checkout with Stripe Checkout Session.
+ * Supports both authenticated users and guest checkout.
  */
 
-// Configuration - Update this URL after deploying the API to Railway
-const API_BASE_URL = 'https://florencebotpro-production.up.railway.app';
+// Configuration
+const PAYMENT_API_URL = 'https://florencebotpro-production.up.railway.app';
+const AUTH_API_URL = 'https://web-production-592c07.up.railway.app';
 
 // Global state
 let stripe = null;
-let elements = null;
-let paymentElement = null;
+let cartItems = [];
+let cartSubtotal = 0;
+let isUserAuthenticated = false;
+let singleProductMode = false;
 let currentProduct = null;
-let currentPaymentIntentId = null;
 
 // Category display names
 const CATEGORY_NAMES = {
@@ -28,29 +31,46 @@ const CATEGORY_NAMES = {
  * Initialize the checkout page
  */
 async function initCheckout() {
-    // Get product ID from URL
-    const urlParams = new URLSearchParams(window.location.search);
-    const productId = urlParams.get('product');
+    // Check if user is authenticated
+    isUserAuthenticated = typeof isAuthenticated === 'function' ? isAuthenticated() : !!localStorage.getItem('accessToken');
 
-    if (!productId) {
-        showError('No product selected. Please go back to the store and select a product.');
-        return;
+    // Show sign-in prompt for guest users
+    const signInPrompt = document.getElementById('signin-prompt');
+    if (signInPrompt && !isUserAuthenticated) {
+        signInPrompt.style.display = 'block';
+    }
+
+    // Pre-fill email if user is authenticated
+    if (isUserAuthenticated) {
+        const user = typeof getCurrentUser === 'function' ? getCurrentUser() : JSON.parse(localStorage.getItem('user') || '{}');
+        if (user.email) {
+            document.getElementById('email').value = user.email;
+        }
     }
 
     try {
-        // Initialize Stripe first
+        // Initialize Stripe
         await initStripe();
 
-        // Load product details
-        await loadProductDetails(productId);
+        // Check for single product mode (legacy URL param)
+        const urlParams = new URLSearchParams(window.location.search);
+        const productId = urlParams.get('product');
 
-        // Check if it's a subscription product
-        if (currentProduct && currentProduct.type === 'subscription') {
-            // For subscriptions, show redirect notice and setup redirect flow
+        if (productId) {
+            // Single product mode - legacy support
+            singleProductMode = true;
+            await loadSingleProduct(productId);
+        } else {
+            // Cart mode - load from cart
+            await loadCartItems();
+        }
+
+        // Check if it's a subscription (single product mode only)
+        if (singleProductMode && currentProduct && currentProduct.type === 'subscription') {
             setupSubscriptionFlow();
         } else {
-            // For one-time purchases, create payment intent and mount payment element
-            await createPaymentIntent();
+            // Enable the checkout button for Stripe Checkout redirect
+            setupCheckoutButton();
         }
     } catch (error) {
         console.error('Checkout initialization error:', error);
@@ -63,7 +83,7 @@ async function initCheckout() {
  */
 async function initStripe() {
     try {
-        const response = await fetch(`${API_BASE_URL}/api/config`);
+        const response = await fetch(`${PAYMENT_API_URL}/api/config`);
         if (!response.ok) {
             throw new Error('Failed to fetch Stripe configuration');
         }
@@ -77,11 +97,11 @@ async function initStripe() {
 }
 
 /**
- * Load product details from API
+ * Load single product (legacy mode)
  */
-async function loadProductDetails(productId) {
+async function loadSingleProduct(productId) {
     try {
-        const response = await fetch(`${API_BASE_URL}/api/product/${productId}`);
+        const response = await fetch(`${PAYMENT_API_URL}/api/product/${productId}`);
         if (!response.ok) {
             if (response.status === 404) {
                 throw new Error('Product not found');
@@ -90,116 +110,217 @@ async function loadProductDetails(productId) {
         }
 
         currentProduct = await response.json();
-        displayProductDetails(currentProduct);
+        currentProduct.product_id = productId;
+
+        // Convert to cart item format
+        cartItems = [{
+            product_id: productId,
+            product_name: currentProduct.name,
+            product_type: currentProduct.type,
+            price: currentProduct.price
+        }];
+        cartSubtotal = currentProduct.price;
+
+        displayCartItems();
     } catch (error) {
         console.error('Product loading error:', error);
-        throw error;
+        showError('Product not found. Please go back to the store and select a product.');
     }
 }
 
 /**
- * Display product details in the order summary
+ * Load cart items from cartManager
  */
-function displayProductDetails(product) {
+async function loadCartItems() {
+    try {
+        // Wait for cartManager to be available
+        if (typeof cartManager === 'undefined') {
+            throw new Error('Cart system not loaded');
+        }
+
+        // Get cart from cartManager
+        const cart = await cartManager.getCart();
+
+        if (!cart.items || cart.items.length === 0) {
+            // Empty cart - show message and redirect
+            showEmptyCartMessage();
+            return;
+        }
+
+        cartItems = cart.items;
+        cartSubtotal = cart.subtotal || cartItems.reduce((sum, item) => sum + parseFloat(item.price), 0);
+
+        displayCartItems();
+    } catch (error) {
+        console.error('Cart loading error:', error);
+        showError('Failed to load your cart. Please try again.');
+    }
+}
+
+/**
+ * Show empty cart message
+ */
+function showEmptyCartMessage() {
+    const productDetailsEl = document.getElementById('product-details');
+    productDetailsEl.innerHTML = `
+        <div style="text-align: center; padding: 40px 20px;">
+            <i class="fas fa-shopping-bag" style="font-size: 3rem; color: var(--text-light); margin-bottom: 16px;"></i>
+            <h3 style="color: var(--text-primary); margin-bottom: 8px;">Your cart is empty</h3>
+            <p style="color: var(--text-secondary); margin-bottom: 24px;">Add some study guides to get started!</p>
+            <a href="store.html" class="btn btn-primary">
+                <i class="fas fa-shopping-cart"></i> Browse Store
+            </a>
+        </div>
+    `;
+
+    // Hide payment form
+    document.querySelector('.payment-form-container').style.display = 'none';
+}
+
+/**
+ * Display cart items in the order summary
+ */
+function displayCartItems() {
     const productDetailsEl = document.getElementById('product-details');
     const subtotalEl = document.getElementById('subtotal');
     const totalEl = document.getElementById('total');
 
-    // Build product details HTML
-    let html = `
-        <div class="product-info">
-            <h3 class="product-name">${escapeHtml(product.name)}</h3>
-            <p class="product-description">${escapeHtml(product.description)}</p>
-            <span class="product-category">
-                <i class="fas fa-tag"></i>
-                ${CATEGORY_NAMES[product.category] || product.category}
-            </span>
-            <div class="product-price">$${product.price.toFixed(2)}${product.interval ? '/month' : ''}</div>
-        </div>
-    `;
+    if (cartItems.length === 0) {
+        showEmptyCartMessage();
+        return;
+    }
 
-    // Add package includes if applicable
-    if (product.includes && product.includes.length > 0) {
+    // Build cart items HTML
+    let html = '<div class="cart-items-checkout">';
+
+    cartItems.forEach(item => {
+        const typeLabel = getTypeLabel(item.product_type);
         html += `
-            <div class="package-includes">
-                <h4>Includes:</h4>
-                <ul>
-                    ${product.includes.map(item => `
-                        <li>
-                            <i class="fas fa-check"></i>
-                            ${escapeHtml(formatProductName(item))}
-                        </li>
-                    `).join('')}
-                </ul>
+            <div class="checkout-item">
+                <div class="checkout-item-icon">
+                    <i class="fas fa-file-medical"></i>
+                </div>
+                <div class="checkout-item-details">
+                    <div class="checkout-item-name">${escapeHtml(item.product_name)}</div>
+                    <div class="checkout-item-type">${typeLabel}</div>
+                </div>
+                <div class="checkout-item-price">$${parseFloat(item.price).toFixed(2)}</div>
             </div>
         `;
-    }
+    });
+
+    html += '</div>';
+
+    // Add item count summary
+    html += `
+        <div class="checkout-item-count" style="margin-top: 12px; font-size: 0.9rem; color: var(--text-secondary);">
+            ${cartItems.length} item${cartItems.length !== 1 ? 's' : ''} in your order
+        </div>
+    `;
 
     productDetailsEl.innerHTML = html;
 
     // Update totals
-    subtotalEl.textContent = `$${product.price.toFixed(2)}`;
-    totalEl.textContent = `$${product.price.toFixed(2)}`;
+    subtotalEl.textContent = `$${cartSubtotal.toFixed(2)}`;
+    totalEl.textContent = `$${cartSubtotal.toFixed(2)}`;
+
+    // Add inline styles for checkout items
+    addCheckoutItemStyles();
 }
 
 /**
- * Create payment intent for one-time purchases
+ * Add inline styles for checkout items (to avoid needing to modify CSS file)
  */
-async function createPaymentIntent() {
-    const emailInput = document.getElementById('email');
-    const email = emailInput.value || '';
+function addCheckoutItemStyles() {
+    if (document.getElementById('checkout-item-styles')) return;
 
-    try {
-        const response = await fetch(`${API_BASE_URL}/api/create-payment-intent`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                product_id: currentProduct.id,
-                email: email || 'pending@checkout.com'  // Placeholder until user enters email
-            }),
-        });
-
-        if (!response.ok) {
-            const error = await response.json();
-            throw new Error(error.error || 'Failed to create payment intent');
+    const styleEl = document.createElement('style');
+    styleEl.id = 'checkout-item-styles';
+    styleEl.textContent = `
+        .cart-items-checkout {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
         }
+        .checkout-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            background: var(--background-light);
+            border-radius: 8px;
+        }
+        .checkout-item-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .checkout-item-icon i {
+            color: white;
+            font-size: 1rem;
+        }
+        .checkout-item-details {
+            flex: 1;
+            min-width: 0;
+        }
+        .checkout-item-name {
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .checkout-item-type {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+        .checkout-item-price {
+            font-weight: 600;
+            color: var(--primary-color);
+            font-size: 0.95rem;
+        }
+    `;
+    document.head.appendChild(styleEl);
+}
 
-        const data = await response.json();
+/**
+ * Get human-readable type label
+ */
+function getTypeLabel(type) {
+    const labels = {
+        'individual': 'Study Guide',
+        'lite-package': 'Lite Package',
+        'full-package': 'Full Package'
+    };
+    return labels[type] || type || 'Study Guide';
+}
 
-        // Store the payment intent ID for later use
-        currentPaymentIntentId = data.paymentIntentId;
+/**
+ * Setup checkout button for Stripe Checkout redirect
+ */
+function setupCheckoutButton() {
+    const paymentElementContainer = document.getElementById('payment-element');
+    const submitButton = document.getElementById('submit-button');
+    const buttonText = document.getElementById('button-text');
 
-        // Initialize Elements with the client secret
-        const appearance = getStripeAppearance();
-        elements = stripe.elements({
-            clientSecret: data.clientSecret,
-            appearance: appearance,
-        });
+    // Replace payment element with redirect message
+    paymentElementContainer.innerHTML = `
+        <div style="padding: 20px; text-align: center; color: var(--text-secondary); background: var(--background-light); border-radius: 12px;">
+            <i class="fas fa-lock" style="font-size: 2rem; margin-bottom: 12px; color: var(--primary-color);"></i>
+            <p style="margin-bottom: 8px;">You'll be redirected to Stripe's secure checkout.</p>
+            <p style="font-size: 0.85rem;">Complete your purchase safely with credit/debit card, Apple Pay, or Google Pay.</p>
+        </div>
+    `;
 
-        // Create and mount the Payment Element
-        paymentElement = elements.create('payment');
-        paymentElement.mount('#payment-element');
-
-        // Enable submit button once element is ready
-        paymentElement.on('ready', () => {
-            document.getElementById('submit-button').disabled = false;
-        });
-
-        // Handle real-time validation errors
-        paymentElement.on('change', (event) => {
-            if (event.error) {
-                showError(event.error.message);
-            } else {
-                hideError();
-            }
-        });
-
-    } catch (error) {
-        console.error('Payment intent creation error:', error);
-        showError(error.message || 'Failed to initialize payment. Please try again.');
-    }
+    // Update button text
+    buttonText.textContent = 'Proceed to Payment';
+    submitButton.disabled = false;
 }
 
 /**
@@ -255,61 +376,77 @@ async function handleSubmit(event) {
     submitButton.classList.add('processing');
 
     try {
-        // Handle subscription redirect
-        if (currentProduct.type === 'subscription') {
+        // Handle subscription redirect (single product mode only)
+        if (singleProductMode && currentProduct && currentProduct.type === 'subscription') {
             await handleSubscriptionCheckout(email);
             return;
         }
 
-        // Handle one-time payment
-        // First, update the payment intent with the correct email
-        const updateResponse = await fetch(`${API_BASE_URL}/api/update-payment-intent`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                payment_intent_id: currentPaymentIntentId,
-                email: email,
-            }),
-        });
-
-        if (!updateResponse.ok) {
-            const updateError = await updateResponse.json();
-            throw new Error(updateError.error || 'Failed to update payment details');
-        }
-
-        // Submit the Payment Element to validate the form
-        const { error: submitError } = await elements.submit();
-        if (submitError) {
-            throw new Error(submitError.message);
-        }
-
-        // Now confirm the payment - this will redirect to Stripe
-        const { error: confirmError } = await stripe.confirmPayment({
-            elements,
-            clientSecret: elements._commonOptions.clientSecret,
-            confirmParams: {
-                return_url: `${window.location.origin}/success.html?product=${currentProduct.id}&payment_intent=${currentPaymentIntentId}`,
-                receipt_email: email,
-            },
-            redirect: 'always',
-        });
-
-        // If we get here, there was an error (successful payments redirect)
-        if (confirmError) {
-            throw new Error(confirmError.message);
-        }
+        // Create Stripe Checkout Session via API
+        await createCheckoutSession(email);
 
     } catch (error) {
-        console.error('Payment error:', error);
-        showError(error.message || 'Payment failed. Please try again.');
+        console.error('Checkout error:', error);
+        showError(error.message || 'Checkout failed. Please try again.');
 
         // Reset button state
         submitButton.disabled = false;
-        buttonText.textContent = currentProduct.type === 'subscription' ? 'Continue to Checkout' : 'Complete Purchase';
+        buttonText.textContent = 'Proceed to Payment';
         spinner.style.display = 'none';
         submitButton.classList.remove('processing');
+    }
+}
+
+/**
+ * Create Stripe Checkout Session and redirect
+ */
+async function createCheckoutSession(email) {
+    try {
+        // Prepare payload
+        const payload = {
+            email: email,
+            success_url: `${window.location.origin}/success.html`,
+            cancel_url: `${window.location.origin}/checkout.html`
+        };
+
+        // If guest (not authenticated), include cart items
+        if (!isUserAuthenticated) {
+            payload.items = cartItems.map(item => ({
+                product_id: item.product_id,
+                product_name: item.product_name,
+                product_type: item.product_type,
+                price: item.price
+            }));
+        }
+
+        // Call checkout API
+        const response = await fetch(`${AUTH_API_URL}/cart/checkout/create-session`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                ...(isUserAuthenticated && localStorage.getItem('accessToken')
+                    ? { 'Authorization': `Bearer ${localStorage.getItem('accessToken')}` }
+                    : {})
+            },
+            body: JSON.stringify(payload)
+        });
+
+        if (!response.ok) {
+            const error = await response.json();
+            throw new Error(error.error || 'Failed to create checkout session');
+        }
+
+        const data = await response.json();
+
+        // Redirect to Stripe Checkout
+        if (data.url) {
+            window.location.href = data.url;
+        } else {
+            throw new Error('No checkout URL returned');
+        }
+
+    } catch (error) {
+        throw error;
     }
 }
 
@@ -318,16 +455,16 @@ async function handleSubmit(event) {
  */
 async function handleSubscriptionCheckout(email) {
     try {
-        const response = await fetch(`${API_BASE_URL}/api/create-subscription`, {
+        const response = await fetch(`${PAYMENT_API_URL}/api/create-subscription`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                product_id: currentProduct.id,
+                product_id: currentProduct.product_id,
                 email: email,
-                success_url: `${window.location.origin}/success.html?session_id={CHECKOUT_SESSION_ID}&product=${currentProduct.id}`,
-                cancel_url: `${window.location.origin}/checkout.html?product=${currentProduct.id}`,
+                success_url: `${window.location.origin}/success.html?session_id={CHECKOUT_SESSION_ID}&product=${currentProduct.product_id}`,
+                cancel_url: `${window.location.origin}/checkout.html?product=${currentProduct.product_id}`,
             }),
         });
 
@@ -344,39 +481,6 @@ async function handleSubscriptionCheckout(email) {
     } catch (error) {
         throw error;
     }
-}
-
-/**
- * Get Stripe Elements appearance configuration
- */
-function getStripeAppearance() {
-    const isDarkMode = document.documentElement.getAttribute('data-theme') === 'dark';
-
-    return {
-        theme: isDarkMode ? 'night' : 'stripe',
-        variables: {
-            colorPrimary: '#2E86AB',
-            colorBackground: isDarkMode ? '#1f2937' : '#ffffff',
-            colorText: isDarkMode ? '#f9fafb' : '#1f2937',
-            colorDanger: '#ef4444',
-            fontFamily: '"Source Sans 3", -apple-system, BlinkMacSystemFont, sans-serif',
-            borderRadius: '8px',
-            spacingUnit: '4px',
-        },
-        rules: {
-            '.Input': {
-                border: isDarkMode ? '2px solid #374151' : '2px solid #e5e7eb',
-                boxShadow: 'none',
-            },
-            '.Input:focus': {
-                border: '2px solid #2E86AB',
-                boxShadow: '0 0 0 3px rgba(46, 134, 171, 0.15)',
-            },
-            '.Label': {
-                fontWeight: '600',
-            },
-        },
-    };
 }
 
 /**
@@ -413,43 +517,28 @@ function isValidEmail(email) {
  * Escape HTML to prevent XSS
  */
 function escapeHtml(text) {
+    if (!text) return '';
     const div = document.createElement('div');
     div.textContent = text;
     return div.innerHTML;
 }
 
-/**
- * Format product slug to readable name
- */
-function formatProductName(slug) {
-    return slug
-        .split('-')
-        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-        .join(' ');
-}
-
 // Initialize on DOM ready
 document.addEventListener('DOMContentLoaded', () => {
-    initCheckout();
+    // Small delay to ensure cart service is loaded
+    setTimeout(() => {
+        initCheckout();
+    }, 100);
 
     // Setup form submission handler
     const paymentForm = document.getElementById('payment-form');
     paymentForm.addEventListener('submit', handleSubmit);
-
-    // Listen for theme changes to update Stripe appearance
-    const themeToggle = document.getElementById('theme-toggle');
-    if (themeToggle) {
-        themeToggle.addEventListener('click', () => {
-            // Stripe Elements will be recreated if needed after theme change
-            // For now, page reload handles this automatically
-        });
-    }
 });
 
 // Re-initialize if user navigates back
 window.addEventListener('pageshow', (event) => {
     if (event.persisted) {
         // Page was loaded from cache (back button)
-        initCheckout();
+        setTimeout(() => initCheckout(), 100);
     }
 });
