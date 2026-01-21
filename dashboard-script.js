@@ -108,6 +108,32 @@ async function loadUserProfile() {
             userAvatar.innerHTML = `<span style="font-weight: 600; font-size: 18px;">${user.first_name.charAt(0)}</span>`;
         }
 
+        // Update Account Overview card
+        const fullName = `${user.first_name || ''} ${user.last_name || ''}`.trim() || 'Not provided';
+        const userNameDisplay = document.getElementById('user-name-display');
+        const userEmailDisplay = document.getElementById('user-email-display');
+        const memberSinceDisplay = document.getElementById('member-since-display');
+
+        if (userNameDisplay) userNameDisplay.textContent = fullName;
+        if (userEmailDisplay) userEmailDisplay.textContent = user.email || 'Not provided';
+        if (memberSinceDisplay) {
+            const joinDate = new Date(user.created_at);
+            memberSinceDisplay.textContent = joinDate.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+        }
+
+        // Update user dropdown header
+        const dropdownUserName = document.getElementById('dropdown-user-name');
+        const dropdownUserEmail = document.getElementById('dropdown-user-email');
+
+        if (dropdownUserName) dropdownUserName.textContent = fullName;
+        if (dropdownUserEmail) dropdownUserEmail.textContent = user.email || '';
+
+        // Update user avatar large in dropdown
+        const userAvatarLarge = document.querySelector('.user-avatar-large');
+        if (userAvatarLarge && user.first_name) {
+            userAvatarLarge.innerHTML = `<span style="font-weight: 600; font-size: 24px;">${user.first_name.charAt(0)}</span>`;
+        }
+
         // Show getting started card for new users (less than 2 days old)
         showGettingStartedCard(user);
 

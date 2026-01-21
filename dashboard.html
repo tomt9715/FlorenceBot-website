@@ -54,13 +54,22 @@
                     <i class="fas fa-moon dark-icon"></i>
                 </button>
                 <div class="user-menu">
-                    <button class="user-avatar" id="user-menu-btn">
+                    <button class="user-avatar" id="user-menu-btn" title="Account menu">
                         <i class="fas fa-user-circle"></i>
                     </button>
                     <div class="user-dropdown" id="user-dropdown">
-                        <a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
-                        <a href="settings.html"><i class="fas fa-cog"></i> Settings</a>
-                        <a href="#logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                        <div class="user-dropdown-header">
+                            <div class="user-avatar-large">
+                                <i class="fas fa-user-circle"></i>
+                            </div>
+                            <div class="user-info">
+                                <span class="user-name" id="dropdown-user-name">Loading...</span>
+                                <span class="user-email" id="dropdown-user-email">Loading...</span>
+                            </div>
+                        </div>
+                        <div class="user-dropdown-divider"></div>
+                        <a href="settings.html"><i class="fas fa-cog"></i> Account Settings</a>
+                        <a href="#logout" id="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</a>
                     </div>
                 </div>
             </div>
@@ -205,6 +214,37 @@
                     </div>
                 </div>
 
+                <!-- Account Overview Card -->
+                <div class="dashboard-card" style="grid-column: span 1;">
+                    <h3><i class="fas fa-user"></i> Account Overview</h3>
+                    <div class="account-info">
+                        <div class="account-detail">
+                            <i class="fas fa-user-circle"></i>
+                            <div>
+                                <span class="detail-label">Name</span>
+                                <span class="detail-value" id="user-name-display">Loading...</span>
+                            </div>
+                        </div>
+                        <div class="account-detail">
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <span class="detail-label">Email</span>
+                                <span class="detail-value" id="user-email-display">Loading...</span>
+                            </div>
+                        </div>
+                        <div class="account-detail">
+                            <i class="fas fa-calendar"></i>
+                            <div>
+                                <span class="detail-label">Member Since</span>
+                                <span class="detail-value" id="member-since-display">Loading...</span>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn-secondary" style="width: 100%; margin-top: 16px;" onclick="window.location.href='settings.html'">
+                        <i class="fas fa-cog"></i> Manage Account Settings
+                    </button>
+                </div>
+
                 <!-- Quick Actions Card -->
                 <div class="dashboard-card" style="grid-column: span 1;">
                     <h3><i class="fas fa-bolt"></i> Quick Actions</h3>
@@ -221,9 +261,9 @@
                             <i class="fab fa-discord"></i>
                             <span>Join Discord</span>
                         </button>
-                        <button class="quick-action-btn" onclick="window.location.href='settings.html'">
-                            <i class="fas fa-cog"></i>
-                            <span>Settings</span>
+                        <button class="quick-action-btn" onclick="window.location.href='pricing.html'">
+                            <i class="fas fa-tag"></i>
+                            <span>Pricing</span>
                         </button>
                     </div>
                 </div>
