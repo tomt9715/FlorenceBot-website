@@ -1,0 +1,546 @@
+/* ============================================
+   STORE-STYLE.CSS - Store Page Specific Styles
+   ============================================ */
+
+/* ============================================
+   STORE LAYOUT
+   ============================================ */
+
+.store-layout {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 40px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* ============================================
+   SIDEBAR STYLING
+   ============================================ */
+
+.store-sidebar {
+    background: var(--card-bg);
+    border-radius: 16px;
+    padding: 24px;
+    height: fit-content;
+    position: sticky;
+    top: 100px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    border: 1px solid var(--border-color);
+}
+
+.sidebar-section {
+    margin-bottom: 32px;
+}
+
+.sidebar-section:last-child {
+    margin-bottom: 0;
+}
+
+.sidebar-section h3 {
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-secondary);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.sidebar-section h3 i {
+    font-size: 0.9rem;
+}
+
+/* Filter List Container */
+.filter-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Shop By Buttons (Individual Guides / Class Packages) */
+.filter-list button[data-shop-type] {
+    width: 100%;
+    padding: 14px 16px;
+    background: transparent;
+    border: 2px solid var(--border-color);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--text-primary);
+    font-family: 'Source Sans 3', sans-serif;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-align: left;
+}
+
+.filter-list button[data-shop-type] i {
+    font-size: 1.1rem;
+    color: var(--primary-color);
+}
+
+.filter-list button[data-shop-type]:hover {
+    background: rgba(46, 134, 171, 0.05);
+    border-color: var(--primary-color);
+    transform: translateX(4px);
+}
+
+.filter-list button[data-shop-type].active {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    border-color: var(--primary-color);
+    color: white;
+}
+
+.filter-list button[data-shop-type].active i {
+    color: white;
+}
+
+/* Category Filter Buttons */
+.filter-list button[data-filter] {
+    width: 100%;
+    padding: 12px 16px;
+    background: var(--background-light);
+    border: 2px solid transparent;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    font-family: 'Source Sans 3', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-align: left;
+    gap: 8px;
+}
+
+.filter-list button[data-filter] i {
+    font-size: 1rem;
+    color: var(--primary-color);
+    flex-shrink: 0;
+}
+
+.filter-list button[data-filter]:hover {
+    background: var(--background-white);
+    border-color: var(--primary-color);
+}
+
+.filter-list button[data-filter].active {
+    background: rgba(46, 134, 171, 0.1);
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+.filter-list button[data-filter].active i {
+    color: var(--primary-color);
+}
+
+/* Filter Count Badge */
+.filter-count {
+    background: var(--background-white);
+    color: var(--text-secondary);
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    min-width: 32px;
+    text-align: center;
+}
+
+.filter-list button[data-filter].active .filter-count {
+    background: var(--primary-color);
+    color: white;
+}
+
+/* "Need Everything?" Promo Card */
+#package-callout-section {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(147, 197, 253, 0.1) 100%);
+    border: 2px solid rgba(59, 130, 246, 0.2);
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+}
+
+#package-callout-section h3 {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 12px;
+    text-transform: none;
+    letter-spacing: normal;
+}
+
+#package-callout-section h3 i {
+    color: var(--primary-color);
+}
+
+#package-callout-section p {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-bottom: 16px;
+    line-height: 1.5;
+}
+
+#package-callout-section .btn {
+    width: 100%;
+    padding: 12px 20px;
+    font-size: 0.9rem;
+}
+
+/* ============================================
+   STORE CONTENT AREA
+   ============================================ */
+
+.store-content {
+    min-height: 600px;
+}
+
+.store-header {
+    margin-bottom: 32px;
+}
+
+.store-header h2 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+}
+
+.store-header p {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+/* ============================================
+   GUIDE CARDS (Store Page)
+   ============================================ */
+
+.guides-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.guide-card {
+    background: var(--card-bg);
+    padding: 30px 24px;
+    border-radius: 16px;
+    text-align: center;
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.guide-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-xl);
+    border-color: var(--primary-color);
+}
+
+/* Guide Icon */
+.guide-card .guide-icon {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.guide-card .guide-icon img {
+    width: 48px !important;
+    height: 48px !important;
+}
+
+.guide-card .guide-icon i {
+    font-size: 2rem;
+    color: white;
+}
+
+.guide-card:hover .guide-icon {
+    transform: scale(1.1) rotate(5deg);
+    box-shadow: 0 8px 20px rgba(46, 134, 171, 0.3);
+}
+
+/* Guide Title */
+.guide-card h4,
+.guide-card h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 14px;
+    line-height: 1.3;
+}
+
+/* Guide Description */
+.guide-card > p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    font-size: 0.95rem;
+    margin-bottom: 20px;
+    flex-grow: 1;
+}
+
+/* Guide Footer */
+.guide-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: auto;
+    padding-top: 16px;
+    border-top: 1px solid var(--border-color);
+}
+
+/* Guide Price */
+.guide-price {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    font-family: 'Outfit', sans-serif;
+}
+
+.guide-footer .btn {
+    flex: 1;
+    padding: 10px 16px;
+    font-size: 0.85rem;
+    min-height: 38px;
+}
+
+/* ============================================
+   PACKAGE CARDS
+   ============================================ */
+
+.packages-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 30px;
+}
+
+.package-card {
+    background: var(--card-bg);
+    padding: 32px 28px;
+    border-radius: 16px;
+    box-shadow: var(--shadow-lg);
+    border: 2px solid var(--border-color);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.package-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+    border-color: var(--primary-color);
+}
+
+/* ============================================
+   DARK MODE SUPPORT
+   ============================================ */
+
+[data-theme="dark"] .store-sidebar {
+    background: var(--card-bg);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+    border-color: var(--border-color);
+}
+
+[data-theme="dark"] .filter-list button[data-filter] {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+[data-theme="dark"] .filter-list button[data-filter]:hover {
+    background: rgba(46, 134, 171, 0.15);
+}
+
+[data-theme="dark"] .filter-list button[data-shop-type] {
+    border-color: var(--border-color);
+}
+
+[data-theme="dark"] .filter-list button[data-shop-type]:hover {
+    background: rgba(46, 134, 171, 0.15);
+}
+
+[data-theme="dark"] #package-callout-section {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.15) 0%, rgba(147, 197, 253, 0.15) 100%);
+    border-color: rgba(59, 130, 246, 0.3);
+}
+
+[data-theme="dark"] .guide-card {
+    background: var(--card-bg);
+    border-color: var(--border-color);
+}
+
+[data-theme="dark"] .guide-card:hover {
+    border-color: var(--primary-color);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme="dark"] .guide-footer {
+    border-top-color: var(--border-color);
+}
+
+[data-theme="dark"] .filter-count {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] .filter-list button[data-filter].active .filter-count {
+    background: var(--primary-color);
+    color: white;
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+
+/* Tablet View (968px and below) */
+@media (max-width: 968px) {
+    .store-layout {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .store-sidebar {
+        position: relative;
+        top: 0;
+        padding: 20px;
+    }
+
+    .sidebar-section {
+        margin-bottom: 24px;
+    }
+
+    .guides-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 24px;
+    }
+
+    .packages-grid {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 24px;
+    }
+}
+
+/* Mobile View (768px and below) */
+@media (max-width: 768px) {
+    .store-sidebar {
+        padding: 20px;
+    }
+
+    .sidebar-section h3 {
+        font-size: 0.75rem;
+    }
+
+    .filter-list button[data-shop-type],
+    .filter-list button[data-filter] {
+        padding: 12px 14px;
+        font-size: 0.9rem;
+    }
+
+    .guide-card {
+        padding: 24px 20px;
+    }
+
+    .guide-card h4,
+    .guide-card h3 {
+        font-size: 1.1rem;
+    }
+
+    .guide-card > p {
+        font-size: 0.9rem;
+    }
+
+    .guide-price {
+        font-size: 1.25rem;
+    }
+
+    .guide-footer .btn {
+        font-size: 0.8rem;
+        padding: 8px 12px;
+    }
+
+    .guides-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .packages-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+}
+
+/* Small Mobile (480px and below) */
+@media (max-width: 480px) {
+    .store-sidebar {
+        padding: 16px;
+    }
+
+    .filter-list button[data-shop-type] {
+        padding: 12px;
+        font-size: 0.85rem;
+        min-height: 44px;
+    }
+
+    .filter-list button[data-filter] {
+        padding: 10px 12px;
+        font-size: 0.85rem;
+        min-height: 44px;
+    }
+
+    .guide-card {
+        padding: 20px 16px;
+    }
+
+    .guide-card .guide-icon {
+        width: 56px;
+        height: 56px;
+        margin-bottom: 16px;
+    }
+
+    .guide-card .guide-icon img {
+        width: 40px !important;
+        height: 40px !important;
+    }
+
+    .guide-card h4,
+    .guide-card h3 {
+        font-size: 1rem;
+        margin-bottom: 12px;
+    }
+
+    .guide-footer {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .guide-footer .btn {
+        width: 100%;
+    }
+
+    #package-callout-section {
+        padding: 16px;
+    }
+
+    #package-callout-section h3 {
+        font-size: 0.85rem;
+    }
+
+    #package-callout-section p {
+        font-size: 0.8rem;
+    }
+}
