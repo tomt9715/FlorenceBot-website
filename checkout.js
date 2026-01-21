@@ -262,7 +262,24 @@ async function handleSubmit(event) {
         }
 
         // Handle one-time payment
-        // First, submit the Payment Element to validate the form
+        // First, update the payment intent with the correct email
+        const updateResponse = await fetch(`${API_BASE_URL}/api/update-payment-intent`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                payment_intent_id: currentPaymentIntentId,
+                email: email,
+            }),
+        });
+
+        if (!updateResponse.ok) {
+            const updateError = await updateResponse.json();
+            throw new Error(updateError.error || 'Failed to update payment details');
+        }
+
+        // Submit the Payment Element to validate the form
         const { error: submitError } = await elements.submit();
         if (submitError) {
             throw new Error(submitError.message);
