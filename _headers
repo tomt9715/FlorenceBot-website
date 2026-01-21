@@ -1,0 +1,21 @@
+# Cache control for HTML pages
+/*.html
+  Cache-Control: public, max-age=0, must-revalidate
+
+# Cache control for JavaScript files
+/*.js
+  Cache-Control: public, max-age=3600, must-revalidate
+
+# Cache control for CSS files
+/*.css
+  Cache-Control: public, max-age=3600, must-revalidate
+
+# Cache control for images
+/*.jpg
+  Cache-Control: public, max-age=86400
+
+/*.png
+  Cache-Control: public, max-age=86400
+
+/*.svg
+  Cache-Control: public, max-age=86400
