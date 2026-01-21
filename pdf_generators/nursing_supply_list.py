@@ -156,9 +156,6 @@ def create_nursing_supply_list_pdf(output_path):
         ("Tech", [
             ("Laptop or Tablet", "For care plans, research, and online exams. Ensure it meets school requirements."),
         ]),
-        ("Clinical Logistics", [
-            ("Parking Strategy", "Scout parking spots early or arrange rideshares with classmates. Hospitals often reserve parking for employees only."),
-        ]),
     ]
 
     for category, items in essentials:

@@ -176,6 +176,7 @@ def create_clinical_survival_guide_pdf(output_path):
     morning_tips = [
         "Eat a substantial breakfast with protein. You may not have time to eat again for hours.",
         "Arrive 10-15 minutes early. Being rushed increases anxiety and sets the wrong tone.",
+        "Scout parking spots early or arrange rideshares with classmates. Hospitals often reserve parking for employees only.",
         "Use the restroom before you get to the unit. Clinical days are long and busy.",
         "Take three deep breaths before entering the building. Ground yourself mentally."
     ]
