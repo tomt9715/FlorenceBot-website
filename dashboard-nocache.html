@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Redirecting...</title>
+    <script>
+        // Force redirect to dashboard with cache-busting parameter
+        const timestamp = new Date().getTime();
+        window.location.href = `/dashboard.html?nocache=${timestamp}`;
+    </script>
+</head>
+<body>
+    <p>Redirecting to dashboard...</p>
+</body>
+</html>
