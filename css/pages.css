@@ -1218,6 +1218,65 @@
     margin: 0 auto;
 }
 
+/* Quick Actions */
+.quick-actions {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.quick-action-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 20px 16px;
+    background: var(--background-light);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    color: var(--text-primary);
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    min-height: 100px;
+}
+
+.quick-action-btn i {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    opacity: 0.8;
+}
+
+.quick-action-btn:hover {
+    background: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(46, 134, 171, 0.3);
+}
+
+.quick-action-btn:hover i {
+    color: white;
+    opacity: 1;
+}
+
+.quick-action-btn:active {
+    transform: translateY(0);
+}
+
+[data-theme="dark"] .quick-action-btn {
+    background: rgba(46, 134, 171, 0.1);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] .quick-action-btn:hover {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
 /* Auth Mobile Responsive */
 @media (max-width: 768px) {
     .auth-page {
