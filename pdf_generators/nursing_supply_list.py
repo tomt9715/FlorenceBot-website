@@ -122,44 +122,40 @@ def create_nursing_supply_list_pdf(output_path):
 
     # Title
     elements.append(Paragraph("Nursing School Supply List", title_style))
-    elements.append(Paragraph("Essential Items by Program Level", subtitle_style))
+    elements.append(Paragraph("Essential Items for Nursing Students", subtitle_style))
 
     # Introduction
     intro = """
-    This comprehensive supply list covers everything you'll need throughout nursing school, organized by when
-    you'll need it. Don't buy everything at once - start with essentials and add items as your program progresses.
+    This comprehensive supply list covers everything you'll need for nursing school. Start with the essentials
+    and add optional items as needed. Focus on quality over quantity for items you'll use daily.
     """
     elements.append(Paragraph(intro, body_style))
     elements.append(Spacer(1, 0.15*inch))
 
-    # Essential Supplies for All Students (Start of Program)
-    elements.append(Paragraph("Essential Supplies - Start of Program", section_header_style))
+    # Essential Supplies for All Students
+    elements.append(Paragraph("Essential Supplies", section_header_style))
 
     essentials = [
         ("Clinical Tools", [
             ("Stethoscope", "Quality matters. Littmann Classic III or Cardiology IV recommended. Budget option: ADC or MDF."),
             ("Penlight", "Get one with pupil gauge. Keep a backup - they disappear easily."),
-            ("Bandage Scissors", "7.5 inch trauma shears. Keep sharp and clean."),
-            ("Watch with Second Hand", "Analog or digital. Needs to be cleanable and waterproof."),
+            ("Watch with Second Hand", "Analog, digital, or smartwatch (Apple Watch, Android equivalent). Must be cleanable and waterproof."),
         ]),
         ("Uniform & Accessories", [
             ("Scrubs", "3-4 sets minimum. Check school requirements for colors. Choose comfortable, breathable fabric."),
             ("Clinical Shoes", "Closed-toe, non-slip, comfortable for 12-hour shifts. Break them in before clinicals."),
             ("Compression Socks", "Prevent leg fatigue and swelling. Invest in quality pairs."),
-            ("Lab Coat", "White coat if required. Check school specifications for length and style."),
             ("Name Badge Holder", "Retractable clip style. Keep your ID accessible and professional."),
         ]),
         ("Study & Organization", [
             ("Nursing Drug Guide", "Updated annually. Davis or Mosby recommended. Mobile app versions available."),
             ("Medical Dictionary", "Taber's or Mosby's. Essential for understanding terminology."),
-            ("3-Ring Binders", "2-3 large binders for organizing notes, handouts, and study materials."),
-            ("Notebook or Clipboard", "For clinical notes and patient information. Keep it HIPAA-compliant."),
+            ("Small Notebook", "Pocket-sized for clinical notes and patient information. Keep it HIPAA-compliant."),
             ("Highlighters & Pens", "Multiple colors for color-coding notes. Black pens for documentation."),
         ]),
-        ("Tech & Productivity", [
+        ("Tech & Essentials", [
             ("Laptop or Tablet", "For care plans, research, and online exams. Ensure it meets school requirements."),
-            ("Printer with Scanner", "For assignments and study materials. Consider all-in-one device."),
-            ("USB Drive or Cloud Storage", "Backup all your work. Use encrypted storage for HIPAA compliance."),
+            ("Parking Strategy", "Scout parking spots early or arrange rideshares with classmates. Hospitals often reserve parking for employees only."),
         ]),
     ]
 
@@ -187,66 +183,22 @@ def create_nursing_supply_list_pdf(output_path):
         elements.append(supply_table)
         elements.append(Spacer(1, 0.08*inch))
 
-    # Intermediate Level Additions
-    elements.append(Paragraph("Intermediate Level - Add Before Med-Surg II", section_header_style))
+    # Additional helpful items section
+    elements.append(Paragraph("Additional Helpful Items", section_header_style))
 
-    intermediate = [
-        ("Advanced Clinical Tools", [
+    additional = [
+        ("Reference Materials", [
+            ("Lab Values Pocket Guide", "Quick reference for normal ranges. Laminated cards work well."),
+            ("EKG/ECG Interpretation Guide", "Pocket guide for rhythm recognition and interpretation."),
+        ]),
+        ("Optional Clinical Tools", [
             ("Blood Pressure Cuff", "Aneroid sphygmomanometer if not provided. Useful for practice and home."),
             ("Pulse Oximeter", "Portable fingertip model for clinical assessments."),
             ("Reflex Hammer", "For neurological assessments. Taylor or Buck style."),
         ]),
-        ("Reference Materials", [
-            ("Lab Values Pocket Guide", "Quick reference for normal ranges. Laminated cards work well."),
-            ("EKG/ECG Interpretation Guide", "Pocket guide for rhythm recognition and interpretation."),
-            ("NCLEX Review Book", "Saunders or Kaplan. Start reviewing early, not just before graduation."),
-        ]),
     ]
 
-    for category, items in intermediate:
-        elements.append(Paragraph(category, category_style))
-
-        table_data = []
-        for item_name, description in items:
-            table_data.append([
-                Paragraph(f"<b>{item_name}</b>", body_style),
-                Paragraph(description, body_style)
-            ])
-
-        supply_table = Table(table_data, colWidths=[1.8*inch, 4.7*inch])
-        supply_table.setStyle(TableStyle([
-            ('VALIGN', (0, 0), (-1, -1), 'TOP'),
-            ('LEFTPADDING', (0, 0), (-1, -1), 8),
-            ('RIGHTPADDING', (0, 0), (-1, -1), 8),
-            ('TOPPADDING', (0, 0), (-1, -1), 6),
-            ('BOTTOMPADDING', (0, 0), (-1, -1), 6),
-            ('GRID', (0, 0), (-1, -1), 0.5, colors.HexColor('#e5e7eb')),
-            ('BACKGROUND', (0, 0), (0, -1), colors.HexColor('#f0f9ff')),
-        ]))
-
-        elements.append(supply_table)
-        elements.append(Spacer(1, 0.08*inch))
-
-    # Advanced Level Additions
-    elements.append(Paragraph("Advanced Level - Final Year & NCLEX Prep", section_header_style))
-
-    advanced = [
-        ("Specialty Clinical Items", [
-            ("Tuning Fork", "128 Hz and 512 Hz for sensory assessment in neuro rotations."),
-            ("Otoscope/Ophthalmoscope", "If doing advanced assessment course. Often provided by school."),
-        ]),
-        ("Professional Development", [
-            ("Resume Portfolio", "Professional folder for resume, certifications, and reference letters."),
-            ("Business Cards", "Simple cards with name, credentials, email, LinkedIn. For networking."),
-            ("Professional Interview Outfit", "Polished outfit for job interviews and networking events."),
-        ]),
-        ("NCLEX Preparation", [
-            ("NCLEX Question Bank", "UWorld, Kaplan, or Hurst. Online subscription essential for practice."),
-            ("NCLEX Study Plan", "Structured review course or self-study schedule. Start 2-3 months before exam."),
-        ]),
-    ]
-
-    for category, items in advanced:
+    for category, items in additional:
         elements.append(Paragraph(category, category_style))
 
         table_data = []
@@ -271,7 +223,7 @@ def create_nursing_supply_list_pdf(output_path):
         elements.append(Spacer(1, 0.08*inch))
 
     # Optional But Helpful
-    elements.append(Paragraph("Optional But Helpful Items", section_header_style))
+    elements.append(Paragraph("Optional Convenience Items", section_header_style))
 
     optional_items = [
         "Small backpack or tote bag for clinical supplies",
@@ -281,7 +233,9 @@ def create_nursing_supply_list_pdf(output_path):
         "Energy bars or healthy snacks for clinical breaks",
         "Small hand sanitizer for your pocket",
         "Planner or digital calendar for time management",
-        "Noise-canceling headphones for studying"
+        "Noise-canceling headphones for studying",
+        "Comfortable shoes for campus (separate from clinical shoes)",
+        "Water bottle with time markers for hydration tracking"
     ]
 
     optional_data = []
@@ -328,11 +282,11 @@ def create_nursing_supply_list_pdf(output_path):
 
     tips_content = [
         [Paragraph("Money-Saving Tips", tips_header_style)],
-        [Paragraph("• Buy used textbooks or rent them. Check school library reserves.", tips_style)],
-        [Paragraph("• Split costs with classmates for optional reference books.", tips_style)],
-        [Paragraph("• Wait until you actually need specialty items before buying them.", tips_style)],
-        [Paragraph("• Check if your school provides any supplies or tool kits.", tips_style)],
-        [Paragraph("• Look for student discounts at medical supply stores.", tips_style)],
+        [Paragraph("• Split costs with classmates for optional reference materials and pocket guides.", tips_style)],
+        [Paragraph("• Wait until you actually need optional items before buying them.", tips_style)],
+        [Paragraph("• Check if your school provides any supplies or tool kits at orientation.", tips_style)],
+        [Paragraph("• Look for student discounts at medical supply stores and online retailers.", tips_style)],
+        [Paragraph("• Consider gently used stethoscopes and equipment from graduating students.", tips_style)],
     ]
 
     tips_table = Table(tips_content, colWidths=[6.5*inch])
