@@ -2872,7 +2872,6 @@
     background: linear-gradient(135deg, #2E86AB 0%, #236b8a 100%);
     color: white;
     padding: 30px 0 40px;
-    margin-bottom: 40px;
 }
 
 .guide-category-badge {
@@ -2925,7 +2924,7 @@
 .guide-content-wrapper {
     max-width: 1400px;
     margin: 0 auto;
-    padding: 0 40px 60px;
+    padding: 40px 40px 60px;
 }
 
 /* Guide Action Buttons */
