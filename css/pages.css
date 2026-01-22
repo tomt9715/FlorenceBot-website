@@ -3087,6 +3087,172 @@
     background: #e0f2fe;
 }
 
+/* Related Guides Section */
+.related-guides {
+    margin-top: 40px;
+    padding: 30px;
+    background: var(--card-bg);
+    border-radius: 16px;
+    border: 1px solid var(--border-color);
+}
+
+.related-guides h3 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 24px;
+}
+
+.related-guides-carousel {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.carousel-track {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    padding: 10px 5px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.carousel-track::-webkit-scrollbar {
+    display: none;
+}
+
+.carousel-btn {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid var(--border-color);
+    background: var(--card-bg);
+    color: var(--text-primary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    z-index: 2;
+}
+
+.carousel-btn:hover {
+    background: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+.related-guide-card {
+    flex-shrink: 0;
+    width: 260px;
+    background: var(--background-light);
+    border-radius: 12px;
+    padding: 20px;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.related-guide-card:hover {
+    border-color: var(--primary-color);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+.related-guide-card.owned {
+    border-color: #10b981;
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.05), rgba(16, 185, 129, 0.1));
+}
+
+.related-guide-header {
+    margin-bottom: 12px;
+}
+
+.related-guide-price {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.related-guide-card:not(.owned) .related-guide-price {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+}
+
+.related-guide-card.owned .related-guide-price {
+    background: #10b981;
+    color: white;
+}
+
+.related-guide-card h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0 0 16px 0;
+    line-height: 1.4;
+    min-height: 44px;
+}
+
+.related-guide-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.btn-view-guide,
+.btn-purchase-guide {
+    flex: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.btn-view-guide {
+    background: #10b981;
+    color: white;
+}
+
+.btn-view-guide:hover {
+    background: #059669;
+    color: white;
+}
+
+.btn-purchase-guide {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+}
+
+.btn-purchase-guide:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(46, 134, 171, 0.4);
+    color: white;
+}
+
+/* Dark mode for related guides */
+[data-theme="dark"] .related-guides {
+    background: var(--card-bg);
+}
+
+[data-theme="dark"] .related-guide-card {
+    background: var(--background-light);
+}
+
+[data-theme="dark"] .carousel-btn {
+    background: var(--card-bg);
+    border-color: var(--border-color);
+}
+
 /* Guide Page Mobile Responsive */
 @media (max-width: 768px) {
     .guide-header {

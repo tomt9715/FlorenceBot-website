@@ -76,12 +76,77 @@ const relatedGuidesMap = {
 
 // Category display names
 const categoryDisplayNames = {
+    'med-surg': 'Medical-Surgical',
     'medsurg': 'Medical-Surgical',
     'pharmacology': 'Pharmacology',
     'fundamentals': 'Fundamentals',
     'maternal': 'Maternal/OB',
+    'maternity': 'Maternal/OB',
     'pediatrics': 'Pediatrics',
-    'mental-health': 'Mental Health'
+    'mental-health': 'Mental Health',
+    'lab-values': 'Lab Values',
+    'clinical-skills': 'Clinical Skills',
+    'safety': 'Safety',
+    'medications': 'Medications'
+};
+
+// Complete product catalog with categories
+const productCatalog = {
+    // Cardiovascular
+    'heart-failure': { name: 'Heart Failure Guide', category: 'med-surg', price: 5.99 },
+    'myocardial-infarction': { name: 'Myocardial Infarction Guide', category: 'med-surg', price: 5.99 },
+    'arrhythmias': { name: 'Arrhythmias Guide', category: 'med-surg', price: 5.99 },
+    'hypertension': { name: 'Hypertension Guide', category: 'med-surg', price: 5.99 },
+    'coronary-artery-disease': { name: 'Coronary Artery Disease Guide', category: 'med-surg', price: 5.99 },
+    'peripheral-vascular-disease': { name: 'Peripheral Vascular Disease Guide', category: 'med-surg', price: 5.99 },
+    // Respiratory
+    'copd': { name: 'COPD Guide', category: 'med-surg', price: 5.99 },
+    'asthma': { name: 'Asthma Guide', category: 'med-surg', price: 5.99 },
+    'pneumonia': { name: 'Pneumonia Guide', category: 'med-surg', price: 5.99 },
+    'oxygen-therapy': { name: 'Oxygen Therapy Guide', category: 'clinical-skills', price: 5.99 },
+    'tuberculosis': { name: 'Tuberculosis Guide', category: 'med-surg', price: 5.99 },
+    'chest-tubes': { name: 'Chest Tubes Guide', category: 'clinical-skills', price: 5.99 },
+    // Endocrine
+    'diabetes-type1': { name: 'Diabetes Type 1 Guide', category: 'med-surg', price: 5.99 },
+    'diabetes-type2': { name: 'Diabetes Type 2 Guide', category: 'med-surg', price: 5.99 },
+    'thyroid-disorders': { name: 'Thyroid Disorders Guide', category: 'med-surg', price: 5.99 },
+    'adrenal-disorders': { name: 'Adrenal Disorders Guide', category: 'med-surg', price: 5.99 },
+    'pituitary-disorders': { name: 'Pituitary Disorders Guide', category: 'med-surg', price: 5.99 },
+    // Neurological
+    'stroke': { name: 'Stroke Guide', category: 'med-surg', price: 5.99 },
+    'seizures': { name: 'Seizures Guide', category: 'med-surg', price: 5.99 },
+    'spinal-cord-injury': { name: 'Spinal Cord Injury Guide', category: 'med-surg', price: 5.99 },
+    'traumatic-brain-injury': { name: 'Traumatic Brain Injury Guide', category: 'med-surg', price: 5.99 },
+    'meningitis': { name: 'Meningitis Guide', category: 'med-surg', price: 5.99 },
+    'parkinsons-ms': { name: 'Parkinson\'s & MS Guide', category: 'med-surg', price: 5.99 },
+    // Renal
+    'acute-kidney-injury': { name: 'Acute Kidney Injury Guide', category: 'med-surg', price: 5.99 },
+    'chronic-kidney-disease': { name: 'Chronic Kidney Disease Guide', category: 'med-surg', price: 5.99 },
+    'dialysis': { name: 'Dialysis Guide', category: 'med-surg', price: 5.99 },
+    'urinary-tract-infections': { name: 'UTI Guide', category: 'med-surg', price: 5.99 },
+    'kidney-stones': { name: 'Kidney Stones Guide', category: 'med-surg', price: 5.99 },
+    'fluid-electrolytes': { name: 'Fluid & Electrolytes Guide', category: 'lab-values', price: 5.99 },
+    // GI
+    'gi-bleeding': { name: 'GI Bleeding Guide', category: 'med-surg', price: 5.99 },
+    'bowel-obstruction': { name: 'Bowel Obstruction Guide', category: 'med-surg', price: 5.99 },
+    'liver-disease': { name: 'Liver Disease Guide', category: 'med-surg', price: 5.99 },
+    'pancreatitis': { name: 'Pancreatitis Guide', category: 'med-surg', price: 5.99 },
+    'inflammatory-bowel-disease': { name: 'IBD Guide', category: 'med-surg', price: 5.99 },
+    'gerd-peptic-ulcer': { name: 'GERD & Peptic Ulcer Guide', category: 'med-surg', price: 5.99 },
+    // Musculoskeletal
+    'fractures': { name: 'Fractures Guide', category: 'med-surg', price: 5.99 },
+    'arthritis': { name: 'Arthritis Guide', category: 'med-surg', price: 5.99 },
+    'hip-knee-replacement': { name: 'Hip & Knee Replacement Guide', category: 'med-surg', price: 5.99 },
+    'osteoporosis': { name: 'Osteoporosis Guide', category: 'med-surg', price: 5.99 },
+    'amputation-care': { name: 'Amputation Care Guide', category: 'med-surg', price: 5.99 },
+    // Mental Health
+    'eating-disorders': { name: 'Eating Disorders Guide', category: 'mental-health', price: 5.99 },
+    // Legacy free guides
+    'electrolytes': { name: 'Electrolyte Management Guide', category: 'lab-values', price: 5.99 },
+    'vital-signs': { name: 'Vital Signs Assessment Guide', category: 'clinical-skills', price: 5.99 },
+    'critical-lab-values': { name: 'Critical Laboratory Values', category: 'lab-values', price: 5.99 },
+    'isolation-precautions': { name: 'Isolation Precautions Guide', category: 'safety', price: 5.99 },
+    'medication-math': { name: 'Medication Dosage Calculations', category: 'medications', price: 5.99 }
 };
 
 // Check guide access via API
@@ -235,6 +300,9 @@ async function loadPremiumGuide(guideId) {
         // User doesn't have access - show purchase prompt
         showPurchasePrompt(guideId, accessResponse);
     }
+
+    // Render related guides from same category
+    renderRelatedGuides(guideId, accessResponse.category);
 
     // Setup print button
     document.getElementById('btn-print').addEventListener('click', () => {
@@ -498,33 +566,85 @@ async function loadMarkdownContent(file, hasAccess, guideId) {
     }
 }
 
-// Render related guides
-function renderRelatedGuides(currentGuideId) {
-    const relatedGuides = relatedGuidesMap[currentGuideId] || [];
+// Render related guides based on category
+function renderRelatedGuides(currentGuideId, currentCategory) {
     const container = document.getElementById('related-guides-grid');
     const section = document.getElementById('related-guides-section');
 
     if (!container || !section) return;
+
+    // Get the category of the current guide
+    const currentProduct = productCatalog[currentGuideId];
+    const category = currentCategory || (currentProduct ? currentProduct.category : null);
+
+    if (!category) {
+        section.style.display = 'none';
+        return;
+    }
+
+    // Get purchased guides from localStorage
+    const purchasedGuides = JSON.parse(localStorage.getItem('purchasedGuides') || '[]');
+
+    // Find other guides in the same category (excluding current)
+    const relatedGuides = Object.entries(productCatalog)
+        .filter(([id, product]) => product.category === category && id !== currentGuideId)
+        .slice(0, 8); // Limit to 8 related guides
 
     if (relatedGuides.length === 0) {
         section.style.display = 'none';
         return;
     }
 
-    container.innerHTML = relatedGuides.map(guideId => {
-        const metadata = legacyGuidesMetadata[guideId];
-        if (!metadata) return '';
-        return `
-            <a href="guide.html?id=${guideId}" class="related-guide-card">
-                <h4>${metadata.title}</h4>
-                <p>${metadata.subtitle.substring(0, 80)}...</p>
-            </a>
-        `;
-    }).filter(Boolean).join('');
-
-    if (container.innerHTML === '') {
-        section.style.display = 'none';
+    // Update section title
+    const sectionTitle = section.querySelector('h3');
+    if (sectionTitle) {
+        sectionTitle.textContent = `More ${categoryDisplayNames[category] || category} Guides`;
     }
+
+    // Render carousel
+    container.innerHTML = `
+        <div class="related-guides-carousel">
+            <button class="carousel-btn carousel-prev" onclick="scrollRelatedGuides(-1)" aria-label="Previous">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <div class="carousel-track">
+                ${relatedGuides.map(([guideId, product]) => {
+                    const isOwned = purchasedGuides.includes(guideId);
+                    return `
+                        <div class="related-guide-card ${isOwned ? 'owned' : ''}">
+                            <div class="related-guide-header">
+                                <span class="related-guide-price">${isOwned ? '<i class="fas fa-check"></i> Owned' : '$' + product.price.toFixed(2)}</span>
+                            </div>
+                            <h4>${product.name}</h4>
+                            <div class="related-guide-actions">
+                                ${isOwned
+                                    ? `<a href="guide.html?id=${guideId}" class="btn-view-guide"><i class="fas fa-book-open"></i> View Guide</a>`
+                                    : `<a href="store.html?highlight=${guideId}" class="btn-purchase-guide"><i class="fas fa-cart-plus"></i> Add to Cart</a>`
+                                }
+                            </div>
+                        </div>
+                    `;
+                }).join('')}
+            </div>
+            <button class="carousel-btn carousel-next" onclick="scrollRelatedGuides(1)" aria-label="Next">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+    `;
+
+    section.style.display = 'block';
+}
+
+// Scroll related guides carousel
+function scrollRelatedGuides(direction) {
+    const track = document.querySelector('.carousel-track');
+    if (!track) return;
+
+    const cardWidth = 280; // card width + gap
+    track.scrollBy({
+        left: direction * cardWidth * 2,
+        behavior: 'smooth'
+    });
 }
 
 // Hide page loader
