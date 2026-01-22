@@ -568,7 +568,7 @@ async function loadAccessibleGuides(user) {
                 return `
                 <div class="guide-item" style="padding: 16px; background: var(--background-light); border-radius: 12px; margin-bottom: 12px; transition: all 0.3s ease; border: 2px solid transparent;">
                     <div style="display: flex; align-items: center; gap: 16px;">
-                        <div style="font-size: 32px; flex-shrink: 0;">${icon}</div>
+                        <div style="width: 40px; height: 40px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 32px;">${icon}</div>
                         <div style="flex: 1;">
                             <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px; flex-wrap: wrap;">
                                 <h4 style="margin: 0; font-size: 1rem; color: var(--text-primary);">${escapeHtml(purchase.product_name)}</h4>
@@ -666,98 +666,74 @@ async function downloadGuide(productId, button) {
     }
 }
 
-// Get icon for guide based on product ID
+// Get icon for guide based on product ID - returns img tag for PNG icons
 function getGuideIcon(productId) {
-    const icons = {
+    // Map product IDs to icon filenames in assets/images/guide-icons/
+    const iconMap = {
         // Cardiovascular (6)
-        'heart-failure': '💔',
-        'myocardial-infarction': '🫀',
-        'arrhythmias': '💓',
-        'hypertension': '🩺',
-        'coronary-artery-disease': '❤️',
-        'peripheral-vascular-disease': '🦵',
+        'heart-failure': 'heart-failure.png',
+        'myocardial-infarction': 'heart-attack.png',
+        'arrhythmias': 'arrhythmias.png',
+        'hypertension': 'hypertension.png',
+        'coronary-artery-disease': 'cad.png',
+        'peripheral-vascular-disease': 'pad.png',
 
         // Respiratory (6)
-        'copd': '🫁',
-        'asthma': '😤',
-        'pneumonia': '🤒',
-        'oxygen-therapy': '💨',
-        'tuberculosis': '🦠',
-        'chest-tubes': '🩻',
+        'copd': 'copd.png',
+        'asthma': 'asthma.png',
+        'pneumonia': 'pneumonia.png',
+        'oxygen-therapy': 'oxygen.png',
+        'tuberculosis': 'tb.png',
+        'chest-tubes': 'chest.png',
 
         // Endocrine (5)
-        'diabetes-type1': '💉',
-        'diabetes-type2': '🍬',
-        'thyroid-disorders': '🦋',
-        'adrenal-disorders': '⚡',
-        'pituitary-disorders': '🧠',
+        'diabetes-type1': 'type-1.png',
+        'diabetes-type2': 'type-2.png',
+        'thyroid-disorders': 'thyroid.png',
+        'adrenal-disorders': 'adrenal.png',
+        'pituitary-disorders': 'pituitary.png',
 
         // Neurological (6)
-        'stroke': '🧠',
-        'seizures': '⚡',
-        'spinal-cord-injury': '🦴',
-        'traumatic-brain-injury': '🤕',
-        'meningitis': '🔬',
-        'parkinsons-ms': '🫨',
+        'stroke': 'stroke.png',
+        'seizures': 'seizure.png',
+        'spinal-cord-injury': 'spinal-cord-injury.png',
+        'traumatic-brain-injury': 'brain-injury.png',
+        'meningitis': 'meningitis.png',
+        'parkinsons-ms': 'shaking.png',
 
         // Renal (6)
-        'acute-kidney-injury': '🫘',
-        'chronic-kidney-disease': '🫘',
-        'dialysis': '🔄',
-        'urinary-tract-infections': '🚽',
-        'kidney-stones': '💎',
-        'fluid-electrolytes': '💧',
+        'acute-kidney-injury': 'kidney-acute.png',
+        'chronic-kidney-disease': 'kidney-disease.png',
+        'dialysis': 'kidney-dialysis.png',
+        'urinary-tract-infections': 'urinary-tract-infection.png',
+        'kidney-stones': 'kidney.png',
+        'fluid-electrolytes': 'chemical.png',
 
         // Gastrointestinal (6)
-        'gi-bleeding': '🩸',
-        'bowel-obstruction': '🚫',
-        'liver-disease': '🫁',
-        'pancreatitis': '😖',
-        'inflammatory-bowel-disease': '🔥',
-        'gerd-peptic-ulcer': '🍽️',
+        'gi-bleeding': 'gi-bleeding.png',
+        'bowel-obstruction': 'bowel-obstruction.png',
+        'liver-disease': 'liver.png',
+        'pancreatitis': 'intestines.png',
+        'inflammatory-bowel-disease': 'intestines.png',
+        'gerd-peptic-ulcer': 'ulcer.png',
 
         // Musculoskeletal (5)
-        'fractures': '🦴',
-        'arthritis': '🦵',
-        'hip-knee-replacement': '🦿',
-        'osteoporosis': '💀',
-        'amputation-care': '🩹',
-
-        // Pharmacology (6)
-        'cardiac-medications': '💊',
-        'antibiotics-antivirals': '💉',
-        'pain-management': '😣',
-        'iv-medications': '🩹',
-        'psychotropic-medications': '🧪',
-        'emergency-medications': '🚨',
-
-        // Fundamentals (5)
-        'assessment-skills': '📋',
-        'infection-control': '🛡️',
-        'documentation-charting': '📝',
-        'patient-safety': '⚠️',
-        'mobility-transfers': '🚶',
-
-        // Maternal/OB (4)
-        'labor-delivery': '👶',
-        'postpartum-care': '🤱',
-        'high-risk-pregnancy': '⚕️',
-        'antepartum-care': '🤰',
-
-        // Pediatrics (4)
-        'growth-development': '📈',
-        'pediatric-emergencies': '🚑',
-        'infant-care': '🍼',
-        'adolescent-health': '👦',
+        'fractures': 'broken-bone.png',
+        'arthritis': 'arthritis.png',
+        'hip-knee-replacement': 'prothesis.png',
+        'osteoporosis': 'osteoporosis.png',
+        'amputation-care': 'amputation.png',
 
         // Mental Health (5)
-        'depression-anxiety': '💭',
-        'crisis-intervention': '🆘',
-        'therapeutic-communication': '💬',
-        'substance-abuse': '🚫',
-        'eating-disorders': '🍽️'
+        'eating-disorders': 'eating-disorder.png'
     };
-    return icons[productId] || '📚';
+
+    const iconFile = iconMap[productId];
+    if (iconFile) {
+        return `<img src="assets/images/guide-icons/${iconFile}" alt="" style="width: 40px; height: 40px; object-fit: contain;">`;
+    }
+    // Fallback to emoji for guides without custom icons
+    return '📚';
 }
 
 // Format date for display
