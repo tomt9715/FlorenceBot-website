@@ -66,6 +66,28 @@
             color: white;
         }
 
+        .pending-icon {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 24px;
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .pending-icon i {
+            font-size: 3rem;
+            color: white;
+            animation: spin 2s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
         @keyframes scaleIn {
             0% {
                 transform: scale(0);
@@ -172,6 +194,90 @@
             line-height: 1.5;
         }
 
+        .guest-warning {
+            margin-top: 24px;
+            padding: 20px;
+            background: rgba(245, 158, 11, 0.1);
+            border: 2px solid rgba(245, 158, 11, 0.3);
+            border-radius: 12px;
+            text-align: left;
+        }
+
+        .guest-warning-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .guest-warning-header i {
+            color: #f59e0b;
+            font-size: 1.5rem;
+        }
+
+        .guest-warning-header h4 {
+            margin: 0;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .guest-warning p {
+            margin: 0 0 16px 0;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        .order-number-display {
+            background: var(--background-white);
+            border: 2px dashed var(--border-color);
+            border-radius: 8px;
+            padding: 16px;
+            text-align: center;
+            margin-bottom: 16px;
+        }
+
+        .order-number-label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .order-number-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            font-family: 'Outfit', monospace;
+            color: var(--primary-color);
+            letter-spacing: 2px;
+        }
+
+        .copy-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .copy-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-1px);
+        }
+
+        .copy-btn.copied {
+            background: #10b981;
+        }
+
         .loading-state {
             display: flex;
             flex-direction: column;
@@ -208,13 +314,19 @@
                 font-size: 1.5rem;
             }
 
-            .success-icon {
+            .success-icon,
+            .pending-icon {
                 width: 80px;
                 height: 80px;
             }
 
-            .success-icon i {
+            .success-icon i,
+            .pending-icon i {
                 font-size: 2.5rem;
+            }
+
+            .order-number-value {
+                font-size: 1.4rem;
             }
         }
 
@@ -225,6 +337,10 @@
 
         [data-theme="dark"] .order-details {
             background: var(--background-white);
+        }
+
+        [data-theme="dark"] .order-number-display {
+            background: var(--background-light);
         }
     </style>
 </head>
@@ -267,7 +383,7 @@
                 <!-- Loading state -->
                 <div class="loading-state" id="loading-state">
                     <div class="spinner spinner-primary"></div>
-                    <p style="color: var(--text-secondary);">Verifying your payment...</p>
+                    <p style="color: var(--text-secondary);">Confirming your purchase...</p>
                 </div>
             </div>
         </div>
@@ -310,34 +426,61 @@
         // Configuration - Main backend API URL for cart/order operations
         const API_BASE_URL = 'https://web-production-592c07.up.railway.app';
 
+        // Polling configuration
+        const POLL_INTERVAL = 3000; // 3 seconds
+        const MAX_POLL_TIME = 30000; // 30 seconds
+        let pollStartTime = null;
+        let pollTimer = null;
+
         /**
          * Initialize success page
          */
         async function initSuccessPage() {
             const urlParams = new URLSearchParams(window.location.search);
             const sessionId = urlParams.get('session_id');
+            const paymentIntent = urlParams.get('payment_intent');
             const orderNumber = urlParams.get('order_number');
 
-            console.log('Success page params:', { sessionId, orderNumber });
+            console.log('Success page params:', { sessionId, paymentIntent, orderNumber });
 
+            if (!sessionId && !paymentIntent) {
+                showErrorState('No payment information found. Please check your email for order confirmation.');
+                return;
+            }
+
+            await verifyPayment(paymentIntent, sessionId);
+        }
+
+        /**
+         * Verify payment status using the new verify endpoint
+         */
+        async function verifyPayment(paymentIntent, sessionId) {
             try {
-                let paymentDetails = null;
+                // Build query params
+                const params = new URLSearchParams();
+                if (paymentIntent) params.append('payment_intent', paymentIntent);
+                if (sessionId) params.append('session_id', sessionId);
 
-                // Verify payment status using session ID
-                if (sessionId) {
-                    paymentDetails = await getSessionStatus(sessionId);
-                }
+                const response = await fetch(`${API_BASE_URL}/cart/orders/verify?${params.toString()}`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                });
 
-                if (paymentDetails && (paymentDetails.payment_status === 'paid' || paymentDetails.status === 'complete')) {
-                    showSuccessState(paymentDetails);
-                } else if (paymentDetails && paymentDetails.status === 'processing') {
-                    // Payment is still processing
-                    showSuccessState({
-                        ...paymentDetails,
-                        processing: true
-                    });
+                const data = await response.json();
+                console.log('Verify response:', data);
+
+                if (data.success && data.order) {
+                    // Payment verified successfully
+                    showSuccessState(data.order);
+                } else if (data.status === 'pending') {
+                    // Payment is processing - show pending state and start polling
+                    showPendingState();
+                    startPolling(paymentIntent, sessionId);
                 } else {
-                    showErrorState('Payment could not be verified. Please contact support if you believe this is an error.');
+                    // Not found or error
+                    showErrorState(data.message || 'Payment could not be verified. Please contact support if you believe this is an error.');
                 }
             } catch (error) {
                 console.error('Verification error:', error);
@@ -346,21 +489,33 @@
         }
 
         /**
-         * Get checkout session status and order details
+         * Start polling for order status
          */
-        async function getSessionStatus(sessionId) {
-            const response = await fetch(`${API_BASE_URL}/cart/checkout/session-status?session_id=${encodeURIComponent(sessionId)}`, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            });
+        function startPolling(paymentIntent, sessionId) {
+            pollStartTime = Date.now();
 
-            if (!response.ok) {
-                throw new Error('Failed to get session status');
+            pollTimer = setInterval(async () => {
+                const elapsed = Date.now() - pollStartTime;
+
+                if (elapsed >= MAX_POLL_TIME) {
+                    // Stop polling after max time
+                    clearInterval(pollTimer);
+                    showTimeoutState();
+                    return;
+                }
+
+                await verifyPayment(paymentIntent, sessionId);
+            }, POLL_INTERVAL);
+        }
+
+        /**
+         * Stop polling
+         */
+        function stopPolling() {
+            if (pollTimer) {
+                clearInterval(pollTimer);
+                pollTimer = null;
             }
-
-            return await response.json();
         }
 
         /**
@@ -376,42 +531,180 @@
         }
 
         /**
+         * Check if user is logged in
+         */
+        function isUserLoggedIn() {
+            try {
+                const accessToken = localStorage.getItem('florencebot_access_token');
+                return !!accessToken;
+            } catch (e) {
+                return false;
+            }
+        }
+
+        /**
+         * Copy text to clipboard
+         */
+        async function copyToClipboard(text, buttonElement) {
+            try {
+                await navigator.clipboard.writeText(text);
+                const originalText = buttonElement.innerHTML;
+                buttonElement.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                buttonElement.classList.add('copied');
+                setTimeout(() => {
+                    buttonElement.innerHTML = originalText;
+                    buttonElement.classList.remove('copied');
+                }, 2000);
+            } catch (err) {
+                // Fallback for older browsers
+                const textArea = document.createElement('textarea');
+                textArea.value = text;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+
+                const originalText = buttonElement.innerHTML;
+                buttonElement.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                buttonElement.classList.add('copied');
+                setTimeout(() => {
+                    buttonElement.innerHTML = originalText;
+                    buttonElement.classList.remove('copied');
+                }, 2000);
+            }
+        }
+
+        /**
+         * Show pending state while waiting for webhook
+         */
+        function showPendingState() {
+            const container = document.getElementById('success-content');
+
+            container.innerHTML = `
+                <div class="pending-icon">
+                    <i class="fas fa-sync-alt"></i>
+                </div>
+                <h1 class="success-title">Processing your payment...</h1>
+                <p class="success-message">
+                    This usually takes just a moment. Please wait...
+                </p>
+                <div class="loading-state" style="padding: 20px 0;">
+                    <div class="spinner spinner-primary"></div>
+                </div>
+            `;
+        }
+
+        /**
+         * Show timeout state when polling takes too long
+         */
+        function showTimeoutState() {
+            const container = document.getElementById('success-content');
+
+            container.innerHTML = `
+                <div class="pending-icon" style="background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);">
+                    <i class="fas fa-clock" style="animation: none;"></i>
+                </div>
+                <h1 class="success-title">Taking longer than expected</h1>
+                <p class="success-message">
+                    Your payment is being processed. Your order confirmation will be sent to your email shortly.
+                </p>
+                <div class="email-note">
+                    <i class="fas fa-envelope"></i>
+                    <p>Please check your email for your order number and access instructions. If you don't receive an email within a few minutes, please contact support.</p>
+                </div>
+                <div class="success-actions" style="margin-top: 24px;">
+                    <a href="https://discord.gg/y2Mh77wAV2" class="btn btn-primary btn-large">
+                        <i class="fab fa-discord"></i>
+                        Contact Support
+                    </a>
+                    <a href="store.html" class="btn btn-light">
+                        <i class="fas fa-arrow-left"></i>
+                        Back to Store
+                    </a>
+                </div>
+            `;
+        }
+
+        /**
          * Show success state
          */
-        function showSuccessState(details) {
+        function showSuccessState(order) {
+            // Stop polling if active
+            stopPolling();
+
             // Clear guest cart on successful purchase
             clearGuestCart();
 
             const container = document.getElementById('success-content');
-            const email = details.customer_email || '';
-            const amount = details.amount ? `$${(details.amount / 100).toFixed(2)}` : '';
-            const order = details.order;
+            const isLoggedIn = isUserLoggedIn();
+            const isGuest = !order.user_id;
 
-            // Build items HTML - show each item purchased
+            // Build items HTML
             let itemsHtml = '';
-            if (order && order.items && order.items.length > 0) {
+            let totalPrice = 0;
+            if (order.items && order.items.length > 0) {
                 itemsHtml = order.items.map(item => {
-                    const qty = item.quantity > 1 ? ` (x${item.quantity})` : '';
+                    totalPrice += item.price;
                     return `
                         <div class="order-item">
-                            <span class="order-item-label">${escapeHtml(item.product_name)}${qty}</span>
+                            <span class="order-item-label">${escapeHtml(item.product_name)}</span>
                             <span class="order-item-value">$${parseFloat(item.price).toFixed(2)}</span>
                         </div>
                     `;
                 }).join('');
-            } else {
-                // Fallback if no order details
-                itemsHtml = `
-                    <div class="order-item">
-                        <span class="order-item-label">Product</span>
-                        <span class="order-item-value">Study Guide</span>
-                    </div>
-                `;
             }
 
             // Determine message based on item count
-            const itemCount = order && order.items ? order.items.length : 1;
+            const itemCount = order.items ? order.items.length : 1;
             const guideText = itemCount === 1 ? 'Your study guide is' : 'Your study guides are';
+
+            let actionsHtml = '';
+            let guestWarningHtml = '';
+
+            if (isGuest) {
+                // Guest user - show prominent order number and account creation prompts
+                guestWarningHtml = `
+                    <div class="guest-warning">
+                        <div class="guest-warning-header">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <h4>Important: Save your order number</h4>
+                        </div>
+                        <p>To access your study guides, create an account or log in and enter this order number.</p>
+                        <div class="order-number-display">
+                            <div class="order-number-label">Your Order Number</div>
+                            <div class="order-number-value" id="order-number-value">${escapeHtml(order.order_number)}</div>
+                        </div>
+                        <button class="copy-btn" onclick="copyToClipboard('${escapeHtml(order.order_number)}', this)">
+                            <i class="fas fa-copy"></i>
+                            Copy to Clipboard
+                        </button>
+                    </div>
+                `;
+
+                const orderParam = encodeURIComponent(order.order_number);
+                actionsHtml = `
+                    <a href="login.html?tab=signup&order=${orderParam}" class="btn btn-primary btn-large">
+                        <i class="fas fa-user-plus"></i>
+                        Create Account
+                    </a>
+                    <a href="login.html?order=${orderParam}" class="btn btn-light">
+                        <i class="fas fa-sign-in-alt"></i>
+                        Already have an account? Log in
+                    </a>
+                `;
+            } else {
+                // Logged-in user - show dashboard link
+                actionsHtml = `
+                    <a href="dashboard.html" class="btn btn-primary btn-large">
+                        <i class="fas fa-book-open"></i>
+                        Go to My Dashboard
+                    </a>
+                    <a href="store.html" class="btn btn-light">
+                        <i class="fas fa-shopping-bag"></i>
+                        Continue Shopping
+                    </a>
+                `;
+            }
 
             container.innerHTML = `
                 <div class="success-icon">
@@ -424,47 +717,32 @@
 
                 <div class="order-details">
                     <h3>Order Details</h3>
-                    ${order && order.order_number ? `
                     <div class="order-item">
                         <span class="order-item-label">Order Number</span>
                         <span class="order-item-value">${escapeHtml(order.order_number)}</span>
                     </div>
-                    ` : ''}
                     ${itemsHtml}
-                    ${order && order.discount_amount > 0 ? `
-                    <div class="order-item">
-                        <span class="order-item-label">Discount</span>
-                        <span class="order-item-value" style="color: #10b981;">-$${order.discount_amount.toFixed(2)}</span>
-                    </div>
-                    ` : ''}
-                    ${amount ? `
                     <div class="order-item" style="border-top: 2px solid var(--border-color); padding-top: 12px; margin-top: 8px;">
                         <span class="order-item-label" style="font-weight: 600;">Total Paid</span>
-                        <span class="order-item-value" style="font-size: 1.1rem;">${amount}</span>
+                        <span class="order-item-value" style="font-size: 1.1rem;">$${parseFloat(order.total).toFixed(2)}</span>
                     </div>
-                    ` : ''}
-                    ${email ? `
+                    ${order.customer_email ? `
                     <div class="order-item">
                         <span class="order-item-label">Email</span>
-                        <span class="order-item-value">${escapeHtml(email)}</span>
+                        <span class="order-item-value">${escapeHtml(order.customer_email)}</span>
                     </div>
                     ` : ''}
                 </div>
 
+                ${guestWarningHtml}
+
                 <div class="success-actions">
-                    <a href="dashboard.html" class="btn btn-primary btn-large">
-                        <i class="fas fa-book-open"></i>
-                        Access Your Guides
-                    </a>
-                    <a href="https://discord.gg/y2Mh77wAV2" class="btn btn-light">
-                        <i class="fab fa-discord"></i>
-                        Join Our Discord Community
-                    </a>
+                    ${actionsHtml}
                 </div>
 
                 <div class="email-note">
                     <i class="fas fa-envelope"></i>
-                    <p>A confirmation email has been sent to your email address with your receipt and access instructions.</p>
+                    <p>A confirmation email has been sent to ${order.customer_email ? escapeHtml(order.customer_email) : 'your email address'} with your receipt and access instructions.</p>
                 </div>
             `;
         }
@@ -473,6 +751,9 @@
          * Show error state
          */
         function showErrorState(message) {
+            // Stop polling if active
+            stopPolling();
+
             const container = document.getElementById('success-content');
 
             container.innerHTML = `
@@ -481,13 +762,13 @@
                     <h1 class="success-title">Something Went Wrong</h1>
                     <p class="success-message">${escapeHtml(message)}</p>
                     <div class="success-actions">
-                        <a href="store.html" class="btn btn-primary btn-large">
-                            <i class="fas fa-arrow-left"></i>
-                            Back to Store
-                        </a>
-                        <a href="https://discord.gg/y2Mh77wAV2" class="btn btn-light">
+                        <a href="https://discord.gg/y2Mh77wAV2" class="btn btn-primary btn-large">
                             <i class="fab fa-discord"></i>
                             Contact Support
+                        </a>
+                        <a href="store.html" class="btn btn-light">
+                            <i class="fas fa-arrow-left"></i>
+                            Back to Store
                         </a>
                     </div>
                 </div>
