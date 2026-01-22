@@ -2,11 +2,14 @@
 // Sidebar Filter Functionality, Shop Type Toggle & Cart Integration
 
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('Store script loaded');
+
     // Convert "Buy Guide" links to "Add to Cart" buttons
     initializeAddToCartButtons();
 
     // Initialize package add-to-cart buttons
     initializePackageButtons();
+
     const filterButtons = document.querySelectorAll('.filter-item[data-filter]');
     const shopTypeButtons = document.querySelectorAll('.filter-item[data-shop-type]');
     const guideCards = document.querySelectorAll('.guide-card');
@@ -27,6 +30,10 @@ document.addEventListener('DOMContentLoaded', function() {
     // Sub-category elements
     const subcategoryChips = document.getElementById('subcategory-chips');
     const subcategoryButtons = document.querySelectorAll('.subcategory-chip');
+
+    console.log('Search input found:', !!searchInput);
+    console.log('Guide cards found:', guideCards.length);
+    console.log('Subcategory chips found:', subcategoryButtons.length);
 
     let currentShopType = 'guides'; // Default to individual guides
     let currentFilter = 'all';
@@ -67,8 +74,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Search functionality
     if (searchInput) {
+        console.log('Adding search input listener');
         searchInput.addEventListener('input', function() {
             currentSearchTerm = this.value.toLowerCase().trim();
+            console.log('Search term:', currentSearchTerm);
 
             // Show/hide clear button
             if (searchClear) {
@@ -77,6 +86,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
             filterGuides();
         });
+    } else {
+        console.log('Search input NOT found!');
     }
 
     if (searchClear) {
@@ -117,6 +128,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Master filter function
     function filterGuides() {
+        console.log('filterGuides called, search term:', currentSearchTerm, 'category:', currentFilter, 'subcategory:', currentSubcategory);
         let visibleCount = 0;
 
         guideCards.forEach(card => {
