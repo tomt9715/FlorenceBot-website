@@ -179,7 +179,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (searchInput) searchInput.value = '';
                 if (searchClear) searchClear.style.display = 'none';
                 if (searchResultsCount) searchResultsCount.style.display = 'none';
-                if (subcategoryChips) subcategoryChips.style.display = 'none';
+                if (subcategoryChips) {
+                    subcategoryChips.classList.remove('visible');
+                }
 
                 // Reset filter buttons
                 filterButtons.forEach(btn => {
@@ -269,9 +271,11 @@ document.addEventListener('DOMContentLoaded', function() {
             // Show/hide subcategory chips based on filter
             if (subcategoryChips) {
                 if (filter === 'med-surg' && currentShopType === 'guides') {
-                    subcategoryChips.style.display = 'flex';
+                    subcategoryChips.style.removeProperty('display');
+                    subcategoryChips.classList.add('visible');
                 } else {
                     subcategoryChips.style.display = 'none';
+                    subcategoryChips.classList.remove('visible');
                     // Reset subcategory filter when leaving med-surg
                     currentSubcategory = 'all';
                     subcategoryButtons.forEach(btn => {
