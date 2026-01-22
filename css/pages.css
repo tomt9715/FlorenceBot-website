@@ -2826,8 +2826,12 @@
 
 .guide-page {
     min-height: 100vh;
-    background: #f8fafc;
+    background: var(--background-light);
     padding-top: 70px;
+}
+
+[data-theme="dark"] .guide-page {
+    background: var(--background-dark, #111827);
 }
 
 .guide-header {
@@ -2937,11 +2941,15 @@
 }
 
 .guide-content {
-    background: white;
+    background: var(--card-bg);
     border-radius: 12px;
     padding: 50px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
     line-height: 1.8;
+}
+
+[data-theme="dark"] .guide-content {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
 .guide-content h1 {
