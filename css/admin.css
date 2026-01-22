@@ -533,8 +533,12 @@
     color: var(--text-secondary);
 }
 
-/* Modal Styles - Admin specific with higher specificity */
-.admin-dashboard .modal-overlay {
+/* Modal Styles - Admin page modals */
+#user-detail-modal,
+#add-guide-modal,
+#guide-owners-modal,
+#bulk-grant-modal,
+#confirm-modal {
     position: fixed;
     top: 0;
     left: 0;
@@ -551,11 +555,19 @@
     overflow-y: auto;
 }
 
-.admin-dashboard .modal-overlay.active {
+#user-detail-modal.active,
+#add-guide-modal.active,
+#guide-owners-modal.active,
+#bulk-grant-modal.active,
+#confirm-modal.active {
     display: flex;
 }
 
-.admin-dashboard .modal-content {
+#user-detail-modal > .modal-content,
+#add-guide-modal > .modal-content,
+#guide-owners-modal > .modal-content,
+#bulk-grant-modal > .modal-content,
+#confirm-modal > .modal-content {
     background: #ffffff;
     border-radius: 16px;
     width: 100%;
@@ -580,15 +592,19 @@
     }
 }
 
-.admin-dashboard .user-detail-modal {
+#user-detail-modal > .user-detail-modal {
     max-width: 800px;
 }
 
-.admin-dashboard .guide-owners-modal {
+#guide-owners-modal > .guide-owners-modal {
     max-width: 900px;
 }
 
-.admin-dashboard .modal-header {
+#user-detail-modal .modal-header,
+#add-guide-modal .modal-header,
+#guide-owners-modal .modal-header,
+#bulk-grant-modal .modal-header,
+#confirm-modal .modal-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -598,7 +614,11 @@
     border-radius: 16px 16px 0 0;
 }
 
-.admin-dashboard .modal-header h2 {
+#user-detail-modal .modal-header h2,
+#add-guide-modal .modal-header h2,
+#guide-owners-modal .modal-header h2,
+#bulk-grant-modal .modal-header h2,
+#confirm-modal .modal-header h2 {
     font-size: 1.25rem;
     font-weight: 600;
     color: #111827;
@@ -608,11 +628,17 @@
     gap: 10px;
 }
 
-.admin-dashboard .modal-header h2 i {
+#user-detail-modal .modal-header h2 i,
+#add-guide-modal .modal-header h2 i,
+#guide-owners-modal .modal-header h2 i,
+#bulk-grant-modal .modal-header h2 i {
     color: #667eea;
 }
 
-.admin-dashboard .modal-close {
+#user-detail-modal .modal-close,
+#add-guide-modal .modal-close,
+#guide-owners-modal .modal-close,
+#bulk-grant-modal .modal-close {
     width: 36px;
     height: 36px;
     display: flex;
@@ -626,28 +652,35 @@
     transition: all 0.2s ease;
 }
 
-.admin-dashboard .modal-close:hover {
+#user-detail-modal .modal-close:hover,
+#add-guide-modal .modal-close:hover,
+#guide-owners-modal .modal-close:hover,
+#bulk-grant-modal .modal-close:hover {
     background: #fee2e2;
     color: #dc2626;
 }
 
-.admin-dashboard .modal-body {
+#user-detail-modal .modal-body,
+#add-guide-modal .modal-body,
+#guide-owners-modal .modal-body,
+#bulk-grant-modal .modal-body,
+#confirm-modal .modal-body {
     padding: 24px;
     background: #ffffff;
     border-radius: 0 0 16px 16px;
 }
 
 /* User Detail Modal Sections */
-.admin-dashboard .user-detail-section {
+#user-detail-modal .user-detail-section {
     margin-bottom: 28px;
     background: #ffffff;
 }
 
-.admin-dashboard .user-detail-section:last-child {
+#user-detail-modal .user-detail-section:last-child {
     margin-bottom: 0;
 }
 
-.admin-dashboard .user-detail-section h3 {
+#user-detail-modal .user-detail-section h3 {
     font-size: 1rem;
     font-weight: 600;
     color: #111827;
@@ -657,7 +690,7 @@
     gap: 8px;
 }
 
-.admin-dashboard .user-detail-section h3 i {
+#user-detail-modal .user-detail-section h3 i {
     color: #667eea;
     font-size: 0.9rem;
 }
@@ -674,19 +707,19 @@
 }
 
 /* User Info Grid */
-.admin-dashboard .user-info-grid {
+#user-detail-modal .user-info-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 16px;
 }
 
-.admin-dashboard .info-item {
+#user-detail-modal .info-item {
     display: flex;
     flex-direction: column;
     gap: 4px;
 }
 
-.admin-dashboard .info-label {
+#user-detail-modal .info-label {
     font-size: 0.75rem;
     font-weight: 600;
     color: #6b7280;
@@ -694,13 +727,13 @@
     letter-spacing: 0.5px;
 }
 
-.admin-dashboard .info-value {
+#user-detail-modal .info-value {
     font-size: 0.95rem;
     color: #111827;
 }
 
 /* Guides List */
-.admin-dashboard .guides-list {
+#user-detail-modal .guides-list {
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -708,7 +741,7 @@
     overflow-y: auto;
 }
 
-.admin-dashboard .guide-item-admin {
+#user-detail-modal .guide-item-admin {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -719,22 +752,22 @@
     border: 1px solid #e5e7eb;
 }
 
-.admin-dashboard .guide-item-admin.revoked {
+#user-detail-modal .guide-item-admin.revoked {
     opacity: 0.6;
     background: #fee2e2;
 }
 
-.admin-dashboard .guide-info {
+#user-detail-modal .guide-info {
     flex: 1;
 }
 
-.admin-dashboard .guide-name {
+#user-detail-modal .guide-name {
     font-weight: 500;
     color: #111827;
     margin-bottom: 4px;
 }
 
-.admin-dashboard .guide-meta {
+#user-detail-modal .guide-meta {
     font-size: 0.8rem;
     color: #6b7280;
 }
@@ -745,7 +778,7 @@
 }
 
 /* Notes List */
-.admin-dashboard .notes-list {
+#user-detail-modal .notes-list {
     display: flex;
     flex-direction: column;
     gap: 12px;
@@ -753,7 +786,7 @@
     overflow-y: auto;
 }
 
-.admin-dashboard .note-item {
+#user-detail-modal .note-item {
     padding: 14px;
     background: #f9fafb;
     border-radius: 10px;
@@ -763,7 +796,7 @@
     border-bottom: 1px solid #e5e7eb;
 }
 
-.admin-dashboard .note-header {
+#user-detail-modal .note-header {
     display: flex;
     justify-content: space-between;
     margin-bottom: 8px;
@@ -771,7 +804,7 @@
     color: #6b7280;
 }
 
-.admin-dashboard .note-text {
+#user-detail-modal .note-text {
     color: #111827;
     font-size: 0.95rem;
     white-space: pre-wrap;
@@ -1108,68 +1141,87 @@
     background: #1e1e2e;
 }
 
-[data-theme="dark"] .admin-dashboard .modal-content {
+[data-theme="dark"] #user-detail-modal > .modal-content,
+[data-theme="dark"] #add-guide-modal > .modal-content,
+[data-theme="dark"] #guide-owners-modal > .modal-content,
+[data-theme="dark"] #bulk-grant-modal > .modal-content,
+[data-theme="dark"] #confirm-modal > .modal-content {
     background: #1e1e2e;
     border-color: #374151;
 }
 
-[data-theme="dark"] .admin-dashboard .modal-header {
+[data-theme="dark"] #user-detail-modal .modal-header,
+[data-theme="dark"] #add-guide-modal .modal-header,
+[data-theme="dark"] #guide-owners-modal .modal-header,
+[data-theme="dark"] #bulk-grant-modal .modal-header,
+[data-theme="dark"] #confirm-modal .modal-header {
     background: #1e1e2e;
     border-bottom-color: #374151;
 }
 
-[data-theme="dark"] .admin-dashboard .modal-header h2 {
+[data-theme="dark"] #user-detail-modal .modal-header h2,
+[data-theme="dark"] #add-guide-modal .modal-header h2,
+[data-theme="dark"] #guide-owners-modal .modal-header h2,
+[data-theme="dark"] #bulk-grant-modal .modal-header h2,
+[data-theme="dark"] #confirm-modal .modal-header h2 {
     color: #f9fafb;
 }
 
-[data-theme="dark"] .admin-dashboard .modal-body {
+[data-theme="dark"] #user-detail-modal .modal-body,
+[data-theme="dark"] #add-guide-modal .modal-body,
+[data-theme="dark"] #guide-owners-modal .modal-body,
+[data-theme="dark"] #bulk-grant-modal .modal-body,
+[data-theme="dark"] #confirm-modal .modal-body {
     background: #1e1e2e;
 }
 
-[data-theme="dark"] .admin-dashboard .modal-close {
+[data-theme="dark"] #user-detail-modal .modal-close,
+[data-theme="dark"] #add-guide-modal .modal-close,
+[data-theme="dark"] #guide-owners-modal .modal-close,
+[data-theme="dark"] #bulk-grant-modal .modal-close {
     background: #374151;
     color: #9ca3af;
 }
 
-[data-theme="dark"] .admin-dashboard .user-detail-section {
+[data-theme="dark"] #user-detail-modal .user-detail-section {
     background: #1e1e2e;
 }
 
-[data-theme="dark"] .admin-dashboard .user-detail-section h3 {
+[data-theme="dark"] #user-detail-modal .user-detail-section h3 {
     color: #f9fafb;
 }
 
-[data-theme="dark"] .admin-dashboard .info-label {
+[data-theme="dark"] #user-detail-modal .info-label {
     color: #9ca3af;
 }
 
-[data-theme="dark"] .admin-dashboard .info-value {
+[data-theme="dark"] #user-detail-modal .info-value {
     color: #f9fafb;
 }
 
-[data-theme="dark"] .admin-dashboard .guide-item-admin {
+[data-theme="dark"] #user-detail-modal .guide-item-admin {
     background: #2a2a3e;
     border-color: #374151;
 }
 
-[data-theme="dark"] .admin-dashboard .guide-name {
+[data-theme="dark"] #user-detail-modal .guide-name {
     color: #f9fafb;
 }
 
-[data-theme="dark"] .admin-dashboard .guide-meta {
+[data-theme="dark"] #user-detail-modal .guide-meta {
     color: #9ca3af;
 }
 
-[data-theme="dark"] .admin-dashboard .note-item {
+[data-theme="dark"] #user-detail-modal .note-item {
     background: #2a2a3e;
     border-color: #374151;
 }
 
-[data-theme="dark"] .admin-dashboard .note-header {
+[data-theme="dark"] #user-detail-modal .note-header {
     color: #9ca3af;
 }
 
-[data-theme="dark"] .admin-dashboard .note-text {
+[data-theme="dark"] #user-detail-modal .note-text {
     color: #f9fafb;
 }
 
