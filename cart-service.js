@@ -105,12 +105,24 @@ class CartManager {
     }
 
     /**
-     * Calculate subtotal from items
+     * Calculate subtotal from items (accounts for quantity)
      * @param {array} items - Cart items
      * @returns {number} - Subtotal
      */
     calculateSubtotal(items) {
-        return items.reduce((sum, item) => sum + (parseFloat(item.price) || 0), 0);
+        return items.reduce((sum, item) => {
+            const quantity = item.quantity || 1;
+            return sum + ((parseFloat(item.price) || 0) * quantity);
+        }, 0);
+    }
+
+    /**
+     * Calculate total item count (accounts for quantity)
+     * @param {array} items - Cart items
+     * @returns {number} - Total item count
+     */
+    calculateItemCount(items) {
+        return items.reduce((count, item) => count + (item.quantity || 1), 0);
     }
 
     /**
@@ -119,9 +131,10 @@ class CartManager {
      * @param {string} productName - Product name
      * @param {string} productType - Product type (individual, lite-package, full-package)
      * @param {number} price - Product price
+     * @param {number} quantity - Quantity to add (default 1)
      * @returns {Promise<object>} - Updated cart
      */
-    async addItem(productId, productName, productType, price) {
+    async addItem(productId, productName, productType, price, quantity = 1) {
         try {
             if (this.isAuthenticated()) {
                 // Add via API
@@ -131,7 +144,8 @@ class CartManager {
                         product_id: productId,
                         product_name: productName,
                         product_type: productType,
-                        price: price
+                        price: price,
+                        quantity: quantity
                     })
                 });
                 this.cart = data.cart || { items: [], subtotal: 0 };
@@ -139,21 +153,23 @@ class CartManager {
                 // Add to localStorage
                 const cart = this.getGuestCart();
 
-                // Check if already in cart
-                if (cart.items.find(item => item.product_id === productId)) {
-                    throw new Error('Item already in cart');
+                // Check if already in cart - if so, increase quantity
+                const existingItem = cart.items.find(item => item.product_id === productId);
+                if (existingItem) {
+                    existingItem.quantity = (existingItem.quantity || 1) + quantity;
+                } else {
+                    cart.items.push({
+                        product_id: productId,
+                        product_name: productName,
+                        product_type: productType,
+                        price: parseFloat(price),
+                        quantity: quantity,
+                        added_at: new Date().toISOString()
+                    });
                 }
 
-                cart.items.push({
-                    product_id: productId,
-                    product_name: productName,
-                    product_type: productType,
-                    price: parseFloat(price),
-                    added_at: new Date().toISOString()
-                });
-
                 cart.subtotal = this.calculateSubtotal(cart.items);
-                cart.item_count = cart.items.length;
+                cart.item_count = this.calculateItemCount(cart.items);
 
                 this.saveGuestCart(cart);
                 this.cart = cart;
@@ -162,6 +178,46 @@ class CartManager {
             return this.cart;
         } catch (error) {
             console.error('Failed to add item to cart:', error);
+            throw error;
+        }
+    }
+
+    /**
+     * Update item quantity in cart
+     * @param {string} productId - Product ID
+     * @param {number} quantity - New quantity
+     * @returns {Promise<object>} - Updated cart
+     */
+    async updateQuantity(productId, quantity) {
+        try {
+            if (quantity < 1) {
+                return await this.removeItem(productId);
+            }
+
+            if (this.isAuthenticated()) {
+                // Update via API
+                const data = await apiCall(`/cart/items/${productId}`, {
+                    method: 'PATCH',
+                    body: JSON.stringify({ quantity: quantity })
+                });
+                this.cart = data.cart || { items: [], subtotal: 0 };
+            } else {
+                // Update in localStorage
+                const cart = this.getGuestCart();
+                const item = cart.items.find(item => item.product_id === productId);
+
+                if (item) {
+                    item.quantity = quantity;
+                    cart.subtotal = this.calculateSubtotal(cart.items);
+                    cart.item_count = this.calculateItemCount(cart.items);
+                    this.saveGuestCart(cart);
+                    this.cart = cart;
+                }
+            }
+            this.notifyListeners();
+            return this.cart;
+        } catch (error) {
+            console.error('Failed to update item quantity:', error);
             throw error;
         }
     }
@@ -272,11 +328,11 @@ class CartManager {
     }
 
     /**
-     * Get item count
+     * Get item count (total quantity of all items)
      * @returns {number} - Number of items in cart
      */
     getItemCount() {
-        return this.cart.items ? this.cart.items.length : 0;
+        return this.cart.items ? this.calculateItemCount(this.cart.items) : 0;
     }
 
     /**

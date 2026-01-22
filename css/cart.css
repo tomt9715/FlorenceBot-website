@@ -512,3 +512,104 @@
         width: 100%;
     }
 }
+
+/* ============================================
+   CONTINUE SHOPPING BUTTON
+   ============================================ */
+
+.cart-continue-btn {
+    width: 100%;
+    padding: 12px 24px;
+    background: transparent;
+    color: var(--text-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 12px;
+    transition: all 0.2s ease;
+}
+
+.cart-continue-btn:hover {
+    background: var(--background-light);
+    color: var(--text-primary);
+    border-color: var(--text-secondary);
+}
+
+.cart-continue-btn i {
+    font-size: 0.9rem;
+}
+
+/* ============================================
+   QUANTITY CONTROLS
+   ============================================ */
+
+.cart-item-quantity-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.qty-btn {
+    width: 28px;
+    height: 28px;
+    border: 1px solid var(--border-color);
+    background: var(--background-light);
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    color: var(--text-secondary);
+}
+
+.qty-btn:hover {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+    color: white;
+}
+
+.qty-btn i {
+    font-size: 0.7rem;
+}
+
+.qty-value {
+    min-width: 24px;
+    text-align: center;
+    font-weight: 600;
+    color: var(--text-primary);
+    font-size: 0.95rem;
+}
+
+.cart-item-price-section {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.cart-item-unit-price {
+    font-size: 0.75rem;
+    color: var(--text-light);
+    margin-top: 2px;
+}
+
+/* ============================================
+   JUST ADDED BUTTON STATE
+   ============================================ */
+
+.add-to-cart-btn.just-added {
+    background: #10b981;
+    color: white;
+}
+
+.add-to-cart-btn.just-added:hover {
+    background: #059669;
+}

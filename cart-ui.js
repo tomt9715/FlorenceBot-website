@@ -63,6 +63,10 @@ class CartUI {
                     <i class="fas fa-lock"></i>
                     Proceed to Checkout
                 </button>
+                <button class="cart-continue-btn" id="cart-continue-btn">
+                    <i class="fas fa-arrow-left"></i>
+                    Continue Shopping
+                </button>
             </div>
         `;
 
@@ -98,6 +102,10 @@ class CartUI {
         // Checkout button
         const checkoutBtn = this.drawer.querySelector('#cart-checkout-btn');
         checkoutBtn.addEventListener('click', () => this.handleCheckout());
+
+        // Continue shopping button
+        const continueBtn = this.drawer.querySelector('#cart-continue-btn');
+        continueBtn.addEventListener('click', () => this.closeDrawer());
 
         // Cart icon click
         document.addEventListener('click', (e) => {
@@ -194,6 +202,29 @@ class CartUI {
                     await this.removeItem(productId);
                 });
             });
+
+            // Add quantity control listeners
+            container.querySelectorAll('.qty-decrease').forEach(btn => {
+                btn.addEventListener('click', async (e) => {
+                    const productId = e.currentTarget.dataset.productId;
+                    const item = items.find(i => i.product_id === productId);
+                    if (item) {
+                        const newQty = (item.quantity || 1) - 1;
+                        await this.updateQuantity(productId, newQty);
+                    }
+                });
+            });
+
+            container.querySelectorAll('.qty-increase').forEach(btn => {
+                btn.addEventListener('click', async (e) => {
+                    const productId = e.currentTarget.dataset.productId;
+                    const item = items.find(i => i.product_id === productId);
+                    if (item) {
+                        const newQty = (item.quantity || 1) + 1;
+                        await this.updateQuantity(productId, newQty);
+                    }
+                });
+            });
         }
     }
 
@@ -205,6 +236,8 @@ class CartUI {
     renderCartItem(item) {
         const typeLabel = this.getTypeLabel(item.product_type);
         const iconClass = this.getTypeIcon(item.product_type);
+        const quantity = item.quantity || 1;
+        const itemTotal = (parseFloat(item.price) * quantity).toFixed(2);
 
         return `
             <div class="cart-item" data-product-id="${this.escapeHtml(item.product_id)}">
@@ -214,8 +247,20 @@ class CartUI {
                 <div class="cart-item-details">
                     <div class="cart-item-name">${this.escapeHtml(item.product_name)}</div>
                     <div class="cart-item-type">${typeLabel}</div>
+                    <div class="cart-item-quantity-controls">
+                        <button class="qty-btn qty-decrease" data-product-id="${this.escapeHtml(item.product_id)}" aria-label="Decrease quantity">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                        <span class="qty-value">${quantity}</span>
+                        <button class="qty-btn qty-increase" data-product-id="${this.escapeHtml(item.product_id)}" aria-label="Increase quantity">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
                 </div>
-                <div class="cart-item-price">$${parseFloat(item.price).toFixed(2)}</div>
+                <div class="cart-item-price-section">
+                    <div class="cart-item-price">$${itemTotal}</div>
+                    ${quantity > 1 ? `<div class="cart-item-unit-price">$${parseFloat(item.price).toFixed(2)} each</div>` : ''}
+                </div>
                 <button class="cart-item-remove" data-product-id="${this.escapeHtml(item.product_id)}" aria-label="Remove item">
                     <i class="fas fa-trash-alt"></i>
                 </button>
@@ -286,10 +331,23 @@ class CartUI {
     async removeItem(productId) {
         try {
             await cartManager.removeItem(productId);
-            this.showToast('success', 'Item Removed', 'Item has been removed from your cart.');
             this.updateAddToCartButtons();
         } catch (error) {
             this.showToast('error', 'Error', error.message || 'Failed to remove item.');
+        }
+    }
+
+    /**
+     * Update item quantity
+     * @param {string} productId - Product ID
+     * @param {number} quantity - New quantity
+     */
+    async updateQuantity(productId, quantity) {
+        try {
+            await cartManager.updateQuantity(productId, quantity);
+            this.updateAddToCartButtons();
+        } catch (error) {
+            this.showToast('error', 'Error', error.message || 'Failed to update quantity.');
         }
     }
 
@@ -351,24 +409,40 @@ class CartUI {
      * @param {string} productType - Product type
      * @param {number} price - Product price
      * @param {HTMLElement} button - Button element (optional)
+     * @param {number} quantity - Quantity to add (default 1)
      */
-    async addToCart(productId, productName, productType, price, button = null) {
+    async addToCart(productId, productName, productType, price, button = null, quantity = 1) {
         if (button) {
             button.classList.add('adding');
             button.disabled = true;
         }
 
         try {
-            await cartManager.addItem(productId, productName, productType, price);
-            this.showToast('success', 'Added to Cart', `${productName} has been added to your cart.`);
-            this.animateBadge();
-            this.updateAddToCartButtons();
-        } catch (error) {
-            this.showToast('error', 'Error', error.message || 'Failed to add item to cart.');
-        } finally {
+            await cartManager.addItem(productId, productName, productType, price, quantity);
+
+            // Show checkmark feedback on button briefly
             if (button) {
                 button.classList.remove('adding');
-                // Button state will be updated by updateAddToCartButtons
+                button.classList.add('just-added');
+                button.innerHTML = '<i class="fas fa-check"></i> Added!';
+
+                // Reset button after brief delay
+                setTimeout(() => {
+                    button.classList.remove('just-added');
+                    this.updateAddToCartButtons();
+                }, 1500);
+            }
+
+            this.animateBadge();
+
+            // Open the cart drawer instead of showing toast
+            this.openDrawer();
+
+        } catch (error) {
+            this.showToast('error', 'Error', error.message || 'Failed to add item to cart.');
+            if (button) {
+                button.classList.remove('adding');
+                button.disabled = false;
             }
         }
     }
