@@ -2856,6 +2856,68 @@
     padding: 0 20px 60px;
 }
 
+/* Guide Action Buttons */
+.guide-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+}
+
+.guide-action-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 1px solid var(--border-color);
+    background: var(--card-bg);
+    color: var(--text-primary);
+}
+
+.guide-action-btn:hover {
+    background: var(--background-light);
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+.guide-action-btn i {
+    font-size: 0.85rem;
+}
+
+.guide-action-btn.btn-print {
+    background: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+.guide-action-btn.btn-print:hover {
+    background: var(--secondary-color);
+    border-color: var(--secondary-color);
+    color: white;
+}
+
+[data-theme="dark"] .guide-action-btn {
+    background: var(--card-bg);
+    border-color: var(--border-color);
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] .guide-action-btn:hover {
+    background: var(--background-light);
+}
+
+[data-theme="dark"] .guide-action-btn.btn-print {
+    background: var(--primary-color);
+    color: white;
+}
+
 .guide-content {
     background: white;
     border-radius: 12px;
