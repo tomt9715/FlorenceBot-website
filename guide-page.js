@@ -393,18 +393,17 @@ async function loadPurchasedContent(guideId, accessResponse) {
     // Store PDF URL for printing
     currentPdfUrl = downloadUrl;
 
-    // Show access badge and PDF viewer
-    contentElement.innerHTML = `
-        <div class="alert alert-success d-flex align-items-center mb-4" style="background: linear-gradient(135deg, #d1fae5, #a7f3d0); border: none; border-radius: 12px;">
-            <i class="fas fa-check-circle me-3" style="font-size: 1.5rem; color: #059669;"></i>
-            <div>
-                <h5 class="mb-1" style="color: #059669; font-weight: 600;">Full Access - Purchased</h5>
-                <p class="mb-0" style="font-size: 0.9rem; color: #047857;">
-                    You own this guide! ${accessResponse.access_type === 'subscription' ? '(via Premium Subscription)' : ''}
-                </p>
-            </div>
-        </div>
+    // Add owned badge to action buttons area
+    const actionsContainer = document.querySelector('.guide-actions');
+    if (actionsContainer) {
+        const ownedBadge = document.createElement('span');
+        ownedBadge.className = 'guide-owned-badge';
+        ownedBadge.innerHTML = `<i class="fas fa-check-circle"></i> ${accessResponse.access_type === 'subscription' ? 'Premium Access' : 'Owned'}`;
+        actionsContainer.appendChild(ownedBadge);
+    }
 
+    // Show PDF viewer
+    contentElement.innerHTML = `
         <div class="guide-pdf-container" style="background: var(--background-light); border-radius: 16px; padding: 24px; margin-bottom: 24px;">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 16px;">
                 <div>
