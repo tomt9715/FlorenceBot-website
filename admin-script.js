@@ -856,5 +856,4 @@ function closeConfirmModal() {
     document.getElementById('confirm-modal').classList.remove('active');
 }
 
-// API_URL constant (should match api-service.js)
-const API_URL = 'https://web-production-592c07.up.railway.app';
+// API_URL is defined in api-service.js which is loaded before this script
