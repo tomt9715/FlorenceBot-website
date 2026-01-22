@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - The Nursing Collective</title>
+    <meta name="robots" content="noindex, nofollow">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/images/apple-touch-icon.png">
+
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#667eea">
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/main.css?v=4.3.admin">
+    <link rel="stylesheet" href="css/components.css?v=4.3.admin">
+    <link rel="stylesheet" href="css/pages.css?v=4.3.admin">
+    <link rel="stylesheet" href="css/admin.css?v=4.3.admin">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Page Loader -->
+    <div class="page-loader" id="page-loader">
+        <div class="loader-spinner"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar admin-navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <a href="index.html">
+                    <img src="assets/images/the-nursing-collective-logo.png" alt="The Nursing Collective Logo" class="nav-logo">
+                </a>
+                <span class="admin-badge-nav"><i class="fas fa-crown"></i> Admin</span>
+            </div>
+            <div class="nav-links">
+                <a href="dashboard.html">User Dashboard</a>
+                <a href="admin.html" class="active">Admin</a>
+                <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+                    <i class="fas fa-sun light-icon"></i>
+                    <i class="fas fa-moon dark-icon"></i>
+                </button>
+                <div class="user-menu">
+                    <button class="user-avatar" id="user-menu-btn" title="Account menu">
+                        <i class="fas fa-user-circle"></i>
+                    </button>
+                    <div class="user-dropdown" id="user-dropdown">
+                        <div class="user-dropdown-header">
+                            <div class="user-avatar-large">
+                                <i class="fas fa-user-circle"></i>
+                            </div>
+                            <div class="user-info">
+                                <span class="user-name" id="dropdown-user-name">Admin</span>
+                                <span class="user-email" id="dropdown-user-email">Loading...</span>
+                            </div>
+                        </div>
+                        <div class="user-dropdown-divider"></div>
+                        <a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> User Dashboard</a>
+                        <a href="settings.html"><i class="fas fa-cog"></i> Account Settings</a>
+                        <a href="#logout" id="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                    </div>
+                </div>
+            </div>
+            <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle navigation menu" aria-expanded="false">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Admin Dashboard -->
+    <section class="admin-dashboard">
+        <div class="container">
+            <!-- Admin Header -->
+            <div class="admin-header">
+                <h1><i class="fas fa-crown"></i> Admin Dashboard</h1>
+                <p class="admin-subtitle">Manage users, guides, and monitor system activity</p>
+            </div>
+
+            <!-- Admin Navigation Tabs -->
+            <div class="admin-tabs">
+                <button class="admin-tab active" data-tab="overview">
+                    <i class="fas fa-chart-line"></i> Overview
+                </button>
+                <button class="admin-tab" data-tab="users">
+                    <i class="fas fa-users"></i> Users
+                </button>
+                <button class="admin-tab" data-tab="guides">
+                    <i class="fas fa-book"></i> Guides
+                </button>
+                <button class="admin-tab" data-tab="audit">
+                    <i class="fas fa-history"></i> Audit Log
+                </button>
+            </div>
+
+            <!-- Tab Content -->
+            <div class="admin-content">
+                <!-- Overview Tab -->
+                <div class="admin-tab-content active" id="tab-overview">
+                    <!-- Stats Cards -->
+                    <div class="admin-stats-grid">
+                        <div class="admin-stat-card">
+                            <div class="stat-icon"><i class="fas fa-users"></i></div>
+                            <div class="stat-info">
+                                <span class="stat-value" id="stat-total-users">-</span>
+                                <span class="stat-label">Total Users</span>
+                            </div>
+                        </div>
+                        <div class="admin-stat-card">
+                            <div class="stat-icon premium"><i class="fas fa-star"></i></div>
+                            <div class="stat-info">
+                                <span class="stat-value" id="stat-premium-users">-</span>
+                                <span class="stat-label">Premium Users</span>
+                            </div>
+                        </div>
+                        <div class="admin-stat-card">
+                            <div class="stat-icon success"><i class="fas fa-shopping-cart"></i></div>
+                            <div class="stat-info">
+                                <span class="stat-value" id="stat-stripe-purchases">-</span>
+                                <span class="stat-label">Stripe Purchases</span>
+                            </div>
+                        </div>
+                        <div class="admin-stat-card">
+                            <div class="stat-icon info"><i class="fas fa-gift"></i></div>
+                            <div class="stat-info">
+                                <span class="stat-value" id="stat-admin-grants">-</span>
+                                <span class="stat-label">Admin Grants</span>
+                            </div>
+                        </div>
+                        <div class="admin-stat-card">
+                            <div class="stat-icon"><i class="fas fa-user-plus"></i></div>
+                            <div class="stat-info">
+                                <span class="stat-value" id="stat-new-today">-</span>
+                                <span class="stat-label">New Today</span>
+                            </div>
+                        </div>
+                        <div class="admin-stat-card">
+                            <div class="stat-icon success"><i class="fas fa-dollar-sign"></i></div>
+                            <div class="stat-info">
+                                <span class="stat-value" id="stat-revenue-month">-</span>
+                                <span class="stat-label">Revenue This Month</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recent Activity -->
+                    <div class="admin-section">
+                        <h3><i class="fas fa-clock"></i> Recent Admin Activity</h3>
+                        <div class="activity-list" id="recent-activity">
+                            <div class="loading-spinner"><i class="fas fa-spinner fa-spin"></i> Loading...</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Users Tab -->
+                <div class="admin-tab-content" id="tab-users">
+                    <!-- User Search -->
+                    <div class="admin-search-bar">
+                        <div class="search-input-group">
+                            <i class="fas fa-search"></i>
+                            <input type="text" id="user-search" placeholder="Search by email address..." autocomplete="off">
+                            <button class="search-btn" id="user-search-btn">Search</button>
+                        </div>
+                    </div>
+
+                    <!-- User List -->
+                    <div class="admin-section">
+                        <div class="section-header">
+                            <h3><i class="fas fa-users"></i> Users</h3>
+                            <span class="user-count" id="user-count">0 users</span>
+                        </div>
+                        <div class="users-table-container">
+                            <table class="admin-table" id="users-table">
+                                <thead>
+                                    <tr>
+                                        <th>Email</th>
+                                        <th>Name</th>
+                                        <th>Guides</th>
+                                        <th>Status</th>
+                                        <th>Joined</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="users-table-body">
+                                    <tr><td colspan="6" class="loading-cell"><i class="fas fa-spinner fa-spin"></i> Loading users...</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- Pagination -->
+                        <div class="pagination-controls" id="users-pagination"></div>
+                    </div>
+                </div>
+
+                <!-- Guides Tab -->
+                <div class="admin-tab-content" id="tab-guides">
+                    <div class="admin-section">
+                        <div class="section-header">
+                            <h3><i class="fas fa-book"></i> Guide Statistics</h3>
+                        </div>
+                        <div class="guides-table-container">
+                            <table class="admin-table" id="guides-table">
+                                <thead>
+                                    <tr>
+                                        <th>Guide Name</th>
+                                        <th>Category</th>
+                                        <th>Price</th>
+                                        <th>Stripe Purchases</th>
+                                        <th>Admin Grants</th>
+                                        <th>Total Owners</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="guides-table-body">
+                                    <tr><td colspan="7" class="loading-cell"><i class="fas fa-spinner fa-spin"></i> Loading guides...</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Audit Log Tab -->
+                <div class="admin-tab-content" id="tab-audit">
+                    <!-- Audit Filters -->
+                    <div class="audit-filters">
+                        <div class="filter-group">
+                            <label>Action Type</label>
+                            <select id="audit-action-filter">
+                                <option value="">All Actions</option>
+                                <option value="grant_guide">Grant Guide</option>
+                                <option value="revoke_guide">Revoke Guide</option>
+                                <option value="restore_guide">Restore Guide</option>
+                                <option value="add_note">Add Note</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label>Target User</label>
+                            <input type="text" id="audit-user-filter" placeholder="User email...">
+                        </div>
+                        <div class="filter-group">
+                            <label>Date From</label>
+                            <input type="date" id="audit-date-from">
+                        </div>
+                        <div class="filter-group">
+                            <label>Date To</label>
+                            <input type="date" id="audit-date-to">
+                        </div>
+                        <button class="btn btn-primary" id="audit-filter-btn">
+                            <i class="fas fa-filter"></i> Apply Filters
+                        </button>
+                        <button class="btn btn-secondary" id="audit-export-btn">
+                            <i class="fas fa-download"></i> Export CSV
+                        </button>
+                    </div>
+
+                    <div class="admin-section">
+                        <div class="section-header">
+                            <h3><i class="fas fa-history"></i> Admin Actions</h3>
+                        </div>
+                        <div class="audit-table-container">
+                            <table class="admin-table" id="audit-table">
+                                <thead>
+                                    <tr>
+                                        <th>Timestamp</th>
+                                        <th>Admin</th>
+                                        <th>Action</th>
+                                        <th>Target User</th>
+                                        <th>Guide</th>
+                                        <th>Reason</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="audit-table-body">
+                                    <tr><td colspan="6" class="loading-cell"><i class="fas fa-spinner fa-spin"></i> Loading audit log...</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- Pagination -->
+                        <div class="pagination-controls" id="audit-pagination"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- User Detail Modal -->
+    <div class="modal-overlay" id="user-detail-modal">
+        <div class="modal-content user-detail-modal">
+            <div class="modal-header">
+                <h2><i class="fas fa-user"></i> <span id="modal-user-email">User Details</span></h2>
+                <button class="modal-close" onclick="closeUserDetailModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- User Info Section -->
+                <div class="user-detail-section">
+                    <h3><i class="fas fa-info-circle"></i> Account Information</h3>
+                    <div class="user-info-grid" id="user-info-grid">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+
+                <!-- Owned Guides Section -->
+                <div class="user-detail-section">
+                    <div class="section-header-inline">
+                        <h3><i class="fas fa-book"></i> Owned Guides (<span id="modal-guides-count">0</span>)</h3>
+                        <button class="btn btn-primary btn-sm" onclick="openAddGuideModal()">
+                            <i class="fas fa-plus"></i> Add Guide
+                        </button>
+                    </div>
+                    <div class="guides-list" id="user-guides-list">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+
+                <!-- Admin Notes Section -->
+                <div class="user-detail-section">
+                    <div class="section-header-inline">
+                        <h3><i class="fas fa-sticky-note"></i> Admin Notes</h3>
+                        <button class="btn btn-secondary btn-sm" onclick="toggleAddNoteForm()">
+                            <i class="fas fa-plus"></i> Add Note
+                        </button>
+                    </div>
+                    <div class="add-note-form" id="add-note-form" style="display: none;">
+                        <textarea id="new-note-text" placeholder="Enter note..." rows="3"></textarea>
+                        <div class="form-actions">
+                            <button class="btn btn-primary btn-sm" onclick="submitNote()">
+                                <i class="fas fa-save"></i> Save Note
+                            </button>
+                            <button class="btn btn-secondary btn-sm" onclick="toggleAddNoteForm()">Cancel</button>
+                        </div>
+                    </div>
+                    <div class="notes-list" id="user-notes-list">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Guide Modal -->
+    <div class="modal-overlay" id="add-guide-modal">
+        <div class="modal-content add-guide-modal">
+            <div class="modal-header">
+                <h2><i class="fas fa-plus-circle"></i> Add Guide to User</h2>
+                <button class="modal-close" onclick="closeAddGuideModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Grant access to a guide for <strong id="add-guide-user-email"></strong></p>
+                <div class="form-group">
+                    <label>Select Guide</label>
+                    <select id="add-guide-select" class="form-select">
+                        <option value="">Select a guide...</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Reason</label>
+                    <select id="add-guide-reason" class="form-select">
+                        <option value="promotional_giveaway">Promotional giveaway</option>
+                        <option value="refund_compensation">Refund compensation</option>
+                        <option value="contest_winner">Contest winner</option>
+                        <option value="support_resolution">Support resolution</option>
+                        <option value="complimentary">Complimentary</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Additional Notes (optional)</label>
+                    <textarea id="add-guide-notes" class="form-control" rows="2" placeholder="Any additional context..."></textarea>
+                </div>
+                <div class="form-actions">
+                    <button class="btn btn-primary" onclick="submitAddGuide()">
+                        <i class="fas fa-check"></i> Grant Access
+                    </button>
+                    <button class="btn btn-secondary" onclick="closeAddGuideModal()">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Guide Owners Modal -->
+    <div class="modal-overlay" id="guide-owners-modal">
+        <div class="modal-content guide-owners-modal">
+            <div class="modal-header">
+                <h2><i class="fas fa-users"></i> <span id="guide-owners-title">Guide Owners</span></h2>
+                <button class="modal-close" onclick="closeGuideOwnersModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="guide-owners-stats">
+                    <span class="stat"><i class="fas fa-users"></i> Total: <strong id="guide-owners-total">0</strong></span>
+                    <span class="stat"><i class="fas fa-check-circle"></i> Active: <strong id="guide-owners-active">0</strong></span>
+                </div>
+                <button class="btn btn-primary" onclick="openBulkGrantModal()">
+                    <i class="fas fa-users-cog"></i> Bulk Grant
+                </button>
+                <div class="owners-table-container">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>User Email</th>
+                                <th>Source</th>
+                                <th>Granted By</th>
+                                <th>Date</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="guide-owners-body">
+                            <!-- Populated by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bulk Grant Modal -->
+    <div class="modal-overlay" id="bulk-grant-modal">
+        <div class="modal-content bulk-grant-modal">
+            <div class="modal-header">
+                <h2><i class="fas fa-users-cog"></i> Bulk Grant Guide</h2>
+                <button class="modal-close" onclick="closeBulkGrantModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Grant <strong id="bulk-grant-guide-name"></strong> to multiple users at once.</p>
+                <div class="form-group">
+                    <label>Email Addresses (one per line or comma-separated)</label>
+                    <textarea id="bulk-grant-emails" class="form-control" rows="6" placeholder="user1@example.com&#10;user2@example.com&#10;user3@example.com"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Reason</label>
+                    <select id="bulk-grant-reason" class="form-select">
+                        <option value="promotional_giveaway">Promotional giveaway</option>
+                        <option value="contest_winner">Contest winners</option>
+                        <option value="support_resolution">Support resolution</option>
+                        <option value="complimentary">Complimentary</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Notes (optional)</label>
+                    <input type="text" id="bulk-grant-notes" class="form-control" placeholder="Additional context...">
+                </div>
+                <div class="form-actions">
+                    <button class="btn btn-primary" onclick="submitBulkGrant()">
+                        <i class="fas fa-check"></i> Grant to All
+                    </button>
+                    <button class="btn btn-secondary" onclick="closeBulkGrantModal()">Cancel</button>
+                </div>
+                <div class="bulk-grant-results" id="bulk-grant-results" style="display: none;">
+                    <!-- Results populated by JS -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Confirm Modal -->
+    <div class="modal-overlay" id="confirm-modal">
+        <div class="modal-content confirm-modal">
+            <div class="modal-header">
+                <h2 id="confirm-title">Confirm Action</h2>
+            </div>
+            <div class="modal-body">
+                <p id="confirm-message">Are you sure?</p>
+                <div class="form-actions">
+                    <button class="btn btn-danger" id="confirm-yes-btn">Yes, Proceed</button>
+                    <button class="btn btn-secondary" onclick="closeConfirmModal()">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <!-- Footer -->
+    <footer class="footer admin-footer">
+        <div class="container">
+            <p>&copy; 2026 The Nursing Collective - Admin Dashboard</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom Modal System -->
+    <script src="modal.js"></script>
+
+    <!-- Dark Mode Manager -->
+    <script src="dark-mode.js"></script>
+
+    <!-- API Service Layer -->
+    <script src="api-service.js"></script>
+
+    <!-- Admin Dashboard Script -->
+    <script src="admin-script.js?v=1.0.0"></script>
+</body>
+</html>
