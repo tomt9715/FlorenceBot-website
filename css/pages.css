@@ -2827,17 +2827,51 @@
 .guide-page {
     min-height: 100vh;
     background: var(--background-light);
-    padding-top: 70px;
 }
 
 [data-theme="dark"] .guide-page {
     background: var(--background-dark, #111827);
 }
 
+/* Breadcrumb - needs padding for fixed navbar */
+.guide-breadcrumb {
+    padding-top: 80px;
+    background: linear-gradient(135deg, #2E86AB 0%, #236b8a 100%);
+}
+
+.guide-breadcrumb .container {
+    padding: 12px 20px;
+}
+
+.breadcrumb-nav {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+}
+
+.breadcrumb-nav a {
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.breadcrumb-nav a:hover {
+    color: white;
+}
+
+.breadcrumb-separator {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.breadcrumb-nav span:last-child {
+    color: rgba(255, 255, 255, 0.9);
+}
+
 .guide-header {
     background: linear-gradient(135deg, #2E86AB 0%, #236b8a 100%);
     color: white;
-    padding: 80px 0 40px;
+    padding: 30px 0 40px;
     margin-bottom: 40px;
 }
 
