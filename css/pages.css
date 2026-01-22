@@ -3156,6 +3156,8 @@
     border: 2px solid transparent;
     transition: all 0.3s ease;
     position: relative;
+    display: flex;
+    flex-direction: column;
 }
 
 .related-guide-card:hover {
@@ -3234,6 +3236,9 @@
 /* Card Body */
 .related-guide-body {
     padding: 16px 20px 20px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
 }
 
 .related-guide-title-row {
@@ -3268,7 +3273,7 @@
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
-    min-height: 42px;
+    flex: 1;
 }
 
 /* Card Actions */
