@@ -1,0 +1,42 @@
+# Dependencies
+node_modules/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Build
+dist/
+build/
+.cache/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+
+# Python (for pdf_generators)
+__pycache__/
+*.py[cod]
+venv/
+.venv/
+
+# Backup files
+*.bak
+*.old
+*.tmp
+*-backup/
+css-backup/
+
+# Local files
+*.local
