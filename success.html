@@ -654,6 +654,26 @@
                 }).join('');
             }
 
+            // Check if there's a bundle discount
+            const hasDiscount = order.discount_amount && parseFloat(order.discount_amount) > 0;
+            const originalSubtotal = order.subtotal ? parseFloat(order.subtotal) : totalPrice;
+            const discountAmount = hasDiscount ? parseFloat(order.discount_amount) : 0;
+
+            // Build discount section HTML
+            let discountHtml = '';
+            if (hasDiscount) {
+                discountHtml = `
+                    <div class="order-item" style="color: var(--text-secondary);">
+                        <span class="order-item-label">Original Price</span>
+                        <span class="order-item-value" style="text-decoration: line-through; color: var(--text-secondary);">$${originalSubtotal.toFixed(2)}</span>
+                    </div>
+                    <div class="order-item" style="color: #10b981;">
+                        <span class="order-item-label"><i class="fas fa-tag" style="margin-right: 6px;"></i>Bundle Discount</span>
+                        <span class="order-item-value" style="color: #10b981; font-weight: 600;">-$${discountAmount.toFixed(2)}</span>
+                    </div>
+                `;
+            }
+
             // Determine message based on item count
             const itemCount = order.items ? order.items.length : 1;
             const guideText = itemCount === 1 ? 'Your study guide is' : 'Your study guides are';
@@ -706,6 +726,17 @@
                 `;
             }
 
+            // Build savings message if discount applied
+            let savingsMessageHtml = '';
+            if (hasDiscount) {
+                savingsMessageHtml = `
+                    <div style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(16, 185, 129, 0.05)); border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 8px; padding: 12px; margin-bottom: 16px; text-align: center;">
+                        <i class="fas fa-check-circle" style="color: #10b981; margin-right: 6px;"></i>
+                        <span style="color: #10b981; font-weight: 600;">You saved $${discountAmount.toFixed(2)} with our bundle deal!</span>
+                    </div>
+                `;
+            }
+
             container.innerHTML = `
                 <div class="success-icon">
                     <i class="fas fa-check"></i>
@@ -715,6 +746,8 @@
                     Thank you for your purchase! ${guideText} now available.
                 </p>
 
+                ${savingsMessageHtml}
+
                 <div class="order-details">
                     <h3>Order Details</h3>
                     <div class="order-item">
@@ -722,6 +755,7 @@
                         <span class="order-item-value">${escapeHtml(order.order_number)}</span>
                     </div>
                     ${itemsHtml}
+                    ${discountHtml}
                     <div class="order-item" style="border-top: 2px solid var(--border-color); padding-top: 12px; margin-top: 8px;">
                         <span class="order-item-label" style="font-weight: 600;">Total Paid</span>
                         <span class="order-item-value" style="font-size: 1.1rem;">$${parseFloat(order.total).toFixed(2)}</span>
