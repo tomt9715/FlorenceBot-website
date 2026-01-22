@@ -1,6 +1,9 @@
 // Guide Page JavaScript - Loads and renders content with access control
 // Uses backend API for access verification
 
+// Store current PDF URL for printing
+let currentPdfUrl = null;
+
 // Get guide ID from URL parameter
 function getGuideId() {
     const urlParams = new URLSearchParams(window.location.search);
@@ -172,7 +175,12 @@ async function loadLegacyGuide(guideId, metadata) {
 
     // Setup print button
     document.getElementById('btn-print').addEventListener('click', () => {
-        window.print();
+        if (currentPdfUrl) {
+            // Open PDF in new tab for printing
+            window.open(currentPdfUrl, '_blank');
+        } else {
+            window.print();
+        }
     });
 
     // Hide loader
@@ -230,7 +238,12 @@ async function loadPremiumGuide(guideId) {
 
     // Setup print button
     document.getElementById('btn-print').addEventListener('click', () => {
-        window.print();
+        if (currentPdfUrl) {
+            // Open PDF in new tab for printing
+            window.open(currentPdfUrl, '_blank');
+        } else {
+            window.print();
+        }
     });
 
     hideLoader();
@@ -376,6 +389,9 @@ async function loadPurchasedContent(guideId, accessResponse) {
     const guide = contentResponse.guide;
     const downloadUrl = guide.content_url;
     const expiresIn = guide.expires_in_minutes || 60;
+
+    // Store PDF URL for printing
+    currentPdfUrl = downloadUrl;
 
     // Show access badge and PDF viewer
     contentElement.innerHTML = `
