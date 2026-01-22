@@ -361,54 +361,50 @@ class CartUI {
         if (!progressSection) return;
 
         const currentCount = discountInfo.individualGuideCount;
-        const tiers = CartManager.BULK_DISCOUNT_TIERS.slice().reverse(); // 3, 5, 10
+        // Tiers ordered highest to lowest: [10, 5, 3]
+        const tiers = CartManager.BULK_DISCOUNT_TIERS;
 
         let html = '';
 
-        // Find which tier we're working towards or have achieved
-        let previousTierQty = 0;
-
+        // Find which tier the user has achieved (check from highest to lowest)
         for (let i = 0; i < tiers.length; i++) {
             const tier = tiers[i];
-            const nextTier = tiers[i + 1];
+            const nextHigherTier = tiers[i - 1]; // The tier above this one (more items)
 
             if (currentCount >= tier.min_qty) {
-                // Already achieved this tier
-                if (nextTier) {
-                    // Show current tier unlocked + progress to next tier
-                    const progress = ((currentCount - tier.min_qty) / (nextTier.min_qty - tier.min_qty)) * 100;
-                    const remaining = nextTier.min_qty - currentCount;
+                // User has achieved this tier!
+                if (nextHigherTier) {
+                    // Show current tier unlocked + progress to next higher tier
+                    const progress = ((currentCount - tier.min_qty) / (nextHigherTier.min_qty - tier.min_qty)) * 100;
+                    const remaining = nextHigherTier.min_qty - currentCount;
                     html = this.createProgressBarWithCurrentTier(
                         Math.min(progress, 100),
                         remaining,
-                        nextTier.min_qty,
-                        nextTier.savings_label,
+                        nextHigherTier.min_qty,
+                        nextHigherTier.savings_label,
                         tier.min_qty,
                         tier.savings_label
                     );
                 } else {
-                    // At max tier - show completed state
+                    // At max tier (10-pack) - show completed state
                     html = this.createCompletedBar();
                 }
                 break;
-            } else if (currentCount > previousTierQty || i === 0) {
-                // Working towards this tier
-                const startFrom = previousTierQty;
-                const progress = startFrom === 0
-                    ? (currentCount / tier.min_qty) * 100
-                    : ((currentCount - startFrom) / (tier.min_qty - startFrom)) * 100;
-                const remaining = tier.min_qty - currentCount;
-                html = this.createProgressBar(
-                    Math.max(0, Math.min(progress, 100)),
-                    remaining,
-                    tier.min_qty,
-                    tier.savings_label,
-                    currentCount === 0
-                );
-                break;
             }
+        }
 
-            previousTierQty = tier.min_qty;
+        // If no tier achieved yet, show progress towards lowest tier (3-pack)
+        if (!html && currentCount >= 0) {
+            const lowestTier = tiers[tiers.length - 1]; // 3-pack
+            const remaining = lowestTier.min_qty - currentCount;
+            const progress = (currentCount / lowestTier.min_qty) * 100;
+            html = this.createProgressBar(
+                Math.max(0, Math.min(progress, 100)),
+                remaining,
+                lowestTier.min_qty,
+                lowestTier.savings_label,
+                currentCount === 0
+            );
         }
 
         progressSection.innerHTML = html;
