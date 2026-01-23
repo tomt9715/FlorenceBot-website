@@ -15,9 +15,9 @@
 
 .checkout-container {
     display: grid;
-    grid-template-columns: 1fr 1.2fr;
+    grid-template-columns: 1fr 1.4fr;
     gap: 40px;
-    max-width: 1000px;
+    max-width: 1200px;
     margin: 0 auto;
 }
 
@@ -192,11 +192,58 @@
     font-size: 0.9rem;
 }
 
-/* Promo code in order summary (inside order-total, between subtotal and total) */
-.order-total .promo-code-container {
+/* Promo code in order summary (inline style) */
+.promo-code-inline {
     margin: 16px 0;
     padding: 0;
-    border-top: none;
+}
+
+.promo-input-inline {
+    display: flex;
+    gap: 8px;
+}
+
+.promo-input-inline input {
+    flex: 1;
+    padding: 10px 12px;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 0.9rem;
+    background: var(--background-white);
+    color: var(--text-primary);
+    text-transform: uppercase;
+}
+
+.promo-input-inline input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(46, 134, 171, 0.15);
+}
+
+.promo-input-inline input::placeholder {
+    text-transform: none;
+    color: var(--text-light);
+}
+
+.promo-input-inline button {
+    padding: 10px 16px;
+    white-space: nowrap;
+}
+
+.promo-applied-inline {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 12px;
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(16, 185, 129, 0.05));
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    border-radius: 8px;
+}
+
+[data-theme="dark"] .promo-input-inline input {
+    background: var(--background-light);
+    border-color: var(--border-color);
+    color: var(--text-primary);
 }
 
 /* ============================================

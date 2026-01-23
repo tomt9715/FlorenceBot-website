@@ -929,23 +929,11 @@ function toggleEmailEdit() {
  * Initialize promo code functionality
  */
 function initPromoCode() {
-    const promoToggle = document.getElementById('promo-toggle');
-    const promoInputContainer = document.getElementById('promo-input-container');
     const applyPromoBtn = document.getElementById('apply-promo-btn');
     const removePromoBtn = document.getElementById('remove-promo-btn');
     const promoCodeInput = document.getElementById('promo-code');
 
-    if (!promoToggle) return;
-
-    // Toggle promo input visibility
-    promoToggle.addEventListener('click', () => {
-        const isHidden = promoInputContainer.style.display === 'none';
-        promoInputContainer.style.display = isHidden ? 'block' : 'none';
-        promoToggle.querySelector('.promo-toggle-icon').style.transform = isHidden ? 'rotate(180deg)' : 'rotate(0deg)';
-        if (isHidden) {
-            promoCodeInput.focus();
-        }
-    });
+    if (!applyPromoBtn || !promoCodeInput) return;
 
     // Apply promo code
     applyPromoBtn.addEventListener('click', () => validateAndApplyPromo());
@@ -959,7 +947,9 @@ function initPromoCode() {
     });
 
     // Remove promo code
-    removePromoBtn.addEventListener('click', () => removePromoCode());
+    if (removePromoBtn) {
+        removePromoBtn.addEventListener('click', () => removePromoCode());
+    }
 }
 
 /**
@@ -1045,15 +1035,14 @@ function showPromoMessage(message, type) {
  * Apply promo success - update UI
  */
 function applyPromoSuccess() {
-    const promoInputContainer = document.getElementById('promo-input-container');
+    const promoSection = document.getElementById('promo-section');
     const promoApplied = document.getElementById('promo-applied');
     const promoAppliedText = document.getElementById('promo-applied-text');
-    const promoToggle = document.getElementById('promo-toggle');
+    const promoInputInline = promoSection ? promoSection.querySelector('.promo-input-inline') : null;
 
     // Hide input, show applied badge
-    promoInputContainer.style.display = 'none';
-    promoApplied.style.display = 'flex';
-    promoToggle.style.display = 'none';
+    if (promoInputInline) promoInputInline.style.display = 'none';
+    if (promoApplied) promoApplied.style.display = 'flex';
 
     // Format the discount text
     let discountText = appliedPromo.code;
@@ -1062,16 +1051,16 @@ function applyPromoSuccess() {
     } else {
         discountText += ` ($${appliedPromo.discount_amount.toFixed(2)} off)`;
     }
-    promoAppliedText.textContent = discountText;
+    if (promoAppliedText) promoAppliedText.textContent = discountText;
 }
 
 /**
  * Remove promo code
  */
 async function removePromoCode() {
-    const promoInputContainer = document.getElementById('promo-input-container');
+    const promoSection = document.getElementById('promo-section');
     const promoApplied = document.getElementById('promo-applied');
-    const promoToggle = document.getElementById('promo-toggle');
+    const promoInputInline = promoSection ? promoSection.querySelector('.promo-input-inline') : null;
     const promoCodeInput = document.getElementById('promo-code');
     const promoMessage = document.getElementById('promo-message');
 
@@ -1081,13 +1070,13 @@ async function removePromoCode() {
     promoDiscountType = null;
 
     // Reset UI
-    promoApplied.style.display = 'none';
-    promoToggle.style.display = 'flex';
-    promoInputContainer.style.display = 'none';
-    promoToggle.querySelector('.promo-toggle-icon').style.transform = 'rotate(0deg)';
-    promoCodeInput.value = '';
-    promoMessage.textContent = '';
-    promoMessage.className = 'promo-message';
+    if (promoApplied) promoApplied.style.display = 'none';
+    if (promoInputInline) promoInputInline.style.display = 'flex';
+    if (promoCodeInput) promoCodeInput.value = '';
+    if (promoMessage) {
+        promoMessage.textContent = '';
+        promoMessage.className = 'promo-message';
+    }
 
     // Update order totals
     updateOrderTotalsWithPromo();
