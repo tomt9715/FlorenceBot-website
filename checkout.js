@@ -296,7 +296,8 @@ function displayCartItems() {
         // Use image for individual guides, Font Awesome icon for packages
         let iconHtml;
         if (iconPath) {
-            iconHtml = `<img src="${iconPath}" alt="${escapeHtml(item.product_name)}" style="width: 100%; height: 100%; object-fit: contain;">`;
+            // Always try to load icon, with fallback to Font Awesome on error
+            iconHtml = `<img src="${iconPath}" alt="${escapeHtml(item.product_name)}" style="width: 100%; height: 100%; object-fit: contain;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"><i class="fas fa-file-medical" style="display: none; color: var(--primary-color); font-size: 1.2rem; width: 100%; height: 100%; align-items: center; justify-content: center;"></i>`;
         } else {
             const iconClass = getPackageIcon(item.product_type);
             iconHtml = `<i class="${iconClass}" style="color: white; font-size: 1rem;"></i>`;
@@ -590,93 +591,18 @@ function getTypeLabel(type) {
 
 /**
  * Get product icon image path based on product ID
- * Maps product IDs to their corresponding icon images in assets/images/guide-icons/
+ * For individual guides, use the product_id directly as the filename
+ * Icon files should be named to match product IDs in assets/images/guide-icons/
  */
 function getProductIconPath(productId, productType) {
-    // For packages, use a generic package icon (Font Awesome)
+    // For packages, use Font Awesome icon instead
     if (productType === 'lite-package' || productType === 'full-package') {
-        return null; // Will use Font Awesome icon instead
+        return null;
     }
 
-    // Map product IDs to their icon file names
-    // Most product IDs match the file name directly, but some need mapping
-    const iconMap = {
-        'heart-failure': 'heart-failure',
-        'myocardial-infarction': 'heart-attack',
-        'arrhythmias': 'arrhythmias',
-        'hypertension': 'hypertension',
-        'cad': 'cad',
-        'coronary-artery-disease': 'cad',
-        'pvd': 'pad',
-        'peripheral-vascular-disease': 'pad',
-        'copd': 'copd',
-        'asthma': 'asthma',
-        'pneumonia': 'pneumonia',
-        'oxygen-therapy': 'oxygen',
-        'tuberculosis': 'tb',
-        'chest-tubes': 'chest',
-        'type-1-diabetes': 'type-1',
-        'type-2-diabetes': 'type-2',
-        'diabetes-type-1': 'type-1',
-        'diabetes-type-2': 'type-2',
-        'thyroid': 'thyroid',
-        'thyroid-disorders': 'thyroid',
-        'adrenal': 'adrenal',
-        'pituitary': 'pituitary',
-        'aki': 'kidney-acute',
-        'acute-kidney-injury': 'kidney-acute',
-        'ckd': 'kidney-disease',
-        'chronic-kidney-disease': 'kidney-disease',
-        'dialysis': 'kidney-dialysis',
-        'uti': 'urinary-tract-infection',
-        'urinary-tract-infection': 'urinary-tract-infection',
-        'liver': 'liver',
-        'hepatic': 'liver',
-        'gi-bleeding': 'gi-bleeding',
-        'bowel-obstruction': 'bowel-obstruction',
-        'ibd': 'intestines',
-        'ulcer': 'ulcer',
-        'peptic-ulcer': 'ulcer',
-        'stroke': 'stroke',
-        'tbi': 'brain-injury',
-        'traumatic-brain-injury': 'brain-injury',
-        'seizure': 'seizure',
-        'seizures': 'seizure',
-        'epilepsy': 'seizure',
-        'spinal-cord-injury': 'spinal-cord-injury',
-        'meningitis': 'meningitis',
-        'parkinsons': 'shaking',
-        'fractures': 'broken-bone',
-        'fracture': 'broken-bone',
-        'osteoporosis': 'osteoporosis',
-        'amputation': 'amputation',
-        'joint-replacement': 'prothesis',
-        'hip-replacement': 'prothesis',
-        'arthritis': 'arthritis',
-        'electrolyte-imbalances': 'chemical',
-        'electrolytes': 'chemical',
-        'eating-disorders': 'eating-disorder',
-        'eating-disorder': 'eating-disorder',
-        // Package/category icons
-        'pediatric-nursing': 'pediatric-nursing',
-        'pediatrics': 'pediatric-nursing',
-        'nursing-fundamentals': 'nursing-fundamentals',
-        'fundamentals': 'nursing-fundamentals',
-        'med-surg': 'med-surge',
-        'medsurg': 'med-surge',
-        'medical-surgical': 'med-surge',
-        'pharmacology': 'pharmacology',
-        'maternal': 'maternal',
-        'maternal-nursing': 'maternal',
-        'ob': 'maternal',
-        'mental-health': 'mental-health-nursing',
-        'mental-health-nursing': 'mental-health-nursing',
-        'psych': 'mental-health-nursing'
-    };
-
-    // Try to find in map, otherwise use the product ID directly as file name
-    const iconFile = iconMap[productId] || productId;
-    return `assets/images/guide-icons/${iconFile}.webp`;
+    // For individual products, use product_id directly as the icon filename
+    // Icons should be named: {product_id}.webp (e.g., thyroid-disorders.webp, diabetes-type-2.webp)
+    return `assets/images/guide-icons/${productId}.webp`;
 }
 
 /**
