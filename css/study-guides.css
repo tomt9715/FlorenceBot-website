@@ -174,9 +174,11 @@
 }
 
 .guide-icon-img {
-    width: 60px;
-    height: 60px;
+    width: 60px !important;
+    height: 60px !important;
+    max-width: 60px !important;
     object-fit: contain;
+    flex-shrink: 0;
 }
 
 .preview-badges {
@@ -355,8 +357,9 @@
 }
 
 .coming-soon-card img {
-    width: 40px;
-    height: 40px;
+    width: 40px !important;
+    height: 40px !important;
+    max-width: 40px !important;
     object-fit: contain;
     flex-shrink: 0;
 }
