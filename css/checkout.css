@@ -590,10 +590,17 @@
         gap: 16px;
     }
 
-    .trust-badge {
-        min-width: 100%;
-        flex-direction: row;
-        justify-content: flex-start;
+    /* Keep horizontal badges centered on mobile */
+    .trust-badges.trust-badges-horizontal {
+        flex-direction: row !important;
+        justify-content: center !important;
+        gap: 24px !important;
+    }
+
+    .trust-badges.trust-badges-horizontal .trust-badge {
+        min-width: auto !important;
+        flex-direction: column !important;
+        text-align: center !important;
     }
 }
 

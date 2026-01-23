@@ -283,10 +283,11 @@ function displayCartItems() {
         const typeLabel = getTypeLabel(item.product_type);
         const quantity = item.quantity || 1;
         const itemTotal = parseFloat(item.price) * quantity;
+        const iconClass = getProductIcon(item.product_type);
         html += `
             <div class="checkout-item">
                 <div class="checkout-item-icon">
-                    <i class="fas fa-file-medical"></i>
+                    <i class="${iconClass}"></i>
                 </div>
                 <div class="checkout-item-details">
                     <div class="checkout-item-name">${escapeHtml(item.product_name)}</div>
@@ -487,6 +488,18 @@ function getTypeLabel(type) {
         'full-package': 'Full Package'
     };
     return labels[type] || type || 'Study Guide';
+}
+
+/**
+ * Get icon class based on product type
+ */
+function getProductIcon(type) {
+    const icons = {
+        'individual': 'fas fa-file-alt',
+        'lite-package': 'fas fa-layer-group',
+        'full-package': 'fas fa-box-open'
+    };
+    return icons[type] || 'fas fa-file-alt';
 }
 
 /**
