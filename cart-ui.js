@@ -229,8 +229,14 @@ class CartUI {
                 subtotalEl.textContent = `$${discountInfo.originalSubtotal.toFixed(2)}`;
             }
 
-            // Render discount progress bars
-            this.renderProgressBars(discountInfo);
+            // Render discount progress bars (only if no packages in cart)
+            if (!discountInfo.hasPackage) {
+                this.renderProgressBars(discountInfo);
+            } else {
+                // Clear progress section when packages are in cart
+                const progressSection = document.getElementById('cart-progress-section');
+                if (progressSection) progressSection.innerHTML = '';
+            }
 
             checkoutBtn.disabled = false;
 

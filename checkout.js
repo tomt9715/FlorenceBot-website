@@ -308,8 +308,8 @@ function updateOrderTotals(discountInfo) {
                 </span>
             </div>
         `;
-    } else if (discountInfo.nextTierInfo && discountInfo.individualGuideCount > 0) {
-        // Show progress bar for users close to a discount
+    } else if (discountInfo.nextTierInfo && discountInfo.individualGuideCount > 0 && !discountInfo.hasPackage) {
+        // Show progress bar for users close to a discount (only if no packages in cart)
         const tier = discountInfo.nextTierInfo.tier;
         const remaining = discountInfo.nextTierInfo.guidesNeeded;
         const progress = (discountInfo.individualGuideCount / tier.min_qty) * 100;

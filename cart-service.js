@@ -206,6 +206,7 @@ class CartManager {
         // Count individual guides (by total quantity)
         let individualGuideCount = 0;
         let otherItemsTotal = 0;
+        let hasPackage = false;
 
         for (const item of items) {
             const quantity = item.quantity || 1;
@@ -213,6 +214,10 @@ class CartManager {
                 individualGuideCount += quantity;
             } else {
                 otherItemsTotal += (parseFloat(item.price) || 0) * quantity;
+                // Check if this is a package (lite or full)
+                if (item.product_type === 'lite-package' || item.product_type === 'full-package') {
+                    hasPackage = true;
+                }
             }
         }
 
@@ -226,6 +231,7 @@ class CartManager {
             discountedSubtotal: bulkDiscount.discountedTotal + otherItemsTotal,
             totalDiscount: bulkDiscount.discountAmount,
             hasDiscount: bulkDiscount.discountAmount > 0,
+            hasPackage,
             nextTierInfo: this.getNextTierInfo(individualGuideCount)
         };
     }
