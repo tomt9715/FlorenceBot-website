@@ -12,6 +12,7 @@
     gap: 40px;
     max-width: 1400px;
     margin: 0 auto;
+    align-items: start;
 }
 
 /* ============================================
@@ -24,9 +25,12 @@
     padding: 24px;
     height: fit-content;
     position: sticky;
-    top: 100px;
+    top: 110px;
+    align-self: flex-start;
     box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
     border: 1px solid var(--border-color);
+    max-height: calc(100vh - 130px);
+    overflow-y: auto;
 }
 
 .sidebar-section {
