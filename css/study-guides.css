@@ -783,12 +783,40 @@
     border-radius: 12px;
 }
 
+/* Fix for View Pricing button (btn-light) */
+.premium-buttons .btn-light::before {
+    display: none !important;
+}
+
 .premium-buttons .btn-light {
-    color: var(--primary-color);
+    color: var(--primary-color) !important;
+    background: white !important;
+    border: 2px solid white !important;
+}
+
+.premium-buttons .btn-light:hover,
+.premium-buttons .btn-light:focus {
+    color: white !important;
+    background: rgba(255, 255, 255, 0.15) !important;
+    border: 2px solid white !important;
+}
+
+/* Fix for Browse Store button (btn-outline-light) */
+.premium-buttons .btn-outline-light::before {
+    display: none !important;
 }
 
 .premium-buttons .btn-outline-light {
-    border-width: 2px;
+    color: white !important;
+    background: transparent !important;
+    border: 2px solid white !important;
+}
+
+.premium-buttons .btn-outline-light:hover,
+.premium-buttons .btn-outline-light:focus {
+    color: var(--primary-color) !important;
+    background: white !important;
+    border: 2px solid white !important;
 }
 
 .premium-guarantee {
