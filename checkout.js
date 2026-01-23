@@ -1001,10 +1001,10 @@ async function validateAndApplyPromo() {
             code: promoCode,
             promo_id: data.promo_id,
             coupon_id: data.coupon_id,
-            name: data.coupon_name,
+            name: data.name,
             discount_type: data.discount_type,
-            discount_value: data.discount_value,
-            discount_amount: data.discount_amount / 100 // Convert from cents
+            discount_value: data.percent_off || data.amount_off,
+            discount_amount: data.discount_amount // Already in dollars from backend
         };
         promoDiscount = appliedPromo.discount_amount;
         promoDiscountType = data.discount_type;
