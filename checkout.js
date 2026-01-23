@@ -675,7 +675,11 @@ async function setupStripeElements() {
             paymentElementComplete = event.complete;
             if (event.complete) {
                 paymentWrapper.classList.add('complete');
-                if (paymentStatusIndicator) paymentStatusIndicator.style.display = 'flex';
+                // Only show "Payment method ready" indicator for card payments
+                const isCardPayment = event.value?.type === 'card';
+                if (paymentStatusIndicator) {
+                    paymentStatusIndicator.style.display = isCardPayment ? 'flex' : 'none';
+                }
             } else {
                 paymentWrapper.classList.remove('complete');
                 if (paymentStatusIndicator) paymentStatusIndicator.style.display = 'none';
@@ -1406,7 +1410,11 @@ async function recreatePaymentIntentWithPromo() {
                 paymentElementComplete = event.complete;
                 if (event.complete) {
                     paymentWrapper.classList.add('complete');
-                    if (paymentStatusIndicator) paymentStatusIndicator.style.display = 'flex';
+                    // Only show "Payment method ready" indicator for card payments
+                    const isCardPayment = event.value?.type === 'card';
+                    if (paymentStatusIndicator) {
+                        paymentStatusIndicator.style.display = isCardPayment ? 'flex' : 'none';
+                    }
                 } else {
                     paymentWrapper.classList.remove('complete');
                     if (paymentStatusIndicator) paymentStatusIndicator.style.display = 'none';
