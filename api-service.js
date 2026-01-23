@@ -115,10 +115,20 @@ async function refreshToken() {
     }
 }
 
+// Flag to prevent multiple logout redirects
+let isLoggingOut = false;
+
 /**
  * Logout function with cross-tab synchronization
  */
 function performLogout() {
+    // Prevent redirect loop
+    if (isLoggingOut) {
+        console.log('Logout already in progress');
+        return;
+    }
+    isLoggingOut = true;
+
     // Clear all auth data
     localStorage.removeItem('accessToken');
     localStorage.removeItem('refreshToken');
