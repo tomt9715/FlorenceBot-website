@@ -12,13 +12,15 @@ const AUTH_API_URL = 'https://api.thenursingcollective.pro';
 
 // Global state
 let stripe = null;
-let cardElement = null;
+let elements = null;
+let paymentElement = null;
 let cartItems = [];
 let cartSubtotal = 0;
 let isUserAuthenticated = false;
 let singleProductMode = false;
 let currentProduct = null;
 let clientSecret = null;
+let paymentElementComplete = false;
 
 // Category display names
 const CATEGORY_NAMES = {
@@ -600,11 +602,12 @@ function getPackageIcon(productType) {
 }
 
 /**
- * Setup Stripe Elements with CardElement
+ * Setup Stripe Elements with Payment Element
+ * Supports Apple Pay, Google Pay, Link, and Cards
  */
 async function setupStripeElements() {
     const submitButton = document.getElementById('submit-button');
-    const cardErrorsEl = document.getElementById('card-errors');
+    const paymentMessageEl = document.getElementById('payment-message');
 
     try {
         // Create a PaymentIntent on the server
@@ -615,64 +618,83 @@ async function setupStripeElements() {
         const isDarkMode = document.documentElement.getAttribute('data-theme') === 'dark';
         const appearance = getStripeAppearance(isDarkMode);
 
-        const elements = stripe.elements({
+        elements = stripe.elements({
             clientSecret,
-            appearance
+            appearance,
+            loader: 'auto'
         });
 
-        // Create and mount the Card Element
-        cardElement = elements.create('card', {
-            style: getCardElementStyle(isDarkMode),
-            hidePostalCode: true // We collect postal code in our own form
+        // Create and mount the Payment Element
+        // This automatically shows Apple Pay, Google Pay, Link, and Cards
+        paymentElement = elements.create('payment', {
+            layout: {
+                type: 'tabs',
+                defaultCollapsed: false
+            },
+            // Pre-fill billing details from form
+            defaultValues: {
+                billingDetails: {
+                    name: document.getElementById('name')?.value || '',
+                    email: document.getElementById('email')?.value || '',
+                    address: {
+                        line1: document.getElementById('address')?.value || '',
+                        line2: document.getElementById('address2')?.value || '',
+                        city: document.getElementById('city')?.value || '',
+                        state: document.getElementById('state')?.value || '',
+                        postal_code: document.getElementById('zip')?.value || '',
+                        country: document.getElementById('country')?.value || 'US'
+                    }
+                }
+            }
         });
 
-        cardElement.mount('#card-element');
+        paymentElement.mount('#payment-element');
 
         // Get wrapper element for styling
-        const cardWrapper = document.getElementById('card-element-wrapper');
+        const paymentWrapper = document.getElementById('payment-element-wrapper');
+        const paymentStatusIndicator = document.getElementById('payment-status-indicator');
 
-        // Handle real-time validation errors
-        // Get card status indicator element
-        const cardStatusIndicator = document.getElementById('card-status-indicator');
-
-        cardElement.on('change', (event) => {
+        // Handle Payment Element events
+        paymentElement.on('change', (event) => {
             if (event.error) {
-                cardErrorsEl.textContent = event.error.message;
-                cardWrapper.classList.add('invalid');
-                cardWrapper.classList.remove('complete');
+                paymentMessageEl.textContent = event.error.message;
+                paymentWrapper.classList.add('invalid');
+                paymentWrapper.classList.remove('complete');
             } else {
-                cardErrorsEl.textContent = '';
-                cardWrapper.classList.remove('invalid');
+                paymentMessageEl.textContent = '';
+                paymentWrapper.classList.remove('invalid');
             }
 
-            // Update complete state and show/hide status indicator
+            // Update complete state
+            paymentElementComplete = event.complete;
             if (event.complete) {
-                cardWrapper.classList.add('complete');
-                if (cardStatusIndicator) cardStatusIndicator.style.display = 'flex';
+                paymentWrapper.classList.add('complete');
+                if (paymentStatusIndicator) paymentStatusIndicator.style.display = 'flex';
             } else {
-                cardWrapper.classList.remove('complete');
-                if (cardStatusIndicator) cardStatusIndicator.style.display = 'none';
+                paymentWrapper.classList.remove('complete');
+                if (paymentStatusIndicator) paymentStatusIndicator.style.display = 'none';
             }
 
-            // Enable submit button when card is complete
+            // Enable submit button when payment element is complete
             updateSubmitButton(event.complete);
         });
 
-        // Handle focus/blur for styling
-        cardElement.on('focus', () => {
-            cardWrapper.classList.add('focused');
+        // Handle loading state
+        paymentElement.on('loaderstart', () => {
+            paymentWrapper.classList.add('loading');
         });
 
-        cardElement.on('blur', () => {
-            cardWrapper.classList.remove('focused');
+        paymentElement.on('ready', () => {
+            paymentWrapper.classList.remove('loading');
         });
 
-        // Listen for theme changes
+        // Listen for theme changes to update appearance
         const observer = new MutationObserver((mutations) => {
             mutations.forEach((mutation) => {
                 if (mutation.attributeName === 'data-theme') {
                     const newIsDarkMode = document.documentElement.getAttribute('data-theme') === 'dark';
-                    cardElement.update({ style: getCardElementStyle(newIsDarkMode) });
+                    const newAppearance = getStripeAppearance(newIsDarkMode);
+                    elements.update({ appearance: newAppearance });
                 }
             });
         });
@@ -771,14 +793,17 @@ function getCardElementStyle(isDarkMode) {
 /**
  * Update submit button state
  */
-function updateSubmitButton(cardComplete) {
+function updateSubmitButton(paymentComplete) {
     const submitButton = document.getElementById('submit-button');
     const form = document.getElementById('payment-form');
 
     // Check if form is valid (all required fields filled)
     const formValid = form.checkValidity();
 
-    submitButton.disabled = !(cardComplete && formValid);
+    // Update global state
+    paymentElementComplete = paymentComplete;
+
+    submitButton.disabled = !(paymentComplete && formValid);
 }
 
 /**
@@ -875,24 +900,29 @@ async function handleSubmit(event) {
     spinner.style.display = 'inline-block';
 
     try {
-        // Confirm the payment with Stripe
-        const { error, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
-            payment_method: {
-                card: cardElement,
-                billing_details: {
-                    name: name,
-                    email: email,
-                    address: {
-                        line1: address,
-                        line2: address2 || null,
-                        city: city,
-                        state: state,
-                        postal_code: zip,
-                        country: country
+        // Confirm the payment using the Payment Element
+        // This handles all payment methods: Cards, Apple Pay, Google Pay, Link
+        const { error, paymentIntent } = await stripe.confirmPayment({
+            elements,
+            confirmParams: {
+                return_url: `${window.location.origin}/success.html`,
+                receipt_email: email,
+                payment_method_data: {
+                    billing_details: {
+                        name: name,
+                        email: email,
+                        address: {
+                            line1: address,
+                            line2: address2 || null,
+                            city: city,
+                            state: state,
+                            postal_code: zip,
+                            country: country
+                        }
                     }
                 }
             },
-            receipt_email: email
+            redirect: 'if_required' // Only redirect if necessary (3D Secure, wallet auth, etc.)
         });
 
         if (error) {
@@ -901,6 +931,12 @@ async function handleSubmit(event) {
                 showError(error.message);
             } else {
                 showError('An unexpected error occurred. Please try again.');
+            }
+
+            // Also show in payment message area
+            const paymentMessageEl = document.getElementById('payment-message');
+            if (paymentMessageEl) {
+                paymentMessageEl.textContent = error.message;
             }
 
             // Report payment errors
@@ -918,8 +954,8 @@ async function handleSubmit(event) {
             buttonIcon.style.display = 'inline-block';
             buttonIcon.className = 'fas fa-lock';
             spinner.style.display = 'none';
-        } else if (paymentIntent.status === 'succeeded') {
-            // Payment succeeded - redirect to success page
+        } else if (paymentIntent && paymentIntent.status === 'succeeded') {
+            // Payment succeeded without redirect - redirect to success page
             buttonText.textContent = 'Payment Successful!';
 
             // Clear cart
@@ -929,14 +965,20 @@ async function handleSubmit(event) {
 
             // Redirect to success page
             window.location.href = `success.html?payment_intent=${paymentIntent.id}`;
-        } else if (paymentIntent.status === 'requires_action') {
+        } else if (paymentIntent && paymentIntent.status === 'requires_action') {
             // 3D Secure or other authentication required
             // Stripe.js handles this automatically in most cases
             buttonText.textContent = 'Authenticating...';
+        } else if (paymentIntent && paymentIntent.status === 'processing') {
+            // Some payment methods (like bank transfers) take time
+            buttonText.textContent = 'Processing...';
+            // Redirect to success page to show pending state
+            window.location.href = `success.html?payment_intent=${paymentIntent.id}`;
         } else {
-            // Unexpected status
+            // Unexpected status or redirect happened
             showError('Payment processing. Please wait...');
         }
+        // Note: If redirect happened, user is taken to return_url automatically
 
     } catch (error) {
         console.error('Payment error:', error);
@@ -1302,58 +1344,77 @@ async function recreatePaymentIntentWithPromo() {
         clientSecret = paymentIntentData.clientSecret;
 
         // Update Stripe Elements with new client secret
-        if (cardElement) {
+        if (paymentElement) {
             // We need to destroy and recreate Elements with new client secret
-            cardElement.destroy();
-            cardElement = null;
+            paymentElement.destroy();
+            paymentElement = null;
+            elements = null;
 
             const isDarkMode = document.documentElement.getAttribute('data-theme') === 'dark';
             const appearance = getStripeAppearance(isDarkMode);
 
-            const elements = stripe.elements({
+            elements = stripe.elements({
                 clientSecret,
-                appearance
+                appearance,
+                loader: 'auto'
             });
 
-            cardElement = elements.create('card', {
-                style: getCardElementStyle(isDarkMode),
-                hidePostalCode: true
+            paymentElement = elements.create('payment', {
+                layout: {
+                    type: 'tabs',
+                    defaultCollapsed: false
+                },
+                defaultValues: {
+                    billingDetails: {
+                        name: document.getElementById('name')?.value || '',
+                        email: document.getElementById('email')?.value || '',
+                        address: {
+                            line1: document.getElementById('address')?.value || '',
+                            line2: document.getElementById('address2')?.value || '',
+                            city: document.getElementById('city')?.value || '',
+                            state: document.getElementById('state')?.value || '',
+                            postal_code: document.getElementById('zip')?.value || '',
+                            country: document.getElementById('country')?.value || 'US'
+                        }
+                    }
+                }
             });
 
-            cardElement.mount('#card-element');
+            paymentElement.mount('#payment-element');
 
             // Re-attach event listeners with wrapper styling
-            const cardWrapper = document.getElementById('card-element-wrapper');
-            const cardStatusIndicator = document.getElementById('card-status-indicator');
+            const paymentWrapper = document.getElementById('payment-element-wrapper');
+            const paymentStatusIndicator = document.getElementById('payment-status-indicator');
 
-            cardElement.on('change', (event) => {
-                const cardErrorsEl = document.getElementById('card-errors');
+            paymentElement.on('change', (event) => {
+                const paymentMessageEl = document.getElementById('payment-message');
                 if (event.error) {
-                    cardErrorsEl.textContent = event.error.message;
-                    cardWrapper.classList.add('invalid');
-                    cardWrapper.classList.remove('complete');
+                    paymentMessageEl.textContent = event.error.message;
+                    paymentWrapper.classList.add('invalid');
+                    paymentWrapper.classList.remove('complete');
                 } else {
-                    cardErrorsEl.textContent = '';
-                    cardWrapper.classList.remove('invalid');
+                    paymentMessageEl.textContent = '';
+                    paymentWrapper.classList.remove('invalid');
                 }
 
+                paymentElementComplete = event.complete;
                 if (event.complete) {
-                    cardWrapper.classList.add('complete');
-                    if (cardStatusIndicator) cardStatusIndicator.style.display = 'flex';
+                    paymentWrapper.classList.add('complete');
+                    if (paymentStatusIndicator) paymentStatusIndicator.style.display = 'flex';
                 } else {
-                    cardWrapper.classList.remove('complete');
-                    if (cardStatusIndicator) cardStatusIndicator.style.display = 'none';
+                    paymentWrapper.classList.remove('complete');
+                    if (paymentStatusIndicator) paymentStatusIndicator.style.display = 'none';
                 }
 
                 updateSubmitButton(event.complete);
             });
 
-            cardElement.on('focus', () => {
-                cardWrapper.classList.add('focused');
+            paymentElement.on('loaderstart', () => {
+                paymentWrapper.classList.add('loading');
             });
 
-            cardElement.on('blur', () => {
-                cardWrapper.classList.remove('focused');
+            paymentElement.on('ready', () => {
+                paymentWrapper.classList.remove('loading');
             });
         }
     } catch (error) {
@@ -1378,9 +1439,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const requiredInputs = paymentForm.querySelectorAll('input[required], select[required]');
     requiredInputs.forEach(input => {
         input.addEventListener('input', () => {
-            // Trigger button state update
-            const cardComplete = cardElement && document.getElementById('card-element').classList.contains('StripeElement--complete');
-            updateSubmitButton(cardComplete || false);
+            // Trigger button state update using global paymentElementComplete state
+            updateSubmitButton(paymentElementComplete);
         });
     });
 });
@@ -1389,10 +1449,11 @@ document.addEventListener('DOMContentLoaded', () => {
 window.addEventListener('pageshow', (event) => {
     if (event.persisted) {
         // Page was loaded from cache (back button)
-        // Destroy existing card element if any
-        if (cardElement) {
-            cardElement.destroy();
-            cardElement = null;
+        // Destroy existing payment element if any
+        if (paymentElement) {
+            paymentElement.destroy();
+            paymentElement = null;
+            elements = null;
         }
         setTimeout(() => initCheckout(), 100);
     }
@@ -1400,7 +1461,7 @@ window.addEventListener('pageshow', (event) => {
 
 // Cleanup on page unload
 window.addEventListener('beforeunload', () => {
-    if (cardElement) {
-        cardElement.destroy();
+    if (paymentElement) {
+        paymentElement.destroy();
     }
 });

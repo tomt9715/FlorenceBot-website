@@ -385,7 +385,7 @@
     margin-top: 8px;
 }
 
-/* Stripe Card Element Container */
+/* Stripe Card Element Container (legacy - kept for backwards compatibility) */
 .card-element-wrapper {
     position: relative;
     background: var(--background-white);
@@ -450,6 +450,97 @@
 
 .card-status i {
     font-size: 0.75rem;
+}
+
+/* ============================================
+   STRIPE PAYMENT ELEMENT STYLES
+   Supports Apple Pay, Google Pay, Cards, Link
+   ============================================ */
+
+.payment-element-wrapper {
+    padding: 16px;
+    border: 2px solid var(--border-color);
+    border-radius: 12px;
+    background: var(--card-bg);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    min-height: 150px;
+}
+
+.payment-element-wrapper:focus-within {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(46, 134, 171, 0.15);
+}
+
+.payment-element-wrapper.loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.payment-element-wrapper.complete {
+    border-color: #10b981;
+}
+
+.payment-element-wrapper.invalid {
+    border-color: #ef4444;
+}
+
+/* Payment Element loading state */
+#payment-element:empty::before {
+    content: '';
+    display: block;
+    width: 100%;
+    min-height: 120px;
+    background: linear-gradient(90deg, var(--background-light) 25%, var(--border-color) 50%, var(--background-light) 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    border-radius: 8px;
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+/* Payment message for errors and status */
+.payment-message {
+    color: var(--error-color, #ef4444);
+    font-size: 0.85rem;
+    margin-top: 12px;
+    min-height: 20px;
+}
+
+.payment-message:empty {
+    display: none;
+}
+
+/* Payment status indicator */
+.payment-status {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 10px;
+    font-size: 0.85rem;
+    color: #10b981;
+}
+
+.payment-status i {
+    font-size: 0.8rem;
+}
+
+/* Dark mode support for Payment Element */
+[data-theme="dark"] .payment-element-wrapper {
+    background: var(--card-bg);
+    border-color: var(--border-color);
+}
+
+[data-theme="dark"] #payment-element:empty::before {
+    background: linear-gradient(90deg, var(--background-light) 25%, var(--border-color) 50%, var(--background-light) 75%);
+    background-size: 200% 100%;
 }
 
 /* Legacy Payment Element Container (for embedded checkout fallback) */
