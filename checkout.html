@@ -96,42 +96,42 @@
                         <div class="skeleton skeleton-text" style="width: 60%;"></div>
                     </div>
 
-                    <div class="order-total">
+                    <!-- Order Totals (dynamically updated by JS) -->
+                    <div class="order-total" id="order-total">
                         <div class="total-row">
                             <span>Subtotal</span>
                             <span id="subtotal">$0.00</span>
                         </div>
-
-                        <!-- Promo Code Section (between subtotal and total) -->
-                        <div class="promo-code-inline" id="promo-section">
-                            <div class="promo-input-inline">
-                                <input
-                                    type="text"
-                                    id="promo-code"
-                                    name="promo_code"
-                                    placeholder="Promo code"
-                                    autocomplete="off"
-                                >
-                                <button type="button" id="apply-promo-btn" class="btn btn-outline-primary btn-sm">
-                                    Apply
-                                </button>
-                            </div>
-                            <div id="promo-message" class="promo-message"></div>
-                            <!-- Applied promo display -->
-                            <div id="promo-applied" class="promo-applied-inline" style="display: none;">
-                                <div class="promo-applied-content">
-                                    <i class="fas fa-check-circle"></i>
-                                    <span id="promo-applied-text"></span>
-                                </div>
-                                <button type="button" id="remove-promo-btn" class="remove-promo-btn">
-                                    <i class="fas fa-times"></i>
-                                </button>
-                            </div>
-                        </div>
-
                         <div class="total-row total-final">
                             <span>Total</span>
                             <span id="total">$0.00</span>
+                        </div>
+                    </div>
+
+                    <!-- Promo Code Section (separate from order-total so it doesn't get replaced) -->
+                    <div class="promo-code-inline" id="promo-section">
+                        <div class="promo-input-inline">
+                            <input
+                                type="text"
+                                id="promo-code"
+                                name="promo_code"
+                                placeholder="Promo code"
+                                autocomplete="off"
+                            >
+                            <button type="button" id="apply-promo-btn" class="btn btn-outline-primary btn-sm">
+                                Apply
+                            </button>
+                        </div>
+                        <div id="promo-message" class="promo-message"></div>
+                        <!-- Applied promo display -->
+                        <div id="promo-applied" class="promo-applied-inline" style="display: none;">
+                            <div class="promo-applied-content">
+                                <i class="fas fa-check-circle"></i>
+                                <span id="promo-applied-text"></span>
+                            </div>
+                            <button type="button" id="remove-promo-btn" class="remove-promo-btn">
+                                <i class="fas fa-times"></i>
+                            </button>
                         </div>
                     </div>
 

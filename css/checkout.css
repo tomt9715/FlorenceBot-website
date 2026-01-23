@@ -161,15 +161,15 @@
 
 /* Horizontal trust badges layout */
 .trust-badges.trust-badges-horizontal {
-    flex-direction: row;
-    justify-content: center;
-    gap: 24px;
+    flex-direction: row !important;
+    justify-content: center !important;
+    gap: 32px !important;
 }
 
 .trust-badges.trust-badges-horizontal .trust-badge {
-    flex-direction: column;
-    text-align: center;
-    gap: 8px;
+    flex-direction: column !important;
+    text-align: center !important;
+    gap: 8px !important;
 }
 
 .trust-badge {
@@ -194,8 +194,9 @@
 
 /* Promo code in order summary (inline style) */
 .promo-code-inline {
-    margin: 16px 0;
-    padding: 0;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-color);
 }
 
 .promo-input-inline {
@@ -678,30 +679,32 @@
    SIGN IN / USER INFO BANNERS
    ============================================ */
 
+.payment-form-container .signin-prompt,
 .signin-prompt {
     display: flex !important;
     flex-direction: row !important;
     align-items: center !important;
-    gap: 16px;
-    padding: 20px 24px;
-    background: linear-gradient(135deg, rgba(99, 102, 241, 0.12), rgba(139, 92, 246, 0.08));
-    border: 2px solid rgba(99, 102, 241, 0.25);
-    border-radius: 16px;
-    margin-bottom: 28px;
-    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.1);
+    gap: 16px !important;
+    padding: 20px 24px !important;
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(139, 92, 246, 0.1)) !important;
+    border: 2px solid rgba(99, 102, 241, 0.3) !important;
+    border-radius: 16px !important;
+    margin-bottom: 28px !important;
+    box-shadow: 0 4px 16px rgba(99, 102, 241, 0.15) !important;
 }
 
+.payment-form-container .signin-prompt-icon,
 .signin-prompt-icon {
-    width: 52px;
-    height: 52px;
-    min-width: 52px;
-    background: linear-gradient(135deg, #6366f1, #8b5cf6);
-    border-radius: 50%;
+    width: 52px !important;
+    height: 52px !important;
+    min-width: 52px !important;
+    background: linear-gradient(135deg, #6366f1, #8b5cf6) !important;
+    border-radius: 50% !important;
     display: flex !important;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+    align-items: center !important;
+    justify-content: center !important;
+    flex-shrink: 0 !important;
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3) !important;
 }
 
 .signin-prompt-icon i {
