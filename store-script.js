@@ -52,12 +52,19 @@ document.addEventListener('DOMContentLoaded', function() {
     let currentSubcategory = 'all';
     let currentSearchTerm = '';
 
-    // Show More functionality
-    const ITEMS_PER_PAGE = 12; // Number of guides to show initially and per "show more" click
-    let visibleItemsCount = ITEMS_PER_PAGE;
+    // Show More functionality for Guides
+    const GUIDES_PER_PAGE = 12; // Number of guides to show initially and per "show more" click
+    let visibleGuidesCount = GUIDES_PER_PAGE;
     const showMoreBtn = document.getElementById('show-more-btn');
     const showMoreContainer = document.getElementById('show-more-container');
     const showMoreCount = document.getElementById('show-more-count');
+
+    // Show More functionality for Packages
+    const PACKAGES_PER_PAGE = 3; // Number of packages to show initially
+    let visiblePackagesCount = PACKAGES_PER_PAGE;
+    const showMorePackagesBtn = document.getElementById('show-more-packages-btn');
+    const showMorePackagesContainer = document.getElementById('show-more-packages-container');
+    const showMorePackagesCount = document.getElementById('show-more-packages-count');
 
     // Category metadata
     const categories = {
@@ -164,7 +171,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Reset pagination when filter changes
         if (resetPagination) {
-            visibleItemsCount = ITEMS_PER_PAGE;
+            visibleGuidesCount = GUIDES_PER_PAGE;
         }
 
         // Get all matching guides first
@@ -202,7 +209,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
         matchingGuides.forEach((card, index) => {
-            if (index < visibleItemsCount) {
+            if (index < visibleGuidesCount) {
                 card.style.display = 'flex';
                 card.style.opacity = '0';
                 card.style.transform = 'translateY(20px)';
@@ -214,7 +221,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
 
-        // Update Show More button
+        // Update Show More button for guides
         updateShowMoreButton(totalMatching);
 
         // Update search results count
@@ -249,21 +256,21 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Update Show More button state
+    // Update Show More button state for guides
     function updateShowMoreButton(totalMatching) {
         if (!showMoreContainer || !showMoreBtn) return;
 
-        const remainingItems = totalMatching - visibleItemsCount;
+        const remainingItems = totalMatching - visibleGuidesCount;
 
         if (remainingItems > 0) {
             showMoreContainer.style.display = 'block';
             showMoreBtn.disabled = false;
             showMoreBtn.innerHTML = '<i class="fas fa-chevron-down"></i> Show More Guides';
             if (showMoreCount) {
-                showMoreCount.textContent = `Showing ${Math.min(visibleItemsCount, totalMatching)} of ${totalMatching} guides`;
+                showMoreCount.textContent = `Showing ${Math.min(visibleGuidesCount, totalMatching)} of ${totalMatching} guides`;
             }
         } else {
-            if (totalMatching > ITEMS_PER_PAGE) {
+            if (totalMatching > GUIDES_PER_PAGE) {
                 // All items shown
                 showMoreContainer.style.display = 'block';
                 showMoreBtn.disabled = true;
@@ -278,11 +285,90 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Show More button click handler
+    // Filter packages with Show More pagination
+    function filterPackages(resetPagination = true) {
+        if (resetPagination) {
+            visiblePackagesCount = PACKAGES_PER_PAGE;
+        }
+
+        // Get all matching packages
+        const matchingPackages = [];
+
+        packageCards.forEach(card => {
+            const category = card.getAttribute('data-category');
+            const matchesCategory = currentFilter === 'all' || category === currentFilter;
+
+            if (matchesCategory) {
+                matchingPackages.push(card);
+            }
+        });
+
+        const totalMatching = matchingPackages.length;
+
+        // Show/hide packages based on pagination
+        packageCards.forEach(card => {
+            card.style.display = 'none';
+        });
+
+        matchingPackages.forEach((card, index) => {
+            if (index < visiblePackagesCount) {
+                card.style.display = 'block';
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    card.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, 10 + (index * 50)); // Staggered animation
+            }
+        });
+
+        // Update Show More button for packages
+        updateShowMorePackagesButton(totalMatching);
+    }
+
+    // Update Show More button state for packages
+    function updateShowMorePackagesButton(totalMatching) {
+        if (!showMorePackagesContainer || !showMorePackagesBtn) return;
+
+        const remainingItems = totalMatching - visiblePackagesCount;
+
+        if (remainingItems > 0) {
+            showMorePackagesContainer.style.display = 'block';
+            showMorePackagesBtn.disabled = false;
+            showMorePackagesBtn.innerHTML = '<i class="fas fa-chevron-down"></i> Show More Classes';
+            if (showMorePackagesCount) {
+                showMorePackagesCount.textContent = `Showing ${Math.min(visiblePackagesCount, totalMatching)} of ${totalMatching} classes`;
+            }
+        } else {
+            if (totalMatching > PACKAGES_PER_PAGE) {
+                // All items shown
+                showMorePackagesContainer.style.display = 'block';
+                showMorePackagesBtn.disabled = true;
+                showMorePackagesBtn.innerHTML = '<i class="fas fa-check"></i> All Classes Shown';
+                if (showMorePackagesCount) {
+                    showMorePackagesCount.textContent = `Showing all ${totalMatching} classes`;
+                }
+            } else {
+                // Few items, hide button entirely
+                showMorePackagesContainer.style.display = 'none';
+            }
+        }
+    }
+
+    // Show More button click handler for guides
     if (showMoreBtn) {
         showMoreBtn.addEventListener('click', function() {
-            visibleItemsCount += ITEMS_PER_PAGE;
+            visibleGuidesCount += GUIDES_PER_PAGE;
             filterGuides(false); // Don't reset pagination
+        });
+    }
+
+    // Show More button click handler for packages
+    if (showMorePackagesBtn) {
+        showMorePackagesBtn.addEventListener('click', function() {
+            visiblePackagesCount += PACKAGES_PER_PAGE;
+            filterPackages(false); // Don't reset pagination
         });
     }
 
@@ -305,6 +391,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (packageComparison) packageComparison.style.display = 'none';
                 if (emptyState) emptyState.style.display = 'none';
                 if (searchContainer) searchContainer.style.display = 'flex';
+                // Show guides Show More, hide packages Show More
+                if (showMorePackagesContainer) showMorePackagesContainer.style.display = 'none';
 
                 // Update header
                 categoryTitle.textContent = 'All Study Guides';
@@ -361,12 +449,15 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (packageComparison) packageComparison.style.display = 'block';
                 if (emptyState) emptyState.style.display = 'none';
                 if (searchContainer) searchContainer.style.display = 'none';
+                // Hide guides Show More (it's inside guides-grid-wrapper which is hidden, but ensure it's hidden)
+                if (showMoreContainer) showMoreContainer.style.display = 'none';
 
                 // Update header
                 categoryTitle.textContent = 'Class Packages';
                 categoryDescription.textContent = 'Choose Full ($49.99) or Lite ($24.99) packages for each nursing class';
 
                 // Reset filter to "All"
+                currentFilter = 'all';
                 filterButtons.forEach(btn => {
                     if (btn.getAttribute('data-filter') === 'all') {
                         btn.classList.add('active');
@@ -375,10 +466,14 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 });
 
-                // Show all packages initially
-                packageCards.forEach(card => {
-                    card.style.display = 'block';
-                });
+                // Hide subcategory chips for packages
+                if (subcategoryChips) {
+                    subcategoryChips.style.display = 'none';
+                    subcategoryChips.classList.remove('visible');
+                }
+
+                // Filter packages with pagination
+                filterPackages();
             }
         });
     });
@@ -450,23 +545,8 @@ document.addEventListener('DOMContentLoaded', function() {
             if (currentShopType === 'guides') {
                 filterGuides();
             } else if (currentShopType === 'packages') {
-                // Filter package cards
-                packageCards.forEach(card => {
-                    const category = card.getAttribute('data-category');
-
-                    if (filter === 'all' || category === filter) {
-                        card.style.display = 'block';
-                        card.style.opacity = '0';
-                        card.style.transform = 'translateY(20px)';
-                        setTimeout(() => {
-                            card.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
-                            card.style.opacity = '1';
-                            card.style.transform = 'translateY(0)';
-                        }, 10);
-                    } else {
-                        card.style.display = 'none';
-                    }
-                });
+                // Filter packages with pagination
+                filterPackages();
             }
 
         });

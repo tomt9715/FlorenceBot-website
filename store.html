@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="css/bundle.min.css">
 
     <!-- Store-specific styles (includes new features) -->
-    <link rel="stylesheet" href="css/store-style.css?v=9">
+    <link rel="stylesheet" href="css/store-style.css?v=10">
 
 
     <!-- Bootstrap 5 CSS -->
@@ -1472,6 +1472,14 @@
                                 </a>
                             </div>
                         </div>
+
+                        <!-- Show More Button for Packages -->
+                        <div class="show-more-container" id="show-more-packages-container" style="display: none;">
+                            <button class="show-more-btn" id="show-more-packages-btn">
+                                <i class="fas fa-chevron-down"></i> Show More Classes
+                            </button>
+                            <p class="show-more-count" id="show-more-packages-count" style="margin-top: 10px; font-size: 0.85rem; color: var(--text-secondary);"></p>
+                        </div>
                     </div>
                 </main>
             </div>
@@ -1550,6 +1558,6 @@
     <script src="cart-ui.js"></script>
 
     <script src="script.js"></script>
-    <script src="store-script.js?v=3"></script>
+    <script src="store-script.js?v=4"></script>
 </body>
 </html>
