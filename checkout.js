@@ -283,11 +283,21 @@ function displayCartItems() {
         const typeLabel = getTypeLabel(item.product_type);
         const quantity = item.quantity || 1;
         const itemTotal = parseFloat(item.price) * quantity;
-        const iconClass = getProductIcon(item.product_type);
+        const iconPath = getProductIconPath(item.product_id, item.product_type);
+
+        // Use image for individual guides, Font Awesome icon for packages
+        let iconHtml;
+        if (iconPath) {
+            iconHtml = `<img src="${iconPath}" alt="${escapeHtml(item.product_name)}" style="width: 100%; height: 100%; object-fit: contain;">`;
+        } else {
+            const iconClass = getPackageIcon(item.product_type);
+            iconHtml = `<i class="${iconClass}" style="color: white; font-size: 1rem;"></i>`;
+        }
+
         html += `
             <div class="checkout-item">
-                <div class="checkout-item-icon">
-                    <i class="${iconClass}"></i>
+                <div class="checkout-item-icon" style="${iconPath ? 'background: var(--background-light); padding: 4px;' : ''}">
+                    ${iconHtml}
                 </div>
                 <div class="checkout-item-details">
                     <div class="checkout-item-name">${escapeHtml(item.product_name)}</div>
@@ -491,15 +501,87 @@ function getTypeLabel(type) {
 }
 
 /**
- * Get icon class based on product type
+ * Get product icon image path based on product ID
+ * Maps product IDs to their corresponding icon images in assets/images/guide-icons/
  */
-function getProductIcon(type) {
+function getProductIconPath(productId, productType) {
+    // For packages, use a generic package icon (Font Awesome)
+    if (productType === 'lite-package' || productType === 'full-package') {
+        return null; // Will use Font Awesome icon instead
+    }
+
+    // Map product IDs to their icon file names
+    // Most product IDs match the file name directly, but some need mapping
+    const iconMap = {
+        'heart-failure': 'heart-failure',
+        'myocardial-infarction': 'heart-attack',
+        'arrhythmias': 'arrhythmias',
+        'hypertension': 'hypertension',
+        'cad': 'cad',
+        'coronary-artery-disease': 'cad',
+        'pvd': 'pad',
+        'peripheral-vascular-disease': 'pad',
+        'copd': 'copd',
+        'asthma': 'asthma',
+        'pneumonia': 'pneumonia',
+        'oxygen-therapy': 'oxygen',
+        'tuberculosis': 'tb',
+        'chest-tubes': 'chest',
+        'type-1-diabetes': 'type-1',
+        'type-2-diabetes': 'type-2',
+        'thyroid': 'thyroid',
+        'adrenal': 'adrenal',
+        'pituitary': 'pituitary',
+        'aki': 'kidney-acute',
+        'acute-kidney-injury': 'kidney-acute',
+        'ckd': 'kidney-disease',
+        'chronic-kidney-disease': 'kidney-disease',
+        'dialysis': 'kidney-dialysis',
+        'uti': 'urinary-tract-infection',
+        'urinary-tract-infection': 'urinary-tract-infection',
+        'liver': 'liver',
+        'hepatic': 'liver',
+        'gi-bleeding': 'gi-bleeding',
+        'bowel-obstruction': 'bowel-obstruction',
+        'ibd': 'intestines',
+        'ulcer': 'ulcer',
+        'peptic-ulcer': 'ulcer',
+        'stroke': 'stroke',
+        'tbi': 'brain-injury',
+        'traumatic-brain-injury': 'brain-injury',
+        'seizure': 'seizure',
+        'seizures': 'seizure',
+        'epilepsy': 'seizure',
+        'spinal-cord-injury': 'spinal-cord-injury',
+        'meningitis': 'meningitis',
+        'parkinsons': 'shaking',
+        'fractures': 'broken-bone',
+        'fracture': 'broken-bone',
+        'osteoporosis': 'osteoporosis',
+        'amputation': 'amputation',
+        'joint-replacement': 'prothesis',
+        'hip-replacement': 'prothesis',
+        'arthritis': 'arthritis',
+        'electrolyte-imbalances': 'chemical',
+        'electrolytes': 'chemical',
+        'eating-disorders': 'eating-disorder',
+        'eating-disorder': 'eating-disorder'
+    };
+
+    // Try to find in map, otherwise use the product ID directly as file name
+    const iconFile = iconMap[productId] || productId;
+    return `assets/images/guide-icons/${iconFile}.webp`;
+}
+
+/**
+ * Get Font Awesome icon class for packages
+ */
+function getPackageIcon(productType) {
     const icons = {
-        'individual': 'fas fa-file-medical',
         'lite-package': 'fas fa-book-medical',
         'full-package': 'fas fa-box-open'
     };
-    return icons[type] || 'fas fa-file-medical';
+    return icons[productType] || 'fas fa-file-medical';
 }
 
 /**
