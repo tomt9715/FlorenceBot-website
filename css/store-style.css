@@ -685,19 +685,20 @@ button.subcategory-chip.active i {
     transform: translateX(-50%);
     background: var(--text-primary);
     color: var(--background-white);
-    padding: 10px 14px;
+    padding: 12px 16px;
     border-radius: 8px;
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     font-weight: 500;
-    white-space: nowrap;
     z-index: 100;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     text-transform: none;
     letter-spacing: normal;
-    max-width: 280px;
+    width: max-content;
+    max-width: 320px;
+    min-width: 200px;
     white-space: normal;
     text-align: center;
-    line-height: 1.4;
+    line-height: 1.5;
 }
 
 .savings-badge:hover::before {
