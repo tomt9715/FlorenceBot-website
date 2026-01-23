@@ -93,6 +93,7 @@
 .hero-stat .stat-label {
     font-size: 0.9rem;
     opacity: 0.9;
+    color: inherit;
 }
 
 /* Section Headers */

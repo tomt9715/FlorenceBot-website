@@ -140,6 +140,7 @@
     opacity: 0.9;
     margin-top: 5px;
     font-weight: 500;
+    color: inherit;
 }
 
 /* Problem/Solution Section */
