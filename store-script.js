@@ -471,6 +471,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
         });
     });
+
+    // Initialize pagination on page load - show only first 12 guides
+    filterGuides();
 });
 
 /**
