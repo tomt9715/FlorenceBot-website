@@ -6,6 +6,9 @@ console.log('=== STORE-SCRIPT.JS FILE LOADED ===');
 document.addEventListener('DOMContentLoaded', function() {
     console.log('Store script DOMContentLoaded fired');
 
+    // Initialize mobile filter toggle
+    initializeMobileFilterToggle();
+
     // Initialize dynamic savings badges
     initializeSavingsBadges();
 
@@ -1302,6 +1305,67 @@ function initializeQuickView() {
             }
         });
     }
+}
+
+/**
+ * Initialize mobile filter toggle functionality
+ * Allows users to collapse/expand the filter sidebar on mobile
+ */
+function initializeMobileFilterToggle() {
+    const toggleBtn = document.getElementById('mobile-filter-toggle');
+    const sidebar = document.getElementById('store-sidebar');
+    const activeFilterCount = document.getElementById('mobile-active-filter-count');
+
+    if (!toggleBtn || !sidebar) {
+        console.log('Mobile filter toggle: elements not found');
+        return;
+    }
+
+    console.log('Mobile filter toggle initialized');
+
+    // Toggle sidebar visibility
+    toggleBtn.addEventListener('click', function() {
+        const isExpanded = sidebar.classList.contains('mobile-expanded');
+
+        if (isExpanded) {
+            sidebar.classList.remove('mobile-expanded');
+            toggleBtn.classList.remove('active');
+            toggleBtn.setAttribute('aria-expanded', 'false');
+        } else {
+            sidebar.classList.add('mobile-expanded');
+            toggleBtn.classList.add('active');
+            toggleBtn.setAttribute('aria-expanded', 'true');
+        }
+    });
+
+    // Update active filter count text when filters change
+    window.updateMobileFilterCount = function(filterName) {
+        if (activeFilterCount) {
+            activeFilterCount.textContent = filterName || 'All';
+        }
+    };
+
+    // Close sidebar when a filter is selected (on mobile)
+    const filterButtons = sidebar.querySelectorAll('.filter-item[data-filter], .filter-item[data-shop-type]');
+    filterButtons.forEach(btn => {
+        btn.addEventListener('click', function() {
+            // Only auto-close on mobile (check if toggle is visible)
+            if (window.innerWidth <= 768) {
+                // Small delay to let user see the selection
+                setTimeout(() => {
+                    sidebar.classList.remove('mobile-expanded');
+                    toggleBtn.classList.remove('active');
+                    toggleBtn.setAttribute('aria-expanded', 'false');
+
+                    // Update the filter count display
+                    const filterText = this.textContent.trim().split('\n')[0].trim();
+                    if (activeFilterCount) {
+                        activeFilterCount.textContent = filterText;
+                    }
+                }, 150);
+            }
+        });
+    });
 }
 
 /**

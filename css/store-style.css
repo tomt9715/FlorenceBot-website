@@ -1510,6 +1510,336 @@ button.subcategory-chip.active i {
 }
 
 /* ============================================
+   MOBILE-FIRST ENHANCEMENTS
+   Collapsible Sidebar & Improved Touch Targets
+   ============================================ */
+
+/* Mobile Filter Toggle Button - Only visible on mobile */
+.mobile-filter-toggle {
+    display: none;
+    width: 100%;
+    padding: 16px 20px;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    font-family: 'Source Sans 3', sans-serif;
+    cursor: pointer;
+    margin-bottom: 16px;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    box-shadow: 0 4px 15px rgba(46, 134, 171, 0.3);
+    transition: all 0.3s ease;
+    min-height: 52px;
+}
+
+.mobile-filter-toggle:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(46, 134, 171, 0.4);
+}
+
+.mobile-filter-toggle:active {
+    transform: translateY(0);
+}
+
+.mobile-filter-toggle i.fa-chevron-down {
+    transition: transform 0.3s ease;
+}
+
+.mobile-filter-toggle.active i.fa-chevron-down {
+    transform: rotate(180deg);
+}
+
+.mobile-filter-count {
+    background: rgba(255, 255, 255, 0.25);
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    margin-left: auto;
+}
+
+/* Mobile View (768px and below) - Enhanced */
+@media (max-width: 768px) {
+    /* Show mobile filter toggle */
+    .mobile-filter-toggle {
+        display: flex;
+    }
+
+    /* Collapsible sidebar */
+    .store-sidebar {
+        max-height: 0;
+        overflow: hidden;
+        padding: 0 20px;
+        margin-bottom: 0;
+        opacity: 0;
+        transition: max-height 0.4s ease, padding 0.4s ease, opacity 0.3s ease, margin 0.4s ease;
+    }
+
+    .store-sidebar.mobile-expanded {
+        max-height: 2000px;
+        padding: 20px;
+        opacity: 1;
+        margin-bottom: 20px;
+    }
+
+    /* Store layout adjustments */
+    .store-layout {
+        padding: 16px;
+        gap: 16px;
+    }
+
+    .store-section {
+        padding: 24px 0 40px;
+    }
+
+    .store-section .container-fluid {
+        padding: 0 16px;
+    }
+
+    /* Hero section mobile */
+    .store-hero {
+        padding: 30px 16px;
+    }
+
+    .store-hero h1 {
+        font-size: 1.75rem;
+        line-height: 1.3;
+    }
+
+    .store-hero p {
+        font-size: 1rem;
+    }
+
+    .store-hero-badge {
+        font-size: 0.75rem;
+        padding: 8px 16px;
+        margin-bottom: 16px;
+    }
+
+    /* Store header mobile */
+    .store-header {
+        margin-bottom: 20px;
+    }
+
+    .store-header h2 {
+        font-size: 1.5rem;
+    }
+
+    .store-header p {
+        font-size: 0.9rem;
+    }
+
+    /* Better touch targets for all buttons */
+    .filter-list button[data-shop-type],
+    .filter-list button[data-filter],
+    .quick-filter-btn {
+        min-height: 52px;
+        padding: 14px 16px;
+        font-size: 1rem;
+    }
+
+    /* Search box mobile improvements */
+    .store-search-container {
+        gap: 12px;
+    }
+
+    .store-search-box input,
+    .store-search-box input[type="text"],
+    input#guide-search {
+        min-height: 52px !important;
+        padding: 14px 48px !important;
+        font-size: 1rem !important;
+    }
+
+    /* Sort dropdown mobile */
+    .sort-container {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .sort-select {
+        min-height: 48px;
+        padding: 12px 40px 12px 16px;
+        font-size: 1rem;
+    }
+
+    /* Guide cards mobile - improved layout */
+    .guide-card {
+        padding: 20px;
+    }
+
+    .guide-card .guide-icon {
+        width: 64px;
+        height: 64px;
+        margin-bottom: 16px;
+    }
+
+    .guide-card .guide-icon img {
+        width: 44px !important;
+        height: 44px !important;
+    }
+
+    .guide-card h4,
+    .guide-card h3 {
+        font-size: 1.1rem;
+        line-height: 1.4;
+    }
+
+    .guide-card > p {
+        font-size: 0.95rem;
+        line-height: 1.5;
+    }
+
+    /* Guide footer mobile - stacked layout */
+    .guide-footer {
+        flex-direction: column;
+        gap: 12px;
+        padding-top: 16px;
+    }
+
+    .guide-price {
+        font-size: 1.5rem;
+        text-align: center;
+    }
+
+    .guide-footer .btn {
+        width: 100%;
+        min-height: 48px;
+        font-size: 1rem;
+        padding: 12px 20px;
+    }
+
+    /* Add to cart button mobile */
+    .add-to-cart-btn {
+        min-height: 48px;
+        padding: 12px 20px;
+        font-size: 1rem;
+    }
+
+    /* Package cards mobile */
+    .package-card {
+        padding: 24px 20px;
+    }
+
+    .package-card h3 {
+        font-size: 1.3rem;
+    }
+
+    .package-price {
+        font-size: 1.75rem;
+    }
+
+    .package-add-to-cart {
+        min-height: 52px;
+        font-size: 1rem;
+    }
+
+    /* Package toggle mobile */
+    .package-toggle-container {
+        flex-direction: column;
+        gap: 12px;
+        padding: 16px;
+    }
+
+    /* Subcategory chips mobile - horizontal scroll */
+    .subcategory-chips {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        padding: 16px;
+        gap: 8px;
+        margin: 16px -16px 0;
+        width: calc(100% + 32px);
+    }
+
+    .subcategory-chips::-webkit-scrollbar {
+        display: none;
+    }
+
+    button.subcategory-chip {
+        flex-shrink: 0;
+        min-height: 44px !important;
+        padding: 10px 16px !important;
+        font-size: 0.9rem !important;
+    }
+
+    /* Quick view button - always visible on mobile for touch */
+    .guide-card .quick-view-btn {
+        opacity: 1;
+        transform: scale(1);
+        width: 40px;
+        height: 40px;
+    }
+
+    /* Empty state mobile */
+    .empty-state {
+        padding: 40px 20px;
+    }
+
+    .empty-state-icon {
+        width: 64px;
+        height: 64px;
+    }
+
+    .empty-state-icon i {
+        font-size: 1.5rem;
+    }
+
+    .empty-state h3 {
+        font-size: 1.25rem;
+    }
+
+    .empty-state p {
+        font-size: 0.95rem;
+    }
+
+    /* Show more button mobile */
+    .show-more-btn {
+        min-height: 52px;
+        padding: 14px 32px;
+        font-size: 1rem;
+        width: 100%;
+    }
+
+    /* Hide decorative circles on mobile */
+    .hero-circle {
+        display: none;
+    }
+}
+
+/* Extra Small Mobile (360px and below) */
+@media (max-width: 360px) {
+    .store-layout {
+        padding: 12px;
+    }
+
+    .store-section .container-fluid {
+        padding: 0 12px;
+    }
+
+    .store-hero h1 {
+        font-size: 1.5rem;
+    }
+
+    .guide-card {
+        padding: 16px;
+    }
+
+    .guide-card h4,
+    .guide-card h3 {
+        font-size: 1rem;
+    }
+
+    .mobile-filter-toggle {
+        padding: 14px 16px;
+        font-size: 0.95rem;
+    }
+}
+
+/* ============================================
    PACKAGE CARD INTERNAL LAYOUT
    ============================================ */
 
