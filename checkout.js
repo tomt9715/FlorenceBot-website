@@ -120,6 +120,12 @@ async function initCheckout() {
             await loadCartItems();
         }
 
+        // Don't setup payment if cart is empty
+        if (cartItems.length === 0) {
+            // Cart is empty - showEmptyCartMessage was already called
+            return;
+        }
+
         // Check if it's a subscription (single product mode only)
         if (singleProductMode && currentProduct && currentProduct.type === 'subscription') {
             setupSubscriptionFlow();
