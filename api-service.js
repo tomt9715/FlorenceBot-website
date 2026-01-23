@@ -94,10 +94,20 @@ async function refreshToken() {
     }
 }
 
+// Flag to prevent redirect loops during logout
+let isLoggingOut = false;
+
 /**
  * Logout function - calls API to clear cookies and clears local state
  */
 async function performLogout() {
+    // Prevent multiple logout calls causing redirect loops
+    if (isLoggingOut) {
+        console.log('Logout already in progress, skipping...');
+        return;
+    }
+    isLoggingOut = true;
+
     try {
         // Call logout endpoint to clear HttpOnly cookies
         await fetch(`${API_URL}/auth/logout`, {
