@@ -192,11 +192,11 @@
     font-size: 0.9rem;
 }
 
-/* Promo code in order summary */
-.order-summary .promo-code-container {
-    margin-top: 20px;
-    padding-top: 20px;
-    border-top: 1px solid var(--border-color);
+/* Promo code in order summary (inside order-total, between subtotal and total) */
+.order-total .promo-code-container {
+    margin: 16px 0;
+    padding: 0;
+    border-top: none;
 }
 
 /* ============================================
