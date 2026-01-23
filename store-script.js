@@ -22,12 +22,18 @@ document.addEventListener('DOMContentLoaded', function() {
     const categoryDescription = document.getElementById('category-description');
     const categoryFilterSection = document.getElementById('category-filter-section');
     const packageCalloutSection = document.getElementById('package-callout-section');
+    const packageComparison = document.getElementById('package-comparison');
     const switchToPackagesBtn = document.getElementById('switch-to-packages-btn');
 
     // Search elements
     const searchInput = document.getElementById('guide-search');
     const searchClear = document.getElementById('search-clear');
     const searchResultsCount = document.getElementById('search-results-count');
+
+    // Empty state elements
+    const emptyState = document.getElementById('empty-state');
+    const emptyStateTerm = document.getElementById('empty-state-term');
+    const clearSearchBtn = document.getElementById('clear-search-btn');
 
     // Sub-category elements
     const subcategoryChips = document.getElementById('subcategory-chips');
@@ -99,6 +105,19 @@ document.addEventListener('DOMContentLoaded', function() {
             this.style.display = 'none';
             filterGuides();
             searchInput.focus();
+        });
+    }
+
+    // Clear search button in empty state
+    if (clearSearchBtn) {
+        clearSearchBtn.addEventListener('click', function() {
+            if (searchInput) {
+                searchInput.value = '';
+                currentSearchTerm = '';
+                if (searchClear) searchClear.style.display = 'none';
+                filterGuides();
+                searchInput.focus();
+            }
         });
     }
 
@@ -176,6 +195,24 @@ document.addEventListener('DOMContentLoaded', function() {
                 searchResultsCount.style.display = 'none';
             }
         }
+
+        // Show/hide empty state
+        if (emptyState) {
+            if (visibleCount === 0 && currentSearchTerm) {
+                emptyState.style.display = 'flex';
+                if (emptyStateTerm) {
+                    emptyStateTerm.textContent = currentSearchTerm;
+                }
+                if (guidesGrid) {
+                    guidesGrid.style.display = 'none';
+                }
+            } else {
+                emptyState.style.display = 'none';
+                if (guidesGrid && currentShopType === 'guides') {
+                    guidesGrid.style.display = 'grid';
+                }
+            }
+        }
     }
 
     // Shop Type Toggle (Guides vs Packages)
@@ -194,6 +231,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 packagesGrid.style.display = 'none';
                 categoryFilterSection.style.display = 'block';
                 if (packageCalloutSection) packageCalloutSection.style.display = 'block';
+                if (packageComparison) packageComparison.style.display = 'none';
+                if (emptyState) emptyState.style.display = 'none';
 
                 // Update header
                 categoryTitle.textContent = 'All Study Guides';
@@ -247,6 +286,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 packagesGrid.style.display = 'grid';
                 categoryFilterSection.style.display = 'block';
                 if (packageCalloutSection) packageCalloutSection.style.display = 'none';
+                if (packageComparison) packageComparison.style.display = 'block';
+                if (emptyState) emptyState.style.display = 'none';
 
                 // Update header
                 categoryTitle.textContent = 'Class Packages';

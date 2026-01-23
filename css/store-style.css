@@ -384,6 +384,62 @@ button.subcategory-chip.active i {
 }
 
 /* ============================================
+   EMPTY STATE
+   ============================================ */
+
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+    text-align: center;
+    background: var(--background-light);
+    border-radius: 16px;
+    border: 2px dashed var(--border-color);
+    margin: 20px 0;
+}
+
+.empty-state-icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, rgba(46, 134, 171, 0.1) 0%, rgba(162, 59, 114, 0.1) 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.empty-state-icon i {
+    font-size: 2rem;
+    color: var(--primary-color);
+}
+
+.empty-state h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+}
+
+.empty-state p {
+    color: var(--text-secondary);
+    font-size: 1rem;
+    margin-bottom: 20px;
+}
+
+.empty-state #empty-state-term {
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+[data-theme="dark"] .empty-state {
+    background: rgba(255, 255, 255, 0.03);
+    border-color: var(--border-color);
+}
+
+/* ============================================
    GUIDE CARDS (Store Page)
    ============================================ */
 
@@ -483,6 +539,150 @@ button.subcategory-chip.active i {
     padding: 10px 16px;
     font-size: 0.85rem;
     min-height: 38px;
+}
+
+/* ============================================
+   PACKAGE COMPARISON
+   ============================================ */
+
+.package-comparison {
+    background: linear-gradient(135deg, rgba(46, 134, 171, 0.08) 0%, rgba(162, 59, 114, 0.08) 100%);
+    border: 1px solid rgba(46, 134, 171, 0.2);
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 30px;
+}
+
+.comparison-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.comparison-header i {
+    color: var(--primary-color);
+    font-size: 1.2rem;
+}
+
+.comparison-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.comparison-item {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 20px;
+    border: 2px solid var(--border-color);
+}
+
+.comparison-item.full {
+    border-color: var(--primary-color);
+}
+
+.comparison-badge {
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+    color: var(--text-secondary);
+}
+
+.comparison-item.full .comparison-badge {
+    color: var(--primary-color);
+}
+
+.comparison-price {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 16px;
+    font-family: 'Outfit', sans-serif;
+}
+
+.comparison-item ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.comparison-item li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.comparison-item li:last-child {
+    border-bottom: none;
+}
+
+.comparison-item li i.fa-check {
+    color: #10b981;
+    font-size: 0.85rem;
+}
+
+.comparison-item li i.fa-minus {
+    color: var(--text-light);
+    font-size: 0.85rem;
+}
+
+.comparison-item.lite li:has(i.fa-minus) {
+    color: var(--text-secondary);
+}
+
+[data-theme="dark"] .package-comparison {
+    background: linear-gradient(135deg, rgba(46, 134, 171, 0.12) 0%, rgba(162, 59, 114, 0.12) 100%);
+    border-color: rgba(46, 134, 171, 0.3);
+}
+
+[data-theme="dark"] .comparison-item {
+    background: var(--card-bg);
+}
+
+@media (max-width: 600px) {
+    .comparison-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ============================================
+   SAVINGS BADGES
+   ============================================ */
+
+.savings-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+
+.savings-badge.best-value {
+    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+    animation: pulse-badge 2s ease-in-out infinite;
+}
+
+@keyframes pulse-badge {
+    0%, 100% {
+        box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.4);
+    }
+    50% {
+        box-shadow: 0 0 0 6px rgba(245, 158, 11, 0);
+    }
 }
 
 /* ============================================

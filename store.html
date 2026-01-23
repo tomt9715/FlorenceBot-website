@@ -273,6 +273,18 @@
                         </div>
                     </div>
 
+                    <!-- Empty State Message (hidden by default) -->
+                    <div class="empty-state" id="empty-state" style="display: none;">
+                        <div class="empty-state-icon">
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <h3>No guides found</h3>
+                        <p>We couldn't find any guides matching "<span id="empty-state-term"></span>"</p>
+                        <button class="btn btn-outline-primary" id="clear-search-btn">
+                            <i class="fas fa-times"></i> Clear Search
+                        </button>
+                    </div>
+
                     <!-- Guides Grid -->
                     <div class="guides-grid" id="guides-grid">
                         <!-- Med-Surg Guides - Cardiovascular -->
@@ -1184,6 +1196,36 @@
                         </div>
                     </div>
 
+                    <!-- Package Comparison Info (Hidden by default, shown with packages) -->
+                    <div class="package-comparison" id="package-comparison" style="display: none;">
+                        <div class="comparison-header">
+                            <i class="fas fa-info-circle"></i>
+                            <span>What's the difference?</span>
+                        </div>
+                        <div class="comparison-grid">
+                            <div class="comparison-item full">
+                                <div class="comparison-badge">Full Package</div>
+                                <div class="comparison-price">$49.99</div>
+                                <ul>
+                                    <li><i class="fas fa-check"></i> All study guides in category</li>
+                                    <li><i class="fas fa-check"></i> NCLEX practice questions</li>
+                                    <li><i class="fas fa-check"></i> Quick reference sheets</li>
+                                    <li><i class="fas fa-check"></i> Future updates included</li>
+                                </ul>
+                            </div>
+                            <div class="comparison-item lite">
+                                <div class="comparison-badge">Lite Package</div>
+                                <div class="comparison-price">$24.99</div>
+                                <ul>
+                                    <li><i class="fas fa-check"></i> Core study guides only</li>
+                                    <li><i class="fas fa-check"></i> Essential topics covered</li>
+                                    <li><i class="fas fa-minus"></i> No practice questions</li>
+                                    <li><i class="fas fa-minus"></i> No reference sheets</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- Class Packages Grid (Hidden by default) -->
                     <div class="packages-grid" id="packages-grid" style="display: none;">
                         <!-- Fundamentals Package -->
@@ -1205,7 +1247,10 @@
 
                             <div style="border-top: 1px solid var(--border-color); padding-top: 16px; margin-bottom: 16px;">
                                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-                                    <span style="font-weight: 600; color: var(--text-primary);">Full Package</span>
+                                    <div style="display: flex; align-items: center; gap: 8px;">
+                                        <span style="font-weight: 600; color: var(--text-primary);">Full Package</span>
+                                        <span class="savings-badge">Save 40%</span>
+                                    </div>
                                     <span style="font-size: 1.3rem; font-weight: 700; color: var(--primary-color);">$49.99</span>
                                 </div>
                                 <a href="checkout.html?product=fundamentals-full" class="btn btn-primary btn-sm w-100 mb-8">
@@ -1244,7 +1289,10 @@
 
                             <div style="border-top: 1px solid var(--border-color); padding-top: 16px; margin-bottom: 16px;">
                                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-                                    <span style="font-weight: 600; color: var(--text-primary);">Full Package</span>
+                                    <div style="display: flex; align-items: center; gap: 8px;">
+                                        <span style="font-weight: 600; color: var(--text-primary);">Full Package</span>
+                                        <span class="savings-badge best-value">Save 79%</span>
+                                    </div>
                                     <span style="font-size: 1.3rem; font-weight: 700; color: var(--primary-color);">$49.99</span>
                                 </div>
                                 <a href="checkout.html?product=medsurg-full" class="btn btn-primary btn-sm w-100 mb-8">
@@ -1279,7 +1327,10 @@
 
                             <div style="border-top: 1px solid var(--border-color); padding-top: 16px; margin-bottom: 16px;">
                                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-                                    <span style="font-weight: 600; color: var(--text-primary);">Full Package</span>
+                                    <div style="display: flex; align-items: center; gap: 8px;">
+                                        <span style="font-weight: 600; color: var(--text-primary);">Full Package</span>
+                                        <span class="savings-badge">Save 28%</span>
+                                    </div>
                                     <span style="font-size: 1.3rem; font-weight: 700; color: var(--primary-color);">$49.99</span>
                                 </div>
                                 <a href="checkout.html?product=pharmacology-full" class="btn btn-primary btn-sm w-100 mb-8">
@@ -1314,7 +1365,10 @@
 
                             <div style="border-top: 1px solid var(--border-color); padding-top: 16px; margin-bottom: 16px;">
                                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-                                    <span style="font-weight: 600; color: var(--text-primary);">Full Package</span>
+                                    <div style="display: flex; align-items: center; gap: 8px;">
+                                        <span style="font-weight: 600; color: var(--text-primary);">Full Package</span>
+                                        <span class="savings-badge">Save 52%</span>
+                                    </div>
                                     <span style="font-size: 1.3rem; font-weight: 700; color: var(--primary-color);">$49.99</span>
                                 </div>
                                 <a href="checkout.html?product=maternal-full" class="btn btn-primary btn-sm w-100 mb-8">
@@ -1349,7 +1403,10 @@
 
                             <div style="border-top: 1px solid var(--border-color); padding-top: 16px; margin-bottom: 16px;">
                                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-                                    <span style="font-weight: 600; color: var(--text-primary);">Full Package</span>
+                                    <div style="display: flex; align-items: center; gap: 8px;">
+                                        <span style="font-weight: 600; color: var(--text-primary);">Full Package</span>
+                                        <span class="savings-badge">Save 52%</span>
+                                    </div>
                                     <span style="font-size: 1.3rem; font-weight: 700; color: var(--primary-color);">$49.99</span>
                                 </div>
                                 <a href="checkout.html?product=pediatrics-full" class="btn btn-primary btn-sm w-100 mb-8">
@@ -1384,7 +1441,10 @@
 
                             <div style="border-top: 1px solid var(--border-color); padding-top: 16px; margin-bottom: 16px;">
                                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-                                    <span style="font-weight: 600; color: var(--text-primary);">Full Package</span>
+                                    <div style="display: flex; align-items: center; gap: 8px;">
+                                        <span style="font-weight: 600; color: var(--text-primary);">Full Package</span>
+                                        <span class="savings-badge">Save 40%</span>
+                                    </div>
                                     <span style="font-size: 1.3rem; font-weight: 700; color: var(--primary-color);">$49.99</span>
                                 </div>
                                 <a href="checkout.html?product=mental-health-full" class="btn btn-primary btn-sm w-100 mb-8">
@@ -1477,140 +1537,6 @@
     <script src="cart-ui.js"></script>
 
     <script src="script.js"></script>
-    <script src="store-script.js?v=2"></script>
-    <script>
-        // Fallback: Initialize search and subcategory functionality if store-script didn't load
-        (function() {
-            console.log('Inline fallback script running...');
-
-            // Wait for DOM to be ready
-            if (document.readyState === 'loading') {
-                document.addEventListener('DOMContentLoaded', initStoreFeatures);
-            } else {
-                initStoreFeatures();
-            }
-
-            function initStoreFeatures() {
-                console.log('initStoreFeatures called');
-
-                var searchInput = document.getElementById('guide-search');
-                var searchClear = document.getElementById('search-clear');
-                var searchResultsCount = document.getElementById('search-results-count');
-                var subcategoryChips = document.getElementById('subcategory-chips');
-                var subcategoryButtons = document.querySelectorAll('.subcategory-chip');
-                var guideCards = document.querySelectorAll('.guide-card');
-                var filterButtons = document.querySelectorAll('.filter-item[data-filter]');
-
-                console.log('Elements found - search:', !!searchInput, 'chips:', subcategoryButtons.length, 'cards:', guideCards.length);
-
-                var currentFilter = 'all';
-                var currentSubcategory = 'all';
-                var currentSearchTerm = '';
-
-                // Search functionality
-                if (searchInput) {
-                    searchInput.addEventListener('input', function() {
-                        currentSearchTerm = this.value.toLowerCase().trim();
-                        console.log('Search:', currentSearchTerm);
-
-                        if (searchClear) {
-                            searchClear.style.display = currentSearchTerm ? 'flex' : 'none';
-                        }
-                        filterGuides();
-                    });
-                }
-
-                // Clear button
-                if (searchClear) {
-                    searchClear.addEventListener('click', function() {
-                        searchInput.value = '';
-                        currentSearchTerm = '';
-                        this.style.display = 'none';
-                        filterGuides();
-                        searchInput.focus();
-                    });
-                }
-
-                // Subcategory chip clicks
-                subcategoryButtons.forEach(function(btn) {
-                    btn.addEventListener('click', function() {
-                        currentSubcategory = this.getAttribute('data-subcategory');
-                        console.log('Subcategory clicked:', currentSubcategory);
-
-                        // Update active states
-                        subcategoryButtons.forEach(function(b) {
-                            b.classList.remove('active');
-                            b.style.background = '#ffffff';
-                            b.style.color = '#1f2937';
-                            b.style.borderColor = '#e5e7eb';
-                        });
-
-                        this.classList.add('active');
-                        this.style.background = 'linear-gradient(135deg, #2E86AB 0%, #A23B72 100%)';
-                        this.style.color = '#ffffff';
-                        this.style.borderColor = 'transparent';
-
-                        filterGuides();
-                    });
-                });
-
-                // Category filter clicks - show/hide subcategory chips
-                filterButtons.forEach(function(btn) {
-                    btn.addEventListener('click', function() {
-                        currentFilter = this.getAttribute('data-filter');
-                        console.log('Filter clicked:', currentFilter);
-
-                        // Show subcategory chips only for med-surg
-                        if (subcategoryChips) {
-                            if (currentFilter === 'med-surg') {
-                                subcategoryChips.style.display = 'flex';
-                                subcategoryChips.classList.add('visible');
-                            } else {
-                                subcategoryChips.style.display = 'none';
-                                subcategoryChips.classList.remove('visible');
-                                currentSubcategory = 'all';
-                            }
-                        }
-
-                        filterGuides();
-                    });
-                });
-
-                function filterGuides() {
-                    var visibleCount = 0;
-
-                    guideCards.forEach(function(card) {
-                        var category = card.getAttribute('data-category');
-                        var subcategory = card.getAttribute('data-subcategory') || '';
-                        var title = (card.querySelector('h4') ? card.querySelector('h4').textContent : '').toLowerCase();
-                        var desc = (card.querySelector('p') ? card.querySelector('p').textContent : '').toLowerCase();
-
-                        var matchesCategory = currentFilter === 'all' || category === currentFilter;
-                        var matchesSubcategory = currentSubcategory === 'all' || subcategory === currentSubcategory || currentFilter !== 'med-surg';
-                        var matchesSearch = !currentSearchTerm || title.indexOf(currentSearchTerm) !== -1 || desc.indexOf(currentSearchTerm) !== -1;
-
-                        if (matchesCategory && matchesSubcategory && matchesSearch) {
-                            card.style.display = 'flex';
-                            visibleCount++;
-                        } else {
-                            card.style.display = 'none';
-                        }
-                    });
-
-                    // Update results count
-                    if (searchResultsCount) {
-                        if (currentSearchTerm) {
-                            searchResultsCount.textContent = visibleCount + ' guide' + (visibleCount !== 1 ? 's' : '') + ' found';
-                            searchResultsCount.style.display = 'inline';
-                        } else {
-                            searchResultsCount.style.display = 'none';
-                        }
-                    }
-
-                    console.log('Filtered:', visibleCount, 'visible');
-                }
-            }
-        })();
-    </script>
+    <script src="store-script.js?v=3"></script>
 </body>
 </html>
