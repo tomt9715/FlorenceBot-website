@@ -52,6 +52,13 @@ document.addEventListener('DOMContentLoaded', function() {
     let currentSubcategory = 'all';
     let currentSearchTerm = '';
 
+    // Show More functionality
+    const ITEMS_PER_PAGE = 12; // Number of guides to show initially and per "show more" click
+    let visibleItemsCount = ITEMS_PER_PAGE;
+    const showMoreBtn = document.getElementById('show-more-btn');
+    const showMoreContainer = document.getElementById('show-more-container');
+    const showMoreCount = document.getElementById('show-more-count');
+
     // Category metadata
     const categories = {
         'all': {
@@ -151,10 +158,17 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Master filter function
-    function filterGuides() {
+    // Master filter function with Show More pagination
+    function filterGuides(resetPagination = true) {
         console.log('filterGuides called, search term:', currentSearchTerm, 'category:', currentFilter, 'subcategory:', currentSubcategory);
-        let visibleCount = 0;
+
+        // Reset pagination when filter changes
+        if (resetPagination) {
+            visibleItemsCount = ITEMS_PER_PAGE;
+        }
+
+        // Get all matching guides first
+        const matchingGuides = [];
 
         guideCards.forEach(card => {
             const category = card.getAttribute('data-category');
@@ -176,6 +190,19 @@ document.addEventListener('DOMContentLoaded', function() {
                                   description.includes(currentSearchTerm);
 
             if (matchesCategory && matchesSubcategory && matchesSearch) {
+                matchingGuides.push(card);
+            }
+        });
+
+        const totalMatching = matchingGuides.length;
+
+        // Show/hide guides based on pagination
+        guideCards.forEach(card => {
+            card.style.display = 'none';
+        });
+
+        matchingGuides.forEach((card, index) => {
+            if (index < visibleItemsCount) {
                 card.style.display = 'flex';
                 card.style.opacity = '0';
                 card.style.transform = 'translateY(20px)';
@@ -183,17 +210,17 @@ document.addEventListener('DOMContentLoaded', function() {
                     card.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
                     card.style.opacity = '1';
                     card.style.transform = 'translateY(0)';
-                }, 10);
-                visibleCount++;
-            } else {
-                card.style.display = 'none';
+                }, 10 + (index * 30)); // Staggered animation
             }
         });
+
+        // Update Show More button
+        updateShowMoreButton(totalMatching);
 
         // Update search results count
         if (searchResultsCount) {
             if (currentSearchTerm) {
-                searchResultsCount.textContent = `${visibleCount} guide${visibleCount !== 1 ? 's' : ''} found`;
+                searchResultsCount.textContent = `${totalMatching} guide${totalMatching !== 1 ? 's' : ''} found`;
                 searchResultsCount.style.display = 'inline';
             } else {
                 searchResultsCount.style.display = 'none';
@@ -202,13 +229,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Show/hide empty state
         if (emptyState) {
-            if (visibleCount === 0 && currentSearchTerm) {
+            if (totalMatching === 0 && currentSearchTerm) {
                 emptyState.style.display = 'flex';
                 if (emptyStateTerm) {
                     emptyStateTerm.textContent = currentSearchTerm;
                 }
                 if (guidesGrid) {
                     guidesGrid.style.display = 'none';
+                }
+                if (showMoreContainer) {
+                    showMoreContainer.style.display = 'none';
                 }
             } else {
                 emptyState.style.display = 'none';
@@ -217,6 +247,43 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
         }
+    }
+
+    // Update Show More button state
+    function updateShowMoreButton(totalMatching) {
+        if (!showMoreContainer || !showMoreBtn) return;
+
+        const remainingItems = totalMatching - visibleItemsCount;
+
+        if (remainingItems > 0) {
+            showMoreContainer.style.display = 'block';
+            showMoreBtn.disabled = false;
+            showMoreBtn.innerHTML = '<i class="fas fa-chevron-down"></i> Show More Guides';
+            if (showMoreCount) {
+                showMoreCount.textContent = `Showing ${Math.min(visibleItemsCount, totalMatching)} of ${totalMatching} guides`;
+            }
+        } else {
+            if (totalMatching > ITEMS_PER_PAGE) {
+                // All items shown
+                showMoreContainer.style.display = 'block';
+                showMoreBtn.disabled = true;
+                showMoreBtn.innerHTML = '<i class="fas fa-check"></i> All Guides Shown';
+                if (showMoreCount) {
+                    showMoreCount.textContent = `Showing all ${totalMatching} guides`;
+                }
+            } else {
+                // Few items, hide button entirely
+                showMoreContainer.style.display = 'none';
+            }
+        }
+    }
+
+    // Show More button click handler
+    if (showMoreBtn) {
+        showMoreBtn.addEventListener('click', function() {
+            visibleItemsCount += ITEMS_PER_PAGE;
+            filterGuides(false); // Don't reset pagination
+        });
     }
 
     // Shop Type Toggle (Guides vs Packages)

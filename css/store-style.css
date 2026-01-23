@@ -3,51 +3,96 @@
    ============================================ */
 
 /* ============================================
-   STORE LAYOUT - Flexbox for sticky sidebar
+   STORE LAYOUT - Unified Container
    ============================================ */
 
 .store-layout {
     display: flex;
-    gap: 40px;
+    gap: 30px;
     max-width: 1400px;
     margin: 0 auto;
-    align-items: flex-start;
+    background: var(--card-bg);
+    border-radius: 20px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    padding: 30px;
+    min-height: 600px;
+    max-height: calc(100vh - 200px);
+    overflow: hidden;
 }
 
 .store-section {
-    overflow: visible !important;
+    padding: 40px 0 60px;
 }
 
 .store-section .container-fluid {
-    overflow: visible !important;
+    padding: 0 40px;
 }
 
 /* ============================================
-   SIDEBAR STYLING - Sticky Position
+   SIDEBAR STYLING - Fixed within container
    ============================================ */
 
 .store-sidebar {
-    background: var(--card-bg);
+    width: 260px;
+    min-width: 260px;
+    flex-shrink: 0;
+    background: var(--background-light);
     border-radius: 16px;
     padding: 24px;
-    width: 280px;
-    min-width: 280px;
-    flex-shrink: 0;
-    position: -webkit-sticky;
-    position: sticky;
-    top: 100px;
-    align-self: flex-start;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-    border: 1px solid var(--border-color);
-    max-height: calc(100vh - 120px);
+    max-height: 100%;
     overflow-y: auto;
-    z-index: 10;
+    border: 1px solid var(--border-color);
 }
 
-/* Content area takes remaining space */
+/* Content area - scrollable with Show More */
 .store-content {
     flex: 1;
     min-width: 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* Scrollable products area */
+.guides-grid-wrapper {
+    flex: 1;
+    overflow-y: auto;
+    padding-right: 10px;
+    margin-right: -10px;
+}
+
+/* Show More button */
+.show-more-container {
+    padding: 20px 0 0;
+    text-align: center;
+    border-top: 1px solid var(--border-color);
+    margin-top: 20px;
+}
+
+.show-more-btn {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    color: white;
+    border: none;
+    padding: 12px 32px;
+    border-radius: 25px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(46, 134, 171, 0.3);
+}
+
+.show-more-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(46, 134, 171, 0.4);
+}
+
+.show-more-btn:disabled {
+    background: var(--text-light);
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
 }
 
 .sidebar-section {
@@ -902,17 +947,28 @@ button.subcategory-chip.active i {
 @media (max-width: 968px) {
     .store-layout {
         display: block;
+        max-height: none;
+        overflow: visible;
+        padding: 20px;
     }
 
     .store-sidebar {
         position: relative !important;
-        top: 0 !important;
         width: 100% !important;
         min-width: 100% !important;
         padding: 20px;
         max-height: none;
         overflow-y: visible;
-        margin-bottom: 30px;
+        margin-bottom: 20px;
+    }
+
+    .store-content {
+        overflow: visible;
+    }
+
+    .guides-grid-wrapper {
+        max-height: none;
+        overflow-y: visible;
     }
 
     .sidebar-section {

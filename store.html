@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="css/bundle.min.css">
 
     <!-- Store-specific styles (includes new features) -->
-    <link rel="stylesheet" href="css/store-style.css?v=5">
+    <link rel="stylesheet" href="css/store-style.css?v=6">
 
 
     <!-- Bootstrap 5 CSS -->
@@ -288,8 +288,9 @@
                         </button>
                     </div>
 
-                    <!-- Guides Grid -->
-                    <div class="guides-grid" id="guides-grid">
+                    <!-- Guides Grid Wrapper (scrollable) -->
+                    <div class="guides-grid-wrapper" id="guides-grid-wrapper">
+                        <div class="guides-grid" id="guides-grid">
                         <!-- Med-Surg Guides - Cardiovascular -->
                         <div class="guide-card" data-category="med-surg" data-subcategory="cardiovascular">
                             <div class="guide-icon">
@@ -1196,6 +1197,15 @@
                                     <i class="fas fa-shopping-cart"></i> Buy Guide
                                 </a>
                             </div>
+                        </div>
+                        </div>
+
+                        <!-- Show More Button -->
+                        <div class="show-more-container" id="show-more-container">
+                            <button class="show-more-btn" id="show-more-btn">
+                                <i class="fas fa-chevron-down"></i> Show More Guides
+                            </button>
+                            <p class="show-more-count" id="show-more-count" style="margin-top: 10px; font-size: 0.85rem; color: var(--text-secondary);"></p>
                         </div>
                     </div>
 
