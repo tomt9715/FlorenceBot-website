@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Study Guide Previews - The Nursing Collective</title>
+    <meta name="description" content="Preview our nursing study guides for free. Topics include electrolytes, vital signs, lab values, isolation precautions, and medication calculations. Purchase full access for $5.99.">
+
+    <!-- Open Graph / Social Media Preview -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://thenursingcollective.pro/study-guides.html">
+    <meta property="og:title" content="Free Study Guide Previews - The Nursing Collective">
+    <meta property="og:description" content="Preview nursing study guides covering electrolytes, vital signs, lab values, and more. Purchase full access for $5.99 each.">
+    <meta property="og:image" content="https://thenursingcollective.pro/assets/images/og-preview.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/images/apple-touch-icon.png">
+
+    <!-- Theme Color for Mobile Browsers -->
+    <meta name="theme-color" content="#2E86AB">
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/pages.css">
+    <link rel="stylesheet" href="css/study-guides.css">
+    <link rel="stylesheet" href="css/cart.css">
+
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Marked.js for markdown parsing -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+    <!-- Page Loader -->
+    <div class="page-loader" id="page-loader">
+        <div class="loader-spinner"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <a href="index.html">
+                    <img src="assets/images/the-nursing-collective-logo.png" alt="The Nursing Collective Logo" class="nav-logo">
+                </a>
+            </div>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="study-guides.html" class="active">Study Guides</a>
+                <a href="pricing.html">Pricing</a>
+                <a href="store.html">Store</a>
+                <a href="about-florencebot.html">About FlorenceBot</a>
+                <a href="login.html">Login</a>
+                <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+                    <i class="fas fa-sun light-icon"></i>
+                    <i class="fas fa-moon dark-icon"></i>
+                </button>
+                <div class="cart-icon-container" aria-label="Shopping cart" title="View cart">
+                    <i class="fas fa-shopping-cart cart-icon"></i>
+                    <span class="cart-badge empty">0</span>
+                </div>
+                <a href="https://discord.gg/y2Mh77wAV2" class="btn btn-primary">Join Discord</a>
+            </div>
+            <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle navigation menu" aria-expanded="false">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Study Guides Hero Section -->
+    <section class="study-guides-hero">
+        <div class="container">
+            <div class="study-guides-hero-content">
+                <div class="hero-badge">
+                    <i class="fas fa-book-open"></i> FREE PREVIEWS AVAILABLE
+                </div>
+                <h1 class="hero-title">Study Guide Library</h1>
+                <p class="hero-description">
+                    Preview our evidence-based nursing study guides for free. Each guide covers essential concepts
+                    with clinical applications, nursing interventions, and NCLEX preparation tips.
+                </p>
+                <div class="hero-stats-row">
+                    <div class="hero-stat">
+                        <span class="stat-value">5</span>
+                        <span class="stat-label">Guides Available</span>
+                    </div>
+                    <div class="hero-stat">
+                        <span class="stat-value">10%</span>
+                        <span class="stat-label">Free Preview</span>
+                    </div>
+                    <div class="hero-stat">
+                        <span class="stat-value">$5.99</span>
+                        <span class="stat-label">Full Access</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Topic Categories Section -->
+    <section class="topic-categories-section">
+        <div class="container">
+            <h2 class="section-heading">Browse by Topic</h2>
+            <p class="section-subheading">Click a category to jump to those guides</p>
+
+            <div class="topic-cards-grid">
+                <a href="#lab-values" class="topic-card available">
+                    <div class="topic-icon">
+                        <i class="fas fa-flask"></i>
+                    </div>
+                    <div class="topic-info">
+                        <h3>Lab Values</h3>
+                        <span class="guide-count">2 guides</span>
+                    </div>
+                </a>
+
+                <a href="#clinical-skills" class="topic-card available">
+                    <div class="topic-icon">
+                        <i class="fas fa-stethoscope"></i>
+                    </div>
+                    <div class="topic-info">
+                        <h3>Clinical Skills</h3>
+                        <span class="guide-count">1 guide</span>
+                    </div>
+                </a>
+
+                <a href="#safety" class="topic-card available">
+                    <div class="topic-icon">
+                        <i class="fas fa-shield-virus"></i>
+                    </div>
+                    <div class="topic-info">
+                        <h3>Safety</h3>
+                        <span class="guide-count">1 guide</span>
+                    </div>
+                </a>
+
+                <a href="#medications" class="topic-card available">
+                    <div class="topic-icon">
+                        <i class="fas fa-pills"></i>
+                    </div>
+                    <div class="topic-info">
+                        <h3>Medications</h3>
+                        <span class="guide-count">1 guide</span>
+                    </div>
+                </a>
+
+                <div class="topic-card coming-soon">
+                    <div class="topic-icon">
+                        <i class="fas fa-hospital"></i>
+                    </div>
+                    <div class="topic-info">
+                        <h3>Med-Surg</h3>
+                        <span class="guide-count">Coming Soon</span>
+                    </div>
+                </div>
+
+                <div class="topic-card coming-soon">
+                    <div class="topic-icon">
+                        <i class="fas fa-baby"></i>
+                    </div>
+                    <div class="topic-info">
+                        <h3>Maternity</h3>
+                        <span class="guide-count">Coming Soon</span>
+                    </div>
+                </div>
+
+                <div class="topic-card coming-soon">
+                    <div class="topic-icon">
+                        <i class="fas fa-child"></i>
+                    </div>
+                    <div class="topic-info">
+                        <h3>Pediatrics</h3>
+                        <span class="guide-count">Coming Soon</span>
+                    </div>
+                </div>
+
+                <div class="topic-card coming-soon">
+                    <div class="topic-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <div class="topic-info">
+                        <h3>Mental Health</h3>
+                        <span class="guide-count">Coming Soon</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lab Values Section -->
+    <section class="guides-category-section" id="lab-values">
+        <div class="container">
+            <div class="category-header">
+                <div class="category-icon lab-values">
+                    <i class="fas fa-flask"></i>
+                </div>
+                <div class="category-title-group">
+                    <h2>Lab Values</h2>
+                    <p>Master critical laboratory values and their clinical significance</p>
+                </div>
+            </div>
+
+            <div class="guides-row">
+                <!-- Electrolytes Guide -->
+                <div class="guide-preview-card" data-guide-id="electrolytes">
+                    <div class="guide-card-header">
+                        <span class="guide-emoji">&#9889;</span>
+                        <div class="guide-badges">
+                            <span class="badge-preview">10% Free Preview</span>
+                            <span class="badge-price">$5.99</span>
+                        </div>
+                    </div>
+                    <div class="guide-card-body">
+                        <h3>Electrolyte Management Guide</h3>
+                        <p>Essential electrolyte ranges, nursing interventions, and clinical priorities. Includes sodium, potassium, calcium, magnesium, and phosphorus management.</p>
+                        <div class="guide-topics">
+                            <span class="topic-tag">Sodium</span>
+                            <span class="topic-tag">Potassium</span>
+                            <span class="topic-tag">Calcium</span>
+                            <span class="topic-tag">+2 more</span>
+                        </div>
+                    </div>
+                    <div class="guide-card-footer">
+                        <div class="guide-meta">
+                            <span><i class="fas fa-clock"></i> 8 min read</span>
+                            <span><i class="fas fa-signal"></i> Intermediate</span>
+                        </div>
+                        <div class="guide-actions">
+                            <button class="btn btn-outline-primary btn-preview" data-guide-id="electrolytes">
+                                <i class="fas fa-eye"></i> Preview
+                            </button>
+                            <button class="btn btn-primary btn-purchase" data-guide-id="electrolytes">
+                                <i class="fas fa-shopping-cart"></i> Buy Full Guide
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Critical Lab Values Guide -->
+                <div class="guide-preview-card" data-guide-id="critical-lab-values">
+                    <div class="guide-card-header">
+                        <span class="guide-emoji">&#129514;</span>
+                        <div class="guide-badges">
+                            <span class="badge-preview">10% Free Preview</span>
+                            <span class="badge-price">$5.99</span>
+                        </div>
+                    </div>
+                    <div class="guide-card-body">
+                        <h3>Critical Laboratory Values</h3>
+                        <p>Life-threatening lab values that require immediate notification and intervention. Essential reference for clinical practice and NCLEX preparation.</p>
+                        <div class="guide-topics">
+                            <span class="topic-tag">Critical Values</span>
+                            <span class="topic-tag">Lab Ranges</span>
+                            <span class="topic-tag">Emergency Response</span>
+                        </div>
+                    </div>
+                    <div class="guide-card-footer">
+                        <div class="guide-meta">
+                            <span><i class="fas fa-clock"></i> 6 min read</span>
+                            <span><i class="fas fa-signal"></i> Intermediate</span>
+                        </div>
+                        <div class="guide-actions">
+                            <button class="btn btn-outline-primary btn-preview" data-guide-id="critical-lab-values">
+                                <i class="fas fa-eye"></i> Preview
+                            </button>
+                            <button class="btn btn-primary btn-purchase" data-guide-id="critical-lab-values">
+                                <i class="fas fa-shopping-cart"></i> Buy Full Guide
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Clinical Skills Section -->
+    <section class="guides-category-section alt-bg" id="clinical-skills">
+        <div class="container">
+            <div class="category-header">
+                <div class="category-icon clinical-skills">
+                    <i class="fas fa-stethoscope"></i>
+                </div>
+                <div class="category-title-group">
+                    <h2>Clinical Skills</h2>
+                    <p>Foundational assessment techniques and clinical competencies</p>
+                </div>
+            </div>
+
+            <div class="guides-row">
+                <!-- Vital Signs Guide -->
+                <div class="guide-preview-card" data-guide-id="vital-signs">
+                    <div class="guide-card-header">
+                        <span class="guide-emoji">&#128147;</span>
+                        <div class="guide-badges">
+                            <span class="badge-preview">10% Free Preview</span>
+                            <span class="badge-price">$5.99</span>
+                        </div>
+                    </div>
+                    <div class="guide-card-body">
+                        <h3>Vital Signs Assessment Guide</h3>
+                        <p>Normal ranges, assessment techniques, and critical values for all age groups. Covers heart rate, blood pressure, respiratory rate, temperature, and oxygen saturation.</p>
+                        <div class="guide-topics">
+                            <span class="topic-tag">Heart Rate</span>
+                            <span class="topic-tag">Blood Pressure</span>
+                            <span class="topic-tag">Respiratory Rate</span>
+                            <span class="topic-tag">+2 more</span>
+                        </div>
+                    </div>
+                    <div class="guide-card-footer">
+                        <div class="guide-meta">
+                            <span><i class="fas fa-clock"></i> 7 min read</span>
+                            <span><i class="fas fa-signal"></i> Beginner</span>
+                        </div>
+                        <div class="guide-actions">
+                            <button class="btn btn-outline-primary btn-preview" data-guide-id="vital-signs">
+                                <i class="fas fa-eye"></i> Preview
+                            </button>
+                            <button class="btn btn-primary btn-purchase" data-guide-id="vital-signs">
+                                <i class="fas fa-shopping-cart"></i> Buy Full Guide
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Safety Section -->
+    <section class="guides-category-section" id="safety">
+        <div class="container">
+            <div class="category-header">
+                <div class="category-icon safety">
+                    <i class="fas fa-shield-virus"></i>
+                </div>
+                <div class="category-title-group">
+                    <h2>Safety & Infection Control</h2>
+                    <p>Protect patients and yourself with evidence-based safety protocols</p>
+                </div>
+            </div>
+
+            <div class="guides-row">
+                <!-- Isolation Precautions Guide -->
+                <div class="guide-preview-card" data-guide-id="isolation-precautions">
+                    <div class="guide-card-header">
+                        <span class="guide-emoji">&#128737;&#65039;</span>
+                        <div class="guide-badges">
+                            <span class="badge-preview">10% Free Preview</span>
+                            <span class="badge-price">$5.99</span>
+                        </div>
+                    </div>
+                    <div class="guide-card-body">
+                        <h3>Isolation Precautions Guide</h3>
+                        <p>Comprehensive guide to standard, contact, droplet, and airborne precautions. Includes PPE requirements and infection control protocols.</p>
+                        <div class="guide-topics">
+                            <span class="topic-tag">Standard Precautions</span>
+                            <span class="topic-tag">Contact</span>
+                            <span class="topic-tag">Droplet</span>
+                            <span class="topic-tag">+2 more</span>
+                        </div>
+                    </div>
+                    <div class="guide-card-footer">
+                        <div class="guide-meta">
+                            <span><i class="fas fa-clock"></i> 9 min read</span>
+                            <span><i class="fas fa-signal"></i> Intermediate</span>
+                        </div>
+                        <div class="guide-actions">
+                            <button class="btn btn-outline-primary btn-preview" data-guide-id="isolation-precautions">
+                                <i class="fas fa-eye"></i> Preview
+                            </button>
+                            <button class="btn btn-primary btn-purchase" data-guide-id="isolation-precautions">
+                                <i class="fas fa-shopping-cart"></i> Buy Full Guide
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Medications Section -->
+    <section class="guides-category-section alt-bg" id="medications">
+        <div class="container">
+            <div class="category-header">
+                <div class="category-icon medications">
+                    <i class="fas fa-pills"></i>
+                </div>
+                <div class="category-title-group">
+                    <h2>Medications & Calculations</h2>
+                    <p>Safe medication administration and dosage calculations</p>
+                </div>
+            </div>
+
+            <div class="guides-row">
+                <!-- Medication Math Guide -->
+                <div class="guide-preview-card" data-guide-id="medication-math">
+                    <div class="guide-card-header">
+                        <span class="guide-emoji">&#129518;</span>
+                        <div class="guide-badges">
+                            <span class="badge-preview">10% Free Preview</span>
+                            <span class="badge-price">$5.99</span>
+                        </div>
+                    </div>
+                    <div class="guide-card-body">
+                        <h3>Medication Dosage Calculations</h3>
+                        <p>Essential drug calculations with step-by-step examples and practice problems. Covers dosage calculations, IV rates, and weight-based dosing.</p>
+                        <div class="guide-topics">
+                            <span class="topic-tag">Dosage Calculations</span>
+                            <span class="topic-tag">IV Flow Rates</span>
+                            <span class="topic-tag">Weight-Based Dosing</span>
+                            <span class="topic-tag">+1 more</span>
+                        </div>
+                    </div>
+                    <div class="guide-card-footer">
+                        <div class="guide-meta">
+                            <span><i class="fas fa-clock"></i> 12 min read</span>
+                            <span><i class="fas fa-signal"></i> Advanced</span>
+                        </div>
+                        <div class="guide-actions">
+                            <button class="btn btn-outline-primary btn-preview" data-guide-id="medication-math">
+                                <i class="fas fa-eye"></i> Preview
+                            </button>
+                            <button class="btn btn-primary btn-purchase" data-guide-id="medication-math">
+                                <i class="fas fa-shopping-cart"></i> Buy Full Guide
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Coming Soon Section -->
+    <section class="coming-soon-section">
+        <div class="container">
+            <div class="coming-soon-content">
+                <div class="coming-soon-icon">
+                    <i class="fas fa-rocket"></i>
+                </div>
+                <h2>More Guides Coming Soon</h2>
+                <p>We're actively developing comprehensive study guides for Med-Surg, Maternity, Pediatrics, Mental Health, and Pharmacology. Join our Discord community to be notified when new guides are released!</p>
+
+                <div class="coming-soon-topics">
+                    <div class="upcoming-topic">
+                        <i class="fas fa-heart"></i>
+                        <span>Cardiovascular</span>
+                    </div>
+                    <div class="upcoming-topic">
+                        <i class="fas fa-lungs"></i>
+                        <span>Respiratory</span>
+                    </div>
+                    <div class="upcoming-topic">
+                        <i class="fas fa-disease"></i>
+                        <span>Endocrine</span>
+                    </div>
+                    <div class="upcoming-topic">
+                        <i class="fas fa-brain"></i>
+                        <span>Neurological</span>
+                    </div>
+                    <div class="upcoming-topic">
+                        <i class="fas fa-baby"></i>
+                        <span>Maternity</span>
+                    </div>
+                    <div class="upcoming-topic">
+                        <i class="fas fa-child"></i>
+                        <span>Pediatrics</span>
+                    </div>
+                </div>
+
+                <a href="https://discord.gg/y2Mh77wAV2" class="btn btn-primary btn-lg">
+                    <i class="fab fa-discord"></i> Join Discord for Updates
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Preview Modal -->
+    <div class="preview-modal" id="preview-modal">
+        <div class="preview-modal-content">
+            <div class="preview-modal-header">
+                <h2 id="preview-modal-title">Guide Preview</h2>
+                <button class="preview-modal-close" id="preview-modal-close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="preview-modal-body" id="preview-modal-body">
+                <!-- Preview content will be loaded here -->
+            </div>
+            <div class="preview-modal-footer">
+                <div class="preview-cta">
+                    <div class="preview-cta-text">
+                        <i class="fas fa-lock"></i>
+                        <span>This is a 10% preview. Purchase for full access to all content.</span>
+                    </div>
+                    <button class="btn btn-primary btn-lg btn-purchase-modal" id="btn-purchase-modal">
+                        <i class="fas fa-shopping-cart"></i> Buy Full Guide - $5.99
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Premium CTA Section -->
+    <section class="premium-cta-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="premium-badge">
+                        <i class="fas fa-star"></i> GET ALL GUIDES
+                    </div>
+                    <h2>Ready to Ace Your NCLEX?</h2>
+                    <p>
+                        Purchase individual guides for $5.99 each, or save with class packages that include
+                        all guides plus NCLEX practice questions and printable study materials.
+                    </p>
+
+                    <div class="premium-features">
+                        <div class="premium-feature">
+                            <div class="feature-icon">
+                                <i class="fas fa-book-medical"></i>
+                            </div>
+                            <h4>5 Full Guides</h4>
+                            <p>Complete study materials</p>
+                        </div>
+                        <div class="premium-feature">
+                            <div class="feature-icon">
+                                <i class="fas fa-clipboard-check"></i>
+                            </div>
+                            <h4>NCLEX Questions</h4>
+                            <p>Practice with rationales</p>
+                        </div>
+                        <div class="premium-feature">
+                            <div class="feature-icon">
+                                <i class="fas fa-download"></i>
+                            </div>
+                            <h4>PDF Access</h4>
+                            <p>Printable study cards</p>
+                        </div>
+                    </div>
+
+                    <div class="premium-buttons">
+                        <a href="store.html" class="btn btn-light btn-lg">
+                            <i class="fas fa-shopping-cart"></i> Visit Store
+                        </a>
+                        <a href="https://discord.gg/y2Mh77wAV2" class="btn btn-outline-light btn-lg">
+                            <i class="fab fa-discord"></i> Join Free Discord
+                        </a>
+                    </div>
+
+                    <p class="premium-guarantee">
+                        <i class="fas fa-shield-alt"></i> 30-day money-back guarantee
+                        <i class="fas fa-sync"></i> Free lifetime updates
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-brand">
+                        <span>The Nursing Collective</span>
+                    </div>
+                    <p>Empowering nursing students with comprehensive study guides, practice questions, and resources for academic success.</p>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="study-guides.html">Study Guides</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
+                        <li><a href="index.html#features">Features</a></li>
+                        <li><a href="https://discord.gg/y2Mh77wAV2">Discord Server</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p>
+                        <i class="fas fa-envelope"></i>
+                        <a href="mailto:support@thenursingcollective.pro">support@thenursingcollective.pro</a>
+                    </p>
+                    <div class="social-links">
+                        <a href="https://discord.gg/y2Mh77wAV2" aria-label="Discord" target="_blank" rel="noopener">
+                            <i class="fab fa-discord"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 The Nursing Collective. Built with care for nursing students.</p>
+                <p style="font-size: 0.7rem; margin-top: 8px; opacity: 0.5;">
+                    <a href="https://www.flaticon.com/free-icons/education" title="education icons" target="_blank" rel="noopener" style="color: inherit; text-decoration: none;">Icons by Freepik & Slamlabs - Flaticon</a>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+    <!-- Custom Modal System -->
+    <script src="modal.js"></script>
+
+    <script src="script.js"></script>
+    <script src="dark-mode.js"></script>
+    <script src="api-service.js"></script>
+    <script src="cart-service.js"></script>
+    <script src="cart-ui.js"></script>
+    <script src="study-guides.js"></script>
+</body>
+</html>

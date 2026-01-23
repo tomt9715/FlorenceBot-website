@@ -451,7 +451,7 @@ function showGuideNotFound(guideId) {
             <p style="color: var(--text-secondary); margin-bottom: 24px;">
                 The study guide "${guideId}" could not be found. It may have been moved or removed.
             </p>
-            <a href="guides.html" class="btn btn-primary">
+            <a href="study-guides.html" class="btn btn-primary">
                 <i class="fas fa-arrow-left me-2"></i>Browse All Guides
             </a>
         </div>
@@ -585,7 +585,7 @@ async function loadMarkdownContent(file, hasAccess, guideId) {
                 <i class="fas fa-exclamation-triangle" style="font-size: 3rem; color: #f59e0b; margin-bottom: 20px;"></i>
                 <h2 style="margin-bottom: 10px;">Failed to Load Guide</h2>
                 <p style="color: var(--guide-text-light);">We couldn't load this study guide. Please try again later.</p>
-                <a href="guides.html" class="btn btn-primary" style="margin-top: 20px; display: inline-block;">
+                <a href="study-guides.html" class="btn btn-primary" style="margin-top: 20px; display: inline-block;">
                     <i class="fas fa-arrow-left"></i> Back to All Guides
                 </a>
             </div>
