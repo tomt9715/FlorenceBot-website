@@ -284,8 +284,10 @@ function displayCartItems() {
         return;
     }
 
-    // Build cart items HTML
-    let html = '<div class="cart-items-checkout">';
+    // Build cart items HTML with scroll wrapper
+    const needsScroll = cartItems.length > 4;
+    let html = '<div class="cart-items-wrapper">';
+    html += '<div class="cart-items-checkout">';
 
     cartItems.forEach(item => {
         const typeLabel = getTypeLabel(item.product_type);
@@ -315,6 +317,18 @@ function displayCartItems() {
 
     html += '</div>';
 
+    // Add scroll indicator if there are more than 4 items
+    if (needsScroll) {
+        html += `
+            <div class="cart-scroll-indicator">
+                <i class="fas fa-chevron-down"></i>
+                <span>Scroll for more</span>
+            </div>
+        `;
+    }
+
+    html += '</div>';
+
     // Add item count summary
     const totalItems = cartItems.reduce((sum, item) => sum + (item.quantity || 1), 0);
     html += `
@@ -336,6 +350,34 @@ function displayCartItems() {
 
     // Attach remove button event listeners
     attachRemoveButtonListeners();
+
+    // Setup scroll indicator behavior
+    setupScrollIndicator();
+}
+
+/**
+ * Setup scroll indicator to hide when user scrolls
+ */
+function setupScrollIndicator() {
+    const cartList = document.querySelector('.cart-items-checkout');
+    const indicator = document.querySelector('.cart-scroll-indicator');
+
+    if (!cartList || !indicator) return;
+
+    // Check if scrolling is actually needed
+    if (cartList.scrollHeight <= cartList.clientHeight) {
+        indicator.classList.add('hidden');
+        return;
+    }
+
+    cartList.addEventListener('scroll', function() {
+        // Hide indicator once user has scrolled a bit
+        if (cartList.scrollTop > 20) {
+            indicator.classList.add('hidden');
+        } else {
+            indicator.classList.remove('hidden');
+        }
+    });
 }
 
 /**
@@ -444,6 +486,9 @@ function addCheckoutItemStyles() {
     const styleEl = document.createElement('style');
     styleEl.id = 'checkout-item-styles';
     styleEl.textContent = `
+        .cart-items-wrapper {
+            position: relative;
+        }
         .cart-items-checkout {
             display: flex;
             flex-direction: column;
@@ -465,6 +510,33 @@ function addCheckoutItemStyles() {
         }
         .cart-items-checkout::-webkit-scrollbar-thumb:hover {
             background: var(--text-secondary);
+        }
+        .cart-scroll-indicator {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            padding: 12px 0 4px;
+            background: linear-gradient(to bottom, transparent, var(--card-bg) 40%);
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        .cart-scroll-indicator i {
+            font-size: 0.7rem;
+            animation: bounce 1.5s infinite;
+        }
+        .cart-scroll-indicator.hidden {
+            opacity: 0;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(3px); }
         }
         .checkout-item {
             display: flex;
