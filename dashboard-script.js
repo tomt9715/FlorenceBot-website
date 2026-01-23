@@ -840,61 +840,61 @@ function getGuideIcon(productId) {
     // Map product IDs to icon filenames in assets/images/guide-icons/
     const iconMap = {
         // Cardiovascular (6)
-        'heart-failure': 'heart-failure.png',
-        'myocardial-infarction': 'heart-attack.png',
-        'arrhythmias': 'arrhythmias.png',
-        'hypertension': 'hypertension.png',
-        'coronary-artery-disease': 'cad.png',
-        'peripheral-vascular-disease': 'pad.png',
+        'heart-failure': 'heart-failure.webp',
+        'myocardial-infarction': 'heart-attack.webp',
+        'arrhythmias': 'arrhythmias.webp',
+        'hypertension': 'hypertension.webp',
+        'coronary-artery-disease': 'cad.webp',
+        'peripheral-vascular-disease': 'pad.webp',
 
         // Respiratory (6)
-        'copd': 'copd.png',
-        'asthma': 'asthma.png',
-        'pneumonia': 'pneumonia.png',
-        'oxygen-therapy': 'oxygen.png',
-        'tuberculosis': 'tb.png',
-        'chest-tubes': 'chest.png',
+        'copd': 'copd.webp',
+        'asthma': 'asthma.webp',
+        'pneumonia': 'pneumonia.webp',
+        'oxygen-therapy': 'oxygen.webp',
+        'tuberculosis': 'tb.webp',
+        'chest-tubes': 'chest.webp',
 
         // Endocrine (5)
-        'diabetes-type1': 'type-1.png',
-        'diabetes-type2': 'type-2.png',
-        'thyroid-disorders': 'thyroid.png',
-        'adrenal-disorders': 'adrenal.png',
-        'pituitary-disorders': 'pituitary.png',
+        'diabetes-type1': 'type-1.webp',
+        'diabetes-type2': 'type-2.webp',
+        'thyroid-disorders': 'thyroid.webp',
+        'adrenal-disorders': 'adrenal.webp',
+        'pituitary-disorders': 'pituitary.webp',
 
         // Neurological (6)
-        'stroke': 'stroke.png',
-        'seizures': 'seizure.png',
-        'spinal-cord-injury': 'spinal-cord-injury.png',
-        'traumatic-brain-injury': 'brain-injury.png',
-        'meningitis': 'meningitis.png',
-        'parkinsons-ms': 'shaking.png',
+        'stroke': 'stroke.webp',
+        'seizures': 'seizure.webp',
+        'spinal-cord-injury': 'spinal-cord-injury.webp',
+        'traumatic-brain-injury': 'brain-injury.webp',
+        'meningitis': 'meningitis.webp',
+        'parkinsons-ms': 'shaking.webp',
 
         // Renal (6)
-        'acute-kidney-injury': 'kidney-acute.png',
-        'chronic-kidney-disease': 'kidney-disease.png',
-        'dialysis': 'kidney-dialysis.png',
-        'urinary-tract-infections': 'urinary-tract-infection.png',
-        'kidney-stones': 'kidney.png',
-        'fluid-electrolytes': 'chemical.png',
+        'acute-kidney-injury': 'kidney-acute.webp',
+        'chronic-kidney-disease': 'kidney-disease.webp',
+        'dialysis': 'kidney-dialysis.webp',
+        'urinary-tract-infections': 'urinary-tract-infection.webp',
+        'kidney-stones': 'kidney.webp',
+        'fluid-electrolytes': 'chemical.webp',
 
         // Gastrointestinal (6)
-        'gi-bleeding': 'gi-bleeding.png',
-        'bowel-obstruction': 'bowel-obstruction.png',
-        'liver-disease': 'liver.png',
-        'pancreatitis': 'intestines.png',
-        'inflammatory-bowel-disease': 'intestines.png',
-        'gerd-peptic-ulcer': 'ulcer.png',
+        'gi-bleeding': 'gi-bleeding.webp',
+        'bowel-obstruction': 'bowel-obstruction.webp',
+        'liver-disease': 'liver.webp',
+        'pancreatitis': 'intestines.webp',
+        'inflammatory-bowel-disease': 'intestines.webp',
+        'gerd-peptic-ulcer': 'ulcer.webp',
 
         // Musculoskeletal (5)
-        'fractures': 'broken-bone.png',
-        'arthritis': 'arthritis.png',
-        'hip-knee-replacement': 'prothesis.png',
-        'osteoporosis': 'osteoporosis.png',
-        'amputation-care': 'amputation.png',
+        'fractures': 'broken-bone.webp',
+        'arthritis': 'arthritis.webp',
+        'hip-knee-replacement': 'prothesis.webp',
+        'osteoporosis': 'osteoporosis.webp',
+        'amputation-care': 'amputation.webp',
 
         // Mental Health (5)
-        'eating-disorders': 'eating-disorder.png'
+        'eating-disorders': 'eating-disorder.webp'
     };
 
     const iconFile = iconMap[productId];
