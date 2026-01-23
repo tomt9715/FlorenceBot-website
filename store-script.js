@@ -189,12 +189,19 @@ document.addEventListener('DOMContentLoaded', function() {
     const showMoreContainer = document.getElementById('show-more-container');
     const showMoreCount = document.getElementById('show-more-count');
 
-    // Show More functionality for Packages
-    const PACKAGES_PER_PAGE = 3; // Number of packages to show initially
+    // Show More functionality for Packages - show all 6 packages
+    const PACKAGES_PER_PAGE = 6; // Show all packages (no Show More needed)
     let visiblePackagesCount = PACKAGES_PER_PAGE;
     const showMorePackagesBtn = document.getElementById('show-more-packages-btn');
     const showMorePackagesContainer = document.getElementById('show-more-packages-container');
     const showMorePackagesCount = document.getElementById('show-more-packages-count');
+
+    // Package type toggle (Lite vs Full)
+    const packageToggleContainer = document.getElementById('package-toggle-container');
+    const packageTypeToggle = document.getElementById('package-type-toggle');
+    const toggleLabelLite = document.getElementById('toggle-label-lite');
+    const toggleLabelFull = document.getElementById('toggle-label-full');
+    let currentPackageType = 'lite'; // Default to lite packages
 
     // Category metadata
     const categories = {
@@ -268,6 +275,168 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
+
+    // Package type toggle functionality (Lite vs Full)
+    if (packageTypeToggle) {
+        packageTypeToggle.addEventListener('change', function() {
+            currentPackageType = this.checked ? 'full' : 'lite';
+            updatePackageToggleLabels();
+            updatePackageCards();
+            updatePackageSavingsBadges();
+        });
+    }
+
+    // Update toggle label styles
+    function updatePackageToggleLabels() {
+        if (toggleLabelLite && toggleLabelFull) {
+            if (currentPackageType === 'lite') {
+                toggleLabelLite.classList.add('active');
+                toggleLabelFull.classList.remove('active');
+            } else {
+                toggleLabelLite.classList.remove('active');
+                toggleLabelFull.classList.add('active');
+            }
+        }
+    }
+
+    // Update package cards based on toggle state
+    function updatePackageCards() {
+        packageCards.forEach(card => {
+            const liteProduct = card.dataset.liteProduct;
+            const fullProduct = card.dataset.fullProduct;
+            const litePrice = card.dataset.litePrice;
+            const fullPrice = card.dataset.fullPrice;
+            const cardTitle = card.querySelector('h3')?.textContent || 'Package';
+
+            const priceEl = card.querySelector('.package-price');
+            const addToCartBtn = card.querySelector('.package-add-to-cart');
+
+            if (currentPackageType === 'lite') {
+                if (priceEl) priceEl.textContent = '$' + litePrice;
+                if (addToCartBtn) {
+                    addToCartBtn.dataset.product = liteProduct;
+                    addToCartBtn.dataset.name = cardTitle + ' - Lite';
+                    // Reset button state
+                    addToCartBtn.innerHTML = '<i class="fas fa-cart-plus"></i> Add to Cart';
+                    addToCartBtn.classList.remove('added');
+                    addToCartBtn.disabled = false;
+                    // Check if already in cart
+                    if (typeof cartService !== 'undefined' && cartService.isInCart && cartService.isInCart(liteProduct)) {
+                        addToCartBtn.innerHTML = '<i class="fas fa-check"></i> In Cart';
+                        addToCartBtn.classList.add('added');
+                        addToCartBtn.disabled = true;
+                    }
+                }
+            } else {
+                if (priceEl) priceEl.textContent = '$' + fullPrice;
+                if (addToCartBtn) {
+                    addToCartBtn.dataset.product = fullProduct;
+                    addToCartBtn.dataset.name = cardTitle + ' - Full';
+                    // Reset button state
+                    addToCartBtn.innerHTML = '<i class="fas fa-cart-plus"></i> Add to Cart';
+                    addToCartBtn.classList.remove('added');
+                    addToCartBtn.disabled = false;
+                    // Check if already in cart
+                    if (typeof cartService !== 'undefined' && cartService.isInCart && cartService.isInCart(fullProduct)) {
+                        addToCartBtn.innerHTML = '<i class="fas fa-check"></i> In Cart';
+                        addToCartBtn.classList.add('added');
+                        addToCartBtn.disabled = true;
+                    }
+                }
+            }
+        });
+    }
+
+    // Update savings badges based on toggle state
+    function updatePackageSavingsBadges() {
+        const GUIDE_PRICE = 5.99;
+        const LITE_PRICE = 24.99;
+        const FULL_PRICE = 49.99;
+
+        // Count guides in each category
+        const categoryCounts = {};
+        document.querySelectorAll('.guide-card').forEach(card => {
+            const category = card.getAttribute('data-category');
+            if (category) {
+                categoryCounts[category] = (categoryCounts[category] || 0) + 1;
+            }
+        });
+
+        // Update each badge
+        const badges = document.querySelectorAll('.package-pricing-simple .savings-badge');
+        badges.forEach(badge => {
+            const category = badge.getAttribute('data-category');
+            const guideCount = categoryCounts[category] || 0;
+            const individualTotal = guideCount * GUIDE_PRICE;
+
+            if (currentPackageType === 'lite') {
+                // Lite package savings calculation
+                const savings = individualTotal - LITE_PRICE;
+                const savingsPercent = Math.round((savings / individualTotal) * 100);
+
+                if (savings > 0 && savingsPercent >= 50) {
+                    badge.textContent = 'SAVE ' + savingsPercent + '%';
+                    badge.classList.add('best-value');
+                    badge.classList.remove('hidden');
+                    badge.setAttribute('data-tooltip',
+                        'Buying ' + guideCount + ' guides separately = $' + individualTotal.toFixed(2) + '. ' +
+                        'Lite Package saves you $' + savings.toFixed(2) + '!'
+                    );
+                    badge.style.display = 'inline-block';
+                } else if (savings > 0) {
+                    badge.textContent = 'SAVE ' + savingsPercent + '%';
+                    badge.classList.remove('best-value');
+                    badge.classList.remove('hidden');
+                    badge.setAttribute('data-tooltip',
+                        'Buying ' + guideCount + ' guides separately = $' + individualTotal.toFixed(2) + '. ' +
+                        'Lite Package saves you $' + savings.toFixed(2) + '!'
+                    );
+                    badge.style.display = 'inline-block';
+                } else {
+                    badge.textContent = 'BUNDLE DEAL';
+                    badge.classList.remove('best-value');
+                    badge.setAttribute('data-tooltip',
+                        'Get core ' + category + ' guides plus essential topics covered!'
+                    );
+                    badge.style.display = 'inline-block';
+                }
+            } else {
+                // Full package savings calculation
+                const savings = individualTotal - FULL_PRICE;
+                const savingsPercent = Math.round((savings / individualTotal) * 100);
+
+                if (savings > 0 && savingsPercent >= 50) {
+                    badge.textContent = 'SAVE ' + savingsPercent + '%';
+                    badge.classList.add('best-value');
+                    badge.classList.remove('hidden');
+                    badge.setAttribute('data-tooltip',
+                        'Buying ' + guideCount + ' guides separately = $' + individualTotal.toFixed(2) + '. ' +
+                        'Full Package saves you $' + savings.toFixed(2) + '!'
+                    );
+                    badge.style.display = 'inline-block';
+                } else if (savings > 0) {
+                    badge.textContent = 'SAVE ' + savingsPercent + '%';
+                    badge.classList.remove('best-value');
+                    badge.classList.remove('hidden');
+                    badge.setAttribute('data-tooltip',
+                        'Buying ' + guideCount + ' guides separately = $' + individualTotal.toFixed(2) + '. ' +
+                        'Full Package saves you $' + savings.toFixed(2) + '!'
+                    );
+                    badge.style.display = 'inline-block';
+                } else {
+                    badge.textContent = 'BUNDLE DEAL';
+                    badge.classList.remove('best-value');
+                    badge.setAttribute('data-tooltip',
+                        'Get all ' + guideCount + ' ' + category + ' guides plus NCLEX questions & reference sheets!'
+                    );
+                    badge.style.display = 'inline-block';
+                }
+            }
+        });
+    }
+
+    // Initialize toggle labels on load
+    updatePackageToggleLabels();
 
     // Sub-category chip functionality
     subcategoryButtons.forEach(button => {
@@ -611,6 +780,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 categoryFilterSection.style.display = 'block';
                 if (packageCalloutSection) packageCalloutSection.style.display = 'block';
                 if (packageComparison) packageComparison.style.display = 'none';
+                if (packageToggleContainer) packageToggleContainer.classList.remove('visible');
                 if (emptyState) emptyState.style.display = 'none';
                 if (searchContainer) searchContainer.style.display = 'flex';
                 if (quickFiltersSection) quickFiltersSection.style.display = 'block';
@@ -676,6 +846,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 categoryFilterSection.style.display = 'block';
                 if (packageCalloutSection) packageCalloutSection.style.display = 'none';
                 if (packageComparison) packageComparison.style.display = 'block';
+                if (packageToggleContainer) packageToggleContainer.classList.add('visible');
                 if (emptyState) emptyState.style.display = 'none';
                 if (searchContainer) searchContainer.style.display = 'none';
                 if (quickFiltersSection) quickFiltersSection.style.display = 'none';
@@ -684,7 +855,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 // Update header
                 categoryTitle.textContent = 'Class Packages';
-                categoryDescription.textContent = 'Choose Full ($49.99) or Lite ($24.99) packages for each nursing class';
+                categoryDescription.textContent = 'Use the toggle below to switch between Lite ($24.99) and Full ($49.99) packages';
 
                 // Reset filter to "All"
                 currentFilter = 'all';
@@ -702,7 +873,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     subcategoryChips.classList.remove('visible');
                 }
 
-                // Filter packages with pagination
+                // Update package cards and badges based on current toggle state
+                updatePackageCards();
+                updatePackageSavingsBadges();
+
+                // Filter packages (show all 6)
                 filterPackages();
             }
         });
@@ -913,53 +1088,36 @@ function initializeAddToCartButtons() {
  * Initialize package add-to-cart buttons
  */
 function initializePackageButtons() {
-    // Package product data
-    const packages = {
-        'fundamentals-full': { name: 'Fundamentals Full Package', type: 'full-package', price: 49.99 },
-        'fundamentals-lite': { name: 'Fundamentals Lite Package', type: 'lite-package', price: 24.99 },
-        'medsurg-full': { name: 'Med-Surg Full Package', type: 'full-package', price: 49.99 },
-        'medsurg-lite': { name: 'Med-Surg Lite Package', type: 'lite-package', price: 24.99 },
-        'pharmacology-full': { name: 'Pharmacology Full Package', type: 'full-package', price: 49.99 },
-        'pharmacology-lite': { name: 'Pharmacology Lite Package', type: 'lite-package', price: 24.99 },
-        'maternal-full': { name: 'Maternal/OB Full Package', type: 'full-package', price: 49.99 },
-        'maternal-lite': { name: 'Maternal/OB Lite Package', type: 'lite-package', price: 24.99 },
-        'pediatrics-full': { name: 'Pediatrics Full Package', type: 'full-package', price: 49.99 },
-        'pediatrics-lite': { name: 'Pediatrics Lite Package', type: 'lite-package', price: 24.99 },
-        'mental-health-full': { name: 'Mental Health Full Package', type: 'full-package', price: 49.99 },
-        'mental-health-lite': { name: 'Mental Health Lite Package', type: 'lite-package', price: 24.99 }
+    // Package product data mapping
+    const packagePrices = {
+        'fundamentals-full': 49.99, 'fundamentals-lite': 24.99,
+        'medsurg-full': 49.99, 'medsurg-lite': 24.99,
+        'pharmacology-full': 49.99, 'pharmacology-lite': 24.99,
+        'maternal-full': 49.99, 'maternal-lite': 24.99,
+        'pediatrics-full': 49.99, 'pediatrics-lite': 24.99,
+        'mental-health-full': 49.99, 'mental-health-lite': 24.99
     };
 
-    // Find all package links
-    const packageLinks = document.querySelectorAll('.package-card a[href^="checkout.html"]');
+    // Find all package add-to-cart buttons (new simplified structure)
+    const packageButtons = document.querySelectorAll('.package-add-to-cart');
 
-    packageLinks.forEach(link => {
-        // Extract product ID from URL
-        const url = new URL(link.href, window.location.origin);
-        const productId = url.searchParams.get('product');
+    packageButtons.forEach(button => {
+        button.addEventListener('click', async function() {
+            const productId = this.dataset.product;
+            const productName = this.dataset.name;
+            const price = packagePrices[productId] || (productId.includes('-full') ? 49.99 : 24.99);
+            const productType = productId.includes('-full') ? 'full-package' : 'lite-package';
 
-        if (!productId || !packages[productId]) return;
+            if (!productId) return;
 
-        const pkg = packages[productId];
-
-        // Create new button
-        const button = document.createElement('button');
-        button.className = 'add-to-cart-btn';
-        button.setAttribute('data-product-id', productId);
-        button.setAttribute('data-product-name', pkg.name);
-        button.setAttribute('data-product-type', pkg.type);
-        button.setAttribute('data-product-price', pkg.price.toString());
-
-        // Preserve original button text for packages
-        const isFullPackage = productId.includes('-full');
-        button.innerHTML = isFullPackage
-            ? '<i class="fas fa-cart-plus"></i> Get Full Package'
-            : '<i class="fas fa-cart-plus"></i> Get Lite Package';
-
-        // Add click handler
-        button.addEventListener('click', handleAddToCartClick);
-
-        // Replace link with button
-        link.parentNode.replaceChild(button, link);
+            // Use cartUI if available
+            if (typeof cartUI !== 'undefined') {
+                await cartUI.addToCart(productId, productName, productType, price, this);
+            } else {
+                console.error('Cart UI not available');
+                alert('Unable to add to cart. Please try again.');
+            }
+        });
     });
 }
 
@@ -1146,8 +1304,9 @@ function initializeQuickView() {
  * Calculates savings based on actual guide count in each category
  */
 function initializeSavingsBadges() {
+    // This function now initializes for the default LITE package state
     const GUIDE_PRICE = 5.99;
-    const FULL_PACKAGE_PRICE = 49.99;
+    const LITE_PRICE = 24.99;
 
     // Count guides in each category
     const guideCards = document.querySelectorAll('.guide-card');
@@ -1162,8 +1321,8 @@ function initializeSavingsBadges() {
 
     console.log('Guide counts by category:', categoryCounts);
 
-    // Update savings badges
-    const savingsBadges = document.querySelectorAll('.savings-badge[data-category]');
+    // Update savings badges (only the new simplified pricing badges)
+    const savingsBadges = document.querySelectorAll('.package-pricing-simple .savings-badge[data-category]');
 
     savingsBadges.forEach(badge => {
         const category = badge.getAttribute('data-category');
@@ -1175,26 +1334,29 @@ function initializeSavingsBadges() {
         }
 
         const individualTotal = guideCount * GUIDE_PRICE;
-        const savings = individualTotal - FULL_PACKAGE_PRICE;
+        const savings = individualTotal - LITE_PRICE;
         const savingsPercent = Math.round((savings / individualTotal) * 100);
 
         // Only show badge if there are actual savings
         if (savingsPercent > 0) {
-            badge.textContent = `Save ${savingsPercent}%`;
+            badge.textContent = 'SAVE ' + savingsPercent + '%';
             badge.setAttribute('data-tooltip',
-                `${guideCount} guides at $${GUIDE_PRICE} each = $${individualTotal.toFixed(2)}. You save $${savings.toFixed(2)}!`
+                'Buying ' + guideCount + ' guides separately = $' + individualTotal.toFixed(2) + '. ' +
+                'Lite Package saves you $' + savings.toFixed(2) + '!'
             );
 
             // Add best-value class for highest savings (over 50%)
             if (savingsPercent >= 50) {
                 badge.classList.add('best-value');
             }
+            badge.style.display = 'inline-block';
         } else {
-            // No savings - hide badge or show "Bundle Deal"
-            badge.textContent = 'Bundle Deal';
+            // No savings - show "Bundle Deal"
+            badge.textContent = 'BUNDLE DEAL';
             badge.setAttribute('data-tooltip',
-                `Get all ${guideCount} ${category} guides plus NCLEX questions & reference sheets!`
+                'Get core ' + category + ' guides plus essential topics covered!'
             );
+            badge.style.display = 'inline-block';
         }
     });
 }

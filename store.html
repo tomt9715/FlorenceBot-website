@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="css/bundle.min.css">
 
     <!-- Store-specific styles (includes new features) -->
-    <link rel="stylesheet" href="css/store-style.css?v=13">
+    <link rel="stylesheet" href="css/store-style.css?v=14">
 
 
     <!-- Bootstrap 5 CSS -->
@@ -1236,6 +1236,16 @@
                         </div>
                     </div>
 
+                    <!-- Package Type Toggle -->
+                    <div class="package-toggle-container" id="package-toggle-container">
+                        <span class="package-toggle-label" id="toggle-label-lite">Lite Package</span>
+                        <label class="package-toggle-switch">
+                            <input type="checkbox" id="package-type-toggle">
+                            <span class="package-toggle-slider"></span>
+                        </label>
+                        <span class="package-toggle-label" id="toggle-label-full">Full Package</span>
+                    </div>
+
                     <!-- Package Comparison Info (Hidden by default, shown with packages) -->
                     <div class="package-comparison" id="package-comparison">
                         <div class="comparison-header">
@@ -1269,7 +1279,9 @@
                     <!-- Class Packages Grid (Hidden by default) -->
                     <div class="packages-grid" id="packages-grid">
                         <!-- Fundamentals Package -->
-                        <div class="package-card" data-category="fundamentals">
+                        <div class="package-card" data-category="fundamentals"
+                             data-lite-product="fundamentals-lite" data-full-product="fundamentals-full"
+                             data-lite-price="24.99" data-full-price="49.99">
                             <div class="package-card-header">
                                 <div class="package-card-icon">
                                     <img src="assets/images/books.webp" alt="Fundamentals of Nursing" loading="lazy">
@@ -1285,29 +1297,21 @@
                                 </div>
                             </div>
 
-                            <div class="package-pricing">
-                                <div class="package-tier">
-                                    <div class="package-tier-left">
-                                        <span class="package-tier-name">Full Package</span>
-                                        <span class="savings-badge" data-category="fundamentals" data-tooltip="Buying 5 guides separately = $29.95. Package saves you $0!"></span>
-                                    </div>
-                                    <span class="package-tier-price">$49.99</span>
+                            <div class="package-pricing-simple">
+                                <div class="package-price-row">
+                                    <span class="package-price">$24.99</span>
+                                    <span class="savings-badge" data-category="fundamentals"></span>
                                 </div>
-                                <a href="checkout.html?product=fundamentals-full" class="btn btn-primary btn-sm w-100 mb-8">
-                                    Get Full Package
-                                </a>
-                                <div class="package-tier">
-                                    <span class="package-tier-name">Lite Package</span>
-                                    <span class="package-tier-price secondary">$24.99</span>
-                                </div>
-                                <a href="checkout.html?product=fundamentals-lite" class="btn btn-outline-primary btn-sm w-100">
-                                    Get Lite Package
-                                </a>
+                                <button class="btn btn-primary w-100 package-add-to-cart" data-product="fundamentals-lite" data-name="Fundamentals of Nursing - Lite">
+                                    <i class="fas fa-cart-plus"></i> Add to Cart
+                                </button>
                             </div>
                         </div>
 
                         <!-- Med-Surg Package (Popular) -->
-                        <div class="package-card popular" data-category="med-surg">
+                        <div class="package-card popular" data-category="med-surg"
+                             data-lite-product="medsurg-lite" data-full-product="medsurg-full"
+                             data-lite-price="24.99" data-full-price="49.99">
                             <div class="package-popular-badge">
                                 <i class="fas fa-star"></i> POPULAR
                             </div>
@@ -1327,29 +1331,21 @@
                                 </div>
                             </div>
 
-                            <div class="package-pricing">
-                                <div class="package-tier">
-                                    <div class="package-tier-left">
-                                        <span class="package-tier-name">Full Package</span>
-                                        <span class="savings-badge" data-category="med-surg" data-tooltip=""></span>
-                                    </div>
-                                    <span class="package-tier-price">$49.99</span>
+                            <div class="package-pricing-simple">
+                                <div class="package-price-row">
+                                    <span class="package-price">$24.99</span>
+                                    <span class="savings-badge" data-category="med-surg"></span>
                                 </div>
-                                <a href="checkout.html?product=medsurg-full" class="btn btn-primary btn-sm w-100 mb-8">
-                                    Get Full Package
-                                </a>
-                                <div class="package-tier">
-                                    <span class="package-tier-name">Lite Package</span>
-                                    <span class="package-tier-price secondary">$24.99</span>
-                                </div>
-                                <a href="checkout.html?product=medsurg-lite" class="btn btn-outline-primary btn-sm w-100">
-                                    Get Lite Package
-                                </a>
+                                <button class="btn btn-primary w-100 package-add-to-cart" data-product="medsurg-lite" data-name="Medical-Surgical Nursing - Lite">
+                                    <i class="fas fa-cart-plus"></i> Add to Cart
+                                </button>
                             </div>
                         </div>
 
                         <!-- Pharmacology Package -->
-                        <div class="package-card" data-category="pharmacology">
+                        <div class="package-card" data-category="pharmacology"
+                             data-lite-product="pharmacology-lite" data-full-product="pharmacology-full"
+                             data-lite-price="24.99" data-full-price="49.99">
                             <div class="package-card-header">
                                 <div class="package-card-icon">
                                     <img src="assets/images/pills.webp" alt="Pharmacology" loading="lazy">
@@ -1365,29 +1361,21 @@
                                 </div>
                             </div>
 
-                            <div class="package-pricing">
-                                <div class="package-tier">
-                                    <div class="package-tier-left">
-                                        <span class="package-tier-name">Full Package</span>
-                                        <span class="savings-badge" data-category="pharmacology" data-tooltip=""></span>
-                                    </div>
-                                    <span class="package-tier-price">$49.99</span>
+                            <div class="package-pricing-simple">
+                                <div class="package-price-row">
+                                    <span class="package-price">$24.99</span>
+                                    <span class="savings-badge" data-category="pharmacology"></span>
                                 </div>
-                                <a href="checkout.html?product=pharmacology-full" class="btn btn-primary btn-sm w-100 mb-8">
-                                    Get Full Package
-                                </a>
-                                <div class="package-tier">
-                                    <span class="package-tier-name">Lite Package</span>
-                                    <span class="package-tier-price secondary">$24.99</span>
-                                </div>
-                                <a href="checkout.html?product=pharmacology-lite" class="btn btn-outline-primary btn-sm w-100">
-                                    Get Lite Package
-                                </a>
+                                <button class="btn btn-primary w-100 package-add-to-cart" data-product="pharmacology-lite" data-name="Pharmacology - Lite">
+                                    <i class="fas fa-cart-plus"></i> Add to Cart
+                                </button>
                             </div>
                         </div>
 
                         <!-- Maternity Package -->
-                        <div class="package-card" data-category="maternity">
+                        <div class="package-card" data-category="maternity"
+                             data-lite-product="maternal-lite" data-full-product="maternal-full"
+                             data-lite-price="24.99" data-full-price="49.99">
                             <div class="package-card-header">
                                 <div class="package-card-icon">
                                     <img src="assets/images/crying.webp" alt="Maternal/OB Nursing" loading="lazy">
@@ -1403,29 +1391,21 @@
                                 </div>
                             </div>
 
-                            <div class="package-pricing">
-                                <div class="package-tier">
-                                    <div class="package-tier-left">
-                                        <span class="package-tier-name">Full Package</span>
-                                        <span class="savings-badge" data-category="maternity" data-tooltip=""></span>
-                                    </div>
-                                    <span class="package-tier-price">$49.99</span>
+                            <div class="package-pricing-simple">
+                                <div class="package-price-row">
+                                    <span class="package-price">$24.99</span>
+                                    <span class="savings-badge" data-category="maternity"></span>
                                 </div>
-                                <a href="checkout.html?product=maternal-full" class="btn btn-primary btn-sm w-100 mb-8">
-                                    Get Full Package
-                                </a>
-                                <div class="package-tier">
-                                    <span class="package-tier-name">Lite Package</span>
-                                    <span class="package-tier-price secondary">$24.99</span>
-                                </div>
-                                <a href="checkout.html?product=maternal-lite" class="btn btn-outline-primary btn-sm w-100">
-                                    Get Lite Package
-                                </a>
+                                <button class="btn btn-primary w-100 package-add-to-cart" data-product="maternal-lite" data-name="Maternal/OB Nursing - Lite">
+                                    <i class="fas fa-cart-plus"></i> Add to Cart
+                                </button>
                             </div>
                         </div>
 
                         <!-- Pediatrics Package -->
-                        <div class="package-card" data-category="pediatrics">
+                        <div class="package-card" data-category="pediatrics"
+                             data-lite-product="pediatrics-lite" data-full-product="pediatrics-full"
+                             data-lite-price="24.99" data-full-price="49.99">
                             <div class="package-card-header">
                                 <div class="package-card-icon">
                                     <img src="assets/images/healthcare.webp" alt="Pediatric Nursing" loading="lazy">
@@ -1441,29 +1421,21 @@
                                 </div>
                             </div>
 
-                            <div class="package-pricing">
-                                <div class="package-tier">
-                                    <div class="package-tier-left">
-                                        <span class="package-tier-name">Full Package</span>
-                                        <span class="savings-badge" data-category="pediatrics" data-tooltip=""></span>
-                                    </div>
-                                    <span class="package-tier-price">$49.99</span>
+                            <div class="package-pricing-simple">
+                                <div class="package-price-row">
+                                    <span class="package-price">$24.99</span>
+                                    <span class="savings-badge" data-category="pediatrics"></span>
                                 </div>
-                                <a href="checkout.html?product=pediatrics-full" class="btn btn-primary btn-sm w-100 mb-8">
-                                    Get Full Package
-                                </a>
-                                <div class="package-tier">
-                                    <span class="package-tier-name">Lite Package</span>
-                                    <span class="package-tier-price secondary">$24.99</span>
-                                </div>
-                                <a href="checkout.html?product=pediatrics-lite" class="btn btn-outline-primary btn-sm w-100">
-                                    Get Lite Package
-                                </a>
+                                <button class="btn btn-primary w-100 package-add-to-cart" data-product="pediatrics-lite" data-name="Pediatric Nursing - Lite">
+                                    <i class="fas fa-cart-plus"></i> Add to Cart
+                                </button>
                             </div>
                         </div>
 
                         <!-- Mental Health Package -->
-                        <div class="package-card" data-category="mental-health">
+                        <div class="package-card" data-category="mental-health"
+                             data-lite-product="mental-health-lite" data-full-product="mental-health-full"
+                             data-lite-price="24.99" data-full-price="49.99">
                             <div class="package-card-header">
                                 <div class="package-card-icon">
                                     <img src="assets/images/brain.webp" alt="Mental Health Nursing" loading="lazy">
@@ -1479,33 +1451,15 @@
                                 </div>
                             </div>
 
-                            <div class="package-pricing">
-                                <div class="package-tier">
-                                    <div class="package-tier-left">
-                                        <span class="package-tier-name">Full Package</span>
-                                        <span class="savings-badge" data-category="mental-health" data-tooltip=""></span>
-                                    </div>
-                                    <span class="package-tier-price">$49.99</span>
+                            <div class="package-pricing-simple">
+                                <div class="package-price-row">
+                                    <span class="package-price">$24.99</span>
+                                    <span class="savings-badge" data-category="mental-health"></span>
                                 </div>
-                                <a href="checkout.html?product=mental-health-full" class="btn btn-primary btn-sm w-100 mb-8">
-                                    Get Full Package
-                                </a>
-                                <div class="package-tier">
-                                    <span class="package-tier-name">Lite Package</span>
-                                    <span class="package-tier-price secondary">$24.99</span>
-                                </div>
-                                <a href="checkout.html?product=mental-health-lite" class="btn btn-outline-primary btn-sm w-100">
-                                    Get Lite Package
-                                </a>
+                                <button class="btn btn-primary w-100 package-add-to-cart" data-product="mental-health-lite" data-name="Mental Health Nursing - Lite">
+                                    <i class="fas fa-cart-plus"></i> Add to Cart
+                                </button>
                             </div>
-                        </div>
-
-                        <!-- Show More Button for Packages -->
-                        <div class="show-more-container" id="show-more-packages-container">
-                            <button class="show-more-btn" id="show-more-packages-btn">
-                                <i class="fas fa-chevron-down"></i> Show More Classes
-                            </button>
-                            <p class="show-more-count" id="show-more-packages-count"></p>
                         </div>
                     </div>
                 </main>
@@ -1585,7 +1539,7 @@
     <script src="cart-ui.js"></script>
 
     <script src="script.js"></script>
-    <script src="store-script.js?v=5"></script>
+    <script src="store-script.js?v=6"></script>
 
     <!-- Quick View Modal -->
     <div class="quick-view-modal" id="quick-view-modal">
