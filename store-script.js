@@ -306,13 +306,17 @@ document.addEventListener('DOMContentLoaded', function() {
             const fullProduct = card.dataset.fullProduct;
             const litePrice = card.dataset.litePrice;
             const fullPrice = card.dataset.fullPrice;
+            const liteIncludes = card.dataset.liteIncludes;
+            const fullIncludes = card.dataset.fullIncludes;
             const cardTitle = card.querySelector('h3')?.textContent || 'Package';
 
             const priceEl = card.querySelector('.package-price');
             const addToCartBtn = card.querySelector('.package-add-to-cart');
+            const includesListEl = card.querySelector('.package-includes-list');
 
             if (currentPackageType === 'lite') {
                 if (priceEl) priceEl.textContent = '$' + litePrice;
+                if (includesListEl && liteIncludes) includesListEl.textContent = liteIncludes;
                 if (addToCartBtn) {
                     addToCartBtn.dataset.product = liteProduct;
                     addToCartBtn.dataset.name = cardTitle + ' - Lite';
@@ -329,6 +333,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             } else {
                 if (priceEl) priceEl.textContent = '$' + fullPrice;
+                if (includesListEl && fullIncludes) includesListEl.textContent = fullIncludes;
                 if (addToCartBtn) {
                     addToCartBtn.dataset.product = fullProduct;
                     addToCartBtn.dataset.name = cardTitle + ' - Full';
