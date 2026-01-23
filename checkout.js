@@ -565,13 +565,23 @@ function getProductIconPath(productId, productType) {
         'electrolyte-imbalances': 'chemical',
         'electrolytes': 'chemical',
         'eating-disorders': 'eating-disorder',
-        'eating-disorder': 'eating-disorder'
+        'eating-disorder': 'eating-disorder',
+        // Package/category icons
+        'pediatric-nursing': 'pediatric-nursing',
+        'pediatrics': 'pediatric-nursing',
+        'nursing-fundamentals': 'nursing-fundamentals',
+        'fundamentals': 'nursing-fundamentals',
+        'med-surg': 'med-surge',
+        'medsurg': 'med-surge',
+        'medical-surgical': 'med-surge',
+        'pharmacology': 'pharmacology',
+        'maternal': 'maternal',
+        'maternal-nursing': 'maternal',
+        'ob': 'maternal',
+        'mental-health': 'mental-health-nursing',
+        'mental-health-nursing': 'mental-health-nursing',
+        'psych': 'mental-health-nursing'
     };
-
-    // Special case: pediatric-nursing is in main images folder, not guide-icons
-    if (productId === 'pediatric-nursing' || productId === 'pediatrics') {
-        return 'assets/images/pediatric-nursing.webp';
-    }
 
     // Try to find in map, otherwise use the product ID directly as file name
     const iconFile = iconMap[productId] || productId;
