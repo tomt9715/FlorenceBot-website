@@ -31,6 +31,10 @@ const CATEGORY_NAMES = {
     'subscription': 'Subscription'
 };
 
+// Track if user wants to use a different email
+let useAccountEmail = true;
+let accountEmail = null;
+
 /**
  * Initialize the checkout page
  */
@@ -38,20 +42,52 @@ async function initCheckout() {
     // Check if user is authenticated
     isUserAuthenticated = typeof isAuthenticated === 'function' ? isAuthenticated() : !!localStorage.getItem('accessToken');
 
-    // Show sign-in prompt for guest users
     const signInPrompt = document.getElementById('signin-prompt');
-    if (signInPrompt && !isUserAuthenticated) {
-        signInPrompt.style.display = 'block';
-    }
+    const userInfoBanner = document.getElementById('user-info-banner');
+    const userEmailDisplay = document.getElementById('user-email-display');
+    const emailInput = document.getElementById('email');
+    const emailGroup = document.getElementById('email-group');
+    const useDifferentEmailBtn = document.getElementById('use-different-email-btn');
 
-    // Pre-fill user data if authenticated
     if (isUserAuthenticated) {
+        // User is signed in - show user info banner
         const user = typeof getCurrentUser === 'function' ? getCurrentUser() : JSON.parse(localStorage.getItem('user') || '{}');
-        if (user.email) {
-            document.getElementById('email').value = user.email;
+        accountEmail = user.email;
+
+        if (userInfoBanner) {
+            userInfoBanner.style.display = 'flex';
         }
+        if (signInPrompt) {
+            signInPrompt.style.display = 'none';
+        }
+        if (userEmailDisplay && accountEmail) {
+            userEmailDisplay.textContent = accountEmail;
+        }
+
+        // Pre-fill and lock email field
+        if (emailInput && accountEmail) {
+            emailInput.value = accountEmail;
+            emailInput.readOnly = true;
+            emailGroup.classList.add('email-locked');
+        }
+
+        // Show "use different email" button
+        if (useDifferentEmailBtn) {
+            useDifferentEmailBtn.style.display = 'inline-flex';
+            useDifferentEmailBtn.addEventListener('click', toggleEmailEdit);
+        }
+
+        // Pre-fill name if available
         if (user.name || user.displayName) {
             document.getElementById('name').value = user.name || user.displayName;
+        }
+    } else {
+        // Guest user - show sign-in prompt
+        if (signInPrompt) {
+            signInPrompt.style.display = 'flex';
+        }
+        if (userInfoBanner) {
+            userInfoBanner.style.display = 'none';
         }
     }
 
@@ -841,6 +877,37 @@ function escapeHtml(text) {
     const div = document.createElement('div');
     div.textContent = text;
     return div.innerHTML;
+}
+
+/**
+ * Toggle email field between locked (account email) and editable (different email)
+ */
+function toggleEmailEdit() {
+    const emailInput = document.getElementById('email');
+    const emailGroup = document.getElementById('email-group');
+    const useDifferentEmailBtn = document.getElementById('use-different-email-btn');
+    const emailHint = document.getElementById('email-hint');
+
+    if (useAccountEmail) {
+        // Switch to editable mode
+        useAccountEmail = false;
+        emailInput.readOnly = false;
+        emailInput.value = '';
+        emailInput.placeholder = 'Enter a different email address';
+        emailInput.focus();
+        emailGroup.classList.remove('email-locked');
+        useDifferentEmailBtn.innerHTML = '<i class="fas fa-undo"></i> Use account email';
+        emailHint.textContent = 'Enter the email where you want your receipt sent.';
+    } else {
+        // Switch back to account email
+        useAccountEmail = true;
+        emailInput.value = accountEmail;
+        emailInput.readOnly = true;
+        emailInput.placeholder = 'your@email.com';
+        emailGroup.classList.add('email-locked');
+        useDifferentEmailBtn.innerHTML = '<i class="fas fa-edit"></i> Use a different email';
+        emailHint.textContent = 'Your receipt and guide access will be sent to this email.';
+    }
 }
 
 // Initialize on DOM ready

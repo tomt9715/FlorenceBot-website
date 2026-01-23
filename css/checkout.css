@@ -606,3 +606,141 @@
 }
 
 /* Stripe Elements dark mode - applied via JS appearance option */
+
+/* ============================================
+   SIGN IN / USER INFO BANNERS
+   ============================================ */
+
+.signin-prompt {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 20px;
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.08), rgba(99, 102, 241, 0.03));
+    border: 1px solid rgba(99, 102, 241, 0.2);
+    border-radius: 12px;
+    margin-bottom: 24px;
+}
+
+.signin-prompt-icon {
+    width: 44px;
+    height: 44px;
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.signin-prompt-icon i {
+    color: white;
+    font-size: 1.25rem;
+}
+
+.signin-prompt-content {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.signin-prompt-content p {
+    margin: 0;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+
+.user-info-banner {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 20px;
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.08), rgba(16, 185, 129, 0.03));
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    border-radius: 12px;
+    margin-bottom: 24px;
+}
+
+.user-info-icon {
+    width: 44px;
+    height: 44px;
+    background: linear-gradient(135deg, #10b981, #059669);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.user-info-icon i {
+    color: white;
+    font-size: 1.25rem;
+}
+
+.user-info-content {
+    flex: 1;
+}
+
+.user-info-content p {
+    margin: 0;
+    color: var(--text-primary);
+    font-size: 0.95rem;
+}
+
+.user-info-content strong {
+    color: #10b981;
+}
+
+.user-info-note {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    display: block;
+    margin-top: 2px;
+}
+
+/* Use different email button */
+.use-different-email-btn {
+    background: none;
+    border: none;
+    color: var(--primary-color);
+    font-size: 0.85rem;
+    cursor: pointer;
+    padding: 4px 0;
+    margin-top: 8px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: color 0.2s;
+}
+
+.use-different-email-btn:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+}
+
+/* Email field locked state */
+.email-locked {
+    position: relative;
+}
+
+.email-locked input {
+    background: var(--background-light) !important;
+    color: var(--text-secondary) !important;
+}
+
+@media (max-width: 480px) {
+    .signin-prompt,
+    .user-info-banner {
+        flex-direction: column;
+        text-align: center;
+        gap: 12px;
+    }
+
+    .signin-prompt-content {
+        flex-direction: column;
+        gap: 12px;
+    }
+}

@@ -128,6 +128,30 @@
                 <div class="payment-form-container">
                     <h2>Payment Details</h2>
 
+                    <!-- Sign In Prompt (shown for guest checkout) - at the top -->
+                    <div class="signin-prompt" id="signin-prompt" style="display: none;">
+                        <div class="signin-prompt-icon">
+                            <i class="fas fa-user-circle"></i>
+                        </div>
+                        <div class="signin-prompt-content">
+                            <p>Have an account? Sign in to sync your purchases.</p>
+                            <a href="login.html?redirect=checkout" class="btn btn-outline-primary btn-sm">
+                                <i class="fas fa-sign-in-alt"></i> Sign In
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Signed In User Info (shown when logged in) -->
+                    <div class="user-info-banner" id="user-info-banner" style="display: none;">
+                        <div class="user-info-icon">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="user-info-content">
+                            <p>Signed in as <strong id="user-email-display"></strong></p>
+                            <span class="user-info-note">Your purchase will be linked to your account.</span>
+                        </div>
+                    </div>
+
                     <!-- Error Message Display -->
                     <div class="error-message error" id="error-message" style="display: none;">
                         <i class="fas fa-exclamation-circle"></i>
@@ -139,7 +163,7 @@
                         <div class="form-section">
                             <h3 class="form-section-title">Contact Information</h3>
 
-                            <div class="form-group">
+                            <div class="form-group" id="email-group">
                                 <label for="email">Email Address <span class="required">*</span></label>
                                 <input
                                     type="email"
@@ -149,7 +173,11 @@
                                     required
                                     autocomplete="email"
                                 >
-                                <p class="form-hint">Your receipt and guide access will be sent to this email.</p>
+                                <p class="form-hint" id="email-hint">Your receipt and guide access will be sent to this email.</p>
+                                <!-- Option to use different email when signed in -->
+                                <button type="button" id="use-different-email-btn" class="use-different-email-btn" style="display: none;">
+                                    <i class="fas fa-edit"></i> Use a different email
+                                </button>
                             </div>
 
                             <div class="form-group">
@@ -286,14 +314,6 @@
                     <div class="subscription-notice" id="subscription-notice" style="display: none;">
                         <i class="fas fa-info-circle"></i>
                         <p>Subscriptions are processed through Stripe's secure checkout. You will be redirected to complete your subscription.</p>
-                    </div>
-
-                    <!-- Sign In Prompt (shown for guest checkout) -->
-                    <div class="signin-prompt" id="signin-prompt" style="display: none; margin-top: 20px; padding: 16px; background: var(--background-light); border-radius: 12px; text-align: center;">
-                        <p style="margin-bottom: 12px; color: var(--text-secondary);">Have an account? Sign in to sync your purchases.</p>
-                        <a href="login.html?redirect=checkout" class="btn btn-outline-primary btn-sm">
-                            <i class="fas fa-sign-in-alt"></i> Sign In
-                        </a>
                     </div>
                 </div>
             </div>
