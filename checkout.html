@@ -84,8 +84,8 @@
                 <span class="current">Checkout</span>
             </div>
 
-            <div class="checkout-container">
-                <!-- Order Summary (Left/Top on mobile) -->
+            <div class="checkout-container checkout-three-column">
+                <!-- Column 1: Order Summary -->
                 <div class="order-summary">
                     <h2>Order Summary</h2>
 
@@ -108,7 +108,7 @@
                         </div>
                     </div>
 
-                    <!-- Promo Code Section (separate from order-total so it doesn't get replaced) -->
+                    <!-- Promo Code Section -->
                     <div class="promo-code-inline" id="promo-section" style="margin-top: 20px; padding: 16px; background: linear-gradient(135deg, rgba(99, 102, 241, 0.06), rgba(139, 92, 246, 0.03)); border: 1px solid rgba(99, 102, 241, 0.15); border-radius: 12px;">
                         <div class="promo-header" style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px;">
                             <i class="fas fa-ticket-alt" style="color: #6366f1; font-size: 0.9rem;"></i>
@@ -153,31 +153,30 @@
                     </div>
                 </div>
 
-                <!-- Payment Form (Right/Bottom on mobile) -->
-                <div class="payment-form-container">
+                <!-- Column 2: Payment Details (Contact & Billing) -->
+                <div class="payment-form-container payment-details-column">
                     <h2>Payment Details</h2>
 
-                    <!-- Sign In Prompt (shown for guest checkout) - at the top, hidden by default until JS checks auth -->
-                    <div class="signin-prompt" id="signin-prompt" style="display: none; flex-direction: row; align-items: center; gap: 16px; padding: 20px 24px; background: linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(139, 92, 246, 0.1)); border: 2px solid rgba(99, 102, 241, 0.3); border-radius: 16px; margin-bottom: 28px; box-shadow: 0 4px 16px rgba(99, 102, 241, 0.15);">
-                        <div class="signin-prompt-icon" style="width: 52px; height: 52px; min-width: 52px; background: linear-gradient(135deg, #6366f1, #8b5cf6); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);">
-                            <i class="fas fa-user-circle" style="color: white; font-size: 1.5rem;"></i>
+                    <!-- Sign In Prompt (shown for guest checkout) -->
+                    <div class="signin-prompt" id="signin-prompt" style="display: none; flex-direction: row; align-items: center; gap: 16px; padding: 16px 20px; background: linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(139, 92, 246, 0.1)); border: 2px solid rgba(99, 102, 241, 0.3); border-radius: 12px; margin-bottom: 24px;">
+                        <div class="signin-prompt-icon" style="width: 44px; height: 44px; min-width: 44px; background: linear-gradient(135deg, #6366f1, #8b5cf6); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                            <i class="fas fa-user-circle" style="color: white; font-size: 1.25rem;"></i>
                         </div>
-                        <div class="signin-prompt-content" style="flex: 1; display: flex; flex-direction: row; align-items: center; justify-content: space-between; gap: 16px;">
-                            <p style="margin: 0; color: var(--text-primary); font-size: 1rem; font-weight: 500;">Have an account? Sign in to sync your purchases.</p>
-                            <a href="login.html?redirect=checkout" class="btn btn-outline-primary btn-sm" style="flex-shrink: 0; padding: 10px 20px; font-weight: 600;">
+                        <div class="signin-prompt-content" style="flex: 1;">
+                            <p style="margin: 0 0 8px 0; color: var(--text-primary); font-size: 0.9rem; font-weight: 500;">Have an account?</p>
+                            <a href="login.html?redirect=checkout" class="btn btn-outline-primary btn-sm" style="padding: 8px 16px; font-weight: 600; font-size: 0.85rem;">
                                 <i class="fas fa-sign-in-alt"></i> Sign In
                             </a>
                         </div>
                     </div>
 
                     <!-- Signed In User Info (shown when logged in) -->
-                    <div class="user-info-banner" id="user-info-banner" style="display: none; flex-direction: row; align-items: center; gap: 16px; padding: 20px 24px; background: linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(16, 185, 129, 0.06)); border: 2px solid rgba(16, 185, 129, 0.25); border-radius: 16px; margin-bottom: 28px; box-shadow: 0 4px 16px rgba(16, 185, 129, 0.1);">
-                        <div class="user-info-icon" style="width: 52px; height: 52px; min-width: 52px; background: linear-gradient(135deg, #10b981, #059669); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);">
-                            <i class="fas fa-check-circle" style="color: white; font-size: 1.5rem;"></i>
+                    <div class="user-info-banner" id="user-info-banner" style="display: none; flex-direction: row; align-items: center; gap: 12px; padding: 16px 20px; background: linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(16, 185, 129, 0.06)); border: 2px solid rgba(16, 185, 129, 0.25); border-radius: 12px; margin-bottom: 24px;">
+                        <div class="user-info-icon" style="width: 40px; height: 40px; min-width: 40px; background: linear-gradient(135deg, #10b981, #059669); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                            <i class="fas fa-check-circle" style="color: white; font-size: 1.1rem;"></i>
                         </div>
                         <div class="user-info-content" style="flex: 1;">
-                            <p style="margin: 0; color: var(--text-primary); font-size: 1rem; font-weight: 600;">Signed in as <strong id="user-email-display" style="color: #10b981;"></strong></p>
-                            <span class="user-info-note" style="font-size: 0.85rem; color: var(--text-secondary); display: block; margin-top: 4px;">Your purchase will be linked to your account.</span>
+                            <p style="margin: 0; color: var(--text-primary); font-size: 0.9rem; font-weight: 600;">Signed in as <strong id="user-email-display" style="color: #10b981;"></strong></p>
                         </div>
                     </div>
 
@@ -192,35 +191,32 @@
                         <div class="form-section">
                             <h3 class="form-section-title">Contact Information</h3>
 
-                            <div class="form-row">
-                                <div class="form-group form-group-half" id="email-group">
-                                    <label for="email">Email Address <span class="required">*</span></label>
-                                    <input
-                                        type="email"
-                                        id="email"
-                                        name="email"
-                                        placeholder="your@email.com"
-                                        required
-                                        autocomplete="email"
-                                    >
-                                    <p class="form-hint" id="email-hint">Receipt sent here</p>
-                                    <!-- Option to use different email when signed in -->
-                                    <button type="button" id="use-different-email-btn" class="use-different-email-btn" style="display: none;">
-                                        <i class="fas fa-edit" style="margin-right: 6px;"></i>Use different email
-                                    </button>
-                                </div>
+                            <div class="form-group" id="email-group">
+                                <label for="email">Email Address <span class="required">*</span></label>
+                                <input
+                                    type="email"
+                                    id="email"
+                                    name="email"
+                                    placeholder="your@email.com"
+                                    required
+                                    autocomplete="email"
+                                >
+                                <p class="form-hint" id="email-hint">Receipt sent here</p>
+                                <button type="button" id="use-different-email-btn" class="use-different-email-btn" style="display: none;">
+                                    <i class="fas fa-edit" style="margin-right: 6px;"></i>Use different email
+                                </button>
+                            </div>
 
-                                <div class="form-group form-group-half">
-                                    <label for="name">Full Name <span class="required">*</span></label>
-                                    <input
-                                        type="text"
-                                        id="name"
-                                        name="name"
-                                        placeholder="John Doe"
-                                        required
-                                        autocomplete="name"
-                                    >
-                                </div>
+                            <div class="form-group">
+                                <label for="name">Full Name <span class="required">*</span></label>
+                                <input
+                                    type="text"
+                                    id="name"
+                                    name="name"
+                                    placeholder="John Doe"
+                                    required
+                                    autocomplete="name"
+                                >
                             </div>
                         </div>
 
@@ -228,29 +224,27 @@
                         <div class="form-section">
                             <h3 class="form-section-title">Billing Address</h3>
 
-                            <div class="form-row">
-                                <div class="form-group form-group-half form-group-wide">
-                                    <label for="address">Street Address <span class="required">*</span></label>
-                                    <input
-                                        type="text"
-                                        id="address"
-                                        name="address"
-                                        placeholder="123 Main Street"
-                                        required
-                                        autocomplete="address-line1"
-                                    >
-                                </div>
+                            <div class="form-group">
+                                <label for="address">Street Address <span class="required">*</span></label>
+                                <input
+                                    type="text"
+                                    id="address"
+                                    name="address"
+                                    placeholder="123 Main Street"
+                                    required
+                                    autocomplete="address-line1"
+                                >
+                            </div>
 
-                                <div class="form-group form-group-half form-group-narrow">
-                                    <label for="address2">Apt, suite (optional)</label>
-                                    <input
-                                        type="text"
-                                        id="address2"
-                                        name="address2"
-                                        placeholder="Apt 4B"
-                                        autocomplete="address-line2"
-                                    >
-                                </div>
+                            <div class="form-group">
+                                <label for="address2">Apt, suite (optional)</label>
+                                <input
+                                    type="text"
+                                    id="address2"
+                                    name="address2"
+                                    placeholder="Apt 4B"
+                                    autocomplete="address-line2"
+                                >
                             </div>
 
                             <div class="form-row">
@@ -315,42 +309,42 @@
                                 </div>
                             </div>
                         </div>
+                    </form>
+                </div>
 
-                        <!-- Payment Information -->
-                        <div class="form-section">
-                            <h3 class="form-section-title">Payment Method</h3>
+                <!-- Column 3: Payment Method -->
+                <div class="payment-form-container payment-method-column">
+                    <h2>Payment Method</h2>
 
-                            <div class="form-group">
-                                <label for="payment-element">Select payment method <span class="required">*</span></label>
-                                <!-- Payment Element container - supports cards, Apple Pay, Google Pay, Link -->
-                                <div class="payment-element-wrapper" id="payment-element-wrapper">
-                                    <div id="payment-element">
-                                        <!-- Stripe Payment Element will be mounted here -->
-                                    </div>
-                                </div>
-                                <!-- Payment status indicator -->
-                                <div class="payment-status" id="payment-status-indicator" style="display: none;">
-                                    <i class="fas fa-check-circle"></i>
-                                    <span>Payment method ready</span>
-                                </div>
-                                <!-- Payment message for errors -->
-                                <div id="payment-message" class="payment-message" role="alert"></div>
+                    <div class="form-group">
+                        <label for="payment-element">Select payment method <span class="required">*</span></label>
+                        <!-- Payment Element container - supports cards, Apple Pay, Google Pay, Link -->
+                        <div class="payment-element-wrapper" id="payment-element-wrapper">
+                            <div id="payment-element">
+                                <!-- Stripe Payment Element will be mounted here -->
                             </div>
                         </div>
+                        <!-- Payment status indicator -->
+                        <div class="payment-status" id="payment-status-indicator" style="display: none;">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Payment method ready</span>
+                        </div>
+                        <!-- Payment message for errors -->
+                        <div id="payment-message" class="payment-message" role="alert"></div>
+                    </div>
 
-                        <!-- Submit Button -->
-                        <button type="submit" id="submit-button" class="btn btn-primary btn-large btn-block" disabled>
-                            <i class="fas fa-lock" id="button-icon"></i>
-                            <span id="button-text">Complete Purchase</span>
-                            <div class="spinner" id="button-spinner" style="display: none;"></div>
-                        </button>
+                    <!-- Submit Button -->
+                    <button type="submit" form="payment-form" id="submit-button" class="btn btn-primary btn-large btn-block" disabled>
+                        <i class="fas fa-lock" id="button-icon"></i>
+                        <span id="button-text">Complete Purchase</span>
+                        <div class="spinner" id="button-spinner" style="display: none;"></div>
+                    </button>
 
-                        <!-- Security Note -->
-                        <p class="security-note">
-                            <i class="fas fa-shield-alt"></i>
-                            Your payment is secured with 256-bit SSL encryption
-                        </p>
-                    </form>
+                    <!-- Security Note -->
+                    <p class="security-note">
+                        <i class="fas fa-shield-alt"></i>
+                        Your payment is secured with 256-bit SSL encryption
+                    </p>
 
                     <!-- Subscription Notice (shown for subscription products) -->
                     <div class="subscription-notice" id="subscription-notice" style="display: none;">
