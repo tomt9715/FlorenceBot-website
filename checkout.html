@@ -326,13 +326,14 @@
                                     <div id="card-element" class="stripe-element">
                                         <!-- Stripe Card Element will be mounted here -->
                                     </div>
-                                    <div class="card-status">
-                                        <i class="fas fa-check-circle"></i>
-                                        <span>Card details complete</span>
-                                    </div>
+                                </div>
+                                <!-- Card status moved outside the box -->
+                                <div class="card-status" id="card-status-indicator" style="display: none;">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>Card details complete</span>
                                 </div>
                                 <!-- Accepted cards shown below the input -->
-                                <div class="accepted-cards" style="display: flex; align-items: center; gap: 8px; margin-top: 10px;">
+                                <div class="accepted-cards" style="display: flex; align-items: center; gap: 8px; margin-top: 8px;">
                                     <span style="font-size: 0.8rem; color: var(--text-secondary);">We accept:</span>
                                     <div style="display: flex; gap: 6px;">
                                         <i class="fab fa-cc-visa" style="font-size: 1.4rem; color: #1a1f71;" title="Visa"></i>

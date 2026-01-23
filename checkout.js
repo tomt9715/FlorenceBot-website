@@ -617,6 +617,9 @@ async function setupStripeElements() {
         const cardWrapper = document.getElementById('card-element-wrapper');
 
         // Handle real-time validation errors
+        // Get card status indicator element
+        const cardStatusIndicator = document.getElementById('card-status-indicator');
+
         cardElement.on('change', (event) => {
             if (event.error) {
                 cardErrorsEl.textContent = event.error.message;
@@ -627,11 +630,13 @@ async function setupStripeElements() {
                 cardWrapper.classList.remove('invalid');
             }
 
-            // Update complete state
+            // Update complete state and show/hide status indicator
             if (event.complete) {
                 cardWrapper.classList.add('complete');
+                if (cardStatusIndicator) cardStatusIndicator.style.display = 'flex';
             } else {
                 cardWrapper.classList.remove('complete');
+                if (cardStatusIndicator) cardStatusIndicator.style.display = 'none';
             }
 
             // Enable submit button when card is complete
@@ -1304,6 +1309,7 @@ async function recreatePaymentIntentWithPromo() {
 
             // Re-attach event listeners with wrapper styling
             const cardWrapper = document.getElementById('card-element-wrapper');
+            const cardStatusIndicator = document.getElementById('card-status-indicator');
 
             cardElement.on('change', (event) => {
                 const cardErrorsEl = document.getElementById('card-errors');
@@ -1318,8 +1324,10 @@ async function recreatePaymentIntentWithPromo() {
 
                 if (event.complete) {
                     cardWrapper.classList.add('complete');
+                    if (cardStatusIndicator) cardStatusIndicator.style.display = 'flex';
                 } else {
                     cardWrapper.classList.remove('complete');
+                    if (cardStatusIndicator) cardStatusIndicator.style.display = 'none';
                 }
 
                 updateSubmitButton(event.complete);
