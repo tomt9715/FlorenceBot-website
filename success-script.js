@@ -252,9 +252,23 @@ function showSuccessState(order) {
         `;
     }
 
-    // Determine message based on item count
+    // Determine message based on item count and build item names
     const itemCount = order.items ? order.items.length : 1;
-    const guideText = itemCount === 1 ? 'Your study guide is' : 'Your study guides are';
+    let purchaseMessage = '';
+    if (order.items && order.items.length > 0) {
+        const itemNames = order.items.map(item => item.product_name);
+        if (itemNames.length === 1) {
+            purchaseMessage = `Thank you for your purchase! ${escapeHtml(itemNames[0])} is now available.`;
+        } else if (itemNames.length === 2) {
+            purchaseMessage = `Thank you for your purchase! ${escapeHtml(itemNames[0])} and ${escapeHtml(itemNames[1])} are now available.`;
+        } else {
+            // 3+ items - list first two and say "and X more"
+            const moreCount = itemNames.length - 2;
+            purchaseMessage = `Thank you for your purchase! ${escapeHtml(itemNames[0])}, ${escapeHtml(itemNames[1])}, and ${moreCount} more ${moreCount === 1 ? 'guide is' : 'guides are'} now available.`;
+        }
+    } else {
+        purchaseMessage = 'Thank you for your purchase! Your study guide is now available.';
+    }
 
     let actionsHtml = '';
     let guestWarningHtml = '';
@@ -322,7 +336,7 @@ function showSuccessState(order) {
         </div>
         <h1 class="success-title">Payment Successful!</h1>
         <p class="success-message">
-            Thank you for your purchase! ${guideText} now available.
+            ${purchaseMessage}
         </p>
 
         ${savingsMessageHtml}
