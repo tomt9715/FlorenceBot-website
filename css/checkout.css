@@ -612,45 +612,56 @@
    ============================================ */
 
 .signin-prompt {
-    display: flex;
-    align-items: center;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
     gap: 16px;
-    padding: 16px 20px;
-    background: linear-gradient(135deg, rgba(99, 102, 241, 0.08), rgba(99, 102, 241, 0.03));
-    border: 1px solid rgba(99, 102, 241, 0.2);
-    border-radius: 12px;
-    margin-bottom: 24px;
+    padding: 20px 24px;
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.12), rgba(139, 92, 246, 0.08));
+    border: 2px solid rgba(99, 102, 241, 0.25);
+    border-radius: 16px;
+    margin-bottom: 28px;
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.1);
 }
 
 .signin-prompt-icon {
-    width: 44px;
-    height: 44px;
+    width: 52px;
+    height: 52px;
+    min-width: 52px;
     background: linear-gradient(135deg, #6366f1, #8b5cf6);
     border-radius: 50%;
-    display: flex;
+    display: flex !important;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
 }
 
 .signin-prompt-icon i {
     color: white;
-    font-size: 1.25rem;
+    font-size: 1.5rem;
 }
 
 .signin-prompt-content {
     flex: 1;
-    display: flex;
+    display: flex !important;
+    flex-direction: row !important;
     align-items: center;
     justify-content: space-between;
-    gap: 12px;
-    flex-wrap: wrap;
+    gap: 16px;
 }
 
 .signin-prompt-content p {
     margin: 0;
-    color: var(--text-secondary);
-    font-size: 0.95rem;
+    color: var(--text-primary);
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.signin-prompt-content .btn {
+    flex-shrink: 0;
+    padding: 10px 20px;
+    font-weight: 600;
 }
 
 .user-info-banner {
@@ -731,16 +742,27 @@
     color: var(--text-secondary) !important;
 }
 
-@media (max-width: 480px) {
-    .signin-prompt,
-    .user-info-banner {
-        flex-direction: column;
+@media (max-width: 520px) {
+    .signin-prompt {
+        flex-direction: column !important;
         text-align: center;
-        gap: 12px;
+        gap: 16px;
+        padding: 20px;
     }
 
     .signin-prompt-content {
+        flex-direction: column !important;
+        gap: 12px;
+        width: 100%;
+    }
+
+    .signin-prompt-content .btn {
+        width: 100%;
+    }
+
+    .user-info-banner {
         flex-direction: column;
+        text-align: center;
         gap: 12px;
     }
 }
