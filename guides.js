@@ -1,5 +1,5 @@
 // Guides data with metadata and pricing
-// All guides show 10% preview for free, full access requires $5.99 purchase
+// All guides show a free preview, full access requires $5.99 purchase
 const guidesData = [
     {
         id: 'electrolytes',

@@ -1,7 +1,7 @@
 // Study Guides Page JavaScript
 // Handles preview modal with placeholder content for Heart Failure and Eating Disorders
 
-// Guide preview content (realistic placeholder - 10% of full guide)
+// Guide preview content (realistic placeholder - preview of full guide)
 const guidePreviewContent = {
     'heart-failure': {
         title: 'Heart Failure',
@@ -61,7 +61,7 @@ Often results from left-sided failure. The right ventricle cannot effectively pu
 
 ---
 
-*This is a 10% preview. Purchase the full guide for complete coverage including:*
+*This is a free preview. Purchase the full guide for complete coverage including:*
 - *Diagnostic tests and interpretation*
 - *Pharmacological management (ACE inhibitors, beta-blockers, diuretics)*
 - *Nursing interventions and patient education*
@@ -131,7 +131,7 @@ Characterized by recurrent episodes of binge eating followed by compensatory beh
 
 ---
 
-*This is a 10% preview. Purchase the full guide for complete coverage including:*
+*This is a free preview. Purchase the full guide for complete coverage including:*
 - *Binge Eating Disorder assessment and treatment*
 - *Nutritional rehabilitation protocols*
 - *Therapeutic communication techniques*
@@ -205,7 +205,7 @@ function openPreviewModal(guideId) {
     const purchaseBtn = document.getElementById('btn-purchase-modal');
 
     // Update title
-    titleEl.textContent = guide.title + ' - 10% Preview';
+    titleEl.textContent = guide.title + ' - Free Preview';
 
     // Update purchase button link
     if (purchaseBtn) {
@@ -236,7 +236,7 @@ function openPreviewModal(guideId) {
     bodyEl.innerHTML = `
         <div class="preview-notice">
             <i class="fas fa-info-circle"></i>
-            <span>You're viewing a free 10% preview. Purchase for full access to all content.</span>
+            <span>You're viewing a free preview. Purchase for full access to all content.</span>
         </div>
         <div class="preview-content markdown-body">
             ${html}
