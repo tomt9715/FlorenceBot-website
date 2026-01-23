@@ -303,7 +303,7 @@ function displayCartItems() {
         }
 
         html += `
-            <div class="checkout-item">
+            <div class="checkout-item" data-product-id="${escapeHtml(item.product_id)}">
                 <div class="checkout-item-icon" style="${iconPath ? 'background: var(--background-light); padding: 4px;' : ''}">
                     ${iconHtml}
                 </div>
@@ -312,6 +312,9 @@ function displayCartItems() {
                     <div class="checkout-item-type">${typeLabel}${quantity > 1 ? ` × ${quantity}` : ''}</div>
                 </div>
                 <div class="checkout-item-price">$${itemTotal.toFixed(2)}</div>
+                <button type="button" class="checkout-item-remove" data-product-id="${escapeHtml(item.product_id)}" title="Remove item">
+                    <i class="fas fa-trash-alt"></i>
+                </button>
             </div>
         `;
     });
@@ -336,6 +339,9 @@ function displayCartItems() {
 
     // Add inline styles for checkout items
     addCheckoutItemStyles();
+
+    // Attach remove button event listeners
+    attachRemoveButtonListeners();
 }
 
 /**
@@ -492,8 +498,82 @@ function addCheckoutItemStyles() {
             color: var(--primary-color);
             font-size: 0.95rem;
         }
+        .checkout-item-remove {
+            background: none;
+            border: none;
+            padding: 8px;
+            cursor: pointer;
+            color: var(--text-secondary);
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .checkout-item-remove:hover {
+            color: #ef4444;
+            background: rgba(239, 68, 68, 0.1);
+        }
+        .checkout-item-remove i {
+            font-size: 0.85rem;
+        }
     `;
     document.head.appendChild(styleEl);
+}
+
+/**
+ * Attach event listeners to remove buttons
+ */
+function attachRemoveButtonListeners() {
+    const removeButtons = document.querySelectorAll('.checkout-item-remove');
+    removeButtons.forEach(btn => {
+        btn.addEventListener('click', async function(e) {
+            e.preventDefault();
+            const productId = this.dataset.productId;
+            if (!productId) return;
+
+            // Add removing animation
+            const item = this.closest('.checkout-item');
+            if (item) {
+                item.style.opacity = '0.5';
+                item.style.pointerEvents = 'none';
+            }
+
+            try {
+                // Remove from cart
+                await cartManager.removeItem(productId);
+
+                // Update local cartItems array
+                cartItems = cartItems.filter(ci => ci.product_id !== productId);
+
+                // Check if cart is now empty
+                if (cartItems.length === 0) {
+                    showEmptyCartMessage();
+                    // Destroy payment element since we can't proceed
+                    if (paymentElement) {
+                        paymentElement.destroy();
+                        paymentElement = null;
+                        elements = null;
+                    }
+                } else {
+                    // Re-display cart items
+                    displayCartItems();
+
+                    // Recreate payment intent with new total
+                    await recreatePaymentIntentWithPromo();
+                }
+            } catch (error) {
+                console.error('Error removing item:', error);
+                // Restore item appearance
+                if (item) {
+                    item.style.opacity = '1';
+                    item.style.pointerEvents = 'auto';
+                }
+                showError('Failed to remove item. Please try again.');
+            }
+        });
+    });
 }
 
 /**
