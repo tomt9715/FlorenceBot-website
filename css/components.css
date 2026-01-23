@@ -422,6 +422,32 @@
 .feature-card p {
     color: var(--text-secondary);
     line-height: 1.6;
+    margin-bottom: 16px;
+}
+
+.feature-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--primary-color);
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.feature-link:hover {
+    gap: 10px;
+    color: var(--primary-dark);
+}
+
+.feature-link i {
+    font-size: 0.85rem;
+    transition: transform 0.2s ease;
+}
+
+.feature-link:hover i {
+    transform: translateX(3px);
 }
 
 /* Guide Cards */
