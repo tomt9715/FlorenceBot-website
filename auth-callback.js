@@ -1,6 +1,22 @@
 // Auth Callback Script
 // Handles OAuth callback processing for Google/Discord sign in
 
+// CRITICAL: Capture guest cart IMMEDIATELY before any other code runs
+// This must happen before tokens are stored (which changes auth state)
+// and before cart-service.js DOMContentLoaded can interfere
+const GUEST_CART_KEY_CAPTURE = 'florencebot_guest_cart';
+let capturedGuestCart = null;
+try {
+    const storedGuestCart = localStorage.getItem(GUEST_CART_KEY_CAPTURE);
+    console.log('Auth callback: Raw guest cart from localStorage:', storedGuestCart);
+    if (storedGuestCart) {
+        capturedGuestCart = JSON.parse(storedGuestCart);
+        console.log('Auth callback: Parsed guest cart:', JSON.stringify(capturedGuestCart));
+    }
+} catch (e) {
+    console.error('Auth callback: Failed to capture guest cart:', e);
+}
+
 // Parse URL parameters
 const urlParams = new URLSearchParams(window.location.search);
 const accessToken = urlParams.get('access_token');
@@ -73,23 +89,22 @@ function initAuthCallback() {
                     localStorage.setItem('user', JSON.stringify(data.user));
                     console.log('User data stored:', data.user.email);
 
-                    // Merge guest cart with user's cart after OAuth login
+                    // Store guest cart item IDs BEFORE merging so checkout can identify newly added items
+                    // Use the capturedGuestCart that was read at script load time (before any interference)
+                    console.log('Auth callback: Using captured guest cart:', JSON.stringify(capturedGuestCart));
+
+                    if (capturedGuestCart && capturedGuestCart.items && capturedGuestCart.items.length > 0) {
+                        const newlyAddedIds = capturedGuestCart.items.map(item => item.product_id);
+                        sessionStorage.setItem('newlyAddedCartItems', JSON.stringify(newlyAddedIds));
+                        console.log('Auth callback: Stored newly added item IDs in sessionStorage:', newlyAddedIds);
+                    } else {
+                        console.log('Auth callback: No guest cart items found to store');
+                    }
+
+                    // Now merge guest cart with user's cart via API
                     try {
                         if (typeof cartManager !== 'undefined') {
                             console.log('Auth callback: Merging guest cart after OAuth login...');
-
-                            // Before merging, store guest cart item IDs so checkout can identify newly added items
-                            const guestCart = cartManager.getGuestCart();
-                            console.log('Auth callback: Guest cart found:', JSON.stringify(guestCart));
-
-                            if (guestCart.items && guestCart.items.length > 0) {
-                                const newlyAddedIds = guestCart.items.map(item => item.product_id);
-                                sessionStorage.setItem('newlyAddedCartItems', JSON.stringify(newlyAddedIds));
-                                console.log('Auth callback: Stored newly added item IDs:', newlyAddedIds);
-                            } else {
-                                console.log('Auth callback: No guest cart items to store');
-                            }
-
                             await cartManager.mergeGuestCart();
                             console.log('Auth callback: Guest cart merged successfully');
                         } else {
