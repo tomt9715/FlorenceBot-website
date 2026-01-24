@@ -22,14 +22,31 @@
     padding: 0 24px;
 }
 
+/* Override container for checkout section to allow full centering */
+.checkout-section > .container {
+    max-width: none;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.checkout-section > .container > .breadcrumbs {
+    width: 100%;
+    max-width: 1232px; /* Match three-column total width (420+400+380+32) */
+    padding: 0 24px;
+    box-sizing: border-box;
+}
+
 /* Three-column layout */
 .checkout-container.checkout-three-column {
     display: flex;
     gap: 32px;
     max-width: none;
-    width: fit-content;
+    width: auto;
     margin: 0 auto;
     justify-content: center;
+    padding: 0 24px;
 }
 
 /* Fixed width columns for consistent layout */
