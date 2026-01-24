@@ -77,6 +77,15 @@ function initAuthCallback() {
                     try {
                         if (typeof cartManager !== 'undefined') {
                             console.log('Merging guest cart after OAuth login...');
+
+                            // Before merging, store guest cart item IDs so checkout can identify newly added items
+                            const guestCart = cartManager.getGuestCart();
+                            if (guestCart.items && guestCart.items.length > 0) {
+                                const newlyAddedIds = guestCart.items.map(item => item.product_id);
+                                sessionStorage.setItem('newlyAddedCartItems', JSON.stringify(newlyAddedIds));
+                                console.log('Stored newly added item IDs for checkout display:', newlyAddedIds);
+                            }
+
                             await cartManager.mergeGuestCart();
                             console.log('Guest cart merged successfully');
                         }

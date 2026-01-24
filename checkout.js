@@ -337,12 +337,39 @@ function displayCartItems() {
         return;
     }
 
+    // Check if there are newly added items from OAuth login merge
+    let newlyAddedIds = [];
+    try {
+        const stored = sessionStorage.getItem('newlyAddedCartItems');
+        if (stored) {
+            newlyAddedIds = JSON.parse(stored);
+        }
+    } catch (e) {
+        console.error('Error parsing newly added cart items:', e);
+    }
+
+    // Separate items into previous session vs newly added
+    const previousItems = [];
+    const newItems = [];
+
+    cartItems.forEach(item => {
+        if (newlyAddedIds.includes(item.product_id)) {
+            newItems.push(item);
+        } else {
+            previousItems.push(item);
+        }
+    });
+
+    // Only show separation if we have both categories
+    const showSeparation = newlyAddedIds.length > 0 && previousItems.length > 0 && newItems.length > 0;
+
     // Build cart items HTML with scroll wrapper
     const needsScroll = cartItems.length > 4;
     let html = '<div class="cart-items-wrapper">';
     html += '<div class="cart-items-checkout">';
 
-    cartItems.forEach(item => {
+    // Helper function to render a single item
+    const renderItem = (item) => {
         const typeLabel = getTypeLabel(item.product_type);
         const quantity = item.quantity || 1;
         const itemTotal = parseFloat(item.price) * quantity;
@@ -351,7 +378,7 @@ function displayCartItems() {
         // Use custom icon image with fallback to Font Awesome if image fails to load
         const iconHtml = `<img src="${iconPath}" alt="${escapeHtml(item.product_name)}" style="width: 100%; height: 100%; object-fit: contain;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"><i class="fas fa-file-medical" style="display: none; color: var(--primary-color); font-size: 1.2rem; width: 100%; height: 100%; align-items: center; justify-content: center;"></i>`;
 
-        html += `
+        return `
             <div class="checkout-item" data-product-id="${escapeHtml(item.product_id)}">
                 <div class="checkout-item-icon" style="background: var(--background-light); padding: 4px;">
                     ${iconHtml}
@@ -366,7 +393,67 @@ function displayCartItems() {
                 </button>
             </div>
         `;
-    });
+    };
+
+    if (showSeparation) {
+        // Show previous session items first with a header
+        html += `
+            <div class="cart-section-header" style="
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                padding: 8px 12px;
+                margin-bottom: 8px;
+                background: linear-gradient(135deg, rgba(107, 114, 128, 0.1), rgba(107, 114, 128, 0.05));
+                border-radius: 8px;
+                border-left: 3px solid #6b7280;
+            ">
+                <i class="fas fa-history" style="color: #6b7280; font-size: 0.85rem;"></i>
+                <span style="font-size: 0.85rem; font-weight: 600; color: #6b7280;">From Previous Session</span>
+                <span style="font-size: 0.75rem; color: #9ca3af; margin-left: auto;">${previousItems.length} item${previousItems.length !== 1 ? 's' : ''}</span>
+            </div>
+        `;
+
+        previousItems.forEach(item => {
+            html += renderItem(item);
+        });
+
+        // Show newly added items with a header
+        html += `
+            <div class="cart-section-header" style="
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                padding: 8px 12px;
+                margin-top: 16px;
+                margin-bottom: 8px;
+                background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(16, 185, 129, 0.05));
+                border-radius: 8px;
+                border-left: 3px solid #10b981;
+            ">
+                <i class="fas fa-plus-circle" style="color: #10b981; font-size: 0.85rem;"></i>
+                <span style="font-size: 0.85rem; font-weight: 600; color: #10b981;">Just Added</span>
+                <span style="font-size: 0.75rem; color: #6ee7b7; margin-left: auto;">${newItems.length} item${newItems.length !== 1 ? 's' : ''}</span>
+            </div>
+        `;
+
+        newItems.forEach(item => {
+            html += renderItem(item);
+        });
+
+        // Clear the sessionStorage after displaying so it doesn't persist across refreshes
+        sessionStorage.removeItem('newlyAddedCartItems');
+    } else {
+        // No separation needed - just render all items
+        cartItems.forEach(item => {
+            html += renderItem(item);
+        });
+
+        // Clear sessionStorage if we showed items (even without separation)
+        if (newlyAddedIds.length > 0) {
+            sessionStorage.removeItem('newlyAddedCartItems');
+        }
+    }
 
     html += '</div>';
 
