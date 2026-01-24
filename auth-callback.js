@@ -8,6 +8,9 @@ const refreshToken = urlParams.get('refresh_token');
 const error = urlParams.get('error');
 const orderToClaim = urlParams.get('order'); // Order to claim after OAuth login
 
+// Check for stored redirect from before OAuth (e.g., checkout flow)
+const storedRedirect = sessionStorage.getItem('authRedirect');
+
 const loadingState = document.getElementById('loading-state');
 const errorState = document.getElementById('error-state');
 const errorMessage = document.getElementById('error-message');
@@ -68,15 +71,25 @@ function initAuthCallback() {
                 if (data.user) {
                     // Store user data
                     localStorage.setItem('user', JSON.stringify(data.user));
-                    console.log('User data stored, redirecting to dashboard');
+                    console.log('User data stored, determining redirect');
 
-                    // Build redirect URL (include order param if present)
+                    // Determine redirect URL based on priority:
+                    // 1. Stored redirect from before OAuth (e.g., checkout)
+                    // 2. Order to claim
+                    // 3. Default to dashboard
                     let redirectUrl = 'dashboard.html';
-                    if (orderToClaim) {
-                        redirectUrl += `?order=${encodeURIComponent(orderToClaim)}`;
+
+                    if (storedRedirect === 'checkout') {
+                        redirectUrl = 'checkout.html';
+                        // Clear the stored redirect
+                        sessionStorage.removeItem('authRedirect');
+                    } else if (orderToClaim) {
+                        redirectUrl = `dashboard.html?order=${encodeURIComponent(orderToClaim)}`;
                     }
 
-                    // Redirect to dashboard with minimum loading time
+                    console.log('Redirecting to:', redirectUrl);
+
+                    // Redirect with minimum loading time
                     redirectWithMinTime(() => {
                         window.location.href = redirectUrl;
                     });
@@ -86,12 +99,17 @@ function initAuthCallback() {
             })
             .catch(error => {
                 console.error('Error fetching user data:', error);
-                // Still redirect to dashboard even if user fetch fails
-                // The dashboard can try to fetch user data again
+                // Still redirect even if user fetch fails
+                // The target page can try to fetch user data again
                 let redirectUrl = 'dashboard.html';
-                if (orderToClaim) {
-                    redirectUrl += `?order=${encodeURIComponent(orderToClaim)}`;
+
+                if (storedRedirect === 'checkout') {
+                    redirectUrl = 'checkout.html';
+                    sessionStorage.removeItem('authRedirect');
+                } else if (orderToClaim) {
+                    redirectUrl = `dashboard.html?order=${encodeURIComponent(orderToClaim)}`;
                 }
+
                 redirectWithMinTime(() => {
                     window.location.href = redirectUrl;
                 });

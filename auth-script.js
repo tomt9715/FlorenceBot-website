@@ -536,6 +536,13 @@ async function handleSocialAuth(provider) {
     // Remember last used auth method
     localStorage.setItem('lastAuthMethod', provider);
 
+    // Store redirect URL before OAuth if present (for checkout flow)
+    const urlParams = new URLSearchParams(window.location.search);
+    const redirectTo = urlParams.get('redirect');
+    if (redirectTo) {
+        sessionStorage.setItem('authRedirect', redirectTo);
+    }
+
     // Currently supported providers
     const supportedProviders = ['google', 'discord'];
 
