@@ -59,23 +59,39 @@ async function initCheckout() {
     if (isUserAuthenticated) {
         // User is signed in - show user info banner
         const user = typeof getCurrentUser === 'function' ? getCurrentUser() : JSON.parse(localStorage.getItem('user') || '{}');
-        accountEmail = user.email;
 
-        if (userInfoBanner) {
-            userInfoBanner.style.display = 'flex';
-        }
+        // Get email from user object - try different possible property names
+        accountEmail = user.email || user.user_email || user.email_address || '';
+
+        console.log('Checkout auth state:', { isAuthenticated: true, user, accountEmail });
+
+        // Hide sign-in prompt immediately
         if (signInPrompt) {
             signInPrompt.style.display = 'none';
         }
-        if (userEmailDisplay && accountEmail) {
-            userEmailDisplay.textContent = accountEmail;
+
+        // Show user info banner
+        if (userInfoBanner) {
+            userInfoBanner.style.display = 'flex';
+        }
+
+        // Display user email in the banner
+        if (userEmailDisplay) {
+            userEmailDisplay.textContent = accountEmail || 'your account';
         }
 
         // Pre-fill and lock email field
         if (emailInput && accountEmail) {
             emailInput.value = accountEmail;
             emailInput.readOnly = true;
-            emailGroup.classList.add('email-locked');
+            if (emailGroup) {
+                emailGroup.classList.add('email-locked');
+            }
+            // Update hint text for locked email
+            const emailHint = document.getElementById('email-hint');
+            if (emailHint) {
+                emailHint.textContent = 'Your receipt and guide access will be sent to this email.';
+            }
         }
 
         // Show "use different email" button
@@ -85,22 +101,20 @@ async function initCheckout() {
         }
 
         // Pre-fill name if available
-        if (user.name || user.displayName) {
-            document.getElementById('name').value = user.name || user.displayName;
+        const nameField = document.getElementById('name');
+        if (nameField && (user.name || user.displayName || user.full_name)) {
+            nameField.value = user.name || user.displayName || user.full_name;
         }
     } else {
-        // Guest user - sign-in prompt is visible by default, just ensure it's showing
+        console.log('Checkout auth state:', { isAuthenticated: false });
+
+        // Guest user - show sign-in prompt, hide user info banner
         if (signInPrompt) {
             signInPrompt.style.display = 'flex';
         }
         if (userInfoBanner) {
             userInfoBanner.style.display = 'none';
         }
-    }
-
-    // Hide sign-in prompt if authenticated (in case JS loaded late)
-    if (isUserAuthenticated && signInPrompt) {
-        signInPrompt.style.display = 'none';
     }
 
     try {
