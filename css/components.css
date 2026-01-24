@@ -1068,13 +1068,12 @@
     border: 1px solid var(--border-color);
     border-radius: 12px;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
-    min-width: 200px;
+    min-width: 220px;
     opacity: 0;
     visibility: hidden;
     transform: translateY(-10px);
     transition: all 0.3s ease;
     z-index: 10001;
-    overflow: hidden;
 }
 
 .user-dropdown.active {

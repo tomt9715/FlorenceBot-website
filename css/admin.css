@@ -488,6 +488,24 @@
 /* Admin Navbar */
 .admin-navbar {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    overflow: visible !important;
+}
+
+.admin-navbar .nav-container {
+    overflow: visible !important;
+}
+
+.admin-navbar .nav-links {
+    overflow: visible !important;
+}
+
+.admin-navbar .user-menu {
+    overflow: visible !important;
+}
+
+.admin-navbar .user-dropdown {
+    overflow: visible !important;
+    max-height: none !important;
 }
 
 .admin-navbar .nav-links a {
