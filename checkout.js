@@ -105,6 +105,9 @@ async function initCheckout() {
         if (nameField && (user.name || user.displayName || user.full_name)) {
             nameField.value = user.name || user.displayName || user.full_name;
         }
+
+        // Update navbar for authenticated user
+        updateNavbarForAuth(user);
     } else {
         console.log('Checkout auth state:', { isAuthenticated: false });
 
@@ -1154,6 +1157,73 @@ function showError(message) {
 function hideError() {
     const errorEl = document.getElementById('error-message');
     errorEl.style.display = 'none';
+}
+
+/**
+ * Update navbar to show authenticated state
+ */
+function updateNavbarForAuth(user) {
+    const navLoginLink = document.getElementById('nav-login-link');
+    const navDashboardLink = document.getElementById('nav-dashboard-link');
+    const userMenu = document.getElementById('user-menu');
+    const dropdownUserName = document.getElementById('dropdown-user-name');
+    const dropdownUserEmail = document.getElementById('dropdown-user-email');
+
+    // Hide login link, show dashboard link
+    if (navLoginLink) {
+        navLoginLink.style.display = 'none';
+    }
+    if (navDashboardLink) {
+        navDashboardLink.style.display = 'inline';
+    }
+
+    // Show user menu
+    if (userMenu) {
+        userMenu.style.display = 'block';
+
+        // Populate user info in dropdown
+        const userName = user.name || user.displayName || user.full_name || 'User';
+        const userEmail = user.email || user.user_email || '';
+
+        if (dropdownUserName) {
+            dropdownUserName.textContent = userName;
+        }
+        if (dropdownUserEmail) {
+            dropdownUserEmail.textContent = userEmail;
+        }
+
+        // Setup user menu toggle
+        const userMenuBtn = document.getElementById('user-menu-btn');
+        const userDropdown = document.getElementById('user-dropdown');
+
+        if (userMenuBtn && userDropdown) {
+            userMenuBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                userDropdown.classList.toggle('active');
+            });
+
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!userMenu.contains(e.target)) {
+                    userDropdown.classList.remove('active');
+                }
+            });
+        }
+
+        // Setup logout button
+        const logoutBtn = document.getElementById('logout-btn');
+        if (logoutBtn) {
+            logoutBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                // Clear auth data
+                localStorage.removeItem('accessToken');
+                localStorage.removeItem('refreshToken');
+                localStorage.removeItem('user');
+                // Redirect to login
+                window.location.href = 'login.html';
+            });
+        }
+    }
 }
 
 /**
