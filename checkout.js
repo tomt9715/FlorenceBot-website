@@ -6,8 +6,7 @@
  * We collect customer info (name, email, address) and send it with the payment.
  */
 
-// Configuration - Single API URL for all backend calls
-const API_URL = 'https://api.thenursingcollective.pro';
+// API_URL is declared in api-service.js and available globally
 
 // Global state
 let stripe = null;
