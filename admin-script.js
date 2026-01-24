@@ -382,7 +382,7 @@ async function openUserDetail(email) {
 
     document.getElementById('modal-user-email').textContent = email;
     document.getElementById('user-info-grid').innerHTML = '<div class="loading-spinner"><i class="fas fa-spinner fa-spin"></i> Loading...</div>';
-    document.getElementById('user-guides-list').innerHTML = '<div class="loading-spinner"><i class="fas fa-spinner fa-spin"></i> Loading...</div>';
+    document.getElementById('user-guides-table-body').innerHTML = '<tr><td colspan="6" class="loading-cell"><i class="fas fa-spinner fa-spin"></i> Loading...</td></tr>';
     document.getElementById('user-notes-list').innerHTML = '<div class="loading-spinner"><i class="fas fa-spinner fa-spin"></i> Loading...</div>';
 
     try {
