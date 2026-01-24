@@ -1522,12 +1522,12 @@ button.subcategory-chip.active i {
     background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
     color: white;
     border: none;
-    border-radius: 12px;
+    border-radius: 12px 12px 0 0;
     font-size: 1rem;
     font-weight: 600;
     font-family: 'Source Sans 3', sans-serif;
     cursor: pointer;
-    margin-bottom: 16px;
+    margin-bottom: 0;
     align-items: center;
     justify-content: center;
     gap: 10px;
@@ -1574,8 +1574,10 @@ button.subcategory-chip.active i {
         overflow: hidden;
         padding: 0 20px;
         margin-bottom: 0;
+        margin-top: 0;
         opacity: 0;
         transition: max-height 0.4s ease, padding 0.4s ease, opacity 0.3s ease, margin 0.4s ease;
+        border-radius: 0 0 12px 12px;
     }
 
     .store-sidebar.mobile-expanded {
@@ -1583,6 +1585,11 @@ button.subcategory-chip.active i {
         padding: 20px;
         opacity: 1;
         margin-bottom: 20px;
+    }
+
+    /* Remove gap between toggle button and sidebar when collapsed */
+    .mobile-filter-toggle + .store-sidebar:not(.mobile-expanded) {
+        border: none;
     }
 
     /* Store layout adjustments */
@@ -1737,11 +1744,17 @@ button.subcategory-chip.active i {
         font-size: 1rem;
     }
 
-    /* Package toggle mobile */
+    /* Package toggle mobile - keep horizontal layout */
     .package-toggle-container {
-        flex-direction: column;
-        gap: 12px;
+        flex-direction: row;
+        gap: 16px;
         padding: 16px;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .package-toggle-label {
+        font-size: 0.85rem;
     }
 
     /* Subcategory chips mobile - horizontal scroll */
