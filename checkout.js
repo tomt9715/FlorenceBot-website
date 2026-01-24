@@ -396,36 +396,13 @@ function displayCartItems() {
     };
 
     if (showSeparation) {
-        // Show previous session items first with a header
+        // Show newly added items FIRST with a header
         html += `
             <div class="cart-section-header" style="
                 display: flex;
                 align-items: center;
                 gap: 8px;
                 padding: 8px 12px;
-                margin-bottom: 8px;
-                background: linear-gradient(135deg, rgba(107, 114, 128, 0.1), rgba(107, 114, 128, 0.05));
-                border-radius: 8px;
-                border-left: 3px solid #6b7280;
-            ">
-                <i class="fas fa-history" style="color: #6b7280; font-size: 0.85rem;"></i>
-                <span style="font-size: 0.85rem; font-weight: 600; color: #6b7280;">From Previous Session</span>
-                <span style="font-size: 0.75rem; color: #9ca3af; margin-left: auto;">${previousItems.length} item${previousItems.length !== 1 ? 's' : ''}</span>
-            </div>
-        `;
-
-        previousItems.forEach(item => {
-            html += renderItem(item);
-        });
-
-        // Show newly added items with a header
-        html += `
-            <div class="cart-section-header" style="
-                display: flex;
-                align-items: center;
-                gap: 8px;
-                padding: 8px 12px;
-                margin-top: 16px;
                 margin-bottom: 8px;
                 background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(16, 185, 129, 0.05));
                 border-radius: 8px;
@@ -438,6 +415,29 @@ function displayCartItems() {
         `;
 
         newItems.forEach(item => {
+            html += renderItem(item);
+        });
+
+        // Show previous session items below
+        html += `
+            <div class="cart-section-header" style="
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                padding: 8px 12px;
+                margin-top: 16px;
+                margin-bottom: 8px;
+                background: linear-gradient(135deg, rgba(107, 114, 128, 0.1), rgba(107, 114, 128, 0.05));
+                border-radius: 8px;
+                border-left: 3px solid #6b7280;
+            ">
+                <i class="fas fa-history" style="color: #6b7280; font-size: 0.85rem;"></i>
+                <span style="font-size: 0.85rem; font-weight: 600; color: #6b7280;">From Previous Session</span>
+                <span style="font-size: 0.75rem; color: #9ca3af; margin-left: auto;">${previousItems.length} item${previousItems.length !== 1 ? 's' : ''}</span>
+            </div>
+        `;
+
+        previousItems.forEach(item => {
             html += renderItem(item);
         });
 
