@@ -1217,78 +1217,122 @@
     color: #111827;
 }
 
-/* Guides List */
-#user-detail-modal .guides-list {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    max-height: 300px;
+/* User Guides Table */
+.user-guides-table-container {
+    max-height: 350px;
     overflow-y: auto;
-}
-
-#user-detail-modal .guide-item-admin {
-    display: flex;
-    align-items: center;
-    padding: 14px 16px;
-    background: #f9fafb;
-    border-radius: 10px;
-    gap: 14px;
+    border-radius: 8px;
     border: 1px solid #e5e7eb;
 }
 
-#user-detail-modal .guide-item-admin .guide-info {
-    flex: 1;
-    min-width: 0;
-}
-
-#user-detail-modal .guide-item-admin .guide-actions {
-    flex-shrink: 0;
-}
-
-#user-detail-modal .guide-item-admin.revoked {
-    opacity: 0.6;
-    background: #fee2e2;
-}
-
-#user-detail-modal .guide-name {
-    font-weight: 500;
-    color: #111827;
-    margin-bottom: 4px;
-}
-
-#user-detail-modal .guide-meta {
-    font-size: 0.8rem;
-    color: #6b7280;
-}
-
-.guide-actions {
-    display: flex;
-    gap: 6px;
-}
-
-/* Bulk Actions Bar */
-.bulk-actions-bar {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 10px 14px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    border-radius: 8px;
-    margin-bottom: 12px;
-}
-
-.bulk-actions-bar .selected-count {
-    color: #fff;
-    font-weight: 500;
+.admin-table.compact {
     font-size: 0.9rem;
 }
 
-.bulk-actions-bar .btn {
-    padding: 6px 12px;
-    font-size: 0.85rem;
+.admin-table.compact th,
+.admin-table.compact td {
+    padding: 10px 12px;
 }
 
-/* Guide Checkbox */
+.admin-table .checkbox-col {
+    width: 40px;
+    text-align: center;
+}
+
+.admin-table .empty-cell {
+    text-align: center;
+    color: #6b7280;
+    padding: 30px !important;
+}
+
+.admin-table .revoked-row {
+    background-color: #fef2f2;
+    opacity: 0.8;
+}
+
+.admin-table .revoked-row td {
+    color: #6b7280;
+}
+
+/* Table Checkbox */
+.table-checkbox {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    margin: 0 auto;
+}
+
+.table-checkbox input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.table-checkbox .checkmark {
+    position: relative;
+    height: 18px;
+    width: 18px;
+    min-width: 18px;
+    background-color: #fff;
+    border: 2px solid #d1d5db;
+    border-radius: 4px;
+    transition: all 0.15s ease;
+}
+
+.table-checkbox:hover .checkmark {
+    border-color: #667eea;
+}
+
+.table-checkbox input:checked ~ .checkmark {
+    background-color: #667eea;
+    border-color: #667eea;
+}
+
+.table-checkbox .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+    left: 4px;
+    top: 0px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+.table-checkbox input:checked ~ .checkmark:after {
+    display: block;
+}
+
+/* Source badges */
+.source-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.source-badge.stripe {
+    background: #e0e7ff;
+    color: #4338ca;
+}
+
+.source-badge.admin {
+    background: #fef3c7;
+    color: #b45309;
+}
+
+/* Guide Checkbox (legacy - keeping for compatibility) */
 .guide-checkbox {
     position: relative;
     display: flex;
@@ -1343,50 +1387,6 @@
 
 .guide-checkbox input:checked ~ .checkmark:after {
     display: block;
-}
-
-/* Revoked Guides Section */
-.revoked-guides-section {
-    margin-top: 16px;
-    border-top: 1px solid #e5e7eb;
-    padding-top: 12px;
-}
-
-.revoked-toggle-btn {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    background: none;
-    border: none;
-    color: #6b7280;
-    cursor: pointer;
-    font-size: 0.9rem;
-    padding: 8px 0;
-    transition: color 0.15s ease;
-}
-
-.revoked-toggle-btn:hover {
-    color: #111827;
-}
-
-.revoked-toggle-btn i {
-    font-size: 0.75rem;
-    transition: transform 0.2s ease;
-}
-
-.revoked-guides-list {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    margin-top: 10px;
-    max-height: 200px;
-    overflow-y: auto;
-}
-
-.revoked-guides-list .guide-item-admin {
-    opacity: 0.7;
-    background: #fef2f2;
-    border-color: #fecaca;
 }
 
 /* Header actions wrapper */
@@ -1894,17 +1894,27 @@
     color: #f9fafb;
 }
 
-[data-theme="dark"] #user-detail-modal .guide-item-admin {
-    background: #2a2a3e;
+[data-theme="dark"] .user-guides-table-container {
     border-color: #374151;
 }
 
-[data-theme="dark"] #user-detail-modal .guide-name {
-    color: #f9fafb;
+[data-theme="dark"] .admin-table .revoked-row {
+    background-color: #3d2a2a;
 }
 
-[data-theme="dark"] #user-detail-modal .guide-meta {
-    color: #9ca3af;
+[data-theme="dark"] .table-checkbox .checkmark {
+    background-color: #374151;
+    border-color: #4b5563;
+}
+
+[data-theme="dark"] .source-badge.stripe {
+    background: #312e81;
+    color: #a5b4fc;
+}
+
+[data-theme="dark"] .source-badge.admin {
+    background: #78350f;
+    color: #fcd34d;
 }
 
 [data-theme="dark"] #user-detail-modal .note-item {
@@ -1920,27 +1930,9 @@
     color: #f9fafb;
 }
 
-[data-theme="dark"] #user-detail-modal .guide-item-admin.revoked,
-[data-theme="dark"] .revoked-guides-list .guide-item-admin {
-    background: #3d2a2a;
-    border-color: #5c3838;
-}
-
 [data-theme="dark"] .guide-checkbox .checkmark {
     background-color: #374151;
     border-color: #4b5563;
-}
-
-[data-theme="dark"] .revoked-toggle-btn {
-    color: #9ca3af;
-}
-
-[data-theme="dark"] .revoked-toggle-btn:hover {
-    color: #f9fafb;
-}
-
-[data-theme="dark"] .revoked-guides-section {
-    border-top-color: #374151;
 }
 
 [data-theme="dark"] .search-input-group,

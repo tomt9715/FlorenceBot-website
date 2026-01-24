@@ -420,93 +420,78 @@ async function openUserDetail(email) {
             </div>
         `;
 
-        // Guides - separate active and revoked
+        // Guides - render as table
         const activeGuides = data.guides.filter(g => g.is_active);
-        const revokedGuides = data.guides.filter(g => !g.is_active);
+        document.getElementById('modal-guides-count').textContent = data.guides.length;
 
-        document.getElementById('modal-guides-count').textContent = activeGuides.length;
-
-        const guidesListEl = document.getElementById('user-guides-list');
-        const revokedSection = document.getElementById('revoked-guides-section');
-        const revokedListEl = document.getElementById('revoked-guides-list');
-        const bulkActionsBar = document.getElementById('guides-bulk-actions');
+        const tbody = document.getElementById('user-guides-table-body');
+        const bulkRevokeBtn = document.getElementById('bulk-revoke-btn');
+        const selectAllCheckbox = document.getElementById('select-all-guides');
 
         // Reset bulk selection state
         selectedGuides.clear();
-        bulkActionsBar.style.display = 'none';
+        bulkRevokeBtn.style.display = 'none';
+        if (selectAllCheckbox) selectAllCheckbox.checked = false;
 
-        // Render active guides
-        if (activeGuides.length === 0) {
-            guidesListEl.innerHTML = '<div class="empty-state"><p>No active guides</p></div>';
+        if (data.guides.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="6" class="empty-cell">No guides</td></tr>';
         } else {
-            guidesListEl.innerHTML = activeGuides.map(guide => `
-                <div class="guide-item-admin" data-guide-id="${escapeHtml(guide.product_id)}">
-                    <label class="guide-checkbox">
-                        <input type="checkbox" class="guide-select-checkbox" data-guide-id="${escapeHtml(guide.product_id)}">
-                        <span class="checkmark"></span>
-                    </label>
-                    <div class="guide-info">
-                        <div class="guide-name">${escapeHtml(guide.product_name)}</div>
-                        <div class="guide-meta">
-                            ${guide.source === 'stripe' ? '<i class="fas fa-credit-card"></i> Stripe' : `<i class="fas fa-gift"></i> ${escapeHtml(guide.granted_by || 'Admin')}`}
-                            • ${formatDate(guide.purchased_at)}
-                            ${guide.grant_reason ? ` • ${escapeHtml(guide.grant_reason)}` : ''}
-                        </div>
-                    </div>
-                    <div class="guide-actions">
-                        <button class="action-btn danger btn-sm" data-revoke-guide="${escapeHtml(guide.product_id)}" data-user-email="${escapeHtml(email)}">
-                            <i class="fas fa-times"></i> Revoke
-                        </button>
-                    </div>
-                </div>
+            tbody.innerHTML = data.guides.map(guide => `
+                <tr class="${guide.is_active ? '' : 'revoked-row'}">
+                    <td class="checkbox-col">
+                        ${guide.is_active ? `
+                            <label class="table-checkbox">
+                                <input type="checkbox" class="guide-select-checkbox" data-guide-id="${escapeHtml(guide.product_id)}">
+                                <span class="checkmark"></span>
+                            </label>
+                        ` : ''}
+                    </td>
+                    <td><strong>${escapeHtml(guide.product_name)}</strong></td>
+                    <td>
+                        ${guide.source === 'stripe'
+                            ? '<span class="source-badge stripe"><i class="fas fa-credit-card"></i> Stripe</span>'
+                            : `<span class="source-badge admin"><i class="fas fa-gift"></i> Admin</span>`}
+                    </td>
+                    <td>${formatDate(guide.purchased_at)}</td>
+                    <td>
+                        ${guide.is_active
+                            ? '<span class="badge-status active"><i class="fas fa-check"></i> Active</span>'
+                            : '<span class="badge-status revoked"><i class="fas fa-times"></i> Revoked</span>'}
+                    </td>
+                    <td>
+                        ${guide.is_active ? `
+                            <button class="action-btn danger btn-sm" data-revoke-guide="${escapeHtml(guide.product_id)}" data-user-email="${escapeHtml(email)}">
+                                <i class="fas fa-times"></i> Revoke
+                            </button>
+                        ` : `
+                            <button class="action-btn success btn-sm" data-restore-guide="${escapeHtml(guide.product_id)}" data-user-email="${escapeHtml(email)}">
+                                <i class="fas fa-redo"></i> Restore
+                            </button>
+                        `}
+                    </td>
+                </tr>
             `).join('');
 
             // Attach event listeners for checkboxes
-            guidesListEl.querySelectorAll('.guide-select-checkbox').forEach(cb => {
+            tbody.querySelectorAll('.guide-select-checkbox').forEach(cb => {
                 cb.addEventListener('change', function() {
                     handleGuideSelection(this.dataset.guideId, this.checked);
                 });
             });
 
             // Attach event listeners for revoke buttons
-            guidesListEl.querySelectorAll('[data-revoke-guide]').forEach(btn => {
+            tbody.querySelectorAll('[data-revoke-guide]').forEach(btn => {
                 btn.addEventListener('click', function() {
                     revokeGuide(this.dataset.userEmail, this.dataset.revokeGuide);
                 });
             });
-        }
-
-        // Render revoked guides section
-        if (revokedGuides.length > 0) {
-            revokedSection.style.display = 'block';
-            document.getElementById('revoked-guides-count').textContent = revokedGuides.length;
-
-            revokedListEl.innerHTML = revokedGuides.map(guide => `
-                <div class="guide-item-admin revoked">
-                    <div class="guide-info">
-                        <div class="guide-name">${escapeHtml(guide.product_name)}</div>
-                        <div class="guide-meta">
-                            ${guide.source === 'stripe' ? '<i class="fas fa-credit-card"></i> Stripe' : `<i class="fas fa-gift"></i> ${escapeHtml(guide.granted_by || 'Admin')}`}
-                            • ${formatDate(guide.purchased_at)}
-                            ${guide.grant_reason ? ` • ${escapeHtml(guide.grant_reason)}` : ''}
-                        </div>
-                    </div>
-                    <div class="guide-actions">
-                        <button class="action-btn success btn-sm" data-restore-guide="${escapeHtml(guide.product_id)}" data-user-email="${escapeHtml(email)}">
-                            <i class="fas fa-redo"></i> Restore
-                        </button>
-                    </div>
-                </div>
-            `).join('');
 
             // Attach event listeners for restore buttons
-            revokedListEl.querySelectorAll('[data-restore-guide]').forEach(btn => {
+            tbody.querySelectorAll('[data-restore-guide]').forEach(btn => {
                 btn.addEventListener('click', function() {
                     restoreGuide(this.dataset.userEmail, this.dataset.restoreGuide);
                 });
             });
-        } else {
-            revokedSection.style.display = 'none';
         }
 
         // Notes
@@ -580,24 +565,27 @@ function handleGuideSelection(guideId, isSelected) {
 }
 
 function updateBulkActionsBar() {
-    const bulkActionsBar = document.getElementById('guides-bulk-actions');
+    const bulkRevokeBtn = document.getElementById('bulk-revoke-btn');
     const countEl = document.getElementById('selected-guides-count');
 
     if (selectedGuides.size > 0) {
-        bulkActionsBar.style.display = 'flex';
+        bulkRevokeBtn.style.display = 'inline-flex';
         countEl.textContent = selectedGuides.size;
     } else {
-        bulkActionsBar.style.display = 'none';
+        bulkRevokeBtn.style.display = 'none';
+    }
+
+    // Update select all checkbox state
+    const allCheckboxes = document.querySelectorAll('.guide-select-checkbox');
+    const selectAllCheckbox = document.getElementById('select-all-guides');
+    if (selectAllCheckbox && allCheckboxes.length > 0) {
+        const allChecked = Array.from(allCheckboxes).every(cb => cb.checked);
+        const someChecked = Array.from(allCheckboxes).some(cb => cb.checked);
+        selectAllCheckbox.checked = allChecked;
+        selectAllCheckbox.indeterminate = someChecked && !allChecked;
     }
 }
 
-function clearGuideSelection() {
-    selectedGuides.clear();
-    document.querySelectorAll('.guide-select-checkbox').forEach(cb => {
-        cb.checked = false;
-    });
-    updateBulkActionsBar();
-}
 
 async function bulkRevokeGuides() {
     if (selectedGuides.size === 0) return;
@@ -633,19 +621,6 @@ async function bulkRevokeGuides() {
     openUserDetail(currentUserEmail); // Refresh
 }
 
-function toggleRevokedGuides() {
-    const revokedList = document.getElementById('revoked-guides-list');
-    const toggleBtn = document.getElementById('toggle-revoked-guides');
-    const icon = toggleBtn.querySelector('i');
-
-    if (revokedList.style.display === 'none') {
-        revokedList.style.display = 'block';
-        icon.className = 'fas fa-chevron-down';
-    } else {
-        revokedList.style.display = 'none';
-        icon.className = 'fas fa-chevron-right';
-    }
-}
 
 // ==================== Add Guide Modal ====================
 
@@ -1296,20 +1271,21 @@ document.addEventListener('DOMContentLoaded', function() {
         confirmCancelBtn.addEventListener('click', closeConfirmModal);
     }
 
-    // Bulk revoke buttons
+    // Bulk revoke button
     const bulkRevokeBtn = document.getElementById('bulk-revoke-btn');
     if (bulkRevokeBtn) {
         bulkRevokeBtn.addEventListener('click', bulkRevokeGuides);
     }
 
-    const clearSelectionBtn = document.getElementById('clear-selection-btn');
-    if (clearSelectionBtn) {
-        clearSelectionBtn.addEventListener('click', clearGuideSelection);
-    }
-
-    // Toggle revoked guides section
-    const toggleRevokedBtn = document.getElementById('toggle-revoked-guides');
-    if (toggleRevokedBtn) {
-        toggleRevokedBtn.addEventListener('click', toggleRevokedGuides);
+    // Select all guides checkbox
+    const selectAllGuidesCheckbox = document.getElementById('select-all-guides');
+    if (selectAllGuidesCheckbox) {
+        selectAllGuidesCheckbox.addEventListener('change', function() {
+            const checkboxes = document.querySelectorAll('.guide-select-checkbox');
+            checkboxes.forEach(cb => {
+                cb.checked = this.checked;
+                handleGuideSelection(cb.dataset.guideId, this.checked);
+            });
+        });
     }
 });
