@@ -277,7 +277,12 @@ function showSuccessState(order) {
 
     if (isGuest) {
         // Guest user - show prominent order number and account creation prompts
-        const escapedOrderNumber = escapeHtml(order.order_number);
+        const rawOrderNumber = order.order_number || '';
+        const escapedOrderNumber = escapeHtml(rawOrderNumber);
+        // Extract just the number part after "TNC-" for easier pasting into claim form
+        const orderNumberForCopy = rawOrderNumber.startsWith('TNC-')
+            ? rawOrderNumber.substring(4)
+            : rawOrderNumber;
         guestWarningHtml = `
             <div class="guest-warning">
                 <div class="guest-warning-header">
@@ -289,12 +294,14 @@ function showSuccessState(order) {
                     <div class="order-number-label">Your Order Number</div>
                     <div class="order-number-value" id="order-number-value">${escapedOrderNumber}</div>
                 </div>
-                <button class="copy-btn" data-order-number="${escapedOrderNumber}">
+                <button class="copy-btn" id="copy-order-btn">
                     <i class="fas fa-copy"></i>
                     Copy to Clipboard
                 </button>
             </div>
         `;
+        // Store order number without TNC- prefix for copy function (easier to paste into claim form)
+        window._orderNumberToCopy = orderNumberForCopy;
 
         const orderParam = encodeURIComponent(order.order_number);
         actionsHtml = `
@@ -375,11 +382,11 @@ function showSuccessState(order) {
         </div>
     `;
 
-    // Attach event listener for copy button using event delegation
-    const copyBtn = container.querySelector('.copy-btn[data-order-number]');
-    if (copyBtn) {
+    // Attach event listener for copy button
+    const copyBtn = container.querySelector('#copy-order-btn');
+    if (copyBtn && window._orderNumberToCopy) {
         copyBtn.addEventListener('click', function() {
-            copyToClipboard(this.dataset.orderNumber, this);
+            copyToClipboard(window._orderNumberToCopy, this);
         });
     }
 }
