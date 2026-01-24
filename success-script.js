@@ -247,9 +247,9 @@ function showSuccessState(order) {
                 <span class="order-item-label">Original Price</span>
                 <span class="order-item-value" style="text-decoration: line-through; color: var(--text-secondary);">$${originalSubtotal.toFixed(2)}</span>
             </div>
-            <div class="order-item" style="color: #10b981;">
+            <div class="order-item" style="color: #f59e0b;">
                 <span class="order-item-label"><i class="fas fa-tag" style="margin-right: 6px;"></i>Bundle Discount</span>
-                <span class="order-item-value" style="color: #10b981; font-weight: 600;">-$${discountAmount.toFixed(2)}</span>
+                <span class="order-item-value" style="color: #f59e0b; font-weight: 600;">-$${discountAmount.toFixed(2)}</span>
             </div>
         `;
     }
@@ -325,9 +325,9 @@ function showSuccessState(order) {
     let savingsMessageHtml = '';
     if (hasDiscount) {
         savingsMessageHtml = `
-            <div style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(16, 185, 129, 0.05)); border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 8px; padding: 12px; margin-bottom: 16px; text-align: center;">
-                <i class="fas fa-check-circle" style="color: #10b981; margin-right: 6px;"></i>
-                <span style="color: #10b981; font-weight: 600;">You saved $${discountAmount.toFixed(2)} with our bundle deal!</span>
+            <div style="background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(245, 158, 11, 0.05)); border: 1px solid rgba(245, 158, 11, 0.2); border-radius: 8px; padding: 12px; margin-bottom: 16px; text-align: center;">
+                <i class="fas fa-check-circle" style="color: #f59e0b; margin-right: 6px;"></i>
+                <span style="color: #f59e0b; font-weight: 600;">You saved $${discountAmount.toFixed(2)} with our bundle deal!</span>
             </div>
         `;
     }
