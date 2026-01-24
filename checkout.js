@@ -546,7 +546,7 @@ function updateOrderTotals(discountInfo) {
                 <span>Original Price</span>
                 <span style="text-decoration: line-through;">$${discountInfo.originalSubtotal.toFixed(2)}</span>
             </div>
-            <div class="total-row discount-row" style="color: #10b981; font-weight: 600;">
+            <div class="total-row discount-row" style="color: #f59e0b; font-weight: 600;">
                 <span><i class="fas fa-tag" style="margin-right: 6px;"></i>Bundle Discount</span>
                 <span>-$${discountInfo.totalDiscount.toFixed(2)}</span>
             </div>
@@ -574,15 +574,15 @@ function updateOrderTotals(discountInfo) {
     if (discountInfo.hasDiscount) {
         html += `
             <div class="checkout-savings-message" style="
-                background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(16, 185, 129, 0.05));
-                border: 1px solid rgba(16, 185, 129, 0.2);
+                background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(245, 158, 11, 0.05));
+                border: 1px solid rgba(245, 158, 11, 0.2);
                 border-radius: 8px;
                 padding: 12px;
                 margin-top: 16px;
                 text-align: center;
             ">
-                <i class="fas fa-check-circle" style="color: #10b981; margin-right: 6px;"></i>
-                <span style="color: #10b981; font-weight: 600;">
+                <i class="fas fa-check-circle" style="color: #f59e0b; margin-right: 6px;"></i>
+                <span style="color: #f59e0b; font-weight: 600;">
                     You're saving $${discountInfo.totalDiscount.toFixed(2)} with our bundle deal!
                 </span>
             </div>
@@ -1614,7 +1614,7 @@ function updateOrderTotalsWithPromo() {
                 <span>Original Price</span>
                 <span style="text-decoration: line-through;">$${discountInfo.originalSubtotal.toFixed(2)}</span>
             </div>
-            <div class="total-row discount-row" style="color: #10b981; font-weight: 600;">
+            <div class="total-row discount-row" style="color: #f59e0b; font-weight: 600;">
                 <span><i class="fas fa-tag" style="margin-right: 6px;"></i>Bundle Discount</span>
                 <span>-$${discountInfo.totalDiscount.toFixed(2)}</span>
             </div>
@@ -1631,7 +1631,7 @@ function updateOrderTotalsWithPromo() {
     // Show promo discount if applied
     if (appliedPromo && promoDiscount > 0) {
         html += `
-            <div class="total-row promo-discount-row" style="color: #8b5cf6; font-weight: 600;">
+            <div class="total-row promo-discount-row" style="color: #f59e0b; font-weight: 600;">
                 <span><i class="fas fa-ticket-alt" style="margin-right: 6px;"></i>Promo: ${appliedPromo.code}</span>
                 <span>-$${promoDiscount.toFixed(2)}</span>
             </div>
@@ -1653,15 +1653,15 @@ function updateOrderTotalsWithPromo() {
     if (totalSavings > 0) {
         html += `
             <div class="checkout-savings-message" style="
-                background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(16, 185, 129, 0.05));
-                border: 1px solid rgba(16, 185, 129, 0.2);
+                background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(245, 158, 11, 0.05));
+                border: 1px solid rgba(245, 158, 11, 0.2);
                 border-radius: 8px;
                 padding: 12px;
                 margin-top: 16px;
                 text-align: center;
             ">
-                <i class="fas fa-check-circle" style="color: #10b981; margin-right: 6px;"></i>
-                <span style="color: #10b981; font-weight: 600;">
+                <i class="fas fa-check-circle" style="color: #f59e0b; margin-right: 6px;"></i>
+                <span style="color: #f59e0b; font-weight: 600;">
                     You're saving $${totalSavings.toFixed(2)} on this order!
                 </span>
             </div>
