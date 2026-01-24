@@ -34,6 +34,18 @@ document.addEventListener('DOMContentLoaded', async function() {
         adminNameEl.textContent = user.first_name || 'Admin';
     }
 
+    // Update user avatar with initial (same as dashboard)
+    const userAvatar = document.querySelector('.user-avatar');
+    if (userAvatar && user.first_name) {
+        userAvatar.innerHTML = `<span style="font-weight: 600; font-size: 18px;">${user.first_name.charAt(0)}</span>`;
+    }
+
+    // Update user avatar large in dropdown
+    const userAvatarLarge = document.querySelector('.user-avatar-large');
+    if (userAvatarLarge && user.first_name) {
+        userAvatarLarge.innerHTML = `<span style="font-weight: 600; font-size: 24px;">${user.first_name.charAt(0)}</span>`;
+    }
+
     // Setup event listeners
     setupEventListeners();
 
