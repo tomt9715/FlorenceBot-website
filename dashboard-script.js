@@ -1102,12 +1102,20 @@ async function loadPurchaseHistory() {
         }
 
         historyList.innerHTML = completedOrders.map(order => {
-            const itemsHtml = (order.items || []).map(item => `
-                <div class="purchase-item-row">
-                    <span class="purchase-item-name">${escapeHtml(item.product_name)}</span>
-                    <span class="purchase-item-price">$${parseFloat(item.price).toFixed(2)}</span>
-                </div>
-            `).join('');
+            const itemsHtml = (order.items || []).map(item => {
+                const isRevoked = item.is_active === false;
+                const revokedClass = isRevoked ? ' revoked' : '';
+                const revokedBadge = isRevoked ? '<span class="revoked-badge"><i class="fas fa-ban"></i> Revoked</span>' : '';
+                const revokedReason = isRevoked && item.grant_reason ? `<div class="revoked-reason"><i class="fas fa-info-circle"></i> ${escapeHtml(item.grant_reason)}</div>` : '';
+
+                return `
+                    <div class="purchase-item-row${revokedClass}">
+                        <span class="purchase-item-name">${escapeHtml(item.product_name)}${revokedBadge}</span>
+                        <span class="purchase-item-price">$${parseFloat(item.price).toFixed(2)}</span>
+                    </div>
+                    ${revokedReason}
+                `;
+            }).join('');
 
             return `
                 <div class="purchase-history-item">
