@@ -1332,6 +1332,52 @@
     color: #b45309;
 }
 
+/* Guide Notes Column */
+.guide-notes-cell {
+    max-width: 150px;
+}
+
+.guide-note-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.guide-note-text {
+    font-size: 0.85rem;
+    color: #6b7280;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex: 1;
+}
+
+.guide-note-empty {
+    color: #9ca3af;
+    font-style: italic;
+}
+
+.note-edit-btn {
+    background: none;
+    border: none;
+    padding: 4px 8px;
+    cursor: pointer;
+    color: #9ca3af;
+    border-radius: 4px;
+    transition: all 0.15s ease;
+    flex-shrink: 0;
+}
+
+.note-edit-btn:hover {
+    background: #f3f4f6;
+    color: #4f46e5;
+}
+
+/* Guide Note Modal */
+.guide-note-modal {
+    max-width: 400px;
+}
+
 /* Guide Checkbox (legacy - keeping for compatibility) */
 .guide-checkbox {
     position: relative;
@@ -1933,6 +1979,23 @@
 [data-theme="dark"] .guide-checkbox .checkmark {
     background-color: #374151;
     border-color: #4b5563;
+}
+
+[data-theme="dark"] .guide-note-text {
+    color: #9ca3af;
+}
+
+[data-theme="dark"] .guide-note-empty {
+    color: #6b7280;
+}
+
+[data-theme="dark"] .note-edit-btn {
+    color: #6b7280;
+}
+
+[data-theme="dark"] .note-edit-btn:hover {
+    background: #374151;
+    color: #818cf8;
 }
 
 [data-theme="dark"] .search-input-group,

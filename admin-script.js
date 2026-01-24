@@ -433,8 +433,14 @@ async function openUserDetail(email) {
         bulkRevokeBtn.style.display = 'none';
         if (selectAllCheckbox) selectAllCheckbox.checked = false;
 
+        // Show/hide Select All and Revoke All buttons based on active guides
+        const selectAllBtn = document.getElementById('select-all-guides-btn');
+        const revokeAllBtn = document.getElementById('revoke-all-guides-btn');
+        if (selectAllBtn) selectAllBtn.style.display = activeGuides.length > 0 ? 'inline-flex' : 'none';
+        if (revokeAllBtn) revokeAllBtn.style.display = activeGuides.length > 0 ? 'inline-flex' : 'none';
+
         if (data.guides.length === 0) {
-            tbody.innerHTML = '<tr><td colspan="6" class="empty-cell">No guides</td></tr>';
+            tbody.innerHTML = '<tr><td colspan="7" class="empty-cell">No guides</td></tr>';
         } else {
             tbody.innerHTML = data.guides.map(guide => `
                 <tr class="${guide.is_active ? '' : 'revoked-row'}">
@@ -457,6 +463,16 @@ async function openUserDetail(email) {
                         ${guide.is_active
                             ? '<span class="badge-status active"><i class="fas fa-check"></i> Active</span>'
                             : '<span class="badge-status revoked"><i class="fas fa-times"></i> Revoked</span>'}
+                    </td>
+                    <td class="guide-notes-cell">
+                        <div class="guide-note-container">
+                            ${guide.admin_note ? `
+                                <span class="guide-note-text" title="${escapeHtml(guide.admin_note)}">${escapeHtml(guide.admin_note.length > 20 ? guide.admin_note.substring(0, 20) + '...' : guide.admin_note)}</span>
+                            ` : '<span class="guide-note-empty">-</span>'}
+                            <button class="note-edit-btn" data-guide-id="${escapeHtml(guide.product_id)}" data-current-note="${escapeHtml(guide.admin_note || '')}" title="Edit note">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                        </div>
                     </td>
                     <td>
                         ${guide.is_active ? `
@@ -490,6 +506,13 @@ async function openUserDetail(email) {
             tbody.querySelectorAll('[data-restore-guide]').forEach(btn => {
                 btn.addEventListener('click', function() {
                     restoreGuide(this.dataset.userEmail, this.dataset.restoreGuide);
+                });
+            });
+
+            // Attach event listeners for note edit buttons
+            tbody.querySelectorAll('.note-edit-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    openGuideNoteModal(this.dataset.guideId, this.dataset.currentNote);
                 });
             });
         }
@@ -551,6 +574,93 @@ async function restoreGuide(email, guideId) {
         console.error('Error restoring guide:', error);
         showToast(error.message || 'Failed to restore guide', 'error');
     }
+}
+
+// ==================== Guide Notes ====================
+
+let currentGuideNoteId = null;
+
+function openGuideNoteModal(guideId, currentNote) {
+    currentGuideNoteId = guideId;
+    document.getElementById('guide-note-text').value = currentNote || '';
+    document.getElementById('guide-note-modal').classList.add('active');
+    document.getElementById('guide-note-text').focus();
+}
+
+function closeGuideNoteModal() {
+    document.getElementById('guide-note-modal').classList.remove('active');
+    currentGuideNoteId = null;
+}
+
+async function saveGuideNote() {
+    const noteText = document.getElementById('guide-note-text').value.trim();
+
+    try {
+        await apiCall(`/admin/users/by-email/${encodeURIComponent(currentUserEmail)}/guides/${currentGuideNoteId}/note`, {
+            method: 'PUT',
+            body: JSON.stringify({ note: noteText })
+        });
+        showToast('Guide note saved', 'success');
+        closeGuideNoteModal();
+        openUserDetail(currentUserEmail); // Refresh
+    } catch (error) {
+        console.error('Error saving guide note:', error);
+        showToast(error.message || 'Failed to save note', 'error');
+    }
+}
+
+// ==================== Select All / Revoke All ====================
+
+function selectAllGuides() {
+    const checkboxes = document.querySelectorAll('.guide-select-checkbox');
+    const selectAllCheckbox = document.getElementById('select-all-guides');
+
+    checkboxes.forEach(cb => {
+        cb.checked = true;
+        selectedGuides.add(cb.dataset.guideId);
+    });
+
+    if (selectAllCheckbox) selectAllCheckbox.checked = true;
+    updateBulkActionsBar();
+}
+
+async function revokeAllGuides() {
+    const activeCheckboxes = document.querySelectorAll('.guide-select-checkbox');
+    const activeCount = activeCheckboxes.length;
+
+    if (activeCount === 0) {
+        showToast('No active guides to revoke', 'info');
+        return;
+    }
+
+    if (!await showConfirm('Revoke All Guides', `Are you sure you want to revoke ALL ${activeCount} active guide${activeCount > 1 ? 's' : ''} for ${currentUserEmail}? This cannot be easily undone.`)) {
+        return;
+    }
+
+    const guideIds = Array.from(activeCheckboxes).map(cb => cb.dataset.guideId);
+    let successCount = 0;
+    let failCount = 0;
+
+    for (const guideId of guideIds) {
+        try {
+            await apiCall(`/admin/users/by-email/${encodeURIComponent(currentUserEmail)}/guides/${guideId}?reason=Admin%20revoked%20all`, {
+                method: 'DELETE'
+            });
+            successCount++;
+        } catch (error) {
+            console.error(`Error revoking guide ${guideId}:`, error);
+            failCount++;
+        }
+    }
+
+    if (failCount === 0) {
+        showToast(`Successfully revoked all ${successCount} guides`, 'success');
+    } else {
+        showToast(`Revoked ${successCount}, failed ${failCount}`, 'error');
+    }
+
+    selectedGuides.clear();
+    openUserDetail(currentUserEmail); // Refresh
 }
 
 // ==================== Bulk Guide Operations ====================
@@ -1287,5 +1397,33 @@ document.addEventListener('DOMContentLoaded', function() {
                 handleGuideSelection(cb.dataset.guideId, this.checked);
             });
         });
+    }
+
+    // Select All button
+    const selectAllGuidesBtn = document.getElementById('select-all-guides-btn');
+    if (selectAllGuidesBtn) {
+        selectAllGuidesBtn.addEventListener('click', selectAllGuides);
+    }
+
+    // Revoke All button
+    const revokeAllGuidesBtn = document.getElementById('revoke-all-guides-btn');
+    if (revokeAllGuidesBtn) {
+        revokeAllGuidesBtn.addEventListener('click', revokeAllGuides);
+    }
+
+    // Guide note modal buttons
+    const closeGuideNoteModalBtn = document.getElementById('close-guide-note-modal-btn');
+    if (closeGuideNoteModalBtn) {
+        closeGuideNoteModalBtn.addEventListener('click', closeGuideNoteModal);
+    }
+
+    const saveGuideNoteBtn = document.getElementById('save-guide-note-btn');
+    if (saveGuideNoteBtn) {
+        saveGuideNoteBtn.addEventListener('click', saveGuideNote);
+    }
+
+    const cancelGuideNoteBtn = document.getElementById('cancel-guide-note-btn');
+    if (cancelGuideNoteBtn) {
+        cancelGuideNoteBtn.addEventListener('click', closeGuideNoteModal);
     }
 });
