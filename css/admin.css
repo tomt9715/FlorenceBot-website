@@ -510,42 +510,54 @@
 }
 
 /* Navbar links - white on purple background */
-.admin-navbar .nav-links > a {
+.admin-navbar .nav-links a {
     color: rgba(255, 255, 255, 0.9);
 }
 
-.admin-navbar .nav-links > a:hover,
-.admin-navbar .nav-links > a.active {
+.admin-navbar .nav-links a:hover,
+.admin-navbar .nav-links a.active {
     color: white;
 }
 
-/* Dropdown menu links - dark text on white background */
-.admin-navbar .nav-links .user-dropdown a {
-    display: flex !important;
-    align-items: center !important;
-    gap: 12px !important;
-    padding: 14px 18px !important;
-    color: #1a1a1a !important;
-    text-decoration: none !important;
-    font-size: 0.95rem !important;
-    border-bottom: 1px solid #e5e7eb !important;
-    background: transparent !important;
+/* Nav right section - separate from nav-links to avoid CSS conflicts */
+.admin-navbar .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-left: auto;
 }
 
-.admin-navbar .nav-links .user-dropdown a:last-child {
-    border-bottom: none !important;
+.admin-navbar .nav-right .theme-toggle {
+    border-color: rgba(255, 255, 255, 0.3);
+    color: white;
 }
 
-.admin-navbar .nav-links .user-dropdown a:hover {
-    background: #f5f5f5 !important;
-    color: #2E86AB !important;
+.admin-navbar .nav-right .theme-toggle:hover {
+    border-color: white;
+    background: rgba(255, 255, 255, 0.1);
 }
 
-.admin-navbar .nav-links .user-dropdown a i {
-    width: 20px;
-    text-align: center;
-    opacity: 0.7;
-    color: inherit !important;
+.admin-navbar .nav-right .user-menu {
+    position: relative;
+}
+
+.admin-navbar .nav-right .user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.admin-navbar .nav-right .user-avatar:hover {
+    background: rgba(255, 255, 255, 0.3);
+    border-color: white;
 }
 
 .admin-badge-nav {
