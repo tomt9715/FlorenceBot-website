@@ -315,11 +315,61 @@ function updateNavAuthState() {
 
     if (!navLinks) return;
 
-    // Find the Login link
-    const loginLink = navLinks.querySelector('a[href="login.html"]');
+    // Get nav elements
+    const navLoginLink = document.getElementById('nav-login-link');
+    const navDashboardLink = document.getElementById('nav-dashboard-link');
+    const userMenu = document.getElementById('user-menu');
 
+    if (isLoggedIn) {
+        // Hide login link, show dashboard link
+        if (navLoginLink) navLoginLink.style.display = 'none';
+        if (navDashboardLink) navDashboardLink.style.display = 'inline';
+
+        // Show and populate user menu
+        if (userMenu) {
+            userMenu.style.display = 'block';
+
+            // Get user data from localStorage
+            const userData = localStorage.getItem('user');
+            if (userData) {
+                try {
+                    const user = JSON.parse(userData);
+                    const userName = user.name || user.displayName || user.full_name || 'User';
+                    const userEmail = user.email || user.user_email || '';
+
+                    const dropdownUserName = document.getElementById('dropdown-user-name');
+                    const dropdownUserEmail = document.getElementById('dropdown-user-email');
+
+                    if (dropdownUserName) dropdownUserName.textContent = userName;
+                    if (dropdownUserEmail) dropdownUserEmail.textContent = userEmail;
+                } catch (e) {
+                    console.error('Error parsing user data:', e);
+                }
+            }
+
+            // Setup logout button
+            const logoutBtn = document.getElementById('logout-btn');
+            if (logoutBtn && !logoutBtn.hasAttribute('data-logout-attached')) {
+                logoutBtn.setAttribute('data-logout-attached', 'true');
+                logoutBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    localStorage.removeItem('accessToken');
+                    localStorage.removeItem('refreshToken');
+                    localStorage.removeItem('user');
+                    window.location.href = 'login.html';
+                });
+            }
+        }
+    } else {
+        // Ensure login link is shown, dashboard link and user menu hidden
+        if (navLoginLink) navLoginLink.style.display = 'inline';
+        if (navDashboardLink) navDashboardLink.style.display = 'none';
+        if (userMenu) userMenu.style.display = 'none';
+    }
+
+    // Fallback for pages without the new nav structure - just change Login to Dashboard
+    const loginLink = navLinks.querySelector('a[href="login.html"]:not(#nav-login-link)');
     if (loginLink && isLoggedIn) {
-        // Replace Login with Dashboard
         loginLink.href = 'dashboard.html';
         loginLink.textContent = 'Dashboard';
     }

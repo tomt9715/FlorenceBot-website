@@ -373,11 +373,34 @@
                 <a href="pricing.html">Pricing</a>
                 <a href="store.html">Store</a>
                 <a href="about-florencebot.html">About FlorenceBot</a>
-                <a href="login.html">Login</a>
+                <!-- Guest nav item (shown when not logged in) -->
+                <a href="login.html" id="nav-login-link">Login</a>
+                <!-- Authenticated nav item (shown when logged in) -->
+                <a href="dashboard.html" id="nav-dashboard-link" style="display: none;">Dashboard</a>
                 <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
                     <i class="fas fa-sun light-icon"></i>
                     <i class="fas fa-moon dark-icon"></i>
                 </button>
+                <!-- User menu (shown when logged in) -->
+                <div class="user-menu" id="user-menu" style="display: none;">
+                    <button class="user-avatar" id="user-menu-btn" title="Account menu">
+                        <i class="fas fa-user-circle"></i>
+                    </button>
+                    <div class="user-dropdown" id="user-dropdown">
+                        <div class="user-dropdown-header">
+                            <div class="user-avatar-large">
+                                <i class="fas fa-user-circle"></i>
+                            </div>
+                            <div class="user-info">
+                                <span class="user-name" id="dropdown-user-name">Loading...</span>
+                                <span class="user-email" id="dropdown-user-email">Loading...</span>
+                            </div>
+                        </div>
+                        <div class="user-dropdown-divider"></div>
+                        <a href="settings.html"><i class="fas fa-cog"></i> Account Settings</a>
+                        <a href="#logout" id="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                    </div>
+                </div>
             </div>
             <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle navigation menu" aria-expanded="false">
                 <i class="fas fa-bars"></i>
@@ -434,6 +457,7 @@
 
     <!-- Scripts -->
     <script src="dark-mode.js"></script>
+    <script src="script.js"></script>
     <script src="success-script.js"></script>
 </body>
 </html>
