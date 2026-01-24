@@ -1228,22 +1228,26 @@
 
 #user-detail-modal .guide-item-admin {
     display: flex;
-    justify-content: space-between;
     align-items: center;
     padding: 14px 16px;
     background: #f9fafb;
     border-radius: 10px;
-    gap: 12px;
+    gap: 14px;
     border: 1px solid #e5e7eb;
+}
+
+#user-detail-modal .guide-item-admin .guide-info {
+    flex: 1;
+    min-width: 0;
+}
+
+#user-detail-modal .guide-item-admin .guide-actions {
+    flex-shrink: 0;
 }
 
 #user-detail-modal .guide-item-admin.revoked {
     opacity: 0.6;
     background: #fee2e2;
-}
-
-#user-detail-modal .guide-info {
-    flex: 1;
 }
 
 #user-detail-modal .guide-name {
@@ -1289,8 +1293,11 @@
     position: relative;
     display: flex;
     align-items: center;
+    justify-content: center;
     cursor: pointer;
-    padding-right: 8px;
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
 }
 
 .guide-checkbox input[type="checkbox"] {
@@ -1302,8 +1309,10 @@
 }
 
 .guide-checkbox .checkmark {
+    position: relative;
     height: 20px;
     width: 20px;
+    min-width: 20px;
     background-color: #fff;
     border: 2px solid #d1d5db;
     border-radius: 4px;
@@ -1323,8 +1332,8 @@
     content: "";
     position: absolute;
     display: none;
-    left: 7px;
-    top: 3px;
+    left: 5px;
+    top: 1px;
     width: 5px;
     height: 10px;
     border: solid white;
