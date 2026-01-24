@@ -1452,3 +1452,123 @@
 [data-theme="dark"] .product-price {
     background: linear-gradient(135deg, rgba(245, 158, 11, 0.12), transparent);
 }
+
+/* ============================================
+   GOOGLE PLACES AUTOCOMPLETE STYLES
+   ============================================ */
+
+/* Main autocomplete dropdown container */
+.pac-container {
+    background: var(--card-bg, #ffffff);
+    border: 1px solid var(--border-color, #e5e7eb);
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    margin-top: 4px;
+    font-family: 'Source Sans 3', -apple-system, BlinkMacSystemFont, sans-serif;
+    z-index: 10000;
+    overflow: hidden;
+}
+
+/* Remove default Google branding box shadow */
+.pac-container:after {
+    display: none !important;
+}
+
+/* Individual autocomplete item */
+.pac-item {
+    padding: 12px 16px;
+    cursor: pointer;
+    border-top: 1px solid var(--border-color, #e5e7eb);
+    font-size: 0.95rem;
+    color: var(--text-primary, #1f2937);
+    transition: background-color 0.15s ease;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.pac-item:first-child {
+    border-top: none;
+}
+
+.pac-item:hover,
+.pac-item.pac-item-selected {
+    background: rgba(46, 134, 171, 0.08);
+}
+
+/* Location icon */
+.pac-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 0;
+    background-size: contain;
+    opacity: 0.6;
+}
+
+/* Main address text */
+.pac-item-query {
+    font-weight: 600;
+    color: var(--text-primary, #1f2937);
+    font-size: 0.95rem;
+}
+
+/* Secondary address text (city, state, country) */
+.pac-item span:not(.pac-item-query):not(.pac-icon) {
+    color: var(--text-secondary, #6b7280);
+    font-size: 0.85rem;
+}
+
+/* Matched text highlighting */
+.pac-matched {
+    font-weight: 700;
+    color: var(--primary-color, #2E86AB);
+}
+
+/* Dark mode styles for autocomplete */
+[data-theme="dark"] .pac-container {
+    background: var(--card-bg, #1f2937);
+    border-color: var(--border-color, #374151);
+}
+
+[data-theme="dark"] .pac-item {
+    color: var(--text-primary, #f3f4f6);
+    border-color: var(--border-color, #374151);
+}
+
+[data-theme="dark"] .pac-item:hover,
+[data-theme="dark"] .pac-item.pac-item-selected {
+    background: rgba(46, 134, 171, 0.15);
+}
+
+[data-theme="dark"] .pac-item-query {
+    color: var(--text-primary, #f3f4f6);
+}
+
+[data-theme="dark"] .pac-matched {
+    color: #5ab5d4;
+}
+
+/* Address input with autocomplete active indicator */
+#address:focus {
+    border-color: var(--primary-color);
+}
+
+/* Subtle icon to indicate autocomplete is available */
+.form-group:has(#address) {
+    position: relative;
+}
+
+#address {
+    padding-right: 40px;
+}
+
+/* Optional: Add a search/location icon inside the address field */
+.address-autocomplete-icon {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-light, #9ca3af);
+    font-size: 0.9rem;
+    pointer-events: none;
+}

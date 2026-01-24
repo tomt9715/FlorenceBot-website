@@ -39,6 +39,8 @@
 
     <!-- Stripe.js -->
     <script src="https://js.stripe.com/v3/"></script>
+    <!-- Google Places API for address autocomplete -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCrUKoEbrY6c1pRaOeS3DzsBET4Uvuqmpg&libraries=places&callback=initGooglePlaces" async defer></script>
     <!-- Sentry Error Tracking (load first) -->
     <script src="https://browser.sentry-cdn.com/8.40.0/bundle.min.js" crossorigin="anonymous"></script>
     <script src="sentry-init.js"></script>
@@ -435,6 +437,7 @@
     <script src="dark-mode.js"></script>
     <script src="api-service.js?v=1769142741"></script>
     <script src="cart-service.js?v=3"></script>
+    <script src="address-autocomplete.js"></script>
     <script src="checkout.js?v=9"></script>
     <script>
         // Page loader
