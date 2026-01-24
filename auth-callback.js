@@ -74,13 +74,14 @@ function initAuthCallback() {
                     console.log('User data stored, determining redirect');
 
                     // Determine redirect URL based on priority:
-                    // 1. Stored redirect from before OAuth (e.g., checkout)
+                    // 1. Stored redirect from before OAuth (e.g., store, checkout)
                     // 2. Order to claim
                     // 3. Default to dashboard
                     let redirectUrl = 'dashboard.html';
 
-                    if (storedRedirect === 'checkout') {
-                        redirectUrl = 'checkout.html';
+                    if (storedRedirect) {
+                        // Redirect back to the page user came from (store, checkout, etc.)
+                        redirectUrl = `${storedRedirect}.html`;
                         // Clear the stored redirect
                         sessionStorage.removeItem('authRedirect');
                     } else if (orderToClaim) {
@@ -103,8 +104,8 @@ function initAuthCallback() {
                 // The target page can try to fetch user data again
                 let redirectUrl = 'dashboard.html';
 
-                if (storedRedirect === 'checkout') {
-                    redirectUrl = 'checkout.html';
+                if (storedRedirect) {
+                    redirectUrl = `${storedRedirect}.html`;
                     sessionStorage.removeItem('authRedirect');
                 } else if (orderToClaim) {
                     redirectUrl = `dashboard.html?order=${encodeURIComponent(orderToClaim)}`;

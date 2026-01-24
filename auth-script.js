@@ -468,13 +468,14 @@ async function handleLogin(email, password) {
             }
         }
 
-        // Check for redirect URL (e.g., from checkout) and order claim
+        // Check for redirect URL (e.g., from store, checkout) and order claim
         const urlParams = new URLSearchParams(window.location.search);
         const redirectTo = urlParams.get('redirect');
         const orderToClaim = urlParams.get('order');
 
-        if (redirectTo === 'checkout') {
-            window.location.href = 'checkout.html';
+        if (redirectTo) {
+            // Redirect back to the page user came from (store, checkout, etc.)
+            window.location.href = `${redirectTo}.html`;
         } else if (orderToClaim) {
             // Redirect to dashboard with order to claim
             window.location.href = `dashboard.html?order=${encodeURIComponent(orderToClaim)}`;
