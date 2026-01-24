@@ -506,6 +506,34 @@
 .admin-navbar .user-dropdown {
     overflow: visible !important;
     max-height: none !important;
+    background: var(--card-bg, #ffffff);
+}
+
+/* Dropdown menu links - ensure they're visible */
+.admin-navbar .user-dropdown a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 18px;
+    color: var(--text-primary, #1a1a1a);
+    text-decoration: none;
+    font-size: 0.95rem;
+    border-bottom: 1px solid var(--border-color, #e5e7eb);
+}
+
+.admin-navbar .user-dropdown a:last-child {
+    border-bottom: none;
+}
+
+.admin-navbar .user-dropdown a:hover {
+    background: var(--background-light, #f5f5f5);
+    color: var(--primary-color, #2E86AB);
+}
+
+.admin-navbar .user-dropdown a i {
+    width: 20px;
+    text-align: center;
+    opacity: 0.7;
 }
 
 .admin-navbar .nav-links a {
