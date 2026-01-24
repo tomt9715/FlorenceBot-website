@@ -1181,8 +1181,15 @@ function updateNavbarForAuth(user) {
     if (userMenu) {
         userMenu.style.display = 'block';
 
-        // Populate user info in dropdown
-        const userName = user.name || user.displayName || user.full_name || 'User';
+        // Build display name from first_name + last_name, or fall back to email prefix
+        let userName = 'User';
+        if (user.first_name || user.last_name) {
+            userName = `${user.first_name || ''} ${user.last_name || ''}`.trim();
+        } else if (user.name || user.displayName || user.full_name) {
+            userName = user.name || user.displayName || user.full_name;
+        } else if (user.email) {
+            userName = user.email.split('@')[0];
+        }
         const userEmail = user.email || user.user_email || '';
 
         if (dropdownUserName) {
