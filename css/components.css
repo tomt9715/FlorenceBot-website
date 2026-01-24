@@ -914,11 +914,15 @@
     bottom: 0;
     background: rgba(0, 0, 0, 0.7);
     z-index: 9999;
-    display: flex;
+    display: none;
     align-items: center;
     justify-content: center;
     padding: 20px;
     backdrop-filter: blur(4px);
+}
+
+.modal-overlay.active {
+    display: flex;
     animation: fadeIn 0.3s ease;
 }
 
