@@ -1262,6 +1262,131 @@
     gap: 6px;
 }
 
+/* Bulk Actions Bar */
+.bulk-actions-bar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 8px;
+    margin-bottom: 12px;
+}
+
+.bulk-actions-bar .selected-count {
+    color: #fff;
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.bulk-actions-bar .btn {
+    padding: 6px 12px;
+    font-size: 0.85rem;
+}
+
+/* Guide Checkbox */
+.guide-checkbox {
+    position: relative;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding-right: 8px;
+}
+
+.guide-checkbox input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.guide-checkbox .checkmark {
+    height: 20px;
+    width: 20px;
+    background-color: #fff;
+    border: 2px solid #d1d5db;
+    border-radius: 4px;
+    transition: all 0.15s ease;
+}
+
+.guide-checkbox:hover .checkmark {
+    border-color: #667eea;
+}
+
+.guide-checkbox input:checked ~ .checkmark {
+    background-color: #667eea;
+    border-color: #667eea;
+}
+
+.guide-checkbox .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+    left: 7px;
+    top: 3px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+.guide-checkbox input:checked ~ .checkmark:after {
+    display: block;
+}
+
+/* Revoked Guides Section */
+.revoked-guides-section {
+    margin-top: 16px;
+    border-top: 1px solid #e5e7eb;
+    padding-top: 12px;
+}
+
+.revoked-toggle-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: none;
+    border: none;
+    color: #6b7280;
+    cursor: pointer;
+    font-size: 0.9rem;
+    padding: 8px 0;
+    transition: color 0.15s ease;
+}
+
+.revoked-toggle-btn:hover {
+    color: #111827;
+}
+
+.revoked-toggle-btn i {
+    font-size: 0.75rem;
+    transition: transform 0.2s ease;
+}
+
+.revoked-guides-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 10px;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.revoked-guides-list .guide-item-admin {
+    opacity: 0.7;
+    background: #fef2f2;
+    border-color: #fecaca;
+}
+
+/* Header actions wrapper */
+.header-actions {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
 /* Notes List */
 #user-detail-modal .notes-list {
     display: flex;
@@ -1784,6 +1909,29 @@
 
 [data-theme="dark"] #user-detail-modal .note-text {
     color: #f9fafb;
+}
+
+[data-theme="dark"] #user-detail-modal .guide-item-admin.revoked,
+[data-theme="dark"] .revoked-guides-list .guide-item-admin {
+    background: #3d2a2a;
+    border-color: #5c3838;
+}
+
+[data-theme="dark"] .guide-checkbox .checkmark {
+    background-color: #374151;
+    border-color: #4b5563;
+}
+
+[data-theme="dark"] .revoked-toggle-btn {
+    color: #9ca3af;
+}
+
+[data-theme="dark"] .revoked-toggle-btn:hover {
+    color: #f9fafb;
+}
+
+[data-theme="dark"] .revoked-guides-section {
+    border-top-color: #374151;
 }
 
 [data-theme="dark"] .search-input-group,

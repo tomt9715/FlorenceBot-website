@@ -492,13 +492,35 @@
                 <!-- Owned Guides Section -->
                 <div class="user-detail-section">
                     <div class="section-header-inline">
-                        <h3><i class="fas fa-book"></i> Owned Guides (<span id="modal-guides-count">0</span>)</h3>
-                        <button class="btn btn-primary btn-sm" id="open-add-guide-modal-btn">
-                            <i class="fas fa-plus"></i> Add Guide
+                        <h3><i class="fas fa-book"></i> Active Guides (<span id="modal-guides-count">0</span>)</h3>
+                        <div class="header-actions">
+                            <button class="btn btn-primary btn-sm" id="open-add-guide-modal-btn">
+                                <i class="fas fa-plus"></i> Add Guide
+                            </button>
+                        </div>
+                    </div>
+                    <!-- Bulk Actions Bar (hidden by default) -->
+                    <div class="bulk-actions-bar" id="guides-bulk-actions" style="display: none;">
+                        <span class="selected-count"><span id="selected-guides-count">0</span> selected</span>
+                        <button class="btn btn-danger btn-sm" id="bulk-revoke-btn">
+                            <i class="fas fa-times"></i> Revoke Selected
+                        </button>
+                        <button class="btn btn-secondary btn-sm" id="clear-selection-btn">
+                            Cancel
                         </button>
                     </div>
                     <div class="guides-list" id="user-guides-list">
                         <!-- Populated by JS -->
+                    </div>
+                    <!-- Revoked Guides Expandable Section -->
+                    <div class="revoked-guides-section" id="revoked-guides-section" style="display: none;">
+                        <button class="revoked-toggle-btn" id="toggle-revoked-guides">
+                            <i class="fas fa-chevron-right"></i>
+                            <span>Show Revoked Guides (<span id="revoked-guides-count">0</span>)</span>
+                        </button>
+                        <div class="revoked-guides-list" id="revoked-guides-list" style="display: none;">
+                            <!-- Populated by JS -->
+                        </div>
                     </div>
                 </div>
 
@@ -687,6 +709,6 @@
     <script src="api-service.js?v=1769142741"></script>
 
     <!-- Admin Dashboard Script -->
-    <script src="admin-script.js?v=1.0.4"></script>
+    <script src="admin-script.js?v=1.0.5"></script>
 </body>
 </html>

@@ -9,6 +9,7 @@ let currentGuideId = null;
 let productsCache = [];
 let usersPage = 1;
 let auditPage = 1;
+let selectedGuides = new Set();
 
 // Initialize on DOM load
 document.addEventListener('DOMContentLoaded', async function() {
@@ -419,15 +420,31 @@ async function openUserDetail(email) {
             </div>
         `;
 
-        // Guides
-        document.getElementById('modal-guides-count').textContent = data.guides.filter(g => g.is_active).length;
+        // Guides - separate active and revoked
+        const activeGuides = data.guides.filter(g => g.is_active);
+        const revokedGuides = data.guides.filter(g => !g.is_active);
+
+        document.getElementById('modal-guides-count').textContent = activeGuides.length;
 
         const guidesListEl = document.getElementById('user-guides-list');
-        if (data.guides.length === 0) {
-            guidesListEl.innerHTML = '<div class="empty-state"><p>No guides owned</p></div>';
+        const revokedSection = document.getElementById('revoked-guides-section');
+        const revokedListEl = document.getElementById('revoked-guides-list');
+        const bulkActionsBar = document.getElementById('guides-bulk-actions');
+
+        // Reset bulk selection state
+        selectedGuides.clear();
+        bulkActionsBar.style.display = 'none';
+
+        // Render active guides
+        if (activeGuides.length === 0) {
+            guidesListEl.innerHTML = '<div class="empty-state"><p>No active guides</p></div>';
         } else {
-            guidesListEl.innerHTML = data.guides.map(guide => `
-                <div class="guide-item-admin ${guide.is_active ? '' : 'revoked'}">
+            guidesListEl.innerHTML = activeGuides.map(guide => `
+                <div class="guide-item-admin" data-guide-id="${escapeHtml(guide.product_id)}">
+                    <label class="guide-checkbox">
+                        <input type="checkbox" class="guide-select-checkbox" data-guide-id="${escapeHtml(guide.product_id)}">
+                        <span class="checkmark"></span>
+                    </label>
                     <div class="guide-info">
                         <div class="guide-name">${escapeHtml(guide.product_name)}</div>
                         <div class="guide-meta">
@@ -437,31 +454,59 @@ async function openUserDetail(email) {
                         </div>
                     </div>
                     <div class="guide-actions">
-                        ${guide.is_active ? `
-                            <button class="action-btn danger" data-revoke-guide="${escapeHtml(guide.product_id)}" data-user-email="${escapeHtml(email)}">
-                                <i class="fas fa-times"></i> Revoke
-                            </button>
-                        ` : `
-                            <span class="badge-status revoked">Revoked</span>
-                            <button class="action-btn success" data-restore-guide="${escapeHtml(guide.product_id)}" data-user-email="${escapeHtml(email)}">
-                                <i class="fas fa-redo"></i> Restore
-                            </button>
-                        `}
+                        <button class="action-btn danger btn-sm" data-revoke-guide="${escapeHtml(guide.product_id)}" data-user-email="${escapeHtml(email)}">
+                            <i class="fas fa-times"></i> Revoke
+                        </button>
                     </div>
                 </div>
             `).join('');
 
-            // Attach event listeners for revoke/restore buttons
+            // Attach event listeners for checkboxes
+            guidesListEl.querySelectorAll('.guide-select-checkbox').forEach(cb => {
+                cb.addEventListener('change', function() {
+                    handleGuideSelection(this.dataset.guideId, this.checked);
+                });
+            });
+
+            // Attach event listeners for revoke buttons
             guidesListEl.querySelectorAll('[data-revoke-guide]').forEach(btn => {
                 btn.addEventListener('click', function() {
                     revokeGuide(this.dataset.userEmail, this.dataset.revokeGuide);
                 });
             });
-            guidesListEl.querySelectorAll('[data-restore-guide]').forEach(btn => {
+        }
+
+        // Render revoked guides section
+        if (revokedGuides.length > 0) {
+            revokedSection.style.display = 'block';
+            document.getElementById('revoked-guides-count').textContent = revokedGuides.length;
+
+            revokedListEl.innerHTML = revokedGuides.map(guide => `
+                <div class="guide-item-admin revoked">
+                    <div class="guide-info">
+                        <div class="guide-name">${escapeHtml(guide.product_name)}</div>
+                        <div class="guide-meta">
+                            ${guide.source === 'stripe' ? '<i class="fas fa-credit-card"></i> Stripe' : `<i class="fas fa-gift"></i> ${escapeHtml(guide.granted_by || 'Admin')}`}
+                            • ${formatDate(guide.purchased_at)}
+                            ${guide.grant_reason ? ` • ${escapeHtml(guide.grant_reason)}` : ''}
+                        </div>
+                    </div>
+                    <div class="guide-actions">
+                        <button class="action-btn success btn-sm" data-restore-guide="${escapeHtml(guide.product_id)}" data-user-email="${escapeHtml(email)}">
+                            <i class="fas fa-redo"></i> Restore
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+
+            // Attach event listeners for restore buttons
+            revokedListEl.querySelectorAll('[data-restore-guide]').forEach(btn => {
                 btn.addEventListener('click', function() {
                     restoreGuide(this.dataset.userEmail, this.dataset.restoreGuide);
                 });
             });
+        } else {
+            revokedSection.style.display = 'none';
         }
 
         // Notes
@@ -520,6 +565,85 @@ async function restoreGuide(email, guideId) {
     } catch (error) {
         console.error('Error restoring guide:', error);
         showToast(error.message || 'Failed to restore guide', 'error');
+    }
+}
+
+// ==================== Bulk Guide Operations ====================
+
+function handleGuideSelection(guideId, isSelected) {
+    if (isSelected) {
+        selectedGuides.add(guideId);
+    } else {
+        selectedGuides.delete(guideId);
+    }
+    updateBulkActionsBar();
+}
+
+function updateBulkActionsBar() {
+    const bulkActionsBar = document.getElementById('guides-bulk-actions');
+    const countEl = document.getElementById('selected-guides-count');
+
+    if (selectedGuides.size > 0) {
+        bulkActionsBar.style.display = 'flex';
+        countEl.textContent = selectedGuides.size;
+    } else {
+        bulkActionsBar.style.display = 'none';
+    }
+}
+
+function clearGuideSelection() {
+    selectedGuides.clear();
+    document.querySelectorAll('.guide-select-checkbox').forEach(cb => {
+        cb.checked = false;
+    });
+    updateBulkActionsBar();
+}
+
+async function bulkRevokeGuides() {
+    if (selectedGuides.size === 0) return;
+
+    const count = selectedGuides.size;
+    if (!await showConfirm('Bulk Revoke Guides', `Are you sure you want to revoke access to ${count} guide${count > 1 ? 's' : ''} for ${currentUserEmail}?`)) {
+        return;
+    }
+
+    const guideIds = Array.from(selectedGuides);
+    let successCount = 0;
+    let failCount = 0;
+
+    for (const guideId of guideIds) {
+        try {
+            await apiCall(`/admin/users/by-email/${encodeURIComponent(currentUserEmail)}/guides/${guideId}?reason=Bulk%20admin%20revoke`, {
+                method: 'DELETE'
+            });
+            successCount++;
+        } catch (error) {
+            console.error(`Error revoking guide ${guideId}:`, error);
+            failCount++;
+        }
+    }
+
+    if (failCount === 0) {
+        showToast(`Successfully revoked ${successCount} guide${successCount > 1 ? 's' : ''}`, 'success');
+    } else {
+        showToast(`Revoked ${successCount}, failed ${failCount}`, 'error');
+    }
+
+    selectedGuides.clear();
+    openUserDetail(currentUserEmail); // Refresh
+}
+
+function toggleRevokedGuides() {
+    const revokedList = document.getElementById('revoked-guides-list');
+    const toggleBtn = document.getElementById('toggle-revoked-guides');
+    const icon = toggleBtn.querySelector('i');
+
+    if (revokedList.style.display === 'none') {
+        revokedList.style.display = 'block';
+        icon.className = 'fas fa-chevron-down';
+    } else {
+        revokedList.style.display = 'none';
+        icon.className = 'fas fa-chevron-right';
     }
 }
 
@@ -1170,5 +1294,22 @@ document.addEventListener('DOMContentLoaded', function() {
     const confirmCancelBtn = document.getElementById('confirm-cancel-btn');
     if (confirmCancelBtn) {
         confirmCancelBtn.addEventListener('click', closeConfirmModal);
+    }
+
+    // Bulk revoke buttons
+    const bulkRevokeBtn = document.getElementById('bulk-revoke-btn');
+    if (bulkRevokeBtn) {
+        bulkRevokeBtn.addEventListener('click', bulkRevokeGuides);
+    }
+
+    const clearSelectionBtn = document.getElementById('clear-selection-btn');
+    if (clearSelectionBtn) {
+        clearSelectionBtn.addEventListener('click', clearGuideSelection);
+    }
+
+    // Toggle revoked guides section
+    const toggleRevokedBtn = document.getElementById('toggle-revoked-guides');
+    if (toggleRevokedBtn) {
+        toggleRevokedBtn.addEventListener('click', toggleRevokedGuides);
     }
 });
