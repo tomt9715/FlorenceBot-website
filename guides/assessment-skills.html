@@ -130,7 +130,7 @@
 
         /* Cover Page */
         .cover-page {
-            background: linear-gradient(135deg, #10b981 0%, #059669 50%, #047857 100%);
+            background: linear-gradient(135deg, var(--primary-color) 0%, #4A90E2 50%, var(--secondary-color) 100%);
             color: white;
             padding: 80px 60px;
             text-align: center;
@@ -164,11 +164,13 @@
             justify-content: center;
             margin: 0 auto 30px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            padding: 12px;
         }
 
-        .cover-logo i {
-            font-size: 40px;
-            color: #10b981;
+        .cover-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
         }
 
         .cover-category {
@@ -240,8 +242,8 @@
 
         /* Learning Objectives */
         .learning-objectives {
-            background: linear-gradient(135deg, #ecfdf5, #d1fae5);
-            border: 2px solid #10b981;
+            background: linear-gradient(135deg, #e0f2fe, #bae6fd);
+            border: 2px solid var(--primary-color);
             border-radius: 12px;
             padding: 28px;
             margin-bottom: 40px;
@@ -251,7 +253,7 @@
             font-family: 'Outfit', sans-serif;
             font-size: 1.2rem;
             font-weight: 700;
-            color: #059669;
+            color: var(--primary-color);
             margin-bottom: 16px;
             display: flex;
             align-items: center;
@@ -274,7 +276,7 @@
         }
 
         .learning-objectives li i {
-            color: #10b981;
+            color: var(--primary-color);
             margin-top: 4px;
             flex-shrink: 0;
         }
@@ -370,7 +372,7 @@
             justify-content: center;
             width: 36px;
             height: 36px;
-            background: linear-gradient(135deg, #10b981, #059669);
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             color: white;
             border-radius: 8px;
             font-size: 1rem;
@@ -432,7 +434,7 @@
 
         .info-box.tip {
             background: #ecfdf5;
-            border-color: #10b981;
+            border-color: var(--primary-color);
         }
 
         .info-box.nclex-tip {
@@ -479,7 +481,7 @@
         }
 
         .guide-table thead {
-            background: linear-gradient(135deg, #10b981, #059669);
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             color: white;
         }
 
@@ -530,7 +532,7 @@
         }
 
         .comparison-card.normal .comparison-card-header {
-            background: linear-gradient(135deg, #10b981, #059669);
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
         }
 
         .comparison-card.abnormal .comparison-card-header {
@@ -608,7 +610,7 @@
             justify-content: center;
             width: 32px;
             height: 32px;
-            background: linear-gradient(135deg, #10b981, #059669);
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             color: white;
             border-radius: 8px;
             font-weight: 700;
@@ -632,7 +634,7 @@
         /* Quick Reference */
         .quick-reference {
             background: white;
-            border: 2px solid #10b981;
+            border: 2px solid var(--primary-color);
             border-radius: 12px;
             padding: 20px;
             margin: 24px 0;
@@ -640,7 +642,7 @@
 
         .quick-reference h3 {
             font-size: 1.1rem;
-            color: #10b981;
+            color: var(--primary-color);
             margin: 0 0 14px;
             display: flex;
             align-items: center;
@@ -673,7 +675,7 @@
 
         /* Key Points Summary */
         .key-points-summary {
-            background: linear-gradient(135deg, #10b981, #059669);
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             border-radius: 12px;
             padding: 28px;
             margin: 40px 0 0;
@@ -840,7 +842,7 @@
         <div class="cover-page">
             <div class="cover-content">
                 <div class="cover-logo">
-                    <i class="fas fa-clipboard-list"></i>
+                    <img src="../assets/images/guide-icons/assessment-skills.webp" alt="Assessment Skills">
                 </div>
                 <div class="cover-category">Fundamentals</div>
                 <h1 class="cover-title">Assessment Skills</h1>
