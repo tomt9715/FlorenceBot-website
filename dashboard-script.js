@@ -820,22 +820,37 @@ async function downloadGuide(productId, button, source = 'dashboard') {
     button.disabled = true;
     button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Preparing...';
 
+    // Check if this is an HTML guide that needs client-side PDF generation
+    const htmlGuides = ['heart-failure']; // HTML guides that use client-side PDF generation
+
     try {
         // Track the download event first
         await trackDownload(productId, source);
 
-        const data = await apiCall(`/cart/downloads/${productId}`, { method: 'GET' });
-
-        if (data.download_url) {
-            // Open download in new tab
-            window.open(data.download_url, '_blank');
-            button.innerHTML = '<i class="fas fa-check"></i> Downloaded!';
+        if (htmlGuides.includes(productId)) {
+            // For HTML guides, open the guide page with download parameter
+            // The guide page will handle PDF generation
+            window.open(`guides/${productId}.html?download=true`, '_blank');
+            button.innerHTML = '<i class="fas fa-check"></i> Opening...';
             setTimeout(() => {
                 button.disabled = false;
                 button.innerHTML = originalText;
             }, 2000);
         } else {
-            throw new Error('Download not available');
+            // For other guides, use the backend download endpoint
+            const data = await apiCall(`/cart/downloads/${productId}`, { method: 'GET' });
+
+            if (data.download_url) {
+                // Open download in new tab
+                window.open(data.download_url, '_blank');
+                button.innerHTML = '<i class="fas fa-check"></i> Downloaded!';
+                setTimeout(() => {
+                    button.disabled = false;
+                    button.innerHTML = originalText;
+                }, 2000);
+            } else {
+                throw new Error('Download not available');
+            }
         }
     } catch (error) {
         console.error('Download error:', error);
