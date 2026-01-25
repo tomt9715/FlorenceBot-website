@@ -1471,10 +1471,10 @@ function initializeQuickView() {
         }
     }
 
-    // Add navigation buttons to modal (if not already present)
+    // Add navigation buttons to modal wrapper (if not already present)
     function addNavButtons() {
-        const content = modal.querySelector('.quick-view-content');
-        if (!content || document.getElementById('quick-view-nav-prev')) return;
+        const wrapper = modal.querySelector('.quick-view-wrapper');
+        if (!wrapper || document.getElementById('quick-view-nav-prev')) return;
 
         const prevBtn = document.createElement('button');
         prevBtn.id = 'quick-view-nav-prev';
@@ -1490,8 +1490,8 @@ function initializeQuickView() {
         nextBtn.title = 'Next guide (→)';
         nextBtn.addEventListener('click', navigateNext);
 
-        content.appendChild(prevBtn);
-        content.appendChild(nextBtn);
+        wrapper.appendChild(prevBtn);
+        wrapper.appendChild(nextBtn);
     }
 
     // Initialize nav buttons

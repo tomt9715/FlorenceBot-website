@@ -2084,6 +2084,15 @@ button.subcategory-chip.active i {
     backdrop-filter: blur(4px);
 }
 
+/* Wrapper to allow nav buttons outside the content box */
+.quick-view-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 60px; /* Space for nav buttons */
+}
+
 .quick-view-content {
     position: relative;
     background: var(--card-bg, #ffffff);
@@ -2101,19 +2110,19 @@ button.subcategory-chip.active i {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    width: 40px;
-    height: 40px;
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
     background: var(--card-bg, #ffffff);
-    border: 1px solid var(--border-color, #e5e7eb);
+    border: 2px solid var(--border-color, #e5e7eb);
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     color: var(--text-primary, #1a1a1a);
-    font-size: 1rem;
-    transition: all 0.2s ease;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    font-size: 1.1rem;
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
     z-index: 10;
 }
 
@@ -2121,7 +2130,12 @@ button.subcategory-chip.active i {
     background: var(--primary-color);
     color: white;
     border-color: var(--primary-color);
-    transform: translateY(-50%) scale(1.1);
+    transform: translateY(-50%) scale(1.15);
+    box-shadow: 0 6px 20px rgba(46, 134, 171, 0.35);
+}
+
+.quick-view-nav:active {
+    transform: translateY(-50%) scale(0.95);
 }
 
 .quick-view-nav:disabled {
@@ -2134,14 +2148,15 @@ button.subcategory-chip.active i {
     background: var(--card-bg, #ffffff);
     color: var(--text-primary, #1a1a1a);
     border-color: var(--border-color, #e5e7eb);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
 }
 
 .quick-view-nav-prev {
-    left: -20px;
+    left: 0;
 }
 
 .quick-view-nav-next {
-    right: -20px;
+    right: 0;
 }
 
 [data-theme="dark"] .quick-view-nav {

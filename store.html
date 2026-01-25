@@ -1558,42 +1558,44 @@
     <!-- Quick View Modal -->
     <div class="quick-view-modal" id="quick-view-modal">
         <div class="quick-view-overlay" id="quick-view-overlay"></div>
-        <div class="quick-view-content">
-            <button class="quick-view-close" id="quick-view-close">
-                <i class="fas fa-times"></i>
-            </button>
-            <div class="quick-view-header">
-                <div class="quick-view-icon" id="quick-view-icon"></div>
-                <div class="quick-view-title-section">
-                    <h2 id="quick-view-title"></h2>
-                    <div class="quick-view-categories">
-                        <span class="quick-view-category-main" id="quick-view-category-main"></span>
-                        <span class="quick-view-category-separator" id="quick-view-category-separator"><i class="fas fa-chevron-right"></i></span>
-                        <span class="quick-view-category-sub" id="quick-view-category-sub"></span>
+        <div class="quick-view-wrapper">
+            <div class="quick-view-content">
+                <button class="quick-view-close" id="quick-view-close">
+                    <i class="fas fa-times"></i>
+                </button>
+                <div class="quick-view-header">
+                    <div class="quick-view-icon" id="quick-view-icon"></div>
+                    <div class="quick-view-title-section">
+                        <h2 id="quick-view-title"></h2>
+                        <div class="quick-view-categories">
+                            <span class="quick-view-category-main" id="quick-view-category-main"></span>
+                            <span class="quick-view-category-separator" id="quick-view-category-separator"><i class="fas fa-chevron-right"></i></span>
+                            <span class="quick-view-category-sub" id="quick-view-category-sub"></span>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="quick-view-body">
-                <div class="quick-view-topics">
-                    <h4>Topics Covered:</h4>
-                    <ul id="quick-view-topics-list">
-                        <!-- Dynamically populated -->
-                    </ul>
+                <div class="quick-view-body">
+                    <div class="quick-view-topics">
+                        <h4>Topics Covered:</h4>
+                        <ul id="quick-view-topics-list">
+                            <!-- Dynamically populated -->
+                        </ul>
+                    </div>
+                    <div class="quick-view-features">
+                        <h4>What's Included:</h4>
+                        <ul>
+                            <li><i class="fas fa-check"></i> Single topic guide</li>
+                            <li><i class="fas fa-check"></i> Complete content coverage</li>
+                            <li><i class="fas fa-check"></i> Key concept summary</li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="quick-view-features">
-                    <h4>What's Included:</h4>
-                    <ul>
-                        <li><i class="fas fa-check"></i> Single topic guide</li>
-                        <li><i class="fas fa-check"></i> Complete content coverage</li>
-                        <li><i class="fas fa-check"></i> Key concept summary</li>
-                    </ul>
+                <div class="quick-view-footer">
+                    <div class="quick-view-price" id="quick-view-price">$5.99</div>
+                    <button class="btn btn-primary" id="quick-view-add-to-cart">
+                        <i class="fas fa-cart-plus"></i> Add to Cart
+                    </button>
                 </div>
-            </div>
-            <div class="quick-view-footer">
-                <div class="quick-view-price" id="quick-view-price">$5.99</div>
-                <button class="btn btn-primary" id="quick-view-add-to-cart">
-                    <i class="fas fa-cart-plus"></i> Add to Cart
-                </button>
             </div>
         </div>
     </div>
