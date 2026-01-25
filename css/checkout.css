@@ -112,7 +112,7 @@
 .checkout-three-column .order-summary,
 .checkout-three-column .payment-details-column,
 .checkout-three-column .payment-method-column {
-    min-height: 780px;
+    min-height: 880px;
     display: flex;
     flex-direction: column;
 }
