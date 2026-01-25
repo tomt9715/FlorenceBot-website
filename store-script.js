@@ -1307,11 +1307,22 @@ function initializeQuickView() {
         );
     }
 
-    // Open Quick View modal
-    function openQuickView(card) {
+    // Open Quick View modal (slideDirection: 'left', 'right', or null for initial open)
+    function openQuickView(card, slideDirection = null) {
         // Update visible cards list and find current index
         visibleCards = getVisibleCards();
         currentCardIndex = visibleCards.indexOf(card);
+
+        // Apply slide animation if navigating
+        const content = modal.querySelector('.quick-view-content');
+        if (content && slideDirection) {
+            // Remove any existing animation classes
+            content.classList.remove('slide-from-left', 'slide-from-right');
+            // Force reflow to restart animation
+            void content.offsetWidth;
+            // Add the appropriate slide animation
+            content.classList.add(slideDirection === 'right' ? 'slide-from-right' : 'slide-from-left');
+        }
 
         const title = card.querySelector('h4')?.textContent || 'Study Guide';
         const description = card.querySelector('p')?.textContent || '';
@@ -1447,14 +1458,14 @@ function initializeQuickView() {
     // Navigate to previous guide
     function navigatePrev() {
         if (currentCardIndex > 0) {
-            openQuickView(visibleCards[currentCardIndex - 1]);
+            openQuickView(visibleCards[currentCardIndex - 1], 'left');
         }
     }
 
     // Navigate to next guide
     function navigateNext() {
         if (currentCardIndex < visibleCards.length - 1) {
-            openQuickView(visibleCards[currentCardIndex + 1]);
+            openQuickView(visibleCards[currentCardIndex + 1], 'right');
         }
     }
 
