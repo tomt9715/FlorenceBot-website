@@ -1228,14 +1228,38 @@ function initializeQuickView() {
 
         // Update modal content
         document.getElementById('quick-view-title').textContent = title;
-        document.getElementById('quick-view-description').textContent = description;
 
-        // Set category badge
-        let categoryDisplay = categoryNames[category] || category;
-        if (subcategory && subcategoryNames[subcategory]) {
-            categoryDisplay = subcategoryNames[subcategory];
+        // Set main category badge
+        const mainCategoryEl = document.getElementById('quick-view-category-main');
+        const subCategoryEl = document.getElementById('quick-view-category-sub');
+
+        if (mainCategoryEl) {
+            mainCategoryEl.textContent = categoryNames[category] || category;
         }
-        document.getElementById('quick-view-category').textContent = categoryDisplay;
+
+        // Set subcategory badge (only show if exists)
+        if (subCategoryEl) {
+            if (subcategory && subcategoryNames[subcategory]) {
+                subCategoryEl.textContent = subcategoryNames[subcategory];
+                subCategoryEl.style.display = 'inline-block';
+            } else {
+                subCategoryEl.style.display = 'none';
+            }
+        }
+
+        // Parse description into topic bullets (split by comma)
+        const topicsList = document.getElementById('quick-view-topics-list');
+        if (topicsList && description) {
+            // Split description by comma and clean up
+            const topics = description.split(',').map(t => t.trim()).filter(t => t.length > 0);
+
+            // Take first 3 topics
+            const displayTopics = topics.slice(0, 3);
+
+            topicsList.innerHTML = displayTopics.map(topic =>
+                `<li><i class="fas fa-circle"></i> ${topic.charAt(0).toUpperCase() + topic.slice(1)}</li>`
+            ).join('');
+        }
 
         // Set icon
         const iconContainer = document.getElementById('quick-view-icon');
