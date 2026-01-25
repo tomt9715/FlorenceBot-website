@@ -1180,6 +1180,97 @@ function initializeQuickView() {
         'musculoskeletal': 'Musculoskeletal'
     };
 
+    // Custom topics for each guide (nursing-focused learning objectives)
+    const guideTopics = {
+        // Cardiovascular
+        'heart-failure': ['Identify left vs right-sided heart failure symptoms', 'Differentiate systolic and diastolic dysfunction', 'Prioritize nursing interventions for fluid overload'],
+        'myocardial-infarction': ['Recognize STEMI vs NSTEMI presentation', 'Interpret cardiac biomarkers (troponin, CK-MB)', 'Understand tPA administration criteria'],
+        'arrhythmias': ['Interpret common ECG rhythms', 'Identify life-threatening dysrhythmias', 'Know when to defibrillate vs cardiovert'],
+        'hypertension': ['Classify hypertension stages accurately', 'Teach lifestyle modifications effectively', 'Recognize hypertensive crisis signs'],
+        'coronary-artery-disease': ['Explain stable vs unstable angina', 'Identify modifiable risk factors', 'Prepare patients for cardiac catheterization'],
+        'peripheral-vascular-disease': ['Differentiate arterial vs venous insufficiency', 'Assess ankle-brachial index (ABI)', 'Implement DVT prevention strategies'],
+
+        // Respiratory
+        'copd': ['Distinguish chronic bronchitis from emphysema', 'Manage oxygen therapy safely (avoid CO2 retention)', 'Teach pursed-lip breathing technique'],
+        'asthma': ['Classify asthma severity levels', 'Differentiate rescue vs controller medications', 'Recognize status asthmaticus emergency'],
+        'pneumonia': ['Compare community vs hospital-acquired pneumonia', 'Identify high-risk patient populations', 'Interpret chest X-ray findings'],
+        'oxygen-therapy': ['Select appropriate oxygen delivery devices', 'Calculate FiO2 for different devices', 'Monitor for oxygen toxicity signs'],
+        'tuberculosis': ['Distinguish latent vs active TB infection', 'Implement airborne isolation precautions', 'Understand RIPE therapy regimen'],
+        'chest-tubes': ['Manage chest drainage systems safely', 'Recognize air leak vs tidaling', 'Know when to clamp chest tubes'],
+
+        // Endocrine
+        'diabetes-type1': ['Understand autoimmune pathophysiology', 'Calculate insulin dosing accurately', 'Recognize and treat DKA emergency'],
+        'diabetes-type2': ['Explain insulin resistance mechanism', 'Compare oral hypoglycemic agents', 'Identify hyperosmolar hyperglycemic state (HHS)'],
+        'thyroid-disorders': ['Differentiate hypo vs hyperthyroidism symptoms', 'Recognize thyroid storm emergency', 'Manage myxedema coma'],
+        'adrenal-disorders': ['Compare Addison\'s vs Cushing\'s syndrome', 'Manage adrenal crisis emergency', 'Understand steroid tapering importance'],
+        'pituitary-disorders': ['Differentiate SIADH vs diabetes insipidus', 'Monitor fluid balance accurately', 'Recognize hormone imbalance signs'],
+
+        // Neurological
+        'stroke': ['Use FAST assessment correctly', 'Differentiate ischemic vs hemorrhagic stroke', 'Know tPA inclusion/exclusion criteria'],
+        'seizures': ['Classify seizure types accurately', 'Manage status epilepticus emergency', 'Implement seizure precautions'],
+        'spinal-cord-injury': ['Identify level of injury implications', 'Recognize autonomic dysreflexia emergency', 'Prevent secondary complications'],
+        'traumatic-brain-injury': ['Calculate Glasgow Coma Scale accurately', 'Monitor for increased ICP signs', 'Implement brain injury precautions'],
+        'meningitis': ['Differentiate bacterial vs viral meningitis', 'Assess for meningeal signs (Kernig, Brudzinski)', 'Implement droplet precautions'],
+        'parkinsons-ms': ['Recognize cardinal Parkinson\'s symptoms', 'Understand MS relapse patterns', 'Manage medication timing for Parkinson\'s'],
+
+        // Renal
+        'acute-kidney-injury': ['Classify prerenal, intrarenal, postrenal causes', 'Interpret BUN/creatinine ratios', 'Monitor fluid balance strictly'],
+        'chronic-kidney-disease': ['Identify CKD stages by GFR', 'Manage dietary restrictions (K+, Na+, phosphorus)', 'Recognize uremic symptoms'],
+        'dialysis': ['Compare hemodialysis vs peritoneal dialysis', 'Assess AV fistula properly (thrill, bruit)', 'Recognize dialysis complications'],
+        'urinary-tract-infections': ['Differentiate lower vs upper UTI', 'Implement CAUTI prevention bundles', 'Interpret urinalysis results'],
+        'kidney-stones': ['Identify stone types and causes', 'Manage acute renal colic pain', 'Teach prevention strategies'],
+        'fluid-electrolytes': ['Recognize electrolyte imbalance symptoms', 'Calculate IV fluid rates', 'Prioritize potassium safety'],
+
+        // Gastrointestinal
+        'gi-bleeding': ['Differentiate upper vs lower GI bleed', 'Recognize hematemesis vs melena vs hematochezia', 'Prioritize hemodynamic stabilization'],
+        'bowel-obstruction': ['Distinguish small vs large bowel obstruction', 'Manage NG tube decompression', 'Recognize strangulation signs'],
+        'liver-disease': ['Assess for hepatic encephalopathy', 'Manage ascites and paracentesis', 'Understand portal hypertension complications'],
+        'pancreatitis': ['Recognize Cullen\'s and Grey Turner\'s signs', 'Manage NPO and pain control', 'Monitor for systemic complications'],
+        'inflammatory-bowel-disease': ['Compare Crohn\'s vs ulcerative colitis', 'Manage acute flare-ups', 'Provide ostomy care education'],
+        'gerd-peptic-ulcer': ['Identify H. pylori treatment regimen', 'Teach PPI administration timing', 'Recognize perforation signs'],
+
+        // Musculoskeletal
+        'fractures': ['Identify fracture types and healing stages', 'Recognize compartment syndrome early', 'Implement neurovascular checks (5 P\'s)'],
+        'arthritis': ['Compare osteoarthritis vs rheumatoid arthritis', 'Understand DMARD therapy', 'Teach joint protection techniques'],
+        'hip-knee-replacement': ['Implement hip precautions correctly', 'Prevent DVT post-operatively', 'Manage pain and early mobility'],
+        'osteoporosis': ['Interpret DEXA scan results', 'Teach bisphosphonate administration', 'Implement fall prevention strategies'],
+        'amputation-care': ['Manage stump positioning and wrapping', 'Address phantom limb pain', 'Support prosthetic readiness'],
+
+        // Pharmacology
+        'cardiac-medications': ['Understand beta blocker mechanisms', 'Monitor ACE inhibitor side effects', 'Calculate diuretic effectiveness'],
+        'antibiotics-antivirals': ['Match antibiotic to infection type', 'Recognize antibiotic resistance patterns', 'Monitor for adverse reactions'],
+        'pain-management': ['Apply WHO pain ladder correctly', 'Recognize opioid toxicity signs', 'Implement multimodal analgesia'],
+        'iv-medications': ['Verify IV compatibility', 'Calculate drip rates accurately', 'Recognize infiltration vs extravasation'],
+        'psychotropic-medications': ['Understand SSRI mechanisms and side effects', 'Monitor for serotonin syndrome', 'Recognize extrapyramidal symptoms'],
+        'emergency-medications': ['Know ACLS drug dosages', 'Understand vasopressor actions', 'Prioritize code medications'],
+
+        // Fundamentals
+        'assessment-skills': ['Perform systematic head-to-toe assessment', 'Interpret vital sign trends', 'Document findings accurately'],
+        'infection-control': ['Apply standard and transmission-based precautions', 'Perform proper hand hygiene technique', 'Don and doff PPE correctly'],
+        'documentation-charting': ['Use proper nursing documentation format', 'Avoid common charting errors', 'Maintain legal and ethical standards'],
+        'patient-safety': ['Implement fall prevention protocols', 'Perform medication reconciliation', 'Report errors using proper channels'],
+        'mobility-transfers': ['Use proper body mechanics', 'Select appropriate assistive devices', 'Implement safe patient handling'],
+
+        // Maternity
+        'labor-delivery': ['Identify stages and phases of labor', 'Interpret fetal heart rate patterns', 'Recognize labor complications'],
+        'postpartum-care': ['Assess uterine involution (BUBBLE-HE)', 'Support breastfeeding initiation', 'Recognize postpartum hemorrhage'],
+        'high-risk-pregnancy': ['Identify preeclampsia warning signs', 'Manage gestational diabetes', 'Monitor for placental complications'],
+        'antepartum-care': ['Calculate estimated due date', 'Perform Leopold\'s maneuvers', 'Interpret prenatal lab results'],
+
+        // Pediatrics
+        'growth-development': ['Identify age-appropriate milestones', 'Administer vaccines per schedule', 'Teach age-specific safety measures'],
+        'pediatric-emergencies': ['Calculate pediatric medication doses', 'Recognize respiratory distress signs', 'Assess dehydration severity'],
+        'infant-care': ['Teach safe sleep practices (SIDS prevention)', 'Assess feeding adequacy', 'Perform developmental screening'],
+        'adolescent-health': ['Address confidentiality appropriately', 'Screen for mental health concerns', 'Discuss risk behavior prevention'],
+
+        // Mental Health
+        'depression-anxiety': ['Use validated screening tools (PHQ-9, GAD-7)', 'Recognize medication side effects', 'Implement therapeutic communication'],
+        'crisis-intervention': ['Assess suicide risk accurately', 'Use de-escalation techniques', 'Know when to implement safety protocols'],
+        'therapeutic-communication': ['Apply active listening techniques', 'Maintain professional boundaries', 'Use open-ended questions effectively'],
+        'substance-abuse': ['Recognize withdrawal syndromes', 'Implement CIWA/COWS protocols', 'Support recovery-oriented care'],
+        'eating-disorders': ['Differentiate anorexia vs bulimia', 'Monitor for refeeding syndrome', 'Support nutritional rehabilitation']
+    };
+
     let currentProductId = null;
     let currentProductName = null;
 
@@ -1232,33 +1323,41 @@ function initializeQuickView() {
         // Set main category badge
         const mainCategoryEl = document.getElementById('quick-view-category-main');
         const subCategoryEl = document.getElementById('quick-view-category-sub');
+        const separatorEl = document.getElementById('quick-view-category-separator');
 
         if (mainCategoryEl) {
             mainCategoryEl.textContent = categoryNames[category] || category;
         }
 
-        // Set subcategory badge (only show if exists)
-        if (subCategoryEl) {
+        // Set subcategory badge and separator (only show if subcategory exists)
+        if (subCategoryEl && separatorEl) {
             if (subcategory && subcategoryNames[subcategory]) {
                 subCategoryEl.textContent = subcategoryNames[subcategory];
-                subCategoryEl.style.display = 'inline-block';
+                subCategoryEl.style.display = 'inline-flex';
+                separatorEl.style.display = 'inline-flex';
             } else {
                 subCategoryEl.style.display = 'none';
+                separatorEl.style.display = 'none';
             }
         }
 
-        // Parse description into topic bullets (split by comma)
+        // Use custom topics from guideTopics object
         const topicsList = document.getElementById('quick-view-topics-list');
-        if (topicsList && description) {
-            // Split description by comma and clean up
-            const topics = description.split(',').map(t => t.trim()).filter(t => t.length > 0);
+        if (topicsList && productId) {
+            const customTopics = guideTopics[productId];
 
-            // Take first 3 topics
-            const displayTopics = topics.slice(0, 3);
-
-            topicsList.innerHTML = displayTopics.map(topic =>
-                `<li><i class="fas fa-circle"></i> ${topic.charAt(0).toUpperCase() + topic.slice(1)}</li>`
-            ).join('');
+            if (customTopics && customTopics.length > 0) {
+                topicsList.innerHTML = customTopics.map(topic =>
+                    `<li><i class="fas fa-circle"></i> ${topic}</li>`
+                ).join('');
+            } else {
+                // Fallback to description if no custom topics
+                const topics = description.split(',').map(t => t.trim()).filter(t => t.length > 0);
+                const displayTopics = topics.slice(0, 3);
+                topicsList.innerHTML = displayTopics.map(topic =>
+                    `<li><i class="fas fa-circle"></i> ${topic.charAt(0).toUpperCase() + topic.slice(1)}</li>`
+                ).join('');
+            }
         }
 
         // Set icon
