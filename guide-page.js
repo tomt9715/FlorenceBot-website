@@ -1,6 +1,18 @@
 // Guide Page JavaScript - Loads and renders content with access control
 // Uses backend API for access verification
 
+// HTML guides that should redirect to /guides/{id}.html
+const htmlGuides = ['heart-failure', 'assessment-skills', 'myocardial-infarction'];
+
+// Check if this guide has an HTML version and redirect immediately
+(function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const guideId = urlParams.get('id');
+    if (guideId && htmlGuides.includes(guideId)) {
+        window.location.replace(`guides/${guideId}.html`);
+    }
+})();
+
 // Store current PDF URL for printing
 let currentPdfUrl = null;
 
@@ -755,7 +767,7 @@ function renderRelatedGuides(currentGuideId, currentCategory) {
                                 <p class="related-guide-desc">${getGuideDesc(guideId)}</p>
                                 <div class="related-guide-actions">
                                     ${isOwned
-                                        ? `<a href="guide.html?id=${guideId}" class="btn-view-guide"><i class="fas fa-book-reader"></i> Continue Studying</a>`
+                                        ? `<a href="${htmlGuides.includes(guideId) ? `guides/${guideId}.html` : `guide.html?id=${guideId}`}" class="btn-view-guide"><i class="fas fa-book-reader"></i> Continue Studying</a>`
                                         : `<a href="store.html?highlight=${guideId}" class="btn-purchase-guide"><i class="fas fa-cart-plus"></i> Add to Cart</a>`
                                     }
                                 </div>
