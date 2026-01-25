@@ -533,7 +533,12 @@ document.addEventListener('DOMContentLoaded', function() {
         const totalMatching = matchingGuides.length;
 
         // Show/hide guides based on pagination
+        // Track which cards were previously visible (for Show More animation)
+        const previouslyVisible = new Set();
         guideCards.forEach(card => {
+            if (card.style.display !== 'none' && card.offsetParent !== null) {
+                previouslyVisible.add(card);
+            }
             card.style.display = 'none';
         });
 
@@ -544,16 +549,30 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
 
+        // Count how many new cards we're showing (for staggered animation)
+        let newCardIndex = 0;
+
         matchingGuides.forEach((card, index) => {
             if (index < visibleGuidesCount) {
                 card.style.display = 'flex';
-                card.style.opacity = '0';
-                card.style.transform = 'translateY(20px)';
-                setTimeout(() => {
-                    card.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+
+                // Only animate if this card wasn't previously visible (new cards from Show More)
+                // or if we're doing a full refresh (resetPagination is true)
+                if (resetPagination || !previouslyVisible.has(card)) {
+                    card.style.opacity = '0';
+                    card.style.transform = 'translateY(20px)';
+                    setTimeout(() => {
+                        card.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    }, 10 + (newCardIndex * 30)); // Staggered animation for new cards only
+                    newCardIndex++;
+                } else {
+                    // Card was already visible, keep it stable
                     card.style.opacity = '1';
                     card.style.transform = 'translateY(0)';
-                }, 10 + (index * 30)); // Staggered animation
+                    card.style.transition = 'none';
+                }
             }
         });
 
