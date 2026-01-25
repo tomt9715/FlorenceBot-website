@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - The Nursing Collective</title>
+    <meta name="description" content="Get in touch with The Nursing Collective for support, refund requests, feedback, or general inquiries.">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/images/apple-touch-icon.png">
+
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#2E86AB">
+
+    <!-- Preconnect to external resources for faster loading -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+
+    <!-- Bundled CSS (Bootstrap + custom styles, purged and minified) -->
+    <link rel="stylesheet" href="css/bundle.min.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        .contact-page {
+            padding: 120px 0 80px;
+            min-height: 100vh;
+        }
+
+        .contact-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .contact-header h1 {
+            font-size: 2.5rem;
+            color: var(--text-primary);
+            margin-bottom: 16px;
+        }
+
+        .contact-header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .contact-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border: 1px solid var(--border-color);
+        }
+
+        .contact-card h2 {
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .contact-card h2 i {
+            color: var(--primary-color);
+            font-size: 1.3rem;
+        }
+
+        .contact-method {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            margin-bottom: 24px;
+            padding: 20px;
+            background: var(--background-light);
+            border-radius: 12px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .contact-method:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .contact-method:last-child {
+            margin-bottom: 0;
+        }
+
+        .contact-method-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--primary-color);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .contact-method-icon i {
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .contact-method-icon.discord {
+            background: #5865F2;
+        }
+
+        .contact-method-info h3 {
+            color: var(--text-primary);
+            font-size: 1.1rem;
+            margin-bottom: 4px;
+        }
+
+        .contact-method-info p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 8px;
+            line-height: 1.5;
+        }
+
+        .contact-method-info a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.2s ease;
+        }
+
+        .contact-method-info a:hover {
+            opacity: 0.8;
+        }
+
+        .response-time {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.85rem;
+            color: var(--text-light);
+            margin-top: 4px;
+        }
+
+        .response-time i {
+            font-size: 0.8rem;
+        }
+
+        /* Policy Section */
+        .policy-section {
+            max-width: 1000px;
+            margin: 60px auto 0;
+        }
+
+        .policy-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border: 1px solid var(--border-color);
+        }
+
+        .policy-card h2 {
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .policy-card h2 i {
+            color: var(--secondary-color);
+        }
+
+        .policy-item {
+            padding: 20px;
+            background: var(--background-light);
+            border-radius: 12px;
+            margin-bottom: 16px;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .policy-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .policy-item h3 {
+            color: var(--text-primary);
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .policy-item h3 i {
+            color: var(--primary-color);
+            font-size: 1rem;
+        }
+
+        .policy-item p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin: 0;
+        }
+
+        .policy-item.highlight {
+            border-left-color: var(--secondary-color);
+            background: rgba(162, 59, 114, 0.05);
+        }
+
+        [data-theme="dark"] .policy-item.highlight {
+            background: rgba(162, 59, 114, 0.1);
+        }
+
+        .policy-item.highlight h3 i {
+            color: var(--secondary-color);
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            max-width: 1000px;
+            margin: 60px auto 0;
+        }
+
+        .faq-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border: 1px solid var(--border-color);
+        }
+
+        .faq-card h2 {
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .faq-card h2 i {
+            color: var(--accent-color);
+        }
+
+        .faq-item {
+            padding: 20px;
+            background: var(--background-light);
+            border-radius: 12px;
+            margin-bottom: 16px;
+        }
+
+        .faq-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .faq-item h3 {
+            color: var(--text-primary);
+            font-size: 1rem;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .faq-item p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin: 0;
+        }
+
+        /* Bottom Links */
+        .contact-bottom-links {
+            margin-top: 48px;
+            padding-top: 32px;
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+        }
+
+        .contact-bottom-links a {
+            color: var(--primary-color);
+            text-decoration: none;
+            margin: 0 12px;
+            font-size: 0.9rem;
+            transition: opacity 0.2s ease;
+        }
+
+        .contact-bottom-links a:hover {
+            opacity: 0.8;
+        }
+
+        @media (max-width: 768px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+
+            .contact-card,
+            .policy-card,
+            .faq-card {
+                padding: 28px 20px;
+            }
+
+            .contact-header h1 {
+                font-size: 2rem;
+            }
+
+            .contact-method {
+                flex-direction: column;
+                text-align: center;
+                align-items: center;
+            }
+
+            .policy-item,
+            .faq-item {
+                padding: 16px;
+            }
+        }
+    </style>
+    <!-- Sentry Error Tracking (load first) -->
+    <script src="https://browser.sentry-cdn.com/8.40.0/bundle.min.js" crossorigin="anonymous"></script>
+    <script src="sentry-init.js"></script>
+</head>
+<body>
+    <!-- Page Loader -->
+    <div class="page-loader" id="page-loader">
+        <div class="loader-spinner"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <a href="index.html">
+                    <img src="assets/images/the-nursing-collective-logo.webp" alt="The Nursing Collective Logo" class="nav-logo">
+                </a>
+            </div>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="study-guides.html">Study Guides</a>
+                <a href="pricing.html">Pricing</a>
+                <a href="store.html">Store</a>
+                <a href="about-florencebot.html">About FlorenceBot</a>
+                <!-- Guest nav item (shown when not logged in) -->
+                <a href="login.html" id="nav-login-link">Login</a>
+                <!-- Authenticated nav item (shown when logged in) -->
+                <a href="dashboard.html" id="nav-dashboard-link" style="display: none;">Dashboard</a>
+                <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+                    <i class="fas fa-sun light-icon"></i>
+                    <i class="fas fa-moon dark-icon"></i>
+                </button>
+                <!-- User menu (shown when logged in) -->
+                <div class="user-menu" id="user-menu" style="display: none;">
+                    <button class="user-avatar" id="user-menu-btn" title="Account menu">
+                        <i class="fas fa-user-circle"></i>
+                    </button>
+                    <div class="user-dropdown" id="user-dropdown">
+                        <div class="user-dropdown-header">
+                            <div class="user-avatar-large">
+                                <i class="fas fa-user-circle"></i>
+                            </div>
+                            <div class="user-info">
+                                <span class="user-name" id="dropdown-user-name">Loading...</span>
+                                <span class="user-email" id="dropdown-user-email">Loading...</span>
+                            </div>
+                        </div>
+                        <div class="user-dropdown-divider"></div>
+                        <a href="settings.html"><i class="fas fa-cog"></i> Account Settings</a>
+                        <a href="#logout" id="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                    </div>
+                </div>
+                <a href="https://discord.gg/y2Mh77wAV2" class="btn btn-primary">Join Discord</a>
+            </div>
+            <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle navigation menu" aria-expanded="false">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Contact Page Content -->
+    <section class="contact-page">
+        <div class="container">
+            <div class="contact-header">
+                <h1>Contact Us</h1>
+                <p>Have a question, need help with a purchase, or want to share feedback? We're here to help!</p>
+            </div>
+
+            <div class="contact-grid">
+                <!-- Contact Methods -->
+                <div class="contact-card">
+                    <h2><i class="fas fa-headset"></i> Get in Touch</h2>
+
+                    <div class="contact-method">
+                        <div class="contact-method-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-method-info">
+                            <h3>Email Support</h3>
+                            <p>For refunds, account issues, and general inquiries</p>
+                            <a href="mailto:support@thenursingcollective.pro">support@thenursingcollective.pro</a>
+                            <div class="response-time">
+                                <i class="fas fa-clock"></i>
+                                Response within 24-48 hours
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="contact-method">
+                        <div class="contact-method-icon discord">
+                            <i class="fab fa-discord"></i>
+                        </div>
+                        <div class="contact-method-info">
+                            <h3>Discord Community</h3>
+                            <p>Quick questions and community support</p>
+                            <a href="https://discord.gg/y2Mh77wAV2" target="_blank" rel="noopener">Join our Discord Server</a>
+                            <div class="response-time">
+                                <i class="fas fa-clock"></i>
+                                Usually faster response from community
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- What We Can Help With -->
+                <div class="contact-card">
+                    <h2><i class="fas fa-question-circle"></i> How Can We Help?</h2>
+
+                    <div class="contact-method">
+                        <div class="contact-method-icon">
+                            <i class="fas fa-undo"></i>
+                        </div>
+                        <div class="contact-method-info">
+                            <h3>Refund Requests</h3>
+                            <p>Request a refund for eligible purchases (see policy below)</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-method">
+                        <div class="contact-method-icon">
+                            <i class="fas fa-download"></i>
+                        </div>
+                        <div class="contact-method-info">
+                            <h3>Access Issues</h3>
+                            <p>Problems downloading or accessing your purchased guides</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-method">
+                        <div class="contact-method-icon">
+                            <i class="fas fa-comment-dots"></i>
+                        </div>
+                        <div class="contact-method-info">
+                            <h3>Feedback & Suggestions</h3>
+                            <p>Share ideas to help us improve our study materials</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Refund Policy Section -->
+            <div class="policy-section">
+                <div class="policy-card">
+                    <h2><i class="fas fa-file-invoice-dollar"></i> Refund Policy for Digital Products</h2>
+
+                    <div class="policy-item">
+                        <h3><i class="fas fa-check-circle"></i> Eligible for Full Refund</h3>
+                        <p>Digital products (study guides, bundles) are eligible for a <strong>full refund within 7 days of purchase</strong>, provided the content has <strong>not been downloaded or accessed</strong>. If you change your mind before downloading, simply contact us for a hassle-free refund.</p>
+                    </div>
+
+                    <div class="policy-item highlight">
+                        <h3><i class="fas fa-exclamation-circle"></i> After Download - All Sales Final</h3>
+                        <p>Once content has been downloaded or accessed, all sales are final. Digital products cannot be "returned" like physical items, so we are unable to offer refunds after the content has been accessed. Please review product descriptions and sample content before purchasing.</p>
+                    </div>
+
+                    <div class="policy-item">
+                        <h3><i class="fas fa-life-ring"></i> Exceptions We Review</h3>
+                        <p>We understand things happen. We'll review refund requests on a case-by-case basis for: technical issues preventing access, accidental duplicate purchases, or billing errors. Contact us with your order details and we'll work with you to find a solution.</p>
+                    </div>
+
+                    <div class="policy-item">
+                        <h3><i class="fas fa-clock"></i> Refund Processing</h3>
+                        <p>Approved refunds are processed within 5-10 business days and returned to your original payment method. You'll receive an email confirmation once the refund is initiated.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAQ Section -->
+            <div class="faq-section">
+                <div class="faq-card">
+                    <h2><i class="fas fa-lightbulb"></i> Frequently Asked Questions</h2>
+
+                    <div class="faq-item">
+                        <h3>How do I request a refund?</h3>
+                        <p>Email us at support@thenursingcollective.pro with your order number (found in your purchase confirmation email) and the reason for your refund request. We'll respond within 24-48 hours.</p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h3>I can't access my purchased guides. What should I do?</h3>
+                        <p>First, make sure you're logged into the same account you used to make the purchase. Check your Dashboard for your purchased content. If you still have issues, contact us with your order details and we'll help resolve it.</p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h3>Can I get a preview before purchasing?</h3>
+                        <p>Yes! Each study guide includes a description and topic list on its product page. We also offer individual guides so you can try one before purchasing a bundle.</p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h3>How long do I have access to purchased guides?</h3>
+                        <p>All purchases include lifetime access. Once you buy a guide, you can download and access it forever, including any future updates to that content.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Links -->
+            <div class="contact-bottom-links">
+                <a href="terms.html">Terms of Service</a> |
+                <a href="privacy.html">Privacy Policy</a> |
+                <a href="index.html">Home</a> |
+                <a href="store.html">Browse Store</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-brand">
+                        <span>The Nursing Collective</span>
+                    </div>
+                    <p>Empowering nursing students with comprehensive study guides, practice questions, and resources for academic success.</p>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="study-guides.html">Study Guides</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
+                        <li><a href="store.html">Store</a></li>
+                        <li><a href="about-florencebot.html">About Bot</a></li>
+                        <li><a href="https://discord.gg/y2Mh77wAV2">Discord Server</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p>
+                        <i class="fas fa-envelope"></i>
+                        <a href="mailto:support@thenursingcollective.pro">support@thenursingcollective.pro</a>
+                    </p>
+                    <div class="social-links">
+                        <a href="https://discord.gg/y2Mh77wAV2" aria-label="Discord" target="_blank" rel="noopener">
+                            <i class="fab fa-discord"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="terms.html">Terms of Service</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 The Nursing Collective. Built with care for nursing students.</p>
+                <p style="font-size: 0.7rem; margin-top: 8px; opacity: 0.5;">
+                    Icons by <a href="https://www.flaticon.com/authors/freepik" title="Freepik" target="_blank" rel="noopener" style="color: inherit; text-decoration: underline;">Freepik</a> & <a href="https://www.flaticon.com/authors/slamlabs" title="Slamlabs" target="_blank" rel="noopener" style="color: inherit; text-decoration: underline;">Slamlabs</a> - <a href="https://www.flaticon.com" title="Flaticon" target="_blank" rel="noopener" style="color: inherit; text-decoration: none;">Flaticon</a>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+    <!-- Dark Mode Manager -->
+    <script src="dark-mode.js"></script>
+
+    <script src="script.js"></script>
+</body>
+</html>
