@@ -1485,7 +1485,26 @@ function initializeQuickView() {
     function navigateNext() {
         if (currentCardIndex < visibleCards.length - 1) {
             openQuickView(visibleCards[currentCardIndex + 1], 'right');
+        } else if (hasMoreGuidesAvailable()) {
+            // At end of visible guides but more available - load more guides
+            const showMoreBtn = document.getElementById('show-more-btn');
+            if (showMoreBtn) {
+                showMoreBtn.click();
+                // After loading more, navigate to the next guide
+                setTimeout(() => {
+                    visibleCards = getVisibleCards();
+                    if (currentCardIndex < visibleCards.length - 1) {
+                        openQuickView(visibleCards[currentCardIndex + 1], 'right');
+                    }
+                }, 100);
+            }
         }
+    }
+
+    // Check if there are more guides available beyond visible ones
+    function hasMoreGuidesAvailable() {
+        const showMoreBtn = document.getElementById('show-more-btn');
+        return showMoreBtn && !showMoreBtn.disabled && showMoreBtn.closest('.show-more-container')?.style.display !== 'none';
     }
 
     // Update navigation button states
@@ -1495,9 +1514,32 @@ function initializeQuickView() {
 
         if (prevBtn) {
             prevBtn.disabled = currentCardIndex <= 0;
+            prevBtn.classList.remove('load-more');
+            prevBtn.title = 'Previous guide (←)';
         }
         if (nextBtn) {
-            nextBtn.disabled = currentCardIndex >= visibleCards.length - 1;
+            const isAtEnd = currentCardIndex >= visibleCards.length - 1;
+            const moreAvailable = hasMoreGuidesAvailable();
+
+            if (isAtEnd && moreAvailable) {
+                // At end of visible guides, but more are available
+                nextBtn.disabled = false;
+                nextBtn.classList.add('load-more');
+                nextBtn.title = 'Load more guides';
+                nextBtn.innerHTML = '<i class="fas fa-plus"></i>';
+            } else if (isAtEnd) {
+                // Truly at the end of all guides
+                nextBtn.disabled = true;
+                nextBtn.classList.remove('load-more');
+                nextBtn.title = 'No more guides';
+                nextBtn.innerHTML = '<i class="fas fa-chevron-right"></i>';
+            } else {
+                // More visible guides ahead
+                nextBtn.disabled = false;
+                nextBtn.classList.remove('load-more');
+                nextBtn.title = 'Next guide (→)';
+                nextBtn.innerHTML = '<i class="fas fa-chevron-right"></i>';
+            }
         }
     }
 
