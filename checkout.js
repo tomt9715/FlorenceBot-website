@@ -358,7 +358,7 @@ function showEmptyCartMessage() {
     if (paymentElementDOM) {
         paymentElementDOM.innerHTML = `
             <div style="text-align: center; padding: 30px 20px; color: var(--text-secondary); background: var(--background-light); border-radius: 8px;">
-                <i class="fas fa-shopping-cart" style="font-size: 2rem; margin-bottom: 12px; opacity: 0.5; display: block;"></i>
+                <img src="assets/images/store-cart.webp" alt="Empty cart" style="width: 48px; height: 48px; margin-bottom: 12px; opacity: 0.5;">
                 <p style="margin: 0; font-size: 0.9rem;">Add items to your cart to continue</p>
             </div>
         `;
