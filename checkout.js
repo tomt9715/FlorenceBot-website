@@ -843,15 +843,16 @@ function attachRemoveButtonListeners() {
 
                 // Check if cart is now empty
                 if (cartItems.length === 0) {
-                    showEmptyCartMessage();
                     // Clear sessionStorage since cart is empty
                     sessionStorage.removeItem('newlyAddedCartItems');
-                    // Destroy payment element since we can't proceed
+                    // Destroy payment element FIRST (before showEmptyCartMessage modifies the DOM)
                     if (paymentElement) {
                         paymentElement.destroy();
                         paymentElement = null;
                         elements = null;
                     }
+                    // Now show empty cart message (after Stripe element is destroyed)
+                    showEmptyCartMessage();
                 } else {
                     // Re-display cart items
                     displayCartItems();
