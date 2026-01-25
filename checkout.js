@@ -307,6 +307,8 @@ async function loadCartItems() {
  * Show empty cart message
  */
 function showEmptyCartMessage() {
+    console.log('[DEBUG] showEmptyCartMessage called');
+
     const productDetailsEl = document.getElementById('product-details');
     productDetailsEl.innerHTML = `
         <div style="text-align: center; padding: 40px 20px;">
@@ -336,8 +338,10 @@ function showEmptyCartMessage() {
 
     // Hide promo code section when cart is empty (use !important to override inline styles)
     const promoSection = document.getElementById('promo-section');
+    console.log('[DEBUG] promoSection element:', promoSection);
     if (promoSection) {
         promoSection.style.setProperty('display', 'none', 'important');
+        console.log('[DEBUG] Set promo section display to none');
     }
 
     // Hide the item count if present
@@ -353,15 +357,18 @@ function showEmptyCartMessage() {
     }
 
     // Show a message in the payment method section that cart is empty
-    const paymentElement = document.getElementById('payment-element');
+    const paymentElementDOM = document.getElementById('payment-element');
     const paymentElementWrapper = document.getElementById('payment-element-wrapper');
-    if (paymentElement) {
-        paymentElement.innerHTML = `
+    console.log('[DEBUG] paymentElementDOM:', paymentElementDOM);
+    console.log('[DEBUG] paymentElementWrapper:', paymentElementWrapper);
+    if (paymentElementDOM) {
+        paymentElementDOM.innerHTML = `
             <div style="text-align: center; padding: 30px 20px; color: var(--text-secondary); background: var(--background-light); border-radius: 8px;">
                 <i class="fas fa-shopping-cart" style="font-size: 2rem; margin-bottom: 12px; opacity: 0.5; display: block;"></i>
                 <p style="margin: 0; font-size: 0.9rem;">Add items to your cart to continue</p>
             </div>
         `;
+        console.log('[DEBUG] Set payment element innerHTML');
     }
     // Remove any styling classes from wrapper that might cause visual issues
     if (paymentElementWrapper) {
