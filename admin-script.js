@@ -470,7 +470,14 @@ async function openUserDetail(email) {
                 });
             }
 
-            tbody.innerHTML = data.guides.map(guide => {
+            // Sort guides by purchased_at date (newest first)
+            const sortedGuides = [...data.guides].sort((a, b) => {
+                const dateA = new Date(a.purchased_at || 0);
+                const dateB = new Date(b.purchased_at || 0);
+                return dateB - dateA;
+            });
+
+            tbody.innerHTML = sortedGuides.map(guide => {
                 const downloadInfo = downloadCountMap[guide.product_id] || { download_count: 0, sources: [] };
                 const downloadCount = downloadInfo.download_count || 0;
 
