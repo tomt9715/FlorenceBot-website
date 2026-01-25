@@ -724,6 +724,14 @@
             text-decoration: none;
         }
 
+        /* PDF Generation Mode - hides non-content elements */
+        body.pdf-mode .download-bar { display: none !important; }
+        body.pdf-mode { background: white !important; }
+        body.pdf-mode .document-container {
+            margin: 0 !important;
+            box-shadow: none !important;
+        }
+
         /* Print Styles */
         @media print {
             .download-bar { display: none !important; }

@@ -77,8 +77,14 @@ async function generatePDF(btn) {
     await trackDownload('guide_page');
 
     try {
+        // Add pdf-mode class to hide download bar during capture
+        document.body.classList.add('pdf-mode');
+
         const element = document.querySelector('.document-container');
         const filename = `TNC-${GUIDE_NAME}.pdf`;
+
+        // Wait a moment for styles to apply
+        await new Promise(r => setTimeout(r, 100));
 
         const opt = {
             margin: 0,
@@ -87,7 +93,9 @@ async function generatePDF(btn) {
             html2canvas: {
                 scale: 2,
                 useCORS: true,
-                letterRendering: true
+                letterRendering: true,
+                scrollY: -window.scrollY,
+                windowWidth: 850
             },
             jsPDF: {
                 unit: 'mm',
@@ -99,6 +107,9 @@ async function generatePDF(btn) {
 
         await html2pdf().set(opt).from(element).save();
 
+        // Remove pdf-mode class
+        document.body.classList.remove('pdf-mode');
+
         btn.innerHTML = '<i class="fas fa-check"></i> Downloaded!';
         setTimeout(() => {
             btn.innerHTML = originalText;
@@ -106,6 +117,8 @@ async function generatePDF(btn) {
         }, 2000);
     } catch (error) {
         console.error('PDF generation error:', error);
+        // Remove pdf-mode class on error too
+        document.body.classList.remove('pdf-mode');
         btn.innerHTML = '<i class="fas fa-exclamation-circle"></i> Error';
         setTimeout(() => {
             btn.innerHTML = originalText;

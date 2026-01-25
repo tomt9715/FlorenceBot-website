@@ -924,11 +924,18 @@ async function generateGuidePDF(productId, guideName) {
             iframe.onload = async function() {
                 try {
                     const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+
+                    // Add pdf-mode class to hide download bar and adjust styles
+                    iframeDoc.body.classList.add('pdf-mode');
+
                     const element = iframeDoc.querySelector('.document-container');
 
                     if (!element) {
                         throw new Error('Guide content not found');
                     }
+
+                    // Wait a moment for styles to apply
+                    await new Promise(r => setTimeout(r, 100));
 
                     const filename = `TNC-${guideName}.pdf`;
 
@@ -939,7 +946,9 @@ async function generateGuidePDF(productId, guideName) {
                         html2canvas: {
                             scale: 2,
                             useCORS: true,
-                            letterRendering: true
+                            letterRendering: true,
+                            scrollY: 0,
+                            windowWidth: 850
                         },
                         jsPDF: {
                             unit: 'mm',
