@@ -940,7 +940,7 @@ async function generateGuidePDF(productId, guideName) {
                     const filename = `TNC-${guideName}.pdf`;
 
                     const opt = {
-                        margin: 0,
+                        margin: [10, 10, 10, 10],
                         filename: filename,
                         image: { type: 'jpeg', quality: 0.98 },
                         html2canvas: {
@@ -948,14 +948,20 @@ async function generateGuidePDF(productId, guideName) {
                             useCORS: true,
                             letterRendering: true,
                             scrollY: 0,
-                            windowWidth: 850
+                            width: element.scrollWidth,
+                            height: element.scrollHeight
                         },
                         jsPDF: {
                             unit: 'mm',
                             format: 'a4',
                             orientation: 'portrait'
                         },
-                        pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
+                        pagebreak: {
+                            mode: ['avoid-all', 'css', 'legacy'],
+                            before: '.cover-page',
+                            after: '.cover-page',
+                            avoid: '.guide-section, .info-box, .guide-table-wrapper, .comparison-card, .intervention-item'
+                        }
                     };
 
                     await html2pdf().set(opt).from(element).save();

@@ -724,12 +724,40 @@
             text-decoration: none;
         }
 
-        /* PDF Generation Mode - hides non-content elements */
+        /* PDF Generation Mode - hides non-content elements and optimizes for PDF */
         body.pdf-mode .download-bar { display: none !important; }
         body.pdf-mode { background: white !important; }
         body.pdf-mode .document-container {
             margin: 0 !important;
             box-shadow: none !important;
+            max-width: 100% !important;
+            width: 100% !important;
+        }
+        body.pdf-mode .document-content {
+            padding: 40px 50px !important;
+        }
+        body.pdf-mode .cover-page {
+            padding: 60px 50px !important;
+        }
+        /* Ensure content doesn't get cut off in PDF */
+        body.pdf-mode .guide-section,
+        body.pdf-mode .info-box,
+        body.pdf-mode .guide-table-wrapper,
+        body.pdf-mode .comparison-grid,
+        body.pdf-mode .comparison-card,
+        body.pdf-mode .interventions-list,
+        body.pdf-mode .intervention-item,
+        body.pdf-mode .quick-reference,
+        body.pdf-mode .learning-objectives,
+        body.pdf-mode .table-of-contents,
+        body.pdf-mode .key-points-summary {
+            page-break-inside: avoid !important;
+            break-inside: avoid !important;
+        }
+        /* Force page break after cover */
+        body.pdf-mode .cover-page {
+            page-break-after: always !important;
+            break-after: page !important;
         }
 
         /* Print Styles */
