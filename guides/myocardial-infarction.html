@@ -712,6 +712,92 @@
         .key-point i { font-size: 1.1rem; margin-top: 2px; }
         .key-point p { margin: 0; font-size: 0.92rem; line-height: 1.4; }
 
+        /* Diagram Styles */
+        .diagram-container {
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            border: 2px solid var(--border-color);
+            border-radius: 16px;
+            padding: 24px;
+            margin: 28px 0;
+            text-align: center;
+        }
+
+        .diagram-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin: 0 0 20px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .diagram-title i {
+            color: var(--primary-color);
+        }
+
+        .anatomy-diagram,
+        .ekg-diagram,
+        .zones-diagram {
+            max-width: 100%;
+            height: auto;
+            margin: 0 auto;
+        }
+
+        .anatomy-diagram {
+            max-height: 400px;
+        }
+
+        .ekg-diagram {
+            max-height: 380px;
+        }
+
+        .zones-diagram {
+            max-height: 320px;
+        }
+
+        .diagram-legend {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 16px;
+            margin-top: 20px;
+            padding-top: 16px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .legend-color {
+            width: 16px;
+            height: 16px;
+            border-radius: 4px;
+            flex-shrink: 0;
+        }
+
+        .diagram-caption {
+            margin-top: 16px;
+            padding: 12px 16px;
+            background: white;
+            border-radius: 8px;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .diagram-caption p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            text-align: left;
+        }
+
         /* Footer */
         .document-footer {
             text-align: center;
@@ -766,6 +852,7 @@
             .quick-reference { page-break-inside: avoid; break-inside: avoid; }
             .learning-objectives { page-break-inside: avoid; break-inside: avoid; }
             .key-points-summary { page-break-inside: avoid; break-inside: avoid; }
+            .diagram-container { page-break-inside: avoid; break-inside: avoid; }
 
             /* Keep headings with their following content */
             h2, h3, h4 {
@@ -815,6 +902,9 @@
             .comparison-grid { grid-template-columns: 1fr; }
             .quick-reference-grid { grid-template-columns: 1fr; }
             .key-points-grid { grid-template-columns: 1fr; }
+            .diagram-container { padding: 16px; }
+            .diagram-legend { flex-direction: column; align-items: center; gap: 8px; }
+            .legend-item { font-size: 0.8rem; }
         }
     </style>
 </head>
@@ -957,6 +1047,90 @@
                     <p>The <strong>LAD</strong> is sometimes called the "widow maker" because it supplies the largest portion of the left ventricle. An occlusion here causes an <strong>Anterior MI</strong> - the most serious type with highest mortality.</p>
                 </div>
 
+                <!-- Coronary Artery Anatomy Diagram -->
+                <div class="diagram-container">
+                    <h4 class="diagram-title"><i class="fas fa-heart"></i> Coronary Artery Anatomy</h4>
+                    <svg viewBox="0 0 500 420" class="anatomy-diagram">
+                        <!-- Heart Shape -->
+                        <defs>
+                            <linearGradient id="heartGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#ef4444;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#dc2626;stop-opacity:1" />
+                            </linearGradient>
+                            <linearGradient id="ladGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#1d4ed8;stop-opacity:1" />
+                            </linearGradient>
+                            <linearGradient id="lcxGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" style="stop-color:#10b981;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#059669;stop-opacity:1" />
+                            </linearGradient>
+                            <linearGradient id="rcaGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" style="stop-color:#f59e0b;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#d97706;stop-opacity:1" />
+                            </linearGradient>
+                            <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+                                <feDropShadow dx="2" dy="2" stdDeviation="3" flood-opacity="0.3"/>
+                            </filter>
+                        </defs>
+
+                        <!-- Heart outline -->
+                        <path d="M250 350 C150 350 50 280 50 180 C50 100 120 50 180 50 C220 50 250 80 250 80 C250 80 280 50 320 50 C380 50 450 100 450 180 C450 280 350 350 250 350 Z"
+                              fill="url(#heartGradient)" filter="url(#shadow)" opacity="0.9"/>
+
+                        <!-- Aorta -->
+                        <ellipse cx="250" cy="65" rx="45" ry="25" fill="#ef4444" stroke="#b91c1c" stroke-width="2"/>
+                        <text x="250" y="70" text-anchor="middle" fill="white" font-size="12" font-weight="600">Aorta</text>
+
+                        <!-- Left Main -->
+                        <path d="M220 85 Q200 100 185 120" stroke="#8b5cf6" stroke-width="6" fill="none" stroke-linecap="round"/>
+                        <circle cx="185" cy="120" r="6" fill="#8b5cf6"/>
+
+                        <!-- LAD (Blue) -->
+                        <path d="M185 120 Q190 160 200 200 Q210 260 230 320" stroke="url(#ladGradient)" stroke-width="5" fill="none" stroke-linecap="round"/>
+                        <path d="M200 180 Q220 190 235 185" stroke="url(#ladGradient)" stroke-width="3" fill="none" stroke-linecap="round"/>
+                        <path d="M210 230 Q230 240 245 235" stroke="url(#ladGradient)" stroke-width="3" fill="none" stroke-linecap="round"/>
+
+                        <!-- LCx (Green) -->
+                        <path d="M185 120 Q140 140 120 180 Q100 230 110 280" stroke="url(#lcxGradient)" stroke-width="5" fill="none" stroke-linecap="round"/>
+                        <path d="M130 200 Q110 210 100 230" stroke="url(#lcxGradient)" stroke-width="3" fill="none" stroke-linecap="round"/>
+
+                        <!-- RCA (Orange) -->
+                        <path d="M280 85 Q320 100 350 140 Q380 190 370 250 Q360 300 320 330" stroke="url(#rcaGradient)" stroke-width="5" fill="none" stroke-linecap="round"/>
+                        <path d="M360 200 Q380 220 385 250" stroke="url(#rcaGradient)" stroke-width="3" fill="none" stroke-linecap="round"/>
+                        <path d="M340 280 Q360 290 370 310" stroke="url(#rcaGradient)" stroke-width="3" fill="none" stroke-linecap="round"/>
+
+                        <!-- Labels with backgrounds -->
+                        <!-- LAD Label -->
+                        <rect x="255" y="195" width="120" height="50" rx="6" fill="white" stroke="#3b82f6" stroke-width="2" filter="url(#shadow)"/>
+                        <text x="315" y="215" text-anchor="middle" fill="#3b82f6" font-size="13" font-weight="700">LAD</text>
+                        <text x="315" y="232" text-anchor="middle" fill="#4b5563" font-size="10">Anterior Wall</text>
+                        <text x="315" y="243" text-anchor="middle" fill="#ef4444" font-size="9" font-weight="600">"Widow Maker"</text>
+
+                        <!-- LCx Label -->
+                        <rect x="15" y="260" width="100" height="45" rx="6" fill="white" stroke="#10b981" stroke-width="2" filter="url(#shadow)"/>
+                        <text x="65" y="280" text-anchor="middle" fill="#10b981" font-size="13" font-weight="700">LCx</text>
+                        <text x="65" y="295" text-anchor="middle" fill="#4b5563" font-size="10">Lateral/Posterior</text>
+
+                        <!-- RCA Label -->
+                        <rect x="385" y="195" width="100" height="55" rx="6" fill="white" stroke="#f59e0b" stroke-width="2" filter="url(#shadow)"/>
+                        <text x="435" y="215" text-anchor="middle" fill="#f59e0b" font-size="13" font-weight="700">RCA</text>
+                        <text x="435" y="230" text-anchor="middle" fill="#4b5563" font-size="10">Inferior Wall</text>
+                        <text x="435" y="243" text-anchor="middle" fill="#4b5563" font-size="9">SA/AV Nodes</text>
+
+                        <!-- Left Main Label -->
+                        <rect x="85" y="100" width="90" height="35" rx="6" fill="white" stroke="#8b5cf6" stroke-width="2" filter="url(#shadow)"/>
+                        <text x="130" y="118" text-anchor="middle" fill="#8b5cf6" font-size="11" font-weight="700">Left Main</text>
+                        <text x="130" y="130" text-anchor="middle" fill="#4b5563" font-size="9">Bifurcates</text>
+                    </svg>
+                    <div class="diagram-legend">
+                        <div class="legend-item"><span class="legend-color" style="background: linear-gradient(135deg, #3b82f6, #1d4ed8);"></span> LAD - Anterior MI</div>
+                        <div class="legend-item"><span class="legend-color" style="background: linear-gradient(135deg, #10b981, #059669);"></span> LCx - Lateral/Posterior MI</div>
+                        <div class="legend-item"><span class="legend-color" style="background: linear-gradient(135deg, #f59e0b, #d97706);"></span> RCA - Inferior MI</div>
+                        <div class="legend-item"><span class="legend-color" style="background: #8b5cf6;"></span> Left Main - Branches to LAD/LCx</div>
+                    </div>
+                </div>
+
                 <h3>Oxygen Supply and Demand</h3>
 
                 <p>The myocardium requires a constant supply of oxygen. When oxygen demand exceeds supply, ischemia occurs. Understanding this balance is key to MI management.</p>
@@ -1074,6 +1248,104 @@
                             </tr>
                         </tbody>
                     </table>
+                </div>
+
+                <!-- Zones of Injury Diagram -->
+                <div class="diagram-container">
+                    <h4 class="diagram-title"><i class="fas fa-bullseye"></i> Zones of Myocardial Injury</h4>
+                    <svg viewBox="0 0 550 320" class="zones-diagram">
+                        <defs>
+                            <linearGradient id="ischemiaGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#fbbf24;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#f59e0b;stop-opacity:1" />
+                            </linearGradient>
+                            <linearGradient id="injuryGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#fb923c;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#ea580c;stop-opacity:1" />
+                            </linearGradient>
+                            <linearGradient id="infarctGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#ef4444;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#b91c1c;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+
+                        <!-- Blocked Artery -->
+                        <rect x="20" y="130" width="80" height="60" rx="30" fill="#fee2e2" stroke="#fca5a5" stroke-width="2"/>
+                        <rect x="70" y="145" width="30" height="30" rx="5" fill="#7f1d1d"/>
+                        <text x="60" y="210" text-anchor="middle" fill="#991b1b" font-size="11" font-weight="600">Blocked</text>
+                        <text x="60" y="222" text-anchor="middle" fill="#991b1b" font-size="11" font-weight="600">Artery</text>
+
+                        <!-- Arrow -->
+                        <path d="M100 160 L130 160" stroke="#6b7280" stroke-width="3" marker-end="url(#arrowhead)"/>
+                        <defs>
+                            <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                                <polygon points="0 0, 10 3.5, 0 7" fill="#6b7280"/>
+                            </marker>
+                        </defs>
+
+                        <!-- Concentric circles showing zones -->
+                        <!-- Outer zone - Ischemia (yellow) -->
+                        <ellipse cx="280" cy="160" rx="130" ry="120" fill="url(#ischemiaGrad)" opacity="0.9"/>
+
+                        <!-- Middle zone - Injury (orange) -->
+                        <ellipse cx="280" cy="160" rx="90" ry="85" fill="url(#injuryGrad)" opacity="0.95"/>
+
+                        <!-- Inner zone - Infarction (red) -->
+                        <ellipse cx="280" cy="160" rx="50" ry="45" fill="url(#infarctGrad)"/>
+
+                        <!-- Zone labels -->
+                        <text x="280" y="165" text-anchor="middle" fill="white" font-size="14" font-weight="700">INFARCT</text>
+                        <text x="280" y="180" text-anchor="middle" fill="white" font-size="10">(Necrosis)</text>
+
+                        <text x="280" y="95" text-anchor="middle" fill="white" font-size="13" font-weight="700">INJURY</text>
+                        <text x="280" y="235" text-anchor="middle" fill="white" font-size="13" font-weight="700">INJURY</text>
+
+                        <text x="280" y="55" text-anchor="middle" fill="#92400e" font-size="13" font-weight="700">ISCHEMIA</text>
+                        <text x="280" y="275" text-anchor="middle" fill="#92400e" font-size="13" font-weight="700">ISCHEMIA</text>
+
+                        <!-- EKG boxes on right side -->
+                        <g class="ekg-indicators">
+                            <!-- Ischemia EKG -->
+                            <rect x="430" y="30" width="110" height="65" rx="8" fill="white" stroke="#f59e0b" stroke-width="2" filter="url(#shadow)"/>
+                            <text x="485" y="50" text-anchor="middle" fill="#92400e" font-size="11" font-weight="700">ISCHEMIA</text>
+                            <text x="485" y="65" text-anchor="middle" fill="#6b7280" font-size="9">T Wave Inversion</text>
+                            <!-- Mini EKG showing inverted T -->
+                            <path d="M445 82 L455 82 L460 82 L465 75 L470 90 L475 82 L485 82 L490 82 L495 95 L500 82 L510 82 L520 82"
+                                  stroke="#f59e0b" stroke-width="2" fill="none"/>
+                            <line x1="430" y="30" x2="415" y2="55" stroke="#f59e0b" stroke-width="2" stroke-dasharray="4,2"/>
+
+                            <!-- Injury EKG -->
+                            <rect x="430" y="115" width="110" height="65" rx="8" fill="white" stroke="#ea580c" stroke-width="2" filter="url(#shadow)"/>
+                            <text x="485" y="135" text-anchor="middle" fill="#c2410c" font-size="11" font-weight="700">INJURY</text>
+                            <text x="485" y="150" text-anchor="middle" fill="#6b7280" font-size="9">ST Elevation</text>
+                            <!-- Mini EKG showing ST elevation -->
+                            <path d="M445 167 L455 167 L460 167 L465 160 L470 175 L475 155 L485 155 L495 155 L500 165 L510 167 L520 167"
+                                  stroke="#ea580c" stroke-width="2" fill="none"/>
+                            <line x1="430" y="147" x2="370" y2="140" stroke="#ea580c" stroke-width="2" stroke-dasharray="4,2"/>
+
+                            <!-- Infarction EKG -->
+                            <rect x="430" y="200" width="110" height="65" rx="8" fill="white" stroke="#dc2626" stroke-width="2" filter="url(#shadow)"/>
+                            <text x="485" y="220" text-anchor="middle" fill="#991b1b" font-size="11" font-weight="700">INFARCTION</text>
+                            <text x="485" y="235" text-anchor="middle" fill="#6b7280" font-size="9">Pathological Q Wave</text>
+                            <!-- Mini EKG showing Q wave -->
+                            <path d="M445 252 L455 252 L460 252 L463 252 L466 270 L469 252 L472 245 L477 260 L482 250 L492 252 L520 252"
+                                  stroke="#dc2626" stroke-width="2" fill="none"/>
+                            <line x1="430" y="232" x2="330" y2="165" stroke="#dc2626" stroke-width="2" stroke-dasharray="4,2"/>
+                        </g>
+
+                        <!-- Reversibility indicators -->
+                        <text x="170" y="300" text-anchor="middle" fill="#059669" font-size="10" font-weight="600">
+                            <tspan x="170" dy="0">✓ Reversible</tspan>
+                            <tspan x="170" dy="12">(outer zones)</tspan>
+                        </text>
+                        <text x="390" y="300" text-anchor="middle" fill="#dc2626" font-size="10" font-weight="600">
+                            <tspan x="390" dy="0">✗ Irreversible</tspan>
+                            <tspan x="390" dy="12">(center)</tspan>
+                        </text>
+                    </svg>
+                    <div class="diagram-caption">
+                        <p><strong>Time is critical:</strong> The injury zone can be salvaged with rapid reperfusion. Without treatment, the infarct zone expands outward over time, converting potentially salvageable tissue into permanent damage.</p>
+                    </div>
                 </div>
             </section>
 
@@ -1367,6 +1639,129 @@
                             </tr>
                         </tbody>
                     </table>
+                </div>
+
+                <!-- EKG Lead Localization Diagram -->
+                <div class="diagram-container">
+                    <h4 class="diagram-title"><i class="fas fa-wave-square"></i> 12-Lead EKG: MI Localization Map</h4>
+                    <svg viewBox="0 0 520 400" class="ekg-diagram">
+                        <defs>
+                            <linearGradient id="anteriorGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#ef4444;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#dc2626;stop-opacity:1" />
+                            </linearGradient>
+                            <linearGradient id="lateralGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#10b981;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#059669;stop-opacity:1" />
+                            </linearGradient>
+                            <linearGradient id="inferiorGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#f59e0b;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#d97706;stop-opacity:1" />
+                            </linearGradient>
+                            <linearGradient id="septalGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#8b5cf6;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#7c3aed;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+
+                        <!-- Heart outline in center -->
+                        <ellipse cx="260" cy="200" rx="100" ry="110" fill="#fef2f2" stroke="#fca5a5" stroke-width="2"/>
+
+                        <!-- Heart regions -->
+                        <!-- Anterior (top) -->
+                        <path d="M200 140 Q260 100 320 140 L300 180 Q260 150 220 180 Z" fill="url(#anteriorGrad)" opacity="0.8"/>
+                        <text x="260" y="155" text-anchor="middle" fill="white" font-size="12" font-weight="600">ANTERIOR</text>
+
+                        <!-- Septal (center-left) -->
+                        <path d="M200 150 L220 180 L220 240 L200 270 Q180 210 200 150" fill="url(#septalGrad)" opacity="0.8"/>
+                        <text x="195" y="215" text-anchor="middle" fill="white" font-size="10" font-weight="600" transform="rotate(-90 195 215)">SEPTAL</text>
+
+                        <!-- Lateral (right side) -->
+                        <path d="M300 180 L320 150 Q340 210 320 270 L300 240 Z" fill="url(#lateralGrad)" opacity="0.8"/>
+                        <text x="325" y="215" text-anchor="middle" fill="white" font-size="10" font-weight="600" transform="rotate(90 325 215)">LATERAL</text>
+
+                        <!-- Inferior (bottom) -->
+                        <path d="M220 250 Q260 280 300 250 L320 270 Q260 320 200 270 Z" fill="url(#inferiorGrad)" opacity="0.8"/>
+                        <text x="260" y="285" text-anchor="middle" fill="white" font-size="12" font-weight="600">INFERIOR</text>
+
+                        <!-- Lead boxes around the heart -->
+                        <!-- Anterior leads (V1-V4) - Top -->
+                        <g class="lead-group anterior-leads">
+                            <rect x="155" y="30" width="40" height="30" rx="5" fill="url(#anteriorGrad)" filter="url(#shadow)"/>
+                            <text x="175" y="50" text-anchor="middle" fill="white" font-size="14" font-weight="700">V1</text>
+
+                            <rect x="205" y="30" width="40" height="30" rx="5" fill="url(#anteriorGrad)" filter="url(#shadow)"/>
+                            <text x="225" y="50" text-anchor="middle" fill="white" font-size="14" font-weight="700">V2</text>
+
+                            <rect x="255" y="30" width="40" height="30" rx="5" fill="url(#anteriorGrad)" filter="url(#shadow)"/>
+                            <text x="275" y="50" text-anchor="middle" fill="white" font-size="14" font-weight="700">V3</text>
+
+                            <rect x="305" y="30" width="40" height="30" rx="5" fill="url(#anteriorGrad)" filter="url(#shadow)"/>
+                            <text x="325" y="50" text-anchor="middle" fill="white" font-size="14" font-weight="700">V4</text>
+
+                            <!-- Connector line -->
+                            <path d="M260 60 L260 100" stroke="#ef4444" stroke-width="2" stroke-dasharray="4,2"/>
+                        </g>
+
+                        <!-- Lateral leads (I, aVL, V5, V6) - Right side -->
+                        <g class="lead-group lateral-leads">
+                            <rect x="400" y="120" width="40" height="30" rx="5" fill="url(#lateralGrad)" filter="url(#shadow)"/>
+                            <text x="420" y="140" text-anchor="middle" fill="white" font-size="14" font-weight="700">I</text>
+
+                            <rect x="450" y="120" width="45" height="30" rx="5" fill="url(#lateralGrad)" filter="url(#shadow)"/>
+                            <text x="472" y="140" text-anchor="middle" fill="white" font-size="13" font-weight="700">aVL</text>
+
+                            <rect x="400" y="160" width="40" height="30" rx="5" fill="url(#lateralGrad)" filter="url(#shadow)"/>
+                            <text x="420" y="180" text-anchor="middle" fill="white" font-size="14" font-weight="700">V5</text>
+
+                            <rect x="450" y="160" width="40" height="30" rx="5" fill="url(#lateralGrad)" filter="url(#shadow)"/>
+                            <text x="470" y="180" text-anchor="middle" fill="white" font-size="14" font-weight="700">V6</text>
+
+                            <!-- Connector line -->
+                            <path d="M400 175 L360 200" stroke="#10b981" stroke-width="2" stroke-dasharray="4,2"/>
+                        </g>
+
+                        <!-- Inferior leads (II, III, aVF) - Bottom -->
+                        <g class="lead-group inferior-leads">
+                            <rect x="195" y="340" width="40" height="30" rx="5" fill="url(#inferiorGrad)" filter="url(#shadow)"/>
+                            <text x="215" y="360" text-anchor="middle" fill="white" font-size="14" font-weight="700">II</text>
+
+                            <rect x="245" y="340" width="40" height="30" rx="5" fill="url(#inferiorGrad)" filter="url(#shadow)"/>
+                            <text x="265" y="360" text-anchor="middle" fill="white" font-size="14" font-weight="700">III</text>
+
+                            <rect x="295" y="340" width="45" height="30" rx="5" fill="url(#inferiorGrad)" filter="url(#shadow)"/>
+                            <text x="317" y="360" text-anchor="middle" fill="white" font-size="13" font-weight="700">aVF</text>
+
+                            <!-- Connector line -->
+                            <path d="M265 340 L265 310" stroke="#f59e0b" stroke-width="2" stroke-dasharray="4,2"/>
+                        </g>
+
+                        <!-- Septal leads (V1, V2) - Left side -->
+                        <g class="lead-group septal-leads">
+                            <rect x="25" y="170" width="40" height="30" rx="5" fill="url(#septalGrad)" filter="url(#shadow)"/>
+                            <text x="45" y="190" text-anchor="middle" fill="white" font-size="14" font-weight="700">V1</text>
+
+                            <rect x="75" y="170" width="40" height="30" rx="5" fill="url(#septalGrad)" filter="url(#shadow)"/>
+                            <text x="95" y="190" text-anchor="middle" fill="white" font-size="14" font-weight="700">V2</text>
+
+                            <!-- Connector line -->
+                            <path d="M115 185 L160 200" stroke="#8b5cf6" stroke-width="2" stroke-dasharray="4,2"/>
+
+                            <!-- Note about septal -->
+                            <text x="70" y="215" text-anchor="middle" fill="#7c3aed" font-size="9">(Septal)</text>
+                        </g>
+
+                        <!-- Artery labels inside heart -->
+                        <text x="260" y="130" text-anchor="middle" fill="#b91c1c" font-size="9" font-weight="600">LAD</text>
+                        <text x="340" y="210" text-anchor="middle" fill="#047857" font-size="9" font-weight="600">LCx</text>
+                        <text x="260" y="305" text-anchor="middle" fill="#b45309" font-size="9" font-weight="600">RCA</text>
+                    </svg>
+                    <div class="diagram-legend">
+                        <div class="legend-item"><span class="legend-color" style="background: linear-gradient(135deg, #ef4444, #dc2626);"></span> Anterior: V1, V2, V3, V4 (LAD)</div>
+                        <div class="legend-item"><span class="legend-color" style="background: linear-gradient(135deg, #10b981, #059669);"></span> Lateral: I, aVL, V5, V6 (LCx)</div>
+                        <div class="legend-item"><span class="legend-color" style="background: linear-gradient(135deg, #f59e0b, #d97706);"></span> Inferior: II, III, aVF (RCA)</div>
+                        <div class="legend-item"><span class="legend-color" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed);"></span> Septal: V1, V2 (LAD)</div>
+                    </div>
                 </div>
 
                 <div class="comparison-grid">
