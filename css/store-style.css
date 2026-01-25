@@ -566,6 +566,7 @@ input#guide-search::placeholder {
     font-family: 'Source Sans 3', sans-serif;
     color: var(--text-primary);
     transition: all 0.2s ease;
+    white-space: nowrap;
 }
 
 .quick-filter-btn:hover {
