@@ -1509,6 +1509,57 @@
 
 .download-history-list table {
     margin-bottom: 0;
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+}
+
+.download-history-list table th,
+.download-history-list table td {
+    padding: 12px;
+    text-align: left;
+    vertical-align: middle;
+    word-wrap: break-word;
+}
+
+.download-history-list table th:first-child,
+.download-history-list table td:first-child {
+    width: 40%;
+}
+
+.download-history-list table th:nth-child(2),
+.download-history-list table td:nth-child(2) {
+    width: 30%;
+}
+
+.download-history-list table th:last-child,
+.download-history-list table td:last-child {
+    width: 30%;
+}
+
+.download-history-list table thead {
+    background: #f9fafb;
+}
+
+.download-history-list table thead th {
+    font-weight: 600;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #6b7280;
+    border-bottom: 2px solid #e5e7eb;
+}
+
+.download-history-list table tbody tr {
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.download-history-list table tbody tr:hover {
+    background: #f9fafb;
+}
+
+.download-history-list table tbody tr:last-child {
+    border-bottom: none;
 }
 
 .download-history-list code {
@@ -1516,6 +1567,7 @@
     padding: 2px 6px;
     border-radius: 4px;
     font-size: 0.8rem;
+    font-family: 'SF Mono', Monaco, 'Courier New', monospace;
 }
 
 /* Guide Notes Column */
@@ -2191,6 +2243,23 @@
 [data-theme="dark"] .download-history-list code {
     background: #374151;
     color: #d1d5db;
+}
+
+[data-theme="dark"] .download-history-list table thead {
+    background: #2a2a3e;
+}
+
+[data-theme="dark"] .download-history-list table thead th {
+    color: #9ca3af;
+    border-bottom-color: #374151;
+}
+
+[data-theme="dark"] .download-history-list table tbody tr {
+    border-bottom-color: #374151;
+}
+
+[data-theme="dark"] .download-history-list table tbody tr:hover {
+    background: #2a2a3e;
 }
 
 [data-theme="dark"] #download-history-modal > .modal-content {
