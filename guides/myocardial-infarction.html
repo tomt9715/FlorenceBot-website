@@ -1,0 +1,1889 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Myocardial Infarction Study Guide - The Nursing Collective</title>
+    <meta name="description" content="Comprehensive nursing study guide for Myocardial Infarction. Learn to recognize STEMI vs NSTEMI presentation, interpret cardiac biomarkers, and understand tPA administration criteria.">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <style>
+        /* ============================================
+           PDF-STYLE STUDY GUIDE STYLES
+           ============================================ */
+
+        :root {
+            --primary-color: #2E86AB;
+            --primary-dark: #236b8a;
+            --secondary-color: #A23B72;
+            --accent-color: #f59e0b;
+            --text-primary: #1f2937;
+            --text-secondary: #4b5563;
+            --background: #ffffff;
+            --border-color: #e5e7eb;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Source Sans 3', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.7;
+            color: var(--text-primary);
+            background: #f3f4f6;
+        }
+
+        /* Download Bar - Fixed at top */
+        .download-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 12px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .download-bar-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 600;
+        }
+
+        .download-bar-brand img {
+            height: 32px;
+            width: auto;
+        }
+
+        .download-bar-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn-download {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background: white;
+            color: var(--primary-color);
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+        }
+
+        .btn-download:hover {
+            background: #f0f9ff;
+            transform: translateY(-1px);
+        }
+
+        .btn-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background: rgba(255,255,255,0.15);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+        }
+
+        .btn-back:hover {
+            background: rgba(255,255,255,0.25);
+        }
+
+        /* Document Container */
+        .document-container {
+            max-width: 850px;
+            margin: 80px auto 40px;
+            background: white;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+
+        /* Cover Page - Colors inspired by guide icon (blue shirt, red heart) */
+        .cover-page {
+            background: linear-gradient(135deg, #3B82F6 0%, #6366F1 40%, #EF4444 100%);
+            color: white;
+            padding: 80px 60px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cover-page::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.5;
+        }
+
+        .cover-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cover-logo {
+            width: 80px;
+            height: 80px;
+            background: white;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            padding: 12px;
+        }
+
+        .cover-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .cover-category {
+            display: inline-block;
+            padding: 8px 24px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+        }
+
+        .cover-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.1;
+        }
+
+        .cover-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            max-width: 600px;
+            margin: 0 auto 40px;
+            line-height: 1.6;
+        }
+
+        .cover-meta {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .cover-meta-item {
+            text-align: center;
+        }
+
+        .cover-meta-item .label {
+            font-size: 0.8rem;
+            opacity: 0.8;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .cover-meta-item .value {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-top: 4px;
+        }
+
+        .cover-brand {
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+
+        /* Document Content */
+        .document-content {
+            padding: 60px;
+        }
+
+        /* Learning Objectives */
+        .learning-objectives {
+            background: linear-gradient(135deg, #ecfdf5, #d1fae5);
+            border: 2px solid #10b981;
+            border-radius: 12px;
+            padding: 28px;
+            margin-bottom: 40px;
+        }
+
+        .learning-objectives h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #059669;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .learning-objectives ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .learning-objectives li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 8px 0;
+            color: var(--text-primary);
+            font-size: 1rem;
+        }
+
+        .learning-objectives li i {
+            color: #10b981;
+            margin-top: 4px;
+            flex-shrink: 0;
+        }
+
+        /* Table of Contents */
+        .table-of-contents {
+            background: #f9fafb;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 28px;
+            margin-bottom: 40px;
+        }
+
+        .table-of-contents h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 16px;
+        }
+
+        .table-of-contents ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            columns: 2;
+            column-gap: 30px;
+        }
+
+        .table-of-contents li {
+            break-inside: avoid;
+            margin-bottom: 8px;
+        }
+
+        .table-of-contents a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 12px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            transition: all 0.2s ease;
+        }
+
+        .table-of-contents a:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .toc-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 22px;
+            height: 22px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 5px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        .table-of-contents a:hover .toc-number {
+            background: white;
+            color: var(--primary-color);
+        }
+
+        /* Content Sections */
+        .guide-section {
+            margin-bottom: 50px;
+            scroll-margin-top: 80px;
+        }
+
+        .guide-section h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .guide-section h3 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin: 28px 0 14px;
+        }
+
+        .guide-section h4 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin: 20px 0 10px;
+        }
+
+        .guide-section p {
+            color: var(--text-secondary);
+            font-size: 1.02rem;
+            margin-bottom: 14px;
+        }
+
+        .guide-section ul, .guide-section ol {
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+            padding-left: 24px;
+        }
+
+        .guide-section li {
+            margin-bottom: 8px;
+        }
+
+        .guide-section strong {
+            color: var(--text-primary);
+        }
+
+        /* Info Boxes */
+        .info-box {
+            border-radius: 10px;
+            padding: 18px 22px;
+            margin: 20px 0;
+            border-left: 4px solid;
+        }
+
+        .info-box.clinical-pearl {
+            background: linear-gradient(135deg, #fffbeb, #fef3c7);
+            border-color: #f59e0b;
+        }
+
+        .info-box.warning {
+            background: #fef2f2;
+            border-color: #ef4444;
+        }
+
+        .info-box.tip {
+            background: #ecfdf5;
+            border-color: #10b981;
+        }
+
+        .info-box.nclex-tip {
+            background: #f5f3ff;
+            border-color: #8b5cf6;
+        }
+
+        .info-box.mnemonic {
+            background: #fffbeb;
+            border-color: #f59e0b;
+        }
+
+        .info-box-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+        }
+
+        .info-box.clinical-pearl .info-box-header { color: #d97706; }
+        .info-box.warning .info-box-header { color: #ef4444; }
+        .info-box.tip .info-box-header { color: #059669; }
+        .info-box.nclex-tip .info-box-header { color: #7c3aed; }
+        .info-box.mnemonic .info-box-header { color: #d97706; }
+
+        .info-box p { margin: 0; color: var(--text-secondary); font-size: 0.98rem; }
+        .info-box ul { margin: 8px 0 0; padding-left: 18px; }
+        .info-box li { margin-bottom: 4px; font-size: 0.98rem; }
+
+        /* Tables */
+        .guide-table-wrapper {
+            overflow-x: auto;
+            margin: 20px 0;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+        }
+
+        .guide-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.92rem;
+        }
+
+        .guide-table thead {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+        }
+
+        .guide-table th {
+            padding: 12px 14px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .guide-table tbody tr {
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .guide-table tbody tr:hover {
+            background: #f9fafb;
+        }
+
+        .guide-table td {
+            padding: 12px 14px;
+            color: var(--text-secondary);
+        }
+
+        .guide-table td:first-child {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        /* Comparison Cards */
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .comparison-card {
+            border-radius: 12px;
+            border: 2px solid var(--border-color);
+            overflow: hidden;
+        }
+
+        .comparison-card-header {
+            padding: 16px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 1.05rem;
+            color: white;
+        }
+
+        .comparison-card.stemi .comparison-card-header {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+        }
+
+        .comparison-card.nstemi .comparison-card-header {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+        }
+
+        .comparison-card.anterior .comparison-card-header {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+        }
+
+        .comparison-card.inferior .comparison-card-header {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+        }
+
+        .comparison-card-body {
+            padding: 18px;
+        }
+
+        .comparison-card-body h4 {
+            font-size: 0.95rem;
+            margin: 0 0 10px;
+        }
+
+        .comparison-card-body ul {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 14px;
+        }
+
+        .comparison-card-body li {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            padding: 6px 0;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .comparison-card-body li:last-child { border-bottom: none; }
+        .comparison-card-body li i { color: var(--primary-color); margin-top: 3px; flex-shrink: 0; }
+
+        /* Interventions List */
+        .interventions-list {
+            background: #f9fafb;
+            border-radius: 12px;
+            padding: 22px;
+            margin: 20px 0;
+        }
+
+        .interventions-list h4 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1rem;
+            margin: 0 0 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .interventions-list h4 i { color: var(--primary-color); }
+
+        .intervention-item {
+            display: flex;
+            gap: 14px;
+            padding: 14px;
+            background: white;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            border: 1px solid var(--border-color);
+        }
+
+        .intervention-number {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+
+        .intervention-content h5 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin: 0 0 4px;
+        }
+
+        .intervention-content p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin: 0;
+        }
+
+        /* Quick Reference */
+        .quick-reference {
+            background: white;
+            border: 2px solid var(--primary-color);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 24px 0;
+        }
+
+        .quick-reference h3 {
+            font-size: 1.1rem;
+            color: var(--primary-color);
+            margin: 0 0 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .quick-reference-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .quick-ref-item {
+            background: #f9fafb;
+            padding: 12px;
+            border-radius: 8px;
+        }
+
+        .quick-ref-item .label {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-bottom: 2px;
+        }
+
+        .quick-ref-item .value {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        /* Key Points Summary */
+        .key-points-summary {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 12px;
+            padding: 28px;
+            margin: 40px 0 0;
+            color: white;
+        }
+
+        .key-points-summary h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.3rem;
+            margin: 0 0 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: white;
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .key-points-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 14px;
+        }
+
+        .key-point {
+            background: rgba(255,255,255,0.15);
+            padding: 14px;
+            border-radius: 10px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .key-point i { font-size: 1.1rem; margin-top: 2px; }
+        .key-point p { margin: 0; font-size: 0.92rem; line-height: 1.4; }
+
+        /* Footer */
+        .document-footer {
+            text-align: center;
+            padding: 30px 60px;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .document-footer a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        /* Print Styles - Optimized for browser Save as PDF */
+        @media print {
+            /* Hide non-content elements */
+            .download-bar { display: none !important; }
+
+            /* Reset page layout */
+            body {
+                background: white !important;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+
+            .document-container {
+                margin: 0 !important;
+                box-shadow: none !important;
+                max-width: 100% !important;
+                width: 100% !important;
+            }
+
+            /* Preserve colors in print */
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                color-adjust: exact !important;
+            }
+
+            /* Cover page styling */
+            .cover-page {
+                page-break-after: always;
+                break-after: page;
+            }
+
+            /* Prevent awkward page breaks */
+            .info-box { page-break-inside: avoid; break-inside: avoid; }
+            .guide-table-wrapper { page-break-inside: avoid; break-inside: avoid; }
+            .comparison-card { page-break-inside: avoid; break-inside: avoid; }
+            .intervention-item { page-break-inside: avoid; break-inside: avoid; }
+            .quick-reference { page-break-inside: avoid; break-inside: avoid; }
+            .learning-objectives { page-break-inside: avoid; break-inside: avoid; }
+            .key-points-summary { page-break-inside: avoid; break-inside: avoid; }
+
+            /* Keep headings with their following content */
+            h2, h3, h4 {
+                page-break-after: avoid;
+                break-after: avoid;
+            }
+
+            /* Keep heading + table together */
+            .guide-section h3 + .guide-table-wrapper,
+            .guide-section h3 + .info-box,
+            .guide-section h3 + .comparison-grid,
+            .guide-section h3 + .interventions-list {
+                page-break-before: avoid;
+                break-before: avoid;
+            }
+
+            /* Allow breaks within larger sections if needed */
+            .comparison-grid { page-break-inside: auto; }
+            .interventions-list { page-break-inside: auto; }
+
+            /* Ensure links are visible in print */
+            a { text-decoration: underline; }
+
+            /* Footer on each page */
+            .document-footer {
+                page-break-inside: avoid;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .download-bar {
+                flex-direction: column;
+                gap: 12px;
+                padding: 12px 16px;
+            }
+            .download-bar-actions {
+                width: 100%;
+                justify-content: center;
+            }
+            .document-container { margin: 120px 10px 20px; }
+            .cover-page { padding: 50px 30px; }
+            .cover-title { font-size: 2.2rem; }
+            .cover-meta { flex-direction: column; gap: 20px; }
+            .document-content { padding: 30px 24px; }
+            .table-of-contents ul { columns: 1; }
+            .comparison-grid { grid-template-columns: 1fr; }
+            .quick-reference-grid { grid-template-columns: 1fr; }
+            .key-points-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body data-product-id="myocardial-infarction" data-guide-name="Myocardial-Infarction">
+    <!-- Download Bar -->
+    <div class="download-bar">
+        <div class="download-bar-brand">
+            <i class="fas fa-book-medical"></i>
+            <span>The Nursing Collective Study Guide</span>
+        </div>
+        <div class="download-bar-actions">
+            <a href="../dashboard.html" class="btn-back">
+                <i class="fas fa-arrow-left"></i> Back to Dashboard
+            </a>
+            <button class="btn-download" id="download-pdf-btn">
+                <i class="fas fa-file-pdf"></i> Save as PDF
+            </button>
+        </div>
+    </div>
+
+    <!-- Document -->
+    <div class="document-container">
+
+        <!-- Cover Page -->
+        <div class="cover-page">
+            <div class="cover-content">
+                <div class="cover-logo">
+                    <img src="../assets/images/guide-icons/myocardial-infarction.webp" alt="Myocardial Infarction">
+                </div>
+                <div class="cover-category">Medical-Surgical Nursing</div>
+                <h1 class="cover-title">Myocardial Infarction</h1>
+                <p class="cover-subtitle">Comprehensive nursing study guide covering STEMI vs NSTEMI recognition, cardiac biomarker interpretation, coronary anatomy, thrombolytic therapy criteria, and priority nursing interventions for acute MI.</p>
+                <div class="cover-meta">
+                    <div class="cover-meta-item">
+                        <div class="label">Reading Time</div>
+                        <div class="value">15-20 minutes</div>
+                    </div>
+                    <div class="cover-meta-item">
+                        <div class="label">Difficulty Level</div>
+                        <div class="value">Intermediate</div>
+                    </div>
+                    <div class="cover-meta-item">
+                        <div class="label">Last Updated</div>
+                        <div class="value">January 2026</div>
+                    </div>
+                </div>
+                <div class="cover-brand">
+                    <i class="fas fa-graduation-cap"></i> The Nursing Collective
+                </div>
+            </div>
+        </div>
+
+        <!-- Document Content -->
+        <div class="document-content">
+
+            <!-- Learning Objectives -->
+            <section class="learning-objectives">
+                <h2><i class="fas fa-bullseye"></i> Learning Objectives</h2>
+                <ul>
+                    <li><i class="fas fa-check-circle"></i> Recognize and differentiate STEMI versus NSTEMI clinical presentation</li>
+                    <li><i class="fas fa-check-circle"></i> Interpret cardiac biomarkers (troponin, CK-MB) and their clinical significance</li>
+                    <li><i class="fas fa-check-circle"></i> Understand tPA administration criteria and contraindications</li>
+                    <li><i class="fas fa-check-circle"></i> Apply the pathophysiology of coronary artery occlusion to patient assessment</li>
+                    <li><i class="fas fa-check-circle"></i> Identify EKG changes associated with different MI locations</li>
+                    <li><i class="fas fa-check-circle"></i> Prioritize nursing interventions for the patient experiencing acute MI</li>
+                    <li><i class="fas fa-check-circle"></i> Recognize complications of myocardial infarction and nursing responses</li>
+                </ul>
+            </section>
+
+            <!-- Table of Contents -->
+            <nav class="table-of-contents">
+                <h2><i class="fas fa-list"></i> Table of Contents</h2>
+                <ul>
+                    <li><a href="#anatomy"><span class="toc-number">1</span> Coronary Anatomy & Physiology</a></li>
+                    <li><a href="#pathophysiology"><span class="toc-number">2</span> Pathophysiology of MI</a></li>
+                    <li><a href="#stemi-nstemi"><span class="toc-number">3</span> STEMI vs NSTEMI</a></li>
+                    <li><a href="#biomarkers"><span class="toc-number">4</span> Cardiac Biomarkers</a></li>
+                    <li><a href="#ekg"><span class="toc-number">5</span> EKG Changes & MI Location</a></li>
+                    <li><a href="#thrombolytics"><span class="toc-number">6</span> Thrombolytic Therapy (tPA)</a></li>
+                    <li><a href="#interventions"><span class="toc-number">7</span> Nursing Interventions</a></li>
+                    <li><a href="#complications"><span class="toc-number">8</span> Complications of MI</a></li>
+                </ul>
+            </nav>
+
+            <!-- Section 1: Coronary Anatomy & Physiology -->
+            <section class="guide-section" id="anatomy">
+                <h2><span class="section-icon"><i class="fas fa-heart"></i></span> Coronary Anatomy & Physiology</h2>
+
+                <p>Understanding coronary artery anatomy is essential for recognizing which areas of the heart are affected during a myocardial infarction and predicting potential complications.</p>
+
+                <h3>Coronary Artery Blood Supply</h3>
+
+                <p>The heart muscle (myocardium) receives its blood supply from the coronary arteries, which branch off the aorta just above the aortic valve. There are two main coronary arteries:</p>
+
+                <div class="info-box clinical-pearl">
+                    <div class="info-box-header">
+                        <i class="fas fa-lightbulb"></i> Clinical Pearl: Coronary Perfusion
+                    </div>
+                    <p>Unlike other organs, the heart receives most of its blood supply during <strong>diastole</strong> (when the heart is relaxed), not during systole. This is why tachycardia is problematic in cardiac patients - less diastolic filling time means less coronary perfusion!</p>
+                </div>
+
+                <div class="guide-table-wrapper">
+                    <table class="guide-table">
+                        <thead>
+                            <tr>
+                                <th>Coronary Artery</th>
+                                <th>Area Supplied</th>
+                                <th>If Occluded, Results In</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Left Anterior Descending (LAD)</td>
+                                <td>Anterior wall of LV, septum, bundle branches</td>
+                                <td>Anterior MI - most common, worst prognosis</td>
+                            </tr>
+                            <tr>
+                                <td>Left Circumflex (LCx)</td>
+                                <td>Lateral and posterior LV walls</td>
+                                <td>Lateral or posterior MI</td>
+                            </tr>
+                            <tr>
+                                <td>Right Coronary Artery (RCA)</td>
+                                <td>Right ventricle, inferior LV, SA and AV nodes</td>
+                                <td>Inferior MI - watch for bradycardia/heart block</td>
+                            </tr>
+                            <tr>
+                                <td>Left Main Coronary</td>
+                                <td>Branches into LAD and LCx</td>
+                                <td>"Widow maker" - massive MI, often fatal</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="info-box mnemonic">
+                    <div class="info-box-header">
+                        <i class="fas fa-brain"></i> Memory Aid: LAD = "Left Anterior Descending"
+                    </div>
+                    <p>The <strong>LAD</strong> is sometimes called the "widow maker" because it supplies the largest portion of the left ventricle. An occlusion here causes an <strong>Anterior MI</strong> - the most serious type with highest mortality.</p>
+                </div>
+
+                <h3>Oxygen Supply and Demand</h3>
+
+                <p>The myocardium requires a constant supply of oxygen. When oxygen demand exceeds supply, ischemia occurs. Understanding this balance is key to MI management.</p>
+
+                <ul>
+                    <li><strong>Oxygen Supply depends on:</strong> Coronary blood flow, arterial oxygen content, hemoglobin level</li>
+                    <li><strong>Oxygen Demand increases with:</strong> Heart rate, contractility, wall tension (preload/afterload)</li>
+                </ul>
+
+                <div class="info-box nclex-tip">
+                    <div class="info-box-header">
+                        <i class="fas fa-graduation-cap"></i> NCLEX Tip: Supply vs Demand
+                    </div>
+                    <p>Treatment goals focus on <strong>increasing supply</strong> (oxygen, nitrates to dilate coronaries) and <strong>decreasing demand</strong> (beta-blockers, rest, morphine). Think: "More supply, less demand!"</p>
+                </div>
+            </section>
+
+            <!-- Section 2: Pathophysiology -->
+            <section class="guide-section" id="pathophysiology">
+                <h2><span class="section-icon"><i class="fas fa-dna"></i></span> Pathophysiology of Myocardial Infarction</h2>
+
+                <p>A myocardial infarction occurs when blood flow to a portion of the heart muscle is severely reduced or completely blocked, leading to myocardial cell death (necrosis).</p>
+
+                <h3>The Atherosclerotic Process</h3>
+
+                <p>Most MIs result from atherosclerosis - the buildup of fatty plaques in the coronary arteries over time:</p>
+
+                <div class="interventions-list">
+                    <h4><i class="fas fa-timeline"></i> Progression to MI</h4>
+
+                    <div class="intervention-item">
+                        <div class="intervention-number">1</div>
+                        <div class="intervention-content">
+                            <h5>Endothelial Injury</h5>
+                            <p>Risk factors (HTN, smoking, diabetes, hyperlipidemia) damage the inner arterial lining, allowing lipid accumulation.</p>
+                        </div>
+                    </div>
+
+                    <div class="intervention-item">
+                        <div class="intervention-number">2</div>
+                        <div class="intervention-content">
+                            <h5>Plaque Formation</h5>
+                            <p>LDL cholesterol deposits in the arterial wall, forming a fibrous plaque that gradually narrows the vessel lumen.</p>
+                        </div>
+                    </div>
+
+                    <div class="intervention-item">
+                        <div class="intervention-number">3</div>
+                        <div class="intervention-content">
+                            <h5>Plaque Rupture</h5>
+                            <p>An unstable plaque can rupture, exposing its thrombogenic core to the bloodstream. This triggers the clotting cascade.</p>
+                        </div>
+                    </div>
+
+                    <div class="intervention-item">
+                        <div class="intervention-number">4</div>
+                        <div class="intervention-content">
+                            <h5>Thrombus Formation</h5>
+                            <p>Platelets aggregate and a blood clot (thrombus) forms at the rupture site, potentially completely occluding the artery.</p>
+                        </div>
+                    </div>
+
+                    <div class="intervention-item">
+                        <div class="intervention-number">5</div>
+                        <div class="intervention-content">
+                            <h5>Myocardial Ischemia → Injury → Infarction</h5>
+                            <p>Blocked blood flow causes ischemia within minutes, injury within 20-30 minutes, and irreversible necrosis begins after ~20 minutes of total occlusion.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-box warning">
+                    <div class="info-box-header">
+                        <i class="fas fa-exclamation-triangle"></i> Critical Understanding: Time = Muscle
+                    </div>
+                    <p><strong>"Time is muscle"</strong> - Every minute of ischemia results in more myocardial cell death. The goal of treatment is rapid reperfusion to salvage as much myocardium as possible.</p>
+                    <ul>
+                        <li>Door-to-balloon time goal: &lt; 90 minutes for PCI</li>
+                        <li>Door-to-needle time goal: &lt; 30 minutes for thrombolytics</li>
+                    </ul>
+                </div>
+
+                <h3>Zones of Injury</h3>
+
+                <p>During an MI, the affected area has three distinct zones:</p>
+
+                <div class="guide-table-wrapper">
+                    <table class="guide-table">
+                        <thead>
+                            <tr>
+                                <th>Zone</th>
+                                <th>Description</th>
+                                <th>EKG Change</th>
+                                <th>Reversibility</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Ischemia (outer)</td>
+                                <td>Reduced blood flow, cells still viable</td>
+                                <td>T wave inversion</td>
+                                <td>Reversible with reperfusion</td>
+                            </tr>
+                            <tr>
+                                <td>Injury (middle)</td>
+                                <td>Severely compromised, cells dying</td>
+                                <td>ST segment elevation</td>
+                                <td>Potentially reversible if treated quickly</td>
+                            </tr>
+                            <tr>
+                                <td>Infarction (center)</td>
+                                <td>Necrotic tissue, cells dead</td>
+                                <td>Pathological Q waves</td>
+                                <td>Irreversible - permanent damage</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Section 3: STEMI vs NSTEMI -->
+            <section class="guide-section" id="stemi-nstemi">
+                <h2><span class="section-icon"><i class="fas fa-heartbeat"></i></span> STEMI vs NSTEMI</h2>
+
+                <p>Acute Coronary Syndrome (ACS) includes a spectrum of conditions: unstable angina, NSTEMI, and STEMI. Distinguishing between these is critical because treatment urgency differs significantly.</p>
+
+                <div class="info-box nclex-tip">
+                    <div class="info-box-header">
+                        <i class="fas fa-graduation-cap"></i> Key Distinction
+                    </div>
+                    <p><strong>STEMI</strong> = Complete coronary artery occlusion → ST elevation on EKG → EMERGENCY reperfusion needed</p>
+                    <p><strong>NSTEMI</strong> = Partial/intermittent occlusion → No ST elevation but positive troponin → Urgent (not emergent) intervention</p>
+                </div>
+
+                <div class="comparison-grid">
+                    <div class="comparison-card stemi">
+                        <div class="comparison-card-header">
+                            <i class="fas fa-bolt"></i> STEMI
+                        </div>
+                        <div class="comparison-card-body">
+                            <h4>ST-Elevation Myocardial Infarction</h4>
+                            <ul>
+                                <li><i class="fas fa-times-circle"></i> <strong>Complete</strong> coronary artery occlusion</li>
+                                <li><i class="fas fa-chart-line"></i> <strong>ST elevation</strong> in contiguous leads</li>
+                                <li><i class="fas fa-vial"></i> <strong>Elevated troponin</strong> (may take hours)</li>
+                                <li><i class="fas fa-exclamation"></i> Transmural infarction (full-thickness)</li>
+                                <li><i class="fas fa-clock"></i> Q waves develop over hours-days</li>
+                            </ul>
+                            <h4>Treatment Priority</h4>
+                            <p><strong>EMERGENT reperfusion:</strong> PCI (preferred) or thrombolytics within 12 hours of symptom onset</p>
+                        </div>
+                    </div>
+
+                    <div class="comparison-card nstemi">
+                        <div class="comparison-card-header">
+                            <i class="fas fa-exclamation-circle"></i> NSTEMI
+                        </div>
+                        <div class="comparison-card-body">
+                            <h4>Non-ST-Elevation Myocardial Infarction</h4>
+                            <ul>
+                                <li><i class="fas fa-adjust"></i> <strong>Partial/subtotal</strong> coronary occlusion</li>
+                                <li><i class="fas fa-chart-line"></i> <strong>ST depression</strong> or T wave inversion</li>
+                                <li><i class="fas fa-vial"></i> <strong>Elevated troponin</strong> (confirms MI vs UA)</li>
+                                <li><i class="fas fa-layer-group"></i> Subendocardial infarction (partial thickness)</li>
+                                <li><i class="fas fa-check"></i> No pathological Q waves</li>
+                            </ul>
+                            <h4>Treatment Priority</h4>
+                            <p><strong>URGENT intervention:</strong> Anti-ischemic therapy, anticoagulation, early invasive strategy within 24-72 hours</p>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>Clinical Presentation of Acute MI</h3>
+
+                <p>Classic MI symptoms include:</p>
+
+                <ul>
+                    <li><strong>Chest pain:</strong> Crushing, pressure, "elephant on chest," may radiate to left arm, jaw, neck, back</li>
+                    <li><strong>Diaphoresis:</strong> Cold, clammy skin is a hallmark sign</li>
+                    <li><strong>Dyspnea:</strong> Shortness of breath from decreased cardiac output</li>
+                    <li><strong>Nausea/vomiting:</strong> Vagal response, especially in inferior MI</li>
+                    <li><strong>Anxiety:</strong> Sense of impending doom</li>
+                    <li><strong>Weakness/fatigue:</strong> From decreased perfusion</li>
+                </ul>
+
+                <div class="info-box warning">
+                    <div class="info-box-header">
+                        <i class="fas fa-exclamation-triangle"></i> Atypical Presentations
+                    </div>
+                    <p>Women, elderly, and diabetic patients often present <strong>atypically</strong>:</p>
+                    <ul>
+                        <li>Fatigue, weakness, or malaise instead of chest pain</li>
+                        <li>Nausea, indigestion, or epigastric discomfort</li>
+                        <li>Shortness of breath without chest pain</li>
+                        <li>Diabetics may have "silent MIs" due to neuropathy</li>
+                    </ul>
+                    <p><strong>Always maintain high suspicion in these populations!</strong></p>
+                </div>
+
+                <div class="info-box mnemonic">
+                    <div class="info-box-header">
+                        <i class="fas fa-brain"></i> Memory Aid: MI Symptoms
+                    </div>
+                    <p><strong>PULSE</strong></p>
+                    <ul>
+                        <li><strong>P</strong>ressure/Pain in chest</li>
+                        <li><strong>U</strong>pper body discomfort (arm, jaw, neck)</li>
+                        <li><strong>L</strong>ightheadedness</li>
+                        <li><strong>S</strong>hortness of breath</li>
+                        <li><strong>E</strong>xhaustion/diaphoresis</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section 4: Cardiac Biomarkers -->
+            <section class="guide-section" id="biomarkers">
+                <h2><span class="section-icon"><i class="fas fa-vial"></i></span> Cardiac Biomarkers</h2>
+
+                <p>Cardiac biomarkers are proteins released from damaged myocardial cells. They are essential for diagnosing MI, especially when EKG findings are equivocal.</p>
+
+                <h3>Troponin: The Gold Standard</h3>
+
+                <p>Cardiac troponins (cTnI and cTnT) are the most sensitive and specific markers for myocardial injury.</p>
+
+                <div class="guide-table-wrapper">
+                    <table class="guide-table">
+                        <thead>
+                            <tr>
+                                <th>Biomarker</th>
+                                <th>Initial Rise</th>
+                                <th>Peak</th>
+                                <th>Return to Normal</th>
+                                <th>Clinical Use</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Troponin I/T</td>
+                                <td>2-4 hours</td>
+                                <td>12-24 hours</td>
+                                <td>7-14 days</td>
+                                <td>Gold standard; most sensitive and specific</td>
+                            </tr>
+                            <tr>
+                                <td>High-Sensitivity Troponin</td>
+                                <td>1-3 hours</td>
+                                <td>12-24 hours</td>
+                                <td>7-14 days</td>
+                                <td>Earlier detection; rule out MI faster</td>
+                            </tr>
+                            <tr>
+                                <td>CK-MB</td>
+                                <td>4-6 hours</td>
+                                <td>18-24 hours</td>
+                                <td>2-3 days</td>
+                                <td>Detect reinfarction (faster return to baseline)</td>
+                            </tr>
+                            <tr>
+                                <td>Myoglobin</td>
+                                <td>1-3 hours</td>
+                                <td>6-9 hours</td>
+                                <td>24 hours</td>
+                                <td>Early marker but not cardiac-specific</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="info-box clinical-pearl">
+                    <div class="info-box-header">
+                        <i class="fas fa-lightbulb"></i> Clinical Pearl: Serial Troponins
+                    </div>
+                    <p>A single troponin level is not enough to rule out MI. Serial troponins (at presentation, 3-6 hours, and sometimes 12 hours) are needed to detect the <strong>rise and fall pattern</strong> characteristic of acute MI.</p>
+                </div>
+
+                <h3>Interpreting Troponin Results</h3>
+
+                <ul>
+                    <li><strong>Elevated troponin alone does not = MI.</strong> Other causes include: heart failure, myocarditis, PE, renal failure, sepsis, cardiac surgery</li>
+                    <li><strong>Diagnosis of MI requires:</strong> Rise and/or fall of troponin PLUS clinical evidence of ischemia (symptoms, EKG changes, imaging findings)</li>
+                    <li><strong>The higher the troponin, the larger the infarct</strong> and the worse the prognosis</li>
+                </ul>
+
+                <div class="quick-reference">
+                    <h3><i class="fas fa-bookmark"></i> Biomarker Quick Reference</h3>
+                    <div class="quick-reference-grid">
+                        <div class="quick-ref-item">
+                            <div class="label">Troponin I Normal</div>
+                            <div class="value">&lt; 0.04 ng/mL (varies by lab)</div>
+                        </div>
+                        <div class="quick-ref-item">
+                            <div class="label">High-Sens Troponin</div>
+                            <div class="value">&lt; 14-19 ng/L (varies)</div>
+                        </div>
+                        <div class="quick-ref-item">
+                            <div class="label">CK-MB Normal</div>
+                            <div class="value">&lt; 3-6% of total CK</div>
+                        </div>
+                        <div class="quick-ref-item">
+                            <div class="label">BNP (HF marker)</div>
+                            <div class="value">&lt; 100 pg/mL</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-box nclex-tip">
+                    <div class="info-box-header">
+                        <i class="fas fa-graduation-cap"></i> NCLEX Tip: Biomarker Timing
+                    </div>
+                    <p>If a patient presents with chest pain and the initial troponin is negative:</p>
+                    <ul>
+                        <li>This does NOT rule out MI - troponin takes 2-4 hours to rise</li>
+                        <li>Repeat troponin in 3-6 hours</li>
+                        <li>Treat based on clinical presentation and EKG while waiting for results</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section 5: EKG Changes -->
+            <section class="guide-section" id="ekg">
+                <h2><span class="section-icon"><i class="fas fa-wave-square"></i></span> EKG Changes & MI Location</h2>
+
+                <p>The 12-lead EKG is crucial for diagnosing STEMI, determining MI location, and guiding treatment. Different leads correspond to different areas of the heart.</p>
+
+                <h3>EKG Changes in MI</h3>
+
+                <div class="guide-table-wrapper">
+                    <table class="guide-table">
+                        <thead>
+                            <tr>
+                                <th>EKG Finding</th>
+                                <th>Represents</th>
+                                <th>Timing</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>ST Elevation</td>
+                                <td>Acute injury (active infarction)</td>
+                                <td>Minutes to hours after occlusion</td>
+                            </tr>
+                            <tr>
+                                <td>ST Depression</td>
+                                <td>Ischemia or reciprocal changes</td>
+                                <td>Can be early sign; seen in NSTEMI</td>
+                            </tr>
+                            <tr>
+                                <td>T Wave Inversion</td>
+                                <td>Ischemia (evolving or recent MI)</td>
+                                <td>Hours to days after event</td>
+                            </tr>
+                            <tr>
+                                <td>Pathological Q Waves</td>
+                                <td>Necrosis (dead tissue)</td>
+                                <td>Hours to days; may be permanent</td>
+                            </tr>
+                            <tr>
+                                <td>Hyperacute T Waves</td>
+                                <td>Very early ischemia</td>
+                                <td>First minutes - easily missed!</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>Localizing MI by EKG Leads</h3>
+
+                <div class="guide-table-wrapper">
+                    <table class="guide-table">
+                        <thead>
+                            <tr>
+                                <th>MI Location</th>
+                                <th>ST Elevation in Leads</th>
+                                <th>Coronary Artery</th>
+                                <th>Potential Complications</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Anterior</td>
+                                <td>V1, V2, V3, V4</td>
+                                <td>LAD</td>
+                                <td>Cardiogenic shock, HF, VT/VF</td>
+                            </tr>
+                            <tr>
+                                <td>Lateral</td>
+                                <td>I, aVL, V5, V6</td>
+                                <td>LCx or LAD</td>
+                                <td>Papillary muscle dysfunction</td>
+                            </tr>
+                            <tr>
+                                <td>Inferior</td>
+                                <td>II, III, aVF</td>
+                                <td>RCA (usually)</td>
+                                <td>Bradycardia, AV blocks, RV infarct</td>
+                            </tr>
+                            <tr>
+                                <td>Posterior</td>
+                                <td>V7-V9 (use posterior leads); reciprocal ST depression V1-V3</td>
+                                <td>RCA or LCx</td>
+                                <td>Often occurs with inferior MI</td>
+                            </tr>
+                            <tr>
+                                <td>Right Ventricular</td>
+                                <td>V1, V4R (right-sided leads)</td>
+                                <td>Proximal RCA</td>
+                                <td>Hypotension, JVD, clear lungs</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="comparison-grid">
+                    <div class="comparison-card anterior">
+                        <div class="comparison-card-header">
+                            <i class="fas fa-exclamation-triangle"></i> Anterior MI
+                        </div>
+                        <div class="comparison-card-body">
+                            <h4>Most Dangerous - "Widow Maker"</h4>
+                            <ul>
+                                <li><i class="fas fa-check"></i> ST elevation in V1-V4</li>
+                                <li><i class="fas fa-check"></i> LAD occlusion</li>
+                                <li><i class="fas fa-check"></i> Largest area of LV affected</li>
+                                <li><i class="fas fa-check"></i> High risk: cardiogenic shock</li>
+                                <li><i class="fas fa-check"></i> High risk: ventricular arrhythmias</li>
+                                <li><i class="fas fa-check"></i> Worst overall prognosis</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="comparison-card inferior">
+                        <div class="comparison-card-header">
+                            <i class="fas fa-heart"></i> Inferior MI
+                        </div>
+                        <div class="comparison-card-body">
+                            <h4>Watch for RV Involvement</h4>
+                            <ul>
+                                <li><i class="fas fa-check"></i> ST elevation in II, III, aVF</li>
+                                <li><i class="fas fa-check"></i> RCA occlusion (most common)</li>
+                                <li><i class="fas fa-check"></i> Monitor for bradycardia</li>
+                                <li><i class="fas fa-check"></i> AV blocks (RCA supplies AV node)</li>
+                                <li><i class="fas fa-check"></i> Check right-sided leads (V4R)</li>
+                                <li><i class="fas fa-check"></i> Generally better prognosis</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-box warning">
+                    <div class="info-box-header">
+                        <i class="fas fa-exclamation-triangle"></i> Critical: Right Ventricular Infarct
+                    </div>
+                    <p>If inferior MI is present, <strong>always check right-sided leads (V4R)</strong> to rule out RV infarct!</p>
+                    <p><strong>RV Infarct triad:</strong> Hypotension + JVD + Clear lungs</p>
+                    <p><strong>Treatment:</strong> AVOID nitrates and diuretics! These patients are preload-dependent. Give IV fluids to maintain RV filling.</p>
+                </div>
+            </section>
+
+            <!-- Section 6: Thrombolytic Therapy -->
+            <section class="guide-section" id="thrombolytics">
+                <h2><span class="section-icon"><i class="fas fa-syringe"></i></span> Thrombolytic Therapy (tPA)</h2>
+
+                <p>Thrombolytics (fibrinolytics) dissolve blood clots by activating plasminogen. They are used in STEMI when primary PCI is not available within 120 minutes.</p>
+
+                <h3>Thrombolytic Agents</h3>
+
+                <div class="guide-table-wrapper">
+                    <table class="guide-table">
+                        <thead>
+                            <tr>
+                                <th>Agent</th>
+                                <th>Generic Name</th>
+                                <th>Administration</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>tPA (Alteplase)</td>
+                                <td>Tissue plasminogen activator</td>
+                                <td>IV bolus + infusion over 90 min</td>
+                            </tr>
+                            <tr>
+                                <td>Reteplase (Retavase)</td>
+                                <td>Recombinant tPA</td>
+                                <td>Two IV boluses 30 min apart</td>
+                            </tr>
+                            <tr>
+                                <td>Tenecteplase (TNKase)</td>
+                                <td>Modified tPA</td>
+                                <td>Single IV bolus (weight-based)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>Indications for Thrombolytics</h3>
+
+                <div class="info-box tip">
+                    <div class="info-box-header">
+                        <i class="fas fa-check-circle"></i> Thrombolytic Criteria (ALL must be met)
+                    </div>
+                    <ul>
+                        <li>STEMI on EKG (ST elevation ≥1mm in 2+ contiguous leads)</li>
+                        <li>Symptom onset within 12 hours (best within 3 hours)</li>
+                        <li>PCI not available within 120 minutes</li>
+                        <li>No absolute contraindications</li>
+                    </ul>
+                </div>
+
+                <h3>Contraindications to Thrombolytics</h3>
+
+                <div class="guide-table-wrapper">
+                    <table class="guide-table">
+                        <thead>
+                            <tr>
+                                <th>Absolute Contraindications</th>
+                                <th>Relative Contraindications</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Prior intracranial hemorrhage (any time)</td>
+                                <td>Recent TIA (within 3 months)</td>
+                            </tr>
+                            <tr>
+                                <td>Known cerebral vascular malformation or tumor</td>
+                                <td>Oral anticoagulant therapy</td>
+                            </tr>
+                            <tr>
+                                <td>Ischemic stroke within 3 months</td>
+                                <td>Pregnancy or 1 week postpartum</td>
+                            </tr>
+                            <tr>
+                                <td>Suspected aortic dissection</td>
+                                <td>Non-compressible vascular punctures</td>
+                            </tr>
+                            <tr>
+                                <td>Active bleeding or bleeding diathesis</td>
+                                <td>Traumatic CPR (&gt;10 min) or major surgery &lt;3 weeks</td>
+                            </tr>
+                            <tr>
+                                <td>Significant closed head or facial trauma within 3 months</td>
+                                <td>Severe uncontrolled hypertension (SBP &gt;180 or DBP &gt;110)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="info-box mnemonic">
+                    <div class="info-box-header">
+                        <i class="fas fa-brain"></i> Memory Aid: Thrombolytic Contraindications
+                    </div>
+                    <p><strong>HEADS</strong> - Think "bleeding in the head is the worst complication"</p>
+                    <ul>
+                        <li><strong>H</strong>emorrhagic stroke (history or recent)</li>
+                        <li><strong>E</strong>xtreme BP (uncontrolled hypertension)</li>
+                        <li><strong>A</strong>ortic dissection suspected</li>
+                        <li><strong>D</strong>isorder of bleeding (coagulopathy)</li>
+                        <li><strong>S</strong>urgery/trauma (recent major)</li>
+                    </ul>
+                </div>
+
+                <h3>Nursing Responsibilities for Thrombolytics</h3>
+
+                <div class="interventions-list">
+                    <h4><i class="fas fa-user-nurse"></i> Before, During, and After tPA</h4>
+
+                    <div class="intervention-item">
+                        <div class="intervention-number">1</div>
+                        <div class="intervention-content">
+                            <h5>Pre-Administration</h5>
+                            <p>Verify STEMI diagnosis, check contraindications, obtain baseline neuro assessment, establish two large-bore IVs, draw labs (CBC, PT/INR, type and screen).</p>
+                        </div>
+                    </div>
+
+                    <div class="intervention-item">
+                        <div class="intervention-number">2</div>
+                        <div class="intervention-content">
+                            <h5>During Administration</h5>
+                            <p>Monitor vital signs every 15 minutes, watch for signs of bleeding (gums, IV sites, urine, stool), assess neuro status frequently, avoid invasive procedures.</p>
+                        </div>
+                    </div>
+
+                    <div class="intervention-item">
+                        <div class="intervention-number">3</div>
+                        <div class="intervention-content">
+                            <h5>Signs of Successful Reperfusion</h5>
+                            <p>Resolution of chest pain, return of ST segments to baseline, reperfusion arrhythmias (especially PVCs, accelerated idioventricular rhythm), early peak of cardiac markers.</p>
+                        </div>
+                    </div>
+
+                    <div class="intervention-item">
+                        <div class="intervention-number">4</div>
+                        <div class="intervention-content">
+                            <h5>Post-Administration</h5>
+                            <p>Continue monitoring for bleeding 24-48 hours, avoid IM injections, use soft toothbrush, apply pressure to venipuncture sites, report any neuro changes immediately.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-box warning">
+                    <div class="info-box-header">
+                        <i class="fas fa-exclamation-triangle"></i> Most Feared Complication
+                    </div>
+                    <p><strong>Intracranial hemorrhage (ICH)</strong> occurs in ~1% of patients receiving thrombolytics. It is often fatal.</p>
+                    <p><strong>Stop thrombolytic immediately and notify MD if patient develops:</strong></p>
+                    <ul>
+                        <li>Sudden severe headache</li>
+                        <li>Altered level of consciousness</li>
+                        <li>New focal neurological deficits</li>
+                        <li>Nausea/vomiting with neuro changes</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section 7: Nursing Interventions -->
+            <section class="guide-section" id="interventions">
+                <h2><span class="section-icon"><i class="fas fa-user-nurse"></i></span> Priority Nursing Interventions</h2>
+
+                <p>Nursing care for acute MI focuses on reducing myocardial oxygen demand, relieving pain, preventing complications, and facilitating rapid reperfusion.</p>
+
+                <div class="info-box mnemonic">
+                    <div class="info-box-header">
+                        <i class="fas fa-brain"></i> Memory Aid: Initial MI Treatment
+                    </div>
+                    <p><strong>MONA-B</strong> (Morphine, Oxygen, Nitroglycerin, Aspirin, Beta-blockers)</p>
+                    <ul>
+                        <li><strong>M</strong>orphine - pain relief, reduces preload and anxiety</li>
+                        <li><strong>O</strong>xygen - only if SpO2 &lt; 90% or in respiratory distress</li>
+                        <li><strong>N</strong>itroglycerin - dilates coronary arteries, reduces preload</li>
+                        <li><strong>A</strong>spirin - antiplatelet, 162-325 mg chewed immediately</li>
+                        <li><strong>B</strong>eta-blockers - reduce HR and myocardial oxygen demand</li>
+                    </ul>
+                </div>
+
+                <h3>Immediate Nursing Actions</h3>
+
+                <div class="interventions-list">
+                    <h4><i class="fas fa-bolt"></i> First 10 Minutes</h4>
+
+                    <div class="intervention-item">
+                        <div class="intervention-number">1</div>
+                        <div class="intervention-content">
+                            <h5>Obtain 12-Lead EKG</h5>
+                            <p>Goal: within 10 minutes of arrival. This is the most important diagnostic test for identifying STEMI and guiding treatment.</p>
+                        </div>
+                    </div>
+
+                    <div class="intervention-item">
+                        <div class="intervention-number">2</div>
+                        <div class="intervention-content">
+                            <h5>Establish IV Access</h5>
+                            <p>Two large-bore IVs (18 gauge or larger). Draw cardiac biomarkers, CBC, BMP, coagulation studies, type and screen.</p>
+                        </div>
+                    </div>
+
+                    <div class="intervention-item">
+                        <div class="intervention-number">3</div>
+                        <div class="intervention-content">
+                            <h5>Administer Aspirin</h5>
+                            <p>162-325 mg chewed (not swallowed whole) for rapid absorption. This should happen unless patient has true aspirin allergy.</p>
+                        </div>
+                    </div>
+
+                    <div class="intervention-item">
+                        <div class="intervention-number">4</div>
+                        <div class="intervention-content">
+                            <h5>Continuous Cardiac Monitoring</h5>
+                            <p>Place on telemetry immediately. Watch for arrhythmias - VT/VF is the leading cause of death in the first hour.</p>
+                        </div>
+                    </div>
+
+                    <div class="intervention-item">
+                        <div class="intervention-number">5</div>
+                        <div class="intervention-content">
+                            <h5>Supplemental Oxygen</h5>
+                            <p>Only if SpO2 &lt; 90%, dyspnea present, or signs of heart failure. Routine oxygen is no longer recommended for uncomplicated MI.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>Medication Administration</h3>
+
+                <div class="guide-table-wrapper">
+                    <table class="guide-table">
+                        <thead>
+                            <tr>
+                                <th>Medication</th>
+                                <th>Purpose</th>
+                                <th>Key Nursing Considerations</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Nitroglycerin</td>
+                                <td>Coronary vasodilation, reduce preload</td>
+                                <td>Check BP before each dose. Hold if SBP &lt;90. Contraindicated if recent PDE5 inhibitor use or RV infarct.</td>
+                            </tr>
+                            <tr>
+                                <td>Morphine</td>
+                                <td>Pain relief, reduce preload, decrease anxiety</td>
+                                <td>Monitor respiratory status. May cause hypotension. Have naloxone available.</td>
+                            </tr>
+                            <tr>
+                                <td>Beta-blockers</td>
+                                <td>Reduce HR, BP, and myocardial O2 demand</td>
+                                <td>Monitor for bradycardia, hypotension, heart block. Contraindicated in cardiogenic shock.</td>
+                            </tr>
+                            <tr>
+                                <td>Heparin</td>
+                                <td>Anticoagulation, prevent clot extension</td>
+                                <td>Monitor PTT (goal 1.5-2x normal), watch for bleeding.</td>
+                            </tr>
+                            <tr>
+                                <td>P2Y12 Inhibitors</td>
+                                <td>Antiplatelet (clopidogrel, ticagrelor)</td>
+                                <td>Given with aspirin for dual antiplatelet therapy. Increases bleeding risk.</td>
+                            </tr>
+                            <tr>
+                                <td>Statins</td>
+                                <td>Plaque stabilization, lipid lowering</td>
+                                <td>High-intensity statin started within 24 hours of MI.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="info-box warning">
+                    <div class="info-box-header">
+                        <i class="fas fa-exclamation-triangle"></i> Nitroglycerin Cautions
+                    </div>
+                    <p><strong>Do NOT give nitroglycerin if:</strong></p>
+                    <ul>
+                        <li>SBP &lt; 90 mmHg</li>
+                        <li>Severe bradycardia (&lt;50 bpm) or tachycardia (&gt;100 bpm)</li>
+                        <li>Right ventricular infarction (preload-dependent)</li>
+                        <li>Patient has taken PDE5 inhibitor (sildenafil, tadalafil) within 24-48 hours</li>
+                    </ul>
+                </div>
+
+                <h3>Ongoing Nursing Care</h3>
+
+                <ul>
+                    <li><strong>Pain assessment:</strong> Use 0-10 scale, reassess after interventions</li>
+                    <li><strong>Vital signs:</strong> Every 15 minutes until stable, then every 1-2 hours</li>
+                    <li><strong>Telemetry monitoring:</strong> Continuous; report arrhythmias immediately</li>
+                    <li><strong>Activity restriction:</strong> Bed rest initially, then gradual mobilization</li>
+                    <li><strong>Intake and output:</strong> Monitor for signs of heart failure</li>
+                    <li><strong>Psychosocial support:</strong> Address anxiety, provide education</li>
+                    <li><strong>Prevent Valsalva:</strong> Stool softeners to prevent straining</li>
+                </ul>
+            </section>
+
+            <!-- Section 8: Complications -->
+            <section class="guide-section" id="complications">
+                <h2><span class="section-icon"><i class="fas fa-exclamation-circle"></i></span> Complications of Myocardial Infarction</h2>
+
+                <p>Complications can occur during or after MI. Early recognition and intervention are essential for patient survival.</p>
+
+                <h3>Electrical Complications (Arrhythmias)</h3>
+
+                <div class="guide-table-wrapper">
+                    <table class="guide-table">
+                        <thead>
+                            <tr>
+                                <th>Arrhythmia</th>
+                                <th>When It Occurs</th>
+                                <th>Nursing Response</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Ventricular Fibrillation</td>
+                                <td>First 4 hours - leading cause of death</td>
+                                <td>Immediate defibrillation, ACLS protocol</td>
+                            </tr>
+                            <tr>
+                                <td>Ventricular Tachycardia</td>
+                                <td>First 24-48 hours</td>
+                                <td>Sustained: cardioversion. Non-sustained: monitor, antiarrhythmics</td>
+                            </tr>
+                            <tr>
+                                <td>Sinus Bradycardia</td>
+                                <td>Inferior MI (vagal response)</td>
+                                <td>Atropine if symptomatic, temporary pacing</td>
+                            </tr>
+                            <tr>
+                                <td>AV Blocks</td>
+                                <td>Inferior MI (RCA supplies AV node)</td>
+                                <td>Monitor, atropine, transcutaneous/transvenous pacing</td>
+                            </tr>
+                            <tr>
+                                <td>Atrial Fibrillation</td>
+                                <td>Any time post-MI</td>
+                                <td>Rate control, anticoagulation, address underlying cause</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>Mechanical Complications</h3>
+
+                <div class="guide-table-wrapper">
+                    <table class="guide-table">
+                        <thead>
+                            <tr>
+                                <th>Complication</th>
+                                <th>Timing</th>
+                                <th>Signs/Symptoms</th>
+                                <th>Treatment</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Cardiogenic Shock</td>
+                                <td>Hours to days</td>
+                                <td>Hypotension, tachycardia, cold/clammy, oliguria, AMS</td>
+                                <td>Inotropes, IABP, mechanical support</td>
+                            </tr>
+                            <tr>
+                                <td>Papillary Muscle Rupture</td>
+                                <td>2-7 days</td>
+                                <td>Sudden severe mitral regurgitation, new murmur, pulmonary edema</td>
+                                <td>Emergency surgery</td>
+                            </tr>
+                            <tr>
+                                <td>Ventricular Septal Rupture</td>
+                                <td>3-5 days</td>
+                                <td>New harsh systolic murmur, rapid deterioration</td>
+                                <td>Emergency surgery</td>
+                            </tr>
+                            <tr>
+                                <td>Free Wall Rupture</td>
+                                <td>5-14 days</td>
+                                <td>Sudden cardiac tamponade, PEA arrest</td>
+                                <td>Usually fatal; emergency surgery if caught</td>
+                            </tr>
+                            <tr>
+                                <td>Ventricular Aneurysm</td>
+                                <td>Weeks to months</td>
+                                <td>Heart failure, arrhythmias, emboli</td>
+                                <td>Anticoagulation, surgical repair</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="info-box warning">
+                    <div class="info-box-header">
+                        <i class="fas fa-exclamation-triangle"></i> Cardiogenic Shock Recognition
+                    </div>
+                    <p>Cardiogenic shock is the most common cause of in-hospital death from MI. Recognize early:</p>
+                    <ul>
+                        <li>SBP &lt; 90 mmHg for 30+ minutes (or requiring vasopressors)</li>
+                        <li>Signs of end-organ hypoperfusion: cool extremities, oliguria, AMS</li>
+                        <li>Cardiac index &lt; 2.2 L/min/m²</li>
+                        <li>PCWP &gt; 15 mmHg (if measured)</li>
+                    </ul>
+                </div>
+
+                <h3>Other Complications</h3>
+
+                <ul>
+                    <li><strong>Pericarditis:</strong> Chest pain worse with inspiration, pericardial friction rub. Treat with aspirin, colchicine. Avoid anticoagulants if present.</li>
+                    <li><strong>Dressler's Syndrome:</strong> Autoimmune pericarditis occurring weeks after MI. Fever, pleuritic chest pain, pericardial effusion.</li>
+                    <li><strong>Left Ventricular Thrombus:</strong> Forms on akinetic wall segments. Requires anticoagulation to prevent embolic stroke.</li>
+                    <li><strong>Heart Failure:</strong> May develop acutely or chronically depending on extent of damage.</li>
+                </ul>
+
+                <div class="info-box clinical-pearl">
+                    <div class="info-box-header">
+                        <i class="fas fa-lightbulb"></i> Clinical Pearl: Timing of Complications
+                    </div>
+                    <p>Mechanical complications (rupture of papillary muscle, septum, or free wall) typically occur <strong>3-7 days post-MI</strong> when the necrotic tissue is weakest. Be especially vigilant during this period for sudden hemodynamic deterioration or new murmurs.</p>
+                </div>
+            </section>
+
+            <!-- Key Points Summary -->
+            <section class="key-points-summary">
+                <h2><i class="fas fa-star"></i> Key Takeaways</h2>
+                <div class="key-points-grid">
+                    <div class="key-point">
+                        <i class="fas fa-clock"></i>
+                        <p><strong>Time is muscle</strong> - Rapid reperfusion saves myocardium. Door-to-balloon &lt;90 min.</p>
+                    </div>
+                    <div class="key-point">
+                        <i class="fas fa-heartbeat"></i>
+                        <p><strong>STEMI</strong> = Complete occlusion, ST elevation, EMERGENT reperfusion needed.</p>
+                    </div>
+                    <div class="key-point">
+                        <i class="fas fa-vial"></i>
+                        <p><strong>Troponin</strong> is the gold standard biomarker - serial levels needed to diagnose MI.</p>
+                    </div>
+                    <div class="key-point">
+                        <i class="fas fa-chart-line"></i>
+                        <p><strong>LAD occlusion</strong> = Anterior MI = Most dangerous, worst prognosis.</p>
+                    </div>
+                    <div class="key-point">
+                        <i class="fas fa-syringe"></i>
+                        <p><strong>tPA contraindications:</strong> Recent stroke, bleeding, aortic dissection, uncontrolled HTN.</p>
+                    </div>
+                    <div class="key-point">
+                        <i class="fas fa-pills"></i>
+                        <p><strong>MONA-B:</strong> Morphine, Oxygen (if needed), Nitro, Aspirin, Beta-blockers.</p>
+                    </div>
+                    <div class="key-point">
+                        <i class="fas fa-lungs"></i>
+                        <p><strong>RV Infarct:</strong> Hypotension + JVD + Clear lungs. AVOID nitrates, give fluids!</p>
+                    </div>
+                    <div class="key-point">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <p><strong>VF/VT</strong> is the leading cause of death in the first hour of MI.</p>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+
+        <!-- Document Footer -->
+        <div class="document-footer">
+            <p><strong>The Nursing Collective</strong> | <a href="https://thenursingcollective.pro">thenursingcollective.pro</a></p>
+            <p style="margin-top: 8px; font-size: 0.85rem; opacity: 0.7;">This study guide is for educational purposes only. Always follow your institution's policies and procedures.</p>
+        </div>
+
+    </div>
+
+    <!-- Guide page scripts (external for CSP compliance) -->
+    <script src="guide-script.js"></script>
+</body>
+</html>
