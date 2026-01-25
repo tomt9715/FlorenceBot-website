@@ -853,9 +853,9 @@ function continueStudying(productId) {
 async function downloadGuide(productId, button, source = 'dashboard') {
     const originalText = button.innerHTML;
     button.disabled = true;
-    button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Preparing...';
+    button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating PDF...';
 
-    // HTML guides that use browser print-to-PDF
+    // HTML guides that use server-side PDF generation
     const htmlGuides = ['heart-failure'];
 
     try {
@@ -863,9 +863,41 @@ async function downloadGuide(productId, button, source = 'dashboard') {
         await trackDownload(productId, source);
 
         if (htmlGuides.includes(productId)) {
-            // For HTML guides, open in print mode - browser's native PDF is much better
-            window.open(`guides/${productId}.html?print=true`, '_blank');
-            button.innerHTML = '<i class="fas fa-check"></i> Opening...';
+            // For HTML guides, use the server-side PDF generation endpoint
+            // This generates a clean PDF without browser headers/footers
+            const token = localStorage.getItem('accessToken');
+            if (!token) {
+                throw new Error('Please log in to download guides');
+            }
+
+            // Fetch the PDF from the backend (uses API_URL from api-service.js)
+            const response = await fetch(`${API_URL}/api/guides/${productId}/pdf`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                },
+                credentials: 'include'
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json().catch(() => ({}));
+                throw new Error(errorData.message || 'Failed to generate PDF');
+            }
+
+            // Get the PDF blob and download it
+            const blob = await response.blob();
+            const url = window.URL.createObjectURL(blob);
+
+            // Create a temporary link to trigger download
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `TNC-${productId.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()).replace(/ /g, '-')}.pdf`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+
+            button.innerHTML = '<i class="fas fa-check"></i> Downloaded!';
             setTimeout(() => {
                 button.disabled = false;
                 button.innerHTML = originalText;
@@ -893,7 +925,7 @@ async function downloadGuide(productId, button, source = 'dashboard') {
             button.disabled = false;
             button.innerHTML = originalText;
         }, 2000);
-        showAlert('Download Error', 'Unable to download the guide. Please try again or contact support.', 'error');
+        showAlert('Download Error', error.message || 'Unable to download the guide. Please try again or contact support.', 'error');
     }
 }
 

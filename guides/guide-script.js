@@ -1,10 +1,10 @@
 // Guide Page JavaScript
-// Handles PDF generation via browser print, download tracking, and UI interactions
+// Handles PDF generation via server-side Playwright, download tracking, and UI interactions
 
 // Configuration - set by data attributes on body element
 const PRODUCT_ID = document.body.dataset.productId || 'heart-failure';
 const GUIDE_NAME = document.body.dataset.guideName || 'Heart-Failure';
-const API_BASE = 'https://florencebot-backend-production.up.railway.app/api';
+const API_URL = 'https://api.thenursingcollective.pro';
 
 // Force light mode on guide pages (don't affect global preference)
 document.documentElement.removeAttribute('data-theme');
@@ -20,32 +20,27 @@ document.querySelectorAll('.table-of-contents a').forEach(link => {
     });
 });
 
-// Get auth token from Firebase (if available) or localStorage
-async function getAuthToken() {
-    if (typeof firebase !== 'undefined' && firebase.auth) {
-        const user = firebase.auth().currentUser;
-        if (user) {
-            return await user.getIdToken();
-        }
-    }
-    return localStorage.getItem('authToken');
+// Get auth token from localStorage (same as api-service.js)
+function getAuthToken() {
+    return localStorage.getItem('accessToken');
 }
 
 // Track download event
 async function trackDownload(source) {
     try {
-        const token = await getAuthToken();
+        const token = getAuthToken();
         if (!token) {
             console.log('No auth token - user not logged in, skipping tracking');
             return;
         }
 
-        const response = await fetch(`${API_BASE}/cart/downloads/track`, {
+        const response = await fetch(`${API_URL}/cart/downloads/track`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`
             },
+            credentials: 'include',
             body: JSON.stringify({
                 product_id: PRODUCT_ID,
                 source: source,
@@ -61,30 +56,69 @@ async function trackDownload(source) {
     }
 }
 
-// Print/Save as PDF function
-async function printGuide(btn) {
+// Download PDF using server-side generation (Playwright)
+async function downloadPDF(btn) {
     const originalText = btn ? btn.innerHTML : '';
 
     if (btn) {
-        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Preparing...';
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating PDF...';
         btn.disabled = true;
     }
 
-    // Track the download
-    await trackDownload('guide_page');
+    try {
+        // Track the download
+        await trackDownload('guide_page');
 
-    // Small delay to let tracking complete
-    await new Promise(r => setTimeout(r, 200));
+        const token = getAuthToken();
+        if (!token) {
+            throw new Error('Please log in to download guides');
+        }
 
-    // Trigger browser print dialog
-    window.print();
+        // Fetch the PDF from the backend
+        const response = await fetch(`${API_URL}/api/guides/${PRODUCT_ID}/pdf`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            },
+            credentials: 'include'
+        });
 
-    if (btn) {
-        btn.innerHTML = '<i class="fas fa-check"></i> Done!';
-        setTimeout(() => {
-            btn.innerHTML = originalText;
-            btn.disabled = false;
-        }, 2000);
+        if (!response.ok) {
+            const errorData = await response.json().catch(() => ({}));
+            throw new Error(errorData.message || 'Failed to generate PDF');
+        }
+
+        // Get the PDF blob and download it
+        const blob = await response.blob();
+        const url = window.URL.createObjectURL(blob);
+
+        // Create a temporary link to trigger download
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `TNC-${GUIDE_NAME}.pdf`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        window.URL.revokeObjectURL(url);
+
+        if (btn) {
+            btn.innerHTML = '<i class="fas fa-check"></i> Downloaded!';
+            setTimeout(() => {
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            }, 2000);
+        }
+    } catch (error) {
+        console.error('PDF download error:', error);
+        if (btn) {
+            btn.innerHTML = '<i class="fas fa-exclamation-circle"></i> Error';
+            setTimeout(() => {
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            }, 2000);
+        }
+        // Show error message to user
+        alert(error.message || 'Unable to download PDF. Please try again or contact support.');
     }
 }
 
@@ -92,17 +126,17 @@ async function printGuide(btn) {
 const downloadBtn = document.getElementById('download-pdf-btn');
 if (downloadBtn) {
     downloadBtn.addEventListener('click', function() {
-        printGuide(this);
+        downloadPDF(this);
     });
 }
 
-// Check for auto-print parameter (from dashboard PDF button)
+// Check for auto-download parameter (from dashboard PDF button)
 document.addEventListener('DOMContentLoaded', function() {
     const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.get('print') === 'true') {
-        // Auto-trigger print after page loads
+    if (urlParams.get('print') === 'true' || urlParams.get('download') === 'true') {
+        // Auto-trigger PDF download after page loads
         setTimeout(() => {
-            printGuide(null);
+            downloadPDF(document.getElementById('download-pdf-btn'));
         }, 500);
     }
 });
