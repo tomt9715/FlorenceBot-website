@@ -567,7 +567,6 @@ input#guide-search::placeholder {
     color: var(--text-primary);
     transition: all 0.2s ease;
     white-space: nowrap;
-    overflow: hidden;
 }
 
 .quick-filter-btn:hover {
@@ -592,26 +591,6 @@ input#guide-search::placeholder {
 
 .quick-filter-btn[data-quick-filter="recently-viewed"] i {
     color: #10b981;
-}
-
-.recently-viewed-count {
-    margin-left: auto;
-    background: var(--primary-color);
-    color: white;
-    font-size: 0.7rem;
-    font-weight: 700;
-    padding: 2px 8px;
-    border-radius: 10px;
-    display: none;
-    flex-shrink: 0;
-    min-width: 24px;
-    text-align: center;
-}
-
-.recently-viewed-count.visible {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
 }
 
 /* Empty recently viewed state */

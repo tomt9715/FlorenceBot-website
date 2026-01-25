@@ -75,7 +75,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // Quick filter elements
     const popularBtn = document.getElementById('popular-btn');
     const recentlyViewedBtn = document.getElementById('recently-viewed-btn');
-    const recentlyViewedCount = document.getElementById('recently-viewed-count');
     const quickFiltersSection = document.getElementById('quick-filters-section');
 
     // Recently viewed guides (stored in localStorage)
@@ -115,26 +114,21 @@ document.addEventListener('DOMContentLoaded', function() {
             console.warn('Could not save recently viewed to localStorage');
         }
 
-        updateRecentlyViewedCount();
-    }
-
-    // Update recently viewed count badge
-    function updateRecentlyViewedCount() {
-        const count = getRecentlyViewed().length;
-        if (recentlyViewedCount) {
-            if (count > 0) {
-                recentlyViewedCount.textContent = count;
-                recentlyViewedCount.classList.add('visible');
-                if (recentlyViewedBtn) recentlyViewedBtn.disabled = false;
-            } else {
-                recentlyViewedCount.classList.remove('visible');
-                if (recentlyViewedBtn) recentlyViewedBtn.disabled = true;
-            }
+        // Enable the button if there are recently viewed items
+        if (recentlyViewedBtn) {
+            recentlyViewedBtn.disabled = false;
         }
     }
 
-    // Initialize recently viewed count
-    updateRecentlyViewedCount();
+    // Initialize recently viewed button state
+    function initRecentlyViewedBtn() {
+        const count = getRecentlyViewed().length;
+        if (recentlyViewedBtn) {
+            recentlyViewedBtn.disabled = count === 0;
+        }
+    }
+
+    initRecentlyViewedBtn();
 
     // Expose addToRecentlyViewed globally for use by Quick View
     window.addToRecentlyViewed = addToRecentlyViewed;
