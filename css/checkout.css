@@ -113,8 +113,11 @@
 .checkout-three-column .payment-details-column,
 .checkout-three-column .payment-method-column {
     min-height: 967px;
+    max-height: 967px;
+    height: 967px;
     display: flex;
     flex-direction: column;
+    overflow: hidden;
 }
 
 /* Order summary layout - push bottom content down */
@@ -1510,7 +1513,7 @@
    ============================================ */
 
 .checkout-security-badges {
-    margin-top: 24px;
+    margin-top: auto;
     padding-top: 24px;
     border-top: 1px solid var(--border-color);
     display: flex;
