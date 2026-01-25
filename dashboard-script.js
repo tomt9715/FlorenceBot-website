@@ -800,17 +800,30 @@ function continueStudying(productId) {
         console.error('Error saving last studied:', e);
     }
 
-    // Navigate to the guide page
-    window.location.href = `guide.html?id=${productId}`;
+    // Check if HTML guide exists for this product
+    // HTML guides are in /guides/{product-id}.html format
+    const htmlGuides = ['heart-failure']; // Add more as they're created
+
+    if (htmlGuides.includes(productId)) {
+        // Navigate to the standalone HTML guide
+        window.location.href = `guides/${productId}.html`;
+    } else {
+        // Fall back to markdown guide viewer
+        window.location.href = `guide.html?id=${productId}`;
+    }
 }
 
 // Download a guide by getting a secure download link
-async function downloadGuide(productId, button) {
+// Tracks download event for refund policy enforcement
+async function downloadGuide(productId, button, source = 'dashboard') {
     const originalText = button.innerHTML;
     button.disabled = true;
     button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Preparing...';
 
     try {
+        // Track the download event first
+        await trackDownload(productId, source);
+
         const data = await apiCall(`/cart/downloads/${productId}`, { method: 'GET' });
 
         if (data.download_url) {
@@ -832,6 +845,24 @@ async function downloadGuide(productId, button) {
             button.innerHTML = originalText;
         }, 2000);
         showAlert('Download Error', 'Unable to download the guide. Please try again or contact support.', 'error');
+    }
+}
+
+// Track download events for refund policy enforcement
+async function trackDownload(productId, source = 'unknown') {
+    try {
+        await apiCall('/cart/downloads/track', {
+            method: 'POST',
+            body: JSON.stringify({
+                product_id: productId,
+                source: source, // 'dashboard', 'guide_page', 'email'
+                timestamp: new Date().toISOString()
+            })
+        });
+        console.log(`Download tracked: ${productId} from ${source}`);
+    } catch (error) {
+        // Don't block download if tracking fails, just log it
+        console.error('Failed to track download:', error);
     }
 }
 

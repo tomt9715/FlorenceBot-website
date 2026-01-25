@@ -781,7 +781,7 @@
             <a href="../dashboard.html" class="btn-back">
                 <i class="fas fa-arrow-left"></i> Back to Dashboard
             </a>
-            <button class="btn-download" onclick="window.print()">
+            <button class="btn-download" id="download-pdf-btn">
                 <i class="fas fa-download"></i> Download PDF
             </button>
         </div>
@@ -1569,6 +1569,77 @@
                     target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
             });
+        });
+    </script>
+
+    <!-- Download tracking and PDF generation -->
+    <script>
+        const PRODUCT_ID = 'heart-failure';
+        const API_BASE = 'https://florencebot-backend-production.up.railway.app/api';
+
+        // Get auth token from Firebase (if available) or localStorage
+        async function getAuthToken() {
+            // Try Firebase first
+            if (typeof firebase !== 'undefined' && firebase.auth) {
+                const user = firebase.auth().currentUser;
+                if (user) {
+                    return await user.getIdToken();
+                }
+            }
+            // Fall back to localStorage
+            const storedToken = localStorage.getItem('authToken');
+            return storedToken;
+        }
+
+        // Track download event
+        async function trackDownload(source) {
+            try {
+                const token = await getAuthToken();
+                if (!token) {
+                    console.log('No auth token - user not logged in, skipping tracking');
+                    return;
+                }
+
+                const response = await fetch(`${API_BASE}/cart/downloads/track`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({
+                        product_id: PRODUCT_ID,
+                        source: source,
+                        timestamp: new Date().toISOString()
+                    })
+                });
+
+                if (response.ok) {
+                    console.log(`Download tracked: ${PRODUCT_ID} from ${source}`);
+                }
+            } catch (error) {
+                // Don't block download if tracking fails
+                console.error('Failed to track download:', error);
+            }
+        }
+
+        // Download PDF button handler
+        document.getElementById('download-pdf-btn').addEventListener('click', async function() {
+            const btn = this;
+            const originalText = btn.innerHTML;
+
+            // Show loading state
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Preparing...';
+            btn.disabled = true;
+
+            // Track the download
+            await trackDownload('guide_page');
+
+            // Restore button and trigger print
+            btn.innerHTML = originalText;
+            btn.disabled = false;
+
+            // Open print dialog
+            window.print();
         });
     </script>
 </body>
