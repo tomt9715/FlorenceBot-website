@@ -694,7 +694,7 @@ async function loadAccessibleGuides(user) {
                     <div class="guide-card-header">
                         <div class="guide-icon">${icon}</div>
                         <span class="owned-badge"><i class="fas fa-check"></i> Owned</span>
-                        <button class="favorite-btn ${isFavorited ? 'favorited' : ''}" onclick="toggleFavorite('${escapeHtml(purchase.product_id)}', this)" title="${isFavorited ? 'Remove from favorites' : 'Add to favorites'}">
+                        <button class="favorite-btn ${isFavorited ? 'favorited' : ''}" data-favorite="${escapeHtml(purchase.product_id)}" title="${isFavorited ? 'Remove from favorites' : 'Add to favorites'}">
                             <i class="${isFavorited ? 'fas' : 'far'} fa-star"></i>
                         </button>
                     </div>
@@ -711,10 +711,10 @@ async function loadAccessibleGuides(user) {
                             ${lastStudiedText ? `<span class="guide-meta-item last-studied"><i class="fas fa-clock"></i> Studied ${lastStudiedText}</span>` : ''}
                         </div>
                         <div class="guide-card-actions">
-                            <button class="btn-continue" onclick="continueStudying('${escapeHtml(purchase.product_id)}')">
+                            <button class="btn-continue" data-study="${escapeHtml(purchase.product_id)}">
                                 <i class="fas fa-book-reader"></i> Continue Studying
                             </button>
-                            <button class="btn-download-secondary download-btn" data-product-id="${escapeHtml(purchase.product_id)}" onclick="downloadGuide('${escapeHtml(purchase.product_id)}', this)">
+                            <button class="btn-download-secondary download-btn" data-download="${escapeHtml(purchase.product_id)}">
                                 <i class="fas fa-download"></i> PDF
                             </button>
                         </div>
@@ -722,6 +722,9 @@ async function loadAccessibleGuides(user) {
                 </div>
             `;
             }).join('');
+
+            // Setup event listeners for guide cards (CSP-compliant, no inline handlers)
+            setupGuideCardListeners();
 
             // Setup view toggle
             setupViewToggle();
@@ -734,11 +737,15 @@ async function loadAccessibleGuides(user) {
                     </div>
                     <h3>Start Your NCLEX Journey</h3>
                     <p>Browse our collection of comprehensive study guides designed to help you pass the NCLEX on your first try.</p>
-                    <button class="btn btn-secondary" onclick="window.location.href='store.html'">
+                    <button class="btn btn-secondary" data-navigate="store.html">
                         <i class="fas fa-store"></i> Visit Store
                     </button>
                 </div>
             `;
+            // Setup navigation for empty state button
+            guideList.querySelector('[data-navigate]')?.addEventListener('click', function() {
+                window.location.href = this.dataset.navigate;
+            });
         }
     } catch (error) {
         console.error('Error loading purchases:', error);
@@ -753,12 +760,40 @@ async function loadAccessibleGuides(user) {
                 </div>
                 <h3>Unable to Load Guides</h3>
                 <p>There was an error loading your purchased guides. Please try refreshing the page.</p>
-                <button class="btn btn-secondary" onclick="window.location.reload()">
+                <button class="btn btn-secondary" data-action="reload">
                     <i class="fas fa-redo"></i> Refresh Page
                 </button>
             </div>
         `;
+        // Setup reload button
+        guideList.querySelector('[data-action="reload"]')?.addEventListener('click', function() {
+            window.location.reload();
+        });
     }
+}
+
+// Setup event listeners for guide cards (CSP-compliant, no inline handlers)
+function setupGuideCardListeners() {
+    // Continue Studying buttons
+    document.querySelectorAll('[data-study]').forEach(btn => {
+        btn.addEventListener('click', function() {
+            continueStudying(this.dataset.study);
+        });
+    });
+
+    // Download PDF buttons
+    document.querySelectorAll('[data-download]').forEach(btn => {
+        btn.addEventListener('click', function() {
+            downloadGuide(this.dataset.download, this);
+        });
+    });
+
+    // Favorite buttons
+    document.querySelectorAll('[data-favorite]').forEach(btn => {
+        btn.addEventListener('click', function() {
+            toggleFavorite(this.dataset.favorite, this);
+        });
+    });
 }
 
 // Setup view toggle functionality
