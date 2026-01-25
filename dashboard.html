@@ -222,6 +222,31 @@
                             </button>
                         </div>
                     </div>
+
+                    <!-- Search and Filter Controls -->
+                    <div class="guides-controls" id="guides-controls" style="display: none;">
+                        <div class="guides-search-box">
+                            <i class="fas fa-search"></i>
+                            <input type="text" id="guides-search-input" placeholder="Search your guides..." />
+                        </div>
+                        <div class="guides-category-tabs" id="guides-category-tabs">
+                            <button class="category-tab active" data-category="all">All</button>
+                            <!-- Categories will be populated dynamically -->
+                        </div>
+                        <div class="guides-sort-dropdown">
+                            <select id="guides-sort">
+                                <option value="recent">Recently Studied</option>
+                                <option value="name">Name A-Z</option>
+                                <option value="purchased">Recently Purchased</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Guide count -->
+                    <div class="guides-count-display" id="guides-count-display" style="display: none;">
+                        <span id="filtered-guides-count">0</span> guides
+                    </div>
+
                     <div class="guides-grid-enhanced view-grid" id="guide-list">
                         <!-- Loading skeleton -->
                         <div class="skeleton-loader">

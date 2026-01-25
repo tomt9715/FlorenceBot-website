@@ -728,6 +728,9 @@ async function loadAccessibleGuides(user) {
 
             // Setup view toggle
             setupViewToggle();
+
+            // Setup search and filter functionality
+            setupGuidesFiltering(purchases);
         } else {
             // Show enhanced empty state with browse guides CTA
             guideList.innerHTML = `
@@ -821,6 +824,216 @@ function setupViewToggle() {
         });
         guideList.classList.remove('view-grid', 'view-list');
         guideList.classList.add(`view-${view}`);
+    }
+}
+
+// Store all purchases for filtering
+let allPurchasedGuides = [];
+
+// Setup search and filter functionality
+function setupGuidesFiltering(purchases) {
+    allPurchasedGuides = purchases;
+
+    const controls = document.getElementById('guides-controls');
+    const countDisplay = document.getElementById('guides-count-display');
+    const searchInput = document.getElementById('guides-search-input');
+    const categoryTabsContainer = document.getElementById('guides-category-tabs');
+    const sortSelect = document.getElementById('guides-sort');
+
+    // Only show controls if user has guides
+    if (purchases.length < 3) {
+        if (controls) controls.style.display = 'none';
+        if (countDisplay) countDisplay.style.display = 'none';
+        return;
+    }
+
+    // Show controls
+    if (controls) controls.style.display = 'flex';
+    if (countDisplay) countDisplay.style.display = 'block';
+
+    // Build category tabs from actual purchases
+    const categories = new Set();
+    purchases.forEach(p => {
+        const categoryInfo = guideCategoryMap[p.product_id];
+        if (categoryInfo) {
+            categories.add(categoryInfo.category);
+        }
+    });
+
+    // Clear and rebuild category tabs
+    if (categoryTabsContainer) {
+        categoryTabsContainer.innerHTML = '<button class="category-tab active" data-category="all">All</button>';
+
+        const categoryLabels = {
+            'med-surg': 'Med-Surg',
+            'lab-values': 'Lab Values',
+            'clinical-skills': 'Clinical Skills',
+            'safety': 'Safety',
+            'pharmacology': 'Pharmacology',
+            'mental-health': 'Mental Health'
+        };
+
+        categories.forEach(cat => {
+            const label = categoryLabels[cat] || cat;
+            const btn = document.createElement('button');
+            btn.className = 'category-tab';
+            btn.dataset.category = cat;
+            btn.textContent = label;
+            categoryTabsContainer.appendChild(btn);
+        });
+
+        // Add click handlers
+        categoryTabsContainer.querySelectorAll('.category-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                categoryTabsContainer.querySelectorAll('.category-tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                filterAndRenderGuides();
+            });
+        });
+    }
+
+    // Search input handler
+    if (searchInput) {
+        searchInput.addEventListener('input', debounceGuides(() => {
+            filterAndRenderGuides();
+        }, 300));
+    }
+
+    // Sort handler
+    if (sortSelect) {
+        sortSelect.addEventListener('change', filterAndRenderGuides);
+    }
+
+    // Initial count update
+    updateGuidesCount(purchases.length);
+}
+
+// Debounce helper for guides search
+function debounceGuides(func, wait) {
+    let timeout;
+    return function(...args) {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => func.apply(this, args), wait);
+    };
+}
+
+// Filter and render guides based on current filters
+function filterAndRenderGuides() {
+    const searchInput = document.getElementById('guides-search-input');
+    const categoryTabsContainer = document.getElementById('guides-category-tabs');
+    const sortSelect = document.getElementById('guides-sort');
+    const guideList = document.querySelector('.guides-grid-enhanced');
+
+    if (!guideList || !allPurchasedGuides.length) return;
+
+    let filteredGuides = [...allPurchasedGuides];
+
+    // Search filter
+    const searchTerm = searchInput?.value?.toLowerCase().trim() || '';
+    if (searchTerm) {
+        filteredGuides = filteredGuides.filter(p => {
+            const name = p.product_name.toLowerCase();
+            const categoryInfo = guideCategoryMap[p.product_id];
+            const categoryLabel = categoryInfo?.label?.toLowerCase() || '';
+            const description = categoryInfo?.description?.toLowerCase() || '';
+            return name.includes(searchTerm) || categoryLabel.includes(searchTerm) || description.includes(searchTerm);
+        });
+    }
+
+    // Category filter
+    const activeCategory = categoryTabsContainer?.querySelector('.category-tab.active')?.dataset.category || 'all';
+    if (activeCategory !== 'all') {
+        filteredGuides = filteredGuides.filter(p => {
+            const categoryInfo = guideCategoryMap[p.product_id];
+            return categoryInfo?.category === activeCategory;
+        });
+    }
+
+    // Sort
+    const sortBy = sortSelect?.value || 'recent';
+    filteredGuides.sort((a, b) => {
+        switch (sortBy) {
+            case 'name':
+                return a.product_name.localeCompare(b.product_name);
+            case 'purchased':
+                return new Date(b.purchased_at) - new Date(a.purchased_at);
+            case 'recent':
+            default:
+                const lastA = getLastStudied(a.product_id);
+                const lastB = getLastStudied(b.product_id);
+                if (!lastA && !lastB) return new Date(b.purchased_at) - new Date(a.purchased_at);
+                if (!lastA) return 1;
+                if (!lastB) return -1;
+                return new Date(lastB) - new Date(lastA);
+        }
+    });
+
+    // Update count
+    updateGuidesCount(filteredGuides.length);
+
+    // Render filtered guides
+    if (filteredGuides.length === 0) {
+        guideList.innerHTML = `
+            <div class="guides-no-results">
+                <i class="fas fa-search"></i>
+                <h4>No guides found</h4>
+                <p>Try adjusting your search or filters</p>
+            </div>
+        `;
+        return;
+    }
+
+    const favorites = getFavorites();
+    guideList.innerHTML = filteredGuides.map(purchase => {
+        const icon = getGuideIcon(purchase.product_id);
+        const categoryInfo = guideCategoryMap[purchase.product_id] || { category: 'med-surg', label: 'Med-Surg', description: 'Comprehensive NCLEX study guide.' };
+        const isFavorited = favorites.includes(purchase.product_id);
+        const lastStudied = getLastStudied(purchase.product_id);
+        const lastStudiedText = formatRelativeTime(lastStudied);
+
+        return `
+        <div class="guide-card-enhanced" data-product-id="${escapeHtml(purchase.product_id)}">
+            <div class="guide-card-header">
+                <div class="guide-icon">${icon}</div>
+                <span class="owned-badge"><i class="fas fa-check"></i> Owned</span>
+                <button class="favorite-btn ${isFavorited ? 'favorited' : ''}" data-favorite="${escapeHtml(purchase.product_id)}" title="${isFavorited ? 'Remove from favorites' : 'Add to favorites'}">
+                    <i class="${isFavorited ? 'fas' : 'far'} fa-star"></i>
+                </button>
+            </div>
+            <div class="guide-card-body">
+                <div class="guide-card-title-row">
+                    <h4>${escapeHtml(purchase.product_name)}</h4>
+                    <span class="category-badge ${categoryInfo.category}">${categoryInfo.label}</span>
+                </div>
+                <p class="guide-preview">${categoryInfo.description}</p>
+                <div class="guide-meta-row">
+                    <span class="guide-meta-item">
+                        <i class="fas fa-calendar-alt"></i> Purchased ${formatDate(purchase.purchased_at)}
+                    </span>
+                    ${lastStudiedText ? `<span class="guide-meta-item last-studied"><i class="fas fa-clock"></i> Studied ${lastStudiedText}</span>` : ''}
+                </div>
+                <div class="guide-card-actions">
+                    <button class="btn-continue" data-study="${escapeHtml(purchase.product_id)}">
+                        <i class="fas fa-book-reader"></i> Continue Studying
+                    </button>
+                    <button class="btn-download-secondary download-btn" data-download="${escapeHtml(purchase.product_id)}">
+                        <i class="fas fa-download"></i> PDF
+                    </button>
+                </div>
+            </div>
+        </div>
+    `;
+    }).join('');
+
+    // Re-attach event listeners
+    setupGuideCardListeners();
+}
+
+// Update guides count display
+function updateGuidesCount(count) {
+    const countElement = document.getElementById('filtered-guides-count');
+    if (countElement) {
+        countElement.textContent = count;
     }
 }
 
