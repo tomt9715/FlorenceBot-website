@@ -73,13 +73,45 @@ function setupEventListeners() {
         if (e.key === 'Enter') searchUsers();
     });
 
-    // Quick search (in Overview toolbar)
-    const quickSearchBtn = document.getElementById('quick-search-btn');
+    // Quick search with autocomplete (in Overview toolbar)
     const quickSearchInput = document.getElementById('quick-user-search');
-    if (quickSearchBtn && quickSearchInput) {
-        quickSearchBtn.addEventListener('click', () => quickSearchUser(quickSearchInput.value));
-        quickSearchInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') quickSearchUser(quickSearchInput.value);
+    const searchAutocomplete = document.getElementById('search-autocomplete');
+    if (quickSearchInput && searchAutocomplete) {
+        let searchDebounceTimer;
+
+        quickSearchInput.addEventListener('input', (e) => {
+            clearTimeout(searchDebounceTimer);
+            const query = e.target.value.trim();
+
+            if (query.length < 2) {
+                searchAutocomplete.classList.remove('active');
+                return;
+            }
+
+            // Debounce the search
+            searchDebounceTimer = setTimeout(() => {
+                performAutocompleteSearch(query);
+            }, 300);
+        });
+
+        quickSearchInput.addEventListener('focus', () => {
+            if (quickSearchInput.value.trim().length >= 2) {
+                searchAutocomplete.classList.add('active');
+            }
+        });
+
+        // Close autocomplete when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!quickSearchInput.contains(e.target) && !searchAutocomplete.contains(e.target)) {
+                searchAutocomplete.classList.remove('active');
+            }
+        });
+
+        // Keyboard navigation
+        quickSearchInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                searchAutocomplete.classList.remove('active');
+            }
         });
     }
 
@@ -548,20 +580,59 @@ function searchUsers() {
     loadUsers(1);
 }
 
-// Quick search from Overview toolbar - switches to Users tab and searches
-function quickSearchUser(query) {
-    if (!query || query.trim() === '') {
-        showToast('Please enter an email to search', 'warning');
-        return;
+// Autocomplete search - fetches users matching query and displays dropdown
+let autocompleteCache = [];
+
+async function performAutocompleteSearch(query) {
+    const autocomplete = document.getElementById('search-autocomplete');
+    if (!autocomplete) return;
+
+    // Show loading state
+    autocomplete.innerHTML = '<div class="search-autocomplete-loading"><i class="fas fa-spinner fa-spin"></i> Searching...</div>';
+    autocomplete.classList.add('active');
+
+    try {
+        // Search users - the API should support searching by email or name
+        const data = await apiCall(`/admin/users?search=${encodeURIComponent(query)}&per_page=8`);
+
+        if (!data.users || data.users.length === 0) {
+            autocomplete.innerHTML = '<div class="search-autocomplete-empty"><i class="fas fa-search"></i> No users found</div>';
+            return;
+        }
+
+        // Cache for keyboard navigation
+        autocompleteCache = data.users;
+
+        // Render results
+        autocomplete.innerHTML = data.users.map(user => {
+            const displayName = `${user.first_name || ''} ${user.last_name || ''}`.trim() || 'Unknown';
+            const initial = (user.first_name || user.email || '?').charAt(0).toUpperCase();
+
+            return `
+                <div class="search-autocomplete-item" data-email="${escapeHtml(user.email)}">
+                    <div class="search-autocomplete-avatar">${initial}</div>
+                    <div class="search-autocomplete-info">
+                        <div class="search-autocomplete-name">${escapeHtml(displayName)}</div>
+                        <div class="search-autocomplete-email">${escapeHtml(user.email)}</div>
+                    </div>
+                    ${user.is_premium ? '<span class="search-autocomplete-badge premium"><i class="fas fa-crown"></i> Premium</span>' : ''}
+                </div>
+            `;
+        }).join('');
+
+        // Add click handlers to results
+        autocomplete.querySelectorAll('.search-autocomplete-item').forEach(item => {
+            item.addEventListener('click', () => {
+                const email = item.dataset.email;
+                // Open the dedicated user profile page
+                window.location.href = `admin-user.html?email=${encodeURIComponent(email)}`;
+            });
+        });
+
+    } catch (error) {
+        console.error('Autocomplete search error:', error);
+        autocomplete.innerHTML = '<div class="search-autocomplete-empty"><i class="fas fa-exclamation-circle"></i> Search failed</div>';
     }
-    // Set the search query in the Users tab search input
-    const userSearchInput = document.getElementById('user-search');
-    if (userSearchInput) {
-        userSearchInput.value = query.trim();
-    }
-    // Switch to Users tab and search
-    switchTab('users');
-    searchUsers();
 }
 
 // Export data options
