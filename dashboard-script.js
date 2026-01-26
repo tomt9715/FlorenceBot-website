@@ -133,8 +133,8 @@ async function loadUserProfile() {
         const isAdmin = user.is_admin || user.email === 'admin@thenursingcollective.pro';
 
         if (adminBadgeEl && isAdmin) {
-            // Move admin badge below the welcome message
-            adminBadgeEl.style.cssText = 'display: block; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 8px 16px; border-radius: 20px; font-weight: 600; font-size: 14px; margin-top: 12px; width: fit-content;';
+            // Move admin badge below the welcome message, centered
+            adminBadgeEl.style.cssText = 'display: block; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 8px 16px; border-radius: 20px; font-weight: 600; font-size: 14px; margin: 12px auto 0 auto; width: fit-content;';
             adminBadgeEl.innerHTML = '<i class="fas fa-crown"></i> Admin';
 
             // Hide stats for admin users (they're not regular members)
