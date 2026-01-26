@@ -5,7 +5,7 @@
    =========================== */
 .admin-subnav {
     position: fixed;
-    top: 90px; /* Position below the fixed main navbar */
+    top: 100px; /* Position below the fixed main navbar (95px height + gap) */
     left: 0;
     right: 0;
     z-index: 900;
