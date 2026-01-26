@@ -1086,11 +1086,12 @@ async function loadGuides(forceRefresh = false) {
         }
 
         // Filter guides by current type
+        // Product types: 'individual' = study guides, 'lite-package'/'full-package' = class packages
         const filteredGuides = guidesCache.filter(guide => {
             if (currentGuideType === 'study_guide') {
-                return guide.type === 'study_guide' || !guide.type;
+                return guide.type === 'individual';
             } else if (currentGuideType === 'class_package') {
-                return guide.type === 'class_package';
+                return guide.type === 'lite-package' || guide.type === 'full-package';
             }
             return true;
         });
