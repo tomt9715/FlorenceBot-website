@@ -661,6 +661,8 @@
 }
 
 .status-item {
+    display: flex;
+    flex-direction: column;
     background: var(--background-light);
     border-radius: 12px;
     overflow: hidden;
@@ -686,6 +688,7 @@
     align-items: center;
     gap: 12px;
     padding: 14px;
+    width: 100%;
 }
 
 .status-expand-icon {
@@ -698,6 +701,7 @@
     color: var(--text-secondary);
     opacity: 0.5;
     transition: all 0.3s ease;
+    flex-shrink: 0;
 }
 
 .status-item.expandable:hover .status-expand-icon {
@@ -711,18 +715,16 @@
 }
 
 .status-details {
+    display: block;
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.3s ease, padding 0.3s ease, opacity 0.3s ease;
-    opacity: 0;
+    transition: max-height 0.3s ease, padding 0.3s ease;
     padding: 0 14px;
-    border-top: 0 solid var(--border-color, #e5e7eb);
 }
 
 .status-item.expanded .status-details {
-    max-height: 200px;
-    padding: 0 14px 14px 14px;
-    opacity: 1;
+    max-height: 150px;
+    padding: 12px 14px 14px 14px;
     border-top: 1px solid var(--border-color, #e5e7eb);
 }
 
@@ -730,30 +732,29 @@
     font-size: 0.85rem;
     color: var(--text-secondary);
     line-height: 1.5;
-    margin: 12px 0;
+    margin: 0 0 10px 0;
 }
 
 .status-details-meta {
     display: flex;
     flex-wrap: wrap;
-    gap: 12px;
-    margin-top: 10px;
+    gap: 8px;
 }
 
 .status-details-meta span {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     color: var(--text-secondary);
     background: var(--background-light, #f3f4f6);
-    padding: 4px 10px;
+    padding: 4px 8px;
     border-radius: 20px;
 }
 
 .status-details-meta span i {
     color: #667eea;
-    font-size: 0.7rem;
+    font-size: 0.65rem;
 }
 
 .status-icon {
