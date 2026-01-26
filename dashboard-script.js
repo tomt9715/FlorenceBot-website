@@ -141,7 +141,9 @@ async function loadUserProfile() {
         }
 
         // Add admin class to body for admin-specific dashboard styling
-        if (user.is_admin) {
+        // Check both is_admin flag and admin email as fallback
+        const isAdmin = user.is_admin || user.email === 'admin@thenursingcollective.pro';
+        if (isAdmin) {
             document.body.classList.add('is-admin-user');
         }
 
