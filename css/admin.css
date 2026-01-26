@@ -255,7 +255,10 @@
 }
 
 .search-autocomplete-badges {
-    margin-top: 6px;
+    margin-top: 8px;
+}
+
+.search-autocomplete-badges .badge-group {
     display: flex;
     flex-wrap: wrap;
     gap: 4px;
