@@ -1532,73 +1532,16 @@ async function loadGuides(forceRefresh = false) {
             guidesCache = data.guides || [];
         }
 
-        // Filter guides by current type
-        // Product types: 'individual' = study guides, 'lite-package'/'full-package' = class packages
-        const filteredGuides = guidesCache.filter(guide => {
-            if (currentGuideType === 'study_guide') {
-                return guide.type === 'individual';
-            } else if (currentGuideType === 'class_package') {
-                return guide.type === 'lite-package' || guide.type === 'full-package';
-            }
-            return true;
-        });
-
-        if (filteredGuides.length === 0) {
-            const typeLabel = currentGuideType === 'study_guide' ? 'study guides' : 'class packages';
-            tbody.innerHTML = `<tr><td colspan="7" class="loading-cell">No ${typeLabel} found</td></tr>`;
-            if (mobileContainer) {
-                mobileContainer.innerHTML = `<div class="loading-cell">No ${typeLabel} found</div>`;
-            }
-            return;
+        // Clear search when loading
+        currentSearchQuery = '';
+        const searchInput = document.getElementById('guide-search');
+        if (searchInput) {
+            searchInput.value = '';
+            document.getElementById('guide-search-clear').style.display = 'none';
         }
 
-        // Desktop table view
-        tbody.innerHTML = filteredGuides.map(guide => `
-            <tr>
-                <td><strong>${escapeHtml(guide.name)}</strong></td>
-                <td>${escapeHtml(guide.category || '-')}</td>
-                <td>$${guide.price.toFixed(2)}</td>
-                <td>${guide.stripe_purchases}</td>
-                <td>${guide.admin_granted}</td>
-                <td><strong>${guide.total_active_owners}</strong></td>
-                <td>
-                    <div class="table-actions">
-                        <button class="action-btn primary" data-view-guide-owners="${escapeHtml(guide.guide_id)}" data-guide-name="${escapeHtml(guide.name)}">
-                            <i class="fas fa-users"></i> View Owners
-                        </button>
-                    </div>
-                </td>
-            </tr>
-        `).join('');
-
-        // Mobile list view
-        if (mobileContainer) {
-            mobileContainer.innerHTML = filteredGuides.map(guide => `
-                <div class="guide-list-item" data-view-guide-owners="${escapeHtml(guide.guide_id)}" data-guide-name="${escapeHtml(guide.name)}">
-                    <div class="guide-list-info">
-                        <div class="guide-list-name">${escapeHtml(guide.name)}</div>
-                        <div class="guide-list-meta"><span class="price">$${guide.price.toFixed(2)}</span> · ${guide.total_active_owners} owners</div>
-                    </div>
-                    <div class="guide-list-right">
-                        <i class="fas fa-chevron-right guide-list-arrow"></i>
-                    </div>
-                </div>
-            `).join('');
-
-            // Attach event listeners to list items
-            mobileContainer.querySelectorAll('.guide-list-item').forEach(item => {
-                item.addEventListener('click', function() {
-                    openGuideOwnersModal(this.dataset.viewGuideOwners, this.dataset.guideName);
-                });
-            });
-        }
-
-        // Attach event listeners to View Owners buttons (desktop)
-        tbody.querySelectorAll('[data-view-guide-owners]').forEach(btn => {
-            btn.addEventListener('click', function() {
-                openGuideOwnersModal(this.dataset.viewGuideOwners, this.dataset.guideName);
-            });
-        });
+        // Render filtered guides
+        renderFilteredGuides();
     } catch (error) {
         console.error('Error loading guides:', error);
         tbody.innerHTML = '<tr><td colspan="7" class="loading-cell">Error loading guides</td></tr>';
@@ -1618,13 +1561,12 @@ function switchGuideType(type) {
         btn.classList.toggle('active', btn.dataset.type === type);
     });
 
-    // Update search placeholder
+    // Update search placeholder and clear search
     const searchInput = document.getElementById('guide-search');
     if (searchInput) {
         searchInput.placeholder = type === 'study_guide' ? 'Search study guides...' : 'Search class packages...';
         searchInput.value = '';
         document.getElementById('guide-search-clear').style.display = 'none';
-        document.getElementById('guide-search-results').classList.remove('active');
     }
 
     // Reload guides with new filter
@@ -1633,114 +1575,117 @@ function switchGuideType(type) {
 
 // ==================== Guide Search ====================
 
+let currentSearchQuery = '';
+
 function initGuideSearch() {
     const searchInput = document.getElementById('guide-search');
     const clearBtn = document.getElementById('guide-search-clear');
-    const resultsContainer = document.getElementById('guide-search-results');
 
     if (!searchInput) return;
 
-    let highlightedIndex = -1;
-
-    // Input handler
+    // Input handler - filter the table/list directly
     searchInput.addEventListener('input', function() {
-        const query = this.value.trim().toLowerCase();
-        clearBtn.style.display = query ? 'flex' : 'none';
-        highlightedIndex = -1;
+        currentSearchQuery = this.value.trim().toLowerCase();
+        clearBtn.style.display = currentSearchQuery ? 'flex' : 'none';
 
-        if (query.length < 1) {
-            resultsContainer.classList.remove('active');
-            return;
-        }
-
-        // Filter guides based on current type and search query
-        const filteredGuides = guidesCache.filter(guide => {
-            // Check type filter
-            if (currentGuideType === 'study_guide' && guide.type !== 'individual') return false;
-            if (currentGuideType === 'class_package' && guide.type !== 'lite-package' && guide.type !== 'full-package') return false;
-
-            // Check search query
-            return guide.name.toLowerCase().includes(query);
-        });
-
-        if (filteredGuides.length === 0) {
-            resultsContainer.innerHTML = '<div class="guide-search-no-results">No matches found</div>';
-            resultsContainer.classList.add('active');
-            return;
-        }
-
-        // Render results (limit to 10)
-        resultsContainer.innerHTML = filteredGuides.slice(0, 10).map((guide, index) => `
-            <div class="guide-search-result" data-index="${index}" data-guide-id="${escapeHtml(guide.guide_id)}" data-guide-name="${escapeHtml(guide.name)}">
-                <div class="guide-search-result-name">${escapeHtml(guide.name)}</div>
-                <div class="guide-search-result-meta"><span class="price">$${guide.price.toFixed(2)}</span> · ${guide.total_active_owners} owners</div>
-            </div>
-        `).join('');
-
-        resultsContainer.classList.add('active');
-
-        // Add click handlers to results
-        resultsContainer.querySelectorAll('.guide-search-result').forEach(result => {
-            result.addEventListener('click', function() {
-                openGuideOwnersModal(this.dataset.guideId, this.dataset.guideName);
-                searchInput.value = '';
-                clearBtn.style.display = 'none';
-                resultsContainer.classList.remove('active');
-            });
-        });
+        // Re-render guides with search filter
+        renderFilteredGuides();
     });
-
-    // Keyboard navigation
-    searchInput.addEventListener('keydown', function(e) {
-        const results = resultsContainer.querySelectorAll('.guide-search-result');
-        if (results.length === 0) return;
-
-        if (e.key === 'ArrowDown') {
-            e.preventDefault();
-            highlightedIndex = Math.min(highlightedIndex + 1, results.length - 1);
-            updateHighlight(results);
-        } else if (e.key === 'ArrowUp') {
-            e.preventDefault();
-            highlightedIndex = Math.max(highlightedIndex - 1, 0);
-            updateHighlight(results);
-        } else if (e.key === 'Enter' && highlightedIndex >= 0) {
-            e.preventDefault();
-            results[highlightedIndex].click();
-        } else if (e.key === 'Escape') {
-            resultsContainer.classList.remove('active');
-            searchInput.blur();
-        }
-    });
-
-    function updateHighlight(results) {
-        results.forEach((r, i) => {
-            r.classList.toggle('highlighted', i === highlightedIndex);
-            if (i === highlightedIndex) {
-                r.scrollIntoView({ block: 'nearest' });
-            }
-        });
-    }
 
     // Clear button
     clearBtn.addEventListener('click', function() {
         searchInput.value = '';
+        currentSearchQuery = '';
         clearBtn.style.display = 'none';
-        resultsContainer.classList.remove('active');
+        renderFilteredGuides();
         searchInput.focus();
     });
 
-    // Close results when clicking outside
-    document.addEventListener('click', function(e) {
-        if (!e.target.closest('.guide-search-container')) {
-            resultsContainer.classList.remove('active');
+    // Escape to clear
+    searchInput.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            searchInput.value = '';
+            currentSearchQuery = '';
+            clearBtn.style.display = 'none';
+            renderFilteredGuides();
+            searchInput.blur();
         }
     });
+}
 
-    // Show results on focus if there's a query
-    searchInput.addEventListener('focus', function() {
-        if (this.value.trim().length >= 1) {
-            this.dispatchEvent(new Event('input'));
+// Render guides filtered by both type and search query
+function renderFilteredGuides() {
+    const tbody = document.getElementById('guides-table-body');
+    const mobileContainer = document.getElementById('guides-mobile-cards');
+
+    // Filter guides by current type AND search query
+    const filteredGuides = guidesCache.filter(guide => {
+        // Check type filter
+        if (currentGuideType === 'study_guide' && guide.type !== 'individual') return false;
+        if (currentGuideType === 'class_package' && guide.type !== 'lite-package' && guide.type !== 'full-package') return false;
+
+        // Check search query
+        if (currentSearchQuery && !guide.name.toLowerCase().includes(currentSearchQuery)) return false;
+
+        return true;
+    });
+
+    if (filteredGuides.length === 0) {
+        const typeLabel = currentGuideType === 'study_guide' ? 'study guides' : 'class packages';
+        const message = currentSearchQuery ? `No ${typeLabel} match "${currentSearchQuery}"` : `No ${typeLabel} found`;
+        tbody.innerHTML = `<tr><td colspan="7" class="loading-cell">${message}</td></tr>`;
+        if (mobileContainer) {
+            mobileContainer.innerHTML = `<div class="guide-list-empty">${message}</div>`;
         }
+        return;
+    }
+
+    // Desktop table view
+    tbody.innerHTML = filteredGuides.map(guide => `
+        <tr>
+            <td><strong>${escapeHtml(guide.name)}</strong></td>
+            <td>${escapeHtml(guide.category || '-')}</td>
+            <td>$${guide.price.toFixed(2)}</td>
+            <td>${guide.stripe_purchases}</td>
+            <td>${guide.admin_granted}</td>
+            <td><strong>${guide.total_active_owners}</strong></td>
+            <td>
+                <div class="table-actions">
+                    <button class="action-btn primary" data-view-guide-owners="${escapeHtml(guide.guide_id)}" data-guide-name="${escapeHtml(guide.name)}">
+                        <i class="fas fa-users"></i> View Owners
+                    </button>
+                </div>
+            </td>
+        </tr>
+    `).join('');
+
+    // Mobile list view
+    if (mobileContainer) {
+        mobileContainer.innerHTML = filteredGuides.map(guide => `
+            <div class="guide-list-item" data-view-guide-owners="${escapeHtml(guide.guide_id)}" data-guide-name="${escapeHtml(guide.name)}">
+                <div class="guide-list-info">
+                    <div class="guide-list-name">${escapeHtml(guide.name)}</div>
+                    <div class="guide-list-meta"><span class="price">$${guide.price.toFixed(2)}</span> · ${guide.total_active_owners} owners</div>
+                </div>
+                <div class="guide-list-right">
+                    <i class="fas fa-chevron-right guide-list-arrow"></i>
+                </div>
+            </div>
+        `).join('');
+
+        // Attach event listeners to list items
+        mobileContainer.querySelectorAll('.guide-list-item').forEach(item => {
+            item.addEventListener('click', function() {
+                openGuideOwnersModal(this.dataset.viewGuideOwners, this.dataset.guideName);
+            });
+        });
+    }
+
+    // Attach event listeners to View Owners buttons (desktop)
+    tbody.querySelectorAll('[data-view-guide-owners]').forEach(btn => {
+        btn.addEventListener('click', function() {
+            openGuideOwnersModal(this.dataset.viewGuideOwners, this.dataset.guideName);
+        });
     });
 }
 
