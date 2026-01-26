@@ -363,6 +363,14 @@ async function loadDashboardOverview() {
         document.getElementById('stat-admin-grants').textContent = data.purchases.admin_granted;
         document.getElementById('stat-revenue-month').textContent = `$${data.revenue.this_month.toFixed(2)}`;
 
+        // Update revenue label based on time period
+        const revenueLabel = document.getElementById('revenue-label');
+        if (revenueLabel) {
+            const timePeriodSelect = document.getElementById('stats-time-period');
+            const selectedOption = timePeriodSelect?.options[timePeriodSelect.selectedIndex]?.text || 'This Month';
+            revenueLabel.textContent = `Revenue (${selectedOption})`;
+        }
+
         // Update total guides owned
         const totalGuidesEl = document.getElementById('stat-total-guides-sold');
         if (totalGuidesEl) {
