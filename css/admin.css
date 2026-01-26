@@ -4,12 +4,12 @@
    ADMIN SUB-NAVIGATION
    =========================== */
 .admin-subnav {
-    position: sticky;
-    top: 70px; /* Below main navbar */
-    z-index: 99;
+    position: relative;
+    z-index: 100;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+    margin-top: 70px; /* Space for fixed main navbar */
 }
 
 .admin-subnav-content {
