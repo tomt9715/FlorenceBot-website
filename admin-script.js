@@ -14,6 +14,69 @@ let userDownloadsCache = {}; // Cache download data per user
 let currentGuideType = 'study_guide'; // 'study_guide' or 'class_package'
 let guidesCache = []; // Cache guides data
 
+// Animated count-up function for stats
+function animateValue(element, start, end, duration, prefix = '', suffix = '', decimals = 0) {
+    if (!element) return;
+
+    // Parse current value if start is null
+    if (start === null) {
+        const currentText = element.textContent.replace(/[^0-9.-]/g, '');
+        start = parseFloat(currentText) || 0;
+    }
+
+    // If values are the same, no animation needed
+    if (start === end) {
+        element.textContent = prefix + (decimals > 0 ? end.toFixed(decimals) : end) + suffix;
+        return;
+    }
+
+    const range = end - start;
+    const startTime = performance.now();
+
+    // Add a subtle scale animation class
+    element.classList.add('stat-animating');
+
+    function update(currentTime) {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+
+        // Easing function (ease-out cubic)
+        const easeOut = 1 - Math.pow(1 - progress, 3);
+
+        const current = start + (range * easeOut);
+        element.textContent = prefix + (decimals > 0 ? current.toFixed(decimals) : Math.round(current)) + suffix;
+
+        if (progress < 1) {
+            requestAnimationFrame(update);
+        } else {
+            element.textContent = prefix + (decimals > 0 ? end.toFixed(decimals) : end) + suffix;
+            element.classList.remove('stat-animating');
+        }
+    }
+
+    requestAnimationFrame(update);
+}
+
+// Helper to animate stat with flash effect
+function updateStatWithAnimation(elementId, value, prefix = '', suffix = '', decimals = 0) {
+    const element = document.getElementById(elementId);
+    if (!element) return;
+
+    // Get current value
+    const currentText = element.textContent.replace(/[^0-9.-]/g, '');
+    const currentValue = parseFloat(currentText) || 0;
+
+    // Animate the number
+    animateValue(element, currentValue, value, 600, prefix, suffix, decimals);
+
+    // Add flash effect to parent card
+    const card = element.closest('.admin-stat-card');
+    if (card && currentValue !== value) {
+        card.classList.add('stat-updated');
+        setTimeout(() => card.classList.remove('stat-updated'), 600);
+    }
+}
+
 // Helper function to generate user status badges
 function getUserStatusBadges(user) {
     const badges = [];
@@ -333,35 +396,26 @@ async function loadDashboardOverview() {
         if (heroRevenue) heroRevenue.textContent = `$${data.revenue.this_month.toFixed(2)}`;
         if (heroNewToday) heroNewToday.textContent = data.statistics.new_users_today;
 
-        // Update main stats (User Statistics section)
-        const premiumUsersEl = document.getElementById('stat-premium-users');
-        if (premiumUsersEl) premiumUsersEl.textContent = data.statistics.premium_users;
+        // Update main stats (User Statistics section) with animations
+        updateStatWithAnimation('stat-premium-users', data.statistics.premium_users);
 
         // Update verified users if available
-        const verifiedUsersEl = document.getElementById('stat-verified-users');
-        if (verifiedUsersEl) {
-            verifiedUsersEl.textContent = data.statistics.verified_users || data.statistics.total_users;
-        }
+        const verifiedCount = data.statistics.verified_users || data.statistics.total_users;
+        updateStatWithAnimation('stat-verified-users', verifiedCount);
 
         // Update active this week (use premium or a calculated value)
-        const activeWeekEl = document.getElementById('stat-active-week');
-        if (activeWeekEl) {
-            // Use active_this_week from API if available, otherwise estimate
-            activeWeekEl.textContent = data.statistics.active_this_week || data.statistics.new_users_today || '-';
-        }
+        const activeWeekCount = data.statistics.active_this_week || data.statistics.new_users_today || 0;
+        updateStatWithAnimation('stat-active-week', activeWeekCount);
 
         // Update conversion rate (premium users / total users)
-        const conversionRateEl = document.getElementById('stat-conversion-rate');
-        if (conversionRateEl) {
-            const totalUsers = data.statistics.total_users || 1;
-            const rate = ((data.statistics.premium_users / totalUsers) * 100).toFixed(1);
-            conversionRateEl.textContent = `${rate}%`;
-        }
+        const totalUsers = data.statistics.total_users || 1;
+        const conversionRate = (data.statistics.premium_users / totalUsers) * 100;
+        updateStatWithAnimation('stat-conversion-rate', conversionRate, '', '%', 1);
 
-        // Update Revenue & Purchases stats
-        document.getElementById('stat-stripe-purchases').textContent = data.purchases.stripe_purchases;
-        document.getElementById('stat-admin-grants').textContent = data.purchases.admin_granted;
-        document.getElementById('stat-revenue-month').textContent = `$${data.revenue.this_month.toFixed(2)}`;
+        // Update Revenue & Purchases stats with animations
+        updateStatWithAnimation('stat-stripe-purchases', data.purchases.stripe_purchases);
+        updateStatWithAnimation('stat-admin-grants', data.purchases.admin_granted);
+        updateStatWithAnimation('stat-revenue-month', data.revenue.this_month, '$', '', 2);
 
         // Update revenue label based on time period
         const revenueLabel = document.getElementById('revenue-label');
@@ -371,31 +425,19 @@ async function loadDashboardOverview() {
             revenueLabel.textContent = `Revenue (${selectedOption})`;
         }
 
-        // Update total guides owned
-        const totalGuidesEl = document.getElementById('stat-total-guides-sold');
-        if (totalGuidesEl) {
-            totalGuidesEl.textContent = (data.purchases.stripe_purchases || 0) + (data.purchases.admin_granted || 0);
-        }
+        // Update total guides owned with animation
+        const totalGuides = (data.purchases.stripe_purchases || 0) + (data.purchases.admin_granted || 0);
+        updateStatWithAnimation('stat-total-guides-sold', totalGuides);
 
-        // Update orders count
-        const ordersCountEl = document.getElementById('orders-count');
-        if (ordersCountEl) {
-            ordersCountEl.textContent = data.purchases.stripe_purchases || 0;
-        }
+        // Update orders count with animation
+        updateStatWithAnimation('orders-count', data.revenue.orders_this_month || data.purchases.stripe_purchases || 0);
 
-        // Calculate and update rate badges
-        const totalUsers = data.statistics.total_users || 1;
-        const premiumRate = document.getElementById('premium-rate');
-        const verifiedRate = document.getElementById('verified-rate');
-        if (premiumRate) {
-            const rate = ((data.statistics.premium_users / totalUsers) * 100).toFixed(1);
-            premiumRate.textContent = `${rate}%`;
-        }
-        if (verifiedRate) {
-            const verified = data.statistics.verified_users || data.statistics.total_users;
-            const rate = ((verified / totalUsers) * 100).toFixed(1);
-            verifiedRate.textContent = `${rate}%`;
-        }
+        // Calculate and update rate badges with animation
+        const premiumRateValue = (data.statistics.premium_users / totalUsers) * 100;
+        const verified = data.statistics.verified_users || data.statistics.total_users;
+        const verifiedRateValue = (verified / totalUsers) * 100;
+        updateStatWithAnimation('premium-rate', premiumRateValue, '', '%', 1);
+        updateStatWithAnimation('verified-rate', verifiedRateValue, '', '%', 1);
 
         // Update auth provider stats if available
         if (data.auth_providers) {

@@ -3215,3 +3215,62 @@
     background: var(--primary-color, #667eea);
     color: white;
 }
+
+/* ===========================
+   STAT ANIMATIONS
+   =========================== */
+
+/* Number counting animation */
+.stat-animating {
+    transition: transform 0.1s ease;
+}
+
+/* Flash effect when stat updates */
+.admin-stat-card.stat-updated {
+    animation: statFlash 0.6s ease;
+}
+
+@keyframes statFlash {
+    0% {
+        transform: scale(1);
+        box-shadow: var(--shadow-sm);
+    }
+    30% {
+        transform: scale(1.02);
+        box-shadow: 0 0 20px rgba(102, 126, 234, 0.3);
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: var(--shadow-sm);
+    }
+}
+
+/* Highlight stat card gets a green flash */
+.admin-stat-card.highlight.stat-updated {
+    animation: statFlashGreen 0.6s ease;
+}
+
+@keyframes statFlashGreen {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 rgba(22, 163, 74, 0);
+    }
+    30% {
+        transform: scale(1.02);
+        box-shadow: 0 0 20px rgba(22, 163, 74, 0.4);
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 rgba(22, 163, 74, 0);
+    }
+}
+
+/* Stat value pulse effect */
+.stat-value.stat-animating {
+    color: var(--primary-color, #667eea);
+}
+
+/* Rate badge animation */
+.stat-badge.stat-animating {
+    transform: scale(1.1);
+}
