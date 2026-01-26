@@ -272,60 +272,140 @@
                                 <span class="status-indicator online"><i class="fas fa-circle"></i> Online</span>
                             </div>
                             <div class="system-status-grid">
-                                <div class="status-item">
-                                    <div class="status-icon"><i class="fas fa-database"></i></div>
-                                    <div class="status-info">
-                                        <span class="status-name">Database</span>
-                                        <span class="status-value online" id="status-database">Connected</span>
+                                <div class="status-item expandable" data-status="database">
+                                    <div class="status-item-header">
+                                        <div class="status-icon"><i class="fas fa-database"></i></div>
+                                        <div class="status-info">
+                                            <span class="status-name">Database</span>
+                                            <span class="status-value online" id="status-database">Connected</span>
+                                        </div>
+                                        <div class="status-expand-icon"><i class="fas fa-chevron-down"></i></div>
+                                    </div>
+                                    <div class="status-details">
+                                        <p>PostgreSQL database hosted on Railway. Stores all user accounts, purchases, guides, and audit logs.</p>
+                                        <div class="status-details-meta">
+                                            <span><i class="fas fa-server"></i> Railway PostgreSQL</span>
+                                            <span><i class="fas fa-lock"></i> SSL Encrypted</span>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="status-item">
-                                    <div class="status-icon"><i class="fab fa-stripe"></i></div>
-                                    <div class="status-info">
-                                        <span class="status-name">Stripe</span>
-                                        <span class="status-value online" id="status-stripe">Active</span>
+                                <div class="status-item expandable" data-status="stripe">
+                                    <div class="status-item-header">
+                                        <div class="status-icon"><i class="fab fa-stripe"></i></div>
+                                        <div class="status-info">
+                                            <span class="status-name">Stripe</span>
+                                            <span class="status-value online" id="status-stripe">Active</span>
+                                        </div>
+                                        <div class="status-expand-icon"><i class="fas fa-chevron-down"></i></div>
+                                    </div>
+                                    <div class="status-details">
+                                        <p>Payment processing via Stripe Checkout. Handles all guide purchases and subscription payments securely.</p>
+                                        <div class="status-details-meta">
+                                            <span><i class="fas fa-credit-card"></i> Checkout Sessions</span>
+                                            <span><i class="fas fa-webhook"></i> Webhooks Active</span>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="status-item">
-                                    <div class="status-icon"><i class="fas fa-envelope"></i></div>
-                                    <div class="status-info">
-                                        <span class="status-name">Email Service</span>
-                                        <span class="status-value online" id="status-email">Operational</span>
+                                <div class="status-item expandable" data-status="email">
+                                    <div class="status-item-header">
+                                        <div class="status-icon"><i class="fas fa-envelope"></i></div>
+                                        <div class="status-info">
+                                            <span class="status-name">Email Service</span>
+                                            <span class="status-value online" id="status-email">Operational</span>
+                                        </div>
+                                        <div class="status-expand-icon"><i class="fas fa-chevron-down"></i></div>
+                                    </div>
+                                    <div class="status-details">
+                                        <p>Transactional emails for purchase confirmations, password resets, and account notifications.</p>
+                                        <div class="status-details-meta">
+                                            <span><i class="fas fa-paper-plane"></i> SMTP Active</span>
+                                            <span><i class="fas fa-check-circle"></i> Delivery OK</span>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="status-item">
-                                    <div class="status-icon"><i class="fas fa-tachometer-alt"></i></div>
-                                    <div class="status-info">
-                                        <span class="status-name">API Response</span>
-                                        <span class="status-value" id="status-api-response">-</span>
+                                <div class="status-item expandable" data-status="api">
+                                    <div class="status-item-header">
+                                        <div class="status-icon"><i class="fas fa-tachometer-alt"></i></div>
+                                        <div class="status-info">
+                                            <span class="status-name">API Response</span>
+                                            <span class="status-value" id="status-api-response">-</span>
+                                        </div>
+                                        <div class="status-expand-icon"><i class="fas fa-chevron-down"></i></div>
+                                    </div>
+                                    <div class="status-details">
+                                        <p>Average response time from the Flask backend API. Lower is better. Measured from health check endpoint.</p>
+                                        <div class="status-details-meta">
+                                            <span><i class="fas fa-bolt"></i> &lt;100ms: Excellent</span>
+                                            <span><i class="fas fa-clock"></i> &lt;500ms: Good</span>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="status-item">
-                                    <div class="status-icon"><i class="fas fa-rocket"></i></div>
-                                    <div class="status-info">
-                                        <span class="status-name">Last Deploy</span>
-                                        <span class="status-value" id="status-last-deploy">-</span>
+                                <div class="status-item expandable" data-status="deploy">
+                                    <div class="status-item-header">
+                                        <div class="status-icon"><i class="fas fa-rocket"></i></div>
+                                        <div class="status-info">
+                                            <span class="status-name">Last Deploy</span>
+                                            <span class="status-value" id="status-last-deploy">-</span>
+                                        </div>
+                                        <div class="status-expand-icon"><i class="fas fa-chevron-down"></i></div>
+                                    </div>
+                                    <div class="status-details">
+                                        <p>Time since the last backend deployment on Railway. Auto-deploys on push to main branch.</p>
+                                        <div class="status-details-meta">
+                                            <span><i class="fab fa-github"></i> GitHub Integration</span>
+                                            <span><i class="fas fa-sync"></i> Auto Deploy</span>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="status-item">
-                                    <div class="status-icon"><i class="fas fa-hdd"></i></div>
-                                    <div class="status-info">
-                                        <span class="status-name">DB Size</span>
-                                        <span class="status-value" id="status-storage">-</span>
+                                <div class="status-item expandable" data-status="storage">
+                                    <div class="status-item-header">
+                                        <div class="status-icon"><i class="fas fa-hdd"></i></div>
+                                        <div class="status-info">
+                                            <span class="status-name">DB Size</span>
+                                            <span class="status-value" id="status-storage">-</span>
+                                        </div>
+                                        <div class="status-expand-icon"><i class="fas fa-chevron-down"></i></div>
+                                    </div>
+                                    <div class="status-details">
+                                        <p>Total number of records across all database tables (users, purchases, guides, audit logs, etc.).</p>
+                                        <div class="status-details-meta">
+                                            <span><i class="fas fa-table"></i> All Tables</span>
+                                            <span><i class="fas fa-chart-bar"></i> Record Count</span>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="status-item">
-                                    <div class="status-icon"><i class="fas fa-shield-alt"></i></div>
-                                    <div class="status-info">
-                                        <span class="status-name">Failed Logins (24h)</span>
-                                        <span class="status-value" id="status-failed-logins">-</span>
+                                <div class="status-item expandable" data-status="security">
+                                    <div class="status-item-header">
+                                        <div class="status-icon"><i class="fas fa-shield-alt"></i></div>
+                                        <div class="status-info">
+                                            <span class="status-name">Failed Logins (24h)</span>
+                                            <span class="status-value" id="status-failed-logins">-</span>
+                                        </div>
+                                        <div class="status-expand-icon"><i class="fas fa-chevron-down"></i></div>
+                                    </div>
+                                    <div class="status-details">
+                                        <p>Number of failed authentication attempts in the last 24 hours. High numbers may indicate brute force attempts.</p>
+                                        <div class="status-details-meta">
+                                            <span><i class="fas fa-user-shield"></i> Firebase Auth</span>
+                                            <span><i class="fas fa-ban"></i> Rate Limited</span>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="status-item">
-                                    <div class="status-icon"><i class="fas fa-exclamation-triangle"></i></div>
-                                    <div class="status-info">
-                                        <span class="status-name">Error Rate (1h)</span>
-                                        <span class="status-value" id="status-error-rate">-</span>
+                                <div class="status-item expandable" data-status="errors">
+                                    <div class="status-item-header">
+                                        <div class="status-icon"><i class="fas fa-exclamation-triangle"></i></div>
+                                        <div class="status-info">
+                                            <span class="status-name">Error Rate (1h)</span>
+                                            <span class="status-value" id="status-error-rate">-</span>
+                                        </div>
+                                        <div class="status-expand-icon"><i class="fas fa-chevron-down"></i></div>
+                                    </div>
+                                    <div class="status-details">
+                                        <p>Number of server errors (5xx) in the past hour. Zero is ideal. Tracked via Sentry error monitoring.</p>
+                                        <div class="status-details-meta">
+                                            <span><i class="fas fa-bug"></i> Sentry Tracking</span>
+                                            <span><i class="fas fa-bell"></i> Alerts Enabled</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -421,7 +501,8 @@
                     <div class="admin-search-bar">
                         <div class="search-input-group">
                             <i class="fas fa-search"></i>
-                            <input type="text" id="user-search" placeholder="Search by email address..." autocomplete="off">
+                            <input type="text" id="user-search" placeholder="Search users by name or email..." autocomplete="off">
+                            <div class="search-autocomplete" id="user-search-autocomplete"></div>
                             <button class="search-btn" id="user-search-btn">Search</button>
                         </div>
                     </div>
@@ -436,8 +517,8 @@
                             <table class="admin-table" id="users-table">
                                 <thead>
                                     <tr>
-                                        <th>Email</th>
                                         <th>Name</th>
+                                        <th>Email</th>
                                         <th>Guides</th>
                                         <th>Status</th>
                                         <th>Joined</th>

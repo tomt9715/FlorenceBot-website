@@ -661,12 +661,99 @@
 }
 
 .status-item {
+    background: var(--background-light);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.status-item.expandable {
+    cursor: pointer;
+}
+
+.status-item.expandable:hover {
+    background: var(--background-hover, #e5e7eb);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.status-item.expandable.expanded {
+    background: var(--card-background);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.status-item-header {
     display: flex;
     align-items: center;
     gap: 12px;
     padding: 14px;
-    background: var(--background-light);
-    border-radius: 12px;
+}
+
+.status-expand-icon {
+    margin-left: auto;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-secondary);
+    opacity: 0.5;
+    transition: all 0.3s ease;
+}
+
+.status-item.expandable:hover .status-expand-icon {
+    opacity: 1;
+}
+
+.status-item.expanded .status-expand-icon {
+    transform: rotate(180deg);
+    opacity: 1;
+    color: #667eea;
+}
+
+.status-details {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease, opacity 0.3s ease;
+    opacity: 0;
+    padding: 0 14px;
+    border-top: 0 solid var(--border-color, #e5e7eb);
+}
+
+.status-item.expanded .status-details {
+    max-height: 200px;
+    padding: 0 14px 14px 14px;
+    opacity: 1;
+    border-top: 1px solid var(--border-color, #e5e7eb);
+}
+
+.status-details p {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin: 12px 0;
+}
+
+.status-details-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+.status-details-meta span {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    background: var(--background-light, #f3f4f6);
+    padding: 4px 10px;
+    border-radius: 20px;
+}
+
+.status-details-meta span i {
+    color: #667eea;
+    font-size: 0.7rem;
 }
 
 .status-icon {
@@ -679,12 +766,14 @@
     border-radius: 10px;
     color: var(--text-secondary);
     font-size: 1rem;
+    flex-shrink: 0;
 }
 
 .status-info {
     display: flex;
     flex-direction: column;
     gap: 2px;
+    flex: 1;
 }
 
 .status-name {
@@ -704,6 +793,24 @@
 
 .status-value.offline {
     color: #dc2626;
+}
+
+/* Dark mode for expanded status items */
+[data-theme="dark"] .status-item.expandable:hover {
+    background: #343448;
+}
+
+[data-theme="dark"] .status-item.expandable.expanded {
+    background: #1e1e2e;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .status-item.expanded .status-details {
+    border-top-color: #374151;
+}
+
+[data-theme="dark"] .status-details-meta span {
+    background: #374151;
 }
 
 /* Status indicator in header */
@@ -1195,6 +1302,7 @@
     padding: 8px 16px;
     box-shadow: var(--shadow-sm);
     gap: 12px;
+    position: relative;
 }
 
 .search-input-group i {

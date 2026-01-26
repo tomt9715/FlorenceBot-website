@@ -113,11 +113,57 @@ function setupEventListeners() {
         tab.addEventListener('click', () => switchTab(tab.dataset.tab));
     });
 
-    // User search (in Users tab)
+    // User search (in Users tab) - with autocomplete
+    const userSearchInput = document.getElementById('user-search');
+    const userSearchAutocomplete = document.getElementById('user-search-autocomplete');
+
     document.getElementById('user-search-btn').addEventListener('click', searchUsers);
-    document.getElementById('user-search').addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') searchUsers();
+    userSearchInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            userSearchAutocomplete.classList.remove('active');
+            searchUsers();
+        }
     });
+
+    // Add autocomplete to Users tab search
+    if (userSearchInput && userSearchAutocomplete) {
+        let userSearchDebounceTimer;
+
+        userSearchInput.addEventListener('input', (e) => {
+            clearTimeout(userSearchDebounceTimer);
+            const query = e.target.value.trim();
+
+            if (query.length < 2) {
+                userSearchAutocomplete.classList.remove('active');
+                return;
+            }
+
+            // Debounce the search
+            userSearchDebounceTimer = setTimeout(() => {
+                performUserTabAutocompleteSearch(query);
+            }, 300);
+        });
+
+        userSearchInput.addEventListener('focus', () => {
+            if (userSearchInput.value.trim().length >= 2) {
+                userSearchAutocomplete.classList.add('active');
+            }
+        });
+
+        // Close autocomplete when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!userSearchInput.contains(e.target) && !userSearchAutocomplete.contains(e.target)) {
+                userSearchAutocomplete.classList.remove('active');
+            }
+        });
+
+        // Keyboard navigation
+        userSearchInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                userSearchAutocomplete.classList.remove('active');
+            }
+        });
+    }
 
     // Quick search with autocomplete (in Overview toolbar)
     const quickSearchInput = document.getElementById('quick-user-search');
@@ -209,6 +255,23 @@ function setupEventListeners() {
             if (e.target === modal) {
                 modal.classList.remove('active');
             }
+        });
+    });
+
+    // System status expandable items
+    document.querySelectorAll('.status-item.expandable').forEach(item => {
+        item.addEventListener('click', () => {
+            // Toggle expanded state
+            const wasExpanded = item.classList.contains('expanded');
+
+            // Optionally close other expanded items (accordion behavior)
+            // Uncomment the next 3 lines if you want only one item open at a time
+            // document.querySelectorAll('.status-item.expanded').forEach(openItem => {
+            //     openItem.classList.remove('expanded');
+            // });
+
+            // Toggle this item
+            item.classList.toggle('expanded', !wasExpanded);
         });
     });
 }
@@ -665,11 +728,11 @@ async function loadUsers(page = 1) {
             }
         }));
 
-        // Render table
+        // Render table (Name first, then Email)
         tbody.innerHTML = usersWithGuides.map(user => `
             <tr>
-                <td><strong>${escapeHtml(user.email)}</strong></td>
-                <td>${escapeHtml(`${user.first_name || ''} ${user.last_name || ''}`.trim() || '-')}</td>
+                <td><strong>${escapeHtml(`${user.first_name || ''} ${user.last_name || ''}`.trim() || '-')}</strong></td>
+                <td>${escapeHtml(user.email)}</td>
                 <td>${user.guides_count}</td>
                 <td>${getUserStatusBadges(user)}</td>
                 <td>${formatDate(user.created_at)}</td>
@@ -760,6 +823,55 @@ async function performAutocompleteSearch(query) {
 
     } catch (error) {
         console.error('Autocomplete search error:', error);
+        autocomplete.innerHTML = '<div class="search-autocomplete-empty"><i class="fas fa-exclamation-circle"></i> Search failed</div>';
+    }
+}
+
+// Autocomplete search for Users tab - same behavior but uses the user-search-autocomplete container
+async function performUserTabAutocompleteSearch(query) {
+    const autocomplete = document.getElementById('user-search-autocomplete');
+    if (!autocomplete) return;
+
+    // Show loading state
+    autocomplete.innerHTML = '<div class="search-autocomplete-loading"><i class="fas fa-spinner fa-spin"></i> Searching...</div>';
+    autocomplete.classList.add('active');
+
+    try {
+        // Search users - the API should support searching by email or name
+        const data = await apiCall(`/admin/users?search=${encodeURIComponent(query)}&per_page=8`);
+
+        if (!data.users || data.users.length === 0) {
+            autocomplete.innerHTML = '<div class="search-autocomplete-empty"><i class="fas fa-search"></i> No users found</div>';
+            return;
+        }
+
+        // Render results - list with name, email, and status badges
+        autocomplete.innerHTML = data.users.map(user => {
+            const displayName = `${user.first_name || ''} ${user.last_name || ''}`.trim();
+
+            return `
+                <div class="search-autocomplete-item" data-email="${escapeHtml(user.email)}">
+                    <div class="search-autocomplete-info">
+                        ${displayName ? `<div class="search-autocomplete-name">${escapeHtml(displayName)}</div>` : ''}
+                        <div class="search-autocomplete-email">${escapeHtml(user.email)}</div>
+                        <div class="search-autocomplete-badges">${getUserStatusBadges(user)}</div>
+                    </div>
+                </div>
+            `;
+        }).join('');
+
+        // Add click handlers to results
+        autocomplete.querySelectorAll('.search-autocomplete-item').forEach(item => {
+            item.addEventListener('click', () => {
+                const email = item.dataset.email;
+                autocomplete.classList.remove('active');
+                // Open the user detail modal instead of navigating to another page
+                openUserDetail(email);
+            });
+        });
+
+    } catch (error) {
+        console.error('User tab autocomplete search error:', error);
         autocomplete.innerHTML = '<div class="search-autocomplete-empty"><i class="fas fa-exclamation-circle"></i> Search failed</div>';
     }
 }
