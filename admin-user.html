@@ -322,6 +322,90 @@
             color: #991b1b;
         }
 
+        /* Scrollable containers */
+        .scrollable-container {
+            max-height: 320px;
+            overflow-y: auto;
+            padding-right: 8px;
+        }
+
+        .scrollable-container::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .scrollable-container::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 3px;
+        }
+
+        .scrollable-container::-webkit-scrollbar-thumb {
+            background: #c1c1c1;
+            border-radius: 3px;
+        }
+
+        .scrollable-container::-webkit-scrollbar-thumb:hover {
+            background: #a1a1a1;
+        }
+
+        /* Filter toggle buttons */
+        .filter-toggles {
+            display: flex;
+            gap: 6px;
+        }
+
+        .filter-toggle-btn {
+            padding: 5px 12px;
+            border: 1px solid #e5e7eb;
+            background: #fff;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: #6b7280;
+        }
+
+        .filter-toggle-btn:hover {
+            border-color: #667eea;
+            color: #667eea;
+        }
+
+        .filter-toggle-btn.active {
+            background: #667eea;
+            border-color: #667eea;
+            color: #fff;
+        }
+
+        .filter-toggle-btn .count {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 18px;
+            height: 18px;
+            padding: 0 5px;
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 9px;
+            font-size: 0.7rem;
+            margin-left: 4px;
+        }
+
+        .filter-toggle-btn.active .count {
+            background: rgba(255, 255, 255, 0.25);
+        }
+
+        /* Empty state for filtered results */
+        .empty-filter-state {
+            text-align: center;
+            padding: 24px 12px;
+            color: #9ca3af;
+        }
+
+        .empty-filter-state i {
+            font-size: 2rem;
+            margin-bottom: 8px;
+            display: block;
+        }
+
         /* Info value with icon */
         .info-value i {
             margin-right: 6px;
@@ -345,6 +429,35 @@
         [data-theme="dark"] .badge-status.revoked {
             background: rgba(239, 68, 68, 0.2);
             color: #f87171;
+        }
+
+        [data-theme="dark"] .scrollable-container::-webkit-scrollbar-track {
+            background: #374151;
+        }
+
+        [data-theme="dark"] .scrollable-container::-webkit-scrollbar-thumb {
+            background: #4b5563;
+        }
+
+        [data-theme="dark"] .scrollable-container::-webkit-scrollbar-thumb:hover {
+            background: #6b7280;
+        }
+
+        [data-theme="dark"] .filter-toggle-btn {
+            background: #374151;
+            border-color: #4b5563;
+            color: #9ca3af;
+        }
+
+        [data-theme="dark"] .filter-toggle-btn:hover {
+            border-color: #667eea;
+            color: #a5b4fc;
+        }
+
+        [data-theme="dark"] .filter-toggle-btn.active {
+            background: #667eea;
+            border-color: #667eea;
+            color: #fff;
         }
 
         /* Dark mode */
@@ -494,9 +607,14 @@
                 <div class="profile-section">
                     <div class="profile-section-header">
                         <h2><i class="fas fa-book"></i> Owned Guides (<span id="guides-count">0</span>)</h2>
+                        <div class="filter-toggles" id="guides-filter-toggles">
+                            <button class="filter-toggle-btn active" data-filter="all">All <span class="count" id="guides-count-all">0</span></button>
+                            <button class="filter-toggle-btn" data-filter="active">Active <span class="count" id="guides-count-active">0</span></button>
+                            <button class="filter-toggle-btn" data-filter="revoked">Revoked <span class="count" id="guides-count-revoked">0</span></button>
+                        </div>
                     </div>
                     <div class="profile-section-content">
-                        <div class="guides-list" id="guides-list">
+                        <div class="guides-list scrollable-container" id="guides-list">
                             <div class="loading-spinner"><i class="fas fa-spinner fa-spin"></i> Loading...</div>
                         </div>
                     </div>
@@ -505,10 +623,10 @@
                 <!-- Activity Timeline -->
                 <div class="profile-section">
                     <div class="profile-section-header">
-                        <h2><i class="fas fa-history"></i> Activity History</h2>
+                        <h2><i class="fas fa-history"></i> Activity History (<span id="activity-count">0</span>)</h2>
                     </div>
                     <div class="profile-section-content">
-                        <div class="activity-timeline" id="activity-timeline">
+                        <div class="activity-timeline scrollable-container" id="activity-timeline">
                             <div class="loading-spinner"><i class="fas fa-spinner fa-spin"></i> Loading...</div>
                         </div>
                     </div>
@@ -559,6 +677,6 @@
     <script src="api-service.js?v=1769142741"></script>
 
     <!-- User Profile Script (External to comply with CSP) -->
-    <script src="admin-user-script.js?v=2"></script>
+    <script src="admin-user-script.js?v=3"></script>
 </body>
 </html>

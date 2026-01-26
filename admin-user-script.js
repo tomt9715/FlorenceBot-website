@@ -11,6 +11,10 @@ if (!userEmail) {
     window.location.href = 'admin.html';
 }
 
+// Store guides data for filtering
+let allGuidesData = [];
+let currentGuidesFilter = 'all';
+
 document.addEventListener('DOMContentLoaded', async function() {
     const pageLoader = document.getElementById('page-loader');
 
@@ -145,43 +149,29 @@ async function loadUserProfile() {
 
         // Guides - use correct field names from Purchase model
         const guides = userData.guides || [];
+        allGuidesData = guides; // Store for filtering
+
         const activeGuides = guides.filter(function(g) { return g.is_active; });
+        const revokedGuides = guides.filter(function(g) { return !g.is_active; });
+
+        // Update counts
         document.getElementById('guides-count').textContent = activeGuides.length;
+        document.getElementById('guides-count-all').textContent = guides.length;
+        document.getElementById('guides-count-active').textContent = activeGuides.length;
+        document.getElementById('guides-count-revoked').textContent = revokedGuides.length;
 
-        if (guides.length === 0) {
-            document.getElementById('guides-list').innerHTML = '<p style="color: #6b7280; padding: 12px 0;">No guides owned yet.</p>';
-        } else {
-            let guidesHtml = '';
-            guides.forEach(function(g) {
-                // Use correct field names: product_name, product_id, purchased_at, source, is_active
-                const sourceIcon = g.source === 'stripe'
-                    ? '<i class="fas fa-credit-card" style="color: #6772e5;"></i> Purchased'
-                    : '<i class="fas fa-gift" style="color: #10b981;"></i> Admin Grant';
-                const statusClass = g.is_active ? 'active' : 'revoked';
-                const statusText = g.is_active ? 'Active' : 'Revoked';
-                const guideName = g.product_name || g.product_id || 'Unknown Guide';
-
-                guidesHtml +=
-                    '<div class="guide-item">' +
-                        '<div class="guide-item-info">' +
-                            '<div class="guide-item-name">' + escapeHtml(guideName) + '</div>' +
-                            '<div class="guide-item-meta">' +
-                                sourceIcon + ' &bull; ' + formatDate(g.purchased_at) +
-                            '</div>' +
-                        '</div>' +
-                        '<span class="badge-status ' + statusClass + '">' + statusText + '</span>' +
-                    '</div>';
-            });
-            document.getElementById('guides-list').innerHTML = guidesHtml;
-        }
+        // Render guides with current filter
+        renderGuides(currentGuidesFilter);
 
         // Activity timeline (downloads) - show product name
         const downloads = downloadsData.downloads || [];
+        document.getElementById('activity-count').textContent = downloads.length;
+
         if (downloads.length === 0) {
             document.getElementById('activity-timeline').innerHTML = '<p style="color: #6b7280; padding: 12px 0;">No activity recorded yet.</p>';
         } else {
             let activityHtml = '';
-            downloads.slice(0, 10).forEach(function(d) {
+            downloads.forEach(function(d) {
                 const productName = d.product_name || d.product_id || 'Unknown';
                 activityHtml +=
                     '<div class="activity-item">' +
@@ -242,7 +232,77 @@ function getAuthProviderIcon(provider) {
     }
 }
 
+function renderGuides(filter) {
+    currentGuidesFilter = filter;
+    let filteredGuides = allGuidesData;
+
+    if (filter === 'active') {
+        filteredGuides = allGuidesData.filter(function(g) { return g.is_active; });
+    } else if (filter === 'revoked') {
+        filteredGuides = allGuidesData.filter(function(g) { return !g.is_active; });
+    }
+
+    const guidesList = document.getElementById('guides-list');
+
+    if (allGuidesData.length === 0) {
+        guidesList.innerHTML = '<p style="color: #6b7280; padding: 12px 0;">No guides owned yet.</p>';
+        return;
+    }
+
+    if (filteredGuides.length === 0) {
+        const emptyMsg = filter === 'active' ? 'No active guides' : 'No revoked guides';
+        const emptyIcon = filter === 'active' ? 'fa-check-circle' : 'fa-times-circle';
+        guidesList.innerHTML =
+            '<div class="empty-filter-state">' +
+                '<i class="fas ' + emptyIcon + '"></i>' +
+                '<p>' + emptyMsg + '</p>' +
+            '</div>';
+        return;
+    }
+
+    let guidesHtml = '';
+    filteredGuides.forEach(function(g) {
+        const sourceIcon = g.source === 'stripe'
+            ? '<i class="fas fa-credit-card" style="color: #6772e5;"></i> Purchased'
+            : '<i class="fas fa-gift" style="color: #10b981;"></i> Admin Grant';
+        const statusClass = g.is_active ? 'active' : 'revoked';
+        const statusText = g.is_active ? 'Active' : 'Revoked';
+        const guideName = g.product_name || g.product_id || 'Unknown Guide';
+
+        guidesHtml +=
+            '<div class="guide-item">' +
+                '<div class="guide-item-info">' +
+                    '<div class="guide-item-name">' + escapeHtml(guideName) + '</div>' +
+                    '<div class="guide-item-meta">' +
+                        sourceIcon + ' &bull; ' + formatDate(g.purchased_at) +
+                    '</div>' +
+                '</div>' +
+                '<span class="badge-status ' + statusClass + '">' + statusText + '</span>' +
+            '</div>';
+    });
+    guidesList.innerHTML = guidesHtml;
+}
+
 function setupEventListeners() {
+    // Guides filter toggles
+    const guidesFilterToggles = document.getElementById('guides-filter-toggles');
+    if (guidesFilterToggles) {
+        guidesFilterToggles.addEventListener('click', function(e) {
+            const btn = e.target.closest('.filter-toggle-btn');
+            if (!btn) return;
+
+            // Update active state
+            guidesFilterToggles.querySelectorAll('.filter-toggle-btn').forEach(function(b) {
+                b.classList.remove('active');
+            });
+            btn.classList.add('active');
+
+            // Apply filter
+            const filter = btn.dataset.filter;
+            renderGuides(filter);
+        });
+    }
+
     // Toggle note form
     const toggleNoteFormBtn = document.getElementById('toggle-note-form-btn');
     if (toggleNoteFormBtn) {
