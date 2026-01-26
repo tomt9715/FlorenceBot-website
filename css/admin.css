@@ -4,7 +4,8 @@
    ADMIN SUB-NAVIGATION
    =========================== */
 .admin-subnav {
-    position: relative;
+    position: sticky;
+    top: 0;
     z-index: 500;
     background: #4a5568; /* Darker gray to contrast with hero */
     border-bottom: 2px solid rgba(255, 255, 255, 0.2);
