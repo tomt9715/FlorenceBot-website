@@ -40,7 +40,7 @@ function getUserStatusBadges(user) {
         const daysSinceCreation = Math.floor((now - createdAt) / (1000 * 60 * 60 * 24));
         if (daysSinceCreation <= 7) {
             badges.push('<span class="badge-status new"><i class="fas fa-sparkles"></i> New</span>');
-            return badges.join(' '); // New users don't need active/inactive
+            return `<div class="badge-group">${badges.join('')}</div>`; // New users don't need active/inactive
         }
     }
 

@@ -267,6 +267,14 @@
 .search-autocomplete-badges .badge-status {
     font-size: 0.7rem;
     padding: 2px 6px;
+    position: relative;
+    overflow: hidden;
+}
+
+.search-autocomplete-badges .badge-status i {
+    position: relative;
+    font-size: 0.6rem;
+    margin-right: 2px;
 }
 
 .search-autocomplete-empty {
