@@ -9,8 +9,7 @@ if (localStorage.getItem('accessToken')) {
     window.location.href = 'dashboard.html';
 }
 
-document.addEventListener('DOMContentLoaded', function() {
-
+document.addEventListener('DOMContentLoaded', function () {
     // Current auth mode: 'signin' or 'signup'
     let currentMode = 'signin'; // Default to sign in mode for returning users
 
@@ -87,7 +86,6 @@ document.addEventListener('DOMContentLoaded', function() {
             if (firstNameInput) firstNameInput.removeAttribute('required');
             if (lastNameInput) lastNameInput.removeAttribute('required');
             if (confirmPasswordInput) confirmPasswordInput.removeAttribute('required');
-
         } else {
             // Update title
             authTitle.textContent = 'Access Your Study Dashboard';
@@ -137,14 +135,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Mode toggle buttons
     if (signinModeBtn) {
-        signinModeBtn.addEventListener('click', function() {
+        signinModeBtn.addEventListener('click', function () {
             currentMode = 'signin';
             updateModeUI();
         });
     }
 
     if (signupModeBtn) {
-        signupModeBtn.addEventListener('click', function() {
+        signupModeBtn.addEventListener('click', function () {
             currentMode = 'signup';
             updateModeUI();
         });
@@ -152,7 +150,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Toggle to email form
     if (emailToggleBtn) {
-        emailToggleBtn.addEventListener('click', function() {
+        emailToggleBtn.addEventListener('click', function () {
             authOptions.style.display = 'none';
             emailForm.classList.add('active');
             localStorage.setItem('lastAuthMethod', 'email');
@@ -161,7 +159,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Back to all options
     if (backBtn) {
-        backBtn.addEventListener('click', function() {
+        backBtn.addEventListener('click', function () {
             emailForm.classList.remove('active');
             authOptions.style.display = 'flex';
             // Reset form
@@ -174,7 +172,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Password strength indicator
     if (passwordInput) {
-        passwordInput.addEventListener('input', function() {
+        passwordInput.addEventListener('input', function () {
             const password = this.value;
             const strengthBar = passwordStrength.querySelector('.strength-bar');
             const strengthText = passwordStrength.querySelector('.strength-text');
@@ -232,7 +230,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Password match indicator
     if (confirmPasswordInput) {
-        confirmPasswordInput.addEventListener('input', function() {
+        confirmPasswordInput.addEventListener('input', function () {
             const password = passwordInput.value;
             const confirmPassword = this.value;
 
@@ -269,7 +267,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Form validation
     if (signupForm) {
-        signupForm.addEventListener('submit', async function(e) {
+        signupForm.addEventListener('submit', async function (e) {
             e.preventDefault();
 
             const email = document.getElementById('email').value;
@@ -325,11 +323,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             } catch (error) {
                 console.error('Auth error:', error);
-                showAlert('Authentication Failed', error.message || 'Authentication failed. Please try again.', 'error');
+                showAlert(
+                    'Authentication Failed',
+                    error.message || 'Authentication failed. Please try again.',
+                    'error'
+                );
                 submitBtn.disabled = false;
-                submitBtn.innerHTML = currentMode === 'signin'
-                    ? '<i class="fas fa-sign-in-alt"></i><span>Sign In</span>'
-                    : '<i class="fas fa-user-plus"></i><span>Create Account</span>';
+                submitBtn.innerHTML =
+                    currentMode === 'signin'
+                        ? '<i class="fas fa-sign-in-alt"></i><span>Sign In</span>'
+                        : '<i class="fas fa-user-plus"></i><span>Create Account</span>';
             }
         });
     }
@@ -341,7 +344,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const forgotPasswordForm = document.getElementById('forgot-password-form');
 
     if (openForgotModalBtn) {
-        openForgotModalBtn.addEventListener('click', function(e) {
+        openForgotModalBtn.addEventListener('click', function (e) {
             e.preventDefault();
             forgotModal.style.display = 'flex';
             document.body.style.overflow = 'hidden'; // Prevent background scrolling
@@ -349,7 +352,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     if (closeForgotModalBtn) {
-        closeForgotModalBtn.addEventListener('click', function() {
+        closeForgotModalBtn.addEventListener('click', function () {
             forgotModal.style.display = 'none';
             document.body.style.overflow = '';
             forgotPasswordForm.reset();
@@ -359,7 +362,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Close modal when clicking outside
     if (forgotModal) {
-        forgotModal.addEventListener('click', function(e) {
+        forgotModal.addEventListener('click', function (e) {
             if (e.target === forgotModal) {
                 closeForgotModalBtn.click();
             }
@@ -368,7 +371,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Handle forgot password form submission
     if (forgotPasswordForm) {
-        forgotPasswordForm.addEventListener('submit', async function(e) {
+        forgotPasswordForm.addEventListener('submit', async function (e) {
             e.preventDefault();
 
             const email = document.getElementById('forgot-email').value;
@@ -383,7 +386,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 const response = await fetch(`${API_URL}/auth/forgot-password`, {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'application/json',
+                        'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({ email })
                 });
@@ -409,7 +412,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 setTimeout(() => {
                     closeForgotModalBtn.click();
                 }, 3000);
-
             } catch (error) {
                 console.error('Forgot password error:', error);
                 messageDiv.style.display = 'block';
@@ -434,11 +436,10 @@ document.addEventListener('DOMContentLoaded', function() {
 // Handle Login
 async function handleLogin(email, password) {
     try {
-
         const response = await fetch(`${API_URL}/auth/login`, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify({ email, password }),
             credentials: 'include' // Include cookies for httpOnly refresh token
@@ -450,7 +451,6 @@ async function handleLogin(email, password) {
             console.error('Login failed:', data.error);
             throw new Error(data.error || 'Login failed');
         }
-
 
         // Store access token and user data (refresh token is set as httpOnly cookie by backend)
         localStorage.setItem('accessToken', data.access_token);
@@ -504,7 +504,6 @@ async function handleLogin(email, password) {
 
         // Return to prevent any further execution
         return;
-
     } catch (error) {
         console.error('Login error:', error);
         throw error; // Re-throw to be caught by caller
@@ -517,11 +516,10 @@ async function handleLogin(email, password) {
 // Handle Registration
 async function handleRegister(email, password, firstName, lastName) {
     try {
-
         const response = await fetch(`${API_URL}/auth/register`, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify({
                 email,
@@ -543,7 +541,6 @@ async function handleRegister(email, password, firstName, lastName) {
 
         // Auto-login after registration (for testing)
         await handleLogin(email, password);
-
     } catch (error) {
         console.error('Registration or auto-login error:', error);
         throw error; // Re-throw to be caught by form handler
@@ -552,7 +549,6 @@ async function handleRegister(email, password, firstName, lastName) {
 
 // Handle social authentication
 async function handleSocialAuth(provider) {
-
     // Remember last used auth method
     localStorage.setItem('lastAuthMethod', provider);
 
@@ -568,16 +564,22 @@ async function handleSocialAuth(provider) {
 
     if (!supportedProviders.includes(provider)) {
         const providerNames = {
-            'discord': 'Discord',
-            'apple': 'Apple'
+            discord: 'Discord',
+            apple: 'Apple'
         };
-        showAlert('Coming Soon', `${providerNames[provider]} authentication will be available soon.\n\nPlease use Google or email authentication for now.`, 'info');
+        showAlert(
+            'Coming Soon',
+            `${providerNames[provider]} authentication will be available soon.\n\nPlease use Google or email authentication for now.`,
+            'info'
+        );
         return;
     }
 
     try {
         // Get OAuth authorization URL from backend
-        const response = await fetch(`${API_URL}/auth/oauth/${provider}`, {
+        // Pass return_url so backend knows where to redirect after OAuth
+        const returnUrl = encodeURIComponent(window.location.origin);
+        const response = await fetch(`${API_URL}/auth/oauth/${provider}?return_url=${returnUrl}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -593,25 +595,32 @@ async function handleSocialAuth(provider) {
 
         // Redirect to OAuth provider
         window.location.href = data.authorization_url;
-
     } catch (error) {
         console.error(`${provider} OAuth initiation error:`, error);
 
         // Check if it's a CORS error
         if (error instanceof TypeError && error.message === 'Load failed') {
-            showAlert('Connection Error', 'Unable to connect to authentication server. This is likely a CORS configuration issue on the backend. Please contact support or try email authentication.', 'error');
+            showAlert(
+                'Connection Error',
+                'Unable to connect to authentication server. This is likely a CORS configuration issue on the backend. Please contact support or try email authentication.',
+                'error'
+            );
         } else {
-            showAlert('Sign In Failed', `Failed to sign in with ${provider}. Please try again or use email authentication.`, 'error');
+            showAlert(
+                'Sign In Failed',
+                `Failed to sign in with ${provider}. Please try again or use email authentication.`,
+                'error'
+            );
         }
     }
 }
 
 // Setup social auth button event listeners (replaces inline onclick handlers)
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     // Google auth button
     const googleBtn = document.querySelector('.auth-btn.google[data-auth-method="google"]');
     if (googleBtn) {
-        googleBtn.addEventListener('click', function() {
+        googleBtn.addEventListener('click', function () {
             handleSocialAuth('google');
         });
     }
@@ -619,14 +628,14 @@ document.addEventListener('DOMContentLoaded', function() {
     // Discord auth button
     const discordBtn = document.querySelector('.auth-btn.discord[data-auth-method="discord"]');
     if (discordBtn) {
-        discordBtn.addEventListener('click', function() {
+        discordBtn.addEventListener('click', function () {
             handleSocialAuth('discord');
         });
     }
 });
 
 // Add ripple effect to buttons (matching site interaction)
-document.addEventListener('click', function(e) {
+document.addEventListener('click', function (e) {
     if (e.target.classList.contains('auth-btn') || e.target.closest('.auth-btn')) {
         const button = e.target.classList.contains('auth-btn') ? e.target : e.target.closest('.auth-btn');
         const ripple = document.createElement('span');

@@ -5,8 +5,7 @@
 // Check authentication (uses api-service.js functions)
 requireAuth();
 
-document.addEventListener('DOMContentLoaded', async function() {
-
+document.addEventListener('DOMContentLoaded', async function () {
     // Load user profile
     await loadUserProfile();
 
@@ -24,13 +23,13 @@ document.addEventListener('DOMContentLoaded', async function() {
     const userDropdown = document.getElementById('user-dropdown');
 
     if (userMenuBtn && userDropdown) {
-        userMenuBtn.addEventListener('click', function(e) {
+        userMenuBtn.addEventListener('click', function (e) {
             e.stopPropagation();
             userDropdown.classList.toggle('active');
         });
 
         // Close dropdown when clicking outside
-        document.addEventListener('click', function(e) {
+        document.addEventListener('click', function (e) {
             if (!userMenuBtn.contains(e.target) && !userDropdown.contains(e.target)) {
                 userDropdown.classList.remove('active');
             }
@@ -38,7 +37,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 
         // Close dropdown when clicking a link
         userDropdown.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', function(e) {
+            link.addEventListener('click', function (e) {
                 // Handle logout
                 if (this.getAttribute('href') === '#logout') {
                     e.preventDefault();
@@ -66,17 +65,17 @@ document.addEventListener('DOMContentLoaded', async function() {
         const confirmPasswordInput = document.getElementById('confirm-new-password');
 
         if (newPasswordInput) {
-            newPasswordInput.addEventListener('input', function() {
+            newPasswordInput.addEventListener('input', function () {
                 updatePasswordStrength(this.value, 'settings-password-strength');
             });
         }
 
         // Add password match indicator
         if (confirmPasswordInput && newPasswordInput) {
-            confirmPasswordInput.addEventListener('input', function() {
+            confirmPasswordInput.addEventListener('input', function () {
                 checkPasswordMatch(newPasswordInput.value, this.value, 'settings-password-match');
             });
-            newPasswordInput.addEventListener('input', function() {
+            newPasswordInput.addEventListener('input', function () {
                 if (confirmPasswordInput.value) {
                     checkPasswordMatch(this.value, confirmPasswordInput.value, 'settings-password-match');
                 }
@@ -112,7 +111,6 @@ async function loadUserProfile() {
 
         // Update local storage
         localStorage.setItem('user', JSON.stringify(user));
-
     } catch (error) {
         console.error('Error loading profile:', error);
         showAlert('Profile Load Failed', 'Failed to load your profile. Please try logging in again.', 'error');
@@ -149,9 +147,10 @@ function updateOAuthStatus(user) {
 // Connect OAuth provider
 async function connectOAuthProvider(provider) {
     try {
-        const response = await fetch(`${API_URL}/auth/oauth/${provider}`, {
+        // Pass return_url so backend knows where to redirect after OAuth
+        const returnUrl = encodeURIComponent(window.location.origin);
+        const response = await fetch(`${API_URL}/auth/oauth/${provider}?return_url=${returnUrl}`, {
             method: 'GET',
-            
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -168,7 +167,6 @@ async function connectOAuthProvider(provider) {
 
         // Redirect to OAuth provider
         window.location.href = data.authorization_url;
-
     } catch (error) {
         console.error(`Error connecting ${provider}:`, error);
         showAlert('Connection Failed', `Failed to connect ${provider}. Please try again.`, 'error');
@@ -205,7 +203,6 @@ async function handleProfileUpdate(e) {
         if (userAvatar && data.user.first_name) {
             userAvatar.innerHTML = `<span style="font-weight: 600; font-size: 18px;">${data.user.first_name.charAt(0)}</span>`;
         }
-
     } catch (error) {
         console.error('Error updating profile:', error);
         showAlert('Update Failed', error.message || 'Failed to update profile. Please try again.', 'error');
@@ -254,7 +251,6 @@ async function handlePasswordChange(e) {
 
         // Clear form
         document.getElementById('password-form').reset();
-
     } catch (error) {
         console.error('Error updating password:', error);
         showAlert('Update Failed', error.message || 'Failed to update password. Please try again.', 'error');
@@ -350,7 +346,6 @@ async function loadNotificationPreferences() {
         if (newGuidesToggle) newGuidesToggle.checked = prefs.new_guides !== false;
         if (promotionsToggle) promotionsToggle.checked = prefs.promotions !== false;
         if (marketingToggle) marketingToggle.checked = prefs.marketing !== false;
-
     } catch (error) {
         console.error('Error loading notification preferences:', error);
     }
@@ -399,7 +394,6 @@ async function handleNotificationToggle() {
                 statusEl.style.display = 'none';
             }, 2000);
         }
-
     } catch (error) {
         console.error('Error saving notification preferences:', error);
 
@@ -442,7 +436,7 @@ function setupDeleteAccount() {
     });
 
     // Close modal on background click
-    modal.addEventListener('click', (e) => {
+    modal.addEventListener('click', e => {
         if (e.target === modal) {
             modal.style.display = 'none';
             resetDeleteForm();
@@ -512,12 +506,15 @@ async function handleDeleteAccount() {
 
         // Show success and redirect
         modal.style.display = 'none';
-        showAlert('Account Deleted', 'Your account has been permanently deleted. You will be redirected to the homepage.', 'info');
+        showAlert(
+            'Account Deleted',
+            'Your account has been permanently deleted. You will be redirected to the homepage.',
+            'info'
+        );
 
         setTimeout(() => {
             window.location.href = 'index.html';
         }, 2000);
-
     } catch (error) {
         console.error('Error deleting account:', error);
         errorDiv.textContent = error.message || 'Failed to delete account. Please check your password and try again.';
