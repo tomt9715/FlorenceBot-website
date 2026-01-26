@@ -5,7 +5,7 @@
    =========================== */
 .admin-subnav {
     position: fixed;
-    top: 85px; /* Position below the fixed main navbar */
+    top: 90px; /* Position below the fixed main navbar */
     left: 0;
     right: 0;
     z-index: 900;
@@ -102,7 +102,7 @@
 /* Mobile responsive */
 @media (max-width: 768px) {
     .admin-subnav {
-        top: 72px; /* Position below the smaller mobile navbar */
+        top: 77px; /* Position below the smaller mobile navbar */
     }
 
     .admin-subnav-content {
