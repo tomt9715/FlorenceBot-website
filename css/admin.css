@@ -3754,36 +3754,41 @@
    =========================== */
 .guide-type-toggle {
     display: flex;
-    gap: 8px;
-    background: var(--background-light, #f3f4f6);
-    padding: 4px;
-    border-radius: 10px;
+    gap: 0;
+    background: transparent;
+    padding: 0;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 2px solid var(--primary-color, #667eea);
 }
 
 .guide-type-toggle .toggle-btn {
-    padding: 8px 16px;
+    padding: 10px 20px;
     border: none;
     background: transparent;
-    color: var(--text-secondary);
-    font-weight: 500;
-    font-size: 0.9rem;
-    border-radius: 8px;
+    color: var(--primary-color, #667eea);
+    font-weight: 600;
+    font-size: 0.85rem;
     cursor: pointer;
     transition: all 0.2s ease;
     display: flex;
     align-items: center;
     gap: 8px;
+    border-radius: 0;
 }
 
-.guide-type-toggle .toggle-btn:hover {
-    color: var(--text-primary);
-    background: rgba(0, 0, 0, 0.05);
+.guide-type-toggle .toggle-btn:first-child {
+    border-right: 1px solid var(--primary-color, #667eea);
+}
+
+.guide-type-toggle .toggle-btn:hover:not(.active) {
+    background: rgba(102, 126, 234, 0.1);
 }
 
 .guide-type-toggle .toggle-btn.active {
     background: var(--primary-color, #667eea);
     color: white;
-    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+    box-shadow: none;
 }
 
 .guide-type-toggle .toggle-btn i {
@@ -3791,20 +3796,23 @@
 }
 
 [data-theme="dark"] .guide-type-toggle {
-    background: #2a2a3e;
+    border-color: #667eea;
 }
 
 [data-theme="dark"] .guide-type-toggle .toggle-btn {
-    color: #9ca3af;
+    color: #667eea;
 }
 
-[data-theme="dark"] .guide-type-toggle .toggle-btn:hover {
-    color: #f9fafb;
-    background: rgba(255, 255, 255, 0.05);
+[data-theme="dark"] .guide-type-toggle .toggle-btn:first-child {
+    border-right-color: #667eea;
+}
+
+[data-theme="dark"] .guide-type-toggle .toggle-btn:hover:not(.active) {
+    background: rgba(102, 126, 234, 0.2);
 }
 
 [data-theme="dark"] .guide-type-toggle .toggle-btn.active {
-    background: var(--primary-color, #667eea);
+    background: #667eea;
     color: white;
 }
 
