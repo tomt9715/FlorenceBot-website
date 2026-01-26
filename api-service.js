@@ -8,15 +8,15 @@
 const API_URL = (function () {
     const hostname = window.location.hostname;
 
-    // Preview/staging branches use staging backend
-    if (hostname.includes('preview-') || hostname === 'localhost' || hostname === '127.0.0.1') {
-        console.log('[API] Using staging backend');
-        return 'https://staging-backend-production-365a.up.railway.app';
+    // Production is only the main domain
+    if (hostname === 'thenursingcollective.pro' || hostname === 'www.thenursingcollective.pro') {
+        console.log('[API] Using production backend');
+        return 'https://api.thenursingcollective.pro';
     }
 
-    // Production
-    console.log('[API] Using production backend');
-    return 'https://api.thenursingcollective.pro';
+    // Everything else (preview branches, localhost, pages.dev) uses staging
+    console.log('[API] Using staging backend');
+    return 'https://staging-backend-production-365a.up.railway.app';
 })();
 
 /**
