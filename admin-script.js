@@ -734,7 +734,7 @@ async function performAutocompleteSearch(query) {
         // Cache for keyboard navigation
         autocompleteCache = data.users;
 
-        // Render results - simple list with name and email
+        // Render results - list with name, email, and status badges
         autocomplete.innerHTML = data.users.map(user => {
             const displayName = `${user.first_name || ''} ${user.last_name || ''}`.trim();
 
@@ -743,6 +743,7 @@ async function performAutocompleteSearch(query) {
                     <div class="search-autocomplete-info">
                         ${displayName ? `<div class="search-autocomplete-name">${escapeHtml(displayName)}</div>` : ''}
                         <div class="search-autocomplete-email">${escapeHtml(user.email)}</div>
+                        <div class="search-autocomplete-badges">${getUserStatusBadges(user)}</div>
                     </div>
                 </div>
             `;

@@ -254,6 +254,18 @@
     text-overflow: ellipsis;
 }
 
+.search-autocomplete-badges {
+    margin-top: 6px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+
+.search-autocomplete-badges .badge-status {
+    font-size: 0.7rem;
+    padding: 2px 6px;
+}
+
 .search-autocomplete-empty {
     padding: 20px 16px;
     text-align: center;
