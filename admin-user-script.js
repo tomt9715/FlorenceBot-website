@@ -14,6 +14,7 @@ if (!userEmail) {
 // Store guides data for filtering
 let allGuidesData = [];
 let currentGuidesFilter = 'all';
+let currentGuidesSort = 'date-desc';
 
 document.addEventListener('DOMContentLoaded', async function() {
     const pageLoader = document.getElementById('page-loader');
@@ -232,15 +233,38 @@ function getAuthProviderIcon(provider) {
     }
 }
 
-function renderGuides(filter) {
-    currentGuidesFilter = filter;
-    let filteredGuides = allGuidesData;
+function renderGuides(filter, sort) {
+    if (filter) currentGuidesFilter = filter;
+    if (sort) currentGuidesSort = sort;
 
-    if (filter === 'active') {
-        filteredGuides = allGuidesData.filter(function(g) { return g.is_active; });
-    } else if (filter === 'revoked') {
-        filteredGuides = allGuidesData.filter(function(g) { return !g.is_active; });
+    let filteredGuides = allGuidesData.slice(); // Clone array
+
+    // Apply filter
+    if (currentGuidesFilter === 'active') {
+        filteredGuides = filteredGuides.filter(function(g) { return g.is_active; });
+    } else if (currentGuidesFilter === 'revoked') {
+        filteredGuides = filteredGuides.filter(function(g) { return !g.is_active; });
     }
+
+    // Apply sort
+    filteredGuides.sort(function(a, b) {
+        switch (currentGuidesSort) {
+            case 'date-desc':
+                return new Date(b.purchased_at || 0) - new Date(a.purchased_at || 0);
+            case 'date-asc':
+                return new Date(a.purchased_at || 0) - new Date(b.purchased_at || 0);
+            case 'name-asc':
+                return (a.product_name || '').localeCompare(b.product_name || '');
+            case 'name-desc':
+                return (b.product_name || '').localeCompare(a.product_name || '');
+            case 'source':
+                // Admin grants first, then stripe purchases
+                if (a.source === b.source) return 0;
+                return a.source === 'admin' ? -1 : 1;
+            default:
+                return 0;
+        }
+    });
 
     const guidesList = document.getElementById('guides-list');
 
@@ -250,8 +274,8 @@ function renderGuides(filter) {
     }
 
     if (filteredGuides.length === 0) {
-        const emptyMsg = filter === 'active' ? 'No active guides' : 'No revoked guides';
-        const emptyIcon = filter === 'active' ? 'fa-check-circle' : 'fa-times-circle';
+        const emptyMsg = currentGuidesFilter === 'active' ? 'No active guides' : 'No revoked guides';
+        const emptyIcon = currentGuidesFilter === 'active' ? 'fa-check-circle' : 'fa-times-circle';
         guidesList.innerHTML =
             '<div class="empty-filter-state">' +
                 '<i class="fas ' + emptyIcon + '"></i>' +
@@ -299,7 +323,15 @@ function setupEventListeners() {
 
             // Apply filter
             const filter = btn.dataset.filter;
-            renderGuides(filter);
+            renderGuides(filter, null);
+        });
+    }
+
+    // Guides sort dropdown
+    const guidesSort = document.getElementById('guides-sort');
+    if (guidesSort) {
+        guidesSort.addEventListener('change', function() {
+            renderGuides(null, this.value);
         });
     }
 

@@ -347,6 +347,39 @@
             background: #a1a1a1;
         }
 
+        /* Header controls */
+        .header-controls {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        /* Sort dropdown */
+        .sort-dropdown {
+            padding: 5px 28px 5px 10px;
+            border: 1px solid #e5e7eb;
+            background: #fff;
+            border-radius: 8px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            cursor: pointer;
+            color: #6b7280;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 8px center;
+        }
+
+        .sort-dropdown:hover {
+            border-color: #667eea;
+        }
+
+        .sort-dropdown:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.2);
+        }
+
         /* Filter toggle buttons */
         .filter-toggles {
             display: flex;
@@ -478,6 +511,22 @@
             background: #667eea;
             border-color: #667eea;
             color: #fff;
+        }
+
+        [data-theme="dark"] .sort-dropdown {
+            background-color: #374151;
+            border-color: #4b5563;
+            color: #e5e7eb;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239ca3af' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+        }
+
+        [data-theme="dark"] .sort-dropdown:hover {
+            border-color: #667eea;
+        }
+
+        [data-theme="dark"] .sort-dropdown option {
+            background-color: #374151;
+            color: #e5e7eb;
         }
 
         /* Dark mode */
@@ -631,10 +680,19 @@
                 <div class="profile-section">
                     <div class="profile-section-header">
                         <h2><i class="fas fa-book"></i> Owned Guides (<span id="guides-count">0</span>)</h2>
-                        <div class="filter-toggles" id="guides-filter-toggles">
-                            <button class="filter-toggle-btn active" data-filter="all">All <span class="count" id="guides-count-all">0</span></button>
-                            <button class="filter-toggle-btn" data-filter="active">Active <span class="count" id="guides-count-active">0</span></button>
-                            <button class="filter-toggle-btn" data-filter="revoked">Revoked <span class="count" id="guides-count-revoked">0</span></button>
+                        <div class="header-controls">
+                            <div class="filter-toggles" id="guides-filter-toggles">
+                                <button class="filter-toggle-btn active" data-filter="all">All <span class="count" id="guides-count-all">0</span></button>
+                                <button class="filter-toggle-btn" data-filter="active">Active <span class="count" id="guides-count-active">0</span></button>
+                                <button class="filter-toggle-btn" data-filter="revoked">Revoked <span class="count" id="guides-count-revoked">0</span></button>
+                            </div>
+                            <select class="sort-dropdown" id="guides-sort">
+                                <option value="date-desc">Newest First</option>
+                                <option value="date-asc">Oldest First</option>
+                                <option value="name-asc">Name A-Z</option>
+                                <option value="name-desc">Name Z-A</option>
+                                <option value="source">By Source</option>
+                            </select>
                         </div>
                     </div>
                     <div class="profile-section-content">
@@ -701,6 +759,6 @@
     <script src="api-service.js?v=1769142741"></script>
 
     <!-- User Profile Script (External to comply with CSP) -->
-    <script src="admin-user-script.js?v=3"></script>
+    <script src="admin-user-script.js?v=4"></script>
 </body>
 </html>
