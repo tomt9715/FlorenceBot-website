@@ -309,7 +309,21 @@ function switchTab(tabName) {
 
 async function loadDashboardOverview() {
     try {
-        const data = await apiCall('/admin/dashboard/enhanced');
+        // Get selected time period
+        const timePeriodSelect = document.getElementById('stats-time-period');
+        let days = timePeriodSelect ? timePeriodSelect.value : '30';
+
+        // Handle special values
+        if (days === 'ytd') {
+            // Calculate days from Jan 1 of current year
+            const now = new Date();
+            const startOfYear = new Date(now.getFullYear(), 0, 1);
+            days = Math.ceil((now - startOfYear) / (1000 * 60 * 60 * 24));
+        }
+
+        // Build API URL with days parameter (backend can use this for filtering)
+        const apiUrl = days === 'all' ? '/admin/dashboard/enhanced' : `/admin/dashboard/enhanced?days=${days}`;
+        const data = await apiCall(apiUrl);
 
         // Update hero stats
         const heroTotalUsers = document.getElementById('hero-total-users');

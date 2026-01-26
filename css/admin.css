@@ -265,16 +265,16 @@
 }
 
 .search-autocomplete-badges .badge-status {
-    font-size: 0.7rem;
-    padding: 2px 6px;
-    position: relative;
-    overflow: hidden;
+    font-size: 0.65rem;
+    padding: 2px 8px;
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
 }
 
 .search-autocomplete-badges .badge-status i {
-    position: relative;
-    font-size: 0.6rem;
-    margin-right: 2px;
+    font-size: 0.55rem;
+    flex-shrink: 0;
 }
 
 .search-autocomplete-empty {
@@ -317,20 +317,45 @@
     gap: 12px;
 }
 
-.time-filter select {
+.time-filter select,
+.time-filter-dropdown select {
     padding: 10px 32px 10px 14px;
     border: 1px solid #e5e7eb;
     border-radius: 8px;
     font-size: 0.85rem;
-    background: #f9fafb url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236b7280' d='M3 4.5L6 7.5L9 4.5'/%3E%3C/svg%3E") no-repeat right 12px center;
+    background: #f9fafb;
     cursor: pointer;
     appearance: none;
     -webkit-appearance: none;
 }
 
-.time-filter select:focus {
+.time-filter select:focus,
+.time-filter-dropdown select:focus {
     outline: none;
     border-color: var(--primary-color, #667eea);
+}
+
+.time-filter-dropdown {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+}
+
+.time-filter-dropdown select {
+    padding-right: 36px;
+}
+
+.time-filter-dropdown > i {
+    position: absolute;
+    right: 12px;
+    font-size: 0.7rem;
+    color: #6b7280;
+    pointer-events: none;
+    transition: transform 0.2s ease;
+}
+
+.time-filter-dropdown:hover > i {
+    color: var(--primary-color, #667eea);
 }
 
 [data-theme="dark"] .admin-toolbar {
@@ -338,10 +363,15 @@
 }
 
 [data-theme="dark"] .toolbar-search input,
-[data-theme="dark"] .time-filter select {
+[data-theme="dark"] .time-filter select,
+[data-theme="dark"] .time-filter-dropdown select {
     background: #374151;
     border-color: #4b5563;
     color: #f9fafb;
+}
+
+[data-theme="dark"] .time-filter-dropdown > i {
+    color: #9ca3af;
 }
 
 [data-theme="dark"] .toolbar-search input::placeholder {

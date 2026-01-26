@@ -165,13 +165,17 @@
                             <div class="search-autocomplete" id="search-autocomplete"></div>
                         </div>
                         <div class="toolbar-actions">
-                            <div class="time-filter">
+                            <div class="time-filter-dropdown">
                                 <select id="stats-time-period">
+                                    <option value="1">Today</option>
                                     <option value="7">Last 7 Days</option>
                                     <option value="30" selected>Last 30 Days</option>
-                                    <option value="90">Last 90 Days</option>
+                                    <option value="90">Last Quarter</option>
+                                    <option value="ytd">Year to Date</option>
+                                    <option value="365">Last 12 Months</option>
                                     <option value="all">All Time</option>
                                 </select>
+                                <i class="fas fa-chevron-down"></i>
                             </div>
                             <button class="btn btn-secondary btn-sm" id="export-data-btn">
                                 <i class="fas fa-download"></i> Export
