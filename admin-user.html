@@ -454,7 +454,14 @@
         }
 
         document.addEventListener('DOMContentLoaded', async function() {
+            const pageLoader = document.getElementById('page-loader');
+
             try {
+                // Check if api-service.js loaded properly
+                if (typeof isAuthenticated !== 'function') {
+                    throw new Error('API service not loaded');
+                }
+
                 // Check authentication
                 if (!isAuthenticated()) {
                     window.location.href = 'login.html';
@@ -463,31 +470,55 @@
 
                 // Verify admin access
                 const user = getCurrentUser();
+                console.log('Current user:', user); // Debug log
+
                 if (!user || !user.is_admin) {
+                    console.log('User not admin, redirecting to dashboard');
                     window.location.href = 'dashboard.html';
                     return;
                 }
+
+                console.log('Loading profile for:', userEmail); // Debug log
 
                 // Load user profile
                 await loadUserProfile();
 
                 // Setup event listeners
                 setupEventListeners();
+
             } catch (error) {
                 console.error('Error initializing user profile page:', error);
-                showToast('Failed to initialize page', 'error');
+                showToast('Failed to initialize page: ' + error.message, 'error');
+
+                // Show error state
+                document.getElementById('profile-name').textContent = 'Error';
+                document.getElementById('profile-email').textContent = error.message;
             } finally {
                 // Always hide page loader
-                document.getElementById('page-loader').style.display = 'none';
+                if (pageLoader) {
+                    pageLoader.style.display = 'none';
+                }
             }
         });
 
         async function loadUserProfile() {
             try {
-                const [userData, downloadsData] = await Promise.all([
-                    apiCall(`/admin/users/by-email/${encodeURIComponent(userEmail)}`),
-                    apiCall(`/admin/users/by-email/${encodeURIComponent(userEmail)}/downloads`).catch(() => ({ downloads: [] }))
+                console.log('Fetching user data...'); // Debug log
+
+                // Add timeout wrapper for API calls
+                const timeoutPromise = new Promise((_, reject) =>
+                    setTimeout(() => reject(new Error('Request timed out')), 15000)
+                );
+
+                const [userData, downloadsData] = await Promise.race([
+                    Promise.all([
+                        apiCall(`/admin/users/by-email/${encodeURIComponent(userEmail)}`),
+                        apiCall(`/admin/users/by-email/${encodeURIComponent(userEmail)}/downloads`).catch(() => ({ downloads: [] }))
+                    ]),
+                    timeoutPromise
                 ]);
+
+                console.log('User data received:', userData); // Debug log
 
                 const data = userData.user;
 
