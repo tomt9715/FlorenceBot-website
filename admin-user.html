@@ -664,19 +664,8 @@
             }, 3000);
         }
 
-        async function apiCall(endpoint, options = {}) {
-            const user = getCurrentUser();
-            const response = await fetch(`${window.API_BASE_URL || 'https://florencebot-backend-production.up.railway.app'}${endpoint}`, {
-                ...options,
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${user.token}`,
-                    ...options.headers
-                }
-            });
-            if (!response.ok) throw new Error('API call failed');
-            return response.json();
-        }
+        // Note: Uses the global apiCall from api-service.js which is already loaded
+        // The global apiCall handles token from localStorage.getItem('accessToken')
     </script>
 </body>
 </html>
