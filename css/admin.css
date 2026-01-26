@@ -2715,6 +2715,15 @@
     margin-right: 8px;
 }
 
+/* Desktop/Mobile visibility defaults - MUST come before media queries */
+.desktop-only {
+    display: block !important;
+}
+
+.mobile-only {
+    display: none !important;
+}
+
 /* Responsive */
 @media (max-width: 1024px) {
     .admin-hero-content {
@@ -3168,15 +3177,6 @@
     .admin-quick-actions {
         grid-template-columns: 1fr;
     }
-}
-
-/* Desktop/Mobile visibility defaults */
-.desktop-only {
-    display: block !important;
-}
-
-.mobile-only {
-    display: none !important;
 }
 
 /* ===========================
