@@ -2920,11 +2920,99 @@
         width: 100%;
         justify-content: center;
     }
+
+    /* Users Table Mobile - Horizontal scroll with better visibility */
+    .users-table-container {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        margin: 0 -16px;
+        padding: 0 16px;
+    }
+
+    .users-table-container .admin-table {
+        min-width: 650px;
+    }
+
+    .users-table-container .admin-table th,
+    .users-table-container .admin-table td {
+        white-space: nowrap;
+        padding: 10px 12px;
+    }
+
+    /* Hide Joined column on mobile to save space */
+    .users-table-container .admin-table th:nth-child(5),
+    .users-table-container .admin-table td:nth-child(5) {
+        display: none;
+    }
+
+    /* Compact the Actions column */
+    .users-table-container .admin-table th:nth-child(6),
+    .users-table-container .admin-table td:nth-child(6) {
+        padding: 10px 8px;
+    }
+
+    /* Guides Table Mobile */
+    .guides-table-container {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        margin: 0 -16px;
+        padding: 0 16px;
+    }
+
+    .guides-table-container .admin-table {
+        min-width: 700px;
+    }
+
+    /* Search section mobile */
+    .search-input-group {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .search-input-group input {
+        width: 100%;
+    }
+
+    .search-input-group .search-btn {
+        width: 100%;
+    }
+
+    /* Compact action buttons on mobile */
+    .table-actions .action-btn {
+        padding: 5px 10px;
+        font-size: 0.75rem;
+    }
+
+    .table-actions .action-btn i {
+        font-size: 0.7rem;
+    }
+
+    /* Status badges more compact on mobile */
+    .badge-status {
+        font-size: 0.65rem;
+        padding: 3px 6px;
+    }
+
+    /* User count badge */
+    .user-count {
+        font-size: 0.8rem;
+    }
 }
 
 @media (max-width: 480px) {
     .admin-quick-actions {
         grid-template-columns: 1fr;
+    }
+
+    /* Even smaller screens - further reduce table size */
+    .users-table-container .admin-table {
+        min-width: 550px;
+        font-size: 0.8rem;
+    }
+
+    .users-table-container .admin-table th,
+    .users-table-container .admin-table td {
+        padding: 8px 10px;
     }
 }
 
