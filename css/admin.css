@@ -726,7 +726,7 @@
 }
 
 .status-item.expanded .status-details {
-    max-height: 150px;
+    max-height: 250px;
     padding: 12px 14px 14px 14px;
     border-top: 1px solid var(--border-color, #e5e7eb);
 }
