@@ -170,6 +170,20 @@ document.addEventListener('DOMContentLoaded', async function() {
 
     // Hide page loader
     document.getElementById('page-loader').style.display = 'none';
+
+    // Handle URL hash for tab navigation (e.g., admin.html#users)
+    const hash = window.location.hash.replace('#', '');
+    if (hash && ['overview', 'users', 'guides', 'audit'].includes(hash)) {
+        switchTab(hash);
+    }
+
+    // Also listen for hash changes
+    window.addEventListener('hashchange', function() {
+        const newHash = window.location.hash.replace('#', '');
+        if (newHash && ['overview', 'users', 'guides', 'audit'].includes(newHash)) {
+            switchTab(newHash);
+        }
+    });
 });
 
 // Setup event listeners
