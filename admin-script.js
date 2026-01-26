@@ -603,19 +603,16 @@ async function performAutocompleteSearch(query) {
         // Cache for keyboard navigation
         autocompleteCache = data.users;
 
-        // Render results
+        // Render results - simple list with name and email
         autocomplete.innerHTML = data.users.map(user => {
-            const displayName = `${user.first_name || ''} ${user.last_name || ''}`.trim() || 'Unknown';
-            const initial = (user.first_name || user.email || '?').charAt(0).toUpperCase();
+            const displayName = `${user.first_name || ''} ${user.last_name || ''}`.trim();
 
             return `
                 <div class="search-autocomplete-item" data-email="${escapeHtml(user.email)}">
-                    <div class="search-autocomplete-avatar">${initial}</div>
                     <div class="search-autocomplete-info">
-                        <div class="search-autocomplete-name">${escapeHtml(displayName)}</div>
+                        ${displayName ? `<div class="search-autocomplete-name">${escapeHtml(displayName)}</div>` : ''}
                         <div class="search-autocomplete-email">${escapeHtml(user.email)}</div>
                     </div>
-                    ${user.is_premium ? '<span class="search-autocomplete-badge premium"><i class="fas fa-crown"></i> Premium</span>' : ''}
                 </div>
             `;
         }).join('');
