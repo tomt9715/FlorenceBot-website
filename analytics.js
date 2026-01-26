@@ -10,8 +10,8 @@
  */
 
 const Analytics = {
-    // Replace with your actual GA4 Measurement ID
-    measurementId: 'G-XXXXXXXXXX', // TODO: Add your GA4 Measurement ID
+    // GA4 Measurement ID
+    measurementId: 'G-JET68BQMLT',
 
     // Track if analytics has been initialized
     initialized: false,
