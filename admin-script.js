@@ -1433,53 +1433,262 @@ async function bulkRevokeGuides() {
 }
 
 
-// ==================== Add Guide Modal ====================
+// ==================== Add Guide Modal (Enhanced) ====================
+
+let addGuideSelectedItems = new Set();
+let addGuideCurrentType = 'study_guide';
+let addGuideSearchQuery = '';
 
 function openAddGuideModal() {
     if (!currentUserEmail) return;
 
+    // Reset state
+    addGuideSelectedItems.clear();
+    addGuideCurrentType = 'study_guide';
+    addGuideSearchQuery = '';
+
     document.getElementById('add-guide-user-email').textContent = currentUserEmail;
-
-    // Populate guide dropdown
-    const select = document.getElementById('add-guide-select');
-    select.innerHTML = '<option value="">Select a guide...</option>' +
-        productsCache
-            .filter(p => p.type !== 'subscription')
-            .map(p => `<option value="${escapeHtml(p.id)}">${escapeHtml(p.name)} ($${p.price})</option>`)
-            .join('');
-
     document.getElementById('add-guide-reason').value = 'promotional_giveaway';
     document.getElementById('add-guide-notes').value = '';
+
+    // Reset type toggle
+    document.querySelectorAll('.add-guide-type-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.type === 'study_guide');
+    });
+
+    // Reset search
+    const searchInput = document.getElementById('add-guide-search');
+    if (searchInput) {
+        searchInput.value = '';
+        searchInput.placeholder = 'Search study guides...';
+    }
+    const clearBtn = document.getElementById('add-guide-search-clear');
+    if (clearBtn) clearBtn.style.display = 'none';
+
+    // Render guide list
+    renderAddGuideList();
+    updateSelectedGuidesDisplay();
+
+    // Disable submit button
+    document.getElementById('submit-add-guide-btn').disabled = true;
 
     document.getElementById('add-guide-modal').classList.add('active');
 }
 
-function closeAddGuideModal() {
-    document.getElementById('add-guide-modal').classList.remove('active');
-}
+function renderAddGuideList() {
+    const listContainer = document.getElementById('add-guide-list');
+    if (!listContainer) return;
 
-async function submitAddGuide() {
-    const guideId = document.getElementById('add-guide-select').value;
-    const reason = document.getElementById('add-guide-reason').value;
-    const notes = document.getElementById('add-guide-notes').value;
+    // Filter guides based on type and search
+    const filteredGuides = productsCache.filter(p => {
+        if (p.type === 'subscription') return false;
 
-    if (!guideId) {
-        showToast('Please select a guide', 'error');
+        const isStudyGuide = p.type === 'individual';
+        const isPackage = p.type === 'lite-package' || p.type === 'full-package';
+
+        if (addGuideCurrentType === 'study_guide' && !isStudyGuide) return false;
+        if (addGuideCurrentType === 'class_package' && !isPackage) return false;
+
+        if (addGuideSearchQuery && !p.name.toLowerCase().includes(addGuideSearchQuery.toLowerCase())) {
+            return false;
+        }
+
+        return true;
+    });
+
+    if (filteredGuides.length === 0) {
+        listContainer.innerHTML = `
+            <div class="add-guide-empty">
+                <i class="fas fa-search"></i>
+                No ${addGuideCurrentType === 'study_guide' ? 'study guides' : 'class packages'} found
+            </div>
+        `;
         return;
     }
 
-    try {
-        await apiCall(`/admin/users/by-email/${encodeURIComponent(currentUserEmail)}/guides`, {
-            method: 'POST',
-            body: JSON.stringify({ guide_id: guideId, reason, notes })
+    listContainer.innerHTML = filteredGuides.map(guide => `
+        <div class="add-guide-item ${addGuideSelectedItems.has(guide.id) ? 'selected' : ''}"
+             data-guide-id="${escapeHtml(guide.id)}"
+             data-guide-name="${escapeHtml(guide.name)}">
+            <div class="add-guide-item-checkbox"></div>
+            <div class="add-guide-item-info">
+                <div class="add-guide-item-name">${escapeHtml(guide.name)}</div>
+                <div class="add-guide-item-price">$${guide.price}</div>
+            </div>
+        </div>
+    `).join('');
+
+    // Add click listeners
+    listContainer.querySelectorAll('.add-guide-item').forEach(item => {
+        item.addEventListener('click', function() {
+            const guideId = this.dataset.guideId;
+            const guideName = this.dataset.guideName;
+
+            if (addGuideSelectedItems.has(guideId)) {
+                addGuideSelectedItems.delete(guideId);
+                this.classList.remove('selected');
+            } else {
+                addGuideSelectedItems.add(guideId);
+                this.classList.add('selected');
+            }
+
+            updateSelectedGuidesDisplay();
         });
-        showToast('Guide granted successfully', 'success');
-        closeAddGuideModal();
-        openUserDetail(currentUserEmail); // Refresh
-    } catch (error) {
-        console.error('Error granting guide:', error);
-        showToast(error.message || 'Failed to grant guide', 'error');
+    });
+}
+
+function updateSelectedGuidesDisplay() {
+    const container = document.getElementById('selected-guides-container');
+    const chipsContainer = document.getElementById('selected-guides-chips');
+    const countSpan = document.getElementById('selected-guides-count');
+    const submitBtn = document.getElementById('submit-add-guide-btn');
+
+    if (addGuideSelectedItems.size === 0) {
+        container.style.display = 'none';
+        submitBtn.disabled = true;
+        return;
     }
+
+    container.style.display = 'block';
+    countSpan.textContent = addGuideSelectedItems.size;
+    submitBtn.disabled = false;
+
+    // Get guide names from cache
+    const chips = [];
+    addGuideSelectedItems.forEach(guideId => {
+        const guide = productsCache.find(p => p.id === guideId);
+        if (guide) {
+            chips.push(`
+                <div class="selected-guide-chip" data-guide-id="${escapeHtml(guideId)}">
+                    <span>${escapeHtml(guide.name.length > 25 ? guide.name.substring(0, 25) + '...' : guide.name)}</span>
+                    <button class="selected-guide-chip-remove" data-guide-id="${escapeHtml(guideId)}">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            `);
+        }
+    });
+
+    chipsContainer.innerHTML = chips.join('');
+
+    // Add remove listeners
+    chipsContainer.querySelectorAll('.selected-guide-chip-remove').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const guideId = this.dataset.guideId;
+            addGuideSelectedItems.delete(guideId);
+
+            // Update list item if visible
+            const listItem = document.querySelector(`.add-guide-item[data-guide-id="${guideId}"]`);
+            if (listItem) listItem.classList.remove('selected');
+
+            updateSelectedGuidesDisplay();
+        });
+    });
+}
+
+function initAddGuideModalListeners() {
+    // Type toggle buttons
+    document.querySelectorAll('.add-guide-type-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            document.querySelectorAll('.add-guide-type-btn').forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            addGuideCurrentType = this.dataset.type;
+
+            // Update search placeholder
+            const searchInput = document.getElementById('add-guide-search');
+            if (searchInput) {
+                searchInput.placeholder = addGuideCurrentType === 'study_guide'
+                    ? 'Search study guides...'
+                    : 'Search class packages...';
+            }
+
+            renderAddGuideList();
+        });
+    });
+
+    // Search input
+    const searchInput = document.getElementById('add-guide-search');
+    const clearBtn = document.getElementById('add-guide-search-clear');
+
+    if (searchInput) {
+        searchInput.addEventListener('input', function() {
+            addGuideSearchQuery = this.value.trim();
+            clearBtn.style.display = addGuideSearchQuery ? 'flex' : 'none';
+            renderAddGuideList();
+        });
+
+        searchInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                this.value = '';
+                addGuideSearchQuery = '';
+                clearBtn.style.display = 'none';
+                renderAddGuideList();
+            }
+        });
+    }
+
+    if (clearBtn) {
+        clearBtn.addEventListener('click', function() {
+            searchInput.value = '';
+            addGuideSearchQuery = '';
+            this.style.display = 'none';
+            renderAddGuideList();
+            searchInput.focus();
+        });
+    }
+}
+
+function closeAddGuideModal() {
+    document.getElementById('add-guide-modal').classList.remove('active');
+    addGuideSelectedItems.clear();
+}
+
+async function submitAddGuide() {
+    if (addGuideSelectedItems.size === 0) {
+        showToast('Please select at least one guide', 'error');
+        return;
+    }
+
+    const reason = document.getElementById('add-guide-reason').value;
+    const notes = document.getElementById('add-guide-notes').value;
+    const submitBtn = document.getElementById('submit-add-guide-btn');
+
+    // Disable button during submission
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Granting...';
+
+    let successCount = 0;
+    let errorCount = 0;
+    const selectedIds = Array.from(addGuideSelectedItems);
+
+    for (const guideId of selectedIds) {
+        try {
+            await apiCall(`/admin/users/by-email/${encodeURIComponent(currentUserEmail)}/guides`, {
+                method: 'POST',
+                body: JSON.stringify({ guide_id: guideId, reason, notes })
+            });
+            successCount++;
+        } catch (error) {
+            console.error('Error granting guide:', guideId, error);
+            errorCount++;
+        }
+    }
+
+    // Reset button
+    submitBtn.innerHTML = '<i class="fas fa-check"></i> Grant Access';
+    submitBtn.disabled = false;
+
+    if (successCount > 0) {
+        const plural = successCount > 1 ? 'guides' : 'guide';
+        showToast(`Successfully granted ${successCount} ${plural}`, 'success');
+    }
+    if (errorCount > 0) {
+        showToast(`Failed to grant ${errorCount} guide(s)`, 'error');
+    }
+
+    closeAddGuideModal();
+    openUserDetail(currentUserEmail); // Refresh user detail view
 }
 
 // ==================== Notes ====================
@@ -2258,6 +2467,9 @@ document.addEventListener('DOMContentLoaded', function() {
     if (submitAddGuideBtn) {
         submitAddGuideBtn.addEventListener('click', submitAddGuide);
     }
+
+    // Initialize enhanced add guide modal listeners
+    initAddGuideModalListeners();
 
     // Notes form buttons
     const toggleAddNoteBtn = document.getElementById('toggle-add-note-btn');
