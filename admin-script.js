@@ -57,7 +57,7 @@ function getUserStatusBadges(user) {
         badges.push('<span class="badge-status inactive"><i class="fas fa-moon"></i> Inactive</span>');
     }
 
-    return badges.join(' ');
+    return `<div class="badge-group">${badges.join('')}</div>`;
 }
 
 // Initialize on DOM load

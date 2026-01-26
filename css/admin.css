@@ -1380,6 +1380,13 @@
 }
 
 /* Table Badges */
+.badge-group {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+}
+
 .badge-status {
     display: inline-flex;
     align-items: center;
@@ -1388,6 +1395,7 @@
     border-radius: 20px;
     font-size: 0.75rem;
     font-weight: 600;
+    white-space: nowrap;
 }
 
 .badge-status.premium {
