@@ -1500,7 +1500,6 @@ async function loadPurchaseHistory() {
 function setupPurchaseHistoryFilters() {
     const searchInput = document.getElementById('purchase-search-input');
     const dateFilter = document.getElementById('purchase-date-filter');
-    const statusFilter = document.getElementById('purchase-status-filter');
     const prevBtn = document.getElementById('purchase-prev-btn');
     const nextBtn = document.getElementById('purchase-next-btn');
 
@@ -1512,10 +1511,6 @@ function setupPurchaseHistoryFilters() {
 
     if (dateFilter) {
         dateFilter.addEventListener('change', applyPurchaseFilters);
-    }
-
-    if (statusFilter) {
-        statusFilter.addEventListener('change', applyPurchaseFilters);
     }
 
     if (prevBtn) {
@@ -1555,17 +1550,19 @@ function debounce(func, wait) {
 function applyPurchaseFilters() {
     const searchInput = document.getElementById('purchase-search-input');
     const dateFilter = document.getElementById('purchase-date-filter');
-    const statusFilter = document.getElementById('purchase-status-filter');
 
     const searchTerm = (searchInput?.value || '').toLowerCase().trim();
     const dateRange = dateFilter?.value || 'all';
-    const statusValue = statusFilter?.value || 'all';
 
     filteredOrders = allOrders.filter(order => {
-        // Search filter - check order number and item names
+        // Filter out orders that only contain revoked items
+        const activeItems = (order.items || []).filter(item => item.is_active !== false);
+        if (activeItems.length === 0) return false;
+
+        // Search filter - check order number and active item names only
         if (searchTerm) {
             const orderNumberMatch = order.order_number.toLowerCase().includes(searchTerm);
-            const itemMatch = (order.items || []).some(item =>
+            const itemMatch = activeItems.some(item =>
                 item.product_name.toLowerCase().includes(searchTerm)
             );
             if (!orderNumberMatch && !itemMatch) return false;
@@ -1578,15 +1575,6 @@ function applyPurchaseFilters() {
             const cutoffDate = new Date();
             cutoffDate.setDate(cutoffDate.getDate() - days);
             if (orderDate < cutoffDate) return false;
-        }
-
-        // Status filter
-        if (statusValue !== 'all') {
-            const hasRevoked = (order.items || []).some(item => item.is_active === false);
-            const hasActive = (order.items || []).some(item => item.is_active !== false);
-
-            if (statusValue === 'revoked' && !hasRevoked) return false;
-            if (statusValue === 'active' && !hasActive) return false;
         }
 
         return true;
@@ -1654,18 +1642,15 @@ function renderPurchaseHistory() {
 
     // Render orders
     historyList.innerHTML = pageOrders.map(order => {
-        const itemsHtml = (order.items || []).map(item => {
-            const isRevoked = item.is_active === false;
-            const revokedClass = isRevoked ? ' revoked' : '';
-            const revokedBadge = isRevoked ? '<span class="revoked-badge"><i class="fas fa-ban"></i> Revoked</span>' : '';
-            const revokedReason = isRevoked && item.grant_reason ? `<div class="revoked-reason"><i class="fas fa-info-circle"></i> ${escapeHtml(item.grant_reason)}</div>` : '';
+        // Filter out revoked items - only show active items
+        const activeItems = (order.items || []).filter(item => item.is_active !== false);
 
+        const itemsHtml = activeItems.map(item => {
             return `
-                <div class="purchase-item-row${revokedClass}">
-                    <span class="purchase-item-name">${escapeHtml(item.product_name)}${revokedBadge}</span>
+                <div class="purchase-item-row">
+                    <span class="purchase-item-name">${escapeHtml(item.product_name)}</span>
                     <span class="purchase-item-price">$${parseFloat(item.price).toFixed(2)}</span>
                 </div>
-                ${revokedReason}
             `;
         }).join('');
 
