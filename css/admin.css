@@ -1291,8 +1291,19 @@
 }
 
 .badge-status.active {
-    background: #dcfce7;
-    color: #16a34a;
+    background: #dbeafe;
+    color: #2563eb;
+}
+
+.badge-status.new {
+    background: #f0fdf4;
+    color: #15803d;
+    border: 1px solid #86efac;
+}
+
+.badge-status.inactive {
+    background: #f3f4f6;
+    color: #6b7280;
 }
 
 .badge-status.revoked {
@@ -2778,7 +2789,19 @@
 }
 
 [data-theme="dark"] .badge-status.active {
-    background: rgba(22, 163, 74, 0.2);
+    background: rgba(37, 99, 235, 0.2);
+    color: #93c5fd;
+}
+
+[data-theme="dark"] .badge-status.new {
+    background: rgba(21, 128, 61, 0.2);
+    color: #86efac;
+    border-color: rgba(134, 239, 172, 0.3);
+}
+
+[data-theme="dark"] .badge-status.inactive {
+    background: rgba(107, 114, 128, 0.2);
+    color: #9ca3af;
 }
 
 [data-theme="dark"] .badge-status.revoked {

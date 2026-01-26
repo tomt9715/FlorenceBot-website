@@ -14,6 +14,52 @@ let userDownloadsCache = {}; // Cache download data per user
 let currentGuideType = 'study_guide'; // 'study_guide' or 'class_package'
 let guidesCache = []; // Cache guides data
 
+// Helper function to generate user status badges
+function getUserStatusBadges(user) {
+    const badges = [];
+
+    // Admin badge (keep this)
+    if (user.is_admin) {
+        badges.push('<span class="badge-status admin"><i class="fas fa-crown"></i> Admin</span>');
+    }
+
+    // Verified/Unverified
+    if (user.is_verified) {
+        badges.push('<span class="badge-status verified"><i class="fas fa-check"></i> Verified</span>');
+    } else {
+        badges.push('<span class="badge-status unverified">Unverified</span>');
+    }
+
+    // Activity status: New (< 7 days), Active (login < 30 days), Inactive (no login > 60 days)
+    const now = new Date();
+    const createdAt = user.created_at ? new Date(user.created_at) : null;
+    const lastLogin = user.last_login ? new Date(user.last_login) : null;
+
+    // Check if user is "New" (joined within 7 days)
+    if (createdAt) {
+        const daysSinceCreation = Math.floor((now - createdAt) / (1000 * 60 * 60 * 24));
+        if (daysSinceCreation <= 7) {
+            badges.push('<span class="badge-status new"><i class="fas fa-sparkles"></i> New</span>');
+            return badges.join(' '); // New users don't need active/inactive
+        }
+    }
+
+    // Check activity based on last login
+    if (lastLogin) {
+        const daysSinceLogin = Math.floor((now - lastLogin) / (1000 * 60 * 60 * 24));
+        if (daysSinceLogin > 60) {
+            badges.push('<span class="badge-status inactive"><i class="fas fa-moon"></i> Inactive</span>');
+        } else if (daysSinceLogin <= 30) {
+            badges.push('<span class="badge-status active"><i class="fas fa-bolt"></i> Active</span>');
+        }
+    } else {
+        // Never logged in after account creation
+        badges.push('<span class="badge-status inactive"><i class="fas fa-moon"></i> Inactive</span>');
+    }
+
+    return badges.join(' ');
+}
+
 // Initialize on DOM load
 document.addEventListener('DOMContentLoaded', async function() {
     // Check authentication
@@ -625,11 +671,7 @@ async function loadUsers(page = 1) {
                 <td><strong>${escapeHtml(user.email)}</strong></td>
                 <td>${escapeHtml(`${user.first_name || ''} ${user.last_name || ''}`.trim() || '-')}</td>
                 <td>${user.guides_count}</td>
-                <td>
-                    ${user.is_admin ? '<span class="badge-status admin"><i class="fas fa-crown"></i> Admin</span>' : ''}
-                    ${user.is_premium ? '<span class="badge-status premium"><i class="fas fa-star"></i> Premium</span>' : ''}
-                    ${user.is_verified ? '<span class="badge-status verified"><i class="fas fa-check"></i> Verified</span>' : '<span class="badge-status unverified">Unverified</span>'}
-                </td>
+                <td>${getUserStatusBadges(user)}</td>
                 <td>${formatDate(user.created_at)}</td>
                 <td>
                     <div class="table-actions">
@@ -857,11 +899,7 @@ async function openUserDetail(email) {
             </div>
             <div class="info-item">
                 <span class="info-label">Status</span>
-                <span class="info-value">
-                    ${data.user.is_admin ? '<span class="badge-status admin">Admin</span>' : ''}
-                    ${data.user.is_premium ? '<span class="badge-status premium">Premium</span>' : ''}
-                    ${data.user.is_verified ? '<span class="badge-status verified">Verified</span>' : '<span class="badge-status unverified">Unverified</span>'}
-                </span>
+                <span class="info-value">${getUserStatusBadges(data.user)}</span>
             </div>
             <div class="info-item">
                 <span class="info-label">Joined</span>
