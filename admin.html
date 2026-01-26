@@ -157,20 +157,32 @@
                 <!-- Overview Tab -->
                 <div class="admin-tab-content active" id="tab-overview">
 
+                    <!-- Admin Toolbar -->
+                    <div class="admin-toolbar">
+                        <div class="toolbar-search">
+                            <i class="fas fa-search"></i>
+                            <input type="text" id="quick-user-search" placeholder="Quick search users by email...">
+                            <button class="btn btn-primary btn-sm" id="quick-search-btn">Search</button>
+                        </div>
+                        <div class="toolbar-actions">
+                            <div class="time-filter">
+                                <select id="stats-time-period">
+                                    <option value="7">Last 7 Days</option>
+                                    <option value="30" selected>Last 30 Days</option>
+                                    <option value="90">Last 90 Days</option>
+                                    <option value="all">All Time</option>
+                                </select>
+                            </div>
+                            <button class="btn btn-secondary btn-sm" id="export-data-btn">
+                                <i class="fas fa-download"></i> Export
+                            </button>
+                        </div>
+                    </div>
+
                     <!-- Stats Grid - Row 1: User Stats -->
                     <div class="stats-section">
                         <h3 class="stats-section-title"><i class="fas fa-users"></i> User Statistics</h3>
                         <div class="admin-stats-grid">
-                            <div class="admin-stat-card">
-                                <div class="stat-icon"><i class="fas fa-users"></i></div>
-                                <div class="stat-info">
-                                    <span class="stat-value" id="stat-total-users">-</span>
-                                    <span class="stat-label">Total Users</span>
-                                </div>
-                                <div class="stat-trend up" id="trend-users">
-                                    <i class="fas fa-arrow-up"></i> <span>0%</span>
-                                </div>
-                            </div>
                             <div class="admin-stat-card">
                                 <div class="stat-icon premium"><i class="fas fa-crown"></i></div>
                                 <div class="stat-info">
@@ -188,10 +200,17 @@
                                 <div class="stat-badge" id="verified-rate">0%</div>
                             </div>
                             <div class="admin-stat-card">
-                                <div class="stat-icon"><i class="fas fa-user-plus"></i></div>
+                                <div class="stat-icon info"><i class="fas fa-calendar-week"></i></div>
                                 <div class="stat-info">
-                                    <span class="stat-value" id="stat-new-today">-</span>
-                                    <span class="stat-label">New Today</span>
+                                    <span class="stat-value" id="stat-active-week">-</span>
+                                    <span class="stat-label">Active This Week</span>
+                                </div>
+                            </div>
+                            <div class="admin-stat-card">
+                                <div class="stat-icon"><i class="fas fa-percentage"></i></div>
+                                <div class="stat-info">
+                                    <span class="stat-value" id="stat-conversion-rate">-</span>
+                                    <span class="stat-label">Conversion Rate</span>
                                 </div>
                             </div>
                         </div>
@@ -510,9 +529,14 @@
         <div class="modal-content user-detail-modal">
             <div class="modal-header">
                 <h2><i class="fas fa-user"></i> <span id="modal-user-email">User Details</span></h2>
-                <button class="modal-close" id="close-user-detail-modal-btn">
-                    <i class="fas fa-times"></i>
-                </button>
+                <div class="modal-header-actions">
+                    <button class="btn btn-secondary btn-sm" id="open-full-profile-btn" title="Open in new page">
+                        <i class="fas fa-external-link-alt"></i> Full Profile
+                    </button>
+                    <button class="modal-close" id="close-user-detail-modal-btn">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
             </div>
             <div class="modal-body">
                 <!-- User Info Section -->

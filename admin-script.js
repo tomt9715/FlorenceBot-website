@@ -67,11 +67,36 @@ function setupEventListeners() {
         tab.addEventListener('click', () => switchTab(tab.dataset.tab));
     });
 
-    // User search
+    // User search (in Users tab)
     document.getElementById('user-search-btn').addEventListener('click', searchUsers);
     document.getElementById('user-search').addEventListener('keypress', (e) => {
         if (e.key === 'Enter') searchUsers();
     });
+
+    // Quick search (in Overview toolbar)
+    const quickSearchBtn = document.getElementById('quick-search-btn');
+    const quickSearchInput = document.getElementById('quick-user-search');
+    if (quickSearchBtn && quickSearchInput) {
+        quickSearchBtn.addEventListener('click', () => quickSearchUser(quickSearchInput.value));
+        quickSearchInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') quickSearchUser(quickSearchInput.value);
+        });
+    }
+
+    // Export data button
+    const exportBtn = document.getElementById('export-data-btn');
+    if (exportBtn) {
+        exportBtn.addEventListener('click', showExportOptions);
+    }
+
+    // Time period filter
+    const timePeriodSelect = document.getElementById('stats-time-period');
+    if (timePeriodSelect) {
+        timePeriodSelect.addEventListener('change', () => {
+            // For now, just reload - can be enhanced later to filter by period
+            loadDashboardOverview();
+        });
+    }
 
     // Audit filters
     document.getElementById('audit-filter-btn').addEventListener('click', loadAuditLog);
@@ -150,22 +175,38 @@ async function loadDashboardOverview() {
         const heroRevenue = document.getElementById('hero-revenue');
         const heroNewToday = document.getElementById('hero-new-today');
         if (heroTotalUsers) heroTotalUsers.textContent = data.statistics.total_users;
-        if (heroRevenue) heroRevenue.textContent = `$${data.revenue.this_month.toFixed(0)}`;
+        if (heroRevenue) heroRevenue.textContent = `$${data.revenue.this_month.toFixed(2)}`;
         if (heroNewToday) heroNewToday.textContent = data.statistics.new_users_today;
 
-        // Update main stats
-        document.getElementById('stat-total-users').textContent = data.statistics.total_users;
-        document.getElementById('stat-premium-users').textContent = data.statistics.premium_users;
-        document.getElementById('stat-new-today').textContent = data.statistics.new_users_today;
-        document.getElementById('stat-stripe-purchases').textContent = data.purchases.stripe_purchases;
-        document.getElementById('stat-admin-grants').textContent = data.purchases.admin_granted;
-        document.getElementById('stat-revenue-month').textContent = `$${data.revenue.this_month.toFixed(2)}`;
+        // Update main stats (User Statistics section)
+        const premiumUsersEl = document.getElementById('stat-premium-users');
+        if (premiumUsersEl) premiumUsersEl.textContent = data.statistics.premium_users;
 
         // Update verified users if available
         const verifiedUsersEl = document.getElementById('stat-verified-users');
         if (verifiedUsersEl) {
             verifiedUsersEl.textContent = data.statistics.verified_users || data.statistics.total_users;
         }
+
+        // Update active this week (use premium or a calculated value)
+        const activeWeekEl = document.getElementById('stat-active-week');
+        if (activeWeekEl) {
+            // Use active_this_week from API if available, otherwise estimate
+            activeWeekEl.textContent = data.statistics.active_this_week || data.statistics.new_users_today || '-';
+        }
+
+        // Update conversion rate (premium users / total users)
+        const conversionRateEl = document.getElementById('stat-conversion-rate');
+        if (conversionRateEl) {
+            const totalUsers = data.statistics.total_users || 1;
+            const rate = ((data.statistics.premium_users / totalUsers) * 100).toFixed(1);
+            conversionRateEl.textContent = `${rate}%`;
+        }
+
+        // Update Revenue & Purchases stats
+        document.getElementById('stat-stripe-purchases').textContent = data.purchases.stripe_purchases;
+        document.getElementById('stat-admin-grants').textContent = data.purchases.admin_granted;
+        document.getElementById('stat-revenue-month').textContent = `$${data.revenue.this_month.toFixed(2)}`;
 
         // Update total guides owned
         const totalGuidesEl = document.getElementById('stat-total-guides-sold');
@@ -505,6 +546,121 @@ async function loadUsers(page = 1) {
 
 function searchUsers() {
     loadUsers(1);
+}
+
+// Quick search from Overview toolbar - switches to Users tab and searches
+function quickSearchUser(query) {
+    if (!query || query.trim() === '') {
+        showToast('Please enter an email to search', 'warning');
+        return;
+    }
+    // Set the search query in the Users tab search input
+    const userSearchInput = document.getElementById('user-search');
+    if (userSearchInput) {
+        userSearchInput.value = query.trim();
+    }
+    // Switch to Users tab and search
+    switchTab('users');
+    searchUsers();
+}
+
+// Export data options
+function showExportOptions() {
+    const options = [
+        { label: 'Export Users (CSV)', action: () => exportData('users') },
+        { label: 'Export Purchases (CSV)', action: () => exportData('purchases') },
+        { label: 'Export Audit Log (CSV)', action: () => exportAuditLog() }
+    ];
+
+    // Create a simple dropdown menu
+    const existingMenu = document.getElementById('export-dropdown-menu');
+    if (existingMenu) {
+        existingMenu.remove();
+        return;
+    }
+
+    const menu = document.createElement('div');
+    menu.id = 'export-dropdown-menu';
+    menu.className = 'export-dropdown-menu';
+    menu.innerHTML = options.map(opt =>
+        `<button class="export-option">${opt.label}</button>`
+    ).join('');
+
+    // Position near the export button
+    const exportBtn = document.getElementById('export-data-btn');
+    exportBtn.parentElement.style.position = 'relative';
+    exportBtn.parentElement.appendChild(menu);
+
+    // Add click handlers
+    menu.querySelectorAll('.export-option').forEach((btn, index) => {
+        btn.addEventListener('click', () => {
+            options[index].action();
+            menu.remove();
+        });
+    });
+
+    // Close on outside click
+    setTimeout(() => {
+        document.addEventListener('click', function closeMenu(e) {
+            if (!menu.contains(e.target) && e.target !== exportBtn) {
+                menu.remove();
+                document.removeEventListener('click', closeMenu);
+            }
+        });
+    }, 10);
+}
+
+// Export data to CSV
+async function exportData(type) {
+    try {
+        showToast(`Exporting ${type}...`, 'info');
+
+        let data, filename, headers, rows;
+
+        if (type === 'users') {
+            data = await apiCall('/admin/users?page=1&per_page=10000');
+            filename = `nursing-collective-users-${new Date().toISOString().split('T')[0]}.csv`;
+            headers = ['Email', 'First Name', 'Last Name', 'Nursing Program', 'Premium', 'Verified', 'Created'];
+            rows = data.users.map(u => [
+                u.email,
+                u.first_name || '',
+                u.last_name || '',
+                u.nursing_program || '',
+                u.is_premium ? 'Yes' : 'No',
+                u.is_verified ? 'Yes' : 'No',
+                u.created_at
+            ]);
+        } else if (type === 'purchases') {
+            data = await apiCall('/admin/dashboard/enhanced');
+            filename = `nursing-collective-purchases-${new Date().toISOString().split('T')[0]}.csv`;
+            headers = ['Guide', 'Category', 'Stripe Purchases', 'Admin Grants', 'Total Owners'];
+            rows = data.guide_stats.map(g => [
+                g.name,
+                g.category,
+                g.stripe_purchases,
+                g.admin_granted,
+                g.total_owners
+            ]);
+        }
+
+        // Convert to CSV
+        const csvContent = [
+            headers.join(','),
+            ...rows.map(row => row.map(cell => `"${String(cell).replace(/"/g, '""')}"`).join(','))
+        ].join('\n');
+
+        // Download
+        const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = filename;
+        link.click();
+
+        showToast(`${type} exported successfully!`, 'success');
+    } catch (error) {
+        console.error('Export error:', error);
+        showToast('Failed to export data', 'error');
+    }
 }
 
 // ==================== User Detail Modal ====================
@@ -1597,6 +1753,16 @@ document.addEventListener('DOMContentLoaded', function() {
     const closeUserDetailModalBtn = document.getElementById('close-user-detail-modal-btn');
     if (closeUserDetailModalBtn) {
         closeUserDetailModalBtn.addEventListener('click', closeUserDetailModal);
+    }
+
+    // Open full profile button
+    const openFullProfileBtn = document.getElementById('open-full-profile-btn');
+    if (openFullProfileBtn) {
+        openFullProfileBtn.addEventListener('click', () => {
+            if (currentUserEmail) {
+                window.open(`admin-user.html?email=${encodeURIComponent(currentUserEmail)}`, '_blank');
+            }
+        });
     }
 
     // Download history modal close button
