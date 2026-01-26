@@ -5,7 +5,7 @@
    =========================== */
 .admin-subnav {
     position: fixed;
-    top: 95px; /* Position below the fixed main navbar (95px height) */
+    top: 85px; /* Position below the fixed main navbar */
     left: 0;
     right: 0;
     z-index: 900;
@@ -102,7 +102,7 @@
 /* Mobile responsive */
 @media (max-width: 768px) {
     .admin-subnav {
-        top: 70px; /* Position below the smaller mobile navbar */
+        top: 62px; /* Position below the smaller mobile navbar */
     }
 
     .admin-subnav-content {
@@ -458,7 +458,7 @@
 .admin-hero {
     position: relative;
     padding: 40px 0;
-    padding-top: 160px; /* Space for fixed navbar (95px) + fixed subnav (~55px) + breathing room */
+    padding-top: 145px; /* Space for fixed navbar (85px) + fixed subnav (~50px) + breathing room */
     overflow: hidden;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }
@@ -2618,7 +2618,7 @@
 @media (max-width: 768px) {
     .admin-hero {
         padding: 16px 0;
-        padding-top: 130px; /* Space for fixed navbar (70px) + fixed subnav (~50px) + breathing room */
+        padding-top: 115px; /* Space for fixed navbar (62px) + fixed subnav (~45px) + breathing room */
     }
 
     .admin-hero-badge {
