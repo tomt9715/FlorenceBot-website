@@ -454,24 +454,32 @@
         }
 
         document.addEventListener('DOMContentLoaded', async function() {
-            // Check authentication
-            requireAuth();
+            try {
+                // Check authentication
+                if (!isAuthenticated()) {
+                    window.location.href = 'login.html';
+                    return;
+                }
 
-            // Verify admin access
-            const user = getCurrentUser();
-            if (!user.is_admin) {
-                window.location.href = 'dashboard.html';
-                return;
+                // Verify admin access
+                const user = getCurrentUser();
+                if (!user || !user.is_admin) {
+                    window.location.href = 'dashboard.html';
+                    return;
+                }
+
+                // Load user profile
+                await loadUserProfile();
+
+                // Setup event listeners
+                setupEventListeners();
+            } catch (error) {
+                console.error('Error initializing user profile page:', error);
+                showToast('Failed to initialize page', 'error');
+            } finally {
+                // Always hide page loader
+                document.getElementById('page-loader').style.display = 'none';
             }
-
-            // Load user profile
-            await loadUserProfile();
-
-            // Hide page loader
-            document.getElementById('page-loader').style.display = 'none';
-
-            // Setup event listeners
-            setupEventListeners();
         });
 
         async function loadUserProfile() {
@@ -587,6 +595,14 @@
             } catch (error) {
                 console.error('Error loading user profile:', error);
                 showToast('Failed to load user profile', 'error');
+
+                // Show error state in UI instead of leaving loading spinners
+                document.getElementById('profile-name').textContent = 'Error Loading User';
+                document.getElementById('profile-email').textContent = userEmail;
+                document.getElementById('account-info-grid').innerHTML = '<p style="color: #dc2626;">Failed to load user data. Please try refreshing the page.</p>';
+                document.getElementById('guides-list').innerHTML = '<p style="color: #dc2626;">Failed to load guides.</p>';
+                document.getElementById('activity-timeline').innerHTML = '<p style="color: #dc2626;">Failed to load activity.</p>';
+                document.getElementById('notes-list').innerHTML = '<p style="color: #dc2626;">Failed to load notes.</p>';
             }
         }
 
