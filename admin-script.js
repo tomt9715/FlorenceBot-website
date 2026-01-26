@@ -873,23 +873,24 @@ async function openUserDetail(email) {
             </div>
         `;
 
-        // Guides - render as simplified table (4 columns: Name, Source, Status, Action)
-        document.getElementById('modal-guides-count').textContent = data.guides.length;
+        // Guides - filter to only show active guides in the popup (revoked shown in Full Profile)
+        const activeGuides = data.guides.filter(g => g.is_active);
+        document.getElementById('modal-guides-count').textContent = activeGuides.length;
 
         const tbody = document.getElementById('user-guides-table-body');
 
-        if (data.guides.length === 0) {
-            tbody.innerHTML = '<tr><td colspan="4" class="empty-cell">No guides owned</td></tr>';
+        if (activeGuides.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="3" class="empty-cell">No active guides</td></tr>';
         } else {
             // Sort guides by purchased_at date (newest first)
-            const sortedGuides = [...data.guides].sort((a, b) => {
+            const sortedGuides = [...activeGuides].sort((a, b) => {
                 const dateA = new Date(a.purchased_at || 0);
                 const dateB = new Date(b.purchased_at || 0);
                 return dateB - dateA;
             });
 
             tbody.innerHTML = sortedGuides.map(guide => `
-                <tr class="${guide.is_active ? '' : 'revoked-row'}">
+                <tr>
                     <td><strong>${escapeHtml(guide.product_name)}</strong></td>
                     <td>
                         ${guide.source === 'stripe'
@@ -897,20 +898,9 @@ async function openUserDetail(email) {
                             : '<span class="source-badge admin"><i class="fas fa-gift"></i> Admin</span>'}
                     </td>
                     <td>
-                        ${guide.is_active
-                            ? '<span class="badge-status active"><i class="fas fa-check"></i> Active</span>'
-                            : '<span class="badge-status revoked"><i class="fas fa-times"></i> Revoked</span>'}
-                    </td>
-                    <td>
-                        ${guide.is_active ? `
-                            <button class="action-btn danger btn-sm" data-revoke-guide="${escapeHtml(guide.product_id)}" data-user-email="${escapeHtml(email)}">
-                                <i class="fas fa-times"></i> Revoke
-                            </button>
-                        ` : `
-                            <button class="action-btn success btn-sm" data-restore-guide="${escapeHtml(guide.product_id)}" data-user-email="${escapeHtml(email)}">
-                                <i class="fas fa-redo"></i> Restore
-                            </button>
-                        `}
+                        <button class="action-btn danger btn-sm" data-revoke-guide="${escapeHtml(guide.product_id)}" data-user-email="${escapeHtml(email)}">
+                            <i class="fas fa-times"></i> Revoke
+                        </button>
                     </td>
                 </tr>
             `).join('');
@@ -919,13 +909,6 @@ async function openUserDetail(email) {
             tbody.querySelectorAll('[data-revoke-guide]').forEach(btn => {
                 btn.addEventListener('click', function() {
                     revokeGuide(this.dataset.userEmail, this.dataset.revokeGuide);
-                });
-            });
-
-            // Attach event listeners for restore buttons
-            tbody.querySelectorAll('[data-restore-guide]').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    restoreGuide(this.dataset.userEmail, this.dataset.restoreGuide);
                 });
             });
         }
