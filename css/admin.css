@@ -2619,7 +2619,7 @@
 @media (max-width: 768px) {
     .admin-hero {
         padding: 16px 0;
-        padding-top: 115px; /* Space for fixed navbar (62px) + fixed subnav (~45px) + breathing room */
+        padding-top: 140px; /* Space for fixed navbar + fixed subnav + breathing room */
     }
 
     .admin-hero-badge {
