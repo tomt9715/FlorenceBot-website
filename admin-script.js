@@ -2092,6 +2092,11 @@ async function loadAuditLog(page = 1) {
         // Cache the audit data for sorting
         auditCache = data.audit_log || [];
 
+        // Reset sort to newest when new filters are applied
+        currentAuditSort = 'newest';
+        const sortSelect = document.getElementById('audit-sort');
+        if (sortSelect) sortSelect.value = 'newest';
+
         if (auditCache.length === 0) {
             tbody.innerHTML = '<tr><td colspan="6" class="loading-cell">No audit log entries found</td></tr>';
             if (mobileContainer) {
