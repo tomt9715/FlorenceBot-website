@@ -44,25 +44,26 @@
         <div class="loader-spinner"></div>
     </div>
 
-    <!-- Navigation -->
-    <nav class="navbar admin-navbar">
+    <!-- Main Site Navigation -->
+    <nav class="navbar">
         <div class="nav-container">
             <div class="nav-brand">
                 <a href="index.html">
                     <img src="assets/images/the-nursing-collective-logo.webp" alt="The Nursing Collective Logo" class="nav-logo">
                 </a>
-                <span class="admin-badge-nav"><i class="fas fa-shield-alt"></i> Admin</span>
             </div>
             <div class="nav-links">
-                <a href="dashboard.html">User Dashboard</a>
-                <a href="admin.html" class="active">Admin</a>
-            </div>
-            <div class="nav-right">
+                <a href="index.html">Home</a>
+                <a href="study-guides.html">Study Guides</a>
+                <a href="pricing.html">Pricing</a>
+                <a href="store.html">Store</a>
+                <a href="about-florencebot.html">About FlorenceBot</a>
+                <a href="dashboard.html">Dashboard</a>
                 <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
                     <i class="fas fa-sun light-icon"></i>
                     <i class="fas fa-moon dark-icon"></i>
                 </button>
-                <div class="user-menu">
+                <div class="user-menu" id="user-menu">
                     <button class="user-avatar" id="user-menu-btn" title="Account menu">
                         <i class="fas fa-user-circle"></i>
                     </button>
@@ -77,7 +78,7 @@
                             </div>
                         </div>
                         <div class="user-dropdown-divider"></div>
-                        <a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> User Dashboard</a>
+                        <a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
                         <a href="dashboard.html#purchases"><i class="fas fa-book-medical"></i> My Purchases</a>
                         <a href="settings.html"><i class="fas fa-cog"></i> Account Settings</a>
                         <div class="user-dropdown-divider"></div>
@@ -89,6 +90,32 @@
             <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle navigation menu" aria-expanded="false">
                 <i class="fas fa-bars"></i>
             </button>
+        </div>
+    </nav>
+
+    <!-- Admin Sub-Navigation -->
+    <nav class="admin-subnav">
+        <div class="container">
+            <div class="admin-subnav-content">
+                <div class="admin-subnav-brand">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Admin Panel</span>
+                </div>
+                <div class="admin-subnav-tabs">
+                    <button class="admin-subnav-tab active" data-tab="overview">
+                        <i class="fas fa-chart-pie"></i> Overview
+                    </button>
+                    <button class="admin-subnav-tab" data-tab="users">
+                        <i class="fas fa-users"></i> Users
+                    </button>
+                    <button class="admin-subnav-tab" data-tab="guides">
+                        <i class="fas fa-book"></i> Guides
+                    </button>
+                    <button class="admin-subnav-tab" data-tab="audit">
+                        <i class="fas fa-history"></i> Audit Log
+                    </button>
+                </div>
+            </div>
         </div>
     </nav>
 
@@ -125,22 +152,6 @@
     <!-- Admin Dashboard -->
     <section class="admin-dashboard">
         <div class="container">
-            <!-- Admin Navigation Tabs -->
-            <div class="admin-tabs">
-                <button class="admin-tab active" data-tab="overview">
-                    <i class="fas fa-chart-pie"></i> Overview
-                </button>
-                <button class="admin-tab" data-tab="users">
-                    <i class="fas fa-users"></i> Users
-                </button>
-                <button class="admin-tab" data-tab="guides">
-                    <i class="fas fa-book"></i> Guides
-                </button>
-                <button class="admin-tab" data-tab="audit">
-                    <i class="fas fa-history"></i> Audit Log
-                </button>
-            </div>
-
             <!-- Tab Content -->
             <div class="admin-content">
                 <!-- Overview Tab -->

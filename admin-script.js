@@ -62,8 +62,8 @@ document.addEventListener('DOMContentLoaded', async function() {
 
 // Setup event listeners
 function setupEventListeners() {
-    // Tab navigation
-    document.querySelectorAll('.admin-tab').forEach(tab => {
+    // Tab navigation (sub-nav tabs)
+    document.querySelectorAll('.admin-subnav-tab').forEach(tab => {
         tab.addEventListener('click', () => switchTab(tab.dataset.tab));
     });
 
@@ -112,8 +112,8 @@ function setupEventListeners() {
 
 // Switch between tabs
 function switchTab(tabName) {
-    // Update tab buttons
-    document.querySelectorAll('.admin-tab').forEach(tab => {
+    // Update tab buttons (sub-nav tabs)
+    document.querySelectorAll('.admin-subnav-tab').forEach(tab => {
         tab.classList.toggle('active', tab.dataset.tab === tabName);
     });
 
@@ -1541,8 +1541,8 @@ function closeConfirmModal() {
 // Switch to a specific tab (used by quick action buttons)
 function switchToTab(tabName) {
     switchTab(tabName);
-    // Scroll to the tabs section
-    document.querySelector('.admin-tabs').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    // Scroll to the admin content section
+    document.querySelector('.admin-content').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 // Export all data
