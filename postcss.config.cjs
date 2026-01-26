@@ -51,6 +51,12 @@ module.exports = {
           /^accordion/,
           // Keep spinner for loading states
           /^spinner/,
+          // Dashboard guides controls (dynamically shown)
+          /^guides-/,
+          /^category-/,
+          // Purchase history controls (dynamically shown)
+          /^purchase-/,
+          /^pagination/,
         ],
         greedy: [],
       },
