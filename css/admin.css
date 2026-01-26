@@ -1622,29 +1622,16 @@
     align-items: flex-end;
 }
 
-/* Audit Section Header with Sort */
-.audit-section-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 12px;
-}
-
-.audit-sort-container {
-    display: flex;
-    align-items: center;
-}
-
+/* Audit Sort Select - styled like other filter selects */
 .audit-sort-select {
-    padding: 8px 12px;
+    width: 100%;
+    padding: 10px 12px;
     border: 1px solid #e5e7eb;
     border-radius: 8px;
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     background: #fff;
     color: #374151;
     cursor: pointer;
-    min-width: 140px;
 }
 
 .audit-sort-select:focus {
