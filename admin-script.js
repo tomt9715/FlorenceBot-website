@@ -1568,30 +1568,23 @@ async function loadGuides(forceRefresh = false) {
             </tr>
         `).join('');
 
-        // Mobile cards view
+        // Mobile list view
         if (mobileContainer) {
             mobileContainer.innerHTML = filteredGuides.map(guide => `
-                <div class="guide-card" data-view-guide-owners="${escapeHtml(guide.guide_id)}" data-guide-name="${escapeHtml(guide.name)}">
-                    <div class="guide-card-header">
-                        <div class="guide-card-name">${escapeHtml(guide.name)}</div>
-                        <i class="fas fa-chevron-right guide-card-arrow"></i>
+                <div class="guide-list-item" data-view-guide-owners="${escapeHtml(guide.guide_id)}" data-guide-name="${escapeHtml(guide.name)}">
+                    <div class="guide-list-info">
+                        <div class="guide-list-name">${escapeHtml(guide.name)}</div>
+                        <div class="guide-list-meta"><span class="price">$${guide.price.toFixed(2)}</span> · ${guide.total_active_owners} owners</div>
                     </div>
-                    <div class="guide-card-meta">
-                        ${escapeHtml(guide.category || 'Uncategorized')} · <span class="price">$${guide.price.toFixed(2)}</span>
-                    </div>
-                    <div class="guide-card-footer">
-                        <span class="guide-card-owners">${guide.total_active_owners} owner${guide.total_active_owners !== 1 ? 's' : ''}</span>
-                        <div class="guide-card-stats">
-                            <span class="guide-card-stat stripe"><i class="fas fa-credit-card"></i> ${guide.stripe_purchases}</span>
-                            <span class="guide-card-stat granted"><i class="fas fa-gift"></i> ${guide.admin_granted}</span>
-                        </div>
+                    <div class="guide-list-right">
+                        <i class="fas fa-chevron-right guide-list-arrow"></i>
                     </div>
                 </div>
             `).join('');
 
-            // Attach event listeners to mobile cards (whole card is clickable)
-            mobileContainer.querySelectorAll('.guide-card').forEach(card => {
-                card.addEventListener('click', function() {
+            // Attach event listeners to list items
+            mobileContainer.querySelectorAll('.guide-list-item').forEach(item => {
+                item.addEventListener('click', function() {
                     openGuideOwnersModal(this.dataset.viewGuideOwners, this.dataset.guideName);
                 });
             });
