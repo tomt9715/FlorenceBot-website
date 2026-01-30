@@ -973,7 +973,8 @@ button.subcategory-chip.active i {
     content: attr(data-tooltip);
     position: absolute;
     bottom: calc(100% + 8px);
-    right: -10px;
+    left: auto;
+    right: 0;
     transform: none;
     background: var(--text-primary);
     color: var(--background-white);
@@ -998,7 +999,8 @@ button.subcategory-chip.active i {
     content: '';
     position: absolute;
     bottom: calc(100% + 2px);
-    right: 16px;
+    left: auto;
+    right: 20px;
     transform: none;
     border: 6px solid transparent;
     border-top-color: var(--text-primary);
