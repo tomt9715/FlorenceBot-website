@@ -132,8 +132,35 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Initialize UI with default mode
+    // Check URL parameters for pre-fill (from guest checkout email CTA)
+    const urlParams = new URLSearchParams(window.location.search);
+    const shouldSignup = urlParams.get('signup') === 'true';
+    const prefillEmail = urlParams.get('email');
+    const orderToClaim = urlParams.get('order');
+
+    // If signup=true is in URL, switch to signup mode
+    if (shouldSignup) {
+        currentMode = 'signup';
+    }
+
+    // Initialize UI with default/URL-specified mode
     updateModeUI();
+
+    // Pre-fill email if provided in URL (from guest checkout email)
+    if (prefillEmail) {
+        if (emailInput) {
+            emailInput.value = decodeURIComponent(prefillEmail);
+        }
+        // Also show a helpful banner if they have an order to claim
+        if (orderToClaim) {
+            showOrderClaimBanner(orderToClaim, prefillEmail);
+        }
+        // Auto-expand email form if email is pre-filled
+        if (authOptions && emailForm) {
+            authOptions.style.display = 'none';
+            emailForm.classList.add('active');
+        }
+    }
 
     // Mode toggle buttons
     if (signinModeBtn) {
@@ -624,6 +651,44 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
+/**
+ * Show a banner indicating an order will be claimed after signup
+ */
+function showOrderClaimBanner(orderNumber, email) {
+    // Create and insert banner after auth header
+    const authHeader = document.querySelector('.auth-header');
+    if (!authHeader) return;
+
+    // Check if banner already exists
+    if (document.getElementById('order-claim-banner')) return;
+
+    const banner = document.createElement('div');
+    banner.id = 'order-claim-banner';
+    banner.style.cssText = `
+        background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+        border: 2px solid #0ea5e9;
+        border-radius: 12px;
+        padding: 16px 20px;
+        margin: 0 0 20px 0;
+        text-align: center;
+    `;
+    banner.innerHTML = `
+        <div style="display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap;">
+            <span style="font-size: 24px;">🎉</span>
+            <div style="text-align: left;">
+                <p style="margin: 0; color: #0c4a6e; font-weight: 600; font-size: 14px;">
+                    Your order is ready to be linked!
+                </p>
+                <p style="margin: 4px 0 0; color: #0369a1; font-size: 13px;">
+                    Create your account and order <strong>${orderNumber}</strong> will be automatically added to your dashboard.
+                </p>
+            </div>
+        </div>
+    `;
+
+    authHeader.insertAdjacentElement('afterend', banner);
+}
 
 // Add ripple effect to buttons (matching site interaction)
 document.addEventListener('click', function(e) {

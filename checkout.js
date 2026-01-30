@@ -1034,6 +1034,9 @@ async function createPaymentIntent() {
         headers['Authorization'] = `Bearer ${localStorage.getItem('accessToken')}`;
     }
 
+    // Get the current email from the form
+    const checkoutEmail = document.getElementById('email')?.value?.trim() || '';
+
     const payload = {
         items: cartItems.map(item => ({
             product_id: item.product_id,
@@ -1042,7 +1045,10 @@ async function createPaymentIntent() {
             price: item.price,
             quantity: item.quantity || 1
         })),
-        return_url: `${window.location.origin}/success.html`
+        return_url: `${window.location.origin}/success.html`,
+        // Pass checkout email info to backend
+        checkout_email: checkoutEmail,
+        use_different_email: !useAccountEmail && isUserAuthenticated
     };
 
     // Add promo code if applied
