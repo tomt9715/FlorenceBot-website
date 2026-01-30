@@ -330,12 +330,12 @@ async function trackDownload(source) {
     }
 }
 
-// Download PDF using server-side generation (Playwright)
+// Download PDF from R2 storage via presigned URL
 async function downloadPDF(btn) {
     const originalText = btn ? btn.innerHTML : '';
 
     if (btn) {
-        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating PDF...';
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Preparing Download...';
         btn.disabled = true;
     }
 
@@ -348,7 +348,7 @@ async function downloadPDF(btn) {
             throw new Error('Please log in to download guides');
         }
 
-        // Fetch the PDF from the backend
+        // Get the presigned URL from the backend
         const response = await fetch(`${API_URL}/api/guides/${PRODUCT_ID}/pdf`, {
             method: 'GET',
             headers: {
@@ -359,24 +359,21 @@ async function downloadPDF(btn) {
 
         if (!response.ok) {
             const errorData = await response.json().catch(() => ({}));
-            throw new Error(errorData.message || 'Failed to generate PDF');
+            throw new Error(errorData.message || 'Failed to get download URL');
         }
 
-        // Get the PDF blob and download it
-        const blob = await response.blob();
-        const url = window.URL.createObjectURL(blob);
+        const data = await response.json();
 
-        // Create a temporary link to trigger download
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = `TNC-${GUIDE_NAME}.pdf`;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        window.URL.revokeObjectURL(url);
+        if (!data.success || !data.redirect_url) {
+            throw new Error(data.message || 'Download URL not available');
+        }
+
+        // Open the presigned R2 URL directly - browser will handle the download
+        // Using window.open to trigger download from R2
+        window.open(data.redirect_url, '_blank');
 
         if (btn) {
-            btn.innerHTML = '<i class="fas fa-check"></i> Downloaded!';
+            btn.innerHTML = '<i class="fas fa-check"></i> Opening PDF...';
             setTimeout(() => {
                 btn.innerHTML = originalText;
                 btn.disabled = false;
