@@ -1095,7 +1095,7 @@ function continueStudying(productId) {
 
     // Check if HTML guide exists for this product
     // HTML guides are in /guides/{product-id}.html format
-    const htmlGuides = ['heart-failure', 'assessment-skills', 'myocardial-infarction', 'copd', 'stroke']; // Add more as they're created
+    const htmlGuides = ['heart-failure', 'assessment-skills', 'myocardial-infarction', 'copd', 'stroke', 'gi-bleeding']; // Add more as they're created
 
     if (htmlGuides.includes(productId)) {
         // Navigate to the standalone HTML guide
