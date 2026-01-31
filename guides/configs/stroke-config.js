@@ -17,10 +17,10 @@ const sidebarConfig = {
         { type: 'time', icon: 'fa-syringe', value: '0.9 mg/kg', label: 'tPA dose (max 90mg)' }
     ],
     clinicalPearls: [
-        { id: 'tip-ct-before-tpa', title: 'CT Scan Before Clot-Busters!' },
-        { id: 'tip-npo-first', title: 'NPO First (Nothing By Mouth!)' },
         { id: 'tip-time-brain', title: 'Time = Brain' },
         { id: 'tip-watch-afib', title: 'Watch for A-fib' },
-        { id: 'tip-permissive-htn', title: 'Let the BP Stay High!' }
+        { id: 'tip-ct-before-tpa', title: 'CT Scan Before Clot-Busters!' },
+        { id: 'tip-permissive-htn', title: 'Let the BP Stay High!' },
+        { id: 'tip-npo-first', title: 'NPO First (Nothing By Mouth!)' }
     ]
 };

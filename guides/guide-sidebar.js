@@ -202,15 +202,15 @@ function initializeTipNavigation() {
                 // Scroll to the tip
                 targetElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
-                // Add highlight class after a brief delay (for scroll to complete)
+                // Add highlight class after scroll completes (~500ms for smooth scroll)
                 setTimeout(() => {
                     targetElement.classList.add('highlight');
 
-                    // Remove highlight class after animation
+                    // Remove highlight class after quick 250ms glow
                     setTimeout(() => {
                         targetElement.classList.remove('highlight');
-                    }, 1500);
-                }, 300);
+                    }, 250);
+                }, 500);
             }
         };
 
