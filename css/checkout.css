@@ -33,168 +33,159 @@
 
 .checkout-section > .container > .breadcrumbs {
     width: 100%;
-    max-width: 1232px; /* Match three-column total width (420+400+380+32) */
+    max-width: 1100px; /* Match two-column total width */
     padding: 0 24px;
     box-sizing: border-box;
 }
 
-/* Three-column layout */
-.checkout-container.checkout-three-column {
+/* Two-column layout for streamlined digital checkout */
+.checkout-container.checkout-two-column {
     display: flex;
-    gap: 32px;
-    max-width: none;
-    width: auto;
+    gap: 40px;
+    max-width: 1100px;
+    width: 100%;
     margin: 0 auto;
     justify-content: center;
     padding: 0 24px;
 }
 
-/* Fixed width columns for consistent layout */
-.checkout-three-column .order-summary {
-    flex: 0 0 420px;
-    width: 420px;
-    max-width: 420px;
-    box-sizing: border-box;
-}
-
-.checkout-three-column .payment-details-column {
-    flex: 0 0 400px;
-    width: 400px;
-    max-width: 400px;
-    box-sizing: border-box;
-}
-
-.checkout-three-column .payment-method-column {
+/* Left column - Order Summary (narrower, ~40%) */
+.checkout-two-column .order-summary {
     flex: 0 0 380px;
     width: 380px;
     max-width: 380px;
     box-sizing: border-box;
-}
-
-.checkout-three-column .order-summary {
     position: sticky;
     top: 100px;
     height: fit-content;
+    max-height: calc(100vh - 140px);
+    overflow-y: auto;
 }
 
-.checkout-three-column .payment-details-column {
-    /* Middle column - payment details form */
+/* Right column - Payment Details (wider, ~60%) */
+.checkout-two-column .payment-details-column {
+    flex: 1;
+    max-width: 600px;
+    box-sizing: border-box;
 }
 
-.checkout-three-column .payment-method-column {
-    position: sticky;
-    top: 100px;
-    height: fit-content;
-}
-
-.checkout-three-column .payment-form-container h2 {
-    font-size: 1.25rem;
-    margin-bottom: 18px;
-    padding-bottom: 12px;
-}
-
-.checkout-three-column .form-section {
-    margin-bottom: 18px;
+.checkout-two-column .payment-form-container h2 {
+    font-size: 1.35rem;
+    margin-bottom: 20px;
     padding-bottom: 14px;
 }
 
-.checkout-three-column .form-group {
-    margin-bottom: 12px;
+.checkout-two-column .form-section {
+    margin-bottom: 24px;
+    padding-bottom: 20px;
 }
 
-/* Smaller padding for three-column cards */
-.checkout-three-column .order-summary,
-.checkout-three-column .payment-form-container {
-    padding: 24px;
+.checkout-two-column .form-group {
+    margin-bottom: 16px;
 }
 
-/* Consistent height for all three columns - matches Payment Details height */
-.checkout-three-column .order-summary,
-.checkout-three-column .payment-details-column,
-.checkout-three-column .payment-method-column {
-    min-height: 967px;
-    max-height: 967px;
-    height: 967px;
+/* Padding for two-column cards */
+.checkout-two-column .order-summary,
+.checkout-two-column .payment-form-container {
+    padding: 28px;
+}
+
+/* Order summary layout */
+.checkout-two-column .order-summary {
     display: flex;
     flex-direction: column;
-    overflow: hidden;
 }
 
-/* Order summary layout - push bottom content down */
-.checkout-three-column .order-summary .product-details {
+.checkout-two-column .order-summary .product-details {
     flex: 1;
     display: flex;
     flex-direction: column;
 }
 
 /* When cart is empty, center the empty message */
-.checkout-three-column .order-summary .product-details.empty-cart {
+.checkout-two-column .order-summary .product-details.empty-cart {
     justify-content: center;
     align-items: center;
 }
 
 /* Push order totals and trust badges to bottom */
-.checkout-three-column .order-summary .order-total {
+.checkout-two-column .order-summary .order-total {
     margin-top: auto;
 }
 
-.checkout-three-column .order-summary .trust-badges {
+.checkout-two-column .order-summary .trust-badges {
     margin-top: 24px;
 }
 
-/* Responsive: tablet landscape - narrower columns but still side by side */
-@media (max-width: 1300px) {
-    .checkout-container.checkout-three-column {
-        gap: 20px;
+/* Submit button styling - large and prominent */
+.checkout-submit-btn {
+    width: 100%;
+    padding: 18px 24px !important;
+    font-size: 1.15rem !important;
+    font-weight: 700 !important;
+    margin-top: 8px;
+    background: linear-gradient(135deg, #10b981, #059669) !important;
+    border: none !important;
+    border-radius: 12px !important;
+    box-shadow: 0 4px 14px rgba(16, 185, 129, 0.4) !important;
+    transition: all 0.2s ease !important;
+}
+
+.checkout-submit-btn:hover:not(:disabled) {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 20px rgba(16, 185, 129, 0.5) !important;
+}
+
+.checkout-submit-btn:disabled {
+    background: linear-gradient(135deg, #9ca3af, #6b7280) !important;
+    box-shadow: none !important;
+    cursor: not-allowed;
+}
+
+/* Responsive: tablet - narrower columns */
+@media (max-width: 1024px) {
+    .checkout-container.checkout-two-column {
+        gap: 24px;
         padding: 0 20px;
     }
 
-    .checkout-three-column .order-summary {
+    .checkout-two-column .order-summary {
         flex: 0 0 320px;
         width: 320px;
         max-width: 320px;
     }
 
-    .checkout-three-column .payment-details-column {
-        flex: 0 0 320px;
-        width: 320px;
-        max-width: 320px;
-    }
-
-    .checkout-three-column .payment-method-column {
-        flex: 0 0 300px;
-        width: 300px;
-        max-width: 300px;
-    }
-
-    .checkout-three-column .order-summary,
-    .checkout-three-column .payment-form-container {
-        padding: 20px;
+    .checkout-two-column .order-summary,
+    .checkout-two-column .payment-form-container {
+        padding: 24px;
     }
 }
 
-/* Responsive: tablet portrait - stack to single column */
-@media (max-width: 1024px) {
-    .checkout-container.checkout-three-column {
+/* Responsive: mobile - stack to single column */
+@media (max-width: 768px) {
+    .checkout-container.checkout-two-column {
         flex-direction: column;
         gap: 20px;
         width: 100%;
-        max-width: 600px;
+        max-width: 100%;
     }
 
-    .checkout-three-column .order-summary,
-    .checkout-three-column .payment-details-column,
-    .checkout-three-column .payment-method-column {
+    .checkout-two-column .order-summary,
+    .checkout-two-column .payment-details-column {
         flex: 0 0 100%;
         width: 100%;
         max-width: 100%;
         position: static;
-        min-height: auto; /* Remove fixed height on mobile/tablet */
     }
 
-    .checkout-three-column .order-summary,
-    .checkout-three-column .payment-form-container {
-        padding: 28px;
+    .checkout-two-column .order-summary {
+        max-height: none;
+        overflow-y: visible;
+    }
+
+    .checkout-two-column .order-summary,
+    .checkout-two-column .payment-form-container {
+        padding: 24px;
     }
 }
 

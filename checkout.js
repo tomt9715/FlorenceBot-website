@@ -939,19 +939,11 @@ async function setupStripeElements() {
                 type: 'tabs',
                 defaultCollapsed: false
             },
-            // Pre-fill billing details from form
+            // Pre-fill billing details from form (no address for digital products)
             defaultValues: {
                 billingDetails: {
                     name: document.getElementById('name')?.value || '',
-                    email: document.getElementById('email')?.value || '',
-                    address: {
-                        line1: document.getElementById('address')?.value || '',
-                        line2: document.getElementById('address2')?.value || '',
-                        city: document.getElementById('city')?.value || '',
-                        state: document.getElementById('state')?.value || '',
-                        postal_code: document.getElementById('zip')?.value || '',
-                        country: document.getElementById('country')?.value || 'US'
-                    }
+                    email: document.getElementById('email')?.value || ''
                 }
             }
         });
@@ -1164,15 +1156,9 @@ async function handleSubmit(event) {
     const buttonIcon = document.getElementById('button-icon');
     const spinner = document.getElementById('button-spinner');
 
-    // Get form values
+    // Get form values (only email and name for digital products)
     const email = document.getElementById('email').value.trim();
     const name = document.getElementById('name').value.trim();
-    const address = document.getElementById('address').value.trim();
-    const address2 = document.getElementById('address2').value.trim();
-    const city = document.getElementById('city').value.trim();
-    const state = document.getElementById('state').value.trim();
-    const zip = document.getElementById('zip').value.trim();
-    const country = document.getElementById('country').value;
 
     // Validate email
     if (!email || !isValidEmail(email)) {
@@ -1181,9 +1167,10 @@ async function handleSubmit(event) {
         return;
     }
 
-    // Validate required fields
-    if (!name || !address || !city || !state || !zip) {
-        showError('Please fill in all required fields.');
+    // Validate name
+    if (!name) {
+        showError('Please enter your full name.');
+        document.getElementById('name').focus();
         return;
     }
 
@@ -1228,15 +1215,7 @@ async function handleSubmit(event) {
                 payment_method_data: {
                     billing_details: {
                         name: name,
-                        email: email,
-                        address: {
-                            line1: address,
-                            line2: address2 || null,
-                            city: city,
-                            state: state,
-                            postal_code: zip,
-                            country: country
-                        }
+                        email: email
                     }
                 }
             },
@@ -1762,15 +1741,7 @@ async function recreatePaymentIntentWithPromo() {
                 defaultValues: {
                     billingDetails: {
                         name: document.getElementById('name')?.value || '',
-                        email: document.getElementById('email')?.value || '',
-                        address: {
-                            line1: document.getElementById('address')?.value || '',
-                            line2: document.getElementById('address2')?.value || '',
-                            city: document.getElementById('city')?.value || '',
-                            state: document.getElementById('state')?.value || '',
-                            postal_code: document.getElementById('zip')?.value || '',
-                            country: document.getElementById('country')?.value || 'US'
-                        }
+                        email: document.getElementById('email')?.value || ''
                     }
                 }
             });
