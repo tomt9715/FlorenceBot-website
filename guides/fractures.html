@@ -201,10 +201,11 @@
 
         .cover-subtitle {
             font-size: 1.15rem;
-            opacity: 0.9;
+            color: white;
             max-width: 600px;
             margin: 0 auto;
             line-height: 1.6;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.3);
         }
 
         .cover-meta {
@@ -869,79 +870,635 @@
         }
 
         /* ============================================
-           WEIGHT BEARING STATUS
+           ANATOMICAL DIAGRAM
            ============================================ */
-        .weight-bearing-chart {
+        .anatomy-diagram {
+            background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 32px;
+            margin: 24px 0;
+            text-align: center;
+        }
+
+        .anatomy-diagram-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .bone-visual {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .bone-illustration {
+            position: relative;
+            width: 120px;
+        }
+
+        .bone-shape {
+            width: 100%;
+            height: 280px;
+            background: linear-gradient(180deg, #e2e8f0 0%, #f1f5f9 20%, #f8fafc 50%, #f1f5f9 80%, #e2e8f0 100%);
+            border-radius: 40px 40px 40px 40px;
+            position: relative;
+            box-shadow: inset -8px 0 16px rgba(0,0,0,0.05), inset 8px 0 16px rgba(255,255,255,0.8);
+            border: 2px solid #cbd5e1;
+        }
+
+        .bone-shape::before {
+            content: '';
+            position: absolute;
+            top: 50px;
+            bottom: 50px;
+            left: 20px;
+            right: 20px;
+            background: linear-gradient(90deg, #fef3c7 0%, #fde68a 50%, #fef3c7 100%);
+            border-radius: 8px;
+            opacity: 0.6;
+        }
+
+        .bone-labels {
+            flex: 1;
+            min-width: 280px;
+            text-align: left;
+        }
+
+        .bone-label-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 12px 16px;
+            margin-bottom: 8px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            transition: all 0.2s ease;
+        }
+
+        .bone-label-item:hover {
+            transform: translateX(4px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .bone-label-marker {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .bone-label-marker.periosteum { background: #3b82f6; }
+        .bone-label-marker.cortical { background: #64748b; }
+        .bone-label-marker.cancellous { background: #94a3b8; }
+        .bone-label-marker.marrow { background: #fbbf24; }
+
+        .bone-label-text {
+            font-size: 0.9rem;
+        }
+
+        .bone-label-text strong {
+            color: var(--text-primary);
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        .bone-label-text span {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+
+        /* ============================================
+           FRACTURE PATTERN VISUALS
+           ============================================ */
+        .fracture-visual-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin: 24px 0;
+        }
+
+        @media (max-width: 900px) {
+            .fracture-visual-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 500px) {
+            .fracture-visual-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .fracture-visual-card {
             background: white;
             border: 1px solid var(--border-color);
             border-radius: 16px;
-            padding: 24px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .fracture-visual-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+            border-color: var(--fracture-blue);
+        }
+
+        .fracture-bone-visual {
+            width: 60px;
+            height: 100px;
+            margin: 0 auto 16px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .bone-segment {
+            width: 24px;
+            background: linear-gradient(90deg, #e2e8f0, #f1f5f9, #e2e8f0);
+            border: 2px solid #94a3b8;
+            border-radius: 4px;
+        }
+
+        .bone-segment.top {
+            height: 40px;
+            border-radius: 12px 12px 4px 4px;
+        }
+
+        .bone-segment.bottom {
+            height: 40px;
+            border-radius: 4px 4px 12px 12px;
+        }
+
+        .fracture-line {
+            width: 100%;
+            height: 4px;
+            position: relative;
+        }
+
+        /* Transverse - straight horizontal line */
+        .fracture-visual-card.transverse .fracture-line::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 40px;
+            height: 3px;
+            background: var(--warning-red);
+        }
+
+        /* Oblique - diagonal line */
+        .fracture-visual-card.oblique .fracture-line::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-30deg);
+            width: 40px;
+            height: 3px;
+            background: var(--warning-red);
+        }
+
+        .fracture-visual-card.oblique .bone-segment.bottom {
+            transform: translateX(4px);
+        }
+
+        /* Spiral - curved line */
+        .fracture-visual-card.spiral .fracture-line::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 24px;
+            border: 3px solid transparent;
+            border-right-color: var(--warning-red);
+            border-radius: 50%;
+        }
+
+        /* Comminuted - multiple fragments */
+        .fracture-visual-card.comminuted .fracture-line {
+            display: flex;
+            justify-content: center;
+            gap: 2px;
+            height: 16px;
+            align-items: center;
+        }
+
+        .fracture-visual-card.comminuted .fracture-line::before,
+        .fracture-visual-card.comminuted .fracture-line::after {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: linear-gradient(90deg, #e2e8f0, #f1f5f9);
+            border: 2px solid #94a3b8;
+            border-radius: 2px;
+            transform: rotate(15deg);
+        }
+
+        .fracture-visual-card.comminuted .bone-segment.top,
+        .fracture-visual-card.comminuted .bone-segment.bottom {
+            height: 34px;
+        }
+
+        /* Greenstick - partial break */
+        .fracture-visual-card.greenstick .bone-segment {
+            background: linear-gradient(90deg, #d1fae5, #a7f3d0, #d1fae5);
+            border-color: #22c55e;
+        }
+
+        .fracture-visual-card.greenstick .fracture-line::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: 50%;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 3px;
+            background: var(--warning-red);
+        }
+
+        .fracture-visual-card.greenstick .bone-segment.bottom {
+            transform: rotate(8deg);
+            transform-origin: left center;
+        }
+
+        /* Impacted - compressed */
+        .fracture-visual-card.impacted .bone-segment.top {
+            height: 35px;
+            border-bottom: none;
+            border-radius: 12px 12px 0 0;
+        }
+
+        .fracture-visual-card.impacted .bone-segment.bottom {
+            height: 35px;
+            border-top: none;
+            border-radius: 0 0 12px 12px;
+            margin-top: -8px;
+        }
+
+        .fracture-visual-card.impacted .fracture-line {
+            display: none;
+        }
+
+        /* Compression */
+        .fracture-visual-card.compression .bone-segment {
+            width: 36px;
+            border-radius: 8px;
+        }
+
+        .fracture-visual-card.compression .bone-segment.top {
+            height: 30px;
+        }
+
+        .fracture-visual-card.compression .bone-segment.bottom {
+            height: 20px;
+            background: linear-gradient(90deg, #fecaca, #fca5a5, #fecaca);
+            border-color: var(--warning-red);
+        }
+
+        .fracture-visual-card.compression .fracture-line {
+            display: none;
+        }
+
+        /* Pathologic */
+        .fracture-visual-card.pathologic .bone-segment {
+            background: linear-gradient(90deg, #fef3c7, #fde68a, #fef3c7);
+            border-color: #f59e0b;
+        }
+
+        .fracture-visual-card.pathologic .bone-segment::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: #f59e0b;
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .fracture-type-name {
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 6px;
+        }
+
+        .fracture-type-desc {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        /* ============================================
+           WEIGHT BEARING STATUS - IMPROVED
+           ============================================ */
+        .weight-bearing-section {
+            background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+            border: 1px solid #86efac;
+            border-radius: 16px;
+            padding: 32px;
             margin: 24px 0;
         }
 
         .wb-header {
             font-family: 'Outfit', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #166534;
+            margin-bottom: 28px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .wb-header-icon {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .wb-progression {
+            display: flex;
+            align-items: stretch;
+            gap: 0;
+            position: relative;
+        }
+
+        .wb-stage {
+            flex: 1;
+            text-align: center;
+            position: relative;
+            padding: 20px 12px;
+            background: white;
+            border-radius: 12px;
+            margin: 0 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            transition: all 0.2s ease;
+        }
+
+        .wb-stage:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+
+        .wb-stage::after {
+            content: '\f061';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            right: -14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #86efac;
+            font-size: 1rem;
+            z-index: 2;
+        }
+
+        .wb-stage:last-child::after {
+            display: none;
+        }
+
+        .wb-icon-circle {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 12px;
+            font-size: 1.4rem;
+            color: white;
+        }
+
+        .wb-stage:nth-child(1) .wb-icon-circle { background: linear-gradient(135deg, #ef4444, #dc2626); }
+        .wb-stage:nth-child(2) .wb-icon-circle { background: linear-gradient(135deg, #f97316, #ea580c); }
+        .wb-stage:nth-child(3) .wb-icon-circle { background: linear-gradient(135deg, #eab308, #ca8a04); }
+        .wb-stage:nth-child(4) .wb-icon-circle { background: linear-gradient(135deg, #22c55e, #16a34a); }
+
+        .wb-abbr {
+            font-family: 'Outfit', sans-serif;
             font-size: 1.1rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+
+        .wb-name {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+
+        .wb-desc {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        @media (max-width: 768px) {
+            .wb-progression {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .wb-stage {
+                margin: 0;
+            }
+
+            .wb-stage::after {
+                content: '\f063';
+                right: 50%;
+                top: auto;
+                bottom: -20px;
+                transform: translateX(50%);
+            }
+
+            .wb-stage:last-child {
+                margin-bottom: 0;
+            }
+        }
+
+        /* ============================================
+           COMPLICATION TIMELINE
+           ============================================ */
+        .complication-timeline {
+            position: relative;
+            padding-left: 40px;
+            margin: 24px 0;
+        }
+
+        .complication-timeline::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(180deg, #ef4444 0%, #f97316 33%, #3b82f6 66%, #3b82f6 100%);
+            border-radius: 2px;
+        }
+
+        .complication-time-group {
+            margin-bottom: 32px;
+            position: relative;
+        }
+
+        .complication-time-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .time-marker {
+            position: absolute;
+            left: -40px;
+            top: 0;
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.9rem;
+            z-index: 1;
+        }
+
+        .time-marker.critical { background: linear-gradient(135deg, #ef4444, #dc2626); }
+        .time-marker.early { background: linear-gradient(135deg, #f97316, #ea580c); }
+        .time-marker.late { background: linear-gradient(135deg, #3b82f6, #2563eb); }
+
+        .time-label {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1rem;
             font-weight: 700;
             color: var(--text-primary);
-            margin-bottom: 20px;
+            margin-bottom: 12px;
+            padding-left: 8px;
+        }
+
+        .time-complications {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 12px;
+        }
+
+        .timeline-comp-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+            border-left: 4px solid var(--border-color);
+            transition: all 0.2s ease;
+        }
+
+        .timeline-comp-card:hover {
+            transform: translateX(4px);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+        }
+
+        .timeline-comp-card.critical { border-left-color: #ef4444; }
+        .timeline-comp-card.warning { border-left-color: #f97316; }
+        .timeline-comp-card.info { border-left-color: #3b82f6; }
+
+        .timeline-comp-header {
             display: flex;
             align-items: center;
             gap: 10px;
+            margin-bottom: 10px;
         }
 
-        .wb-scale {
+        .timeline-comp-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
             display: flex;
-            justify-content: space-between;
-            position: relative;
-            padding: 0 10px;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
         }
 
-        .wb-scale::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 0;
-            right: 0;
-            height: 8px;
-            background: linear-gradient(90deg, #ef4444, #f97316, #eab308, #22c55e);
-            border-radius: 4px;
-            transform: translateY(-50%);
-            z-index: 0;
+        .timeline-comp-card.critical .timeline-comp-icon {
+            background: #fee2e2;
+            color: #ef4444;
         }
 
-        .wb-level {
-            text-align: center;
-            z-index: 1;
-            background: white;
-            padding: 0 8px;
+        .timeline-comp-card.warning .timeline-comp-icon {
+            background: #ffedd5;
+            color: #f97316;
         }
 
-        .wb-dot {
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            margin: 0 auto 8px;
-            border: 3px solid white;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        .timeline-comp-card.info .timeline-comp-icon {
+            background: #dbeafe;
+            color: #3b82f6;
         }
 
-        .wb-level:nth-child(1) .wb-dot { background: #ef4444; }
-        .wb-level:nth-child(2) .wb-dot { background: #f97316; }
-        .wb-level:nth-child(3) .wb-dot { background: #eab308; }
-        .wb-level:nth-child(4) .wb-dot { background: #22c55e; }
-
-        .wb-label {
-            font-size: 0.75rem;
+        .timeline-comp-name {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1rem;
             font-weight: 700;
             color: var(--text-primary);
         }
 
-        .wb-abbr {
+        .timeline-comp-signs {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .timeline-comp-signs li {
+            padding: 4px 0;
+            padding-left: 20px;
+            position: relative;
             font-size: 0.85rem;
-            font-weight: 800;
             color: var(--text-secondary);
-            margin-bottom: 4px;
+        }
+
+        .timeline-comp-signs li::before {
+            content: '\f054';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            font-size: 0.6rem;
+            position: absolute;
+            left: 0;
+            top: 7px;
+            color: var(--text-secondary);
+        }
+
+        .timeline-comp-treatment {
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px dashed var(--border-color);
+            font-size: 0.85rem;
+            color: var(--healing-green);
+            font-weight: 600;
+        }
+
+        .timeline-comp-treatment i {
+            margin-right: 6px;
         }
 
         /* ============================================
@@ -1488,6 +2045,49 @@
 
                 <h3>Bone Structure</h3>
 
+                <!-- Anatomical Diagram -->
+                <div class="anatomy-diagram">
+                    <div class="anatomy-diagram-title">
+                        <i class="fas fa-bone"></i>
+                        Long Bone Cross-Section
+                    </div>
+                    <div class="bone-visual">
+                        <div class="bone-illustration">
+                            <div class="bone-shape"></div>
+                        </div>
+                        <div class="bone-labels">
+                            <div class="bone-label-item">
+                                <div class="bone-label-marker periosteum"></div>
+                                <div class="bone-label-text">
+                                    <strong>Periosteum</strong>
+                                    <span>Outer fibrous membrane with blood vessels & nerves</span>
+                                </div>
+                            </div>
+                            <div class="bone-label-item">
+                                <div class="bone-label-marker cortical"></div>
+                                <div class="bone-label-text">
+                                    <strong>Cortical (Compact) Bone</strong>
+                                    <span>Dense outer layer providing strength (80% of bone mass)</span>
+                                </div>
+                            </div>
+                            <div class="bone-label-item">
+                                <div class="bone-label-marker cancellous"></div>
+                                <div class="bone-label-text">
+                                    <strong>Cancellous (Spongy) Bone</strong>
+                                    <span>Honeycomb trabeculae at bone ends</span>
+                                </div>
+                            </div>
+                            <div class="bone-label-item">
+                                <div class="bone-label-marker marrow"></div>
+                                <div class="bone-label-text">
+                                    <strong>Bone Marrow</strong>
+                                    <span>Medullary cavity with red/yellow marrow</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="body-region-grid">
                     <div class="body-region-card">
                         <div class="body-region-header">
@@ -1676,62 +2276,78 @@
 
                 <h3>Fracture Patterns</h3>
 
-                <div class="fracture-type-grid">
-                    <div class="fracture-type-card">
-                        <div class="fracture-type-icon">
-                            <i class="fas fa-arrows-alt-h" style="color: var(--fracture-blue);"></i>
+                <div class="fracture-visual-grid">
+                    <div class="fracture-visual-card transverse">
+                        <div class="fracture-bone-visual">
+                            <div class="bone-segment top"></div>
+                            <div class="fracture-line"></div>
+                            <div class="bone-segment bottom"></div>
                         </div>
                         <div class="fracture-type-name">Transverse</div>
-                        <div class="fracture-type-desc">Straight break perpendicular to bone's long axis. Usually from direct force.</div>
+                        <div class="fracture-type-desc">Straight break perpendicular to bone. Direct force injury.</div>
                     </div>
-                    <div class="fracture-type-card">
-                        <div class="fracture-type-icon">
-                            <i class="fas fa-slash" style="color: var(--fracture-blue);"></i>
+                    <div class="fracture-visual-card oblique">
+                        <div class="fracture-bone-visual">
+                            <div class="bone-segment top"></div>
+                            <div class="fracture-line"></div>
+                            <div class="bone-segment bottom"></div>
                         </div>
                         <div class="fracture-type-name">Oblique</div>
-                        <div class="fracture-type-desc">Diagonal break across bone at an angle. From twisting or angular force.</div>
+                        <div class="fracture-type-desc">Diagonal break at an angle. Twisting or angular force.</div>
                     </div>
-                    <div class="fracture-type-card">
-                        <div class="fracture-type-icon">
-                            <i class="fas fa-sync-alt" style="color: var(--fracture-blue);"></i>
+                    <div class="fracture-visual-card spiral">
+                        <div class="fracture-bone-visual">
+                            <div class="bone-segment top"></div>
+                            <div class="fracture-line"></div>
+                            <div class="bone-segment bottom"></div>
                         </div>
                         <div class="fracture-type-name">Spiral</div>
-                        <div class="fracture-type-desc">Twisting break wrapping around bone. Common in skiing injuries.</div>
+                        <div class="fracture-type-desc">Twisting break wrapping around bone. Common in skiing.</div>
                     </div>
-                    <div class="fracture-type-card">
-                        <div class="fracture-type-icon">
-                            <i class="fas fa-puzzle-piece" style="color: var(--fracture-blue);"></i>
+                    <div class="fracture-visual-card comminuted">
+                        <div class="fracture-bone-visual">
+                            <div class="bone-segment top"></div>
+                            <div class="fracture-line"></div>
+                            <div class="bone-segment bottom"></div>
                         </div>
                         <div class="fracture-type-name">Comminuted</div>
-                        <div class="fracture-type-desc">Multiple fragments (3+ pieces). High-energy trauma. Complex healing.</div>
+                        <div class="fracture-type-desc">Multiple fragments (3+ pieces). High-energy trauma.</div>
                     </div>
-                    <div class="fracture-type-card">
-                        <div class="fracture-type-icon">
-                            <i class="fas fa-compress-alt" style="color: var(--fracture-blue);"></i>
+                    <div class="fracture-visual-card impacted">
+                        <div class="fracture-bone-visual">
+                            <div class="bone-segment top"></div>
+                            <div class="fracture-line"></div>
+                            <div class="bone-segment bottom"></div>
                         </div>
                         <div class="fracture-type-name">Impacted</div>
-                        <div class="fracture-type-desc">Bone fragments driven into each other. Common in falls on outstretched hand.</div>
+                        <div class="fracture-type-desc">Fragments driven into each other. Falls on outstretched hand.</div>
                     </div>
-                    <div class="fracture-type-card">
-                        <div class="fracture-type-icon">
-                            <i class="fas fa-compress-arrows-alt" style="color: var(--fracture-blue);"></i>
+                    <div class="fracture-visual-card compression">
+                        <div class="fracture-bone-visual">
+                            <div class="bone-segment top"></div>
+                            <div class="fracture-line"></div>
+                            <div class="bone-segment bottom"></div>
                         </div>
                         <div class="fracture-type-name">Compression</div>
-                        <div class="fracture-type-desc">Bone crushed/collapses. Common in vertebrae with osteoporosis.</div>
+                        <div class="fracture-type-desc">Bone crushed/collapses. Vertebrae with osteoporosis.</div>
                     </div>
-                    <div class="fracture-type-card">
-                        <div class="fracture-type-icon">
-                            <i class="fas fa-tint" style="color: #22c55e;"></i>
+                    <div class="fracture-visual-card greenstick">
+                        <div class="fracture-bone-visual">
+                            <div class="bone-segment top"></div>
+                            <div class="fracture-line"></div>
+                            <div class="bone-segment bottom"></div>
                         </div>
                         <div class="fracture-type-name">Greenstick</div>
-                        <div class="fracture-type-desc">Incomplete break (one side). Pediatric only - flexible bones bend.</div>
+                        <div class="fracture-type-desc">Incomplete break (one side). Pediatric only.</div>
                     </div>
-                    <div class="fracture-type-card">
-                        <div class="fracture-type-icon">
-                            <i class="fas fa-disease" style="color: var(--emergency-orange);"></i>
+                    <div class="fracture-visual-card pathologic">
+                        <div class="fracture-bone-visual">
+                            <div class="bone-segment top"></div>
+                            <div class="fracture-line"></div>
+                            <div class="bone-segment bottom"></div>
                         </div>
                         <div class="fracture-type-name">Pathologic</div>
-                        <div class="fracture-type-desc">Break through diseased bone (cancer, osteoporosis). Minimal trauma.</div>
+                        <div class="fracture-type-desc">Through diseased bone (cancer, osteoporosis).</div>
                     </div>
                 </div>
 
@@ -2376,31 +2992,45 @@
 
                 <h3>Weight Bearing Status</h3>
 
-                <div class="weight-bearing-chart">
+                <div class="weight-bearing-section">
                     <div class="wb-header">
-                        <i class="fas fa-walking"></i>
-                        Weight Bearing Progression
+                        <div class="wb-header-icon">
+                            <i class="fas fa-walking"></i>
+                        </div>
+                        <span>Weight Bearing Progression</span>
                     </div>
-                    <div class="wb-scale">
-                        <div class="wb-level">
-                            <div class="wb-dot"></div>
+                    <div class="wb-progression">
+                        <div class="wb-stage">
+                            <div class="wb-icon-circle">
+                                <i class="fas fa-ban"></i>
+                            </div>
                             <div class="wb-abbr">NWB</div>
-                            <div class="wb-label">Non Weight<br>Bearing</div>
+                            <div class="wb-name">Non-Weight Bearing</div>
+                            <div class="wb-desc">No weight on affected leg. Use crutches/walker.</div>
                         </div>
-                        <div class="wb-level">
-                            <div class="wb-dot"></div>
+                        <div class="wb-stage">
+                            <div class="wb-icon-circle">
+                                <i class="fas fa-shoe-prints"></i>
+                            </div>
                             <div class="wb-abbr">TTWB</div>
-                            <div class="wb-label">Toe Touch<br>Weight Bearing</div>
+                            <div class="wb-name">Toe Touch</div>
+                            <div class="wb-desc">Toe touches for balance only. No actual weight.</div>
                         </div>
-                        <div class="wb-level">
-                            <div class="wb-dot"></div>
+                        <div class="wb-stage">
+                            <div class="wb-icon-circle">
+                                <i class="fas fa-balance-scale"></i>
+                            </div>
                             <div class="wb-abbr">PWB</div>
-                            <div class="wb-label">Partial Weight<br>Bearing</div>
+                            <div class="wb-name">Partial Weight</div>
+                            <div class="wb-desc">Specific % of body weight (e.g., 25-50%).</div>
                         </div>
-                        <div class="wb-level">
-                            <div class="wb-dot"></div>
+                        <div class="wb-stage">
+                            <div class="wb-icon-circle">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
                             <div class="wb-abbr">WBAT</div>
-                            <div class="wb-label">Weight Bearing<br>As Tolerated</div>
+                            <div class="wb-name">As Tolerated</div>
+                            <div class="wb-desc">Full weight as comfortable. Normal gait goal.</div>
                         </div>
                     </div>
                 </div>
@@ -2434,108 +3064,131 @@
 
                 <h3>Major Complications by Timing</h3>
 
-                <div class="complication-grid">
-                    <div class="complication-card critical">
-                        <div class="complication-header">
-                            <div class="complication-icon">
-                                <i class="fas fa-compress-arrows-alt"></i>
+                <div class="complication-timeline">
+                    <!-- Immediate/Hours -->
+                    <div class="complication-time-group">
+                        <div class="time-marker critical">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <div class="time-label">Immediate (Hours After Injury)</div>
+                        <div class="time-complications">
+                            <div class="timeline-comp-card critical">
+                                <div class="timeline-comp-header">
+                                    <div class="timeline-comp-icon">
+                                        <i class="fas fa-compress-arrows-alt"></i>
+                                    </div>
+                                    <div class="timeline-comp-name">Compartment Syndrome</div>
+                                </div>
+                                <ul class="timeline-comp-signs">
+                                    <li>Pain out of proportion/with passive stretch</li>
+                                    <li>Tense, swollen compartment</li>
+                                    <li>Paresthesias progressing to paralysis</li>
+                                </ul>
+                                <div class="timeline-comp-treatment">
+                                    <i class="fas fa-syringe"></i> Emergency fasciotomy within 6 hours
+                                </div>
                             </div>
-                            <div>
-                                <div class="complication-name">Compartment Syndrome</div>
-                                <div class="complication-timing">Hours after injury</div>
+                            <div class="timeline-comp-card critical">
+                                <div class="timeline-comp-header">
+                                    <div class="timeline-comp-icon">
+                                        <i class="fas fa-lungs"></i>
+                                    </div>
+                                    <div class="timeline-comp-name">Fat Embolism Syndrome</div>
+                                </div>
+                                <ul class="timeline-comp-signs">
+                                    <li>Dyspnea, tachypnea, hypoxia</li>
+                                    <li>Confusion, restlessness, altered LOC</li>
+                                    <li>Petechiae (chest, axillae, conjunctivae)</li>
+                                </ul>
+                                <div class="timeline-comp-treatment">
+                                    <i class="fas fa-wind"></i> Supportive care, O2, immobilization
+                                </div>
                             </div>
                         </div>
-                        <ul class="complication-signs">
-                            <li>Pain out of proportion/with passive stretch</li>
-                            <li>Tense, swollen compartment</li>
-                            <li>Paresthesias</li>
-                            <li>Treatment: Emergency fasciotomy</li>
-                        </ul>
                     </div>
-                    <div class="complication-card critical">
-                        <div class="complication-header">
-                            <div class="complication-icon">
-                                <i class="fas fa-lungs"></i>
+
+                    <!-- Early (Days to Weeks) -->
+                    <div class="complication-time-group">
+                        <div class="time-marker early">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="time-label">Early (Days to Weeks)</div>
+                        <div class="time-complications">
+                            <div class="timeline-comp-card warning">
+                                <div class="timeline-comp-header">
+                                    <div class="timeline-comp-icon">
+                                        <i class="fas fa-bacteria"></i>
+                                    </div>
+                                    <div class="timeline-comp-name">Infection (Osteomyelitis)</div>
+                                </div>
+                                <ul class="timeline-comp-signs">
+                                    <li>Fever, chills, malaise</li>
+                                    <li>Wound erythema, drainage, odor</li>
+                                    <li>Elevated WBC, ESR, CRP</li>
+                                </ul>
+                                <div class="timeline-comp-treatment">
+                                    <i class="fas fa-pills"></i> IV antibiotics, surgical debridement
+                                </div>
                             </div>
-                            <div>
-                                <div class="complication-name">Fat Embolism Syndrome</div>
-                                <div class="complication-timing">24-72 hours post-fracture</div>
+                            <div class="timeline-comp-card warning">
+                                <div class="timeline-comp-header">
+                                    <div class="timeline-comp-icon">
+                                        <i class="fas fa-droplet"></i>
+                                    </div>
+                                    <div class="timeline-comp-name">Deep Vein Thrombosis</div>
+                                </div>
+                                <ul class="timeline-comp-signs">
+                                    <li>Unilateral leg swelling, warmth</li>
+                                    <li>Calf pain (Homans' sign - unreliable)</li>
+                                    <li>Can lead to PE (chest pain, dyspnea)</li>
+                                </ul>
+                                <div class="timeline-comp-treatment">
+                                    <i class="fas fa-syringe"></i> Anticoagulation, SCDs, early mobility
+                                </div>
                             </div>
                         </div>
-                        <ul class="complication-signs">
-                            <li>Dyspnea, tachypnea, hypoxia</li>
-                            <li>Confusion, restlessness, altered LOC</li>
-                            <li>Petechiae (chest, axillae, conjunctivae)</li>
-                            <li>Treatment: Supportive, O2, immobilization</li>
-                        </ul>
                     </div>
-                    <div class="complication-card">
-                        <div class="complication-header">
-                            <div class="complication-icon">
-                                <i class="fas fa-skull-crossbones"></i>
+
+                    <!-- Late (Weeks to Months) -->
+                    <div class="complication-time-group">
+                        <div class="time-marker late">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        <div class="time-label">Late (Weeks to Months)</div>
+                        <div class="time-complications">
+                            <div class="timeline-comp-card info">
+                                <div class="timeline-comp-header">
+                                    <div class="timeline-comp-icon">
+                                        <i class="fas fa-bone"></i>
+                                    </div>
+                                    <div class="timeline-comp-name">Delayed/Nonunion</div>
+                                </div>
+                                <ul class="timeline-comp-signs">
+                                    <li>Fracture not healing in expected time</li>
+                                    <li>Continued pain and instability</li>
+                                    <li>Risk factors: smoking, infection, malnutrition</li>
+                                </ul>
+                                <div class="timeline-comp-treatment">
+                                    <i class="fas fa-magnet"></i> Bone stimulator, surgical intervention
+                                </div>
                             </div>
-                            <div>
-                                <div class="complication-name">Infection (Osteomyelitis)</div>
-                                <div class="complication-timing">Days to weeks</div>
+                            <div class="timeline-comp-card info">
+                                <div class="timeline-comp-header">
+                                    <div class="timeline-comp-icon">
+                                        <i class="fas fa-circle-xmark"></i>
+                                    </div>
+                                    <div class="timeline-comp-name">Avascular Necrosis</div>
+                                </div>
+                                <ul class="timeline-comp-signs">
+                                    <li>Bone death from disrupted blood supply</li>
+                                    <li>Common in femoral neck, scaphoid fractures</li>
+                                    <li>Persistent pain despite healing</li>
+                                </ul>
+                                <div class="timeline-comp-treatment">
+                                    <i class="fas fa-user-md"></i> Surgery, joint replacement if severe
+                                </div>
                             </div>
                         </div>
-                        <ul class="complication-signs">
-                            <li>Fever, chills, malaise</li>
-                            <li>Wound erythema, drainage, odor</li>
-                            <li>Elevated WBC, ESR, CRP</li>
-                            <li>Treatment: Antibiotics, debridement</li>
-                        </ul>
-                    </div>
-                    <div class="complication-card">
-                        <div class="complication-header">
-                            <div class="complication-icon">
-                                <i class="fas fa-blood"></i>
-                            </div>
-                            <div>
-                                <div class="complication-name">Deep Vein Thrombosis</div>
-                                <div class="complication-timing">Days to weeks</div>
-                            </div>
-                        </div>
-                        <ul class="complication-signs">
-                            <li>Unilateral leg swelling, warmth</li>
-                            <li>Calf pain (Homans' sign - unreliable)</li>
-                            <li>Can lead to PE (chest pain, dyspnea)</li>
-                            <li>Treatment: Anticoagulation, SCDs</li>
-                        </ul>
-                    </div>
-                    <div class="complication-card monitor">
-                        <div class="complication-header">
-                            <div class="complication-icon">
-                                <i class="fas fa-bone"></i>
-                            </div>
-                            <div>
-                                <div class="complication-name">Delayed/Nonunion</div>
-                                <div class="complication-timing">Weeks to months</div>
-                            </div>
-                        </div>
-                        <ul class="complication-signs">
-                            <li>Fracture not healing in expected time</li>
-                            <li>Continued pain and instability</li>
-                            <li>Risk: smoking, infection, poor nutrition</li>
-                            <li>Treatment: Bone stimulator, surgery</li>
-                        </ul>
-                    </div>
-                    <div class="complication-card monitor">
-                        <div class="complication-header">
-                            <div class="complication-icon">
-                                <i class="fas fa-circle-xmark"></i>
-                            </div>
-                            <div>
-                                <div class="complication-name">Avascular Necrosis</div>
-                                <div class="complication-timing">Weeks to months</div>
-                            </div>
-                        </div>
-                        <ul class="complication-signs">
-                            <li>Bone death from disrupted blood supply</li>
-                            <li>Common in femoral neck, scaphoid fractures</li>
-                            <li>Persistent pain despite healing</li>
-                            <li>Treatment: Surgery, joint replacement</li>
-                        </ul>
                     </div>
                 </div>
 
