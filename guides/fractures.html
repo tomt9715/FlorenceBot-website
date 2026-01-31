@@ -1,0 +1,2696 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fractures Study Guide - The Nursing Collective</title>
+    <meta name="description" content="Comprehensive nursing study guide for Fractures. Learn fracture types, bone healing stages, compartment syndrome recognition, and the 5 P's of neurovascular assessment.">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <!-- Sidebar Styles -->
+    <link rel="stylesheet" href="guide-sidebar.css">
+
+    <style>
+        /* ============================================
+           FRACTURES GUIDE - VISUAL ATLAS LAYOUT
+           Body region cards, procedure timelines, rehab trackers
+           ============================================ */
+
+        :root {
+            --primary-color: #2E86AB;
+            --primary-dark: #236b8a;
+            --secondary-color: #A23B72;
+            --accent-color: #f59e0b;
+            --text-primary: #1f2937;
+            --text-secondary: #4b5563;
+            --background: #ffffff;
+            --border-color: #e5e7eb;
+            /* Fractures-specific colors - Gray to Blue gradient */
+            --fracture-gray: #64748b;
+            --fracture-blue: #3b82f6;
+            --bone-color: #f8fafc;
+            --healing-green: #22c55e;
+            --warning-red: #ef4444;
+            --emergency-orange: #f97316;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Source Sans 3', sans-serif;
+            line-height: 1.7;
+            color: var(--text-primary);
+            background: #f8fafc;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Outfit', sans-serif;
+        }
+
+        /* ============================================
+           DOWNLOAD BAR
+           ============================================ */
+        .download-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(135deg, var(--fracture-gray) 0%, var(--fracture-blue) 100%);
+            padding: 12px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+
+        .download-bar-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: white;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .download-bar-brand i {
+            font-size: 1.2rem;
+        }
+
+        .download-bar-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn-back, .btn-download {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            border: none;
+        }
+
+        .btn-back {
+            background: rgba(255,255,255,0.15);
+            color: white;
+        }
+
+        .btn-back:hover {
+            background: rgba(255,255,255,0.25);
+        }
+
+        .btn-download {
+            background: white;
+            color: var(--fracture-blue);
+        }
+
+        .btn-download:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        /* ============================================
+           DOCUMENT CONTAINER
+           ============================================ */
+        .document-container {
+            max-width: 900px;
+            margin: 80px auto 40px;
+            background: white;
+            box-shadow: 0 10px 60px rgba(0,0,0,0.1);
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        /* ============================================
+           COVER PAGE
+           ============================================ */
+        .cover-page {
+            background: linear-gradient(135deg, var(--fracture-gray) 0%, #475569 40%, var(--fracture-blue) 100%);
+            padding: 60px 40px;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cover-page::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 30% 70%, rgba(255,255,255,0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .cover-logo {
+            width: 80px;
+            height: 80px;
+            background: white;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+        }
+
+        .cover-logo i {
+            font-size: 36px;
+            background: linear-gradient(135deg, var(--fracture-gray), var(--fracture-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .cover-category {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            opacity: 0.9;
+            margin-bottom: 12px;
+        }
+
+        .cover-title {
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+
+        .cover-subtitle {
+            font-size: 1.15rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .cover-meta {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-top: 32px;
+            font-size: 0.9rem;
+        }
+
+        .cover-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            opacity: 0.85;
+        }
+
+        /* ============================================
+           DOCUMENT CONTENT
+           ============================================ */
+        .document-content {
+            padding: 48px;
+        }
+
+        /* Learning Objectives */
+        .learning-objectives {
+            background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+            border: 1px solid #bae6fd;
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 40px;
+        }
+
+        .learning-objectives h2 {
+            font-size: 1.3rem;
+            color: var(--fracture-blue);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .objectives-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 16px;
+        }
+
+        .objective-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            background: white;
+            padding: 16px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .objective-number {
+            width: 28px;
+            height: 28px;
+            background: linear-gradient(135deg, var(--fracture-gray), var(--fracture-blue));
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .objective-text {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        /* ============================================
+           GUIDE SECTIONS
+           ============================================ */
+        .guide-section {
+            margin-bottom: 48px;
+            scroll-margin-top: 100px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 3px solid var(--border-color);
+        }
+
+        .section-number {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--fracture-gray), var(--fracture-blue));
+            color: white;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .section-title-group h2 {
+            font-size: 1.6rem;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+
+        .section-title-group p {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+        }
+
+        h3 {
+            font-size: 1.25rem;
+            color: var(--text-primary);
+            margin: 32px 0 16px;
+            padding-left: 16px;
+            border-left: 4px solid var(--fracture-blue);
+        }
+
+        h4 {
+            font-size: 1.1rem;
+            color: var(--text-primary);
+            margin: 24px 0 12px;
+        }
+
+        p {
+            margin-bottom: 16px;
+            color: var(--text-secondary);
+        }
+
+        /* ============================================
+           VISUAL ATLAS COMPONENTS
+           Body Region Cards
+           ============================================ */
+        .body-region-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 24px 0;
+        }
+
+        .body-region-card {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+            transition: all 0.3s ease;
+        }
+
+        .body-region-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+        }
+
+        .body-region-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .body-region-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--fracture-gray), var(--fracture-blue));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .body-region-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .body-region-subtitle {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .body-region-content {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .body-region-content ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .body-region-content li {
+            padding: 6px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .body-region-content li::before {
+            content: '\f054';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            font-size: 0.7rem;
+            position: absolute;
+            left: 0;
+            top: 8px;
+            color: var(--fracture-blue);
+        }
+
+        /* ============================================
+           FRACTURE TYPE CARDS
+           ============================================ */
+        .fracture-type-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin: 24px 0;
+        }
+
+        .fracture-type-card {
+            background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.2s ease;
+        }
+
+        .fracture-type-card:hover {
+            transform: translateY(-2px);
+            border-color: var(--fracture-blue);
+        }
+
+        .fracture-type-icon {
+            width: 56px;
+            height: 56px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            font-size: 1.5rem;
+        }
+
+        .fracture-type-name {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .fracture-type-desc {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        /* ============================================
+           HEALING TIMELINE
+           ============================================ */
+        .healing-timeline {
+            background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+            border: 1px solid #86efac;
+            border-radius: 16px;
+            padding: 32px;
+            margin: 24px 0;
+        }
+
+        .healing-timeline-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #166534;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .timeline-stages {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            position: relative;
+        }
+
+        .timeline-stage {
+            display: flex;
+            gap: 20px;
+            position: relative;
+            padding-bottom: 24px;
+        }
+
+        .timeline-stage:last-child {
+            padding-bottom: 0;
+        }
+
+        .timeline-stage::before {
+            content: '';
+            position: absolute;
+            left: 23px;
+            top: 48px;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, var(--healing-green), #86efac);
+        }
+
+        .timeline-stage:last-child::before {
+            display: none;
+        }
+
+        .timeline-marker {
+            width: 48px;
+            height: 48px;
+            background: white;
+            border: 3px solid var(--healing-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            color: var(--healing-green);
+            flex-shrink: 0;
+            z-index: 1;
+        }
+
+        .timeline-content {
+            flex: 1;
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+
+        .timeline-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .timeline-stage-name {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .timeline-duration {
+            background: linear-gradient(135deg, var(--healing-green), #22c55e);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .timeline-description {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* ============================================
+           5 P'S ASSESSMENT CARDS
+           ============================================ */
+        .five-ps-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 12px;
+            margin: 24px 0;
+        }
+
+        @media (max-width: 900px) {
+            .five-ps-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .five-ps-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .p-card {
+            background: white;
+            border: 2px solid var(--border-color);
+            border-radius: 16px;
+            padding: 20px 16px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .p-card:hover {
+            border-color: var(--warning-red);
+            transform: scale(1.03);
+        }
+
+        .p-letter {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--warning-red), #dc2626);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 8px;
+        }
+
+        .p-name {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .p-assess {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        .p-abnormal {
+            font-size: 0.8rem;
+            color: var(--warning-red);
+            font-weight: 600;
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px dashed #fca5a5;
+        }
+
+        /* ============================================
+           COMPARTMENT SYNDROME ALERT
+           ============================================ */
+        .emergency-alert {
+            background: linear-gradient(135deg, #fef2f2, #fee2e2);
+            border: 2px solid var(--warning-red);
+            border-radius: 16px;
+            padding: 28px;
+            margin: 24px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .emergency-alert::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 8px;
+            height: 100%;
+            background: var(--warning-red);
+        }
+
+        .emergency-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .emergency-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--warning-red);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .emergency-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: #991b1b;
+        }
+
+        .emergency-subtitle {
+            font-size: 0.9rem;
+            color: #b91c1c;
+        }
+
+        .emergency-content {
+            padding-left: 60px;
+        }
+
+        .emergency-content p {
+            color: #7f1d1d;
+            font-size: 1rem;
+            margin-bottom: 12px;
+        }
+
+        .emergency-actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .emergency-action {
+            background: white;
+            border: 1px solid #fca5a5;
+            border-radius: 10px;
+            padding: 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .emergency-action-number {
+            width: 28px;
+            height: 28px;
+            background: var(--warning-red);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .emergency-action-text {
+            font-size: 0.9rem;
+            color: #7f1d1d;
+            font-weight: 500;
+        }
+
+        /* ============================================
+           COMPLICATION WATCH CARDS
+           ============================================ */
+        .complication-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 24px 0;
+        }
+
+        .complication-card {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            border-left: 5px solid var(--emergency-orange);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+        }
+
+        .complication-card.critical {
+            border-left-color: var(--warning-red);
+        }
+
+        .complication-card.moderate {
+            border-left-color: var(--accent-color);
+        }
+
+        .complication-card.monitor {
+            border-left-color: var(--fracture-blue);
+        }
+
+        .complication-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 14px;
+        }
+
+        .complication-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--emergency-orange);
+            font-size: 1.1rem;
+        }
+
+        .complication-card.critical .complication-icon {
+            background: linear-gradient(135deg, #fee2e2, #fecaca);
+            color: var(--warning-red);
+        }
+
+        .complication-card.monitor .complication-icon {
+            background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+            color: var(--fracture-blue);
+        }
+
+        .complication-name {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .complication-timing {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .complication-signs {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .complication-signs li {
+            padding: 6px 0;
+            padding-left: 24px;
+            position: relative;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .complication-signs li::before {
+            content: '\f071';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            font-size: 0.7rem;
+            position: absolute;
+            left: 0;
+            top: 8px;
+            color: var(--emergency-orange);
+        }
+
+        .complication-card.critical .complication-signs li::before {
+            color: var(--warning-red);
+        }
+
+        .complication-card.monitor .complication-signs li::before {
+            content: '\f06a';
+            color: var(--fracture-blue);
+        }
+
+        /* ============================================
+           WEIGHT BEARING STATUS
+           ============================================ */
+        .weight-bearing-chart {
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 24px;
+            margin: 24px 0;
+        }
+
+        .wb-header {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .wb-scale {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            padding: 0 10px;
+        }
+
+        .wb-scale::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 8px;
+            background: linear-gradient(90deg, #ef4444, #f97316, #eab308, #22c55e);
+            border-radius: 4px;
+            transform: translateY(-50%);
+            z-index: 0;
+        }
+
+        .wb-level {
+            text-align: center;
+            z-index: 1;
+            background: white;
+            padding: 0 8px;
+        }
+
+        .wb-dot {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            margin: 0 auto 8px;
+            border: 3px solid white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+
+        .wb-level:nth-child(1) .wb-dot { background: #ef4444; }
+        .wb-level:nth-child(2) .wb-dot { background: #f97316; }
+        .wb-level:nth-child(3) .wb-dot { background: #eab308; }
+        .wb-level:nth-child(4) .wb-dot { background: #22c55e; }
+
+        .wb-label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .wb-abbr {
+            font-size: 0.85rem;
+            font-weight: 800;
+            color: var(--text-secondary);
+            margin-bottom: 4px;
+        }
+
+        /* ============================================
+           INTERVENTION CARDS
+           ============================================ */
+        .intervention-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 24px 0;
+        }
+
+        .intervention-card {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+            border: 1px solid var(--border-color);
+            transition: all 0.2s ease;
+        }
+
+        .intervention-card:hover {
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+        }
+
+        .intervention-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .intervention-icon {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.1rem;
+        }
+
+        .intervention-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .intervention-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .intervention-list li {
+            padding: 8px 0;
+            padding-left: 24px;
+            position: relative;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            border-bottom: 1px solid #f3f4f6;
+        }
+
+        .intervention-list li:last-child {
+            border-bottom: none;
+        }
+
+        .intervention-list li::before {
+            content: '\f00c';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            font-size: 0.75rem;
+            position: absolute;
+            left: 0;
+            top: 10px;
+            color: var(--healing-green);
+        }
+
+        /* ============================================
+           INFO BOXES
+           ============================================ */
+        .info-box {
+            border-radius: 12px;
+            padding: 20px 24px;
+            margin: 20px 0;
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+        }
+
+        .info-box-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 1.1rem;
+        }
+
+        .info-box-content {
+            flex: 1;
+        }
+
+        .info-box-content strong {
+            display: block;
+            font-size: 1rem;
+            margin-bottom: 6px;
+        }
+
+        .info-box-content p {
+            margin: 0;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .info-box.warning {
+            background: linear-gradient(135deg, #fef2f2, #fee2e2);
+            border: 1px solid #fecaca;
+        }
+
+        .info-box.warning .info-box-icon {
+            background: #fee2e2;
+            color: var(--warning-red);
+        }
+
+        .info-box.warning .info-box-content strong {
+            color: #991b1b;
+        }
+
+        .info-box.warning .info-box-content p {
+            color: #7f1d1d;
+        }
+
+        .info-box.clinical {
+            background: linear-gradient(135deg, #fffbeb, #fef3c7);
+            border: 1px solid #fde68a;
+        }
+
+        .info-box.clinical .info-box-icon {
+            background: #fef3c7;
+            color: #d97706;
+        }
+
+        .info-box.clinical .info-box-content strong {
+            color: #92400e;
+        }
+
+        .info-box.clinical .info-box-content p {
+            color: #78350f;
+        }
+
+        .info-box.nclex {
+            background: linear-gradient(135deg, #faf5ff, #f3e8ff);
+            border: 1px solid #e9d5ff;
+        }
+
+        .info-box.nclex .info-box-icon {
+            background: #f3e8ff;
+            color: #9333ea;
+        }
+
+        .info-box.nclex .info-box-content strong {
+            color: #6b21a8;
+        }
+
+        .info-box.nclex .info-box-content p {
+            color: #581c87;
+        }
+
+        .info-box.tip {
+            background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+            border: 1px solid #bbf7d0;
+        }
+
+        .info-box.tip .info-box-icon {
+            background: #dcfce7;
+            color: var(--healing-green);
+        }
+
+        .info-box.tip .info-box-content strong {
+            color: #166534;
+        }
+
+        .info-box.tip .info-box-content p {
+            color: #15803d;
+        }
+
+        /* ============================================
+           TABLES
+           ============================================ */
+        .guide-table-wrapper {
+            overflow-x: auto;
+            margin: 20px 0;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+
+        .guide-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+
+        .guide-table thead {
+            background: linear-gradient(135deg, var(--fracture-gray), var(--fracture-blue));
+            color: white;
+        }
+
+        .guide-table th {
+            padding: 14px 16px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .guide-table td {
+            padding: 14px 16px;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+        }
+
+        .guide-table tbody tr:hover {
+            background: #f8fafc;
+        }
+
+        .guide-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* ============================================
+           KEY POINTS SUMMARY
+           ============================================ */
+        .key-points-summary {
+            background: linear-gradient(135deg, #1f2937, #374151);
+            border-radius: 16px;
+            padding: 32px;
+            margin-top: 48px;
+            color: white;
+        }
+
+        .key-points-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .key-points-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--fracture-gray), var(--fracture-blue));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+        }
+
+        .key-points-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+
+        .key-points-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 16px;
+        }
+
+        .key-point-item {
+            background: rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 18px;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .key-point-check {
+            width: 24px;
+            height: 24px;
+            background: var(--healing-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 0.75rem;
+        }
+
+        .key-point-text {
+            font-size: 0.95rem;
+            line-height: 1.5;
+            opacity: 0.95;
+        }
+
+        /* ============================================
+           DOCUMENT FOOTER
+           ============================================ */
+        .document-footer {
+            background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+            padding: 32px 48px;
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+        }
+
+        .footer-brand {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .footer-logo {
+            width: 36px;
+            height: 36px;
+        }
+
+        .footer-name {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .footer-tagline {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+        }
+
+        .footer-copyright {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        /* ============================================
+           PRINT STYLES
+           ============================================ */
+        @media print {
+            body {
+                background: white;
+            }
+
+            .download-bar {
+                display: none !important;
+            }
+
+            .document-container {
+                margin: 0;
+                box-shadow: none;
+                border-radius: 0;
+                max-width: 100%;
+            }
+
+            .cover-page {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            .guide-section {
+                page-break-inside: avoid;
+            }
+
+            .emergency-alert {
+                page-break-inside: avoid;
+            }
+
+            .florencebot-tip {
+                break-inside: avoid;
+                page-break-inside: avoid;
+            }
+
+            .key-points-summary {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                page-break-inside: avoid;
+            }
+
+            h3 {
+                page-break-after: avoid;
+            }
+
+            .body-region-card,
+            .intervention-card,
+            .complication-card {
+                page-break-inside: avoid;
+            }
+        }
+
+        /* ============================================
+           RESPONSIVE STYLES
+           ============================================ */
+        @media (max-width: 768px) {
+            .cover-title {
+                font-size: 2rem;
+            }
+
+            .document-content {
+                padding: 24px;
+            }
+
+            .section-header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .section-number {
+                margin-bottom: 8px;
+            }
+
+            .download-bar {
+                flex-direction: column;
+                gap: 12px;
+                padding: 12px 16px;
+            }
+
+            .download-bar-actions {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .five-ps-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .p-letter {
+                font-size: 2rem;
+            }
+
+            .cover-meta {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .emergency-content {
+                padding-left: 0;
+            }
+
+            .timeline-stage {
+                flex-direction: column;
+            }
+
+            .timeline-stage::before {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body data-product-id="fractures" data-guide-name="Fractures">
+    <!-- Download Bar -->
+    <div class="download-bar">
+        <div class="download-bar-brand">
+            <i class="fas fa-book-medical"></i>
+            <span>The Nursing Collective Study Guide</span>
+        </div>
+        <div class="download-bar-actions">
+            <a href="../dashboard.html" class="btn-back">
+                <i class="fas fa-arrow-left"></i> Back to Dashboard
+            </a>
+            <button class="btn-download" id="download-pdf-btn">
+                <i class="fas fa-file-pdf"></i> Save as PDF
+            </button>
+        </div>
+    </div>
+
+    <!-- Document Container -->
+    <div class="document-container">
+        <!-- Cover Page -->
+        <div class="cover-page">
+            <div class="cover-logo">
+                <i class="fas fa-bone"></i>
+            </div>
+            <div class="cover-category">Musculoskeletal System</div>
+            <h1 class="cover-title">Fractures</h1>
+            <p class="cover-subtitle">Complete nursing guide to fracture types, bone healing stages, neurovascular assessment, and recognizing compartment syndrome</p>
+            <div class="cover-meta">
+                <div class="cover-meta-item">
+                    <i class="fas fa-clock"></i>
+                    <span>45 min read</span>
+                </div>
+                <div class="cover-meta-item">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span>NCLEX Focused</span>
+                </div>
+                <div class="cover-meta-item">
+                    <i class="fas fa-file-alt"></i>
+                    <span>2025 Edition</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Document Content -->
+        <div class="document-content">
+            <!-- Learning Objectives -->
+            <div class="learning-objectives">
+                <h2><i class="fas fa-bullseye"></i> Learning Objectives</h2>
+                <div class="objectives-grid">
+                    <div class="objective-item">
+                        <div class="objective-number">1</div>
+                        <div class="objective-text">Describe bone anatomy and physiology relevant to fracture healing</div>
+                    </div>
+                    <div class="objective-item">
+                        <div class="objective-number">2</div>
+                        <div class="objective-text">Identify and differentiate fracture types and classifications</div>
+                    </div>
+                    <div class="objective-item">
+                        <div class="objective-number">3</div>
+                        <div class="objective-text">Explain the four stages of bone healing</div>
+                    </div>
+                    <div class="objective-item">
+                        <div class="objective-number">4</div>
+                        <div class="objective-text">Perform neurovascular assessment using the 5 P's</div>
+                    </div>
+                    <div class="objective-item">
+                        <div class="objective-number">5</div>
+                        <div class="objective-text">Recognize early signs of compartment syndrome</div>
+                    </div>
+                    <div class="objective-item">
+                        <div class="objective-number">6</div>
+                        <div class="objective-text">Implement appropriate nursing interventions for fracture patients</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 1: Bone Anatomy & Physiology -->
+            <section class="guide-section" id="anatomy">
+                <div class="section-header">
+                    <div class="section-number">1</div>
+                    <div class="section-title-group">
+                        <h2>Bone Anatomy & Physiology</h2>
+                        <p>Understanding bone structure for fracture management</p>
+                    </div>
+                </div>
+
+                <p>Bones are dynamic, living organs that provide structural support, protect vital organs, produce blood cells, and store minerals. Understanding bone anatomy is essential for recognizing fracture patterns and promoting optimal healing.</p>
+
+                <h3>Bone Structure</h3>
+
+                <div class="body-region-grid">
+                    <div class="body-region-card">
+                        <div class="body-region-header">
+                            <div class="body-region-icon">
+                                <i class="fas fa-layer-group"></i>
+                            </div>
+                            <div>
+                                <div class="body-region-title">Periosteum</div>
+                                <div class="body-region-subtitle">Outer protective layer</div>
+                            </div>
+                        </div>
+                        <div class="body-region-content">
+                            <ul>
+                                <li>Dense fibrous membrane covering bone surface</li>
+                                <li>Contains blood vessels and nerves</li>
+                                <li>Essential for bone healing and repair</li>
+                                <li>Attachment point for tendons and ligaments</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="body-region-card">
+                        <div class="body-region-header">
+                            <div class="body-region-icon">
+                                <i class="fas fa-circle"></i>
+                            </div>
+                            <div>
+                                <div class="body-region-title">Cortical (Compact) Bone</div>
+                                <div class="body-region-subtitle">Dense outer layer</div>
+                            </div>
+                        </div>
+                        <div class="body-region-content">
+                            <ul>
+                                <li>Makes up 80% of skeletal mass</li>
+                                <li>Provides strength and rigidity</li>
+                                <li>Found in shafts of long bones (diaphysis)</li>
+                                <li>Organized in Haversian systems</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="body-region-card">
+                        <div class="body-region-header">
+                            <div class="body-region-icon">
+                                <i class="fas fa-th"></i>
+                            </div>
+                            <div>
+                                <div class="body-region-title">Cancellous (Spongy) Bone</div>
+                                <div class="body-region-subtitle">Inner trabecular network</div>
+                            </div>
+                        </div>
+                        <div class="body-region-content">
+                            <ul>
+                                <li>Honeycomb-like structure (trabeculae)</li>
+                                <li>Found at bone ends (epiphysis)</li>
+                                <li>Contains red marrow for blood cell production</li>
+                                <li>Absorbs shock and stress</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="body-region-card">
+                        <div class="body-region-header">
+                            <div class="body-region-icon">
+                                <i class="fas fa-tint"></i>
+                            </div>
+                            <div>
+                                <div class="body-region-title">Bone Marrow</div>
+                                <div class="body-region-subtitle">Blood cell production center</div>
+                            </div>
+                        </div>
+                        <div class="body-region-content">
+                            <ul>
+                                <li><strong>Red marrow:</strong> Produces RBCs, WBCs, platelets</li>
+                                <li><strong>Yellow marrow:</strong> Fat storage (adults)</li>
+                                <li>Located in medullary cavity</li>
+                                <li>Can release fat emboli with long bone fractures</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>Long Bone Regions</h3>
+
+                <div class="guide-table-wrapper">
+                    <table class="guide-table">
+                        <thead>
+                            <tr>
+                                <th>Region</th>
+                                <th>Location</th>
+                                <th>Characteristics</th>
+                                <th>Clinical Significance</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Epiphysis</strong></td>
+                                <td>Ends of bone</td>
+                                <td>Mostly spongy bone, covered by articular cartilage</td>
+                                <td>Fractures affect joint function</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Metaphysis</strong></td>
+                                <td>Between epiphysis and diaphysis</td>
+                                <td>Contains growth plate (physis) in children</td>
+                                <td>Growth plate injuries can affect development</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Diaphysis</strong></td>
+                                <td>Shaft (middle portion)</td>
+                                <td>Thick cortical bone, medullary cavity</td>
+                                <td>Most common site for fractures</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>Bone Blood Supply</h3>
+
+                <p>Adequate blood supply is critical for fracture healing. Blood reaches bone through multiple pathways:</p>
+
+                <div class="info-box clinical">
+                    <div class="info-box-icon">
+                        <i class="fas fa-heartbeat"></i>
+                    </div>
+                    <div class="info-box-content">
+                        <strong>Blood Supply to Bone</strong>
+                        <p><strong>Nutrient artery:</strong> Main blood supply, enters through nutrient foramen. <strong>Periosteal vessels:</strong> Supply outer third of cortex. <strong>Metaphyseal/Epiphyseal vessels:</strong> Supply bone ends. Disruption of blood supply leads to delayed healing or avascular necrosis (AVN).</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 2: Fracture Types -->
+            <section class="guide-section" id="fracture-types">
+                <div class="section-header">
+                    <div class="section-number">2</div>
+                    <div class="section-title-group">
+                        <h2>Fracture Types & Classification</h2>
+                        <p>Identifying fracture patterns for appropriate treatment</p>
+                    </div>
+                </div>
+
+                <p>A fracture is a break or disruption in bone continuity. Fractures are classified by their pattern, displacement, and whether they communicate with the external environment.</p>
+
+                <h3>Open vs. Closed Fractures</h3>
+
+                <div class="body-region-grid">
+                    <div class="body-region-card">
+                        <div class="body-region-header">
+                            <div class="body-region-icon" style="background: linear-gradient(135deg, #ef4444, #dc2626);">
+                                <i class="fas fa-exclamation-triangle"></i>
+                            </div>
+                            <div>
+                                <div class="body-region-title">Open (Compound) Fracture</div>
+                                <div class="body-region-subtitle">Bone pierces skin - EMERGENCY</div>
+                            </div>
+                        </div>
+                        <div class="body-region-content">
+                            <ul>
+                                <li>Bone fragments protrude through skin</li>
+                                <li>High risk of infection (osteomyelitis)</li>
+                                <li>Requires surgical debridement</li>
+                                <li>IV antibiotics within 1 hour</li>
+                                <li>Tetanus prophylaxis required</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="body-region-card">
+                        <div class="body-region-header">
+                            <div class="body-region-icon" style="background: linear-gradient(135deg, #22c55e, #16a34a);">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <div>
+                                <div class="body-region-title">Closed (Simple) Fracture</div>
+                                <div class="body-region-subtitle">Skin remains intact</div>
+                            </div>
+                        </div>
+                        <div class="body-region-content">
+                            <ul>
+                                <li>Skin not broken by bone fragments</li>
+                                <li>Lower infection risk</li>
+                                <li>May still have significant soft tissue injury</li>
+                                <li>Can often be managed conservatively</li>
+                                <li>May still require surgery for alignment</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>Fracture Patterns</h3>
+
+                <div class="fracture-type-grid">
+                    <div class="fracture-type-card">
+                        <div class="fracture-type-icon">
+                            <i class="fas fa-arrows-alt-h" style="color: var(--fracture-blue);"></i>
+                        </div>
+                        <div class="fracture-type-name">Transverse</div>
+                        <div class="fracture-type-desc">Straight break perpendicular to bone's long axis. Usually from direct force.</div>
+                    </div>
+                    <div class="fracture-type-card">
+                        <div class="fracture-type-icon">
+                            <i class="fas fa-slash" style="color: var(--fracture-blue);"></i>
+                        </div>
+                        <div class="fracture-type-name">Oblique</div>
+                        <div class="fracture-type-desc">Diagonal break across bone at an angle. From twisting or angular force.</div>
+                    </div>
+                    <div class="fracture-type-card">
+                        <div class="fracture-type-icon">
+                            <i class="fas fa-sync-alt" style="color: var(--fracture-blue);"></i>
+                        </div>
+                        <div class="fracture-type-name">Spiral</div>
+                        <div class="fracture-type-desc">Twisting break wrapping around bone. Common in skiing injuries.</div>
+                    </div>
+                    <div class="fracture-type-card">
+                        <div class="fracture-type-icon">
+                            <i class="fas fa-puzzle-piece" style="color: var(--fracture-blue);"></i>
+                        </div>
+                        <div class="fracture-type-name">Comminuted</div>
+                        <div class="fracture-type-desc">Multiple fragments (3+ pieces). High-energy trauma. Complex healing.</div>
+                    </div>
+                    <div class="fracture-type-card">
+                        <div class="fracture-type-icon">
+                            <i class="fas fa-compress-alt" style="color: var(--fracture-blue);"></i>
+                        </div>
+                        <div class="fracture-type-name">Impacted</div>
+                        <div class="fracture-type-desc">Bone fragments driven into each other. Common in falls on outstretched hand.</div>
+                    </div>
+                    <div class="fracture-type-card">
+                        <div class="fracture-type-icon">
+                            <i class="fas fa-compress-arrows-alt" style="color: var(--fracture-blue);"></i>
+                        </div>
+                        <div class="fracture-type-name">Compression</div>
+                        <div class="fracture-type-desc">Bone crushed/collapses. Common in vertebrae with osteoporosis.</div>
+                    </div>
+                    <div class="fracture-type-card">
+                        <div class="fracture-type-icon">
+                            <i class="fas fa-tint" style="color: #22c55e;"></i>
+                        </div>
+                        <div class="fracture-type-name">Greenstick</div>
+                        <div class="fracture-type-desc">Incomplete break (one side). Pediatric only - flexible bones bend.</div>
+                    </div>
+                    <div class="fracture-type-card">
+                        <div class="fracture-type-icon">
+                            <i class="fas fa-disease" style="color: var(--emergency-orange);"></i>
+                        </div>
+                        <div class="fracture-type-name">Pathologic</div>
+                        <div class="fracture-type-desc">Break through diseased bone (cancer, osteoporosis). Minimal trauma.</div>
+                    </div>
+                </div>
+
+                <h3>Displacement Classification</h3>
+
+                <div class="guide-table-wrapper">
+                    <table class="guide-table">
+                        <thead>
+                            <tr>
+                                <th>Classification</th>
+                                <th>Description</th>
+                                <th>Treatment Approach</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Nondisplaced</strong></td>
+                                <td>Bone fragments remain in anatomical alignment</td>
+                                <td>Often conservative (cast/splint)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Displaced</strong></td>
+                                <td>Fragments have moved from normal position</td>
+                                <td>May require reduction and fixation</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Angulated</strong></td>
+                                <td>Fragments tilted at an angle to each other</td>
+                                <td>Reduction needed for proper alignment</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Rotated</strong></td>
+                                <td>Distal fragment twisted on longitudinal axis</td>
+                                <td>Surgical correction usually needed</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="info-box nclex">
+                    <div class="info-box-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="info-box-content">
+                        <strong>NCLEX Alert: Fracture Classification</strong>
+                        <p>Remember: <strong>OPEN = EMERGENCY</strong>. Open fractures require IV antibiotics within 1 hour, surgical debridement, and tetanus prophylaxis. Comminuted fractures have the longest healing time due to multiple fragments and disrupted blood supply.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 3: Bone Healing -->
+            <section class="guide-section" id="healing">
+                <div class="section-header">
+                    <div class="section-number">3</div>
+                    <div class="section-title-group">
+                        <h2>Bone Healing Process</h2>
+                        <p>The four stages of fracture repair</p>
+                    </div>
+                </div>
+
+                <p>Bone healing (osteogenesis) is a remarkable process that can restore bone to its original strength. Understanding these stages helps nurses anticipate patient needs and recognize delayed healing.</p>
+
+                <div class="healing-timeline">
+                    <div class="healing-timeline-title">
+                        <i class="fas fa-clock"></i>
+                        Fracture Healing Timeline
+                    </div>
+                    <div class="timeline-stages">
+                        <div class="timeline-stage">
+                            <div class="timeline-marker">
+                                <i class="fas fa-tint"></i>
+                            </div>
+                            <div class="timeline-content">
+                                <div class="timeline-header">
+                                    <div class="timeline-stage-name">Stage 1: Hematoma Formation</div>
+                                    <div class="timeline-duration">0-3 days</div>
+                                </div>
+                                <div class="timeline-description">
+                                    Blood vessels rupture at fracture site, forming a hematoma (blood clot). This provides a framework for healing. Inflammatory response begins with WBCs removing debris. Patient experiences pain, swelling, and warmth at site.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline-stage">
+                            <div class="timeline-marker">
+                                <i class="fas fa-project-diagram"></i>
+                            </div>
+                            <div class="timeline-content">
+                                <div class="timeline-header">
+                                    <div class="timeline-stage-name">Stage 2: Fibrocartilaginous Callus</div>
+                                    <div class="timeline-duration">3 days - 2 weeks</div>
+                                </div>
+                                <div class="timeline-description">
+                                    Fibroblasts and chondroblasts migrate to site. Granulation tissue and cartilage form a soft callus bridging the fracture gap. New blood vessels develop (angiogenesis). This soft callus is fragile and must be protected from stress.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline-stage">
+                            <div class="timeline-marker">
+                                <i class="fas fa-bone"></i>
+                            </div>
+                            <div class="timeline-content">
+                                <div class="timeline-header">
+                                    <div class="timeline-stage-name">Stage 3: Bony Callus Formation</div>
+                                    <div class="timeline-duration">2-6 weeks</div>
+                                </div>
+                                <div class="timeline-description">
+                                    Osteoblasts deposit calcium, converting soft callus to hard, bony callus (woven bone). The fracture site becomes rigid but is still weaker than mature bone. X-rays show visible callus formation. Progressive weight bearing may begin.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline-stage">
+                            <div class="timeline-marker">
+                                <i class="fas fa-sync"></i>
+                            </div>
+                            <div class="timeline-content">
+                                <div class="timeline-header">
+                                    <div class="timeline-stage-name">Stage 4: Bone Remodeling</div>
+                                    <div class="timeline-duration">6 weeks - 1+ year</div>
+                                </div>
+                                <div class="timeline-description">
+                                    Osteoclasts resorb excess bone while osteoblasts deposit lamellar (mature) bone along stress lines. Bone gradually returns to original shape and strength. This process continues for months to years. Weight bearing stimulates proper remodeling.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>Factors Affecting Bone Healing</h3>
+
+                <div class="body-region-grid">
+                    <div class="body-region-card">
+                        <div class="body-region-header">
+                            <div class="body-region-icon" style="background: linear-gradient(135deg, #22c55e, #16a34a);">
+                                <i class="fas fa-plus-circle"></i>
+                            </div>
+                            <div>
+                                <div class="body-region-title">Factors That Promote Healing</div>
+                                <div class="body-region-subtitle">Optimize these for best outcomes</div>
+                            </div>
+                        </div>
+                        <div class="body-region-content">
+                            <ul>
+                                <li>Good blood supply to fracture site</li>
+                                <li>Proper immobilization</li>
+                                <li>Close approximation of fragments</li>
+                                <li>Adequate nutrition (protein, calcium, vitamin D)</li>
+                                <li>Younger age</li>
+                                <li>Weight-bearing exercise (per orders)</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="body-region-card">
+                        <div class="body-region-header">
+                            <div class="body-region-icon" style="background: linear-gradient(135deg, #ef4444, #dc2626);">
+                                <i class="fas fa-minus-circle"></i>
+                            </div>
+                            <div>
+                                <div class="body-region-title">Factors That Delay Healing</div>
+                                <div class="body-region-subtitle">Address these to prevent complications</div>
+                            </div>
+                        </div>
+                        <div class="body-region-content">
+                            <ul>
+                                <li>Inadequate immobilization</li>
+                                <li>Infection</li>
+                                <li>Poor blood supply (smoking, diabetes, PVD)</li>
+                                <li>Malnutrition (especially protein deficiency)</li>
+                                <li>Corticosteroid use</li>
+                                <li>Advanced age</li>
+                                <li>Excessive bone gap or movement</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-box tip">
+                    <div class="info-box-icon">
+                        <i class="fas fa-utensils"></i>
+                    </div>
+                    <div class="info-box-content">
+                        <strong>Nutrition for Bone Healing</strong>
+                        <p><strong>Protein:</strong> 1.5-2 g/kg/day for tissue repair. <strong>Calcium:</strong> 1000-1200 mg/day. <strong>Vitamin D:</strong> 600-800 IU/day for calcium absorption. <strong>Vitamin C:</strong> For collagen synthesis. Encourage dairy, leafy greens, lean meats, and sunlight exposure.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 4: Neurovascular Assessment -->
+            <section class="guide-section" id="assessment">
+                <div class="section-header">
+                    <div class="section-number">4</div>
+                    <div class="section-title-group">
+                        <h2>Neurovascular Assessment</h2>
+                        <p>The 5 P's: Critical monitoring for limb viability</p>
+                    </div>
+                </div>
+
+                <p>Neurovascular assessment is a critical nursing skill for patients with fractures, casts, or any extremity injury. The "5 P's" provide a systematic approach to detect compromised circulation or nerve function early, preventing permanent damage.</p>
+
+                <!-- FlorenceBot Tip: 5 P's -->
+                <div class="florencebot-tip" id="tip-5ps">
+                    <div class="florencebot-tip-header">
+                        <div class="florencebot-tip-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <span class="florencebot-tip-label">FlorenceBot Pro Tip</span>
+                    </div>
+                    <div class="florencebot-tip-title">The 5 P's Save Limbs</div>
+                    <div class="florencebot-tip-content">
+                        <strong>Memorize this: Pain, Pallor, Pulselessness, Paresthesia, Paralysis!</strong> These are your early warning signs that blood flow or nerve function is compromised. Always assess the injured limb AND compare to the uninjured side. Pain out of proportion to injury (especially with passive stretch) is often the FIRST sign of compartment syndrome - don't wait for the other P's to appear!
+                    </div>
+                </div>
+
+                <h3>The 5 P's of Neurovascular Assessment</h3>
+
+                <div class="five-ps-grid">
+                    <div class="p-card">
+                        <div class="p-letter">P</div>
+                        <div class="p-name">Pain</div>
+                        <div class="p-assess">Assess quality, location, severity (0-10 scale)</div>
+                        <div class="p-abnormal">ALERT: Pain with passive stretch or out of proportion to injury</div>
+                    </div>
+                    <div class="p-card">
+                        <div class="p-letter">P</div>
+                        <div class="p-name">Pallor</div>
+                        <div class="p-assess">Check skin color; compare to unaffected limb</div>
+                        <div class="p-abnormal">ALERT: Pale, white, or cyanotic skin</div>
+                    </div>
+                    <div class="p-card">
+                        <div class="p-letter">P</div>
+                        <div class="p-name">Pulselessness</div>
+                        <div class="p-assess">Palpate distal pulses; assess capillary refill</div>
+                        <div class="p-abnormal">ALERT: Weak/absent pulse; cap refill >3 sec</div>
+                    </div>
+                    <div class="p-card">
+                        <div class="p-letter">P</div>
+                        <div class="p-name">Paresthesia</div>
+                        <div class="p-assess">Ask about numbness, tingling, "pins & needles"</div>
+                        <div class="p-abnormal">ALERT: New numbness or abnormal sensations</div>
+                    </div>
+                    <div class="p-card">
+                        <div class="p-letter">P</div>
+                        <div class="p-name">Paralysis</div>
+                        <div class="p-assess">Test ability to move fingers/toes</div>
+                        <div class="p-abnormal">ALERT: Weakness or inability to move (LATE sign!)</div>
+                    </div>
+                </div>
+
+                <h3>Neurovascular Assessment Technique</h3>
+
+                <div class="guide-table-wrapper">
+                    <table class="guide-table">
+                        <thead>
+                            <tr>
+                                <th>Assessment</th>
+                                <th>How to Assess</th>
+                                <th>Normal Finding</th>
+                                <th>Report Immediately</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Pain</strong></td>
+                                <td>Ask patient to rate pain; passively stretch fingers/toes</td>
+                                <td>Pain manageable with medication; no increase with stretch</td>
+                                <td>Severe pain, especially with passive stretch</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Pulses</strong></td>
+                                <td>Palpate radial/ulnar (arm) or dorsalis pedis/posterior tibial (leg)</td>
+                                <td>Strong, easily palpable pulse bilaterally</td>
+                                <td>Weak, thready, or absent pulse</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Color</strong></td>
+                                <td>Compare to unaffected limb; check nail beds</td>
+                                <td>Pink, warm, matches uninjured side</td>
+                                <td>Pale, white, mottled, or cyanotic</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Temperature</strong></td>
+                                <td>Use back of hand to compare both limbs</td>
+                                <td>Warm, equal bilaterally</td>
+                                <td>Cool or cold to touch</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Capillary Refill</strong></td>
+                                <td>Press nail bed for 2-3 seconds, release, count seconds to pink</td>
+                                <td>&lt;3 seconds</td>
+                                <td>&gt;3 seconds (sluggish refill)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Sensation</strong></td>
+                                <td>Light touch; ask about numbness/tingling</td>
+                                <td>Intact sensation, no paresthesias</td>
+                                <td>Numbness, tingling, decreased sensation</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Movement</strong></td>
+                                <td>Ask patient to wiggle fingers/toes; test grip/push strength</td>
+                                <td>Full active ROM, good strength</td>
+                                <td>Weakness or inability to move</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="info-box warning">
+                    <div class="info-box-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="info-box-content">
+                        <strong>Assessment Frequency</strong>
+                        <p><strong>Immediately post-injury/surgery:</strong> Every 15-30 minutes. <strong>First 24-48 hours:</strong> Every 1-2 hours. <strong>After stabilization:</strong> Every 4-8 hours. <strong>Any change:</strong> Notify provider immediately and increase frequency.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 5: Compartment Syndrome -->
+            <section class="guide-section" id="compartment-syndrome">
+                <div class="section-header">
+                    <div class="section-number">5</div>
+                    <div class="section-title-group">
+                        <h2>Compartment Syndrome</h2>
+                        <p>Recognizing a limb-threatening emergency</p>
+                    </div>
+                </div>
+
+                <p>Compartment syndrome occurs when pressure within a closed muscle compartment increases to a level that compromises blood flow and tissue perfusion. Without emergency intervention, permanent nerve damage and muscle death occur within 6-8 hours.</p>
+
+                <!-- FlorenceBot Tip: Compartment Syndrome Emergency -->
+                <div class="florencebot-tip" id="tip-compartment-emergency">
+                    <div class="florencebot-tip-header">
+                        <div class="florencebot-tip-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <span class="florencebot-tip-label">FlorenceBot Pro Tip</span>
+                    </div>
+                    <div class="florencebot-tip-title">Compartment Syndrome = EMERGENCY</div>
+                    <div class="florencebot-tip-content">
+                        <strong>This is a surgical emergency - don't wait to report it!</strong> The #1 early sign is pain out of proportion to the injury, especially pain that increases when you passively stretch the muscle (like extending the fingers for a forearm compartment syndrome). If your patient's pain suddenly gets worse despite medication, or if they scream when you gently move their fingers, call the surgeon NOW. Irreversible damage starts in 6 hours!
+                    </div>
+                </div>
+
+                <div class="emergency-alert">
+                    <div class="emergency-header">
+                        <div class="emergency-icon">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <div>
+                            <div class="emergency-title">Compartment Syndrome - Act Fast!</div>
+                            <div class="emergency-subtitle">Irreversible damage in 6-8 hours</div>
+                        </div>
+                    </div>
+                    <div class="emergency-content">
+                        <p><strong>The 6 P's of Compartment Syndrome:</strong> Pain (especially with passive stretch), Pressure (tense compartment), Paresthesia, Pallor, Pulselessness, Paralysis. <strong>Note:</strong> Pulses may still be present early - don't be falsely reassured!</p>
+                        <div class="emergency-actions">
+                            <div class="emergency-action">
+                                <div class="emergency-action-number">1</div>
+                                <div class="emergency-action-text">Remove or bivalve cast/dressing immediately</div>
+                            </div>
+                            <div class="emergency-action">
+                                <div class="emergency-action-number">2</div>
+                                <div class="emergency-action-text">Notify surgeon STAT</div>
+                            </div>
+                            <div class="emergency-action">
+                                <div class="emergency-action-number">3</div>
+                                <div class="emergency-action-text">Keep limb at heart level (not elevated!)</div>
+                            </div>
+                            <div class="emergency-action">
+                                <div class="emergency-action-number">4</div>
+                                <div class="emergency-action-text">Prepare for emergent fasciotomy</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>Understanding Compartment Syndrome</h3>
+
+                <div class="body-region-grid">
+                    <div class="body-region-card">
+                        <div class="body-region-header">
+                            <div class="body-region-icon" style="background: linear-gradient(135deg, #ef4444, #dc2626);">
+                                <i class="fas fa-compress"></i>
+                            </div>
+                            <div>
+                                <div class="body-region-title">What Causes It?</div>
+                                <div class="body-region-subtitle">Pressure builds in muscle compartment</div>
+                            </div>
+                        </div>
+                        <div class="body-region-content">
+                            <ul>
+                                <li><strong>Internal:</strong> Bleeding, edema from fracture</li>
+                                <li><strong>External:</strong> Tight cast, circumferential dressing</li>
+                                <li><strong>Common with:</strong> Tibial fractures, forearm fractures</li>
+                                <li><strong>Also from:</strong> Crush injuries, burns, reperfusion</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="body-region-card">
+                        <div class="body-region-header">
+                            <div class="body-region-icon" style="background: linear-gradient(135deg, #ef4444, #dc2626);">
+                                <i class="fas fa-times-circle"></i>
+                            </div>
+                            <div>
+                                <div class="body-region-title">What Happens?</div>
+                                <div class="body-region-subtitle">Tissue damage cascade</div>
+                            </div>
+                        </div>
+                        <div class="body-region-content">
+                            <ul>
+                                <li>Pressure exceeds capillary perfusion pressure</li>
+                                <li>Muscle and nerve ischemia begins</li>
+                                <li>Cell death releases more fluid → more swelling</li>
+                                <li>Vicious cycle of increasing pressure</li>
+                                <li>Without fasciotomy: Volkmann's contracture, amputation</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>Early vs. Late Signs</h3>
+
+                <div class="guide-table-wrapper">
+                    <table class="guide-table">
+                        <thead>
+                            <tr>
+                                <th>Early Signs (Act NOW!)</th>
+                                <th>Late Signs (Damage Occurring)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Pain out of proportion to injury</td>
+                                <td>Paralysis (unable to move)</td>
+                            </tr>
+                            <tr>
+                                <td>Pain with passive stretch of muscles</td>
+                                <td>Pulselessness (very late sign)</td>
+                            </tr>
+                            <tr>
+                                <td>Tense, swollen compartment</td>
+                                <td>Pallor, cool skin</td>
+                            </tr>
+                            <tr>
+                                <td>Paresthesias (numbness, tingling)</td>
+                                <td>Complete sensory loss</td>
+                            </tr>
+                            <tr>
+                                <td>Increasing analgesic requirements</td>
+                                <td>Muscle necrosis</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="info-box nclex">
+                    <div class="info-box-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="info-box-content">
+                        <strong>NCLEX Alert: Compartment Syndrome Priority</strong>
+                        <p><strong>Key point:</strong> Pain with PASSIVE stretch is the earliest and most reliable sign! If the NCLEX asks about the first sign of compartment syndrome, choose pain (especially with passive movement) over paralysis or pulselessness - those are LATE signs. Also remember: Do NOT elevate the limb above heart level - this decreases arterial pressure and worsens ischemia.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 6: Nursing Interventions -->
+            <section class="guide-section" id="interventions">
+                <div class="section-header">
+                    <div class="section-number">6</div>
+                    <div class="section-title-group">
+                        <h2>Nursing Interventions</h2>
+                        <p>Evidence-based care for fracture patients</p>
+                    </div>
+                </div>
+
+                <h3>Immediate Post-Fracture Care</h3>
+
+                <div class="intervention-grid">
+                    <div class="intervention-card">
+                        <div class="intervention-header">
+                            <div class="intervention-icon">
+                                <i class="fas fa-hand-holding-medical"></i>
+                            </div>
+                            <div class="intervention-title">Immobilization</div>
+                        </div>
+                        <ul class="intervention-list">
+                            <li>Immobilize fracture in position found until x-ray</li>
+                            <li>Splint joints above and below fracture site</li>
+                            <li>Apply traction only if ordered</li>
+                            <li>Handle injured extremity gently</li>
+                            <li>Support with pillows or positioning devices</li>
+                        </ul>
+                    </div>
+                    <div class="intervention-card">
+                        <div class="intervention-header">
+                            <div class="intervention-icon">
+                                <i class="fas fa-ice-cream"></i>
+                            </div>
+                            <div class="intervention-title">RICE Protocol</div>
+                        </div>
+                        <ul class="intervention-list">
+                            <li><strong>R</strong>est - Limit movement of injured area</li>
+                            <li><strong>I</strong>ce - 20 minutes on, 20 off (protect skin)</li>
+                            <li><strong>C</strong>ompression - Elastic bandage if appropriate</li>
+                            <li><strong>E</strong>levation - Above heart level to reduce edema</li>
+                            <li>Note: Do NOT elevate if compartment syndrome suspected</li>
+                        </ul>
+                    </div>
+                    <div class="intervention-card">
+                        <div class="intervention-header">
+                            <div class="intervention-icon">
+                                <i class="fas fa-pills"></i>
+                            </div>
+                            <div class="intervention-title">Pain Management</div>
+                        </div>
+                        <ul class="intervention-list">
+                            <li>Assess pain using appropriate scale (0-10)</li>
+                            <li>Administer analgesics as ordered</li>
+                            <li>Ice and elevation for swelling/pain</li>
+                            <li>Position for comfort</li>
+                            <li>Report uncontrolled pain - may indicate compartment syndrome</li>
+                        </ul>
+                    </div>
+                    <div class="intervention-card">
+                        <div class="intervention-header">
+                            <div class="intervention-icon">
+                                <i class="fas fa-stethoscope"></i>
+                            </div>
+                            <div class="intervention-title">Monitoring</div>
+                        </div>
+                        <ul class="intervention-list">
+                            <li>Neurovascular checks per facility protocol</li>
+                            <li>Vital signs (watch for shock with blood loss)</li>
+                            <li>Monitor for fat embolism (long bone fractures)</li>
+                            <li>Assess surgical site for bleeding/drainage</li>
+                            <li>Document and report changes immediately</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- FlorenceBot Tip: Pain Paradox -->
+                <div class="florencebot-tip" id="tip-pain-paradox">
+                    <div class="florencebot-tip-header">
+                        <div class="florencebot-tip-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <span class="florencebot-tip-label">FlorenceBot Pro Tip</span>
+                    </div>
+                    <div class="florencebot-tip-title">The Pain Paradox</div>
+                    <div class="florencebot-tip-content">
+                        <strong>Unrelieved pain is NEVER "just normal fracture pain"!</strong> Here's the paradox: we want to manage pain, but increasing pain that doesn't respond to medication is a red flag. If your patient says "the pain is worse" despite adequate analgesia, don't just give more meds - assess for compartment syndrome! Pain that breaks through medication, especially pain with passive movement, needs immediate investigation. Trust your patient when they say something is wrong.
+                    </div>
+                </div>
+
+                <h3>Cast Care</h3>
+
+                <!-- FlorenceBot Tip: Cast Care -->
+                <div class="florencebot-tip" id="tip-cast-care">
+                    <div class="florencebot-tip-header">
+                        <div class="florencebot-tip-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <span class="florencebot-tip-label">FlorenceBot Pro Tip</span>
+                    </div>
+                    <div class="florencebot-tip-title">Cast Care Essentials</div>
+                    <div class="florencebot-tip-content">
+                        <strong>The #1 rule of cast care: NEVER put anything inside the cast!</strong> Patients love to scratch with coat hangers, pencils, or rulers - this damages skin and creates wounds that get infected. Teach them to use a hair dryer on cool setting for itching. Also, plaster casts take 24-72 hours to fully dry - handle with palms only (no fingertips!) to prevent dents that cause pressure injuries. And remember: if a fiberglass cast gets wet, use a hair dryer on LOW heat to dry it thoroughly.
+                    </div>
+                </div>
+
+                <div class="guide-table-wrapper">
+                    <table class="guide-table">
+                        <thead>
+                            <tr>
+                                <th>Cast Type</th>
+                                <th>Drying Time</th>
+                                <th>Key Nursing Considerations</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Plaster</strong></td>
+                                <td>24-72 hours</td>
+                                <td>Handle with palms only; avoid denting. Keep uncovered to dry. Heavier but molds better.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Fiberglass</strong></td>
+                                <td>30 minutes</td>
+                                <td>Water-resistant (not waterproof). Lighter. Can scratch skin. Dry thoroughly if wet.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>Patient Education: Cast Care</h3>
+
+                <div class="body-region-grid">
+                    <div class="body-region-card">
+                        <div class="body-region-header">
+                            <div class="body-region-icon" style="background: linear-gradient(135deg, #22c55e, #16a34a);">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div>
+                                <div class="body-region-title">DO</div>
+                                <div class="body-region-subtitle">Essential care instructions</div>
+                            </div>
+                        </div>
+                        <div class="body-region-content">
+                            <ul>
+                                <li>Elevate above heart level when resting</li>
+                                <li>Wiggle fingers/toes frequently</li>
+                                <li>Apply ice in bag over cast for swelling</li>
+                                <li>Keep cast clean and dry</li>
+                                <li>Report increased pain, numbness, or drainage</li>
+                                <li>Inspect skin at cast edges daily</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="body-region-card">
+                        <div class="body-region-header">
+                            <div class="body-region-icon" style="background: linear-gradient(135deg, #ef4444, #dc2626);">
+                                <i class="fas fa-times"></i>
+                            </div>
+                            <div>
+                                <div class="body-region-title">DON'T</div>
+                                <div class="body-region-subtitle">Avoid these hazards</div>
+                            </div>
+                        </div>
+                        <div class="body-region-content">
+                            <ul>
+                                <li>Put objects inside cast to scratch</li>
+                                <li>Get cast wet (unless waterproof)</li>
+                                <li>Bear weight until approved</li>
+                                <li>Apply powder or lotion under cast</li>
+                                <li>Ignore foul odor from cast</li>
+                                <li>Trim or modify the cast yourself</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>Weight Bearing Status</h3>
+
+                <div class="weight-bearing-chart">
+                    <div class="wb-header">
+                        <i class="fas fa-walking"></i>
+                        Weight Bearing Progression
+                    </div>
+                    <div class="wb-scale">
+                        <div class="wb-level">
+                            <div class="wb-dot"></div>
+                            <div class="wb-abbr">NWB</div>
+                            <div class="wb-label">Non Weight<br>Bearing</div>
+                        </div>
+                        <div class="wb-level">
+                            <div class="wb-dot"></div>
+                            <div class="wb-abbr">TTWB</div>
+                            <div class="wb-label">Toe Touch<br>Weight Bearing</div>
+                        </div>
+                        <div class="wb-level">
+                            <div class="wb-dot"></div>
+                            <div class="wb-abbr">PWB</div>
+                            <div class="wb-label">Partial Weight<br>Bearing</div>
+                        </div>
+                        <div class="wb-level">
+                            <div class="wb-dot"></div>
+                            <div class="wb-abbr">WBAT</div>
+                            <div class="wb-label">Weight Bearing<br>As Tolerated</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 7: Complications -->
+            <section class="guide-section" id="complications">
+                <div class="section-header">
+                    <div class="section-number">7</div>
+                    <div class="section-title-group">
+                        <h2>Complications</h2>
+                        <p>Early recognition and nursing management</p>
+                    </div>
+                </div>
+
+                <p>Fracture complications can be immediate, early, or delayed. Vigilant nursing assessment is essential for early detection and intervention.</p>
+
+                <!-- FlorenceBot Tip: Fat Embolism -->
+                <div class="florencebot-tip" id="tip-fat-embolism">
+                    <div class="florencebot-tip-header">
+                        <div class="florencebot-tip-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <span class="florencebot-tip-label">FlorenceBot Pro Tip</span>
+                    </div>
+                    <div class="florencebot-tip-title">Watch for Fat Embolism</div>
+                    <div class="florencebot-tip-content">
+                        <strong>Fat embolism syndrome (FES) typically occurs 24-72 hours after a long bone fracture.</strong> Watch for the classic triad: respiratory distress (the fat travels to the lungs first), neurologic changes (confusion, restlessness - fat crosses to brain), and petechiae (tiny red/purple spots, especially on chest, axillae, and conjunctivae). The petechiae are a late sign but very specific. Any patient with a femur or pelvic fracture who suddenly becomes confused and short of breath needs immediate evaluation!
+                    </div>
+                </div>
+
+                <h3>Major Complications by Timing</h3>
+
+                <div class="complication-grid">
+                    <div class="complication-card critical">
+                        <div class="complication-header">
+                            <div class="complication-icon">
+                                <i class="fas fa-compress-arrows-alt"></i>
+                            </div>
+                            <div>
+                                <div class="complication-name">Compartment Syndrome</div>
+                                <div class="complication-timing">Hours after injury</div>
+                            </div>
+                        </div>
+                        <ul class="complication-signs">
+                            <li>Pain out of proportion/with passive stretch</li>
+                            <li>Tense, swollen compartment</li>
+                            <li>Paresthesias</li>
+                            <li>Treatment: Emergency fasciotomy</li>
+                        </ul>
+                    </div>
+                    <div class="complication-card critical">
+                        <div class="complication-header">
+                            <div class="complication-icon">
+                                <i class="fas fa-lungs"></i>
+                            </div>
+                            <div>
+                                <div class="complication-name">Fat Embolism Syndrome</div>
+                                <div class="complication-timing">24-72 hours post-fracture</div>
+                            </div>
+                        </div>
+                        <ul class="complication-signs">
+                            <li>Dyspnea, tachypnea, hypoxia</li>
+                            <li>Confusion, restlessness, altered LOC</li>
+                            <li>Petechiae (chest, axillae, conjunctivae)</li>
+                            <li>Treatment: Supportive, O2, immobilization</li>
+                        </ul>
+                    </div>
+                    <div class="complication-card">
+                        <div class="complication-header">
+                            <div class="complication-icon">
+                                <i class="fas fa-skull-crossbones"></i>
+                            </div>
+                            <div>
+                                <div class="complication-name">Infection (Osteomyelitis)</div>
+                                <div class="complication-timing">Days to weeks</div>
+                            </div>
+                        </div>
+                        <ul class="complication-signs">
+                            <li>Fever, chills, malaise</li>
+                            <li>Wound erythema, drainage, odor</li>
+                            <li>Elevated WBC, ESR, CRP</li>
+                            <li>Treatment: Antibiotics, debridement</li>
+                        </ul>
+                    </div>
+                    <div class="complication-card">
+                        <div class="complication-header">
+                            <div class="complication-icon">
+                                <i class="fas fa-blood"></i>
+                            </div>
+                            <div>
+                                <div class="complication-name">Deep Vein Thrombosis</div>
+                                <div class="complication-timing">Days to weeks</div>
+                            </div>
+                        </div>
+                        <ul class="complication-signs">
+                            <li>Unilateral leg swelling, warmth</li>
+                            <li>Calf pain (Homans' sign - unreliable)</li>
+                            <li>Can lead to PE (chest pain, dyspnea)</li>
+                            <li>Treatment: Anticoagulation, SCDs</li>
+                        </ul>
+                    </div>
+                    <div class="complication-card monitor">
+                        <div class="complication-header">
+                            <div class="complication-icon">
+                                <i class="fas fa-bone"></i>
+                            </div>
+                            <div>
+                                <div class="complication-name">Delayed/Nonunion</div>
+                                <div class="complication-timing">Weeks to months</div>
+                            </div>
+                        </div>
+                        <ul class="complication-signs">
+                            <li>Fracture not healing in expected time</li>
+                            <li>Continued pain and instability</li>
+                            <li>Risk: smoking, infection, poor nutrition</li>
+                            <li>Treatment: Bone stimulator, surgery</li>
+                        </ul>
+                    </div>
+                    <div class="complication-card monitor">
+                        <div class="complication-header">
+                            <div class="complication-icon">
+                                <i class="fas fa-circle-xmark"></i>
+                            </div>
+                            <div>
+                                <div class="complication-name">Avascular Necrosis</div>
+                                <div class="complication-timing">Weeks to months</div>
+                            </div>
+                        </div>
+                        <ul class="complication-signs">
+                            <li>Bone death from disrupted blood supply</li>
+                            <li>Common in femoral neck, scaphoid fractures</li>
+                            <li>Persistent pain despite healing</li>
+                            <li>Treatment: Surgery, joint replacement</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3>Prevention Strategies</h3>
+
+                <div class="intervention-grid">
+                    <div class="intervention-card">
+                        <div class="intervention-header">
+                            <div class="intervention-icon">
+                                <i class="fas fa-lungs"></i>
+                            </div>
+                            <div class="intervention-title">Prevent Fat Embolism</div>
+                        </div>
+                        <ul class="intervention-list">
+                            <li>Early immobilization of fracture</li>
+                            <li>Gentle handling during transport</li>
+                            <li>Adequate hydration</li>
+                            <li>Early surgical fixation when indicated</li>
+                            <li>Monitor high-risk patients closely (long bone, pelvis)</li>
+                        </ul>
+                    </div>
+                    <div class="intervention-card">
+                        <div class="intervention-header">
+                            <div class="intervention-icon">
+                                <i class="fas fa-syringe"></i>
+                            </div>
+                            <div class="intervention-title">Prevent DVT/PE</div>
+                        </div>
+                        <ul class="intervention-list">
+                            <li>Early mobilization when safe</li>
+                            <li>Sequential compression devices (SCDs)</li>
+                            <li>Anticoagulant prophylaxis as ordered</li>
+                            <li>Hydration</li>
+                            <li>Ankle pumps and exercises</li>
+                        </ul>
+                    </div>
+                    <div class="intervention-card">
+                        <div class="intervention-header">
+                            <div class="intervention-icon">
+                                <i class="fas fa-bacteria"></i>
+                            </div>
+                            <div class="intervention-title">Prevent Infection</div>
+                        </div>
+                        <ul class="intervention-list">
+                            <li>Sterile technique for wound care</li>
+                            <li>Monitor surgical sites for drainage</li>
+                            <li>Administer prophylactic antibiotics as ordered</li>
+                            <li>Keep pin sites clean (external fixation)</li>
+                            <li>Patient education on signs of infection</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="info-box nclex">
+                    <div class="info-box-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="info-box-content">
+                        <strong>NCLEX Alert: Fat Embolism vs. Pulmonary Embolism</strong>
+                        <p><strong>Fat embolism:</strong> Occurs 24-72 hours after long bone fracture. Classic triad = respiratory distress + neurologic changes + petechiae. <strong>Pulmonary embolism:</strong> From DVT, sudden onset chest pain, dyspnea, hemoptysis. On NCLEX, petechiae + confusion + fracture = think fat embolism!</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Key Points Summary -->
+            <div class="key-points-summary">
+                <div class="key-points-header">
+                    <div class="key-points-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h2 class="key-points-title">Key Points to Remember</h2>
+                </div>
+                <div class="key-points-grid">
+                    <div class="key-point-item">
+                        <div class="key-point-check">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <div class="key-point-text">
+                            <strong>5 P's:</strong> Pain, Pallor, Pulselessness, Paresthesia, Paralysis - assess every 1-2 hours initially
+                        </div>
+                    </div>
+                    <div class="key-point-item">
+                        <div class="key-point-check">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <div class="key-point-text">
+                            <strong>Pain with passive stretch</strong> is the EARLIEST sign of compartment syndrome - don't wait for other signs!
+                        </div>
+                    </div>
+                    <div class="key-point-item">
+                        <div class="key-point-check">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <div class="key-point-text">
+                            <strong>Compartment syndrome window:</strong> Irreversible damage occurs within 6-8 hours - fasciotomy is the treatment
+                        </div>
+                    </div>
+                    <div class="key-point-item">
+                        <div class="key-point-check">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <div class="key-point-text">
+                            <strong>Fat embolism triad:</strong> Respiratory distress + confusion + petechiae (24-72 hours after long bone fracture)
+                        </div>
+                    </div>
+                    <div class="key-point-item">
+                        <div class="key-point-check">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <div class="key-point-text">
+                            <strong>Open fractures:</strong> Surgical emergency - IV antibiotics within 1 hour, surgical debridement required
+                        </div>
+                    </div>
+                    <div class="key-point-item">
+                        <div class="key-point-check">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <div class="key-point-text">
+                            <strong>Bone healing:</strong> 4 stages (hematoma → fibrocartilage → bony callus → remodeling) taking 6-8 weeks typically
+                        </div>
+                    </div>
+                    <div class="key-point-item">
+                        <div class="key-point-check">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <div class="key-point-text">
+                            <strong>Never elevate</strong> a limb with suspected compartment syndrome above heart level - decreases arterial perfusion
+                        </div>
+                    </div>
+                    <div class="key-point-item">
+                        <div class="key-point-check">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <div class="key-point-text">
+                            <strong>Cast care:</strong> Never insert objects to scratch, keep dry, report increased pain or foul odor immediately
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Document Footer -->
+        <div class="document-footer">
+            <div class="footer-brand">
+                <img src="../assets/images/icon.png" alt="TNC Logo" class="footer-logo">
+                <span class="footer-name">The Nursing Collective</span>
+            </div>
+            <p class="footer-tagline">Empowering nursing students with evidence-based study resources</p>
+            <p class="footer-copyright">&copy; 2025 The Nursing Collective. All rights reserved.</p>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="configs/fractures-config.js"></script>
+    <script src="guide-sidebar.js"></script>
+    <script src="guide-script.js"></script>
+</body>
+</html>

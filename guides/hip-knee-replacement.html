@@ -1,0 +1,2862 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hip & Knee Replacement Study Guide - The Nursing Collective</title>
+    <meta name="description" content="Comprehensive nursing study guide for Hip and Knee Replacement (Arthroplasty). Learn hip precautions, DVT prevention, postoperative care, and early mobility protocols.">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <!-- Sidebar Styles -->
+    <link rel="stylesheet" href="guide-sidebar.css">
+
+    <style>
+        /* ============================================
+           HIP & KNEE REPLACEMENT GUIDE - VISUAL ATLAS LAYOUT
+           Procedure timelines, mobility checklists, rehab trackers
+           ============================================ */
+
+        :root {
+            --primary-color: #2E86AB;
+            --primary-dark: #236b8a;
+            --secondary-color: #A23B72;
+            --accent-color: #f59e0b;
+            --text-primary: #1f2937;
+            --text-secondary: #4b5563;
+            --background: #ffffff;
+            --border-color: #e5e7eb;
+            /* Hip/Knee Replacement-specific colors - Silver to Gold gradient */
+            --joint-silver: #94a3b8;
+            --joint-gold: #eab308;
+            --prosthetic-blue: #3b82f6;
+            --healing-green: #22c55e;
+            --warning-red: #ef4444;
+            --caution-orange: #f97316;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Source Sans 3', sans-serif;
+            line-height: 1.7;
+            color: var(--text-primary);
+            background: #f8fafc;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Outfit', sans-serif;
+        }
+
+        /* ============================================
+           DOWNLOAD BAR
+           ============================================ */
+        .download-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(135deg, var(--joint-silver) 0%, var(--joint-gold) 100%);
+            padding: 12px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+
+        .download-bar-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: white;
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+        }
+
+        .download-bar-brand i {
+            font-size: 1.2rem;
+        }
+
+        .download-bar-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn-back, .btn-download {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            border: none;
+        }
+
+        .btn-back {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+        }
+
+        .btn-back:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        .btn-download {
+            background: white;
+            color: #92400e;
+        }
+
+        .btn-download:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        /* ============================================
+           DOCUMENT CONTAINER
+           ============================================ */
+        .document-container {
+            max-width: 900px;
+            margin: 80px auto 40px;
+            background: white;
+            box-shadow: 0 10px 60px rgba(0,0,0,0.1);
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        /* ============================================
+           COVER PAGE
+           ============================================ */
+        .cover-page {
+            background: linear-gradient(135deg, var(--joint-silver) 0%, #64748b 40%, var(--joint-gold) 100%);
+            padding: 60px 40px;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cover-page::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 30% 70%, rgba(255,255,255,0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .cover-logo {
+            width: 80px;
+            height: 80px;
+            background: white;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+        }
+
+        .cover-logo i {
+            font-size: 36px;
+            background: linear-gradient(135deg, var(--joint-silver), var(--joint-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .cover-category {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            opacity: 0.9;
+            margin-bottom: 12px;
+        }
+
+        .cover-title {
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+
+        .cover-subtitle {
+            font-size: 1.15rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .cover-meta {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-top: 32px;
+            font-size: 0.9rem;
+        }
+
+        .cover-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            opacity: 0.85;
+        }
+
+        /* ============================================
+           DOCUMENT CONTENT
+           ============================================ */
+        .document-content {
+            padding: 48px;
+        }
+
+        /* Learning Objectives */
+        .learning-objectives {
+            background: linear-gradient(135deg, #fefce8, #fef9c3);
+            border: 1px solid #fde047;
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 40px;
+        }
+
+        .learning-objectives h2 {
+            font-size: 1.3rem;
+            color: #a16207;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .objectives-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 16px;
+        }
+
+        .objective-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            background: white;
+            padding: 16px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .objective-number {
+            width: 28px;
+            height: 28px;
+            background: linear-gradient(135deg, var(--joint-silver), var(--joint-gold));
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .objective-text {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        /* ============================================
+           GUIDE SECTIONS
+           ============================================ */
+        .guide-section {
+            margin-bottom: 48px;
+            scroll-margin-top: 100px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 3px solid var(--border-color);
+        }
+
+        .section-number {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--joint-silver), var(--joint-gold));
+            color: white;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .section-title-group h2 {
+            font-size: 1.6rem;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+
+        .section-title-group p {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+        }
+
+        h3 {
+            font-size: 1.25rem;
+            color: var(--text-primary);
+            margin: 32px 0 16px;
+            padding-left: 16px;
+            border-left: 4px solid var(--joint-gold);
+        }
+
+        h4 {
+            font-size: 1.1rem;
+            color: var(--text-primary);
+            margin: 24px 0 12px;
+        }
+
+        p {
+            margin-bottom: 16px;
+            color: var(--text-secondary);
+        }
+
+        /* ============================================
+           VISUAL ATLAS COMPONENTS
+           Body Region Cards
+           ============================================ */
+        .anatomy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 24px 0;
+        }
+
+        .anatomy-card {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+            transition: all 0.3s ease;
+        }
+
+        .anatomy-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+        }
+
+        .anatomy-card-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .anatomy-card-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--joint-silver), var(--joint-gold));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .anatomy-card-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .anatomy-card-subtitle {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .anatomy-card-content {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .anatomy-card-content ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .anatomy-card-content li {
+            padding: 6px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .anatomy-card-content li::before {
+            content: '\f054';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            font-size: 0.7rem;
+            position: absolute;
+            left: 0;
+            top: 8px;
+            color: var(--joint-gold);
+        }
+
+        /* ============================================
+           PROCEDURE COMPARISON
+           ============================================ */
+        .procedure-comparison {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin: 24px 0;
+        }
+
+        .procedure-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            border: 1px solid var(--border-color);
+        }
+
+        .procedure-card-header {
+            padding: 20px 24px;
+            color: white;
+            text-align: center;
+        }
+
+        .procedure-card.hip .procedure-card-header {
+            background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+        }
+
+        .procedure-card.knee .procedure-card-header {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+        }
+
+        .procedure-card-icon {
+            font-size: 2rem;
+            margin-bottom: 8px;
+        }
+
+        .procedure-card-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        .procedure-card-body {
+            padding: 24px;
+        }
+
+        .procedure-card-body ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .procedure-card-body li {
+            padding: 10px 0;
+            padding-left: 28px;
+            position: relative;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            border-bottom: 1px solid #f3f4f6;
+        }
+
+        .procedure-card-body li:last-child {
+            border-bottom: none;
+        }
+
+        .procedure-card-body li::before {
+            content: '\f00c';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            font-size: 0.8rem;
+            position: absolute;
+            left: 0;
+            top: 12px;
+            color: var(--healing-green);
+        }
+
+        /* ============================================
+           HIP PRECAUTIONS - CRITICAL ALERT
+           ============================================ */
+        .precautions-alert {
+            background: linear-gradient(135deg, #fef2f2, #fee2e2);
+            border: 2px solid var(--warning-red);
+            border-radius: 16px;
+            padding: 28px;
+            margin: 24px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .precautions-alert::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 8px;
+            height: 100%;
+            background: var(--warning-red);
+        }
+
+        .precautions-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .precautions-icon {
+            width: 56px;
+            height: 56px;
+            background: var(--warning-red);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.8rem;
+        }
+
+        .precautions-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: #991b1b;
+        }
+
+        .precautions-subtitle {
+            font-size: 0.95rem;
+            color: #b91c1c;
+        }
+
+        .precautions-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-top: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .precautions-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .precaution-item {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            border: 2px solid #fca5a5;
+            transition: all 0.2s ease;
+        }
+
+        .precaution-item:hover {
+            transform: scale(1.02);
+            border-color: var(--warning-red);
+        }
+
+        .precaution-icon-large {
+            font-size: 2.5rem;
+            color: var(--warning-red);
+            margin-bottom: 12px;
+        }
+
+        .precaution-rule {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #991b1b;
+            margin-bottom: 8px;
+        }
+
+        .precaution-detail {
+            font-size: 0.9rem;
+            color: #7f1d1d;
+            line-height: 1.5;
+        }
+
+        /* ============================================
+           SURGICAL APPROACH COMPARISON
+           ============================================ */
+        .approach-comparison {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 24px 0;
+        }
+
+        .approach-card {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            border: 2px solid var(--border-color);
+            transition: all 0.2s ease;
+        }
+
+        .approach-card:hover {
+            border-color: var(--prosthetic-blue);
+        }
+
+        .approach-card.posterior {
+            border-left: 5px solid #ef4444;
+        }
+
+        .approach-card.anterior {
+            border-left: 5px solid #22c55e;
+        }
+
+        .approach-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .approach-badge {
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .approach-card.posterior .approach-badge {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .approach-card.anterior .approach-badge {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .approach-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .approach-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .approach-list li {
+            padding: 8px 0;
+            padding-left: 24px;
+            position: relative;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .approach-list li::before {
+            content: '\f111';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            font-size: 0.4rem;
+            position: absolute;
+            left: 0;
+            top: 14px;
+            color: var(--joint-silver);
+        }
+
+        /* ============================================
+           DVT PREVENTION PANEL
+           ============================================ */
+        .dvt-prevention-panel {
+            background: linear-gradient(135deg, #eff6ff, #dbeafe);
+            border: 1px solid #93c5fd;
+            border-radius: 16px;
+            padding: 28px;
+            margin: 24px 0;
+        }
+
+        .dvt-panel-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .dvt-panel-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .dvt-panel-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #1e40af;
+        }
+
+        .dvt-methods-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+        }
+
+        .dvt-method {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+
+        .dvt-method-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 12px;
+            color: #2563eb;
+            font-size: 1.2rem;
+        }
+
+        .dvt-method-name {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 6px;
+        }
+
+        .dvt-method-detail {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        /* ============================================
+           MOBILITY TIMELINE
+           ============================================ */
+        .mobility-timeline {
+            background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+            border: 1px solid #86efac;
+            border-radius: 16px;
+            padding: 32px;
+            margin: 24px 0;
+        }
+
+        .mobility-timeline-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .mobility-timeline-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .mobility-timeline-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #166534;
+        }
+
+        .timeline-track {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            position: relative;
+        }
+
+        .timeline-item {
+            display: flex;
+            gap: 20px;
+            position: relative;
+            padding-bottom: 24px;
+        }
+
+        .timeline-item:last-child {
+            padding-bottom: 0;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 23px;
+            top: 48px;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, var(--healing-green), #86efac);
+        }
+
+        .timeline-item:last-child::before {
+            display: none;
+        }
+
+        .timeline-marker {
+            width: 48px;
+            height: 48px;
+            background: white;
+            border: 3px solid var(--healing-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: var(--healing-green);
+            flex-shrink: 0;
+            z-index: 1;
+            font-size: 0.85rem;
+        }
+
+        .timeline-content {
+            flex: 1;
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+
+        .timeline-period {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--healing-green), #22c55e);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .timeline-activity {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .timeline-details {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* ============================================
+           PAIN MANAGEMENT CARDS
+           ============================================ */
+        .pain-management-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 24px 0;
+        }
+
+        .pain-card {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+        }
+
+        .pain-card-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .pain-card-icon {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, #a855f7, #9333ea);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.1rem;
+        }
+
+        .pain-card-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .pain-card-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .pain-card-list li {
+            padding: 8px 0;
+            padding-left: 24px;
+            position: relative;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            border-bottom: 1px solid #f3f4f6;
+        }
+
+        .pain-card-list li:last-child {
+            border-bottom: none;
+        }
+
+        .pain-card-list li::before {
+            content: '\f00c';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            font-size: 0.75rem;
+            position: absolute;
+            left: 0;
+            top: 10px;
+            color: #a855f7;
+        }
+
+        /* ============================================
+           COMPLICATION WATCH CARDS
+           ============================================ */
+        .complication-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 24px 0;
+        }
+
+        .complication-card {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            border-left: 5px solid var(--caution-orange);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+        }
+
+        .complication-card.critical {
+            border-left-color: var(--warning-red);
+        }
+
+        .complication-card.moderate {
+            border-left-color: var(--caution-orange);
+        }
+
+        .complication-card.monitor {
+            border-left-color: var(--prosthetic-blue);
+        }
+
+        .complication-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 14px;
+        }
+
+        .complication-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--caution-orange);
+            font-size: 1.1rem;
+        }
+
+        .complication-card.critical .complication-icon {
+            background: linear-gradient(135deg, #fee2e2, #fecaca);
+            color: var(--warning-red);
+        }
+
+        .complication-card.monitor .complication-icon {
+            background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+            color: var(--prosthetic-blue);
+        }
+
+        .complication-name {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .complication-timing {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .complication-signs {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .complication-signs li {
+            padding: 6px 0;
+            padding-left: 24px;
+            position: relative;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .complication-signs li::before {
+            content: '\f071';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            font-size: 0.7rem;
+            position: absolute;
+            left: 0;
+            top: 8px;
+            color: var(--caution-orange);
+        }
+
+        .complication-card.critical .complication-signs li::before {
+            color: var(--warning-red);
+        }
+
+        .complication-card.monitor .complication-signs li::before {
+            content: '\f06a';
+            color: var(--prosthetic-blue);
+        }
+
+        /* ============================================
+           DISCHARGE CHECKLIST
+           ============================================ */
+        .discharge-checklist {
+            background: linear-gradient(135deg, #faf5ff, #f3e8ff);
+            border: 1px solid #e9d5ff;
+            border-radius: 16px;
+            padding: 28px;
+            margin: 24px 0;
+        }
+
+        .discharge-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .discharge-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #a855f7, #9333ea);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .discharge-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #6b21a8;
+        }
+
+        .discharge-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 16px;
+        }
+
+        .discharge-item {
+            background: white;
+            border-radius: 12px;
+            padding: 16px 20px;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+        }
+
+        .discharge-check {
+            width: 24px;
+            height: 24px;
+            background: linear-gradient(135deg, #a855f7, #9333ea);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.7rem;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .discharge-text {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        /* ============================================
+           INFO BOXES
+           ============================================ */
+        .info-box {
+            border-radius: 12px;
+            padding: 20px 24px;
+            margin: 20px 0;
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+        }
+
+        .info-box-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 1.1rem;
+        }
+
+        .info-box-content {
+            flex: 1;
+        }
+
+        .info-box-content strong {
+            display: block;
+            font-size: 1rem;
+            margin-bottom: 6px;
+        }
+
+        .info-box-content p {
+            margin: 0;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .info-box.warning {
+            background: linear-gradient(135deg, #fef2f2, #fee2e2);
+            border: 1px solid #fecaca;
+        }
+
+        .info-box.warning .info-box-icon {
+            background: #fee2e2;
+            color: var(--warning-red);
+        }
+
+        .info-box.warning .info-box-content strong {
+            color: #991b1b;
+        }
+
+        .info-box.warning .info-box-content p {
+            color: #7f1d1d;
+        }
+
+        .info-box.clinical {
+            background: linear-gradient(135deg, #fffbeb, #fef3c7);
+            border: 1px solid #fde68a;
+        }
+
+        .info-box.clinical .info-box-icon {
+            background: #fef3c7;
+            color: #d97706;
+        }
+
+        .info-box.clinical .info-box-content strong {
+            color: #92400e;
+        }
+
+        .info-box.clinical .info-box-content p {
+            color: #78350f;
+        }
+
+        .info-box.nclex {
+            background: linear-gradient(135deg, #faf5ff, #f3e8ff);
+            border: 1px solid #e9d5ff;
+        }
+
+        .info-box.nclex .info-box-icon {
+            background: #f3e8ff;
+            color: #9333ea;
+        }
+
+        .info-box.nclex .info-box-content strong {
+            color: #6b21a8;
+        }
+
+        .info-box.nclex .info-box-content p {
+            color: #581c87;
+        }
+
+        .info-box.tip {
+            background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+            border: 1px solid #bbf7d0;
+        }
+
+        .info-box.tip .info-box-icon {
+            background: #dcfce7;
+            color: var(--healing-green);
+        }
+
+        .info-box.tip .info-box-content strong {
+            color: #166534;
+        }
+
+        .info-box.tip .info-box-content p {
+            color: #15803d;
+        }
+
+        /* ============================================
+           TABLES
+           ============================================ */
+        .guide-table-wrapper {
+            overflow-x: auto;
+            margin: 20px 0;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+
+        .guide-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+
+        .guide-table thead {
+            background: linear-gradient(135deg, var(--joint-silver), var(--joint-gold));
+            color: white;
+        }
+
+        .guide-table th {
+            padding: 14px 16px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .guide-table td {
+            padding: 14px 16px;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+        }
+
+        .guide-table tbody tr:hover {
+            background: #f8fafc;
+        }
+
+        .guide-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* ============================================
+           KEY POINTS SUMMARY
+           ============================================ */
+        .key-points-summary {
+            background: linear-gradient(135deg, #1f2937, #374151);
+            border-radius: 16px;
+            padding: 32px;
+            margin-top: 48px;
+            color: white;
+        }
+
+        .key-points-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .key-points-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--joint-silver), var(--joint-gold));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+        }
+
+        .key-points-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+
+        .key-points-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 16px;
+        }
+
+        .key-point-item {
+            background: rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 18px;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .key-point-check {
+            width: 24px;
+            height: 24px;
+            background: var(--healing-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 0.75rem;
+        }
+
+        .key-point-text {
+            font-size: 0.95rem;
+            line-height: 1.5;
+            opacity: 0.95;
+        }
+
+        /* ============================================
+           DOCUMENT FOOTER
+           ============================================ */
+        .document-footer {
+            background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+            padding: 32px 48px;
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+        }
+
+        .footer-brand {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .footer-logo {
+            width: 36px;
+            height: 36px;
+        }
+
+        .footer-name {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .footer-tagline {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+        }
+
+        .footer-copyright {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        /* ============================================
+           PRINT STYLES
+           ============================================ */
+        @media print {
+            body {
+                background: white;
+            }
+
+            .download-bar {
+                display: none !important;
+            }
+
+            .document-container {
+                margin: 0;
+                box-shadow: none;
+                border-radius: 0;
+                max-width: 100%;
+            }
+
+            .cover-page {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            .guide-section {
+                page-break-inside: avoid;
+            }
+
+            .precautions-alert {
+                page-break-inside: avoid;
+            }
+
+            .florencebot-tip {
+                break-inside: avoid;
+                page-break-inside: avoid;
+            }
+
+            .key-points-summary {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                page-break-inside: avoid;
+            }
+
+            h3 {
+                page-break-after: avoid;
+            }
+
+            .anatomy-card,
+            .procedure-card,
+            .complication-card {
+                page-break-inside: avoid;
+            }
+        }
+
+        /* ============================================
+           RESPONSIVE STYLES
+           ============================================ */
+        @media (max-width: 768px) {
+            .cover-title {
+                font-size: 2rem;
+            }
+
+            .document-content {
+                padding: 24px;
+            }
+
+            .section-header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .section-number {
+                margin-bottom: 8px;
+            }
+
+            .download-bar {
+                flex-direction: column;
+                gap: 12px;
+                padding: 12px 16px;
+            }
+
+            .download-bar-actions {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .precautions-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cover-meta {
+                flex-direction: column;
+                gap: 12px;
+            }
+        }
+    </style>
+</head>
+<body data-product-id="hip-knee-replacement" data-guide-name="Hip-Knee-Replacement">
+    <!-- Download Bar -->
+    <div class="download-bar">
+        <div class="download-bar-brand">
+            <i class="fas fa-book-medical"></i>
+            <span>The Nursing Collective Study Guide</span>
+        </div>
+        <div class="download-bar-actions">
+            <a href="../dashboard.html" class="btn-back">
+                <i class="fas fa-arrow-left"></i> Back to Dashboard
+            </a>
+            <button class="btn-download" id="download-pdf-btn">
+                <i class="fas fa-file-pdf"></i> Save as PDF
+            </button>
+        </div>
+    </div>
+
+    <!-- Document Container -->
+    <div class="document-container">
+        <!-- Cover Page -->
+        <div class="cover-page">
+            <div class="cover-logo">
+                <i class="fas fa-bone"></i>
+            </div>
+            <div class="cover-category">Musculoskeletal System</div>
+            <h1 class="cover-title">Hip & Knee Replacement</h1>
+            <p class="cover-subtitle">Complete nursing guide to total joint arthroplasty, hip precautions, DVT prevention, pain management, and early mobility protocols</p>
+            <div class="cover-meta">
+                <div class="cover-meta-item">
+                    <i class="fas fa-clock"></i>
+                    <span>50 min read</span>
+                </div>
+                <div class="cover-meta-item">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span>NCLEX Focused</span>
+                </div>
+                <div class="cover-meta-item">
+                    <i class="fas fa-file-alt"></i>
+                    <span>2025 Edition</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Document Content -->
+        <div class="document-content">
+            <!-- Learning Objectives -->
+            <div class="learning-objectives">
+                <h2><i class="fas fa-bullseye"></i> Learning Objectives</h2>
+                <div class="objectives-grid">
+                    <div class="objective-item">
+                        <div class="objective-number">1</div>
+                        <div class="objective-text">Describe hip and knee joint anatomy relevant to arthroplasty</div>
+                    </div>
+                    <div class="objective-item">
+                        <div class="objective-number">2</div>
+                        <div class="objective-text">Identify indications for total joint replacement surgery</div>
+                    </div>
+                    <div class="objective-item">
+                        <div class="objective-number">3</div>
+                        <div class="objective-text">Implement hip precautions correctly based on surgical approach</div>
+                    </div>
+                    <div class="objective-item">
+                        <div class="objective-number">4</div>
+                        <div class="objective-text">Apply DVT prevention strategies in post-operative patients</div>
+                    </div>
+                    <div class="objective-item">
+                        <div class="objective-number">5</div>
+                        <div class="objective-text">Manage pain using multimodal analgesia approaches</div>
+                    </div>
+                    <div class="objective-item">
+                        <div class="objective-number">6</div>
+                        <div class="objective-text">Facilitate early mobility and rehabilitation milestones</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 1: Joint Anatomy -->
+            <section class="guide-section" id="anatomy">
+                <div class="section-header">
+                    <div class="section-number">1</div>
+                    <div class="section-title-group">
+                        <h2>Joint Anatomy & Physiology</h2>
+                        <p>Understanding the structures replaced in arthroplasty</p>
+                    </div>
+                </div>
+
+                <p>Total joint replacement (arthroplasty) involves removing damaged joint surfaces and replacing them with prosthetic components. Understanding normal anatomy helps nurses anticipate complications and provide appropriate care.</p>
+
+                <h3>Hip Joint Anatomy</h3>
+
+                <div class="anatomy-grid">
+                    <div class="anatomy-card">
+                        <div class="anatomy-card-header">
+                            <div class="anatomy-card-icon">
+                                <i class="fas fa-circle"></i>
+                            </div>
+                            <div>
+                                <div class="anatomy-card-title">Acetabulum</div>
+                                <div class="anatomy-card-subtitle">Socket of the hip joint</div>
+                            </div>
+                        </div>
+                        <div class="anatomy-card-content">
+                            <ul>
+                                <li>Cup-shaped cavity in the pelvis</li>
+                                <li>Lined with articular cartilage</li>
+                                <li>Replaced with metal/ceramic cup</li>
+                                <li>Polyethylene liner provides cushioning</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="anatomy-card">
+                        <div class="anatomy-card-header">
+                            <div class="anatomy-card-icon">
+                                <i class="fas fa-baseball"></i>
+                            </div>
+                            <div>
+                                <div class="anatomy-card-title">Femoral Head</div>
+                                <div class="anatomy-card-subtitle">Ball of the hip joint</div>
+                            </div>
+                        </div>
+                        <div class="anatomy-card-content">
+                            <ul>
+                                <li>Round head of the femur bone</li>
+                                <li>Articulates with acetabulum</li>
+                                <li>Replaced with metal or ceramic ball</li>
+                                <li>Attached to femoral stem component</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="anatomy-card">
+                        <div class="anatomy-card-header">
+                            <div class="anatomy-card-icon">
+                                <i class="fas fa-bone"></i>
+                            </div>
+                            <div>
+                                <div class="anatomy-card-title">Femoral Neck</div>
+                                <div class="anatomy-card-subtitle">Connection point - common fracture site</div>
+                            </div>
+                        </div>
+                        <div class="anatomy-card-content">
+                            <ul>
+                                <li>Connects femoral head to shaft</li>
+                                <li>Common site for hip fractures</li>
+                                <li>Contains blood supply to femoral head</li>
+                                <li>Removed during total hip replacement</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="anatomy-card">
+                        <div class="anatomy-card-header">
+                            <div class="anatomy-card-icon">
+                                <i class="fas fa-band-aid"></i>
+                            </div>
+                            <div>
+                                <div class="anatomy-card-title">Joint Capsule</div>
+                                <div class="anatomy-card-subtitle">Stabilizing structures</div>
+                            </div>
+                        </div>
+                        <div class="anatomy-card-content">
+                            <ul>
+                                <li>Fibrous capsule surrounds joint</li>
+                                <li>Ligaments provide stability</li>
+                                <li>Cut during surgery - must heal</li>
+                                <li>Why hip precautions are critical</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>Knee Joint Anatomy</h3>
+
+                <div class="anatomy-grid">
+                    <div class="anatomy-card">
+                        <div class="anatomy-card-header">
+                            <div class="anatomy-card-icon">
+                                <i class="fas fa-arrow-up"></i>
+                            </div>
+                            <div>
+                                <div class="anatomy-card-title">Femoral Condyles</div>
+                                <div class="anatomy-card-subtitle">End of the thigh bone</div>
+                            </div>
+                        </div>
+                        <div class="anatomy-card-content">
+                            <ul>
+                                <li>Two rounded surfaces at femur end</li>
+                                <li>Articulate with tibia</li>
+                                <li>Replaced with metal femoral component</li>
+                                <li>Smooth surface allows gliding motion</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="anatomy-card">
+                        <div class="anatomy-card-header">
+                            <div class="anatomy-card-icon">
+                                <i class="fas fa-arrow-down"></i>
+                            </div>
+                            <div>
+                                <div class="anatomy-card-title">Tibial Plateau</div>
+                                <div class="anatomy-card-subtitle">Top of the shin bone</div>
+                            </div>
+                        </div>
+                        <div class="anatomy-card-content">
+                            <ul>
+                                <li>Flat surface at top of tibia</li>
+                                <li>Covered with articular cartilage</li>
+                                <li>Replaced with metal tibial tray</li>
+                                <li>Polyethylene insert sits on top</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="anatomy-card">
+                        <div class="anatomy-card-header">
+                            <div class="anatomy-card-icon">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <div>
+                                <div class="anatomy-card-title">Patella (Kneecap)</div>
+                                <div class="anatomy-card-subtitle">Sesamoid bone</div>
+                            </div>
+                        </div>
+                        <div class="anatomy-card-content">
+                            <ul>
+                                <li>Protects anterior knee joint</li>
+                                <li>Glides in trochlear groove</li>
+                                <li>May or may not be resurfaced</li>
+                                <li>Patellar resurfacing = plastic button</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="anatomy-card">
+                        <div class="anatomy-card-header">
+                            <div class="anatomy-card-icon">
+                                <i class="fas fa-link"></i>
+                            </div>
+                            <div>
+                                <div class="anatomy-card-title">Ligaments</div>
+                                <div class="anatomy-card-subtitle">Stability structures</div>
+                            </div>
+                        </div>
+                        <div class="anatomy-card-content">
+                            <ul>
+                                <li><strong>ACL/PCL:</strong> Cruciate ligaments</li>
+                                <li><strong>MCL/LCL:</strong> Collateral ligaments</li>
+                                <li>PCL often sacrificed in TKR</li>
+                                <li>Collaterals usually preserved</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-box clinical">
+                    <div class="info-box-icon">
+                        <i class="fas fa-cog"></i>
+                    </div>
+                    <div class="info-box-content">
+                        <strong>Prosthetic Components</strong>
+                        <p>Joint replacements use combinations of <strong>metal alloys</strong> (cobalt-chrome, titanium), <strong>ceramic</strong>, and <strong>polyethylene</strong> (plastic). Components may be cemented or press-fit (cementless). Cemented prostheses allow immediate weight bearing; cementless require bone ingrowth and may have initial weight-bearing restrictions.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 2: Indications & Types -->
+            <section class="guide-section" id="indications">
+                <div class="section-header">
+                    <div class="section-number">2</div>
+                    <div class="section-title-group">
+                        <h2>Indications & Types of Arthroplasty</h2>
+                        <p>When and why joint replacement is performed</p>
+                    </div>
+                </div>
+
+                <p>Total joint replacement is considered when conservative treatments fail to relieve pain and restore function. It is one of the most successful orthopedic procedures, with excellent outcomes for most patients.</p>
+
+                <h3>Indications for Surgery</h3>
+
+                <div class="guide-table-wrapper">
+                    <table class="guide-table">
+                        <thead>
+                            <tr>
+                                <th>Primary Indications</th>
+                                <th>Description</th>
+                                <th>Notes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Osteoarthritis (OA)</strong></td>
+                                <td>Degenerative "wear and tear" arthritis</td>
+                                <td>Most common indication (>90%)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Rheumatoid Arthritis</strong></td>
+                                <td>Autoimmune inflammatory arthritis</td>
+                                <td>May affect multiple joints</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Avascular Necrosis</strong></td>
+                                <td>Bone death from loss of blood supply</td>
+                                <td>Common in femoral head</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Hip Fracture</strong></td>
+                                <td>Femoral neck fracture in elderly</td>
+                                <td>Hemiarthroplasty or total hip</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Failed Previous Surgery</strong></td>
+                                <td>Revision of prior arthroplasty</td>
+                                <td>More complex surgery</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>Types of Procedures</h3>
+
+                <div class="procedure-comparison">
+                    <div class="procedure-card hip">
+                        <div class="procedure-card-header">
+                            <div class="procedure-card-icon"><i class="fas fa-circle-dot"></i></div>
+                            <div class="procedure-card-title">Hip Arthroplasty</div>
+                        </div>
+                        <div class="procedure-card-body">
+                            <ul>
+                                <li><strong>Total Hip (THA):</strong> Replaces both femoral head and acetabulum</li>
+                                <li><strong>Hemiarthroplasty:</strong> Replaces femoral head only (for fractures)</li>
+                                <li><strong>Hip Resurfacing:</strong> Caps femoral head instead of removing</li>
+                                <li>Approaches: Posterior, anterior, lateral</li>
+                                <li>Average lifespan: 15-25 years</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="procedure-card knee">
+                        <div class="procedure-card-header">
+                            <div class="procedure-card-icon"><i class="fas fa-angles-up"></i></div>
+                            <div class="procedure-card-title">Knee Arthroplasty</div>
+                        </div>
+                        <div class="procedure-card-body">
+                            <ul>
+                                <li><strong>Total Knee (TKA):</strong> Replaces all 3 compartments</li>
+                                <li><strong>Partial (Unicompartmental):</strong> One compartment only</li>
+                                <li><strong>Patellofemoral:</strong> Just under kneecap</li>
+                                <li>Standard midline approach</li>
+                                <li>Average lifespan: 15-20 years</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-box nclex">
+                    <div class="info-box-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="info-box-content">
+                        <strong>NCLEX Alert: Hemiarthroplasty vs Total Hip</strong>
+                        <p><strong>Hemiarthroplasty</strong> replaces only the femoral head and is used for hip fractures when the acetabulum is healthy. <strong>Total hip arthroplasty (THA)</strong> replaces both the ball and socket, used for arthritis or when both surfaces are damaged. Both require hip precautions!</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 3: Preoperative Care -->
+            <section class="guide-section" id="preop">
+                <div class="section-header">
+                    <div class="section-number">3</div>
+                    <div class="section-title-group">
+                        <h2>Preoperative Care</h2>
+                        <p>Preparing patients for successful surgery</p>
+                    </div>
+                </div>
+
+                <p>Thorough preoperative preparation improves outcomes, reduces complications, and facilitates early recovery. Many facilities use "joint camp" or prehabilitation programs.</p>
+
+                <h3>Preoperative Assessment</h3>
+
+                <div class="anatomy-grid">
+                    <div class="anatomy-card">
+                        <div class="anatomy-card-header">
+                            <div class="anatomy-card-icon" style="background: linear-gradient(135deg, #ef4444, #dc2626);">
+                                <i class="fas fa-heart"></i>
+                            </div>
+                            <div>
+                                <div class="anatomy-card-title">Cardiac Clearance</div>
+                                <div class="anatomy-card-subtitle">Cardiovascular assessment</div>
+                            </div>
+                        </div>
+                        <div class="anatomy-card-content">
+                            <ul>
+                                <li>ECG for patients over 50</li>
+                                <li>Stress test if indicated</li>
+                                <li>Optimize heart failure, hypertension</li>
+                                <li>Hold certain cardiac medications</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="anatomy-card">
+                        <div class="anatomy-card-header">
+                            <div class="anatomy-card-icon" style="background: linear-gradient(135deg, #3b82f6, #2563eb);">
+                                <i class="fas fa-vial"></i>
+                            </div>
+                            <div>
+                                <div class="anatomy-card-title">Laboratory Tests</div>
+                                <div class="anatomy-card-subtitle">Baseline values</div>
+                            </div>
+                        </div>
+                        <div class="anatomy-card-content">
+                            <ul>
+                                <li>CBC - baseline hemoglobin</li>
+                                <li>BMP - kidney function</li>
+                                <li>Coagulation studies (PT/INR, PTT)</li>
+                                <li>Type and screen for blood</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="anatomy-card">
+                        <div class="anatomy-card-header">
+                            <div class="anatomy-card-icon" style="background: linear-gradient(135deg, #f97316, #ea580c);">
+                                <i class="fas fa-pills"></i>
+                            </div>
+                            <div>
+                                <div class="anatomy-card-title">Medication Management</div>
+                                <div class="anatomy-card-subtitle">What to hold/continue</div>
+                            </div>
+                        </div>
+                        <div class="anatomy-card-content">
+                            <ul>
+                                <li><strong>STOP:</strong> Anticoagulants, NSAIDs, aspirin</li>
+                                <li><strong>STOP:</strong> Metformin (day of surgery)</li>
+                                <li><strong>CONTINUE:</strong> Most cardiac meds with sip</li>
+                                <li>Follow surgeon/anesthesia instructions</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="anatomy-card">
+                        <div class="anatomy-card-header">
+                            <div class="anatomy-card-icon" style="background: linear-gradient(135deg, #22c55e, #16a34a);">
+                                <i class="fas fa-bacteria"></i>
+                            </div>
+                            <div>
+                                <div class="anatomy-card-title">Infection Prevention</div>
+                                <div class="anatomy-card-subtitle">Reduce surgical site infection</div>
+                            </div>
+                        </div>
+                        <div class="anatomy-card-content">
+                            <ul>
+                                <li>MRSA nasal screening</li>
+                                <li>Chlorhexidine (CHG) shower night before</li>
+                                <li>Dental clearance (no active infection)</li>
+                                <li>Treat any skin infections first</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>Patient Education Topics</h3>
+
+                <div class="guide-table-wrapper">
+                    <table class="guide-table">
+                        <thead>
+                            <tr>
+                                <th>Topic</th>
+                                <th>Key Teaching Points</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Hip Precautions</strong></td>
+                                <td>Explain restrictions before surgery so patient knows what to expect</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Pain Management</strong></td>
+                                <td>Multimodal approach; realistic expectations (pain is expected but managed)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Mobility Goals</strong></td>
+                                <td>Walking same day or POD 1; importance of PT/OT participation</td>
+                            </tr>
+                            <tr>
+                                <td><strong>DVT Prevention</strong></td>
+                                <td>Blood thinner importance; compression devices; ankle pumps</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Discharge Planning</strong></td>
+                                <td>Home setup (raised toilet seat, grab bars); who will help at home</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="info-box tip">
+                    <div class="info-box-icon">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <div class="info-box-content">
+                        <strong>Home Preparation Checklist</strong>
+                        <p>Arrange for: Raised toilet seat, shower chair/bench, grab bars, reacher/grabber, long-handled shoehorn, sock aid, hip kit for hip patients. Remove throw rugs and tripping hazards. Prepare meals in advance. Arrange for help with pet care, household tasks.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 4: Hip Precautions -->
+            <section class="guide-section" id="hip-precautions">
+                <div class="section-header">
+                    <div class="section-number">4</div>
+                    <div class="section-title-group">
+                        <h2>Hip Precautions</h2>
+                        <p>Preventing dislocation after hip replacement</p>
+                    </div>
+                </div>
+
+                <p>Hip precautions are movement restrictions that prevent dislocation while the joint capsule heals. The specific precautions depend on the surgical approach used. Precautions are typically maintained for 6-12 weeks.</p>
+
+                <!-- FlorenceBot Tip: Hip Precautions -->
+                <div class="florencebot-tip" id="tip-hip-precautions">
+                    <div class="florencebot-tip-header">
+                        <div class="florencebot-tip-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <span class="florencebot-tip-label">FlorenceBot Pro Tip</span>
+                    </div>
+                    <div class="florencebot-tip-title">The Big Three Hip Rules</div>
+                    <div class="florencebot-tip-content">
+                        <strong>For posterior approach hips, remember: Don't Bend, Don't Cross, Don't Twist!</strong> These three rules prevent the ball from popping out of the socket. (1) Don't bend hip past 90 degrees - no leaning forward in chair, no bending to pick things up. (2) Don't cross legs or ankles - use a pillow between legs when sleeping. (3) Don't twist/rotate inward - keep toes pointed up or slightly outward. Teach patients "nose over toes" - if bending, their nose shouldn't go past their toes!
+                    </div>
+                </div>
+
+                <div class="precautions-alert">
+                    <div class="precautions-header">
+                        <div class="precautions-icon">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <div>
+                            <div class="precautions-title">Posterior Approach Hip Precautions</div>
+                            <div class="precautions-subtitle">Most common approach - CRITICAL to prevent dislocation</div>
+                        </div>
+                    </div>
+                    <div class="precautions-grid">
+                        <div class="precaution-item">
+                            <div class="precaution-icon-large">
+                                <i class="fas fa-angle-up"></i>
+                            </div>
+                            <div class="precaution-rule">No Flexion > 90°</div>
+                            <div class="precaution-detail">Don't bend hip more than 90 degrees. No bending forward at waist. Use raised toilet seat, reacher.</div>
+                        </div>
+                        <div class="precaution-item">
+                            <div class="precaution-icon-large">
+                                <i class="fas fa-times"></i>
+                            </div>
+                            <div class="precaution-rule">No Adduction</div>
+                            <div class="precaution-detail">Don't cross legs or ankles. Keep pillow between legs when side-lying or sleeping.</div>
+                        </div>
+                        <div class="precaution-item">
+                            <div class="precaution-icon-large">
+                                <i class="fas fa-rotate-left"></i>
+                            </div>
+                            <div class="precaution-rule">No Internal Rotation</div>
+                            <div class="precaution-detail">Don't turn toes inward. Keep toes pointed up or slightly outward at all times.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FlorenceBot Tip: Posterior vs Anterior -->
+                <div class="florencebot-tip" id="tip-posterior-vs-anterior">
+                    <div class="florencebot-tip-header">
+                        <div class="florencebot-tip-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <span class="florencebot-tip-label">FlorenceBot Pro Tip</span>
+                    </div>
+                    <div class="florencebot-tip-title">Posterior vs Anterior Approach</div>
+                    <div class="florencebot-tip-content">
+                        <strong>The surgical approach changes which movements are dangerous!</strong> Posterior approach (most common) cuts through the back muscles, so the hip can dislocate backward - that's why you avoid flexion, adduction, and internal rotation. Anterior approach goes through the front, so precautions are opposite - avoid extension, abduction, and external rotation. Always check the operative report or ask the surgeon which approach was used before teaching precautions!
+                    </div>
+                </div>
+
+                <h3>Approach-Specific Precautions</h3>
+
+                <div class="approach-comparison">
+                    <div class="approach-card posterior">
+                        <div class="approach-header">
+                            <span class="approach-badge">Most Common</span>
+                        </div>
+                        <h4 class="approach-title">Posterior Approach</h4>
+                        <ul class="approach-list">
+                            <li><strong>Avoid:</strong> Flexion > 90 degrees</li>
+                            <li><strong>Avoid:</strong> Adduction (crossing midline)</li>
+                            <li><strong>Avoid:</strong> Internal rotation</li>
+                            <li>Incision on back/side of hip</li>
+                            <li>Higher dislocation risk (2-3%)</li>
+                            <li>Precautions typically 6-12 weeks</li>
+                        </ul>
+                    </div>
+                    <div class="approach-card anterior">
+                        <div class="approach-header">
+                            <span class="approach-badge">Growing Trend</span>
+                        </div>
+                        <h4 class="approach-title">Anterior Approach</h4>
+                        <ul class="approach-list">
+                            <li><strong>Avoid:</strong> Extension (leg behind body)</li>
+                            <li><strong>Avoid:</strong> Abduction (leg out to side)</li>
+                            <li><strong>Avoid:</strong> External rotation</li>
+                            <li>Incision on front of hip</li>
+                            <li>Lower dislocation risk (~1%)</li>
+                            <li>Often fewer/shorter precautions</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3>Positioning & Activities</h3>
+
+                <div class="guide-table-wrapper">
+                    <table class="guide-table">
+                        <thead>
+                            <tr>
+                                <th>Activity</th>
+                                <th>Safe Technique (Posterior Approach)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Sitting</strong></td>
+                                <td>Use firm, elevated chairs. Keep hips higher than knees. Don't lean forward.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Toileting</strong></td>
+                                <td>Use raised toilet seat (adds 4-6 inches). Don't lean forward when wiping.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Sleeping</strong></td>
+                                <td>Sleep on back or non-operative side with pillow between legs. Avoid side-lying on operative side initially.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Dressing</strong></td>
+                                <td>Use reacher, long-handled shoehorn, sock aid. Dress operative leg first, undress it last.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Bathing</strong></td>
+                                <td>Use shower chair. Use long-handled sponge for lower body. No tub baths until cleared.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Transfers</strong></td>
+                                <td>Pivot on non-operative leg. Keep operative leg extended when transitioning. Don't twist.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="info-box warning">
+                    <div class="info-box-icon">
+                        <i class="fas fa-exclamation-circle"></i>
+                    </div>
+                    <div class="info-box-content">
+                        <strong>Signs of Hip Dislocation</strong>
+                        <p>Sudden severe pain in hip/groin, leg appears shortened, leg rotated inward or outward (depending on dislocation direction), unable to bear weight, visible deformity. <strong>This is an emergency!</strong> Keep patient still, do not attempt to reduce, notify surgeon immediately.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 5: Postoperative Care -->
+            <section class="guide-section" id="postop">
+                <div class="section-header">
+                    <div class="section-number">5</div>
+                    <div class="section-title-group">
+                        <h2>Postoperative Nursing Care</h2>
+                        <p>Evidence-based care for optimal recovery</p>
+                    </div>
+                </div>
+
+                <p>Postoperative care focuses on pain management, preventing complications, and achieving early mobility. Many patients go home within 1-2 days using enhanced recovery protocols.</p>
+
+                <h3>Immediate Post-Op Assessment (PACU)</h3>
+
+                <div class="anatomy-grid">
+                    <div class="anatomy-card">
+                        <div class="anatomy-card-header">
+                            <div class="anatomy-card-icon" style="background: linear-gradient(135deg, #ef4444, #dc2626);">
+                                <i class="fas fa-heartbeat"></i>
+                            </div>
+                            <div>
+                                <div class="anatomy-card-title">Hemodynamic Status</div>
+                                <div class="anatomy-card-subtitle">Monitor for blood loss</div>
+                            </div>
+                        </div>
+                        <div class="anatomy-card-content">
+                            <ul>
+                                <li>VS every 15 min until stable</li>
+                                <li>Watch for hypotension (blood loss)</li>
+                                <li>Monitor drain output if present</li>
+                                <li>Hemoglobin check POD 1</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="anatomy-card">
+                        <div class="anatomy-card-header">
+                            <div class="anatomy-card-icon" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed);">
+                                <i class="fas fa-hand-sparkles"></i>
+                            </div>
+                            <div>
+                                <div class="anatomy-card-title">Neurovascular Checks</div>
+                                <div class="anatomy-card-subtitle">Assess operative limb</div>
+                            </div>
+                        </div>
+                        <div class="anatomy-card-content">
+                            <ul>
+                                <li>Color, temperature, capillary refill</li>
+                                <li>Pulses (dorsalis pedis, posterior tibial)</li>
+                                <li>Sensation and movement</li>
+                                <li>Compare to non-operative limb</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="anatomy-card">
+                        <div class="anatomy-card-header">
+                            <div class="anatomy-card-icon" style="background: linear-gradient(135deg, #f97316, #ea580c);">
+                                <i class="fas fa-head-side-virus"></i>
+                            </div>
+                            <div>
+                                <div class="anatomy-card-title">Pain Assessment</div>
+                                <div class="anatomy-card-subtitle">Multimodal management</div>
+                            </div>
+                        </div>
+                        <div class="anatomy-card-content">
+                            <ul>
+                                <li>Assess pain level (0-10 scale)</li>
+                                <li>Nerve block effectiveness</li>
+                                <li>Administer scheduled medications</li>
+                                <li>Position for comfort</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="anatomy-card">
+                        <div class="anatomy-card-header">
+                            <div class="anatomy-card-icon" style="background: linear-gradient(135deg, #22c55e, #16a34a);">
+                                <i class="fas fa-lungs"></i>
+                            </div>
+                            <div>
+                                <div class="anatomy-card-title">Respiratory</div>
+                                <div class="anatomy-card-subtitle">Prevent atelectasis</div>
+                            </div>
+                        </div>
+                        <div class="anatomy-card-content">
+                            <ul>
+                                <li>O2 as needed post-anesthesia</li>
+                                <li>Incentive spirometry every 1-2 hours</li>
+                                <li>Cough and deep breathe</li>
+                                <li>Elevate HOB when stable</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>Pain Management</h3>
+
+                <!-- FlorenceBot Tip: First Ambulation -->
+                <div class="florencebot-tip" id="tip-first-ambulation">
+                    <div class="florencebot-tip-header">
+                        <div class="florencebot-tip-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <span class="florencebot-tip-label">FlorenceBot Pro Tip</span>
+                    </div>
+                    <div class="florencebot-tip-title">Get Them Moving Early</div>
+                    <div class="florencebot-tip-content">
+                        <strong>Early mobility is the #1 thing you can do to prevent complications!</strong> Most joint replacement patients should be up and walking on POD 0 or POD 1. Pre-medicate for pain 30-45 minutes before PT. Make sure the nerve block hasn't made the leg too weak - if they can't feel or move their foot, wait. Use a gait belt, have the patient dangle first to prevent orthostatic hypotension, and remember: falling is worse than waiting another hour for the block to wear off.
+                    </div>
+                </div>
+
+                <div class="pain-management-grid">
+                    <div class="pain-card">
+                        <div class="pain-card-header">
+                            <div class="pain-card-icon">
+                                <i class="fas fa-syringe"></i>
+                            </div>
+                            <div class="pain-card-title">Regional Anesthesia</div>
+                        </div>
+                        <ul class="pain-card-list">
+                            <li>Peripheral nerve blocks (femoral, adductor canal)</li>
+                            <li>Spinal anesthesia with intrathecal morphine</li>
+                            <li>Local infiltration around joint</li>
+                            <li>Provides 12-24+ hours of relief</li>
+                            <li>Monitor for motor weakness (fall risk!)</li>
+                        </ul>
+                    </div>
+                    <div class="pain-card">
+                        <div class="pain-card-header">
+                            <div class="pain-card-icon">
+                                <i class="fas fa-pills"></i>
+                            </div>
+                            <div class="pain-card-title">Scheduled Medications</div>
+                        </div>
+                        <ul class="pain-card-list">
+                            <li>Acetaminophen 1g every 6-8 hours</li>
+                            <li>NSAIDs (if not contraindicated)</li>
+                            <li>Gabapentin/pregabalin for neuropathic pain</li>
+                            <li>Opioids for breakthrough only</li>
+                            <li>Muscle relaxants PRN</li>
+                        </ul>
+                    </div>
+                    <div class="pain-card">
+                        <div class="pain-card-header">
+                            <div class="pain-card-icon">
+                                <i class="fas fa-snowflake"></i>
+                            </div>
+                            <div class="pain-card-title">Non-Pharmacologic</div>
+                        </div>
+                        <ul class="pain-card-list">
+                            <li>Ice/cryotherapy (20 min on/off)</li>
+                            <li>Elevation to reduce swelling</li>
+                            <li>Positioning for comfort</li>
+                            <li>Relaxation techniques</li>
+                            <li>Distraction (TV, music, visitors)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="info-box nclex">
+                    <div class="info-box-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="info-box-content">
+                        <strong>NCLEX Alert: Multimodal Analgesia</strong>
+                        <p>Multimodal analgesia uses multiple medication classes targeting different pain pathways. This approach provides better pain control with fewer opioid side effects (nausea, constipation, respiratory depression). Schedule non-opioids (acetaminophen, NSAIDs) around the clock; use opioids for breakthrough only.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 6: DVT Prevention -->
+            <section class="guide-section" id="dvt-prevention">
+                <div class="section-header">
+                    <div class="section-number">6</div>
+                    <div class="section-title-group">
+                        <h2>DVT Prevention</h2>
+                        <p>Venous thromboembolism prophylaxis</p>
+                    </div>
+                </div>
+
+                <p>Joint replacement patients are at high risk for deep vein thrombosis (DVT) and pulmonary embolism (PE). Aggressive prophylaxis is essential and continues after discharge.</p>
+
+                <!-- FlorenceBot Tip: DVT Prevention -->
+                <div class="florencebot-tip" id="tip-dvt-prevention">
+                    <div class="florencebot-tip-header">
+                        <div class="florencebot-tip-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <span class="florencebot-tip-label">FlorenceBot Pro Tip</span>
+                    </div>
+                    <div class="florencebot-tip-title">DVT Prevention is Critical</div>
+                    <div class="florencebot-tip-content">
+                        <strong>Without prophylaxis, up to 50% of joint replacement patients would develop DVT!</strong> Your job: make sure those SCDs are actually ON (not just in the room), verify the patient took their blood thinner, and get them moving. The triad that causes clots (Virchow's triad): stasis (lying in bed), endothelial injury (surgery), hypercoagulability (body's response to surgery). We can't prevent the last two, but YOU can fight stasis with early ambulation and compression!
+                    </div>
+                </div>
+
+                <div class="dvt-prevention-panel">
+                    <div class="dvt-panel-header">
+                        <div class="dvt-panel-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <div class="dvt-panel-title">DVT Prevention Strategies</div>
+                    </div>
+                    <div class="dvt-methods-grid">
+                        <div class="dvt-method">
+                            <div class="dvt-method-icon">
+                                <i class="fas fa-syringe"></i>
+                            </div>
+                            <div class="dvt-method-name">Anticoagulation</div>
+                            <div class="dvt-method-detail">Enoxaparin, rivaroxaban, apixaban, or aspirin for 10-35 days</div>
+                        </div>
+                        <div class="dvt-method">
+                            <div class="dvt-method-icon">
+                                <i class="fas fa-compress-alt"></i>
+                            </div>
+                            <div class="dvt-method-name">SCDs</div>
+                            <div class="dvt-method-detail">Sequential compression devices while in bed; remove only for ambulation</div>
+                        </div>
+                        <div class="dvt-method">
+                            <div class="dvt-method-icon">
+                                <i class="fas fa-walking"></i>
+                            </div>
+                            <div class="dvt-method-name">Early Mobility</div>
+                            <div class="dvt-method-detail">Ambulate day of surgery or POD 1; frequent position changes</div>
+                        </div>
+                        <div class="dvt-method">
+                            <div class="dvt-method-icon">
+                                <i class="fas fa-shoe-prints"></i>
+                            </div>
+                            <div class="dvt-method-name">Ankle Pumps</div>
+                            <div class="dvt-method-detail">Dorsiflexion/plantarflexion exercises every hour while awake</div>
+                        </div>
+                        <div class="dvt-method">
+                            <div class="dvt-method-icon">
+                                <i class="fas fa-socks"></i>
+                            </div>
+                            <div class="dvt-method-name">Compression Stockings</div>
+                            <div class="dvt-method-detail">TED hose or graduated compression; wear during day</div>
+                        </div>
+                        <div class="dvt-method">
+                            <div class="dvt-method-icon">
+                                <i class="fas fa-tint"></i>
+                            </div>
+                            <div class="dvt-method-name">Hydration</div>
+                            <div class="dvt-method-detail">Adequate fluids to prevent hemoconcentration</div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>Anticoagulation Options</h3>
+
+                <div class="guide-table-wrapper">
+                    <table class="guide-table">
+                        <thead>
+                            <tr>
+                                <th>Medication</th>
+                                <th>Dosing</th>
+                                <th>Duration</th>
+                                <th>Nursing Considerations</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Enoxaparin (Lovenox)</strong></td>
+                                <td>40 mg SQ daily or 30 mg SQ q12h</td>
+                                <td>10-35 days</td>
+                                <td>Teach self-injection; rotate sites</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Rivaroxaban (Xarelto)</strong></td>
+                                <td>10 mg PO daily</td>
+                                <td>12 days (TKA), 35 days (THA)</td>
+                                <td>Take with food; no routine monitoring</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Apixaban (Eliquis)</strong></td>
+                                <td>2.5 mg PO BID</td>
+                                <td>12 days (TKA), 35 days (THA)</td>
+                                <td>No routine monitoring; renal dosing</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Aspirin</strong></td>
+                                <td>81-325 mg PO daily</td>
+                                <td>35 days</td>
+                                <td>Low bleeding risk; may be used in low-risk patients</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Warfarin (Coumadin)</strong></td>
+                                <td>Adjusted to INR 2-3</td>
+                                <td>10-35 days</td>
+                                <td>Requires INR monitoring; dietary education</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="info-box warning">
+                    <div class="info-box-icon">
+                        <i class="fas fa-lungs"></i>
+                    </div>
+                    <div class="info-box-content">
+                        <strong>Signs of Pulmonary Embolism</strong>
+                        <p><strong>Sudden onset:</strong> Dyspnea, chest pain (pleuritic), tachypnea, tachycardia, hypoxia, anxiety/restlessness, cough (may have hemoptysis). <strong>This is a medical emergency!</strong> Call rapid response, obtain ECG/ABG, anticipate CT angiography and anticoagulation.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 7: Mobility & Rehabilitation -->
+            <section class="guide-section" id="mobility">
+                <div class="section-header">
+                    <div class="section-number">7</div>
+                    <div class="section-title-group">
+                        <h2>Mobility & Rehabilitation</h2>
+                        <p>Progressive recovery milestones</p>
+                    </div>
+                </div>
+
+                <p>Early and progressive mobility is essential for recovery. Most patients participate in physical therapy starting the day of surgery or POD 1 and continue outpatient therapy for 6-12 weeks.</p>
+
+                <div class="mobility-timeline">
+                    <div class="mobility-timeline-header">
+                        <div class="mobility-timeline-icon">
+                            <i class="fas fa-walking"></i>
+                        </div>
+                        <div class="mobility-timeline-title">Recovery Milestones</div>
+                    </div>
+                    <div class="timeline-track">
+                        <div class="timeline-item">
+                            <div class="timeline-marker">Day 0</div>
+                            <div class="timeline-content">
+                                <div class="timeline-period">Day of Surgery</div>
+                                <div class="timeline-activity">Bed Mobility & Sitting</div>
+                                <div class="timeline-details">Ankle pumps, quad sets, gluteal sets. Dangle at bedside. May attempt standing/pivoting to chair with max assist. Assess for orthostatic hypotension.</div>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-marker">Day 1</div>
+                            <div class="timeline-content">
+                                <div class="timeline-period">POD 1</div>
+                                <div class="timeline-activity">First Ambulation</div>
+                                <div class="timeline-details">Walk in room/hallway with walker and assist. Transfer bed-to-chair independently. Continue exercises. Assess weight-bearing status per surgeon orders.</div>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-marker">Day 2</div>
+                            <div class="timeline-content">
+                                <div class="timeline-period">POD 2</div>
+                                <div class="timeline-activity">Increased Distance & Stairs</div>
+                                <div class="timeline-details">Walk 100+ feet with walker. Practice stairs if going home. May discharge home or to rehab facility. Independent with transfers.</div>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-marker">Wk 2-6</div>
+                            <div class="timeline-content">
+                                <div class="timeline-period">Weeks 2-6</div>
+                                <div class="timeline-activity">Outpatient Therapy</div>
+                                <div class="timeline-details">Progress to cane or no device. Increase ROM and strength. Continue hip precautions. Drive when off narcotics (usually 2-4 weeks).</div>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-marker">3-6 mo</div>
+                            <div class="timeline-content">
+                                <div class="timeline-period">3-6 Months</div>
+                                <div class="timeline-activity">Full Recovery</div>
+                                <div class="timeline-details">Return to most activities. Hip precautions usually discontinued at 6-12 weeks. Full strength and ROM. Low-impact exercise resumed.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>Weight Bearing Status</h3>
+
+                <div class="guide-table-wrapper">
+                    <table class="guide-table">
+                        <thead>
+                            <tr>
+                                <th>Status</th>
+                                <th>Abbreviation</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Weight Bearing As Tolerated</strong></td>
+                                <td>WBAT</td>
+                                <td>Most common for cemented prostheses. Full weight as comfortable.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Toe Touch Weight Bearing</strong></td>
+                                <td>TTWB</td>
+                                <td>Toe touches for balance only; no actual weight through leg.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Partial Weight Bearing</strong></td>
+                                <td>PWB</td>
+                                <td>Specific percentage (e.g., 50%) of body weight on leg.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Non-Weight Bearing</strong></td>
+                                <td>NWB</td>
+                                <td>No weight on operative leg (rare for joint replacement).</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="info-box tip">
+                    <div class="info-box-icon">
+                        <i class="fas fa-walking"></i>
+                    </div>
+                    <div class="info-box-content">
+                        <strong>Safe Ambulation Tips</strong>
+                        <p><strong>Pre-medicate</strong> 30-45 min before PT. <strong>Use gait belt</strong> for all initial ambulation. <strong>Dangle first</strong> to check for orthostatic hypotension. <strong>Check nerve block</strong> status - if leg is still numb/weak, delay ambulation. <strong>Walker first</strong>, progress to cane, then no device.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 8: Complications -->
+            <section class="guide-section" id="complications">
+                <div class="section-header">
+                    <div class="section-number">8</div>
+                    <div class="section-title-group">
+                        <h2>Complications</h2>
+                        <p>Recognition and prevention of adverse events</p>
+                    </div>
+                </div>
+
+                <p>While joint replacement is highly successful, complications can occur. Early recognition and intervention are essential for optimal outcomes.</p>
+
+                <!-- FlorenceBot Tip: Infection Signs -->
+                <div class="florencebot-tip" id="tip-infection-signs">
+                    <div class="florencebot-tip-header">
+                        <div class="florencebot-tip-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <span class="florencebot-tip-label">FlorenceBot Pro Tip</span>
+                    </div>
+                    <div class="florencebot-tip-title">Watch for Infection</div>
+                    <div class="florencebot-tip-content">
+                        <strong>Prosthetic joint infection (PJI) is one of the most devastating complications!</strong> Early signs: persistent fever, increasing pain (especially at rest or at night), wound drainage beyond POD 3-5, redness spreading from incision. The scary part? Infection can occur years later from bacteria traveling through the bloodstream (dental work, UTI, skin infection). That's why joint replacement patients need prophylactic antibiotics before dental procedures for life!
+                    </div>
+                </div>
+
+                <div class="complication-grid">
+                    <div class="complication-card critical">
+                        <div class="complication-header">
+                            <div class="complication-icon">
+                                <i class="fas fa-circle-xmark"></i>
+                            </div>
+                            <div>
+                                <div class="complication-name">Hip Dislocation</div>
+                                <div class="complication-timing">Risk highest first 6-12 weeks</div>
+                            </div>
+                        </div>
+                        <ul class="complication-signs">
+                            <li>Sudden severe hip/groin pain</li>
+                            <li>Leg appears shortened</li>
+                            <li>Leg rotated abnormally</li>
+                            <li>Unable to bear weight</li>
+                            <li><strong>Treatment:</strong> Closed/open reduction</li>
+                        </ul>
+                    </div>
+                    <div class="complication-card critical">
+                        <div class="complication-header">
+                            <div class="complication-icon">
+                                <i class="fas fa-bacteria"></i>
+                            </div>
+                            <div>
+                                <div class="complication-name">Prosthetic Joint Infection</div>
+                                <div class="complication-timing">Early (<3 mo) or late (>3 mo)</div>
+                            </div>
+                        </div>
+                        <ul class="complication-signs">
+                            <li>Fever, chills, malaise</li>
+                            <li>Wound erythema, warmth, drainage</li>
+                            <li>Increasing pain (especially at rest)</li>
+                            <li>Elevated WBC, ESR, CRP</li>
+                            <li><strong>Treatment:</strong> Antibiotics, possible revision</li>
+                        </ul>
+                    </div>
+                    <div class="complication-card critical">
+                        <div class="complication-header">
+                            <div class="complication-icon">
+                                <i class="fas fa-lungs"></i>
+                            </div>
+                            <div>
+                                <div class="complication-name">DVT / Pulmonary Embolism</div>
+                                <div class="complication-timing">Risk highest 2-10 days post-op</div>
+                            </div>
+                        </div>
+                        <ul class="complication-signs">
+                            <li>Unilateral leg swelling, warmth, pain</li>
+                            <li>PE: sudden dyspnea, chest pain, tachycardia</li>
+                            <li>Hypoxia, anxiety</li>
+                            <li><strong>Prevention:</strong> Anticoagulation, SCDs, early mobility</li>
+                        </ul>
+                    </div>
+                    <div class="complication-card moderate">
+                        <div class="complication-header">
+                            <div class="complication-icon">
+                                <i class="fas fa-bone"></i>
+                            </div>
+                            <div>
+                                <div class="complication-name">Periprosthetic Fracture</div>
+                                <div class="complication-timing">Intraop or post-op</div>
+                            </div>
+                        </div>
+                        <ul class="complication-signs">
+                            <li>Sudden pain with activity</li>
+                            <li>Inability to bear weight</li>
+                            <li>History of fall or trauma</li>
+                            <li>Risk: osteoporosis, revision surgery</li>
+                            <li><strong>Treatment:</strong> Fixation or revision</li>
+                        </ul>
+                    </div>
+                    <div class="complication-card monitor">
+                        <div class="complication-header">
+                            <div class="complication-icon">
+                                <i class="fas fa-ruler"></i>
+                            </div>
+                            <div>
+                                <div class="complication-name">Leg Length Discrepancy</div>
+                                <div class="complication-timing">Noticed after surgery</div>
+                            </div>
+                        </div>
+                        <ul class="complication-signs">
+                            <li>Feeling one leg is longer/shorter</li>
+                            <li>Limp or gait abnormality</li>
+                            <li>Hip or back pain</li>
+                            <li>May improve as muscles strengthen</li>
+                            <li><strong>Treatment:</strong> Shoe lift; rarely revision</li>
+                        </ul>
+                    </div>
+                    <div class="complication-card monitor">
+                        <div class="complication-header">
+                            <div class="complication-icon">
+                                <i class="fas fa-cog"></i>
+                            </div>
+                            <div>
+                                <div class="complication-name">Prosthesis Loosening</div>
+                                <div class="complication-timing">Years after surgery</div>
+                            </div>
+                        </div>
+                        <ul class="complication-signs">
+                            <li>Gradually increasing pain</li>
+                            <li>Pain with weight bearing</li>
+                            <li>Start-up pain (first steps after sitting)</li>
+                            <li><strong>Treatment:</strong> Revision surgery</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3>Discharge Teaching</h3>
+
+                <div class="discharge-checklist">
+                    <div class="discharge-header">
+                        <div class="discharge-icon">
+                            <i class="fas fa-clipboard-check"></i>
+                        </div>
+                        <div class="discharge-title">Discharge Teaching Checklist</div>
+                    </div>
+                    <div class="discharge-grid">
+                        <div class="discharge-item">
+                            <div class="discharge-check"><i class="fas fa-check"></i></div>
+                            <div class="discharge-text">Demonstrate hip precautions (if applicable) and verify understanding</div>
+                        </div>
+                        <div class="discharge-item">
+                            <div class="discharge-check"><i class="fas fa-check"></i></div>
+                            <div class="discharge-text">Review anticoagulation medication, dose, duration, and signs of bleeding</div>
+                        </div>
+                        <div class="discharge-item">
+                            <div class="discharge-check"><i class="fas fa-check"></i></div>
+                            <div class="discharge-text">Teach signs of DVT and PE - when to seek emergency care</div>
+                        </div>
+                        <div class="discharge-item">
+                            <div class="discharge-check"><i class="fas fa-check"></i></div>
+                            <div class="discharge-text">Review wound care: keep dry, watch for infection signs</div>
+                        </div>
+                        <div class="discharge-item">
+                            <div class="discharge-check"><i class="fas fa-check"></i></div>
+                            <div class="discharge-text">Confirm follow-up appointments: surgeon, PT/OT</div>
+                        </div>
+                        <div class="discharge-item">
+                            <div class="discharge-check"><i class="fas fa-check"></i></div>
+                            <div class="discharge-text">Verify home setup: raised toilet seat, grab bars, walker</div>
+                        </div>
+                        <div class="discharge-item">
+                            <div class="discharge-check"><i class="fas fa-check"></i></div>
+                            <div class="discharge-text">Review pain management plan and medication schedule</div>
+                        </div>
+                        <div class="discharge-item">
+                            <div class="discharge-check"><i class="fas fa-check"></i></div>
+                            <div class="discharge-text">Educate on lifelong antibiotic prophylaxis before dental procedures</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-box nclex">
+                    <div class="info-box-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="info-box-content">
+                        <strong>NCLEX Alert: Priority After Joint Replacement</strong>
+                        <p>The priority nursing interventions after joint replacement are: (1) <strong>Prevent DVT/PE</strong> - anticoagulation, SCDs, early mobility; (2) <strong>Prevent dislocation</strong> - hip precautions, proper positioning; (3) <strong>Manage pain</strong> - multimodal approach; (4) <strong>Prevent infection</strong> - sterile wound care, monitor for signs. On NCLEX, if asked about immediate post-op priority, think safety (DVT, dislocation) before comfort (pain).</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Key Points Summary -->
+            <div class="key-points-summary">
+                <div class="key-points-header">
+                    <div class="key-points-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h2 class="key-points-title">Key Points to Remember</h2>
+                </div>
+                <div class="key-points-grid">
+                    <div class="key-point-item">
+                        <div class="key-point-check">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <div class="key-point-text">
+                            <strong>Posterior approach hip precautions:</strong> No flexion >90°, no adduction, no internal rotation (6-12 weeks)
+                        </div>
+                    </div>
+                    <div class="key-point-item">
+                        <div class="key-point-check">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <div class="key-point-text">
+                            <strong>DVT prevention triad:</strong> Anticoagulation + SCDs + Early ambulation (continue anticoag 10-35 days)
+                        </div>
+                    </div>
+                    <div class="key-point-item">
+                        <div class="key-point-check">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <div class="key-point-text">
+                            <strong>First ambulation:</strong> POD 0 or 1; pre-medicate for pain; check nerve block status; use gait belt
+                        </div>
+                    </div>
+                    <div class="key-point-item">
+                        <div class="key-point-check">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <div class="key-point-text">
+                            <strong>Multimodal pain management:</strong> Scheduled acetaminophen + NSAIDs; opioids for breakthrough only
+                        </div>
+                    </div>
+                    <div class="key-point-item">
+                        <div class="key-point-check">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <div class="key-point-text">
+                            <strong>Hip dislocation signs:</strong> Severe pain, shortened leg, abnormal rotation - surgical emergency
+                        </div>
+                    </div>
+                    <div class="key-point-item">
+                        <div class="key-point-check">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <div class="key-point-text">
+                            <strong>Infection prevention:</strong> CHG shower pre-op; sterile wound care; antibiotics before dental work FOR LIFE
+                        </div>
+                    </div>
+                    <div class="key-point-item">
+                        <div class="key-point-check">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <div class="key-point-text">
+                            <strong>Weight bearing:</strong> Usually WBAT for cemented prostheses; confirm with surgeon order
+                        </div>
+                    </div>
+                    <div class="key-point-item">
+                        <div class="key-point-check">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <div class="key-point-text">
+                            <strong>Full recovery:</strong> 3-6 months; most patients report significant improvement in pain and function
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Document Footer -->
+        <div class="document-footer">
+            <div class="footer-brand">
+                <img src="../assets/images/icon.png" alt="TNC Logo" class="footer-logo">
+                <span class="footer-name">The Nursing Collective</span>
+            </div>
+            <p class="footer-tagline">Empowering nursing students with evidence-based study resources</p>
+            <p class="footer-copyright">&copy; 2025 The Nursing Collective. All rights reserved.</p>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="configs/hip-knee-replacement-config.js"></script>
+    <script src="guide-sidebar.js"></script>
+    <script src="guide-script.js"></script>
+</body>
+</html>
