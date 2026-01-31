@@ -61,6 +61,9 @@ function initializeGuideSidebars(config) {
 
     // Initialize TOC functionality (scroll tracking, progress bar)
     initializeTOCBehavior();
+
+    // Initialize tip navigation (click on sidebar tips to scroll to inline callouts)
+    initializeTipNavigation();
 }
 
 function createLeftSidebar(sections) {
@@ -154,15 +157,16 @@ function createRightSidebar(quickRefItems, clinicalPearls) {
         `;
     }
 
-    // Florence Tips (Clinical Pearls)
+    // FlorenceBot Tips (Clinical Pearls) - Clickable links to inline callouts
     let tipsHtml = '';
     if (clinicalPearls.length > 0) {
         let tips = '';
-        clinicalPearls.forEach(pearl => {
+        clinicalPearls.forEach((pearl, index) => {
+            // Generate tip ID from title (lowercase, hyphenated)
+            const tipId = pearl.id || `tip-${pearl.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/-+$/, '')}`;
             tips += `
-                <div class="tip-item">
+                <div class="tip-item" data-tip-target="${tipId}" role="button" tabindex="0">
                     <div class="tip-item-title">${pearl.title}</div>
-                    <div class="tip-item-text">${pearl.text}</div>
                 </div>
             `;
         });
@@ -171,9 +175,9 @@ function createRightSidebar(quickRefItems, clinicalPearls) {
             <div class="florence-tips-card">
                 <div class="florence-tips-header">
                     <div class="florence-tips-avatar">
-                        <img src="../assets/images/healthcare.webp" alt="Florence">
+                        <img src="../assets/images/healthcare.webp" alt="FlorenceBot">
                     </div>
-                    <h4>Florence's Pro Tips</h4>
+                    <h4>FlorenceBot's Pro Tips</h4>
                 </div>
                 ${tips}
             </div>
@@ -183,6 +187,41 @@ function createRightSidebar(quickRefItems, clinicalPearls) {
     sidebar.innerHTML = florenceHtml + keyNumbersHtml + tipsHtml;
 
     return sidebar;
+}
+
+// Handle clicking on sidebar tips to scroll to inline callouts
+function initializeTipNavigation() {
+    const tipItems = document.querySelectorAll('.tip-item[data-tip-target]');
+
+    tipItems.forEach(item => {
+        const handleClick = () => {
+            const targetId = item.getAttribute('data-tip-target');
+            const targetElement = document.getElementById(targetId);
+
+            if (targetElement) {
+                // Scroll to the tip
+                targetElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+                // Add highlight class after a brief delay (for scroll to complete)
+                setTimeout(() => {
+                    targetElement.classList.add('highlight');
+
+                    // Remove highlight class after animation
+                    setTimeout(() => {
+                        targetElement.classList.remove('highlight');
+                    }, 1500);
+                }, 300);
+            }
+        };
+
+        item.addEventListener('click', handleClick);
+        item.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                handleClick();
+            }
+        });
+    });
 }
 
 function initializeTOCBehavior() {

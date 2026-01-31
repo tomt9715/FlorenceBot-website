@@ -404,6 +404,103 @@
     line-height: 1.5;
 }
 
+/* Sidebar tips as clickable links */
+.tip-item {
+    cursor: pointer;
+}
+
+.tip-item:active {
+    transform: scale(0.98);
+}
+
+/* ============================================
+   INLINE FLORENCEBOT TIP CALLOUTS
+   These appear in the guide content and PDF
+   ============================================ */
+
+.florencebot-tip {
+    background: linear-gradient(135deg, #fdf4ff, #fae8ff);
+    border: 1px solid #e9d5ff;
+    border-left: 4px solid #a855f7;
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin: 24px 0;
+    position: relative;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.florencebot-tip-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.florencebot-tip-icon {
+    width: 28px;
+    height: 28px;
+    background: linear-gradient(135deg, #a855f7, #7c3aed);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 0.75rem;
+    flex-shrink: 0;
+}
+
+.florencebot-tip-label {
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: #7c3aed;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.florencebot-tip-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #6b21a8;
+    margin-bottom: 8px;
+}
+
+.florencebot-tip-content {
+    font-size: 0.95rem;
+    color: #4b5563;
+    line-height: 1.6;
+}
+
+/* Glow animation when tip is targeted */
+.florencebot-tip.highlight {
+    animation: tipGlow 1.5s ease-out;
+}
+
+@keyframes tipGlow {
+    0% {
+        box-shadow: 0 0 0 0 rgba(168, 85, 247, 0.6);
+        transform: scale(1);
+    }
+    20% {
+        box-shadow: 0 0 20px 8px rgba(168, 85, 247, 0.4);
+        transform: scale(1.01);
+    }
+    100% {
+        box-shadow: 0 4px 16px rgba(168, 85, 247, 0.1);
+        transform: scale(1);
+    }
+}
+
+/* Print styles for inline tips */
+@media print {
+    .florencebot-tip {
+        break-inside: avoid;
+        border: 1px solid #d8b4fe;
+        box-shadow: none;
+    }
+}
+
 /* Document container adjustment for three-column layout */
 .page-wrapper .document-container {
     max-width: 900px;
