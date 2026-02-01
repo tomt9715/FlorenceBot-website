@@ -698,9 +698,9 @@ const categoryConfig = {
     'cardiovascular': { label: 'Cardiovascular', icon: 'fa-heartbeat', order: 1 },
     'respiratory': { label: 'Respiratory', icon: 'fa-lungs', order: 2 },
     'neurological': { label: 'Neurological', icon: 'fa-brain', order: 3 },
-    'endocrine': { label: 'Endocrine', icon: 'fa-disease', order: 4 },
-    'renal': { label: 'Renal', icon: 'fa-kidneys', order: 5 },
-    'gastrointestinal': { label: 'Gastrointestinal', icon: 'fa-stomach', order: 6 },
+    'endocrine': { label: 'Endocrine', icon: 'fa-syringe', order: 4 },
+    'renal': { label: 'Renal', icon: 'fa-tint', order: 5 },
+    'gastrointestinal': { label: 'Gastrointestinal', icon: 'fa-utensils', order: 6 },
     'musculoskeletal': { label: 'Musculoskeletal', icon: 'fa-bone', order: 7 },
     // Other categories
     'clinical-skills': { label: 'Clinical Skills', icon: 'fa-stethoscope', order: 8 },
