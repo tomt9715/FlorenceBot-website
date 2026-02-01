@@ -5385,8 +5385,133 @@ body.is-admin-user .purchase-history-section {
 .guides-folders-container {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 32px;
 }
+
+/* ==================== Netflix-Style Category Rows ==================== */
+
+.category-row {
+    margin-bottom: 8px;
+}
+
+.category-row-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+    padding: 0 4px;
+}
+
+.category-row-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.category-row-title h3 {
+    margin: 0;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.category-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+}
+
+.category-count {
+    background: var(--background-light);
+    color: var(--text-secondary);
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+/* Horizontal scrolling row */
+.category-row-scroll {
+    position: relative;
+    margin: 0 -24px;
+    padding: 0 24px;
+}
+
+.category-row-cards {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    padding: 8px 0 16px;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: var(--border-color) transparent;
+}
+
+.category-row-cards::-webkit-scrollbar {
+    height: 6px;
+}
+
+.category-row-cards::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.category-row-cards::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: 3px;
+}
+
+.category-row-cards::-webkit-scrollbar-thumb:hover {
+    background: var(--text-secondary);
+}
+
+.category-row-cards .guide-card-compact {
+    flex: 0 0 280px;
+    scroll-snap-align: start;
+}
+
+/* Category icon colors - inherited from folder system */
+.category-icon.cardiovascular { background: linear-gradient(135deg, rgba(239, 68, 68, 0.15) 0%, rgba(220, 38, 38, 0.1) 100%); color: #dc2626; }
+.category-icon.respiratory { background: linear-gradient(135deg, rgba(59, 130, 246, 0.15) 0%, rgba(37, 99, 235, 0.1) 100%); color: #2563eb; }
+.category-icon.neurological { background: linear-gradient(135deg, rgba(168, 85, 247, 0.15) 0%, rgba(147, 51, 234, 0.1) 100%); color: #9333ea; }
+.category-icon.endocrine { background: linear-gradient(135deg, rgba(251, 146, 60, 0.15) 0%, rgba(234, 88, 12, 0.1) 100%); color: #ea580c; }
+.category-icon.renal { background: linear-gradient(135deg, rgba(20, 184, 166, 0.15) 0%, rgba(13, 148, 136, 0.1) 100%); color: #0d9488; }
+.category-icon.gastrointestinal { background: linear-gradient(135deg, rgba(132, 204, 22, 0.15) 0%, rgba(101, 163, 13, 0.1) 100%); color: #65a30d; }
+.category-icon.musculoskeletal { background: linear-gradient(135deg, rgba(120, 113, 108, 0.15) 0%, rgba(87, 83, 78, 0.1) 100%); color: #57534e; }
+.category-icon.clinical-skills { background: linear-gradient(135deg, rgba(99, 102, 241, 0.15) 0%, rgba(79, 70, 229, 0.1) 100%); color: #4f46e5; }
+.category-icon.pharmacology { background: linear-gradient(135deg, rgba(139, 92, 246, 0.15) 0%, rgba(124, 58, 237, 0.1) 100%); color: #7c3aed; }
+.category-icon.mental-health { background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(5, 150, 105, 0.1) 100%); color: #059669; }
+.category-icon.maternal-newborn { background: linear-gradient(135deg, rgba(236, 72, 153, 0.15) 0%, rgba(219, 39, 119, 0.1) 100%); color: #db2777; }
+.category-icon.pediatrics { background: linear-gradient(135deg, rgba(245, 158, 11, 0.15) 0%, rgba(217, 119, 6, 0.1) 100%); color: #d97706; }
+.category-icon.lab-values { background: linear-gradient(135deg, rgba(6, 182, 212, 0.15) 0%, rgba(8, 145, 178, 0.1) 100%); color: #0891b2; }
+.category-icon.safety { background: linear-gradient(135deg, rgba(249, 115, 22, 0.15) 0%, rgba(234, 88, 12, 0.1) 100%); color: #ea580c; }
+
+/* Responsive for category rows */
+@media (max-width: 768px) {
+    .category-row-scroll {
+        margin: 0 -16px;
+        padding: 0 16px;
+    }
+
+    .category-row-cards .guide-card-compact {
+        flex: 0 0 260px;
+    }
+
+    .category-row-title h3 {
+        font-size: 1rem;
+    }
+}
+
+/* Dark mode for category rows */
+[data-theme="dark"] .category-count {
+    background: var(--background-color);
+}
+
+/* ==================== Legacy Folder Styles (keeping for reference) ==================== */
 
 /* Individual Category Folder */
 .category-folder {

@@ -880,44 +880,30 @@ function renderCategoryFolders(purchases, searchTerm = '') {
         return;
     }
 
-    // Get expanded state from localStorage
-    const expandedFolders = getExpandedFolders();
-
-    // Render each category folder
+    // Render each category as a horizontal scrolling row (Netflix-style)
     foldersContainer.innerHTML = sortedCategories.map(category => {
         const guides = groupedByCategory[category];
         const config = categoryConfig[category] || { label: category, icon: 'fa-book' };
-        const isExpanded = expandedFolders.includes(category);
 
         return `
-            <div class="category-folder ${isExpanded ? 'expanded' : ''}" data-category="${category}">
-                <div class="folder-header" data-toggle-folder="${category}">
-                    <div class="folder-header-left">
-                        <div class="folder-icon ${category}">
+            <div class="category-row" data-category="${category}">
+                <div class="category-row-header">
+                    <div class="category-row-title">
+                        <div class="category-icon ${category}">
                             <i class="fas ${config.icon}"></i>
                         </div>
-                        <div>
-                            <h3 class="folder-title">${config.label}</h3>
-                            <span class="folder-count">${guides.length} guide${guides.length !== 1 ? 's' : ''}</span>
-                        </div>
-                    </div>
-                    <div class="folder-header-right">
-                        <div class="folder-toggle">
-                            <i class="fas fa-chevron-down"></i>
-                        </div>
+                        <h3>${config.label}</h3>
+                        <span class="category-count">${guides.length}</span>
                     </div>
                 </div>
-                <div class="folder-content">
-                    <div class="folder-guides-grid">
+                <div class="category-row-scroll">
+                    <div class="category-row-cards">
                         ${guides.map(purchase => renderCompactGuideCard(purchase, false)).join('')}
                     </div>
                 </div>
             </div>
         `;
     }).join('');
-
-    // Setup folder toggle listeners
-    setupFolderToggleListeners();
 
     // Setup guide card listeners
     setupGuideCardListenersCompact(foldersContainer);
