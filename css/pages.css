@@ -148,6 +148,124 @@
     color: rgba(255, 255, 255, 0.9);
 }
 
+/* Featured Guides Section */
+.featured-guides {
+    padding: 80px 0;
+    background: var(--background-light);
+}
+
+.featured-guides-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    margin-top: 40px;
+}
+
+.featured-guide-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 24px;
+    background: var(--card-bg);
+    border-radius: 16px;
+    border: 1px solid var(--border-color);
+    text-decoration: none;
+    color: var(--text-primary);
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow-sm);
+}
+
+.featured-guide-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--primary-color);
+}
+
+.featured-guide-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.featured-guide-icon i {
+    font-size: 1.5rem;
+    color: white;
+}
+
+.featured-guide-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.featured-guide-content h3 {
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--text-primary);
+}
+
+.featured-guide-content p {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin-bottom: 12px;
+}
+
+.featured-guide-category {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--primary-color);
+    background: rgba(46, 134, 171, 0.1);
+    padding: 4px 10px;
+    border-radius: 20px;
+}
+
+.featured-guides-cta {
+    text-align: center;
+    margin-top: 40px;
+}
+
+.featured-guides-cta .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+@media (max-width: 768px) {
+    .featured-guides {
+        padding: 60px 0;
+    }
+
+    .featured-guides-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .featured-guide-card {
+        padding: 20px;
+    }
+
+    .featured-guide-icon {
+        width: 50px;
+        height: 50px;
+    }
+
+    .featured-guide-icon i {
+        font-size: 1.25rem;
+    }
+
+    .featured-guide-content h3 {
+        font-size: 1.05rem;
+    }
+}
+
 /* Problem/Solution Section */
 .problem-solution {
     padding: 80px 0;
