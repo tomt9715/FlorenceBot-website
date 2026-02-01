@@ -547,55 +547,55 @@ const guidesData = [
     }
 ];
 
-// Category mapping for guide cards
+// Category mapping for guide cards - now with proper Med-Surg subcategories
 const guideCategoryMap = {
     // Cardiovascular
-    'heart-failure': { category: 'med-surg', label: 'Med-Surg', description: 'Comprehensive guide to heart failure management and nursing interventions.' },
-    'myocardial-infarction': { category: 'med-surg', label: 'Med-Surg', description: 'Acute MI recognition, treatment protocols, and patient care.' },
-    'arrhythmias': { category: 'med-surg', label: 'Med-Surg', description: 'Cardiac rhythm interpretation and emergency interventions.' },
-    'hypertension': { category: 'med-surg', label: 'Med-Surg', description: 'Blood pressure management and lifestyle modifications.' },
-    'coronary-artery-disease': { category: 'med-surg', label: 'Med-Surg', description: 'CAD pathophysiology and evidence-based treatments.' },
-    'peripheral-vascular-disease': { category: 'med-surg', label: 'Med-Surg', description: 'PVD assessment, wound care, and circulation optimization.' },
+    'heart-failure': { category: 'cardiovascular', label: 'Cardiovascular', description: 'Comprehensive guide to heart failure management and nursing interventions.' },
+    'myocardial-infarction': { category: 'cardiovascular', label: 'Cardiovascular', description: 'Acute MI recognition, treatment protocols, and patient care.' },
+    'arrhythmias': { category: 'cardiovascular', label: 'Cardiovascular', description: 'Cardiac rhythm interpretation and emergency interventions.' },
+    'hypertension': { category: 'cardiovascular', label: 'Cardiovascular', description: 'Blood pressure management and lifestyle modifications.' },
+    'coronary-artery-disease': { category: 'cardiovascular', label: 'Cardiovascular', description: 'CAD pathophysiology and evidence-based treatments.' },
+    'peripheral-vascular-disease': { category: 'cardiovascular', label: 'Cardiovascular', description: 'PVD assessment, wound care, and circulation optimization.' },
     // Respiratory
-    'copd': { category: 'med-surg', label: 'Med-Surg', description: 'COPD staging, oxygen therapy, and exacerbation management.' },
-    'asthma': { category: 'med-surg', label: 'Med-Surg', description: 'Asthma triggers, medication protocols, and action plans.' },
-    'pneumonia': { category: 'med-surg', label: 'Med-Surg', description: 'Pneumonia types, antibiotic therapy, and respiratory care.' },
-    'oxygen-therapy': { category: 'clinical-skills', label: 'Clinical Skills', description: 'O2 delivery devices, flow rates, and monitoring.' },
-    'tuberculosis': { category: 'med-surg', label: 'Med-Surg', description: 'TB infection control and treatment protocols.' },
-    'chest-tubes': { category: 'clinical-skills', label: 'Clinical Skills', description: 'Chest tube management and troubleshooting.' },
+    'copd': { category: 'respiratory', label: 'Respiratory', description: 'COPD staging, oxygen therapy, and exacerbation management.' },
+    'asthma': { category: 'respiratory', label: 'Respiratory', description: 'Asthma triggers, medication protocols, and action plans.' },
+    'pneumonia': { category: 'respiratory', label: 'Respiratory', description: 'Pneumonia types, antibiotic therapy, and respiratory care.' },
+    'oxygen-therapy': { category: 'respiratory', label: 'Respiratory', description: 'O2 delivery devices, flow rates, and monitoring.' },
+    'tuberculosis': { category: 'respiratory', label: 'Respiratory', description: 'TB infection control and treatment protocols.' },
+    'chest-tubes': { category: 'respiratory', label: 'Respiratory', description: 'Chest tube management and troubleshooting.' },
     // Endocrine
-    'diabetes-type1': { category: 'med-surg', label: 'Med-Surg', description: 'Type 1 diabetes management and insulin therapy.' },
-    'diabetes-type2': { category: 'med-surg', label: 'Med-Surg', description: 'Type 2 diabetes care and oral medications.' },
-    'thyroid-disorders': { category: 'med-surg', label: 'Med-Surg', description: 'Hypo/hyperthyroidism assessment and treatment.' },
-    'adrenal-disorders': { category: 'med-surg', label: 'Med-Surg', description: 'Adrenal crisis and Cushing syndrome management.' },
-    'pituitary-disorders': { category: 'med-surg', label: 'Med-Surg', description: 'Pituitary hormone imbalances and interventions.' },
+    'diabetes-type1': { category: 'endocrine', label: 'Endocrine', description: 'Type 1 diabetes management and insulin therapy.' },
+    'diabetes-type2': { category: 'endocrine', label: 'Endocrine', description: 'Type 2 diabetes care and oral medications.' },
+    'thyroid-disorders': { category: 'endocrine', label: 'Endocrine', description: 'Hypo/hyperthyroidism assessment and treatment.' },
+    'adrenal-disorders': { category: 'endocrine', label: 'Endocrine', description: 'Adrenal crisis and Cushing syndrome management.' },
+    'pituitary-disorders': { category: 'endocrine', label: 'Endocrine', description: 'Pituitary hormone imbalances and interventions.' },
     // Neurological
-    'stroke': { category: 'med-surg', label: 'Med-Surg', description: 'Stroke types, FAST assessment, and acute care.' },
-    'seizures': { category: 'med-surg', label: 'Med-Surg', description: 'Seizure precautions and emergency response.' },
-    'spinal-cord-injury': { category: 'med-surg', label: 'Med-Surg', description: 'SCI levels, complications, and rehabilitation.' },
-    'traumatic-brain-injury': { category: 'med-surg', label: 'Med-Surg', description: 'TBI assessment scales and ICP monitoring.' },
-    'meningitis': { category: 'med-surg', label: 'Med-Surg', description: 'Meningitis signs, isolation, and treatment.' },
-    'parkinsons-ms': { category: 'med-surg', label: 'Med-Surg', description: 'Progressive neurological disorders management.' },
+    'stroke': { category: 'neurological', label: 'Neurological', description: 'Stroke types, FAST assessment, and acute care.' },
+    'seizures': { category: 'neurological', label: 'Neurological', description: 'Seizure precautions and emergency response.' },
+    'spinal-cord-injury': { category: 'neurological', label: 'Neurological', description: 'SCI levels, complications, and rehabilitation.' },
+    'traumatic-brain-injury': { category: 'neurological', label: 'Neurological', description: 'TBI assessment scales and ICP monitoring.' },
+    'meningitis': { category: 'neurological', label: 'Neurological', description: 'Meningitis signs, isolation, and treatment.' },
+    'parkinsons-ms': { category: 'neurological', label: 'Neurological', description: 'Progressive neurological disorders management.' },
     // Renal
-    'acute-kidney-injury': { category: 'med-surg', label: 'Med-Surg', description: 'AKI stages and fluid management.' },
-    'chronic-kidney-disease': { category: 'med-surg', label: 'Med-Surg', description: 'CKD staging and renal diet education.' },
-    'dialysis': { category: 'med-surg', label: 'Med-Surg', description: 'Hemodialysis and peritoneal dialysis care.' },
-    'urinary-tract-infections': { category: 'med-surg', label: 'Med-Surg', description: 'UTI prevention and antibiotic selection.' },
-    'kidney-stones': { category: 'med-surg', label: 'Med-Surg', description: 'Nephrolithiasis pain management and prevention.' },
-    'fluid-electrolytes': { category: 'lab-values', label: 'Lab Values', description: 'Electrolyte imbalances and IV fluid therapy.' },
-    // GI
-    'gi-bleeding': { category: 'med-surg', label: 'Med-Surg', description: 'Upper and lower GI bleed management.' },
-    'bowel-obstruction': { category: 'med-surg', label: 'Med-Surg', description: 'SBO vs LBO assessment and treatment.' },
-    'liver-disease': { category: 'med-surg', label: 'Med-Surg', description: 'Cirrhosis, hepatitis, and liver failure care.' },
-    'pancreatitis': { category: 'med-surg', label: 'Med-Surg', description: 'Acute and chronic pancreatitis management.' },
-    'inflammatory-bowel-disease': { category: 'med-surg', label: 'Med-Surg', description: 'Crohn\'s disease and ulcerative colitis.' },
-    'gerd-peptic-ulcer': { category: 'med-surg', label: 'Med-Surg', description: 'GERD and PUD treatment protocols.' },
+    'acute-kidney-injury': { category: 'renal', label: 'Renal', description: 'AKI stages and fluid management.' },
+    'chronic-kidney-disease': { category: 'renal', label: 'Renal', description: 'CKD staging and renal diet education.' },
+    'dialysis': { category: 'renal', label: 'Renal', description: 'Hemodialysis and peritoneal dialysis care.' },
+    'urinary-tract-infections': { category: 'renal', label: 'Renal', description: 'UTI prevention and antibiotic selection.' },
+    'kidney-stones': { category: 'renal', label: 'Renal', description: 'Nephrolithiasis pain management and prevention.' },
+    'fluid-electrolytes': { category: 'renal', label: 'Renal', description: 'Electrolyte imbalances and IV fluid therapy.' },
+    // GI (Gastrointestinal)
+    'gi-bleeding': { category: 'gastrointestinal', label: 'Gastrointestinal', description: 'Upper and lower GI bleed management.' },
+    'bowel-obstruction': { category: 'gastrointestinal', label: 'Gastrointestinal', description: 'SBO vs LBO assessment and treatment.' },
+    'liver-disease': { category: 'gastrointestinal', label: 'Gastrointestinal', description: 'Cirrhosis, hepatitis, and liver failure care.' },
+    'pancreatitis': { category: 'gastrointestinal', label: 'Gastrointestinal', description: 'Acute and chronic pancreatitis management.' },
+    'inflammatory-bowel-disease': { category: 'gastrointestinal', label: 'Gastrointestinal', description: 'Crohn\'s disease and ulcerative colitis.' },
+    'gerd-peptic-ulcer': { category: 'gastrointestinal', label: 'Gastrointestinal', description: 'GERD and PUD treatment protocols.' },
     // Musculoskeletal
-    'fractures': { category: 'med-surg', label: 'Med-Surg', description: 'Fracture types and orthopedic nursing care.' },
-    'arthritis': { category: 'med-surg', label: 'Med-Surg', description: 'OA and RA management strategies.' },
-    'hip-knee-replacement': { category: 'med-surg', label: 'Med-Surg', description: 'Joint replacement pre and post-op care.' },
-    'osteoporosis': { category: 'med-surg', label: 'Med-Surg', description: 'Bone density preservation and fall prevention.' },
-    'amputation-care': { category: 'med-surg', label: 'Med-Surg', description: 'Amputation wound care and prosthetics.' },
+    'fractures': { category: 'musculoskeletal', label: 'Musculoskeletal', description: 'Fracture types and orthopedic nursing care.' },
+    'arthritis': { category: 'musculoskeletal', label: 'Musculoskeletal', description: 'OA and RA management strategies.' },
+    'hip-knee-replacement': { category: 'musculoskeletal', label: 'Musculoskeletal', description: 'Joint replacement pre and post-op care.' },
+    'osteoporosis': { category: 'musculoskeletal', label: 'Musculoskeletal', description: 'Bone density preservation and fall prevention.' },
+    'amputation-care': { category: 'musculoskeletal', label: 'Musculoskeletal', description: 'Amputation wound care and prosthetics.' },
     // Pharmacology
     'cardiac-medications': { category: 'pharmacology', label: 'Pharmacology', description: 'Cardiac drugs, antihypertensives, and anticoagulants.' },
     'antibiotics-antivirals': { category: 'pharmacology', label: 'Pharmacology', description: 'Antimicrobial therapy and resistance prevention.' },
@@ -625,11 +625,13 @@ const guideCategoryMap = {
     'therapeutic-communication': { category: 'mental-health', label: 'Mental Health', description: 'Therapeutic techniques and patient rapport.' },
     'substance-abuse': { category: 'mental-health', label: 'Mental Health', description: 'Substance use disorders and recovery support.' },
     'eating-disorders': { category: 'mental-health', label: 'Mental Health', description: 'Anorexia, bulimia, and binge eating interventions.' },
-    // Other categories
+    // Lab Values
     'electrolytes': { category: 'lab-values', label: 'Lab Values', description: 'Essential electrolyte ranges and nursing interventions.' },
     'vital-signs': { category: 'clinical-skills', label: 'Clinical Skills', description: 'Assessment techniques and critical values.' },
     'critical-lab-values': { category: 'lab-values', label: 'Lab Values', description: 'Life-threatening lab values requiring immediate action.' },
+    // Safety
     'isolation-precautions': { category: 'safety', label: 'Safety', description: 'Standard, contact, droplet, and airborne precautions.' },
+    // Pharmacology extras
     'medication-math': { category: 'pharmacology', label: 'Pharmacology', description: 'Dosage calculations, IV rates, and conversions.' }
 };
 
@@ -690,16 +692,24 @@ function formatRelativeTime(dateString) {
     return formatDate(dateString);
 }
 
-// Category display configuration
+// Category display configuration - includes Med-Surg subcategories
 const categoryConfig = {
-    'med-surg': { label: 'Med-Surg', icon: 'fa-heartbeat', order: 1 },
-    'clinical-skills': { label: 'Clinical Skills', icon: 'fa-stethoscope', order: 2 },
-    'pharmacology': { label: 'Pharmacology', icon: 'fa-pills', order: 3 },
-    'lab-values': { label: 'Lab Values', icon: 'fa-flask', order: 4 },
-    'mental-health': { label: 'Mental Health', icon: 'fa-brain', order: 5 },
-    'maternal-newborn': { label: 'Maternal-Newborn', icon: 'fa-baby', order: 6 },
-    'pediatrics': { label: 'Pediatrics', icon: 'fa-child', order: 7 },
-    'safety': { label: 'Safety', icon: 'fa-shield-alt', order: 8 }
+    // Med-Surg Subcategories (body systems)
+    'cardiovascular': { label: 'Cardiovascular', icon: 'fa-heartbeat', order: 1 },
+    'respiratory': { label: 'Respiratory', icon: 'fa-lungs', order: 2 },
+    'neurological': { label: 'Neurological', icon: 'fa-brain', order: 3 },
+    'endocrine': { label: 'Endocrine', icon: 'fa-disease', order: 4 },
+    'renal': { label: 'Renal', icon: 'fa-kidneys', order: 5 },
+    'gastrointestinal': { label: 'Gastrointestinal', icon: 'fa-stomach', order: 6 },
+    'musculoskeletal': { label: 'Musculoskeletal', icon: 'fa-bone', order: 7 },
+    // Other categories
+    'clinical-skills': { label: 'Clinical Skills', icon: 'fa-stethoscope', order: 8 },
+    'pharmacology': { label: 'Pharmacology', icon: 'fa-pills', order: 9 },
+    'lab-values': { label: 'Lab Values', icon: 'fa-flask', order: 10 },
+    'mental-health': { label: 'Mental Health', icon: 'fa-head-side-virus', order: 11 },
+    'maternal-newborn': { label: 'Maternal-Newborn', icon: 'fa-baby', order: 12 },
+    'pediatrics': { label: 'Pediatrics', icon: 'fa-child', order: 13 },
+    'safety': { label: 'Safety', icon: 'fa-shield-alt', order: 14 }
 };
 
 // Load purchased guides from backend API - NEW FOLDER SYSTEM

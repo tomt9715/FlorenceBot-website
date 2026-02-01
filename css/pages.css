@@ -5433,8 +5433,16 @@ body.is-admin-user .purchase-history-section {
     font-size: 1.2rem;
 }
 
-/* Category-specific folder icon colors */
-.folder-icon.med-surg { background: linear-gradient(135deg, rgba(239, 68, 68, 0.15) 0%, rgba(220, 38, 38, 0.1) 100%); color: #dc2626; }
+/* Category-specific folder icon colors - Med-Surg Subcategories */
+.folder-icon.cardiovascular { background: linear-gradient(135deg, rgba(239, 68, 68, 0.15) 0%, rgba(220, 38, 38, 0.1) 100%); color: #dc2626; }
+.folder-icon.respiratory { background: linear-gradient(135deg, rgba(59, 130, 246, 0.15) 0%, rgba(37, 99, 235, 0.1) 100%); color: #2563eb; }
+.folder-icon.neurological { background: linear-gradient(135deg, rgba(168, 85, 247, 0.15) 0%, rgba(147, 51, 234, 0.1) 100%); color: #9333ea; }
+.folder-icon.endocrine { background: linear-gradient(135deg, rgba(251, 146, 60, 0.15) 0%, rgba(234, 88, 12, 0.1) 100%); color: #ea580c; }
+.folder-icon.renal { background: linear-gradient(135deg, rgba(20, 184, 166, 0.15) 0%, rgba(13, 148, 136, 0.1) 100%); color: #0d9488; }
+.folder-icon.gastrointestinal { background: linear-gradient(135deg, rgba(132, 204, 22, 0.15) 0%, rgba(101, 163, 13, 0.1) 100%); color: #65a30d; }
+.folder-icon.musculoskeletal { background: linear-gradient(135deg, rgba(120, 113, 108, 0.15) 0%, rgba(87, 83, 78, 0.1) 100%); color: #57534e; }
+
+/* Other categories */
 .folder-icon.clinical-skills { background: linear-gradient(135deg, rgba(99, 102, 241, 0.15) 0%, rgba(79, 70, 229, 0.1) 100%); color: #4f46e5; }
 .folder-icon.pharmacology { background: linear-gradient(135deg, rgba(139, 92, 246, 0.15) 0%, rgba(124, 58, 237, 0.1) 100%); color: #7c3aed; }
 .folder-icon.mental-health { background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(5, 150, 105, 0.1) 100%); color: #059669; }
