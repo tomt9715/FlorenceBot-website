@@ -1,0 +1,2382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arrhythmias Study Guide - The Nursing Collective</title>
+    <meta name="description" content="Comprehensive nursing study guide for cardiac arrhythmias. Learn to interpret common ECG rhythms, identify life-threatening dysrhythmias, and understand when to defibrillate vs cardiovert.">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <style>
+        /* ============================================
+           PDF-STYLE STUDY GUIDE STYLES - ARRHYTHMIAS
+           Classic Document Layout (Cardiovascular)
+           Color Scheme: Pink → Coral → Red (matching arrhythmias.webp icon)
+           ============================================ */
+
+        :root {
+            --primary-color: #f87171;
+            --primary-dark: #ef4444;
+            --secondary-color: #ec4899;
+            --accent-color: #93c5fd;
+            --text-primary: #1f2937;
+            --text-secondary: #4b5563;
+            --background: #ffffff;
+            --border-color: #e5e7eb;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Source Sans 3', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.7;
+            color: var(--text-primary);
+            background: #f3f4f6;
+        }
+
+        /* Download Bar - Fixed at top */
+        .download-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 12px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .download-bar-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 600;
+        }
+
+        .download-bar-brand img {
+            height: 32px;
+            width: auto;
+        }
+
+        .download-bar-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn-download {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background: white;
+            color: var(--primary-color);
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+        }
+
+        .btn-download:hover {
+            background: #f0f9ff;
+            transform: translateY(-1px);
+        }
+
+        .btn-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background: rgba(255,255,255,0.15);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+        }
+
+        .btn-back:hover {
+            background: rgba(255,255,255,0.25);
+        }
+
+        /* Document Container */
+        .document-container {
+            max-width: 850px;
+            margin: 80px auto 40px;
+            background: white;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+
+        /* Cover Page - Pink to Coral to Red gradient (matching arrhythmias.webp icon) */
+        .cover-page {
+            background: linear-gradient(135deg, #fda4af 0%, #f87171 50%, #ef4444 100%);
+            color: white;
+            padding: 80px 60px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cover-page::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.5;
+        }
+
+        .cover-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cover-logo {
+            width: 80px;
+            height: 80px;
+            background: white;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            padding: 12px;
+        }
+
+        .cover-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .cover-category {
+            display: inline-block;
+            padding: 8px 24px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+        }
+
+        .cover-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.1;
+        }
+
+        .cover-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            max-width: 600px;
+            margin: 0 auto 40px;
+            line-height: 1.6;
+        }
+
+        .cover-meta {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .cover-meta-item {
+            text-align: center;
+        }
+
+        .cover-meta-item .label {
+            font-size: 0.8rem;
+            opacity: 0.8;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .cover-meta-item .value {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-top: 4px;
+        }
+
+        .cover-brand {
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+
+        /* Document Content */
+        .document-content {
+            padding: 60px;
+        }
+
+        /* Learning Objectives */
+        .learning-objectives {
+            background: linear-gradient(135deg, #ecfdf5, #d1fae5);
+            border: 2px solid #10b981;
+            border-radius: 12px;
+            padding: 28px;
+            margin-bottom: 40px;
+        }
+
+        .learning-objectives h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #059669;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .learning-objectives ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .learning-objectives li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 8px 0;
+            color: var(--text-primary);
+            font-size: 1rem;
+        }
+
+        .learning-objectives li i {
+            color: #10b981;
+            margin-top: 4px;
+            flex-shrink: 0;
+        }
+
+        /* Table of Contents */
+        .table-of-contents {
+            background: #f9fafb;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 28px;
+            margin-bottom: 40px;
+        }
+
+        .table-of-contents h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 16px;
+        }
+
+        .table-of-contents ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            columns: 2;
+            column-gap: 30px;
+        }
+
+        .table-of-contents li {
+            break-inside: avoid;
+            margin-bottom: 8px;
+        }
+
+        .table-of-contents a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 12px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            transition: all 0.2s ease;
+        }
+
+        .table-of-contents a:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .toc-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 22px;
+            height: 22px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 5px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        .table-of-contents a:hover .toc-number {
+            background: white;
+            color: var(--primary-color);
+        }
+
+        /* Content Sections */
+        .guide-section {
+            margin-bottom: 50px;
+            scroll-margin-top: 80px;
+        }
+
+        .guide-section h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .guide-section h3 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin: 28px 0 14px;
+        }
+
+        .guide-section h4 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin: 20px 0 10px;
+        }
+
+        .guide-section p {
+            color: var(--text-secondary);
+            font-size: 1.02rem;
+            margin-bottom: 14px;
+        }
+
+        .guide-section ul, .guide-section ol {
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+            padding-left: 24px;
+        }
+
+        .guide-section li {
+            margin-bottom: 8px;
+        }
+
+        .guide-section strong {
+            color: var(--text-primary);
+        }
+
+        /* Info Boxes */
+        .info-box {
+            border-radius: 10px;
+            padding: 18px 22px;
+            margin: 20px 0;
+            border-left: 4px solid;
+        }
+
+        .info-box.clinical-pearl {
+            background: linear-gradient(135deg, #fffbeb, #fef3c7);
+            border-color: #f59e0b;
+        }
+
+        .info-box.warning {
+            background: #fef2f2;
+            border-color: #ef4444;
+        }
+
+        .info-box.tip {
+            background: #ecfdf5;
+            border-color: #10b981;
+        }
+
+        .info-box.nclex-tip {
+            background: #f5f3ff;
+            border-color: #8b5cf6;
+        }
+
+        .info-box.mnemonic {
+            background: #fffbeb;
+            border-color: #f59e0b;
+        }
+
+        .info-box.time-critical {
+            background: linear-gradient(135deg, #fef2f2, #fee2e2);
+            border-color: #dc2626;
+        }
+
+        .info-box-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+        }
+
+        .info-box.clinical-pearl .info-box-header { color: #d97706; }
+        .info-box.warning .info-box-header { color: #ef4444; }
+        .info-box.tip .info-box-header { color: #059669; }
+        .info-box.nclex-tip .info-box-header { color: #7c3aed; }
+        .info-box.mnemonic .info-box-header { color: #d97706; }
+        .info-box.time-critical .info-box-header { color: #dc2626; }
+
+        .info-box p { margin: 0; color: var(--text-secondary); font-size: 0.98rem; }
+        .info-box ul { margin: 8px 0 0; padding-left: 18px; }
+        .info-box li { margin-bottom: 4px; font-size: 0.98rem; }
+
+        /* Tables */
+        .guide-table-wrapper {
+            overflow-x: auto;
+            margin: 20px 0;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+        }
+
+        .guide-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.92rem;
+        }
+
+        .guide-table thead {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+        }
+
+        .guide-table th {
+            padding: 12px 14px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .guide-table tbody tr {
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .guide-table tbody tr:hover {
+            background: #f9fafb;
+        }
+
+        .guide-table td {
+            padding: 12px 14px;
+            color: var(--text-secondary);
+        }
+
+        .guide-table td:first-child {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        /* Rhythm Cards */
+        .rhythm-cards {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin: 24px 0;
+        }
+
+        .rhythm-card {
+            border-radius: 12px;
+            border: 2px solid var(--border-color);
+            overflow: hidden;
+            transition: all 0.2s ease;
+        }
+
+        .rhythm-card:hover {
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .rhythm-card-header {
+            padding: 14px 18px;
+            font-weight: 700;
+            font-size: 1rem;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .rhythm-card.normal .rhythm-card-header { background: linear-gradient(135deg, #10b981, #059669); }
+        .rhythm-card.atrial .rhythm-card-header { background: linear-gradient(135deg, #3b82f6, #2563eb); }
+        .rhythm-card.ventricular .rhythm-card-header { background: linear-gradient(135deg, #ef4444, #dc2626); }
+        .rhythm-card.block .rhythm-card-header { background: linear-gradient(135deg, #f59e0b, #d97706); }
+        .rhythm-card.lethal .rhythm-card-header { background: linear-gradient(135deg, #dc2626, #991b1b); }
+
+        .rhythm-card-body {
+            padding: 18px;
+        }
+
+        .rhythm-card-body h4 {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin: 0 0 10px;
+        }
+
+        .rhythm-card-body ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .rhythm-card-body li {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            padding: 6px 0;
+            color: var(--text-secondary);
+            font-size: 0.88rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .rhythm-card-body li:last-child { border-bottom: none; }
+        .rhythm-card-body li i { color: var(--primary-color); margin-top: 3px; flex-shrink: 0; }
+
+        /* Comparison Cards */
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .comparison-card {
+            border-radius: 12px;
+            border: 2px solid var(--border-color);
+            overflow: hidden;
+        }
+
+        .comparison-card-header {
+            padding: 16px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 1.05rem;
+            color: white;
+        }
+
+        .comparison-card.defib .comparison-card-header {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+        }
+
+        .comparison-card.cardio .comparison-card-header {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+        }
+
+        .comparison-card-body {
+            padding: 18px;
+        }
+
+        .comparison-card-body h4 {
+            font-size: 0.95rem;
+            margin: 0 0 10px;
+        }
+
+        .comparison-card-body ul {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 14px;
+        }
+
+        .comparison-card-body li {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            padding: 6px 0;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .comparison-card-body li:last-child { border-bottom: none; }
+        .comparison-card-body li i { color: var(--primary-color); margin-top: 3px; flex-shrink: 0; }
+
+        /* Interventions List */
+        .interventions-list {
+            background: #f9fafb;
+            border-radius: 12px;
+            padding: 22px;
+            margin: 20px 0;
+        }
+
+        .interventions-list h4 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1rem;
+            margin: 0 0 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .interventions-list h4 i { color: var(--primary-color); }
+
+        .intervention-item {
+            display: flex;
+            gap: 14px;
+            padding: 14px;
+            background: white;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            border: 1px solid var(--border-color);
+        }
+
+        .intervention-number {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+
+        .intervention-content h5 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin: 0 0 4px;
+        }
+
+        .intervention-content p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin: 0;
+        }
+
+        /* ECG Diagram Styles */
+        .ecg-diagram {
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            border: 2px solid var(--border-color);
+            border-radius: 16px;
+            padding: 24px;
+            margin: 28px 0;
+            text-align: center;
+        }
+
+        .ecg-diagram-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin: 0 0 20px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .ecg-diagram-title i {
+            color: var(--primary-color);
+        }
+
+        .ecg-wave-visual {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 16px;
+        }
+
+        .ecg-wave-svg {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .ecg-labels {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 16px;
+            margin-top: 16px;
+        }
+
+        .ecg-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            background: white;
+            padding: 8px 14px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .ecg-label-color {
+            width: 16px;
+            height: 16px;
+            border-radius: 4px;
+        }
+
+        /* Conduction Pathway Visual */
+        .conduction-pathway {
+            background: linear-gradient(135deg, #f0fdfa, #ccfbf1);
+            border: 2px solid var(--primary-color);
+            border-radius: 16px;
+            padding: 24px;
+            margin: 24px 0;
+        }
+
+        .conduction-pathway h4 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+
+        .pathway-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .pathway-step {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            background: white;
+            padding: 14px 18px;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+        }
+
+        .pathway-step-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .pathway-step-content h5 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin: 0 0 4px;
+        }
+
+        .pathway-step-content p {
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            margin: 0;
+        }
+
+        .pathway-arrow {
+            text-align: center;
+            color: var(--primary-color);
+            font-size: 1.2rem;
+        }
+
+        /* Quick Reference */
+        .quick-reference {
+            background: white;
+            border: 2px solid var(--primary-color);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 24px 0;
+        }
+
+        .quick-reference h3 {
+            font-size: 1.1rem;
+            color: var(--primary-color);
+            margin: 0 0 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .quick-reference-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .quick-ref-item {
+            background: #f9fafb;
+            padding: 12px;
+            border-radius: 8px;
+        }
+
+        .quick-ref-item .label {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-bottom: 2px;
+        }
+
+        .quick-ref-item .value {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        /* Key Points Summary */
+        .key-points-summary {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 12px;
+            padding: 28px;
+            margin: 40px 0 0;
+            color: white;
+        }
+
+        .key-points-summary h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.3rem;
+            margin: 0 0 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: white;
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .key-points-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 14px;
+        }
+
+        .key-point {
+            background: rgba(255,255,255,0.15);
+            padding: 14px;
+            border-radius: 10px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .key-point i { font-size: 1.1rem; margin-top: 2px; }
+        .key-point p { margin: 0; font-size: 0.92rem; line-height: 1.4; }
+
+        /* Lethal Rhythms Alert Box */
+        .lethal-alert {
+            background: linear-gradient(135deg, #fef2f2, #fee2e2);
+            border: 2px solid #ef4444;
+            border-radius: 12px;
+            padding: 24px;
+            margin: 24px 0;
+        }
+
+        .lethal-alert h4 {
+            color: #dc2626;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 0 0 16px;
+            font-size: 1.1rem;
+        }
+
+        .lethal-rhythms-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 14px;
+        }
+
+        .lethal-rhythm-item {
+            background: white;
+            padding: 14px;
+            border-radius: 10px;
+            border-left: 4px solid #ef4444;
+        }
+
+        .lethal-rhythm-item h5 {
+            color: #dc2626;
+            font-size: 0.95rem;
+            margin: 0 0 6px;
+        }
+
+        .lethal-rhythm-item p {
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            margin: 0;
+        }
+
+        /* Footer */
+        .document-footer {
+            text-align: center;
+            padding: 32px 48px;
+            border-top: 1px solid var(--border-color);
+            background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+        }
+
+        .footer-logo {
+            height: 48px;
+            width: auto;
+            margin-bottom: 12px;
+        }
+
+        .footer-tagline {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+        }
+
+        .footer-copyright {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        /* Print Styles */
+        @page {
+            margin: 0.6in 0.4in;
+        }
+
+        @media print {
+            .download-bar { display: none !important; }
+
+            body {
+                background: white !important;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+
+            .document-container {
+                margin: 0 !important;
+                box-shadow: none !important;
+                max-width: 100% !important;
+                width: 100% !important;
+            }
+
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                color-adjust: exact !important;
+            }
+
+            .cover-page {
+                page-break-after: always;
+                break-after: page;
+            }
+
+            .info-box { page-break-inside: avoid; break-inside: avoid; }
+            .guide-table-wrapper { page-break-inside: avoid; break-inside: avoid; }
+            .rhythm-card { page-break-inside: avoid; break-inside: avoid; }
+            .comparison-card { page-break-inside: avoid; break-inside: avoid; }
+            .intervention-item { page-break-inside: avoid; break-inside: avoid; }
+            .quick-reference { page-break-inside: avoid; break-inside: avoid; }
+            .learning-objectives { page-break-inside: avoid; break-inside: avoid; }
+            .key-points-summary { page-break-inside: avoid; break-inside: avoid; }
+            .lethal-alert { page-break-inside: avoid; break-inside: avoid; }
+            .conduction-pathway { page-break-inside: avoid; break-inside: avoid; }
+            .ecg-diagram { page-break-inside: avoid; break-inside: avoid; }
+
+            h2, h3, h4 {
+                page-break-after: avoid;
+                break-after: avoid;
+            }
+
+            a { text-decoration: underline; }
+
+            .document-footer {
+                page-break-inside: avoid;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .download-bar {
+                flex-direction: column;
+                gap: 12px;
+                padding: 12px 16px;
+            }
+            .download-bar-actions {
+                width: 100%;
+                justify-content: center;
+            }
+            .document-container { margin: 120px 10px 20px; }
+            .cover-page { padding: 50px 30px; }
+            .cover-title { font-size: 2.2rem; }
+            .cover-meta { flex-direction: column; gap: 20px; }
+            .document-content { padding: 30px 24px; }
+            .table-of-contents ul { columns: 1; }
+            .comparison-grid { grid-template-columns: 1fr; }
+            .rhythm-cards { grid-template-columns: 1fr; }
+            .quick-reference-grid { grid-template-columns: 1fr; }
+            .key-points-grid { grid-template-columns: 1fr; }
+            .lethal-rhythms-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+
+    <!-- Sidebar Styles (shared across all guides) -->
+    <link rel="stylesheet" href="guide-sidebar.css">
+</head>
+<body data-product-id="arrhythmias" data-guide-name="Arrhythmias">
+    <!-- Download Bar -->
+    <div class="download-bar">
+        <div class="download-bar-brand">
+            <i class="fas fa-book-medical"></i>
+            <span>The Nursing Collective Study Guide</span>
+        </div>
+        <div class="download-bar-actions">
+            <a href="../dashboard.html" class="btn-back">
+                <i class="fas fa-arrow-left"></i> Back to Dashboard
+            </a>
+            <button class="btn-download" id="download-pdf-btn">
+                <i class="fas fa-file-pdf"></i> Save as PDF
+            </button>
+        </div>
+    </div>
+
+    <!-- Document -->
+    <div class="document-container">
+
+        <!-- Cover Page -->
+        <div class="cover-page">
+            <div class="cover-content">
+                <div class="cover-logo">
+                    <img src="../assets/images/guide-icons/arrhythmias.webp" alt="Arrhythmias">
+                </div>
+                <div class="cover-category">Medical-Surgical Nursing</div>
+                <h1 class="cover-title">Cardiac Arrhythmias</h1>
+                <p class="cover-subtitle">Comprehensive nursing study guide covering the cardiac conduction system, ECG rhythm interpretation, life-threatening dysrhythmias, and understanding when to defibrillate versus cardiovert.</p>
+                <div class="cover-meta">
+                    <div class="cover-meta-item">
+                        <div class="label">Reading Time</div>
+                        <div class="value">20-25 minutes</div>
+                    </div>
+                    <div class="cover-meta-item">
+                        <div class="label">Difficulty Level</div>
+                        <div class="value">Intermediate</div>
+                    </div>
+                    <div class="cover-meta-item">
+                        <div class="label">Last Updated</div>
+                        <div class="value">January 2026</div>
+                    </div>
+                </div>
+                <div class="cover-brand">
+                    <i class="fas fa-graduation-cap"></i> The Nursing Collective
+                </div>
+            </div>
+        </div>
+
+        <!-- Document Content -->
+        <div class="document-content">
+
+            <!-- Learning Objectives -->
+            <section class="learning-objectives">
+                <h2><i class="fas fa-bullseye"></i> Learning Objectives</h2>
+                <ul>
+                    <li><i class="fas fa-check-circle"></i> Describe the cardiac conduction system and the origin of each ECG waveform</li>
+                    <li><i class="fas fa-check-circle"></i> Interpret common ECG rhythms including sinus, atrial, junctional, and ventricular rhythms</li>
+                    <li><i class="fas fa-check-circle"></i> Identify life-threatening dysrhythmias requiring immediate intervention</li>
+                    <li><i class="fas fa-check-circle"></i> Differentiate between when to defibrillate versus when to cardiovert</li>
+                    <li><i class="fas fa-check-circle"></i> Apply systematic ECG interpretation using a step-by-step approach</li>
+                    <li><i class="fas fa-check-circle"></i> Prioritize nursing interventions for patients with cardiac arrhythmias</li>
+                    <li><i class="fas fa-check-circle"></i> Recognize heart blocks and their clinical significance</li>
+                </ul>
+            </section>
+
+            <!-- Table of Contents -->
+            <nav class="table-of-contents">
+                <h2><i class="fas fa-list"></i> Table of Contents</h2>
+                <ul>
+                    <li><a href="#conduction"><span class="toc-number">1</span> Cardiac Conduction System</a></li>
+                    <li><a href="#ecg-basics"><span class="toc-number">2</span> ECG Basics & Interpretation</a></li>
+                    <li><a href="#sinus-rhythms"><span class="toc-number">3</span> Sinus Rhythms</a></li>
+                    <li><a href="#atrial-rhythms"><span class="toc-number">4</span> Atrial Arrhythmias</a></li>
+                    <li><a href="#ventricular-rhythms"><span class="toc-number">5</span> Ventricular Arrhythmias</a></li>
+                    <li><a href="#heart-blocks"><span class="toc-number">6</span> Heart Blocks</a></li>
+                    <li><a href="#defib-cardiovert"><span class="toc-number">7</span> Defibrillation vs Cardioversion</a></li>
+                    <li><a href="#interventions"><span class="toc-number">8</span> Nursing Interventions</a></li>
+                </ul>
+            </nav>
+
+            <!-- Section 1: Cardiac Conduction System -->
+            <section class="guide-section" id="conduction">
+                <h2><span class="section-icon"><i class="fas fa-bolt"></i></span> Cardiac Conduction System</h2>
+
+                <p>The heart has its own electrical system that controls heart rate and rhythm. Understanding the conduction pathway is essential for interpreting ECG rhythms and recognizing where abnormalities originate.</p>
+
+                <h3>Anatomy of the Conduction System</h3>
+
+                <p>The cardiac conduction system consists of specialized cells that generate and conduct electrical impulses through the heart in an organized sequence:</p>
+
+                <div class="conduction-pathway">
+                    <h4><i class="fas fa-route"></i> Electrical Conduction Pathway</h4>
+                    <div class="pathway-steps">
+                        <div class="pathway-step">
+                            <div class="pathway-step-icon">1</div>
+                            <div class="pathway-step-content">
+                                <h5>SA Node (Sinoatrial Node)</h5>
+                                <p>The "pacemaker" of the heart. Located in the right atrium. Fires at <strong>60-100 bpm</strong>. Generates the P wave on ECG.</p>
+                            </div>
+                        </div>
+                        <div class="pathway-arrow"><i class="fas fa-arrow-down"></i></div>
+                        <div class="pathway-step">
+                            <div class="pathway-step-icon">2</div>
+                            <div class="pathway-step-content">
+                                <h5>Internodal Pathways</h5>
+                                <p>Conduct impulse through the atria, causing atrial contraction (P wave). Three pathways: anterior, middle (Wenckebach), posterior (Thorel).</p>
+                            </div>
+                        </div>
+                        <div class="pathway-arrow"><i class="fas fa-arrow-down"></i></div>
+                        <div class="pathway-step">
+                            <div class="pathway-step-icon">3</div>
+                            <div class="pathway-step-content">
+                                <h5>AV Node (Atrioventricular Node)</h5>
+                                <p>Located at the floor of the right atrium. Creates a <strong>delay</strong> (PR interval) to allow atria to empty before ventricles contract. Backup pacemaker at <strong>40-60 bpm</strong>.</p>
+                            </div>
+                        </div>
+                        <div class="pathway-arrow"><i class="fas fa-arrow-down"></i></div>
+                        <div class="pathway-step">
+                            <div class="pathway-step-icon">4</div>
+                            <div class="pathway-step-content">
+                                <h5>Bundle of His</h5>
+                                <p>Conducts impulse from AV node into the interventricular septum. Divides into left and right bundle branches.</p>
+                            </div>
+                        </div>
+                        <div class="pathway-arrow"><i class="fas fa-arrow-down"></i></div>
+                        <div class="pathway-step">
+                            <div class="pathway-step-icon">5</div>
+                            <div class="pathway-step-content">
+                                <h5>Bundle Branches (Left & Right)</h5>
+                                <p>Carry impulse down the interventricular septum. Left bundle has anterior and posterior fascicles.</p>
+                            </div>
+                        </div>
+                        <div class="pathway-arrow"><i class="fas fa-arrow-down"></i></div>
+                        <div class="pathway-step">
+                            <div class="pathway-step-icon">6</div>
+                            <div class="pathway-step-content">
+                                <h5>Purkinje Fibers</h5>
+                                <p>Terminal network spreading throughout ventricular myocardium. Causes rapid, coordinated ventricular contraction (QRS complex). Backup pacemaker at <strong>20-40 bpm</strong>.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-box clinical-pearl">
+                    <div class="info-box-header">
+                        <i class="fas fa-lightbulb"></i> Clinical Pearl: Pacemaker Hierarchy
+                    </div>
+                    <p>The heart has a "backup" system. If the SA node fails, the AV node can take over (40-60 bpm). If both fail, the ventricles can generate their own rhythm through Purkinje fibers (20-40 bpm). This "escape" mechanism prevents cardiac arrest but produces abnormal rhythms.</p>
+                </div>
+
+                <div class="florencebot-tip" id="tip-pacemaker-hierarchy">
+                    <div class="florencebot-tip-header">
+                        <div class="florencebot-tip-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <span class="florencebot-tip-label">FlorenceBot Pro Tip</span>
+                    </div>
+                    <div class="florencebot-tip-title">Pacemaker Hierarchy</div>
+                    <div class="florencebot-tip-content">
+                        <strong>Think of the heart's electrical system like a chain of command!</strong> The SA node is the "general" (60-100 bpm), the AV node is the "captain" (40-60 bpm), and the ventricles are the "soldiers" (20-40 bpm). If the boss is out, the next in line takes over - but they're slower at making decisions. That's why a junctional or ventricular escape rhythm is slower than normal sinus rhythm. The <strong>lower the pacemaker, the slower the rate and the wider the QRS</strong>.
+                    </div>
+                </div>
+
+                <h3>Intrinsic Rates</h3>
+
+                <div class="guide-table-wrapper">
+                    <table class="guide-table">
+                        <thead>
+                            <tr>
+                                <th>Pacemaker Site</th>
+                                <th>Intrinsic Rate</th>
+                                <th>Resulting Rhythm</th>
+                                <th>Clinical Significance</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>SA Node</td>
+                                <td>60-100 bpm</td>
+                                <td>Normal Sinus Rhythm</td>
+                                <td>Normal pacemaker, produces upright P waves</td>
+                            </tr>
+                            <tr>
+                                <td>AV Junction</td>
+                                <td>40-60 bpm</td>
+                                <td>Junctional Rhythm</td>
+                                <td>Absent or inverted P waves, narrow QRS</td>
+                            </tr>
+                            <tr>
+                                <td>Purkinje/Ventricles</td>
+                                <td>20-40 bpm</td>
+                                <td>Idioventricular Rhythm</td>
+                                <td>Wide QRS (&gt;0.12s), no P waves, life-threatening</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="info-box nclex-tip">
+                    <div class="info-box-header">
+                        <i class="fas fa-graduation-cap"></i> NCLEX Tip: The Lower the Pacemaker, the Slower the Rate
+                    </div>
+                    <p>Remember: As you go <strong>lower</strong> in the conduction system, the intrinsic rate gets <strong>slower</strong> and the QRS gets <strong>wider</strong>. SA node = 60-100, AV junction = 40-60, Ventricles = 20-40. A wide QRS always means the impulse originated below the AV node.</p>
+                </div>
+            </section>
+
+            <!-- Section 2: ECG Basics & Interpretation -->
+            <section class="guide-section" id="ecg-basics">
+                <h2><span class="section-icon"><i class="fas fa-wave-square"></i></span> ECG Basics & Interpretation</h2>
+
+                <p>The electrocardiogram (ECG/EKG) is a graphic representation of the electrical activity of the heart. Each waveform corresponds to a specific electrical event.</p>
+
+                <h3>ECG Waveforms and What They Represent</h3>
+
+                <div class="ecg-diagram">
+                    <h4 class="ecg-diagram-title"><i class="fas fa-heartbeat"></i> Normal ECG Complex</h4>
+                    <div class="ecg-wave-visual">
+                        <!-- SVG representation of ECG waveform -->
+                        <svg viewBox="0 0 400 150" class="ecg-wave-svg">
+                            <!-- Grid lines -->
+                            <defs>
+                                <pattern id="smallGrid" width="10" height="10" patternUnits="userSpaceOnUse">
+                                    <path d="M 10 0 L 0 0 0 10" fill="none" stroke="#fecaca" stroke-width="0.5"/>
+                                </pattern>
+                                <pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse">
+                                    <rect width="50" height="50" fill="url(#smallGrid)"/>
+                                    <path d="M 50 0 L 0 0 0 50" fill="none" stroke="#fca5a5" stroke-width="1"/>
+                                </pattern>
+                            </defs>
+                            <rect width="400" height="150" fill="url(#grid)"/>
+
+                            <!-- Baseline -->
+                            <line x1="0" y1="90" x2="400" y2="90" stroke="#94a3b8" stroke-width="1" stroke-dasharray="5,5"/>
+
+                            <!-- ECG Waveform -->
+                            <path d="M 20,90 L 50,90 Q 60,90 65,75 T 80,90 L 100,90 L 110,90 L 115,85 L 120,95 L 125,20 L 130,110 L 135,85 L 145,90 L 180,90 Q 200,90 210,70 T 240,90 L 280,90"
+                                  fill="none" stroke="#ef4444" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+
+                            <!-- Labels -->
+                            <text x="70" y="65" fill="#ef4444" font-size="14" font-weight="600" text-anchor="middle">P</text>
+                            <text x="115" y="60" fill="#7c3aed" font-size="12" font-weight="600" text-anchor="middle">Q</text>
+                            <text x="127" y="15" fill="#7c3aed" font-size="14" font-weight="600" text-anchor="middle">R</text>
+                            <text x="138" y="105" fill="#7c3aed" font-size="12" font-weight="600" text-anchor="middle">S</text>
+                            <text x="210" y="60" fill="#10b981" font-size="14" font-weight="600" text-anchor="middle">T</text>
+
+                            <!-- Interval markers -->
+                            <line x1="50" y1="120" x2="100" y2="120" stroke="#f59e0b" stroke-width="2"/>
+                            <text x="75" y="135" fill="#f59e0b" font-size="11" font-weight="600" text-anchor="middle">PR Interval</text>
+
+                            <line x1="110" y1="130" x2="145" y2="130" stroke="#7c3aed" stroke-width="2"/>
+                            <text x="127" y="145" fill="#7c3aed" font-size="11" font-weight="600" text-anchor="middle">QRS</text>
+
+                            <line x1="110" y1="140" x2="240" y2="140" stroke="#10b981" stroke-width="2"/>
+                            <text x="175" y="148" fill="#10b981" font-size="11" font-weight="600" text-anchor="middle">QT Interval</text>
+                        </svg>
+                    </div>
+                    <div class="ecg-labels">
+                        <div class="ecg-label">
+                            <span class="ecg-label-color" style="background: #ef4444;"></span>
+                            P Wave = Atrial depolarization
+                        </div>
+                        <div class="ecg-label">
+                            <span class="ecg-label-color" style="background: #7c3aed;"></span>
+                            QRS = Ventricular depolarization
+                        </div>
+                        <div class="ecg-label">
+                            <span class="ecg-label-color" style="background: #10b981;"></span>
+                            T Wave = Ventricular repolarization
+                        </div>
+                    </div>
+                </div>
+
+                <div class="guide-table-wrapper">
+                    <table class="guide-table">
+                        <thead>
+                            <tr>
+                                <th>Component</th>
+                                <th>Represents</th>
+                                <th>Normal Value</th>
+                                <th>Abnormal Findings</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>P Wave</td>
+                                <td>Atrial depolarization</td>
+                                <td>&lt;0.12 sec, &lt;2.5mm tall</td>
+                                <td>Absent (A-fib), peaked (RAE), notched (LAE)</td>
+                            </tr>
+                            <tr>
+                                <td>PR Interval</td>
+                                <td>Time from atrial to ventricular depolarization</td>
+                                <td>0.12-0.20 sec (3-5 small boxes)</td>
+                                <td>Short (&lt;0.12) = WPW; Long (&gt;0.20) = heart block</td>
+                            </tr>
+                            <tr>
+                                <td>QRS Complex</td>
+                                <td>Ventricular depolarization</td>
+                                <td>0.06-0.12 sec (&lt;3 small boxes)</td>
+                                <td>Wide (&gt;0.12) = bundle branch block or V-origin</td>
+                            </tr>
+                            <tr>
+                                <td>ST Segment</td>
+                                <td>Time between depolarization and repolarization</td>
+                                <td>Isoelectric (flat at baseline)</td>
+                                <td>Elevation = MI; Depression = ischemia</td>
+                            </tr>
+                            <tr>
+                                <td>T Wave</td>
+                                <td>Ventricular repolarization</td>
+                                <td>Upright (same direction as QRS)</td>
+                                <td>Inverted = ischemia; Peaked = hyperkalemia</td>
+                            </tr>
+                            <tr>
+                                <td>QT Interval</td>
+                                <td>Total ventricular electrical activity</td>
+                                <td>&lt;0.44 sec (varies with HR)</td>
+                                <td>Prolonged = risk of Torsades de Pointes</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>Systematic ECG Interpretation</h3>
+
+                <p>Use this step-by-step approach to systematically analyze every rhythm strip:</p>
+
+                <div class="interventions-list">
+                    <h4><i class="fas fa-clipboard-check"></i> 5-Step ECG Analysis</h4>
+
+                    <div class="intervention-item">
+                        <div class="intervention-number">1</div>
+                        <div class="intervention-content">
+                            <h5>Rate</h5>
+                            <p>Count the number of QRS complexes in a 6-second strip and multiply by 10. Normal = 60-100 bpm. Bradycardia &lt;60, Tachycardia &gt;100.</p>
+                        </div>
+                    </div>
+
+                    <div class="intervention-item">
+                        <div class="intervention-number">2</div>
+                        <div class="intervention-content">
+                            <h5>Rhythm</h5>
+                            <p>Is the R-R interval regular or irregular? Measure the distance between consecutive R waves. Regular = consistent spacing. Irregularly irregular = atrial fibrillation.</p>
+                        </div>
+                    </div>
+
+                    <div class="intervention-item">
+                        <div class="intervention-number">3</div>
+                        <div class="intervention-content">
+                            <h5>P Waves</h5>
+                            <p>Are P waves present? Are they upright and uniform? Is there one P wave before each QRS? Absent P waves suggest atrial fibrillation or junctional rhythm.</p>
+                        </div>
+                    </div>
+
+                    <div class="intervention-item">
+                        <div class="intervention-number">4</div>
+                        <div class="intervention-content">
+                            <h5>PR Interval</h5>
+                            <p>Measure from the beginning of P wave to beginning of QRS. Normal = 0.12-0.20 sec. Prolonged PR = AV block. Short PR = WPW syndrome.</p>
+                        </div>
+                    </div>
+
+                    <div class="intervention-item">
+                        <div class="intervention-number">5</div>
+                        <div class="intervention-content">
+                            <h5>QRS Width</h5>
+                            <p>Measure the QRS complex duration. Normal = &lt;0.12 sec (3 small boxes). Wide QRS indicates ventricular origin or bundle branch block.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-box mnemonic">
+                    <div class="info-box-header">
+                        <i class="fas fa-brain"></i> Memory Aid: ECG Interpretation
+                    </div>
+                    <p><strong>5 R's of ECG Interpretation:</strong></p>
+                    <ul>
+                        <li><strong>R</strong>ate - How fast?</li>
+                        <li><strong>R</strong>hythm - Regular or irregular?</li>
+                        <li><strong>R</strong>ound P waves - Present and normal?</li>
+                        <li><strong>R</strong>elationship - PR interval normal? P before each QRS?</li>
+                        <li><strong>R</strong>RS width - Narrow or wide QRS?</li>
+                    </ul>
+                </div>
+
+                <div class="quick-reference">
+                    <h3><i class="fas fa-ruler"></i> Quick Reference: ECG Paper Measurements</h3>
+                    <div class="quick-reference-grid">
+                        <div class="quick-ref-item">
+                            <div class="label">Small Box (horizontal)</div>
+                            <div class="value">0.04 seconds</div>
+                        </div>
+                        <div class="quick-ref-item">
+                            <div class="label">Large Box (horizontal)</div>
+                            <div class="value">0.20 seconds</div>
+                        </div>
+                        <div class="quick-ref-item">
+                            <div class="label">Small Box (vertical)</div>
+                            <div class="value">0.1 mV (1mm)</div>
+                        </div>
+                        <div class="quick-ref-item">
+                            <div class="label">Paper Speed</div>
+                            <div class="value">25 mm/sec (standard)</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 3: Sinus Rhythms -->
+            <section class="guide-section" id="sinus-rhythms">
+                <h2><span class="section-icon"><i class="fas fa-heart"></i></span> Sinus Rhythms</h2>
+
+                <p>Sinus rhythms originate from the SA node. They are characterized by upright P waves in lead II (with one P wave before each QRS), a normal PR interval, and a narrow QRS complex.</p>
+
+                <div class="rhythm-cards">
+                    <div class="rhythm-card normal">
+                        <div class="rhythm-card-header">
+                            <i class="fas fa-check-circle"></i> Normal Sinus Rhythm (NSR)
+                        </div>
+                        <div class="rhythm-card-body">
+                            <h4>Characteristics:</h4>
+                            <ul>
+                                <li><i class="fas fa-heartbeat"></i> Rate: 60-100 bpm</li>
+                                <li><i class="fas fa-wave-square"></i> Rhythm: Regular</li>
+                                <li><i class="fas fa-chart-line"></i> P waves: Upright, uniform, one before each QRS</li>
+                                <li><i class="fas fa-ruler-horizontal"></i> PR interval: 0.12-0.20 sec</li>
+                                <li><i class="fas fa-compress-alt"></i> QRS: &lt;0.12 sec (narrow)</li>
+                            </ul>
+                            <h4>Clinical Significance:</h4>
+                            <p>Normal rhythm. No intervention needed unless symptomatic.</p>
+                        </div>
+                    </div>
+
+                    <div class="rhythm-card normal">
+                        <div class="rhythm-card-header">
+                            <i class="fas fa-turtle"></i> Sinus Bradycardia
+                        </div>
+                        <div class="rhythm-card-body">
+                            <h4>Characteristics:</h4>
+                            <ul>
+                                <li><i class="fas fa-heartbeat"></i> Rate: <strong>&lt;60 bpm</strong></li>
+                                <li><i class="fas fa-wave-square"></i> Rhythm: Regular</li>
+                                <li><i class="fas fa-chart-line"></i> P waves: Normal</li>
+                                <li><i class="fas fa-ruler-horizontal"></i> PR/QRS: Normal</li>
+                            </ul>
+                            <h4>Causes:</h4>
+                            <p>Athletes, sleep, beta-blockers, digoxin, inferior MI, hypothyroidism, increased ICP</p>
+                            <h4>Treatment:</h4>
+                            <p>If symptomatic: Atropine 0.5mg IV, transcutaneous pacing, treat underlying cause</p>
+                        </div>
+                    </div>
+
+                    <div class="rhythm-card normal">
+                        <div class="rhythm-card-header">
+                            <i class="fas fa-rabbit-fast"></i> Sinus Tachycardia
+                        </div>
+                        <div class="rhythm-card-body">
+                            <h4>Characteristics:</h4>
+                            <ul>
+                                <li><i class="fas fa-heartbeat"></i> Rate: <strong>&gt;100 bpm</strong> (usually 100-160)</li>
+                                <li><i class="fas fa-wave-square"></i> Rhythm: Regular</li>
+                                <li><i class="fas fa-chart-line"></i> P waves: Normal (may be buried in preceding T wave at high rates)</li>
+                                <li><i class="fas fa-ruler-horizontal"></i> PR/QRS: Normal</li>
+                            </ul>
+                            <h4>Causes:</h4>
+                            <p>Exercise, fever, pain, anxiety, hypovolemia, anemia, hyperthyroidism, caffeine, medications</p>
+                            <h4>Treatment:</h4>
+                            <p>Treat underlying cause (fluids, antipyretics, pain control). Usually not treated directly.</p>
+                        </div>
+                    </div>
+
+                    <div class="rhythm-card normal">
+                        <div class="rhythm-card-header">
+                            <i class="fas fa-random"></i> Sinus Arrhythmia
+                        </div>
+                        <div class="rhythm-card-body">
+                            <h4>Characteristics:</h4>
+                            <ul>
+                                <li><i class="fas fa-heartbeat"></i> Rate: 60-100 bpm (variable)</li>
+                                <li><i class="fas fa-wave-square"></i> Rhythm: <strong>Irregular</strong> (varies with respiration)</li>
+                                <li><i class="fas fa-chart-line"></i> P waves: Normal</li>
+                                <li><i class="fas fa-ruler-horizontal"></i> PR/QRS: Normal</li>
+                            </ul>
+                            <h4>Clinical Significance:</h4>
+                            <p>Common in children and young adults. Rate increases with inspiration, decreases with expiration. Benign - no treatment needed.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-box warning">
+                    <div class="info-box-header">
+                        <i class="fas fa-exclamation-triangle"></i> Critical: Symptomatic Bradycardia
+                    </div>
+                    <p>Bradycardia becomes an emergency when the patient is <strong>symptomatic</strong>:</p>
+                    <ul>
+                        <li>Hypotension (SBP &lt;90 mmHg)</li>
+                        <li>Altered mental status/confusion</li>
+                        <li>Chest pain/ischemia</li>
+                        <li>Signs of shock (cool, clammy, diaphoretic)</li>
+                        <li>Acute heart failure</li>
+                    </ul>
+                    <p><strong>Treatment: Atropine 0.5-1mg IV (max 3mg), then consider transcutaneous pacing</strong></p>
+                </div>
+            </section>
+
+            <!-- Section 4: Atrial Arrhythmias -->
+            <section class="guide-section" id="atrial-rhythms">
+                <h2><span class="section-icon"><i class="fas fa-heartbeat"></i></span> Atrial Arrhythmias</h2>
+
+                <p>Atrial arrhythmias originate above the ventricles (in the atria or AV junction). They typically have narrow QRS complexes because ventricular conduction follows normal pathways.</p>
+
+                <div class="rhythm-cards">
+                    <div class="rhythm-card atrial">
+                        <div class="rhythm-card-header">
+                            <i class="fas fa-bolt"></i> Atrial Fibrillation (A-Fib)
+                        </div>
+                        <div class="rhythm-card-body">
+                            <h4>Characteristics:</h4>
+                            <ul>
+                                <li><i class="fas fa-heartbeat"></i> Rate: Variable (60-180+ bpm)</li>
+                                <li><i class="fas fa-wave-square"></i> Rhythm: <strong>Irregularly irregular</strong></li>
+                                <li><i class="fas fa-chart-line"></i> P waves: <strong>Absent</strong> - chaotic fibrillatory waves</li>
+                                <li><i class="fas fa-ruler-horizontal"></i> PR: Not measurable</li>
+                                <li><i class="fas fa-compress-alt"></i> QRS: Usually narrow</li>
+                            </ul>
+                            <h4>Risks:</h4>
+                            <p>Blood pools in atria → <strong>clot formation → stroke</strong>. Anticoagulation critical!</p>
+                            <h4>Treatment:</h4>
+                            <p>Rate control (beta-blockers, CCBs, digoxin), rhythm control (amiodarone, cardioversion), anticoagulation</p>
+                        </div>
+                    </div>
+
+                    <div class="rhythm-card atrial">
+                        <div class="rhythm-card-header">
+                            <i class="fas fa-wave-square"></i> Atrial Flutter
+                        </div>
+                        <div class="rhythm-card-body">
+                            <h4>Characteristics:</h4>
+                            <ul>
+                                <li><i class="fas fa-heartbeat"></i> Atrial rate: 250-350 bpm</li>
+                                <li><i class="fas fa-heartbeat"></i> Ventricular rate: Varies with block (typically 150 with 2:1 block)</li>
+                                <li><i class="fas fa-wave-square"></i> Rhythm: Usually regular</li>
+                                <li><i class="fas fa-chart-line"></i> P waves: <strong>"Sawtooth" flutter waves</strong> (best seen in leads II, III, aVF)</li>
+                            </ul>
+                            <h4>Common Ratios:</h4>
+                            <p>2:1 (ventricular rate ~150), 3:1 (~100), 4:1 (~75)</p>
+                            <h4>Treatment:</h4>
+                            <p>Similar to A-fib: rate control, anticoagulation. Often responds well to cardioversion or ablation.</p>
+                        </div>
+                    </div>
+
+                    <div class="rhythm-card atrial">
+                        <div class="rhythm-card-header">
+                            <i class="fas fa-circle-notch"></i> SVT (Supraventricular Tachycardia)
+                        </div>
+                        <div class="rhythm-card-body">
+                            <h4>Characteristics:</h4>
+                            <ul>
+                                <li><i class="fas fa-heartbeat"></i> Rate: <strong>150-250 bpm</strong></li>
+                                <li><i class="fas fa-wave-square"></i> Rhythm: Regular</li>
+                                <li><i class="fas fa-chart-line"></i> P waves: Often hidden in preceding T wave or absent</li>
+                                <li><i class="fas fa-compress-alt"></i> QRS: Narrow (&lt;0.12 sec)</li>
+                            </ul>
+                            <h4>Sudden Onset/Offset:</h4>
+                            <p>Starts and stops abruptly. Often caused by reentry circuit (AVNRT, AVRT).</p>
+                            <h4>Treatment:</h4>
+                            <p>Vagal maneuvers (Valsalva, carotid massage), Adenosine 6mg rapid IV push → 12mg if no response, cardioversion if unstable</p>
+                        </div>
+                    </div>
+
+                    <div class="rhythm-card atrial">
+                        <div class="rhythm-card-header">
+                            <i class="fas fa-star"></i> Premature Atrial Contractions (PACs)
+                        </div>
+                        <div class="rhythm-card-body">
+                            <h4>Characteristics:</h4>
+                            <ul>
+                                <li><i class="fas fa-heartbeat"></i> Early beat that interrupts the rhythm</li>
+                                <li><i class="fas fa-chart-line"></i> P wave: Present but <strong>different morphology</strong></li>
+                                <li><i class="fas fa-compress-alt"></i> QRS: Narrow (normal)</li>
+                                <li><i class="fas fa-pause"></i> Usually followed by compensatory pause</li>
+                            </ul>
+                            <h4>Causes:</h4>
+                            <p>Caffeine, stress, alcohol, tobacco, electrolyte imbalances</p>
+                            <h4>Treatment:</h4>
+                            <p>Usually benign - no treatment needed. Reduce stimulants. Investigate if frequent.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-box nclex-tip">
+                    <div class="info-box-header">
+                        <i class="fas fa-graduation-cap"></i> NCLEX Tip: A-Fib and Stroke Risk
+                    </div>
+                    <p>The "irregularly irregular" rhythm of atrial fibrillation is a classic NCLEX identifier. Remember: <strong>stagnant blood in fibrillating atria forms clots</strong>. A clot can embolize to the brain causing stroke. Anticoagulation (warfarin, DOACs) is essential unless contraindicated. CHA₂DS₂-VASc score determines stroke risk.</p>
+                </div>
+
+                <div class="florencebot-tip" id="tip-afib-stroke">
+                    <div class="florencebot-tip-header">
+                        <div class="florencebot-tip-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <span class="florencebot-tip-label">FlorenceBot Pro Tip</span>
+                    </div>
+                    <div class="florencebot-tip-title">A-Fib & Stroke Risk</div>
+                    <div class="florencebot-tip-content">
+                        <strong>A-fib = Anticoagulation!</strong> When the atria quiver instead of contract, blood pools and can form clots. These clots love to travel to the brain and cause strokes. That's why nearly every A-fib patient needs blood thinners (unless they have a major contraindication). The CHA₂DS₂-VASc score helps us quantify stroke risk. <strong>Remember: irregularly irregular + no P waves = think A-fib, think anticoagulation, think stroke prevention!</strong>
+                    </div>
+                </div>
+
+                <div class="info-box clinical-pearl">
+                    <div class="info-box-header">
+                        <i class="fas fa-lightbulb"></i> Clinical Pearl: Adenosine Administration
+                    </div>
+                    <p>Adenosine has a <strong>half-life of &lt;10 seconds</strong>. It must be given as a rapid IV push followed immediately by a 20mL saline flush. Use the closest IV site to the heart (antecubital preferred). Warn patients they may feel brief chest discomfort, flushing, or sense of impending doom - this is normal and transient.</p>
+                </div>
+
+                <div class="florencebot-tip" id="tip-adenosine">
+                    <div class="florencebot-tip-header">
+                        <div class="florencebot-tip-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <span class="florencebot-tip-label">FlorenceBot Pro Tip</span>
+                    </div>
+                    <div class="florencebot-tip-title">Adenosine Technique</div>
+                    <div class="florencebot-tip-content">
+                        <strong>Adenosine is like a reset button for the heart - but you only have 10 seconds!</strong> This drug has an incredibly short half-life, so technique is everything. Use the IV site closest to the heart (antecubital is best), give it as a rapid push, and immediately chase it with a 20mL saline bolus. Warn your patient they might feel like they're having a heart attack for a few seconds - that's normal! The brief sensation of doom passes quickly as the drug works.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 5: Ventricular Arrhythmias -->
+            <section class="guide-section" id="ventricular-rhythms">
+                <h2><span class="section-icon"><i class="fas fa-exclamation-triangle"></i></span> Ventricular Arrhythmias</h2>
+
+                <p>Ventricular arrhythmias originate below the AV node. They are characterized by <strong>wide QRS complexes (&gt;0.12 seconds)</strong> because the impulse spreads through ventricular muscle rather than the normal conduction system. Many are life-threatening.</p>
+
+                <div class="lethal-alert">
+                    <h4><i class="fas fa-skull-crossbones"></i> Life-Threatening Rhythms - Immediate Action Required</h4>
+                    <div class="lethal-rhythms-grid">
+                        <div class="lethal-rhythm-item">
+                            <h5>Ventricular Fibrillation (V-Fib)</h5>
+                            <p>Chaotic, disorganized electrical activity. No cardiac output. <strong>SHOCK immediately</strong> (defibrillation).</p>
+                        </div>
+                        <div class="lethal-rhythm-item">
+                            <h5>Pulseless Ventricular Tachycardia</h5>
+                            <p>Organized wide-complex tachycardia without pulse. <strong>SHOCK immediately</strong> (defibrillation).</p>
+                        </div>
+                        <div class="lethal-rhythm-item">
+                            <h5>Asystole</h5>
+                            <p>Flatline - no electrical activity. <strong>Non-shockable</strong>. CPR + epinephrine.</p>
+                        </div>
+                        <div class="lethal-rhythm-item">
+                            <h5>Pulseless Electrical Activity (PEA)</h5>
+                            <p>Organized rhythm without pulse. <strong>Non-shockable</strong>. CPR + treat reversible causes (H's and T's).</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="rhythm-cards">
+                    <div class="rhythm-card ventricular">
+                        <div class="rhythm-card-header">
+                            <i class="fas fa-bolt"></i> Ventricular Tachycardia (V-Tach)
+                        </div>
+                        <div class="rhythm-card-body">
+                            <h4>Characteristics:</h4>
+                            <ul>
+                                <li><i class="fas fa-heartbeat"></i> Rate: <strong>100-250 bpm</strong></li>
+                                <li><i class="fas fa-wave-square"></i> Rhythm: Usually regular</li>
+                                <li><i class="fas fa-chart-line"></i> P waves: Usually absent or dissociated</li>
+                                <li><i class="fas fa-compress-alt"></i> QRS: <strong>Wide &gt;0.12 sec</strong>, bizarre morphology</li>
+                            </ul>
+                            <h4>Types:</h4>
+                            <ul>
+                                <li><strong>Monomorphic:</strong> Same QRS shape - often reentry circuit</li>
+                                <li><strong>Polymorphic:</strong> Varying QRS shapes - often ischemia or long QT</li>
+                            </ul>
+                            <h4>Treatment:</h4>
+                            <ul>
+                                <li><strong>With pulse:</strong> Amiodarone, synchronized cardioversion if unstable</li>
+                                <li><strong>Pulseless:</strong> Defibrillation + CPR</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="rhythm-card lethal">
+                        <div class="rhythm-card-header">
+                            <i class="fas fa-skull"></i> Ventricular Fibrillation (V-Fib)
+                        </div>
+                        <div class="rhythm-card-body">
+                            <h4>Characteristics:</h4>
+                            <ul>
+                                <li><i class="fas fa-heartbeat"></i> Rate: Cannot determine (chaotic)</li>
+                                <li><i class="fas fa-wave-square"></i> Rhythm: Chaotic, disorganized</li>
+                                <li><i class="fas fa-chart-line"></i> P waves: None</li>
+                                <li><i class="fas fa-compress-alt"></i> QRS: None - only fibrillatory waves</li>
+                            </ul>
+                            <h4>Clinical Presentation:</h4>
+                            <p><strong>Pulseless, unresponsive, no breathing</strong>. This is cardiac arrest!</p>
+                            <h4>Treatment:</h4>
+                            <p><strong>IMMEDIATE DEFIBRILLATION</strong> + high-quality CPR. Epinephrine 1mg IV q3-5min. Amiodarone 300mg IV.</p>
+                        </div>
+                    </div>
+
+                    <div class="rhythm-card ventricular">
+                        <div class="rhythm-card-header">
+                            <i class="fas fa-sync-alt"></i> Torsades de Pointes
+                        </div>
+                        <div class="rhythm-card-body">
+                            <h4>Characteristics:</h4>
+                            <ul>
+                                <li><i class="fas fa-heartbeat"></i> Rate: 150-300 bpm</li>
+                                <li><i class="fas fa-wave-square"></i> QRS: Wide, <strong>"twisting" around the baseline</strong></li>
+                                <li><i class="fas fa-chart-line"></i> Associated with <strong>prolonged QT interval</strong></li>
+                            </ul>
+                            <h4>Causes:</h4>
+                            <p>Long QT syndrome, hypokalemia, hypomagnesemia, certain drugs (antiarrhythmics, antibiotics, antipsychotics)</p>
+                            <h4>Treatment:</h4>
+                            <p><strong>Magnesium sulfate 1-2g IV</strong>. Correct electrolytes. Defibrillate if pulseless. Avoid drugs that prolong QT.</p>
+                        </div>
+                    </div>
+
+                    <div class="rhythm-card ventricular">
+                        <div class="rhythm-card-header">
+                            <i class="fas fa-exclamation"></i> Premature Ventricular Contractions (PVCs)
+                        </div>
+                        <div class="rhythm-card-body">
+                            <h4>Characteristics:</h4>
+                            <ul>
+                                <li><i class="fas fa-heartbeat"></i> Early beat with <strong>wide, bizarre QRS</strong></li>
+                                <li><i class="fas fa-chart-line"></i> No P wave precedes the beat</li>
+                                <li><i class="fas fa-pause"></i> Full compensatory pause follows</li>
+                            </ul>
+                            <h4>Patterns to Know:</h4>
+                            <ul>
+                                <li><strong>Bigeminy:</strong> Every other beat is a PVC</li>
+                                <li><strong>Trigeminy:</strong> Every third beat is a PVC</li>
+                                <li><strong>Couplet:</strong> Two PVCs in a row</li>
+                                <li><strong>Triplet/Run:</strong> Three+ PVCs in a row (= V-tach if sustained)</li>
+                            </ul>
+                            <h4>Treatment:</h4>
+                            <p>Occasional PVCs often benign. Treat underlying cause. Frequent/symptomatic: beta-blockers, antiarrhythmics.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-box warning">
+                    <div class="info-box-header">
+                        <i class="fas fa-exclamation-triangle"></i> Warning: "R on T" Phenomenon
+                    </div>
+                    <p>If a PVC occurs during the T wave (the relative refractory period), it can trigger <strong>ventricular fibrillation</strong>. The T wave represents a vulnerable period in the cardiac cycle. Monitor patients with frequent PVCs closely for "R on T" pattern.</p>
+                </div>
+
+                <div class="info-box mnemonic">
+                    <div class="info-box-header">
+                        <i class="fas fa-brain"></i> Memory Aid: H's and T's of PEA/Asystole
+                    </div>
+                    <p>Reversible causes to check during cardiac arrest:</p>
+                    <ul>
+                        <li><strong>H</strong>ypovolemia, <strong>H</strong>ypoxia, <strong>H</strong>ydrogen ion (acidosis), <strong>H</strong>ypo/Hyperkalemia, <strong>H</strong>ypothermia</li>
+                        <li><strong>T</strong>ension pneumothorax, <strong>T</strong>amponade (cardiac), <strong>T</strong>oxins, <strong>T</strong>hrombosis (pulmonary/coronary)</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section 6: Heart Blocks -->
+            <section class="guide-section" id="heart-blocks">
+                <h2><span class="section-icon"><i class="fas fa-ban"></i></span> Heart Blocks</h2>
+
+                <p>Heart blocks occur when conduction through the AV node is delayed or blocked. They are classified by degree of block and have different clinical implications.</p>
+
+                <div class="guide-table-wrapper">
+                    <table class="guide-table">
+                        <thead>
+                            <tr>
+                                <th>Type</th>
+                                <th>PR Interval</th>
+                                <th>P:QRS Ratio</th>
+                                <th>Characteristics</th>
+                                <th>Treatment</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1st Degree</td>
+                                <td><strong>&gt;0.20 sec</strong> (prolonged but constant)</td>
+                                <td>1:1</td>
+                                <td>Every P wave conducts, just delayed. Usually benign.</td>
+                                <td>Usually none. Monitor. Review medications.</td>
+                            </tr>
+                            <tr>
+                                <td>2nd Degree Type I (Wenckebach/Mobitz I)</td>
+                                <td><strong>Progressively lengthens</strong></td>
+                                <td>Variable (some P's blocked)</td>
+                                <td>PR lengthens until a beat is dropped. Pattern repeats. Usually benign.</td>
+                                <td>Monitor. Atropine if symptomatic. Usually no pacing needed.</td>
+                            </tr>
+                            <tr>
+                                <td>2nd Degree Type II (Mobitz II)</td>
+                                <td><strong>Constant</strong> (then dropped QRS)</td>
+                                <td>Variable (some P's blocked)</td>
+                                <td>Fixed PR, then suddenly dropped beats. More serious - can progress to 3rd degree.</td>
+                                <td>Often requires pacemaker. May progress to complete heart block.</td>
+                            </tr>
+                            <tr>
+                                <td>3rd Degree (Complete)</td>
+                                <td>Variable (P's and QRS independent)</td>
+                                <td><strong>No relationship</strong></td>
+                                <td>Complete AV dissociation. Atria and ventricles beat independently.</td>
+                                <td><strong>Pacemaker required</strong>. Temporary pacing, then permanent.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="comparison-grid">
+                    <div class="comparison-card">
+                        <div class="comparison-card-header" style="background: linear-gradient(135deg, #10b981, #059669);">
+                            <i class="fas fa-check"></i> Type I (Wenckebach) - "Better Block"
+                        </div>
+                        <div class="comparison-card-body">
+                            <h4>Key Features:</h4>
+                            <ul>
+                                <li><i class="fas fa-arrow-right"></i> Progressive PR lengthening</li>
+                                <li><i class="fas fa-arrow-right"></i> Grouped beating pattern</li>
+                                <li><i class="fas fa-arrow-right"></i> Occurs at AV node level</li>
+                                <li><i class="fas fa-arrow-right"></i> Often reversible</li>
+                                <li><i class="fas fa-arrow-right"></i> Responds to atropine</li>
+                            </ul>
+                            <h4>Memory Trick:</h4>
+                            <p>"<strong>Longer, longer, longer, DROP</strong>" - then the cycle repeats</p>
+                        </div>
+                    </div>
+
+                    <div class="comparison-card">
+                        <div class="comparison-card-header" style="background: linear-gradient(135deg, #ef4444, #dc2626);">
+                            <i class="fas fa-exclamation-triangle"></i> Type II (Mobitz II) - "Bad Block"
+                        </div>
+                        <div class="comparison-card-body">
+                            <h4>Key Features:</h4>
+                            <ul>
+                                <li><i class="fas fa-arrow-right"></i> Fixed PR interval</li>
+                                <li><i class="fas fa-arrow-right"></i> Sudden dropped beats</li>
+                                <li><i class="fas fa-arrow-right"></i> Occurs below AV node (bundle branches)</li>
+                                <li><i class="fas fa-arrow-right"></i> More likely to progress</li>
+                                <li><i class="fas fa-arrow-right"></i> Does NOT respond to atropine</li>
+                            </ul>
+                            <h4>Memory Trick:</h4>
+                            <p>"<strong>Same, same, same, DROP</strong>" - unpredictable, dangerous</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-box nclex-tip">
+                    <div class="info-box-header">
+                        <i class="fas fa-graduation-cap"></i> NCLEX Tip: Distinguishing Type I vs Type II
+                    </div>
+                    <p>For second-degree blocks, focus on the <strong>PR interval before the dropped beat</strong>:</p>
+                    <ul>
+                        <li><strong>Type I:</strong> PR interval gets progressively longer before the drop ("Wenck-BAD" = worsening PR)</li>
+                        <li><strong>Type II:</strong> PR interval stays the same before the drop (like a "sudden surprise")</li>
+                    </ul>
+                    <p>Type II is more serious because it often progresses to complete heart block suddenly.</p>
+                </div>
+
+                <div class="florencebot-tip" id="tip-type1-vs-type2">
+                    <div class="florencebot-tip-header">
+                        <div class="florencebot-tip-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <span class="florencebot-tip-label">FlorenceBot Pro Tip</span>
+                    </div>
+                    <div class="florencebot-tip-title">Type I vs Type II Block</div>
+                    <div class="florencebot-tip-content">
+                        <strong>Here's my favorite way to remember the difference:</strong> Type I (Wenckebach) = <strong>"Longer, longer, longer, DROP!"</strong> The PR interval progressively lengthens until it finally drops a beat, then the cycle repeats. Type II (Mobitz II) = <strong>"Same, same, same, DROP!"</strong> The PR intervals are all the same length, then suddenly and unpredictably a beat is dropped. Type II is the <strong>bad one</strong> because it can suddenly progress to complete heart block without warning - these patients often need a pacemaker!
+                    </div>
+                </div>
+
+                <div class="info-box warning">
+                    <div class="info-box-header">
+                        <i class="fas fa-exclamation-triangle"></i> Critical: Third-Degree (Complete) Heart Block
+                    </div>
+                    <p>In complete heart block, the atria and ventricles beat <strong>independently</strong> of each other. Look for:</p>
+                    <ul>
+                        <li>Regular P waves at their own rate</li>
+                        <li>Regular QRS complexes at a different (slower) rate</li>
+                        <li>No consistent relationship between P waves and QRS</li>
+                        <li>Ventricular rate depends on escape pacemaker (40-60 junctional, 20-40 ventricular)</li>
+                    </ul>
+                    <p><strong>This is a life-threatening emergency requiring pacemaker insertion!</strong></p>
+                </div>
+            </section>
+
+            <!-- Section 7: Defibrillation vs Cardioversion -->
+            <section class="guide-section" id="defib-cardiovert">
+                <h2><span class="section-icon"><i class="fas fa-bolt"></i></span> Defibrillation vs Cardioversion</h2>
+
+                <p>Both defibrillation and cardioversion deliver electrical shocks to the heart, but they serve different purposes and are used in different situations. Understanding when to use each is critical for NCLEX and clinical practice.</p>
+
+                <div class="comparison-grid">
+                    <div class="comparison-card defib">
+                        <div class="comparison-card-header">
+                            <i class="fas fa-bolt"></i> Defibrillation
+                        </div>
+                        <div class="comparison-card-body">
+                            <h4>Purpose:</h4>
+                            <p><strong>Unsynchronized</strong> shock to terminate chaotic rhythms and allow the heart's natural pacemaker to reset</p>
+
+                            <h4>When to Use:</h4>
+                            <ul>
+                                <li><i class="fas fa-skull-crossbones"></i> <strong>Ventricular Fibrillation (V-Fib)</strong></li>
+                                <li><i class="fas fa-skull-crossbones"></i> <strong>Pulseless Ventricular Tachycardia</strong></li>
+                            </ul>
+
+                            <h4>Key Points:</h4>
+                            <ul>
+                                <li><i class="fas fa-exclamation"></i> <strong>NO pulse</strong> = Defibrillation</li>
+                                <li><i class="fas fa-bolt"></i> Unsynchronized (immediate shock)</li>
+                                <li><i class="fas fa-arrow-up"></i> Higher energy: 120-200J biphasic</li>
+                                <li><i class="fas fa-clock"></i> Time-critical: shock first in witnessed arrest</li>
+                            </ul>
+
+                            <h4>Rhythm Recognition:</h4>
+                            <p>These are <strong>shockable rhythms</strong> - disorganized electrical activity causing no cardiac output</p>
+                        </div>
+                    </div>
+
+                    <div class="comparison-card cardio">
+                        <div class="comparison-card-header">
+                            <i class="fas fa-sync-alt"></i> Synchronized Cardioversion
+                        </div>
+                        <div class="comparison-card-body">
+                            <h4>Purpose:</h4>
+                            <p><strong>Synchronized</strong> shock timed to R wave to avoid the vulnerable T wave period and prevent triggering V-fib</p>
+
+                            <h4>When to Use:</h4>
+                            <ul>
+                                <li><i class="fas fa-heartbeat"></i> Unstable A-Fib with RVR</li>
+                                <li><i class="fas fa-heartbeat"></i> Unstable Atrial Flutter</li>
+                                <li><i class="fas fa-heartbeat"></i> Unstable SVT (after adenosine fails)</li>
+                                <li><i class="fas fa-heartbeat"></i> V-Tach <strong>WITH pulse</strong> (unstable)</li>
+                            </ul>
+
+                            <h4>Key Points:</h4>
+                            <ul>
+                                <li><i class="fas fa-check"></i> <strong>HAS pulse</strong> = Cardioversion</li>
+                                <li><i class="fas fa-sync-alt"></i> Synchronized to R wave</li>
+                                <li><i class="fas fa-arrow-down"></i> Lower energy: 50-200J</li>
+                                <li><i class="fas fa-user-nurse"></i> Patient is awake - sedation needed!</li>
+                            </ul>
+
+                            <h4>Rhythm Recognition:</h4>
+                            <p>These are <strong>unstable tachyarrhythmias</strong> - organized rhythms causing hemodynamic instability</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-box time-critical">
+                    <div class="info-box-header">
+                        <i class="fas fa-clock"></i> Critical Decision Point
+                    </div>
+                    <p><strong>Ask yourself: Does the patient have a pulse?</strong></p>
+                    <ul>
+                        <li><strong>NO pulse:</strong> This is cardiac arrest. <strong>DEFIBRILLATE</strong> immediately for V-Fib or pulseless V-Tach</li>
+                        <li><strong>HAS pulse but unstable:</strong> This is a tachyarrhythmia causing symptoms. Consider <strong>SYNCHRONIZED CARDIOVERSION</strong></li>
+                        <li><strong>HAS pulse and stable:</strong> Use medications first (adenosine, amiodarone, beta-blockers)</li>
+                    </ul>
+                </div>
+
+                <div class="florencebot-tip" id="tip-defib-vs-cardio">
+                    <div class="florencebot-tip-header">
+                        <div class="florencebot-tip-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <span class="florencebot-tip-label">FlorenceBot Pro Tip</span>
+                    </div>
+                    <div class="florencebot-tip-title">Defib vs Cardioversion</div>
+                    <div class="florencebot-tip-content">
+                        <strong>Pulse check is EVERYTHING!</strong> Here's the simple rule: <strong>No pulse = Defibrillate</strong> (unsynchronized shock for V-Fib or pulseless V-Tach). <strong>Has pulse but unstable = Synchronized Cardioversion</strong>. The sync button tells the defibrillator to time the shock with the R wave, avoiding the vulnerable T wave period. Remember: cardioversion patients are awake and need sedation! Defibrillation patients are in cardiac arrest - just shock and start CPR.
+                    </div>
+                </div>
+
+                <h3>Signs of Hemodynamic Instability</h3>
+
+                <p>Use synchronized cardioversion when the tachyarrhythmia is causing any of these symptoms:</p>
+
+                <div class="quick-reference">
+                    <h3><i class="fas fa-exclamation-circle"></i> Unstable Signs (Need Immediate Cardioversion)</h3>
+                    <div class="quick-reference-grid">
+                        <div class="quick-ref-item">
+                            <div class="label">Blood Pressure</div>
+                            <div class="value">Hypotension (SBP &lt;90)</div>
+                        </div>
+                        <div class="quick-ref-item">
+                            <div class="label">Mental Status</div>
+                            <div class="value">Altered, confused</div>
+                        </div>
+                        <div class="quick-ref-item">
+                            <div class="label">Chest Pain</div>
+                            <div class="value">Ischemic symptoms</div>
+                        </div>
+                        <div class="quick-ref-item">
+                            <div class="label">Heart Failure</div>
+                            <div class="value">Acute pulmonary edema</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-box nclex-tip">
+                    <div class="info-box-header">
+                        <i class="fas fa-graduation-cap"></i> NCLEX Tip: The "Sync" Button
+                    </div>
+                    <p>For synchronized cardioversion, you must press the <strong>SYNC button</strong> on the defibrillator. This tells the machine to deliver the shock during the R wave, avoiding the vulnerable T wave period. <strong>Important:</strong> After each shock, the sync mode often resets - you must re-engage it before each subsequent cardioversion. In contrast, defibrillation does NOT use sync mode.</p>
+                </div>
+
+                <h3>Energy Levels</h3>
+
+                <div class="guide-table-wrapper">
+                    <table class="guide-table">
+                        <thead>
+                            <tr>
+                                <th>Rhythm</th>
+                                <th>Intervention</th>
+                                <th>Energy (Biphasic)</th>
+                                <th>Notes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>V-Fib / Pulseless V-Tach</td>
+                                <td>Defibrillation</td>
+                                <td>120-200J (max output)</td>
+                                <td>Unsynchronized, immediate</td>
+                            </tr>
+                            <tr>
+                                <td>Unstable A-Fib</td>
+                                <td>Synchronized Cardioversion</td>
+                                <td>120-200J</td>
+                                <td>May need higher energy due to irregular rhythm</td>
+                            </tr>
+                            <tr>
+                                <td>Atrial Flutter</td>
+                                <td>Synchronized Cardioversion</td>
+                                <td>50-100J</td>
+                                <td>Usually converts at lower energy</td>
+                            </tr>
+                            <tr>
+                                <td>SVT</td>
+                                <td>Synchronized Cardioversion</td>
+                                <td>50-100J</td>
+                                <td>Try adenosine first if stable</td>
+                            </tr>
+                            <tr>
+                                <td>Monomorphic V-Tach with pulse</td>
+                                <td>Synchronized Cardioversion</td>
+                                <td>100J</td>
+                                <td>Synchronized because patient has pulse</td>
+                            </tr>
+                            <tr>
+                                <td>Polymorphic V-Tach (Torsades)</td>
+                                <td>Defibrillation</td>
+                                <td>120-200J</td>
+                                <td>Treat as V-Fib (sync may not work)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="info-box warning">
+                    <div class="info-box-header">
+                        <i class="fas fa-exclamation-triangle"></i> Special Case: Polymorphic V-Tach (Torsades de Pointes)
+                    </div>
+                    <p>Although the patient may have a pulse, treat polymorphic V-Tach as <strong>defibrillation</strong>, not synchronized cardioversion. Why? The machine may have difficulty finding a consistent R wave to synchronize with due to the varying QRS morphology. Also give <strong>Magnesium sulfate 1-2g IV</strong>.</p>
+                </div>
+            </section>
+
+            <!-- Section 8: Nursing Interventions -->
+            <section class="guide-section" id="interventions">
+                <h2><span class="section-icon"><i class="fas fa-user-nurse"></i></span> Nursing Interventions</h2>
+
+                <p>Nursing care for patients with arrhythmias focuses on continuous monitoring, early recognition of deterioration, safe medication administration, and emergency response readiness.</p>
+
+                <h3>General Nursing Interventions for Arrhythmias</h3>
+
+                <div class="interventions-list">
+                    <h4><i class="fas fa-stethoscope"></i> Priority Nursing Actions</h4>
+
+                    <div class="intervention-item">
+                        <div class="intervention-number">1</div>
+                        <div class="intervention-content">
+                            <h5>Assess the Patient, Not Just the Monitor</h5>
+                            <p>Always check the patient's clinical status. A rhythm may look dangerous on the monitor but be artifact. Conversely, a "normal-looking" rhythm can mask clinical deterioration. Assess level of consciousness, vital signs, and symptoms.</p>
+                        </div>
+                    </div>
+
+                    <div class="intervention-item">
+                        <div class="intervention-number">2</div>
+                        <div class="intervention-content">
+                            <h5>Continuous Cardiac Monitoring</h5>
+                            <p>Ensure proper lead placement and electrode contact. Set appropriate alarm parameters. Document rhythm strips per facility policy. Report any significant changes immediately.</p>
+                        </div>
+                    </div>
+
+                    <div class="intervention-item">
+                        <div class="intervention-number">3</div>
+                        <div class="intervention-content">
+                            <h5>Establish/Maintain IV Access</h5>
+                            <p>Antiarrhythmic medications require IV access. For emergency situations, ensure at least one large-bore IV. Know where emergency equipment is located.</p>
+                        </div>
+                    </div>
+
+                    <div class="intervention-item">
+                        <div class="intervention-number">4</div>
+                        <div class="intervention-content">
+                            <h5>Monitor Electrolytes</h5>
+                            <p>Electrolyte imbalances (especially potassium and magnesium) can cause or worsen arrhythmias. Monitor lab values and report abnormalities. Replace as ordered.</p>
+                        </div>
+                    </div>
+
+                    <div class="intervention-item">
+                        <div class="intervention-number">5</div>
+                        <div class="intervention-content">
+                            <h5>Medication Administration Safety</h5>
+                            <p>Know the indications, contraindications, and side effects of antiarrhythmic drugs. Monitor for proarrhythmic effects (drugs that can worsen or cause new arrhythmias). Many antiarrhythmics have narrow therapeutic windows.</p>
+                        </div>
+                    </div>
+
+                    <div class="intervention-item">
+                        <div class="intervention-number">6</div>
+                        <div class="intervention-content">
+                            <h5>Emergency Preparedness</h5>
+                            <p>Know location and function of defibrillator/crash cart. Maintain current ACLS certification. Be prepared to initiate CPR if needed. Document all interventions and patient responses.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>Common Antiarrhythmic Medications</h3>
+
+                <div class="guide-table-wrapper">
+                    <table class="guide-table">
+                        <thead>
+                            <tr>
+                                <th>Medication</th>
+                                <th>Class</th>
+                                <th>Used For</th>
+                                <th>Nursing Considerations</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Adenosine (Adenocard)</td>
+                                <td>Endogenous nucleoside</td>
+                                <td>SVT (first-line)</td>
+                                <td>Rapid IV push + flush. Half-life &lt;10 sec. Warn patient of brief chest discomfort.</td>
+                            </tr>
+                            <tr>
+                                <td>Amiodarone (Cordarone)</td>
+                                <td>Class III</td>
+                                <td>V-Tach, V-Fib, A-Fib</td>
+                                <td>Causes hypotension, bradycardia. Monitor thyroid, liver, lungs. Long half-life (weeks).</td>
+                            </tr>
+                            <tr>
+                                <td>Atropine</td>
+                                <td>Anticholinergic</td>
+                                <td>Symptomatic bradycardia</td>
+                                <td>0.5-1mg IV. May cause tachycardia, dry mouth, urinary retention. Not effective for Mobitz II.</td>
+                            </tr>
+                            <tr>
+                                <td>Diltiazem (Cardizem)</td>
+                                <td>CCB</td>
+                                <td>A-Fib rate control, SVT</td>
+                                <td>Causes hypotension, bradycardia. Avoid in heart failure with reduced EF.</td>
+                            </tr>
+                            <tr>
+                                <td>Metoprolol (Lopressor)</td>
+                                <td>Beta-blocker</td>
+                                <td>Rate control (A-Fib, SVT)</td>
+                                <td>Monitor HR, BP. Avoid in asthma, decompensated HF, severe bradycardia.</td>
+                            </tr>
+                            <tr>
+                                <td>Magnesium Sulfate</td>
+                                <td>Electrolyte</td>
+                                <td>Torsades de Pointes</td>
+                                <td>1-2g IV over 5-20 min. Monitor for hypotension. Check reflexes if on continuous infusion.</td>
+                            </tr>
+                            <tr>
+                                <td>Epinephrine</td>
+                                <td>Catecholamine</td>
+                                <td>Cardiac arrest (all rhythms)</td>
+                                <td>1mg IV q3-5 min during arrest. Causes vasoconstriction, increases BP.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="info-box clinical-pearl">
+                    <div class="info-box-header">
+                        <i class="fas fa-lightbulb"></i> Clinical Pearl: Adenosine Technique
+                    </div>
+                    <p>Adenosine has a half-life of less than 10 seconds, so technique matters:</p>
+                    <ul>
+                        <li>Use the IV site <strong>closest to the heart</strong> (antecubital preferred)</li>
+                        <li>Prepare a 20mL normal saline flush in the same syringe or immediately available</li>
+                        <li>Inject adenosine as a <strong>rapid push</strong> followed immediately by the flush</li>
+                        <li>Elevate the arm during administration</li>
+                        <li>Have the defibrillator ready - rhythm may temporarily pause or deteriorate</li>
+                    </ul>
+                </div>
+
+                <div class="info-box nclex-tip">
+                    <div class="info-box-header">
+                        <i class="fas fa-graduation-cap"></i> NCLEX Tip: Vagal Maneuvers for SVT
+                    </div>
+                    <p>Before administering adenosine for stable SVT, attempt <strong>vagal maneuvers</strong>:</p>
+                    <ul>
+                        <li><strong>Valsalva maneuver:</strong> Bear down as if having a bowel movement (most effective)</li>
+                        <li><strong>Carotid massage:</strong> Only if no bruit, not in elderly (risk of stroke)</li>
+                        <li><strong>Cold water to face:</strong> Triggers diving reflex</li>
+                        <li><strong>Coughing:</strong> May terminate the rhythm</li>
+                    </ul>
+                    <p>These stimulate the vagus nerve, slowing AV nodal conduction.</p>
+                </div>
+
+                <h3>Patient Education</h3>
+
+                <ul>
+                    <li><strong>Symptom recognition:</strong> Teach patients to recognize palpitations, dizziness, shortness of breath, and chest discomfort</li>
+                    <li><strong>Medication compliance:</strong> Emphasize importance of taking antiarrhythmics as prescribed; never stop abruptly</li>
+                    <li><strong>Trigger avoidance:</strong> Reduce caffeine, alcohol, and tobacco which can precipitate arrhythmias</li>
+                    <li><strong>When to seek help:</strong> Syncope, severe chest pain, difficulty breathing, or new neurological symptoms require immediate evaluation</li>
+                    <li><strong>Home monitoring:</strong> Some patients may benefit from pulse checks or home ECG devices</li>
+                    <li><strong>Anticoagulation teaching:</strong> For patients on blood thinners (A-Fib), teach about bleeding precautions, dietary considerations (warfarin), and monitoring</li>
+                </ul>
+            </section>
+
+            <!-- Key Points Summary -->
+            <section class="key-points-summary">
+                <h2><i class="fas fa-star"></i> Key Points Summary</h2>
+                <div class="key-points-grid">
+                    <div class="key-point">
+                        <i class="fas fa-bolt"></i>
+                        <p><strong>Conduction System:</strong> SA node (60-100) → AV node (40-60) → Bundle/Purkinje (20-40). Lower site = slower rate, wider QRS.</p>
+                    </div>
+                    <div class="key-point">
+                        <i class="fas fa-wave-square"></i>
+                        <p><strong>ECG Basics:</strong> P wave = atrial depolarization. QRS = ventricular depolarization. T wave = ventricular repolarization.</p>
+                    </div>
+                    <div class="key-point">
+                        <i class="fas fa-random"></i>
+                        <p><strong>A-Fib Recognition:</strong> Irregularly irregular rhythm, absent P waves, narrow QRS. Major stroke risk - anticoagulation essential.</p>
+                    </div>
+                    <div class="key-point">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <p><strong>Lethal Rhythms:</strong> V-Fib and pulseless V-Tach require immediate defibrillation. Asystole and PEA are non-shockable - give CPR + epinephrine.</p>
+                    </div>
+                    <div class="key-point">
+                        <i class="fas fa-sync-alt"></i>
+                        <p><strong>Defib vs Cardio:</strong> No pulse = defibrillate. Has pulse but unstable = synchronized cardioversion. Has pulse and stable = medications first.</p>
+                    </div>
+                    <div class="key-point">
+                        <i class="fas fa-ban"></i>
+                        <p><strong>Heart Blocks:</strong> Type I (Wenckebach) = progressive PR lengthening. Type II = fixed PR then dropped beat (worse prognosis). Complete = AV dissociation.</p>
+                    </div>
+                    <div class="key-point">
+                        <i class="fas fa-vial"></i>
+                        <p><strong>Electrolytes Matter:</strong> Hypokalemia and hypomagnesemia predispose to arrhythmias. Hyperkalemia causes peaked T waves and can lead to asystole.</p>
+                    </div>
+                    <div class="key-point">
+                        <i class="fas fa-user-nurse"></i>
+                        <p><strong>Assess the Patient:</strong> Always correlate rhythm with clinical presentation. A "dangerous" rhythm in an asymptomatic patient needs different management than in an unstable patient.</p>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+
+        <!-- Footer -->
+        <div class="document-footer">
+            <img src="../assets/images/logo.png" alt="The Nursing Collective" class="footer-logo">
+            <p class="footer-tagline">Empowering nursing students with knowledge</p>
+            <p class="footer-copyright">&copy; 2026 The Nursing Collective. All rights reserved.</p>
+        </div>
+
+    </div>
+
+    <!-- Sidebar Script -->
+    <script src="guide-sidebar.js"></script>
+
+    <!-- Sidebar Configuration -->
+    <script>
+    const sidebarConfig = {
+        sections: [
+            { id: 'conduction', icon: 'fa-bolt', title: 'Conduction System' },
+            { id: 'ecg-basics', icon: 'fa-wave-square', title: 'ECG Basics' },
+            { id: 'sinus-rhythms', icon: 'fa-heart', title: 'Sinus Rhythms' },
+            { id: 'atrial-rhythms', icon: 'fa-heartbeat', title: 'Atrial Arrhythmias' },
+            { id: 'ventricular-rhythms', icon: 'fa-exclamation-triangle', title: 'Ventricular Arrhythmias' },
+            { id: 'heart-blocks', icon: 'fa-ban', title: 'Heart Blocks' },
+            { id: 'defib-cardiovert', icon: 'fa-bolt', title: 'Defib vs Cardiovert' },
+            { id: 'interventions', icon: 'fa-user-nurse', title: 'Nursing Interventions' }
+        ],
+        quickRef: [
+            { type: 'target', value: '60-100', label: 'SA Node Rate (bpm)' },
+            { type: 'warning', value: '40-60', label: 'AV Node Rate (bpm)' },
+            { type: 'critical', value: '20-40', label: 'Ventricle Rate (bpm)' },
+            { type: 'time', value: '<0.12s', label: 'Normal QRS Width' },
+            { type: 'success', value: '0.12-0.20s', label: 'Normal PR Interval' },
+            { type: 'info', value: '120-200J', label: 'Defib Energy (Biphasic)' }
+        ],
+        clinicalPearls: [
+            { id: 'tip-pacemaker-hierarchy', title: 'Pacemaker Hierarchy' },
+            { id: 'tip-afib-stroke', title: 'A-Fib & Stroke Risk' },
+            { id: 'tip-adenosine', title: 'Adenosine Technique' },
+            { id: 'tip-defib-vs-cardio', title: 'Defib vs Cardioversion' },
+            { id: 'tip-type1-vs-type2', title: 'Type I vs Type II Block' }
+        ]
+    };
+    </script>
+
+    <!-- Guide Script -->
+    <script src="guide-script.js"></script>
+</body>
+</html>
