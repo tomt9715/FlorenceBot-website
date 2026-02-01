@@ -5980,6 +5980,26 @@ pre code {
     background: var(--background-light);
 }
 
+/* Pricing Tiers Grid - 4 columns on desktop */
+.pricing-tiers-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    align-items: stretch;
+}
+
+@media (max-width: 1200px) {
+    .pricing-tiers-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .pricing-tiers-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
 .pricing-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
