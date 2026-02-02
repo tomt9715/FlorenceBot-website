@@ -26,6 +26,7 @@ const sidebarConfig = {
         { id: 'tip-ics-most-effective', title: 'ICS is Most Effective', text: 'Inhaled corticosteroids are the cornerstone of asthma treatment. Use daily even when feeling well.' },
         { id: 'tip-status-asthmaticus', title: 'Status Asthmaticus Signs', text: 'Silent chest, speaking only 1-2 words, peak flow <40%, lethargy = EMERGENCY. Escalate immediately!' },
         { id: 'tip-inhaler-technique', title: 'Assess Inhaler Technique', text: 'Up to 90% use inhalers incorrectly. Always have patients demonstrate technique before stepping up therapy.' },
-        { id: 'tip-written-action-plan', title: 'Written Action Plan', text: 'Every patient needs a written plan with green/yellow/red zones. It reduces ER visits and hospitalizations.' }
+        { id: 'tip-written-action-plan', title: 'Written Action Plan', text: 'Every patient needs a written plan with green/yellow/red zones. It reduces ER visits and hospitalizations.' },
+        { id: 'tip-pediatric-inhaler', title: 'Spacers Are Essential for Children', text: 'ALWAYS use a spacer with MDIs in children! They cannot coordinate press-and-breathe. Use mask for under 4, mouthpiece for older kids.' }
     ]
 };
