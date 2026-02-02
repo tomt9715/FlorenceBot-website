@@ -737,9 +737,9 @@ function updateQuickStats(purchases) {
     if (topCategoryEl && purchases.length > 0) {
         const categoryCounts = {};
         purchases.forEach(p => {
-            const guideInfo = htmlGuides.find(g => g.id === p.product_id);
-            if (guideInfo && guideInfo.category) {
-                categoryCounts[guideInfo.category] = (categoryCounts[guideInfo.category] || 0) + 1;
+            const categoryInfo = guideCategoryMap[p.product_id];
+            if (categoryInfo && categoryInfo.category) {
+                categoryCounts[categoryInfo.category] = (categoryCounts[categoryInfo.category] || 0) + 1;
             }
         });
 
