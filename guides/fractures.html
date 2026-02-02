@@ -1636,11 +1636,15 @@
                 break-after: page;
             }
 
-            /* Remove text shadows for clean PDF rendering */
+            /* Remove text shadows and box shadows for clean PDF rendering */
             .cover-title,
             .cover-subtitle,
             .cover-category {
                 text-shadow: none !important;
+            }
+
+            .cover-logo {
+                box-shadow: none !important;
             }
 
             /* Ensure no selection highlighting in print */
