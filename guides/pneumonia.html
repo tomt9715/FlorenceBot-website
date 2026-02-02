@@ -447,6 +447,11 @@
             border-color: #f59e0b;
         }
 
+        .info-box.pediatric {
+            background: linear-gradient(135deg, #fdf2f8 0%, #fce7f3 100%);
+            border-color: #ec4899;
+        }
+
         .info-box-header {
             display: flex;
             align-items: center;
@@ -461,6 +466,7 @@
         .info-box.tip .info-box-header { color: #059669; }
         .info-box.nclex-tip .info-box-header { color: #7c3aed; }
         .info-box.mnemonic .info-box-header { color: #d97706; }
+        .info-box.pediatric .info-box-header { color: #db2777; }
 
         .info-box p { margin: 0; color: var(--text-secondary); font-size: 0.98rem; }
         .info-box ul { margin: 8px 0 0; padding-left: 18px; }
@@ -910,6 +916,7 @@
                     <li><a href="#diagnostics"><span class="toc-number">6</span> Diagnostics & Chest X-Ray</a></li>
                     <li><a href="#treatment"><span class="toc-number">7</span> Treatment & Antibiotics</a></li>
                     <li><a href="#interventions"><span class="toc-number">8</span> Nursing Interventions</a></li>
+                    <li><a href="#pediatrics"><span class="toc-number">9</span> Pediatric Considerations</a></li>
                 </ul>
             </nav>
 
@@ -1929,6 +1936,181 @@
                         <li><strong>T</strong>urn and reposition regularly</li>
                         <li><strong>H</strong>ydration - Encourage fluids to thin secretions</li>
                         <li><strong>E</strong>ducate - Prevention, medications, warning signs</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section 9: Pediatric Considerations -->
+            <section class="guide-section" id="pediatrics">
+                <h2><span class="section-icon"><i class="fas fa-child"></i></span> Pediatric Considerations</h2>
+
+                <p>Pneumonia is a leading cause of hospitalization in children. Pediatric pneumonia differs significantly from adult pneumonia in etiology, presentation, assessment challenges, and management considerations.</p>
+
+                <div class="info-box pediatric">
+                    <div class="info-box-header">
+                        <i class="fas fa-baby"></i> Age-Related Assessment Challenges
+                    </div>
+                    <p><strong>Infants and young children cannot describe respiratory symptoms!</strong> Watch for:</p>
+                    <ul>
+                        <li>Tachypnea (often the earliest and most sensitive sign)</li>
+                        <li>Nasal flaring, grunting, head bobbing</li>
+                        <li>Retractions (subcostal, intercostal, suprasternal)</li>
+                        <li>Poor feeding, refusing to eat or drink</li>
+                        <li>Irritability or lethargy</li>
+                        <li>Fever may be absent in neonates - hypothermia can indicate sepsis</li>
+                    </ul>
+                </div>
+
+                <h3>Pediatric Respiratory Rate Norms</h3>
+
+                <div class="info-box warning">
+                    <div class="info-box-header">
+                        <i class="fas fa-exclamation-triangle"></i> Know Normal RR by Age - Tachypnea is Key!
+                    </div>
+                    <ul>
+                        <li><strong>Newborn:</strong> 30-60 breaths/min</li>
+                        <li><strong>Infant (1-12 mo):</strong> 25-50 breaths/min</li>
+                        <li><strong>Toddler (1-3 yrs):</strong> 20-30 breaths/min</li>
+                        <li><strong>Preschool (3-5 yrs):</strong> 20-25 breaths/min</li>
+                        <li><strong>School age (6-12 yrs):</strong> 18-22 breaths/min</li>
+                        <li><strong>Adolescent:</strong> 12-20 breaths/min</li>
+                    </ul>
+                    <p style="margin-top: 10px;"><strong>Count for a full 60 seconds when the child is calm!</strong></p>
+                </div>
+
+                <h3>Common Pathogens by Age</h3>
+
+                <div class="guide-table-wrapper">
+                    <table class="guide-table">
+                        <thead>
+                            <tr>
+                                <th>Age Group</th>
+                                <th>Most Common Pathogens</th>
+                                <th>Key Considerations</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Neonates (0-28 days)</strong></td>
+                                <td>Group B Strep, E. coli, Listeria, HSV</td>
+                                <td>Often from birth canal; presents as sepsis; requires IV antibiotics</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Infants (1-3 mo)</strong></td>
+                                <td>RSV, Chlamydia trachomatis, S. pneumoniae</td>
+                                <td>RSV bronchiolitis common; "staccato cough" suggests Chlamydia</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Infants/Toddlers (3 mo - 5 yrs)</strong></td>
+                                <td>Viruses (RSV, influenza, parainfluenza), S. pneumoniae</td>
+                                <td>Viral causes predominate; bacterial superinfection possible</td>
+                            </tr>
+                            <tr>
+                                <td><strong>School Age (5-18 yrs)</strong></td>
+                                <td>Mycoplasma pneumoniae, S. pneumoniae, viruses</td>
+                                <td>"Walking pneumonia" (Mycoplasma) - gradual onset, dry cough</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="info-box pediatric">
+                    <div class="info-box-header">
+                        <i class="fas fa-virus"></i> RSV - The Most Common Cause in Infants
+                    </div>
+                    <p><strong>Respiratory Syncytial Virus (RSV)</strong> is the #1 cause of pneumonia and bronchiolitis in children under 2.</p>
+                    <ul>
+                        <li>Peak season: Fall through spring (similar to flu)</li>
+                        <li>Highly contagious - spread by respiratory droplets and contact</li>
+                        <li>Starts as URI symptoms, can progress to lower respiratory infection</li>
+                        <li>High-risk: Premature infants, congenital heart disease, immunocompromised</li>
+                        <li>Palivizumab (Synagis) prophylaxis for high-risk infants during RSV season</li>
+                        <li>Treatment is primarily supportive - oxygen, hydration, suctioning</li>
+                    </ul>
+                </div>
+
+                <h3>Pediatric Treatment Considerations</h3>
+
+                <div class="guide-table-wrapper">
+                    <table class="guide-table">
+                        <thead>
+                            <tr>
+                                <th>Intervention</th>
+                                <th>Pediatric Considerations</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Oxygen Delivery</strong></td>
+                                <td>Nasal cannula, high-flow nasal cannula, or blow-by for infants who won't tolerate masks; target SpO2 ≥90-92%</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Hydration</strong></td>
+                                <td>Monitor closely - children dehydrate quickly; may need IV if poor oral intake; watch for SIADH in severe cases</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Antibiotics</strong></td>
+                                <td>Amoxicillin is first-line for outpatient bacterial CAP; azithromycin for Mycoplasma; IV for severe/hospitalized</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Fever Management</strong></td>
+                                <td>Acetaminophen or ibuprofen (ibuprofen only if >6 months); weight-based dosing essential</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Airway Clearance</strong></td>
+                                <td>Bulb suctioning for infants; CPT may help but evidence is limited; encourage coughing in older children</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Positioning</strong></td>
+                                <td>Elevate HOB; side-lying may help with secretion drainage; infants should remain supine for sleep (safe sleep)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="florencebot-tip" id="tip-pediatric-dehydration">
+                    <div class="florencebot-tip-header">
+                        <div class="florencebot-tip-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <span class="florencebot-tip-label">FlorenceBot Pro Tip</span>
+                    </div>
+                    <div class="florencebot-tip-title">Watch for Dehydration in Pediatric Pneumonia</div>
+                    <div class="florencebot-tip-content">
+                        <strong>Children with pneumonia are at high risk for dehydration!</strong> Tachypnea increases insensible fluid losses, fever increases metabolic demands, and sick children often refuse to drink. Monitor for: decreased urine output (<1 mL/kg/hr), dry mucous membranes, sunken fontanelle (infants), poor skin turgor, and lethargy. Offer small, frequent amounts of fluids. If oral intake is poor, IV fluids may be needed. Accurate daily weights are essential!
+                    </div>
+                </div>
+
+                <h3>Hospitalization Criteria for Children</h3>
+
+                <div class="info-box warning">
+                    <div class="info-box-header">
+                        <i class="fas fa-hospital"></i> When to Hospitalize a Child with Pneumonia
+                    </div>
+                    <ul>
+                        <li>Age <3-6 months with suspected bacterial pneumonia</li>
+                        <li>Hypoxemia (SpO2 <90-92% on room air)</li>
+                        <li>Moderate to severe respiratory distress</li>
+                        <li>Dehydration or inability to maintain oral intake</li>
+                        <li>Failed outpatient antibiotic therapy</li>
+                        <li>Toxic appearance or signs of sepsis</li>
+                        <li>Complicated pneumonia (effusion, empyema, abscess)</li>
+                        <li>Underlying chronic disease (cardiac, pulmonary, immunodeficiency)</li>
+                        <li>Unreliable caregiver or follow-up concerns</li>
+                    </ul>
+                </div>
+
+                <div class="info-box tip">
+                    <div class="info-box-header">
+                        <i class="fas fa-home"></i> Discharge Teaching for Parents
+                    </div>
+                    <ul>
+                        <li><strong>Medications:</strong> Complete entire antibiotic course; proper dosing with measuring device (not kitchen spoons)</li>
+                        <li><strong>Hydration:</strong> Encourage fluids - popsicles, clear soups, oral rehydration solutions</li>
+                        <li><strong>Comfort:</strong> Elevate head during sleep, use cool mist humidifier, saline drops and suctioning for congestion</li>
+                        <li><strong>Activity:</strong> Rest but allow quiet play; no need for strict bed rest</li>
+                        <li><strong>Return precautions:</strong> Worsening breathing difficulty, persistent high fever >3 days on antibiotics, refusing fluids, decreased responsiveness, cyanosis</li>
+                        <li><strong>Prevention:</strong> Vaccinations (PCV13, flu), hand hygiene, avoid smoke exposure</li>
                     </ul>
                 </div>
             </section>

@@ -8,7 +8,8 @@ const sidebarConfig = {
         { id: 'assessment', icon: 'fa-stethoscope', title: 'Clinical Assessment' },
         { id: 'diagnostics', icon: 'fa-x-ray', title: 'Diagnostics & CXR' },
         { id: 'treatment', icon: 'fa-pills', title: 'Treatment & Antibiotics' },
-        { id: 'interventions', icon: 'fa-user-nurse', title: 'Nursing Interventions' }
+        { id: 'interventions', icon: 'fa-user-nurse', title: 'Nursing Interventions' },
+        { id: 'pediatrics', icon: 'fa-child', title: 'Pediatric Considerations' }
     ],
     quickRef: [
         { type: 'target', icon: 'fa-percentage', value: '≥92%', label: 'SpO2 Target' },
@@ -25,6 +26,7 @@ const sidebarConfig = {
         { id: 'tip-assessment-findings', title: 'Consolidation Triad', text: 'Dullness to percussion + bronchial breath sounds + increased tactile fremitus = lung consolidation found!' },
         { id: 'tip-cxr-interpretation', title: 'CXR Reading', text: 'Normal lung = black (air). Pneumonia = white (consolidation). Look for lobar vs patchy pattern, air bronchograms, and pleural effusion.' },
         { id: 'tip-antibiotic-timing', title: 'Antibiotic Timing', text: 'First dose within 4 hours (1 hour if severe/sepsis). Delayed antibiotics increase mortality. Don\'t wait for cultures!' },
-        { id: 'tip-incentive-spirometry', title: 'IS Technique', text: 'Sit upright, inhale slowly (3-5 sec), hold 5-10 sec at max. Goal is sustained inspiration, not speed. 10 reps q1-2h while awake.' }
+        { id: 'tip-incentive-spirometry', title: 'IS Technique', text: 'Sit upright, inhale slowly (3-5 sec), hold 5-10 sec at max. Goal is sustained inspiration, not speed. 10 reps q1-2h while awake.' },
+        { id: 'tip-pediatric-dehydration', title: 'Pediatric Dehydration Risk', text: 'Children with pneumonia dehydrate fast! Tachypnea increases fluid losses, fever increases demands, and sick kids refuse to drink. Monitor output and weights!' }
     ]
 };

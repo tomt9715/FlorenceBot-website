@@ -7,7 +7,8 @@ const sidebarConfig = {
         { id: 'assessment', icon: 'fa-stethoscope', title: 'Assessment' },
         { id: 'compartment-syndrome', icon: 'fa-triangle-exclamation', title: 'Compartment Syndrome' },
         { id: 'interventions', icon: 'fa-user-nurse', title: 'Nursing Interventions' },
-        { id: 'complications', icon: 'fa-circle-exclamation', title: 'Complications' }
+        { id: 'complications', icon: 'fa-circle-exclamation', title: 'Complications' },
+        { id: 'pediatrics', icon: 'fa-child', title: 'Pediatric Considerations' }
     ],
     quickRef: [
         { type: 'critical', value: '6 hrs', label: 'Compartment syndrome window' },
@@ -22,6 +23,7 @@ const sidebarConfig = {
         { id: 'tip-compartment-emergency', title: 'Compartment Syndrome Emergency' },
         { id: 'tip-fat-embolism', title: 'Watch for Fat Embolism' },
         { id: 'tip-pain-paradox', title: 'The Pain Paradox' },
-        { id: 'tip-cast-care', title: 'Cast Care Essentials' }
+        { id: 'tip-cast-care', title: 'Cast Care Essentials' },
+        { id: 'tip-growth-plate', title: 'Growth Plate Injuries', text: 'Growth plates are the weakest part of pediatric bone. Salter-Harris classification (Types I-V) predicts prognosis. Screen for non-accidental trauma!' }
     ]
 };
