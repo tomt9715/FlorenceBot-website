@@ -57,6 +57,12 @@ module.exports = {
           // Purchase history controls (dynamically shown)
           /^purchase-/,
           /^pagination/,
+          // Page hero sections (critical for page layouts)
+          /^study-guides-hero/,
+          /^store-hero/,
+          /^pricing-hero/,
+          /^florencebot-hero/,
+          /^hero-/,
         ],
         greedy: [],
       },
