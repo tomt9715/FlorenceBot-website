@@ -257,62 +257,88 @@
                     </div>
                 </section>
 
-                <!-- Consolidated Widgets -->
-                <div class="dashboard-widgets-row">
-                    <div class="widget widget-account">
-                        <h3><i class="fas fa-user"></i> Account</h3>
-                        <div class="widget-content">
-                            <div class="info-row">
-                                <span class="label">Name</span>
-                                <span class="value" id="widget-user-name">Loading...</span>
+                <!-- Account & Stats Widget -->
+                <div class="widget widget-account-enhanced">
+                    <div class="widget-account-grid">
+                        <!-- Left: Account Info -->
+                        <div class="account-info-section">
+                            <h3><i class="fas fa-user"></i> Account</h3>
+                            <div class="widget-content">
+                                <div class="info-row">
+                                    <span class="label">Name</span>
+                                    <span class="value" id="widget-user-name">Loading...</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="label">Email</span>
+                                    <span class="value" id="widget-user-email">Loading...</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="label">Discord</span>
+                                    <span class="status-badge disconnected" id="widget-discord-status">
+                                        <i class="fas fa-times-circle"></i> Not connected
+                                    </span>
+                                </div>
                             </div>
-                            <div class="info-row">
-                                <span class="label">Email</span>
-                                <span class="value" id="widget-user-email">Loading...</span>
+                            <button class="btn-link" data-navigate="settings.html">
+                                Manage Settings →
+                            </button>
+                        </div>
+                        <!-- Right: Quick Stats -->
+                        <div class="account-stats-section">
+                            <div class="quick-stat-card">
+                                <div class="quick-stat-icon guides">
+                                    <i class="fas fa-book-open"></i>
+                                </div>
+                                <div class="quick-stat-info">
+                                    <span class="quick-stat-number" id="stat-guides-owned">0</span>
+                                    <span class="quick-stat-label">Guides Owned</span>
+                                </div>
                             </div>
-                            <div class="info-row">
-                                <span class="label">Discord</span>
-                                <span class="status-badge disconnected" id="widget-discord-status">
-                                    <i class="fas fa-times-circle"></i> Not connected
-                                </span>
+                            <div class="quick-stat-card">
+                                <div class="quick-stat-icon studied">
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                                <div class="quick-stat-info">
+                                    <span class="quick-stat-number" id="stat-last-studied">—</span>
+                                    <span class="quick-stat-label">Last Studied</span>
+                                </div>
+                            </div>
+                            <div class="quick-stat-card">
+                                <div class="quick-stat-icon category">
+                                    <i class="fas fa-heart"></i>
+                                </div>
+                                <div class="quick-stat-info">
+                                    <span class="quick-stat-number" id="stat-top-category">—</span>
+                                    <span class="quick-stat-label">Top Category</span>
+                                </div>
                             </div>
                         </div>
-                        <button class="btn-link" data-navigate="settings.html">
-                            Manage Settings →
-                        </button>
-                    </div>
-
-                    <div class="widget widget-purchases">
-                        <h3><i class="fas fa-shopping-bag"></i> Quick Stats</h3>
-                        <div class="widget-content">
-                            <div class="stat-item">
-                                <span class="stat-number" id="widget-total-purchases">0</span>
-                                <span class="stat-label">Total Purchases</span>
-                            </div>
-                        </div>
-                        <button class="btn-link" data-navigate="store.html">
-                            Visit Store →
-                        </button>
                     </div>
                 </div>
 
-                <!-- Claim Order Section -->
-                <section class="dashboard-section claim-order-section">
-                    <div class="section-header-enhanced">
-                        <h2><i class="fas fa-ticket-alt"></i> Claim a Purchase</h2>
-                    </div>
-                    <div class="claim-order-card">
-                        <p class="claim-description">Have an order number from a previous purchase? Enter it below to add those guides to your account.</p>
-                        <div class="claim-form">
-                            <div class="claim-input-group">
-                                <span class="claim-prefix">TNC-</span>
-                                <input type="text" id="claim-order-input" placeholder="123456" maxlength="6" autocomplete="off" />
-                            </div>
-                            <button class="btn btn-primary" id="claim-order-btn">
-                                <i class="fas fa-plus-circle"></i> Claim Order
-                            </button>
+                <!-- Collapsible Claim Order Section -->
+                <section class="dashboard-section claim-order-section collapsible collapsed">
+                    <button class="collapsible-header" id="claim-section-toggle">
+                        <div class="collapsible-title">
+                            <i class="fas fa-ticket-alt"></i>
+                            <span>Claim a Purchase</span>
                         </div>
-                        <div id="claim-message" class="claim-message" style="display: none;"></div>
+                        <i class="fas fa-chevron-down collapsible-icon"></i>
+                    </button>
+                    <div class="collapsible-content">
+                        <div class="claim-order-card">
+                            <p class="claim-description">Have an order number from a previous purchase? Enter it below to add those guides to your account.</p>
+                            <div class="claim-form">
+                                <div class="claim-input-group">
+                                    <span class="claim-prefix">TNC-</span>
+                                    <input type="text" id="claim-order-input" placeholder="123456" maxlength="6" autocomplete="off" />
+                                </div>
+                                <button class="btn btn-primary" id="claim-order-btn">
+                                    <i class="fas fa-plus-circle"></i> Claim Order
+                                </button>
+                            </div>
+                            <div id="claim-message" class="claim-message" style="display: none;"></div>
+                        </div>
                     </div>
                 </section>
 

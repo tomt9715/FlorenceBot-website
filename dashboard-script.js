@@ -702,6 +702,67 @@ function isNewPurchase(purchasedAt) {
     return diffDays <= 7;
 }
 
+// Update enhanced quick stats in the account widget
+function updateQuickStats(purchases) {
+    // Guides owned count
+    const guidesOwnedEl = document.getElementById('stat-guides-owned');
+    if (guidesOwnedEl) {
+        guidesOwnedEl.textContent = purchases.length;
+    }
+
+    // Last studied - find most recent from localStorage
+    const lastStudiedEl = document.getElementById('stat-last-studied');
+    if (lastStudiedEl) {
+        let mostRecentStudy = null;
+        purchases.forEach(p => {
+            const lastStudied = getLastStudied(p.product_id);
+            if (lastStudied) {
+                const studyDate = new Date(lastStudied);
+                if (!mostRecentStudy || studyDate > mostRecentStudy) {
+                    mostRecentStudy = studyDate;
+                }
+            }
+        });
+
+        if (mostRecentStudy) {
+            const relativeTime = formatRelativeTime(mostRecentStudy.toISOString());
+            lastStudiedEl.textContent = relativeTime || 'Today';
+        } else {
+            lastStudiedEl.textContent = 'Not yet';
+        }
+    }
+
+    // Top category - find category with most guides
+    const topCategoryEl = document.getElementById('stat-top-category');
+    if (topCategoryEl && purchases.length > 0) {
+        const categoryCounts = {};
+        purchases.forEach(p => {
+            const guideInfo = htmlGuides.find(g => g.id === p.product_id);
+            if (guideInfo && guideInfo.category) {
+                categoryCounts[guideInfo.category] = (categoryCounts[guideInfo.category] || 0) + 1;
+            }
+        });
+
+        let topCategory = null;
+        let maxCount = 0;
+        for (const [category, count] of Object.entries(categoryCounts)) {
+            if (count > maxCount) {
+                maxCount = count;
+                topCategory = category;
+            }
+        }
+
+        if (topCategory && categoryConfig[topCategory]) {
+            topCategoryEl.textContent = categoryConfig[topCategory].label;
+        } else if (topCategory) {
+            // Capitalize first letter
+            topCategoryEl.textContent = topCategory.charAt(0).toUpperCase() + topCategory.slice(1);
+        } else {
+            topCategoryEl.textContent = '—';
+        }
+    }
+}
+
 // Category display configuration - includes Med-Surg subcategories
 const categoryConfig = {
     // Med-Surg Subcategories (body systems)
@@ -745,11 +806,8 @@ async function loadAccessibleGuides(user) {
             guidesCountStat.textContent = purchases.length;
         }
 
-        // Update purchases widget
-        const purchasesElement = document.getElementById('widget-total-purchases');
-        if (purchasesElement) {
-            purchasesElement.textContent = purchases.length;
-        }
+        // Update enhanced quick stats
+        updateQuickStats(purchases);
 
         // Store purchased IDs in localStorage for other pages
         const purchasedIds = purchases.map(p => p.product_id);
@@ -2246,6 +2304,17 @@ document.addEventListener('DOMContentLoaded', function() {
             if (card) {
                 card.style.display = 'none';
                 localStorage.setItem('gettingStartedDismissed', 'true');
+            }
+        });
+    }
+
+    // Collapsible section toggle (Claim a Purchase)
+    const claimSectionToggle = document.getElementById('claim-section-toggle');
+    if (claimSectionToggle) {
+        claimSectionToggle.addEventListener('click', function() {
+            const section = this.closest('.collapsible');
+            if (section) {
+                section.classList.toggle('collapsed');
             }
         });
     }
