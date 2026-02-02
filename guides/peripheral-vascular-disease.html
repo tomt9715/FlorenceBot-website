@@ -1,0 +1,1811 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Peripheral Vascular Disease Study Guide - The Nursing Collective</title>
+    <meta name="description" content="Comprehensive nursing study guide for Peripheral Vascular Disease. Learn to differentiate arterial vs venous insufficiency, assess ankle-brachial index (ABI), and implement DVT prevention strategies.">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <style>
+        /* ============================================
+           PDF-STYLE STUDY GUIDE STYLES
+           Peripheral Vascular Disease - Classic Document Layout
+           Colors inspired by icon: coral/salmon vessels, tan/cream skin
+           ============================================ */
+
+        :root {
+            --primary-color: #E07A5F;
+            --primary-dark: #C96A52;
+            --secondary-color: #81B29A;
+            --accent-color: #F2CC8F;
+            --text-primary: #1f2937;
+            --text-secondary: #4b5563;
+            --background: #ffffff;
+            --border-color: #e5e7eb;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Source Sans 3', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.7;
+            color: var(--text-primary);
+            background: #f3f4f6;
+        }
+
+        /* Download Bar - Fixed at top */
+        .download-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 12px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .download-bar-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 600;
+        }
+
+        .download-bar-brand img {
+            height: 32px;
+            width: auto;
+        }
+
+        .download-bar-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn-download {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background: white;
+            color: var(--primary-color);
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+        }
+
+        .btn-download:hover {
+            background: #f0f9ff;
+            transform: translateY(-1px);
+        }
+
+        .btn-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background: rgba(255,255,255,0.15);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+        }
+
+        .btn-back:hover {
+            background: rgba(255,255,255,0.25);
+        }
+
+        /* Document Container */
+        .document-container {
+            max-width: 850px;
+            margin: 80px auto 40px;
+            background: white;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+
+        /* Cover Page - Colors inspired by guide icon (coral vessels, tan skin) */
+        .cover-page {
+            background: linear-gradient(135deg, #E07A5F 0%, #81B29A 50%, #F2CC8F 100%);
+            color: white;
+            padding: 80px 60px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cover-page::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.5;
+        }
+
+        .cover-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cover-logo {
+            width: 80px;
+            height: 80px;
+            background: white;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            padding: 12px;
+        }
+
+        .cover-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .cover-category {
+            display: inline-block;
+            padding: 8px 24px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+        }
+
+        .cover-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 3.2rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.1;
+        }
+
+        .cover-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            max-width: 600px;
+            margin: 0 auto 40px;
+            line-height: 1.6;
+        }
+
+        .cover-meta {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .cover-meta-item {
+            text-align: center;
+        }
+
+        .cover-meta-item .label {
+            font-size: 0.8rem;
+            opacity: 0.8;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .cover-meta-item .value {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-top: 4px;
+        }
+
+        .cover-brand {
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+
+        /* Document Content */
+        .document-content {
+            padding: 60px;
+        }
+
+        /* Learning Objectives */
+        .learning-objectives {
+            background: linear-gradient(135deg, #ecfdf5, #d1fae5);
+            border: 2px solid #10b981;
+            border-radius: 12px;
+            padding: 28px;
+            margin-bottom: 40px;
+        }
+
+        .learning-objectives h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #059669;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .learning-objectives ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .learning-objectives li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 8px 0;
+            color: var(--text-primary);
+            font-size: 1rem;
+        }
+
+        .learning-objectives li i {
+            color: #10b981;
+            margin-top: 4px;
+            flex-shrink: 0;
+        }
+
+        /* Table of Contents */
+        .table-of-contents {
+            background: #f9fafb;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 28px;
+            margin-bottom: 40px;
+        }
+
+        .table-of-contents h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 16px;
+        }
+
+        .table-of-contents ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            columns: 2;
+            column-gap: 30px;
+        }
+
+        .table-of-contents li {
+            break-inside: avoid;
+            margin-bottom: 8px;
+        }
+
+        .table-of-contents a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 12px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            transition: all 0.2s ease;
+        }
+
+        .table-of-contents a:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .toc-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 22px;
+            height: 22px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 5px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        .table-of-contents a:hover .toc-number {
+            background: white;
+            color: var(--primary-color);
+        }
+
+        /* Content Sections */
+        .guide-section {
+            margin-bottom: 50px;
+            scroll-margin-top: 80px;
+        }
+
+        .guide-section h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .guide-section h3 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin: 28px 0 14px;
+        }
+
+        .guide-section h4 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin: 20px 0 10px;
+        }
+
+        .guide-section p {
+            color: var(--text-secondary);
+            font-size: 1.02rem;
+            margin-bottom: 14px;
+        }
+
+        .guide-section ul, .guide-section ol {
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+            padding-left: 24px;
+        }
+
+        .guide-section li {
+            margin-bottom: 8px;
+        }
+
+        .guide-section strong {
+            color: var(--text-primary);
+        }
+
+        /* Info Boxes */
+        .info-box {
+            border-radius: 10px;
+            padding: 18px 22px;
+            margin: 20px 0;
+            border-left: 4px solid;
+        }
+
+        .info-box.clinical-pearl {
+            background: linear-gradient(135deg, #fffbeb, #fef3c7);
+            border-color: #f59e0b;
+        }
+
+        .info-box.warning {
+            background: #fef2f2;
+            border-color: #ef4444;
+        }
+
+        .info-box.tip {
+            background: #ecfdf5;
+            border-color: #10b981;
+        }
+
+        .info-box.nclex-tip {
+            background: #f5f3ff;
+            border-color: #8b5cf6;
+        }
+
+        .info-box.mnemonic {
+            background: #fffbeb;
+            border-color: #f59e0b;
+        }
+
+        .info-box-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+        }
+
+        .info-box.clinical-pearl .info-box-header { color: #d97706; }
+        .info-box.warning .info-box-header { color: #ef4444; }
+        .info-box.tip .info-box-header { color: #059669; }
+        .info-box.nclex-tip .info-box-header { color: #7c3aed; }
+        .info-box.mnemonic .info-box-header { color: #d97706; }
+
+        .info-box p { margin: 0; color: var(--text-secondary); font-size: 0.98rem; }
+        .info-box ul { margin: 8px 0 0; padding-left: 18px; }
+        .info-box li { margin-bottom: 4px; font-size: 0.98rem; }
+
+        /* Tables */
+        .guide-table-wrapper {
+            overflow-x: auto;
+            margin: 20px 0;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+        }
+
+        .guide-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.92rem;
+        }
+
+        .guide-table thead {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+        }
+
+        .guide-table th {
+            padding: 12px 14px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .guide-table tbody tr {
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .guide-table tbody tr:hover {
+            background: #f9fafb;
+        }
+
+        .guide-table td {
+            padding: 12px 14px;
+            color: var(--text-secondary);
+        }
+
+        .guide-table td:first-child {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        /* Comparison Cards */
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .comparison-card {
+            border-radius: 12px;
+            border: 2px solid var(--border-color);
+            overflow: hidden;
+        }
+
+        .comparison-card-header {
+            padding: 16px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 1.05rem;
+            color: white;
+        }
+
+        .comparison-card.arterial .comparison-card-header {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+        }
+
+        .comparison-card.venous .comparison-card-header {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+        }
+
+        .comparison-card.pad .comparison-card-header {
+            background: linear-gradient(135deg, #E07A5F, #C96A52);
+        }
+
+        .comparison-card.dvt .comparison-card-header {
+            background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+        }
+
+        .comparison-card-body {
+            padding: 18px;
+        }
+
+        .comparison-card-body h4 {
+            font-size: 0.95rem;
+            margin: 0 0 10px;
+        }
+
+        .comparison-card-body ul {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 14px;
+        }
+
+        .comparison-card-body li {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            padding: 6px 0;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .comparison-card-body li:last-child { border-bottom: none; }
+        .comparison-card-body li i { color: var(--primary-color); margin-top: 3px; flex-shrink: 0; }
+
+        /* Interventions List */
+        .interventions-list {
+            background: #f9fafb;
+            border-radius: 12px;
+            padding: 22px;
+            margin: 20px 0;
+        }
+
+        .interventions-list h4 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1rem;
+            margin: 0 0 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .interventions-list h4 i { color: var(--primary-color); }
+
+        .intervention-item {
+            display: flex;
+            gap: 14px;
+            padding: 14px;
+            background: white;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            border: 1px solid var(--border-color);
+        }
+
+        .intervention-number {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+
+        .intervention-content h5 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin: 0 0 4px;
+        }
+
+        .intervention-content p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin: 0;
+        }
+
+        /* Key Points Summary */
+        .key-points-summary {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 12px;
+            padding: 28px;
+            margin: 40px 0 0;
+            color: white;
+        }
+
+        .key-points-summary h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.3rem;
+            margin: 0 0 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: white;
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .key-points-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 14px;
+        }
+
+        .key-point {
+            background: rgba(255,255,255,0.15);
+            padding: 14px;
+            border-radius: 10px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .key-point i { font-size: 1.1rem; margin-top: 2px; }
+        .key-point p { margin: 0; font-size: 0.92rem; line-height: 1.4; }
+
+        /* Footer */
+        .document-footer {
+            text-align: center;
+            padding: 32px 48px;
+            border-top: 1px solid var(--border-color);
+            background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+        }
+
+        .footer-logo {
+            height: 48px;
+            width: auto;
+            margin-bottom: 12px;
+        }
+
+        .footer-tagline {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+        }
+
+        .footer-copyright {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        /* Print Styles */
+        @page {
+            margin: 0.6in 0.4in;
+        }
+
+        @media print {
+            .download-bar { display: none !important; }
+
+            body {
+                background: white !important;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+
+            .document-container {
+                margin: 0 !important;
+                box-shadow: none !important;
+                max-width: 100% !important;
+                width: 100% !important;
+            }
+
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                color-adjust: exact !important;
+            }
+
+            .cover-page {
+                page-break-after: always;
+                break-after: page;
+            }
+
+            .info-box { page-break-inside: avoid; break-inside: avoid; }
+            .guide-table-wrapper { page-break-inside: avoid; break-inside: avoid; }
+            .comparison-card { page-break-inside: avoid; break-inside: avoid; }
+            .intervention-item { page-break-inside: avoid; break-inside: avoid; }
+            .learning-objectives { page-break-inside: avoid; break-inside: avoid; }
+            .key-points-summary { page-break-inside: avoid; break-inside: avoid; }
+
+            h2, h3, h4 {
+                page-break-after: avoid;
+                break-after: avoid;
+            }
+
+            .comparison-grid { page-break-inside: auto; }
+            .interventions-list { page-break-inside: auto; }
+
+            a { text-decoration: underline; }
+
+            .document-footer {
+                page-break-inside: avoid;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .download-bar {
+                flex-direction: column;
+                gap: 12px;
+                padding: 12px 16px;
+            }
+            .download-bar-actions {
+                width: 100%;
+                justify-content: center;
+            }
+            .document-container { margin: 120px 10px 20px; }
+            .cover-page { padding: 50px 30px; }
+            .cover-title { font-size: 2.2rem; }
+            .cover-meta { flex-direction: column; gap: 20px; }
+            .document-content { padding: 30px 24px; }
+            .table-of-contents ul { columns: 1; }
+            .comparison-grid { grid-template-columns: 1fr; }
+            .key-points-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+
+    <!-- Sidebar Styles (shared across all guides) -->
+    <link rel="stylesheet" href="guide-sidebar.css">
+</head>
+<body data-product-id="peripheral-vascular-disease" data-guide-name="Peripheral-Vascular-Disease">
+    <!-- Download Bar -->
+    <div class="download-bar">
+        <div class="download-bar-brand">
+            <i class="fas fa-book-medical"></i>
+            <span>The Nursing Collective Study Guide</span>
+        </div>
+        <div class="download-bar-actions">
+            <a href="../dashboard.html" class="btn-back">
+                <i class="fas fa-arrow-left"></i> Back to Dashboard
+            </a>
+            <button class="btn-download" id="download-pdf-btn">
+                <i class="fas fa-file-pdf"></i> Save as PDF
+            </button>
+        </div>
+    </div>
+
+    <!-- Document -->
+    <div class="document-container">
+
+        <!-- Cover Page -->
+        <div class="cover-page">
+            <div class="cover-content">
+                <div class="cover-logo">
+                    <img src="../assets/images/guide-icons/peripheral-vascular-disease.webp" alt="Peripheral Vascular Disease">
+                </div>
+                <div class="cover-category">Medical-Surgical Nursing</div>
+                <h1 class="cover-title">Peripheral Vascular Disease</h1>
+                <p class="cover-subtitle">Comprehensive nursing study guide covering arterial vs venous insufficiency differentiation, ankle-brachial index assessment, DVT prevention strategies, and evidence-based management of peripheral arterial and venous disorders.</p>
+                <div class="cover-meta">
+                    <div class="cover-meta-item">
+                        <div class="label">Reading Time</div>
+                        <div class="value">20-25 minutes</div>
+                    </div>
+                    <div class="cover-meta-item">
+                        <div class="label">Difficulty Level</div>
+                        <div class="value">Intermediate</div>
+                    </div>
+                    <div class="cover-meta-item">
+                        <div class="label">Last Updated</div>
+                        <div class="value">February 2026</div>
+                    </div>
+                </div>
+                <div class="cover-brand">
+                    <i class="fas fa-graduation-cap"></i> The Nursing Collective
+                </div>
+            </div>
+        </div>
+
+        <!-- Document Content -->
+        <div class="document-content">
+
+            <!-- Learning Objectives -->
+            <section class="learning-objectives">
+                <h2><i class="fas fa-bullseye"></i> Learning Objectives</h2>
+                <ul>
+                    <li><i class="fas fa-check-circle"></i> Describe the anatomy and physiology of the peripheral vascular system</li>
+                    <li><i class="fas fa-check-circle"></i> Differentiate between arterial and venous insufficiency assessment findings</li>
+                    <li><i class="fas fa-check-circle"></i> Perform and interpret ankle-brachial index (ABI) measurements</li>
+                    <li><i class="fas fa-check-circle"></i> Implement evidence-based DVT prevention strategies</li>
+                    <li><i class="fas fa-check-circle"></i> Recognize clinical manifestations of peripheral arterial disease (PAD)</li>
+                    <li><i class="fas fa-check-circle"></i> Apply appropriate nursing interventions for venous thromboembolism</li>
+                    <li><i class="fas fa-check-circle"></i> Educate patients on lifestyle modifications for vascular health</li>
+                    <li><i class="fas fa-check-circle"></i> Identify complications requiring emergent intervention</li>
+                </ul>
+            </section>
+
+            <!-- Table of Contents -->
+            <nav class="table-of-contents">
+                <h2><i class="fas fa-list"></i> Table of Contents</h2>
+                <ul>
+                    <li><a href="#anatomy"><span class="toc-number">1</span> Vascular Anatomy & Physiology</a></li>
+                    <li><a href="#arterial-venous"><span class="toc-number">2</span> Arterial vs Venous Disease</a></li>
+                    <li><a href="#pad"><span class="toc-number">3</span> Peripheral Arterial Disease</a></li>
+                    <li><a href="#abi"><span class="toc-number">4</span> Ankle-Brachial Index</a></li>
+                    <li><a href="#venous"><span class="toc-number">5</span> Chronic Venous Insufficiency</a></li>
+                    <li><a href="#dvt"><span class="toc-number">6</span> Deep Vein Thrombosis</a></li>
+                    <li><a href="#prevention"><span class="toc-number">7</span> DVT Prevention Strategies</a></li>
+                    <li><a href="#interventions"><span class="toc-number">8</span> Treatment & Nursing Care</a></li>
+                </ul>
+            </nav>
+
+            <!-- Section 1: Vascular Anatomy & Physiology -->
+            <section class="guide-section" id="anatomy">
+                <h2><span class="section-icon"><i class="fas fa-heart"></i></span> Vascular Anatomy & Physiology</h2>
+
+                <p>The peripheral vascular system consists of arterial and venous networks that transport blood to and from the body's tissues. Understanding normal structure and function is essential for recognizing pathological changes in peripheral vascular disease.</p>
+
+                <h3>Arterial System</h3>
+
+                <p>Arteries carry oxygenated blood away from the heart to the tissues. They have thick, muscular walls that can withstand high pressures and regulate blood flow through vasoconstriction and vasodilation.</p>
+
+                <div class="guide-table-wrapper">
+                    <table class="guide-table">
+                        <thead>
+                            <tr>
+                                <th>Layer</th>
+                                <th>Structure</th>
+                                <th>Function</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Tunica Intima</td>
+                                <td>Single layer of endothelial cells</td>
+                                <td>Smooth surface for blood flow; site of atherosclerosis</td>
+                            </tr>
+                            <tr>
+                                <td>Tunica Media</td>
+                                <td>Smooth muscle and elastic fibers</td>
+                                <td>Vasoconstriction/vasodilation; maintains pressure</td>
+                            </tr>
+                            <tr>
+                                <td>Tunica Adventitia</td>
+                                <td>Connective tissue</td>
+                                <td>Structural support; anchors vessel to surrounding tissue</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>Venous System</h3>
+
+                <p>Veins return deoxygenated blood to the heart. They have thinner walls than arteries and operate under low pressure. Veins contain one-way valves that prevent backflow and rely on the muscle pump mechanism to assist blood return.</p>
+
+                <div class="info-box clinical-pearl">
+                    <div class="info-box-header">
+                        <i class="fas fa-lightbulb"></i> Clinical Pearl: The Muscle Pump
+                    </div>
+                    <p>Contraction of the calf muscles (the "second heart") squeezes deep veins and propels blood toward the heart. This is why <strong>prolonged immobility</strong> increases DVT risk - the muscle pump isn't working! Early ambulation and leg exercises activate this mechanism.</p>
+                </div>
+
+                <h3>Lower Extremity Circulation</h3>
+
+                <h4>Arterial Supply</h4>
+                <ul>
+                    <li><strong>Common femoral artery</strong> → branches at the groin</li>
+                    <li><strong>Superficial femoral artery</strong> → continues down the thigh</li>
+                    <li><strong>Popliteal artery</strong> → behind the knee</li>
+                    <li><strong>Anterior tibial</strong> → dorsalis pedis (top of foot)</li>
+                    <li><strong>Posterior tibial</strong> → behind medial malleolus</li>
+                    <li><strong>Peroneal artery</strong> → lateral leg</li>
+                </ul>
+
+                <h4>Venous Drainage</h4>
+                <ul>
+                    <li><strong>Deep veins:</strong> Run alongside arteries (femoral, popliteal, tibial); primary return pathway</li>
+                    <li><strong>Superficial veins:</strong> Great saphenous (medial), small saphenous (posterior); connect to deep system via perforators</li>
+                    <li><strong>Perforating veins:</strong> Connect superficial and deep systems; valves prevent blood from flowing superficially</li>
+                </ul>
+
+                <div class="florencebot-tip" id="tip-pulse-locations">
+                    <div class="florencebot-tip-header">
+                        <div class="florencebot-tip-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <span class="florencebot-tip-label">FlorenceBot Pro Tip</span>
+                    </div>
+                    <div class="florencebot-tip-title">Know Your Pulse Points</div>
+                    <div class="florencebot-tip-content">
+                        <strong>Master the lower extremity pulse locations!</strong> The <strong>femoral pulse</strong> is at the midpoint of the inguinal ligament. The <strong>popliteal pulse</strong> is deep in the popliteal fossa (have the patient slightly flex the knee). The <strong>dorsalis pedis (DP)</strong> is on the dorsum of the foot, lateral to the extensor hallucis longus tendon. The <strong>posterior tibial (PT)</strong> is behind and slightly inferior to the medial malleolus. Always compare both sides and document using a scale (0-4+). Absent or diminished pulses are a key finding in arterial disease!
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 2: Arterial vs Venous Disease -->
+            <section class="guide-section" id="arterial-venous">
+                <h2><span class="section-icon"><i class="fas fa-code-branch"></i></span> Arterial vs Venous Insufficiency</h2>
+
+                <p>Differentiating between arterial and venous insufficiency is one of the most important clinical skills in vascular nursing. The two conditions have distinctly different pathophysiology, presentations, and treatments.</p>
+
+                <div class="comparison-grid">
+                    <div class="comparison-card arterial">
+                        <div class="comparison-card-header">
+                            <i class="fas fa-arrow-down"></i> Arterial Insufficiency
+                        </div>
+                        <div class="comparison-card-body">
+                            <h4>Pathophysiology</h4>
+                            <ul>
+                                <li><i class="fas fa-times-circle"></i> <strong>Decreased blood flow TO tissues</strong></li>
+                                <li><i class="fas fa-dna"></i> Caused by atherosclerosis, embolism, or spasm</li>
+                                <li><i class="fas fa-lungs"></i> Results in tissue ischemia and hypoxia</li>
+                            </ul>
+                            <h4>Key Assessment Findings</h4>
+                            <ul>
+                                <li><i class="fas fa-thermometer-empty"></i> <strong>Cool</strong> extremities</li>
+                                <li><i class="fas fa-palette"></i> <strong>Pale</strong> or dusky color; pallor with elevation</li>
+                                <li><i class="fas fa-ban"></i> <strong>Absent or diminished pulses</strong></li>
+                                <li><i class="fas fa-running"></i> <strong>Intermittent claudication</strong> (pain with activity)</li>
+                                <li><i class="fas fa-moon"></i> <strong>Rest pain</strong> (severe disease)</li>
+                                <li><i class="fas fa-cut"></i> Shiny, thin, hairless skin</li>
+                                <li><i class="fas fa-hand-paper"></i> Thick, brittle nails</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="comparison-card venous">
+                        <div class="comparison-card-header">
+                            <i class="fas fa-arrow-up"></i> Venous Insufficiency
+                        </div>
+                        <div class="comparison-card-body">
+                            <h4>Pathophysiology</h4>
+                            <ul>
+                                <li><i class="fas fa-times-circle"></i> <strong>Impaired blood return FROM tissues</strong></li>
+                                <li><i class="fas fa-dna"></i> Caused by valve incompetence or obstruction</li>
+                                <li><i class="fas fa-water"></i> Results in venous hypertension and congestion</li>
+                            </ul>
+                            <h4>Key Assessment Findings</h4>
+                            <ul>
+                                <li><i class="fas fa-thermometer-full"></i> <strong>Warm</strong> extremities</li>
+                                <li><i class="fas fa-palette"></i> <strong>Brown discoloration</strong> (hemosiderin staining)</li>
+                                <li><i class="fas fa-heartbeat"></i> <strong>Pulses present</strong> (may be hard to palpate due to edema)</li>
+                                <li><i class="fas fa-weight"></i> <strong>Heaviness/aching</strong> worse with standing</li>
+                                <li><i class="fas fa-bed"></i> <strong>Relieved by elevation</strong></li>
+                                <li><i class="fas fa-water"></i> Edema (pitting)</li>
+                                <li><i class="fas fa-band-aid"></i> Stasis dermatitis, lipodermatosclerosis</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="florencebot-tip" id="tip-arterial-vs-venous">
+                    <div class="florencebot-tip-header">
+                        <div class="florencebot-tip-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <span class="florencebot-tip-label">FlorenceBot Pro Tip</span>
+                    </div>
+                    <div class="florencebot-tip-title">The Position Test</div>
+                    <div class="florencebot-tip-content">
+                        <strong>Position makes a difference!</strong> Here's a quick way to differentiate: <strong>Arterial disease</strong> pain WORSENS with elevation (less blood flow against gravity) and IMPROVES when legs are dependent (dangling). <strong>Venous disease</strong> pain IMPROVES with elevation (helps blood return) and WORSENS with dependency (blood pools). Also remember: arterial ulcers are usually on toes and pressure points, while venous ulcers are typically on the medial malleolus ("gaiter area"). Understanding the pathophysiology makes the differences logical!
+                    </div>
+                </div>
+
+                <h3>Ulcer Comparison</h3>
+
+                <div class="guide-table-wrapper">
+                    <table class="guide-table">
+                        <thead>
+                            <tr>
+                                <th>Characteristic</th>
+                                <th>Arterial Ulcer</th>
+                                <th>Venous Ulcer</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Location</td>
+                                <td>Toes, heels, lateral malleolus, pressure points</td>
+                                <td>Medial malleolus ("gaiter area"), lower leg</td>
+                            </tr>
+                            <tr>
+                                <td>Wound Bed</td>
+                                <td>Pale, necrotic, dry; may have eschar</td>
+                                <td>Red, beefy, granulating; moist with exudate</td>
+                            </tr>
+                            <tr>
+                                <td>Borders</td>
+                                <td>Well-defined, "punched out" appearance</td>
+                                <td>Irregular, shallow borders</td>
+                            </tr>
+                            <tr>
+                                <td>Pain</td>
+                                <td>Severe; worse at night, with elevation</td>
+                                <td>Mild to moderate; aching; improves with elevation</td>
+                            </tr>
+                            <tr>
+                                <td>Surrounding Skin</td>
+                                <td>Shiny, thin, hairless, cool</td>
+                                <td>Brown staining, warm, dermatitis, edema</td>
+                            </tr>
+                            <tr>
+                                <td>Pulses</td>
+                                <td>Diminished or absent</td>
+                                <td>Usually normal</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="info-box mnemonic">
+                    <div class="info-box-header">
+                        <i class="fas fa-brain"></i> Memory Aid: Arterial vs Venous
+                    </div>
+                    <p><strong>Arterial = "A" words</strong></p>
+                    <ul>
+                        <li><strong>A</strong>bsent pulses</li>
+                        <li><strong>A</strong>ching with Activity (claudication)</li>
+                        <li><strong>A</strong>trophed skin (shiny, hairless)</li>
+                        <li>Pain worse with <strong>A</strong>ltitude (elevation)</li>
+                    </ul>
+                    <p><strong>Venous = Think "V" for Varicose/Valve problems</strong></p>
+                    <ul>
+                        <li>Brown staining (hemosiderin)</li>
+                        <li>Brawny edema</li>
+                        <li>Better with elevation</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section 3: Peripheral Arterial Disease -->
+            <section class="guide-section" id="pad">
+                <h2><span class="section-icon"><i class="fas fa-heartbeat"></i></span> Peripheral Arterial Disease (PAD)</h2>
+
+                <p>Peripheral arterial disease is a manifestation of systemic atherosclerosis affecting arteries outside the heart and brain, most commonly in the lower extremities. It is a marker of significant cardiovascular risk.</p>
+
+                <h3>Risk Factors</h3>
+
+                <div class="guide-table-wrapper">
+                    <table class="guide-table">
+                        <thead>
+                            <tr>
+                                <th>Major Risk Factors</th>
+                                <th>Contributing Factors</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Smoking (strongest modifiable risk)</td>
+                                <td>Hyperhomocysteinemia</td>
+                            </tr>
+                            <tr>
+                                <td>Diabetes mellitus</td>
+                                <td>Chronic kidney disease</td>
+                            </tr>
+                            <tr>
+                                <td>Hypertension</td>
+                                <td>Elevated CRP/inflammation</td>
+                            </tr>
+                            <tr>
+                                <td>Hyperlipidemia</td>
+                                <td>Obesity</td>
+                            </tr>
+                            <tr>
+                                <td>Age >50 years</td>
+                                <td>Sedentary lifestyle</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="info-box warning">
+                    <div class="info-box-header">
+                        <i class="fas fa-exclamation-triangle"></i> PAD = Systemic Disease
+                    </div>
+                    <p><strong>PAD is not just a leg problem!</strong> Patients with PAD have a 6-7x higher risk of cardiovascular death. They are at high risk for heart attack and stroke because the same atherosclerotic process affects coronary and cerebral arteries. Always assess for CAD and stroke risk in PAD patients!</p>
+                </div>
+
+                <h3>Clinical Stages of PAD (Fontaine Classification)</h3>
+
+                <div class="interventions-list">
+                    <h4><i class="fas fa-stairs"></i> Progressive Stages of PAD</h4>
+
+                    <div class="intervention-item">
+                        <div class="intervention-number">I</div>
+                        <div class="intervention-content">
+                            <h5>Asymptomatic</h5>
+                            <p>No symptoms despite measurable disease. May have abnormal ABI. Often discovered incidentally.</p>
+                        </div>
+                    </div>
+
+                    <div class="intervention-item">
+                        <div class="intervention-number">II</div>
+                        <div class="intervention-content">
+                            <h5>Intermittent Claudication</h5>
+                            <p>Muscle pain, cramping, or fatigue with walking that is relieved by rest. IIa: claudication >200m; IIb: claudication <200m.</p>
+                        </div>
+                    </div>
+
+                    <div class="intervention-item">
+                        <div class="intervention-number">III</div>
+                        <div class="intervention-content">
+                            <h5>Rest Pain</h5>
+                            <p>Pain at rest, especially at night. Often relieved by dangling leg over bed. Indicates severe ischemia - limb-threatening!</p>
+                        </div>
+                    </div>
+
+                    <div class="intervention-item">
+                        <div class="intervention-number">IV</div>
+                        <div class="intervention-content">
+                            <h5>Tissue Loss</h5>
+                            <p>Ulceration or gangrene. Critical limb ischemia (CLI). High risk for amputation without revascularization.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="florencebot-tip" id="tip-claudication">
+                    <div class="florencebot-tip-header">
+                        <div class="florencebot-tip-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <span class="florencebot-tip-label">FlorenceBot Pro Tip</span>
+                    </div>
+                    <div class="florencebot-tip-title">Understanding Claudication</div>
+                    <div class="florencebot-tip-content">
+                        <strong>Claudication is exercise-induced ischemia of the leg muscles!</strong> The word comes from Latin "claudicare" meaning "to limp." Key features: (1) it's predictable - same distance causes symptoms, (2) it's reproducible - happens with each walk, (3) it's relieved by standing still (doesn't require sitting), and (4) the location indicates the level of disease (buttock/hip = aortoiliac, thigh = common femoral, calf = superficial femoral/popliteal - most common). Don't confuse it with neurogenic claudication from spinal stenosis, which is relieved by sitting/bending forward, not just standing.
+                    </div>
+                </div>
+
+                <h3>Assessment of PAD</h3>
+
+                <ul>
+                    <li><strong>History:</strong> Walking distance, pain characteristics, risk factors, functional limitations</li>
+                    <li><strong>Inspection:</strong> Skin color, hair distribution, nail changes, muscle atrophy, ulcers, gangrene</li>
+                    <li><strong>Palpation:</strong> Skin temperature, capillary refill (>3 sec abnormal), pulse quality bilaterally</li>
+                    <li><strong>Special tests:</strong> ABI, segmental pressures, pulse volume recordings, duplex ultrasound</li>
+                    <li><strong>Positional color changes:</strong> Pallor with elevation (Buerger's test), dependent rubor</li>
+                </ul>
+            </section>
+
+            <!-- Section 4: Ankle-Brachial Index -->
+            <section class="guide-section" id="abi">
+                <h2><span class="section-icon"><i class="fas fa-ruler"></i></span> Ankle-Brachial Index (ABI)</h2>
+
+                <p>The ankle-brachial index is a simple, non-invasive test that compares blood pressure in the ankle to blood pressure in the arm. It is the primary screening and diagnostic tool for PAD.</p>
+
+                <h3>How to Perform ABI</h3>
+
+                <div class="interventions-list">
+                    <h4><i class="fas fa-clipboard-list"></i> ABI Measurement Steps</h4>
+
+                    <div class="intervention-item">
+                        <div class="intervention-number">1</div>
+                        <div class="intervention-content">
+                            <h5>Patient Preparation</h5>
+                            <p>Have patient rest supine for 10 minutes. Room should be warm. Remove constrictive clothing. Explain the procedure.</p>
+                        </div>
+                    </div>
+
+                    <div class="intervention-item">
+                        <div class="intervention-number">2</div>
+                        <div class="intervention-content">
+                            <h5>Measure Brachial Pressures</h5>
+                            <p>Place appropriate-sized cuff on upper arm. Use Doppler to locate brachial artery. Inflate cuff until signal disappears, then slowly deflate. Record the systolic pressure when signal returns. Measure both arms.</p>
+                        </div>
+                    </div>
+
+                    <div class="intervention-item">
+                        <div class="intervention-number">3</div>
+                        <div class="intervention-content">
+                            <h5>Measure Ankle Pressures</h5>
+                            <p>Place cuff just above the ankle. Use Doppler to locate dorsalis pedis (DP) and posterior tibial (PT) arteries. Measure systolic pressure at each. Use the HIGHER of DP or PT for each ankle.</p>
+                        </div>
+                    </div>
+
+                    <div class="intervention-item">
+                        <div class="intervention-number">4</div>
+                        <div class="intervention-content">
+                            <h5>Calculate ABI</h5>
+                            <p>ABI = Highest ankle pressure (that leg) ÷ Highest brachial pressure (either arm). Calculate separately for each leg.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>ABI Interpretation</h3>
+
+                <div class="guide-table-wrapper">
+                    <table class="guide-table">
+                        <thead>
+                            <tr>
+                                <th>ABI Value</th>
+                                <th>Interpretation</th>
+                                <th>Clinical Significance</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>>1.30</td>
+                                <td>Non-compressible vessels</td>
+                                <td>Calcified arteries (diabetes, CKD); ABI unreliable; use TBI</td>
+                            </tr>
+                            <tr>
+                                <td>1.00-1.30</td>
+                                <td>Normal</td>
+                                <td>No significant PAD</td>
+                            </tr>
+                            <tr>
+                                <td>0.91-0.99</td>
+                                <td>Borderline</td>
+                                <td>May have early disease; consider exercise ABI</td>
+                            </tr>
+                            <tr>
+                                <td>0.41-0.90</td>
+                                <td>Mild to Moderate PAD</td>
+                                <td>Claudication typical; lifestyle modification, medications</td>
+                            </tr>
+                            <tr>
+                                <td>≤0.40</td>
+                                <td>Severe PAD</td>
+                                <td>Critical limb ischemia; rest pain, tissue loss; urgent referral</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="florencebot-tip" id="tip-abi-pearls">
+                    <div class="florencebot-tip-header">
+                        <div class="florencebot-tip-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <span class="florencebot-tip-label">FlorenceBot Pro Tip</span>
+                    </div>
+                    <div class="florencebot-tip-title">ABI Clinical Pearls</div>
+                    <div class="florencebot-tip-content">
+                        <strong>ABI has some important limitations!</strong> In diabetic patients and those with CKD, arteries can become calcified and incompressible, giving falsely elevated ABI readings (>1.30). In these patients, use <strong>toe-brachial index (TBI)</strong> instead - toe arteries don't calcify as much. Also, a normal resting ABI doesn't rule out PAD - if you suspect disease, order an <strong>exercise ABI</strong>. The patient walks on a treadmill, then ABI is remeasured. A drop of >20% post-exercise indicates significant PAD even with normal resting values.
+                    </div>
+                </div>
+
+                <div class="info-box nclex-tip">
+                    <div class="info-box-header">
+                        <i class="fas fa-graduation-cap"></i> NCLEX Tip: Quick ABI Calculation
+                    </div>
+                    <p><strong>Example:</strong> Right ankle DP = 100 mmHg, PT = 110 mmHg. Left ankle DP = 90 mmHg, PT = 95 mmHg. Right arm = 120 mmHg, Left arm = 118 mmHg.</p>
+                    <p>Right ABI = 110 (higher ankle) ÷ 120 (higher arm) = <strong>0.92</strong> (borderline)</p>
+                    <p>Left ABI = 95 (higher ankle) ÷ 120 (higher arm) = <strong>0.79</strong> (mild-moderate PAD)</p>
+                </div>
+            </section>
+
+            <!-- Section 5: Chronic Venous Insufficiency -->
+            <section class="guide-section" id="venous">
+                <h2><span class="section-icon"><i class="fas fa-water"></i></span> Chronic Venous Insufficiency</h2>
+
+                <p>Chronic venous insufficiency (CVI) occurs when leg veins cannot efficiently return blood to the heart, usually due to damaged valves or previous DVT. It leads to venous hypertension and characteristic skin changes.</p>
+
+                <h3>Pathophysiology</h3>
+
+                <ul>
+                    <li><strong>Valve incompetence:</strong> Damaged or weakened valves allow blood to flow backward (reflux)</li>
+                    <li><strong>Obstruction:</strong> Previous DVT can cause chronic venous obstruction</li>
+                    <li><strong>Muscle pump failure:</strong> Reduced calf muscle function decreases venous return</li>
+                    <li><strong>Venous hypertension:</strong> Elevated pressure in leg veins causes fluid extravasation, inflammation, and tissue damage</li>
+                </ul>
+
+                <h3>Clinical Manifestations</h3>
+
+                <div class="guide-table-wrapper">
+                    <table class="guide-table">
+                        <thead>
+                            <tr>
+                                <th>Finding</th>
+                                <th>Description</th>
+                                <th>Pathophysiology</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Edema</td>
+                                <td>Pitting edema, worse at end of day, improves overnight</td>
+                                <td>Increased capillary filtration from venous hypertension</td>
+                            </tr>
+                            <tr>
+                                <td>Varicose Veins</td>
+                                <td>Dilated, tortuous superficial veins</td>
+                                <td>Valve failure and venous dilation</td>
+                            </tr>
+                            <tr>
+                                <td>Hemosiderin Staining</td>
+                                <td>Brown/reddish discoloration of skin</td>
+                                <td>RBC extravasation and hemoglobin breakdown</td>
+                            </tr>
+                            <tr>
+                                <td>Stasis Dermatitis</td>
+                                <td>Red, scaly, itchy skin; may weep</td>
+                                <td>Inflammatory response to venous hypertension</td>
+                            </tr>
+                            <tr>
+                                <td>Lipodermatosclerosis</td>
+                                <td>Hardened, fibrotic skin; "inverted champagne bottle" leg</td>
+                                <td>Chronic inflammation and fibrosis</td>
+                            </tr>
+                            <tr>
+                                <td>Venous Ulcers</td>
+                                <td>Shallow, irregular ulcers at medial malleolus</td>
+                                <td>Tissue breakdown from chronic venous hypertension</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>Management of CVI</h3>
+
+                <ul>
+                    <li><strong>Compression therapy:</strong> Graduated compression stockings (30-40 mmHg); cornerstone of treatment</li>
+                    <li><strong>Leg elevation:</strong> Above heart level, 3-4 times daily for 30 minutes</li>
+                    <li><strong>Exercise:</strong> Walking activates calf muscle pump; avoid prolonged standing/sitting</li>
+                    <li><strong>Skin care:</strong> Moisturize dry skin; treat dermatitis; avoid trauma</li>
+                    <li><strong>Weight management:</strong> Reduce abdominal pressure on venous return</li>
+                    <li><strong>Procedures:</strong> Ablation, sclerotherapy, or surgery for severe cases</li>
+                </ul>
+
+                <div class="info-box tip">
+                    <div class="info-box-header">
+                        <i class="fas fa-check-circle"></i> Compression Therapy Tips
+                    </div>
+                    <p>Apply compression stockings in the morning <strong>before</strong> getting out of bed (before edema develops). Ensure proper fit - improper sizing can cause harm. Stockings should be replaced every 3-6 months as elasticity decreases. <strong>Contraindicated</strong> in significant arterial disease (ABI <0.5) - always check ABI before prescribing!</p>
+                </div>
+            </section>
+
+            <!-- Section 6: Deep Vein Thrombosis -->
+            <section class="guide-section" id="dvt">
+                <h2><span class="section-icon"><i class="fas fa-exclamation-circle"></i></span> Deep Vein Thrombosis (DVT)</h2>
+
+                <p>Deep vein thrombosis is a blood clot that forms in the deep veins, most commonly in the lower extremities. DVT is a serious condition that can lead to pulmonary embolism, a potentially fatal complication.</p>
+
+                <h3>Virchow's Triad</h3>
+
+                <p>The three factors that predispose to thrombus formation:</p>
+
+                <div class="guide-table-wrapper">
+                    <table class="guide-table">
+                        <thead>
+                            <tr>
+                                <th>Factor</th>
+                                <th>Definition</th>
+                                <th>Clinical Examples</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Venous Stasis</td>
+                                <td>Slowed or stagnant blood flow</td>
+                                <td>Immobility, paralysis, long flights, prolonged surgery, heart failure</td>
+                            </tr>
+                            <tr>
+                                <td>Endothelial Injury</td>
+                                <td>Damage to vessel wall lining</td>
+                                <td>Surgery, trauma, IV catheters, previous DVT, vasculitis</td>
+                            </tr>
+                            <tr>
+                                <td>Hypercoagulability</td>
+                                <td>Increased tendency to clot</td>
+                                <td>Malignancy, pregnancy, oral contraceptives, inherited disorders (Factor V Leiden), dehydration</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="info-box mnemonic">
+                    <div class="info-box-header">
+                        <i class="fas fa-brain"></i> Memory Aid: DVT Risk Factors
+                    </div>
+                    <p><strong>THROMBOSIS</strong></p>
+                    <ul>
+                        <li><strong>T</strong>rauma, Travel (long distance)</li>
+                        <li><strong>H</strong>ypercoagulable states, HRT/Hormones</li>
+                        <li><strong>R</strong>ecent surgery, Restricted mobility</li>
+                        <li><strong>O</strong>ld age, Obesity</li>
+                        <li><strong>M</strong>alignancy</li>
+                        <li><strong>B</strong>irth control pills, Blood disorders</li>
+                        <li><strong>O</strong>rthopedic surgery</li>
+                        <li><strong>S</strong>moking, Stroke</li>
+                        <li><strong>I</strong>mmobility, IV catheters</li>
+                        <li><strong>S</strong>epsis, prior clot history</li>
+                    </ul>
+                </div>
+
+                <h3>Clinical Presentation</h3>
+
+                <ul>
+                    <li><strong>Unilateral leg swelling</strong> - most common finding</li>
+                    <li><strong>Pain or tenderness</strong> - often in calf</li>
+                    <li><strong>Warmth</strong> - affected leg warmer than unaffected</li>
+                    <li><strong>Erythema</strong> - redness along course of vein</li>
+                    <li><strong>Palpable cord</strong> - thrombosed vein may be felt</li>
+                    <li><strong>Homan's sign</strong> - calf pain with dorsiflexion (not reliable - don't rely on this!)</li>
+                </ul>
+
+                <div class="info-box warning">
+                    <div class="info-box-header">
+                        <i class="fas fa-exclamation-triangle"></i> Critical Warning: PE Signs
+                    </div>
+                    <p>DVT can lead to <strong>pulmonary embolism (PE)</strong> if clot dislodges and travels to the lungs. Watch for:</p>
+                    <ul>
+                        <li>Sudden dyspnea</li>
+                        <li>Pleuritic chest pain</li>
+                        <li>Tachycardia, tachypnea</li>
+                        <li>Hypoxemia</li>
+                        <li>Hemoptysis</li>
+                        <li>Anxiety, sense of impending doom</li>
+                    </ul>
+                    <p><strong>PE is a medical emergency!</strong> Activate rapid response if suspected.</p>
+                </div>
+
+                <h3>Diagnosis</h3>
+
+                <ul>
+                    <li><strong>Wells Score:</strong> Clinical prediction rule to estimate DVT probability</li>
+                    <li><strong>D-dimer:</strong> High sensitivity but low specificity; useful for ruling OUT DVT if negative</li>
+                    <li><strong>Duplex ultrasound:</strong> Gold standard for diagnosis; shows non-compressible vein with thrombus</li>
+                    <li><strong>Venography:</strong> Rarely used; invasive contrast study</li>
+                </ul>
+            </section>
+
+            <!-- Section 7: DVT Prevention -->
+            <section class="guide-section" id="prevention">
+                <h2><span class="section-icon"><i class="fas fa-shield-alt"></i></span> DVT Prevention Strategies</h2>
+
+                <p>Prevention of DVT is a critical nursing responsibility, especially in hospitalized patients. Evidence-based prophylaxis significantly reduces the incidence of venous thromboembolism (VTE).</p>
+
+                <h3>Risk Assessment</h3>
+
+                <p>All hospitalized patients should be assessed for VTE risk. Common tools include the Padua Prediction Score (medical patients) and Caprini Score (surgical patients).</p>
+
+                <div class="guide-table-wrapper">
+                    <table class="guide-table">
+                        <thead>
+                            <tr>
+                                <th>Risk Level</th>
+                                <th>Examples</th>
+                                <th>Recommended Prophylaxis</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Low Risk</td>
+                                <td>Minor surgery, ambulatory patients</td>
+                                <td>Early ambulation</td>
+                            </tr>
+                            <tr>
+                                <td>Moderate Risk</td>
+                                <td>General surgery, medical illness with bed rest</td>
+                                <td>Pharmacologic OR mechanical</td>
+                            </tr>
+                            <tr>
+                                <td>High Risk</td>
+                                <td>Hip/knee replacement, major trauma, cancer surgery</td>
+                                <td>Pharmacologic AND mechanical</td>
+                            </tr>
+                            <tr>
+                                <td>High Bleeding Risk</td>
+                                <td>Active bleeding, recent neurosurgery</td>
+                                <td>Mechanical prophylaxis only</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>Mechanical Prophylaxis</h3>
+
+                <div class="interventions-list">
+                    <h4><i class="fas fa-cogs"></i> Mechanical Prevention Methods</h4>
+
+                    <div class="intervention-item">
+                        <div class="intervention-number">1</div>
+                        <div class="intervention-content">
+                            <h5>Sequential Compression Devices (SCDs)</h5>
+                            <p>Intermittent pneumatic compression of calves simulates walking and enhances venous return. Must be worn consistently - removing for >2 hours significantly reduces effectiveness.</p>
+                        </div>
+                    </div>
+
+                    <div class="intervention-item">
+                        <div class="intervention-number">2</div>
+                        <div class="intervention-content">
+                            <h5>Graduated Compression Stockings (GCS)</h5>
+                            <p>Anti-embolism stockings (TEDs) provide graduated compression (highest at ankle, decreasing up leg). Ensure proper fit and smooth application. Check skin integrity daily.</p>
+                        </div>
+                    </div>
+
+                    <div class="intervention-item">
+                        <div class="intervention-number">3</div>
+                        <div class="intervention-content">
+                            <h5>Venous Foot Pumps</h5>
+                            <p>Inflatable devices that compress the plantar venous plexus. Alternative when leg devices can't be used.</p>
+                        </div>
+                    </div>
+
+                    <div class="intervention-item">
+                        <div class="intervention-number">4</div>
+                        <div class="intervention-content">
+                            <h5>Early Ambulation</h5>
+                            <p>The most natural form of VTE prevention! Get patients out of bed and walking as soon as safely possible. Even standing and marching in place helps.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="florencebot-tip" id="tip-scd-compliance">
+                    <div class="florencebot-tip-header">
+                        <div class="florencebot-tip-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <span class="florencebot-tip-label">FlorenceBot Pro Tip</span>
+                    </div>
+                    <div class="florencebot-tip-title">SCDs Work - If They're On!</div>
+                    <div class="florencebot-tip-content">
+                        <strong>Compliance is everything with SCDs!</strong> Studies show SCDs reduce DVT by 60% - but only if worn consistently. Every time you enter a patient's room, check: Are the SCDs plugged in? Are they actually cycling? Are they on the patient's legs (not hanging off the bed)? Document SCD compliance. Educate patients and families on why they're important. The most expensive DVT prevention device in the world is worthless sitting on the floor. Make SCD checks part of your routine!
+                    </div>
+                </div>
+
+                <h3>Pharmacologic Prophylaxis</h3>
+
+                <div class="guide-table-wrapper">
+                    <table class="guide-table">
+                        <thead>
+                            <tr>
+                                <th>Medication</th>
+                                <th>Dose (Typical)</th>
+                                <th>Key Nursing Considerations</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Unfractionated Heparin (UFH)</td>
+                                <td>5,000 units SQ q8-12h</td>
+                                <td>Short half-life; reversible with protamine; monitor platelets for HIT</td>
+                            </tr>
+                            <tr>
+                                <td>Enoxaparin (Lovenox)</td>
+                                <td>40 mg SQ daily</td>
+                                <td>LMWH; more predictable; dose adjust for renal impairment (CrCl <30)</td>
+                            </tr>
+                            <tr>
+                                <td>Fondaparinux (Arixtra)</td>
+                                <td>2.5 mg SQ daily</td>
+                                <td>Factor Xa inhibitor; contraindicated if CrCl <30; no HIT risk</td>
+                            </tr>
+                            <tr>
+                                <td>Rivaroxaban (Xarelto)</td>
+                                <td>10 mg PO daily (post-surgery)</td>
+                                <td>Oral factor Xa inhibitor; convenient; limited reversal options</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="info-box warning">
+                    <div class="info-box-header">
+                        <i class="fas fa-exclamation-triangle"></i> Heparin-Induced Thrombocytopenia (HIT)
+                    </div>
+                    <p>HIT is a serious complication of heparin therapy (UFH > LMWH). It paradoxically causes <strong>thrombosis</strong>, not bleeding!</p>
+                    <ul>
+                        <li>Monitor platelet count baseline and every 2-3 days during heparin</li>
+                        <li>Suspect HIT if platelets drop >50% from baseline or below 100,000</li>
+                        <li>Timing: typically 5-14 days after starting heparin (or sooner if prior exposure)</li>
+                        <li>If suspected: STOP all heparin immediately, send HIT antibodies, start alternative anticoagulant</li>
+                    </ul>
+                </div>
+
+                <h3>Nursing Interventions for VTE Prevention</h3>
+
+                <ul>
+                    <li><strong>Assess VTE risk</strong> on admission and with changes in condition</li>
+                    <li><strong>Implement ordered prophylaxis</strong> - both mechanical and pharmacologic</li>
+                    <li><strong>Early mobility:</strong> Ambulate patients as soon as safely possible; consult PT/OT</li>
+                    <li><strong>Hydration:</strong> Prevent dehydration which increases blood viscosity</li>
+                    <li><strong>Positioning:</strong> Avoid positions that impede venous return (crossing legs, prolonged hip flexion)</li>
+                    <li><strong>Leg exercises:</strong> Teach ankle pumps, foot circles for immobile patients</li>
+                    <li><strong>Monitor for DVT:</strong> Assess legs for swelling, pain, warmth each shift</li>
+                    <li><strong>Patient education:</strong> Teach signs of DVT/PE; importance of compliance with prophylaxis</li>
+                </ul>
+            </section>
+
+            <!-- Section 8: Treatment & Nursing Care -->
+            <section class="guide-section" id="interventions">
+                <h2><span class="section-icon"><i class="fas fa-user-nurse"></i></span> Treatment & Nursing Care</h2>
+
+                <p>Management of peripheral vascular disease requires a comprehensive approach including risk factor modification, pharmacotherapy, and interventional procedures when indicated.</p>
+
+                <h3>Treatment of DVT</h3>
+
+                <div class="guide-table-wrapper">
+                    <table class="guide-table">
+                        <thead>
+                            <tr>
+                                <th>Treatment</th>
+                                <th>Purpose</th>
+                                <th>Nursing Considerations</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Anticoagulation (initial)</td>
+                                <td>Prevent clot extension and PE</td>
+                                <td>LMWH, UFH infusion, or DOACs; monitor for bleeding; aPTT for UFH</td>
+                            </tr>
+                            <tr>
+                                <td>Anticoagulation (long-term)</td>
+                                <td>Prevent recurrence</td>
+                                <td>Warfarin (INR 2-3), DOACs; duration 3+ months; patient education essential</td>
+                            </tr>
+                            <tr>
+                                <td>Thrombolysis</td>
+                                <td>Dissolve large clots</td>
+                                <td>Catheter-directed for iliofemoral DVT; high bleeding risk; ICU monitoring</td>
+                            </tr>
+                            <tr>
+                                <td>IVC Filter</td>
+                                <td>Prevent PE if anticoagulation contraindicated</td>
+                                <td>Does NOT treat DVT; does NOT replace anticoagulation when possible</td>
+                            </tr>
+                            <tr>
+                                <td>Compression Therapy</td>
+                                <td>Reduce edema, prevent PTS</td>
+                                <td>Start after acute phase; graduated compression stockings for 2+ years</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="florencebot-tip" id="tip-dvt-mobility">
+                    <div class="florencebot-tip-header">
+                        <div class="florencebot-tip-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <span class="florencebot-tip-label">FlorenceBot Pro Tip</span>
+                    </div>
+                    <div class="florencebot-tip-title">DVT and Ambulation - Myth Busted!</div>
+                    <div class="florencebot-tip-content">
+                        <strong>Old teaching: strict bed rest for DVT to prevent PE. NEW evidence: early ambulation is safe and beneficial!</strong> Multiple studies show that once therapeutic anticoagulation is established, early walking does NOT increase PE risk and actually reduces leg symptoms faster. Current guidelines recommend early ambulation with compression for most DVT patients. The exception: massive iliofemoral DVT or unstable patients may need brief initial rest. But for routine DVT, get them moving! Always verify your facility's protocol, but don't keep patients unnecessarily bedridden.
+                    </div>
+                </div>
+
+                <h3>Treatment of PAD</h3>
+
+                <ul>
+                    <li><strong>Risk factor modification:</strong> Smoking cessation (MOST important), BP control, diabetes management, lipid therapy</li>
+                    <li><strong>Exercise therapy:</strong> Supervised walking program; walk until claudication, rest, repeat; 30-45 min, 3x/week</li>
+                    <li><strong>Antiplatelet therapy:</strong> Aspirin or clopidogrel reduces cardiovascular events</li>
+                    <li><strong>Cilostazol (Pletal):</strong> PDE inhibitor; improves walking distance; contraindicated in heart failure</li>
+                    <li><strong>Revascularization:</strong> Angioplasty/stenting or surgical bypass for severe/refractory disease</li>
+                </ul>
+
+                <h3>Nursing Care for PAD</h3>
+
+                <div class="interventions-list">
+                    <h4><i class="fas fa-user-nurse"></i> Key Nursing Interventions</h4>
+
+                    <div class="intervention-item">
+                        <div class="intervention-number">1</div>
+                        <div class="intervention-content">
+                            <h5>Protect Extremities</h5>
+                            <p>Avoid trauma to ischemic limbs. Use heel protectors. Inspect feet daily. Proper footwear. No hot water bottles or heating pads (decreased sensation).</p>
+                        </div>
+                    </div>
+
+                    <div class="intervention-item">
+                        <div class="intervention-number">2</div>
+                        <div class="intervention-content">
+                            <h5>Position for Perfusion</h5>
+                            <p>For arterial disease: keep legs level or slightly dependent (NOT elevated). Elevating ischemic limbs worsens pain and perfusion. Reverse Trendelenburg may help rest pain.</p>
+                        </div>
+                    </div>
+
+                    <div class="intervention-item">
+                        <div class="intervention-number">3</div>
+                        <div class="intervention-content">
+                            <h5>Promote Circulation</h5>
+                            <p>Encourage prescribed exercise. Avoid crossing legs. Keep environment warm. Avoid vasoconstrictors (caffeine, tobacco, cold). Maintain hydration.</p>
+                        </div>
+                    </div>
+
+                    <div class="intervention-item">
+                        <div class="intervention-number">4</div>
+                        <div class="intervention-content">
+                            <h5>Monitor for Complications</h5>
+                            <p>Assess pulses, skin color, temperature, capillary refill. Watch for signs of critical limb ischemia: rest pain, non-healing wounds, gangrene. Report changes promptly.</p>
+                        </div>
+                    </div>
+
+                    <div class="intervention-item">
+                        <div class="intervention-number">5</div>
+                        <div class="intervention-content">
+                            <h5>Patient Education</h5>
+                            <p>Smoking cessation resources. Foot care instruction (especially diabetics). Signs of worsening disease. Medication adherence. Exercise prescription. When to seek care.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-box nclex-tip">
+                    <div class="info-box-header">
+                        <i class="fas fa-graduation-cap"></i> NCLEX Tip: Position Matters!
+                    </div>
+                    <p><strong>Arterial disease:</strong> Keep legs DOWN (level or dependent) to promote blood flow TO the tissues. Elevation worsens ischemia.</p>
+                    <p><strong>Venous disease:</strong> Keep legs UP (elevated) to promote blood return FROM the tissues. Dependency worsens edema.</p>
+                    <p><strong>Remember:</strong> Arteries = blood going OUT = keep down. Veins = blood coming BACK = raise up.</p>
+                </div>
+            </section>
+
+            <!-- Key Points Summary -->
+            <section class="key-points-summary">
+                <h2><i class="fas fa-star"></i> Key Takeaways</h2>
+                <div class="key-points-grid">
+                    <div class="key-point">
+                        <i class="fas fa-thermometer-half"></i>
+                        <p><strong>Arterial:</strong> Cool, pale, pulseless, painful with activity. <strong>Venous:</strong> Warm, brown, edematous, aching relieved by elevation.</p>
+                    </div>
+                    <div class="key-point">
+                        <i class="fas fa-ruler"></i>
+                        <p><strong>ABI 0.9-1.3</strong> is normal. <strong>≤0.4</strong> indicates critical limb ischemia. <strong>>1.3</strong> suggests calcified vessels.</p>
+                    </div>
+                    <div class="key-point">
+                        <i class="fas fa-running"></i>
+                        <p><strong>Intermittent claudication</strong> = PAD symptom. Predictable leg pain with walking, relieved by standing still.</p>
+                    </div>
+                    <div class="key-point">
+                        <i class="fas fa-dna"></i>
+                        <p><strong>Virchow's Triad:</strong> Stasis + Endothelial injury + Hypercoagulability = DVT risk.</p>
+                    </div>
+                    <div class="key-point">
+                        <i class="fas fa-shield-alt"></i>
+                        <p><strong>DVT prevention:</strong> SCDs, compression stockings, pharmacologic prophylaxis, and EARLY AMBULATION.</p>
+                    </div>
+                    <div class="key-point">
+                        <i class="fas fa-lungs"></i>
+                        <p><strong>DVT complication:</strong> Pulmonary embolism. Watch for sudden dyspnea, chest pain, tachycardia.</p>
+                    </div>
+                    <div class="key-point">
+                        <i class="fas fa-bed"></i>
+                        <p><strong>Position:</strong> Arterial disease - keep legs DOWN. Venous disease - keep legs UP.</p>
+                    </div>
+                    <div class="key-point">
+                        <i class="fas fa-smoking-ban"></i>
+                        <p><strong>Smoking cessation</strong> is the single most important modifiable risk factor for PAD.</p>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+
+        <!-- Document Footer -->
+        <div class="document-footer">
+            <img src="../assets/images/the-nursing-collective-logo.webp" alt="The Nursing Collective" class="footer-logo">
+            <p class="footer-tagline">Empowering nursing students with evidence-based study resources</p>
+            <p class="footer-copyright">&copy; 2026 The Nursing Collective. All rights reserved.</p>
+        </div>
+
+    </div>
+
+    <!-- Guide page scripts (external for CSP compliance) -->
+    <script src="configs/peripheral-vascular-disease-config.js"></script>
+    <script src="guide-sidebar.js"></script>
+    <script src="guide-script.js"></script>
+</body>
+</html>
