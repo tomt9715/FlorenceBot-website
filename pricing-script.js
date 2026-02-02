@@ -1,7 +1,86 @@
 // Pricing Page JavaScript
-// Class-based Package System with Tier Toggle
+// Subscription-based Access System
 
 document.addEventListener('DOMContentLoaded', function() {
+
+    // ==========================================================================
+    // SUBSCRIPTION PLAN BUTTONS
+    // ==========================================================================
+
+    const planButtons = document.querySelectorAll('[data-plan]');
+    const ctaSubscribeBtn = document.getElementById('cta-subscribe-btn');
+
+    // Handle subscription plan button clicks
+    planButtons.forEach(button => {
+        button.addEventListener('click', async function() {
+            const planId = this.getAttribute('data-plan');
+            await handleSubscriptionClick(planId, this);
+        });
+    });
+
+    // Handle CTA button click (defaults to monthly)
+    if (ctaSubscribeBtn) {
+        ctaSubscribeBtn.addEventListener('click', async function(e) {
+            e.preventDefault();
+            await handleSubscriptionClick('monthly-access', this);
+        });
+    }
+
+    async function handleSubscriptionClick(planId, button) {
+        // Check if user is logged in
+        if (!isAuthenticated()) {
+            // Store intended plan and redirect to login
+            sessionStorage.setItem('intendedPlan', planId);
+            window.location.href = '/login.html?redirect=pricing';
+            return;
+        }
+
+        const originalText = button.innerHTML;
+        button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading...';
+        button.disabled = true;
+
+        try {
+            // Get user email
+            const user = getCurrentUser();
+            if (!user || !user.email) {
+                throw new Error('Unable to get user email');
+            }
+
+            // Create checkout session
+            const data = await createSubscriptionCheckout(planId, user.email);
+
+            // Redirect to Stripe Checkout
+            if (data.url) {
+                window.location.href = data.url;
+            } else {
+                throw new Error('No checkout URL returned');
+            }
+
+        } catch (error) {
+            console.error('Subscription checkout error:', error);
+            button.innerHTML = originalText;
+            button.disabled = false;
+            alert('Unable to start checkout. Please try again or contact support.');
+        }
+    }
+
+    // Check if user came back after login with an intended plan
+    const intendedPlan = sessionStorage.getItem('intendedPlan');
+    if (intendedPlan && isAuthenticated()) {
+        sessionStorage.removeItem('intendedPlan');
+        // Find and click the button for the intended plan
+        const planButton = document.querySelector(`[data-plan="${intendedPlan}"]`);
+        if (planButton) {
+            // Small delay to ensure page is fully loaded
+            setTimeout(() => {
+                planButton.click();
+            }, 500);
+        }
+    }
+
+    // ==========================================================================
+    // FREE GUIDE PDF DOWNLOAD
+    // ==========================================================================
 
     // Free Guide PDF Download functionality
     const freeGuideButtons = document.querySelectorAll('[data-free-guide]');

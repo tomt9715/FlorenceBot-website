@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pricing - Simple, Transparent Options | The Nursing Collective</title>
-    <meta name="description" content="Simple pricing for nursing students. Free tier, Full packages ($49.99), Lite packages ($24.99), or individual guides ($5.99). One-time payment, lifetime access.">
+    <meta name="description" content="Simple subscription plans for nursing students. Monthly ($14.99/mo), Semester ($44.99), or Lifetime ($119). Access all study guides, clinical resources, and quick reference tools.">
 
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="favicon.ico">
@@ -42,39 +42,35 @@
         "@context": "https://schema.org",
         "@type": "WebPage",
         "name": "Pricing - The Nursing Collective",
-        "description": "Simple pricing for nursing students. Free tier, Full packages ($49.99), Lite packages ($24.99), or individual guides ($5.99). One-time payment, lifetime access.",
+        "description": "Subscription plans for nursing students. Monthly ($14.99/mo), Semester ($44.99), or Lifetime ($119). Access all study guides, clinical resources, and quick reference tools.",
         "url": "https://thenursingcollective.pro/pricing.html",
         "mainEntity": {
             "@type": "ItemList",
-            "name": "Pricing Options",
+            "name": "Subscription Plans",
             "itemListElement": [
                 {
                     "@type": "Offer",
-                    "name": "Free Tier",
-                    "description": "Access to Discord community, free study resources, and community support",
-                    "price": "0",
-                    "priceCurrency": "USD"
+                    "name": "Monthly Access",
+                    "description": "Full access to all study guides, clinical resources, and quick reference tools. Cancel anytime.",
+                    "price": "14.99",
+                    "priceCurrency": "USD",
+                    "priceValidUntil": "2027-12-31"
                 },
                 {
                     "@type": "Offer",
-                    "name": "Individual Guide",
-                    "description": "Single study guide with lifetime access",
-                    "price": "5.99",
-                    "priceCurrency": "USD"
+                    "name": "Semester Access",
+                    "description": "4 months of full access - perfect for one class. Best value.",
+                    "price": "44.99",
+                    "priceCurrency": "USD",
+                    "priceValidUntil": "2027-12-31"
                 },
                 {
                     "@type": "Offer",
-                    "name": "Lite Package",
-                    "description": "Class-specific study guide collection",
-                    "price": "24.99",
-                    "priceCurrency": "USD"
-                },
-                {
-                    "@type": "Offer",
-                    "name": "Full Package",
-                    "description": "Complete class study guide collection with all guides",
-                    "price": "49.99",
-                    "priceCurrency": "USD"
+                    "name": "Lifetime Access",
+                    "description": "One-time payment for permanent access to all current and future content.",
+                    "price": "119.00",
+                    "priceCurrency": "USD",
+                    "priceValidUntil": "2027-12-31"
                 }
             ]
         }
@@ -198,10 +194,10 @@
                 <i class="fas fa-tags"></i> PRICING OPTIONS
             </div>
             <h1 style="font-size: 3rem; font-weight: 700; margin-bottom: 20px; line-height: 1.2;">
-                Simple, Transparent Pricing
+                One Price. Everything You Need.
             </h1>
             <p style="font-size: 1.25rem; color: rgba(255, 255, 255, 0.95); max-width: 700px; margin: 0 auto 40px;">
-                Choose the option that works best for your study needs. No subscriptions, just one-time payments for lifetime access.
+                Get unlimited access to all study guides, clinical resources, and quick reference tools. Choose the plan that fits your journey.
             </p>
         </div>
     </section>
@@ -213,270 +209,264 @@
                 <div class="free-badge">
                     <i class="fas fa-gift"></i> FREE RESOURCES
                 </div>
-                <h2>Get Started with Free Study Tools</h2>
-                <p>No credit card required • Instant download • Created by nurses, for nurses</p>
+                <h2>5 Free Nursing School Survival Guides</h2>
+                <p>No account required • Instant access • Created by nurses, for nurses</p>
             </div>
 
-            <div class="resources-grid">
-                <!-- NCLEX Priority Concepts -->
+            <div class="resources-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px;">
+                <!-- How to Study -->
                 <div class="resource-card">
-                    <div class="resource-icon">
-                        <img src="assets/images/pricing-think.webp" alt="NCLEX Priority Concepts" loading="lazy">
+                    <div class="resource-icon" style="background: linear-gradient(135deg, #2E86AB 0%, #1a5276 100%);">
+                        <i class="fas fa-brain" style="font-size: 2.5rem; color: white;"></i>
                     </div>
-                    <h3>Top 50 NCLEX Priority Concepts</h3>
-                    <p>Quick reference guide covering the most essential concepts for NCLEX success, organized by category.</p>
+                    <h3>How to Study for Nursing School</h3>
+                    <p>Science-backed study strategies designed specifically for nursing school success.</p>
                     <ul class="resource-features">
-                        <li><i class="fas fa-check"></i> 50 priority concepts</li>
-                        <li><i class="fas fa-check"></i> Organized by NCLEX categories</li>
+                        <li><i class="fas fa-check"></i> Active recall techniques</li>
+                        <li><i class="fas fa-check"></i> NCLEX-style thinking</li>
                     </ul>
-                    <button class="btn btn-outline-primary btn-download" data-free-guide="nclex-priority-concepts">
-                        <i class="fas fa-download"></i> Download PDF
-                    </button>
+                    <a href="resources/how-to-study.html" class="btn btn-outline-primary">
+                        <i class="fas fa-book-open"></i> Read Guide
+                    </a>
                 </div>
 
-                <!-- First Clinical Day Survival Guide -->
+                <!-- Not Overwhelmed -->
                 <div class="resource-card">
-                    <div class="resource-icon">
-                        <img src="assets/images/pricing-nurse.webp" alt="Clinical Day Survival Guide" loading="lazy">
+                    <div class="resource-icon" style="background: linear-gradient(135deg, #A23B72 0%, #7b2d57 100%);">
+                        <i class="fas fa-heart" style="font-size: 2.5rem; color: white;"></i>
                     </div>
-                    <h3>First Clinical Day Survival Guide</h3>
-                    <p>Essential tips and practical strategies to help nervous nursing students feel confident and prepared.</p>
+                    <h3>How to Not Be Overwhelmed</h3>
+                    <p>Mental health strategies and coping techniques for nursing students.</p>
                     <ul class="resource-features">
-                        <li><i class="fas fa-check"></i> Pre-clinical preparation</li>
-                        <li><i class="fas fa-check"></i> Day-of strategies & tips</li>
+                        <li><i class="fas fa-check"></i> Stress management</li>
+                        <li><i class="fas fa-check"></i> Work-life balance</li>
                     </ul>
-                    <button class="btn btn-outline-primary btn-download" data-free-guide="clinical-day-survival-guide">
-                        <i class="fas fa-download"></i> Download PDF
-                    </button>
+                    <a href="resources/not-overwhelmed.html" class="btn btn-outline-primary">
+                        <i class="fas fa-book-open"></i> Read Guide
+                    </a>
                 </div>
 
-                <!-- Nursing School Supply List -->
+                <!-- Time Management -->
                 <div class="resource-card">
-                    <div class="resource-icon">
-                        <img src="assets/images/pricing-checklist.webp" alt="Nursing School Supply List" loading="lazy">
+                    <div class="resource-icon" style="background: linear-gradient(135deg, #F18F01 0%, #c47301 100%);">
+                        <i class="fas fa-clock" style="font-size: 2.5rem; color: white;"></i>
                     </div>
-                    <h3>Nursing School Supply List</h3>
-                    <p>Comprehensive supply checklist organized by program level with practical recommendations and money-saving tips.</p>
+                    <h3>Time Management for Nursing Students</h3>
+                    <p>Practical scheduling strategies to balance classes, clinicals, and life.</p>
                     <ul class="resource-features">
-                        <li><i class="fas fa-check"></i> Essential & optional items</li>
-                        <li><i class="fas fa-check"></i> Organized by program level</li>
+                        <li><i class="fas fa-check"></i> Weekly planning</li>
+                        <li><i class="fas fa-check"></i> Priority matrices</li>
                     </ul>
-                    <button class="btn btn-outline-primary btn-download" data-free-guide="nursing-supply-list">
-                        <i class="fas fa-download"></i> Download PDF
-                    </button>
+                    <a href="resources/time-management.html" class="btn btn-outline-primary">
+                        <i class="fas fa-book-open"></i> Read Guide
+                    </a>
                 </div>
+
+                <!-- Care Plans -->
+                <div class="resource-card">
+                    <div class="resource-icon" style="background: linear-gradient(135deg, #2E7D32 0%, #1b5e20 100%);">
+                        <i class="fas fa-clipboard-list" style="font-size: 2.5rem; color: white;"></i>
+                    </div>
+                    <h3>How to Write Care Plans</h3>
+                    <p>Step-by-step guide to writing nursing care plans that actually make sense.</p>
+                    <ul class="resource-features">
+                        <li><i class="fas fa-check"></i> NANDA diagnoses</li>
+                        <li><i class="fas fa-check"></i> SMART goals</li>
+                    </ul>
+                    <a href="resources/care-plans.html" class="btn btn-outline-primary">
+                        <i class="fas fa-book-open"></i> Read Guide
+                    </a>
+                </div>
+
+                <!-- Feeling Like Failing -->
+                <div class="resource-card">
+                    <div class="resource-icon" style="background: linear-gradient(135deg, #7B1FA2 0%, #4a148c 100%);">
+                        <i class="fas fa-hand-holding-heart" style="font-size: 2.5rem; color: white;"></i>
+                    </div>
+                    <h3>What to Do When You Feel Like You're Failing</h3>
+                    <p>Support and strategies for when nursing school feels impossible.</p>
+                    <ul class="resource-features">
+                        <li><i class="fas fa-check"></i> Recovery strategies</li>
+                        <li><i class="fas fa-check"></i> Getting help</li>
+                    </ul>
+                    <a href="resources/feeling-like-failing.html" class="btn btn-outline-primary">
+                        <i class="fas fa-book-open"></i> Read Guide
+                    </a>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 32px;">
+                <a href="resources.html" class="btn btn-primary">
+                    <i class="fas fa-arrow-right"></i> View All Free Resources
+                </a>
             </div>
         </div>
     </section>
 
-    <!-- Pricing Tiers Comparison -->
+    <!-- Subscription Plans -->
     <section style="padding: 40px 0 80px;">
         <div class="container">
-            <div class="pricing-tiers-grid">
-                <!-- Free Tier -->
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 1000px; margin: 0 auto;">
+
+                <!-- Monthly Access -->
                 <div>
                     <div class="pricing-card" style="background: var(--card-background); border-radius: 20px; padding: 32px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); transition: all 0.3s ease; height: 100%; display: flex; flex-direction: column; border: 2px solid var(--border-color);">
                         <div style="text-align: center; margin-bottom: 24px;">
                             <div style="margin-bottom: 12px; font-size: 3rem; color: var(--primary-color);">
-                                <i class="fas fa-comments"></i>
+                                <i class="fas fa-calendar-alt"></i>
                             </div>
-                            <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 8px; color: var(--text-primary);">Free Tier</h3>
-                            <p style="color: var(--text-secondary); font-size: 0.9rem; margin: 0;">Community access</p>
+                            <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 8px; color: var(--text-primary);">Monthly</h3>
+                            <p style="color: var(--text-secondary); font-size: 0.9rem; margin: 0;">Flexible monthly access</p>
                         </div>
 
                         <div style="text-align: center; margin-bottom: 24px;">
-                            <div style="font-size: 3rem; font-weight: 700; color: var(--text-primary);">$0</div>
-                            <p style="font-size: 0.9rem; color: var(--text-secondary); margin: 8px 0 0 0;">Forever free</p>
+                            <div style="font-size: 3rem; font-weight: 700; color: var(--primary-color);">$14.99</div>
+                            <p style="font-size: 0.9rem; color: var(--text-secondary); margin: 8px 0 0 0;">per month • Cancel anytime</p>
                         </div>
 
                         <div style="margin-bottom: 24px; flex-grow: 1;">
                             <ul style="list-style: none; padding: 0; margin: 0;">
                                 <li style="padding: 8px 0; color: var(--text-primary); font-size: 0.95rem;">
-                                    <i class="fas fa-check" style="color: var(--success-color); margin-right: 8px;"></i> Discord community access
+                                    <i class="fas fa-check" style="color: var(--success-color); margin-right: 8px;"></i> All study guides
                                 </li>
                                 <li style="padding: 8px 0; color: var(--text-primary); font-size: 0.95rem;">
-                                    <i class="fas fa-check" style="color: var(--success-color); margin-right: 8px;"></i> Study tips & resources
+                                    <i class="fas fa-check" style="color: var(--success-color); margin-right: 8px;"></i> Clinical confidence resources
                                 </li>
                                 <li style="padding: 8px 0; color: var(--text-primary); font-size: 0.95rem;">
-                                    <i class="fas fa-check" style="color: var(--success-color); margin-right: 8px;"></i> Peer support network
+                                    <i class="fas fa-check" style="color: var(--success-color); margin-right: 8px;"></i> Quick reference tools
                                 </li>
-                                <li style="padding: 8px 0; color: var(--text-secondary); font-size: 0.95rem;">
-                                    <i class="fas fa-times" style="color: var(--text-muted); margin-right: 8px;"></i> No study guides
+                                <li style="padding: 8px 0; color: var(--text-primary); font-size: 0.95rem;">
+                                    <i class="fas fa-check" style="color: var(--success-color); margin-right: 8px;"></i> New content as released
+                                </li>
+                                <li style="padding: 8px 0; color: var(--text-primary); font-size: 0.95rem;">
+                                    <i class="fas fa-check" style="color: var(--success-color); margin-right: 8px;"></i> Cancel anytime
                                 </li>
                             </ul>
                         </div>
 
-                        <a href="https://discord.gg/y2Mh77wAV2" class="btn btn-outline-primary btn-pricing">
-                            Join Discord
-                        </a>
+                        <button class="btn btn-outline-primary btn-pricing" data-plan="monthly-access">
+                            Get Started
+                        </button>
                     </div>
                 </div>
 
-                <!-- Individual Guides -->
-                <div>
-                    <div class="pricing-card" style="background: var(--card-background); border-radius: 20px; padding: 32px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); transition: all 0.3s ease; height: 100%; display: flex; flex-direction: column; border: 2px solid var(--border-color);">
-                        <div style="text-align: center; margin-bottom: 24px;">
-                            <div style="margin-bottom: 12px;">
-                                <img src="assets/images/shopping-cart.webp" alt="Individual Guides" style="width: 64px; height: 64px;" loading="lazy">
-                            </div>
-                            <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 8px; color: var(--text-primary);">Individual Guides</h3>
-                            <p style="color: var(--text-secondary); font-size: 0.9rem; margin: 0;">Build your own collection</p>
-                        </div>
-
-                        <div style="text-align: center; margin-bottom: 24px;">
-                            <div style="font-size: 3rem; font-weight: 700; color: var(--primary-color);">$5.99</div>
-                            <p style="font-size: 0.9rem; color: var(--text-secondary); margin: 8px 0 0 0;">Per guide • One-time payment</p>
-                        </div>
-
-                        <div style="margin-bottom: 24px; flex-grow: 1;">
-                            <ul style="list-style: none; padding: 0; margin: 0;">
-                                <li style="padding: 8px 0; color: var(--text-primary); font-size: 0.95rem;">
-                                    <i class="fas fa-check" style="color: var(--success-color); margin-right: 8px;"></i> Single topic guide
-                                </li>
-                                <li style="padding: 8px 0; color: var(--text-primary); font-size: 0.95rem;">
-                                    <i class="fas fa-check" style="color: var(--success-color); margin-right: 8px;"></i> Complete content coverage
-                                </li>
-                                <li style="padding: 8px 0; color: var(--text-primary); font-size: 0.95rem;">
-                                    <i class="fas fa-check" style="color: var(--success-color); margin-right: 8px;"></i> Key concept summary
-                                </li>
-                                <li style="padding: 8px 0; color: var(--text-primary); font-size: 0.95rem;">
-                                    <i class="fas fa-check" style="color: var(--success-color); margin-right: 8px;"></i> Mix & match topics
-                                </li>
-                                <li style="padding: 8px 0; color: var(--text-secondary); font-size: 0.95rem;">
-                                    <i class="fas fa-times" style="color: var(--text-muted); margin-right: 8px;"></i> No NCLEX questions
-                                </li>
-                                <li style="padding: 8px 0; color: var(--text-primary); font-size: 0.95rem; font-weight: 600;">
-                                    <i class="fas fa-info-circle" style="color: var(--primary-color); margin-right: 8px;"></i> 50+ guides available
-                                </li>
-                            </ul>
-                        </div>
-
-                        <a href="store.html" class="btn btn-primary btn-pricing">
-                            Browse Store
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Lite Package -->
-                <div>
-                    <div class="pricing-card" style="background: var(--card-background); border-radius: 20px; padding: 32px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); transition: all 0.3s ease; height: 100%; display: flex; flex-direction: column; border: 2px solid var(--border-color);">
-                        <div style="text-align: center; margin-bottom: 24px;">
-                            <div style="margin-bottom: 12px;">
-                                <img src="assets/images/book-lite.webp" alt="Lite Package" style="width: 64px; height: 64px;" loading="lazy">
-                            </div>
-                            <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 8px; color: var(--text-primary);">Lite Package</h3>
-                            <p style="color: var(--text-secondary); font-size: 0.9rem; margin: 0;">Essential study materials</p>
-                        </div>
-
-                        <div style="text-align: center; margin-bottom: 24px;">
-                            <div style="font-size: 3rem; font-weight: 700; color: var(--primary-color);">$24.99</div>
-                            <p style="font-size: 0.9rem; color: var(--text-secondary); margin: 8px 0 0 0;">Per class • One-time payment</p>
-                        </div>
-
-                        <div style="margin-bottom: 24px; flex-grow: 1;">
-                            <ul style="list-style: none; padding: 0; margin: 0;">
-                                <li style="padding: 8px 0; color: var(--text-primary); font-size: 0.95rem;">
-                                    <i class="fas fa-check" style="color: var(--success-color); margin-right: 8px;"></i> All study guides for class
-                                </li>
-                                <li style="padding: 8px 0; color: var(--text-primary); font-size: 0.95rem;">
-                                    <i class="fas fa-check" style="color: var(--success-color); margin-right: 8px;"></i> Key concept summaries
-                                </li>
-                                <li style="padding: 8px 0; color: var(--text-primary); font-size: 0.95rem;">
-                                    <i class="fas fa-check" style="color: var(--success-color); margin-right: 8px;"></i> Quick reference cheat sheets
-                                </li>
-                                <li style="padding: 8px 0; color: var(--text-primary); font-size: 0.95rem;">
-                                    <i class="fas fa-check" style="color: var(--success-color); margin-right: 8px;"></i> Topic review quizzes
-                                </li>
-                                <li style="padding: 8px 0; color: var(--text-primary); font-size: 0.95rem;">
-                                    <i class="fas fa-check" style="color: var(--success-color); margin-right: 8px;"></i> Study schedule template
-                                </li>
-                                <li style="padding: 8px 0; color: var(--text-primary); font-size: 0.95rem;">
-                                    <i class="fas fa-check" style="color: var(--success-color); margin-right: 8px;"></i> Future updates included
-                                </li>
-                            </ul>
-                        </div>
-
-                        <a href="store.html" class="btn btn-primary btn-pricing">
-                            Browse Classes
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Full Package - POPULAR -->
+                <!-- Semester Access - BEST VALUE -->
                 <div>
                     <div class="pricing-card" style="position: relative; background: var(--card-background); border-radius: 20px; padding: 32px; box-shadow: 0 8px 30px rgba(0,0,0,0.15); transition: all 0.3s ease; height: 100%; display: flex; flex-direction: column; border: 2px solid var(--primary-color); transform: scale(1.05); overflow: visible;">
-                        <div style="position: absolute; top: -12px; right: 20px; background: linear-gradient(135deg, #f59e0b, #d97706); color: white; padding: 6px 16px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4); white-space: nowrap;">
-                            <i class="fas fa-star"></i> POPULAR
+                        <div style="position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: linear-gradient(135deg, #f59e0b, #d97706); color: white; padding: 6px 16px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4); white-space: nowrap;">
+                            <i class="fas fa-star"></i> BEST VALUE
                         </div>
 
                         <div style="text-align: center; margin-bottom: 24px;">
-                            <div style="margin-bottom: 12px;">
-                                <img src="assets/images/books.webp" alt="Full Package" style="width: 64px; height: 64px;" loading="lazy">
+                            <div style="margin-bottom: 12px; font-size: 3rem; color: var(--primary-color);">
+                                <i class="fas fa-graduation-cap"></i>
                             </div>
-                            <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 8px; color: var(--text-primary);">Full Package</h3>
-                            <p style="color: var(--text-secondary); font-size: 0.9rem; margin: 0;">Complete exam prep toolkit</p>
+                            <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 8px; color: var(--text-primary);">Semester</h3>
+                            <p style="color: var(--text-secondary); font-size: 0.9rem; margin: 0;">4 months of access</p>
                         </div>
 
                         <div style="text-align: center; margin-bottom: 24px;">
-                            <div style="font-size: 3rem; font-weight: 700; color: var(--primary-color);">$49.99</div>
-                            <p style="font-size: 0.9rem; color: var(--text-secondary); margin: 8px 0 0 0;">Per class • One-time payment</p>
+                            <div style="font-size: 3rem; font-weight: 700; color: var(--primary-color);">$44.99</div>
+                            <p style="font-size: 0.9rem; color: var(--text-secondary); margin: 8px 0 0 0;">one-time • Save 25%</p>
                         </div>
 
                         <div style="margin-bottom: 24px; flex-grow: 1;">
-                            <p style="font-size: 0.85rem; color: var(--primary-color); font-weight: 600; margin: 0 0 12px 0; padding-bottom: 8px; border-bottom: 1px solid var(--border-color);">
-                                <i class="fas fa-arrow-right" style="margin-right: 6px;"></i> Everything in Lite, plus:
-                            </p>
                             <ul style="list-style: none; padding: 0; margin: 0;">
                                 <li style="padding: 8px 0; color: var(--text-primary); font-size: 0.95rem;">
-                                    <i class="fas fa-check" style="color: var(--success-color); margin-right: 8px;"></i> 200+ NCLEX-style questions
+                                    <i class="fas fa-check" style="color: var(--success-color); margin-right: 8px;"></i> All study guides
                                 </li>
                                 <li style="padding: 8px 0; color: var(--text-primary); font-size: 0.95rem;">
-                                    <i class="fas fa-check" style="color: var(--success-color); margin-right: 8px;"></i> Detailed answer explanations
+                                    <i class="fas fa-check" style="color: var(--success-color); margin-right: 8px;"></i> Clinical confidence resources
                                 </li>
                                 <li style="padding: 8px 0; color: var(--text-primary); font-size: 0.95rem;">
-                                    <i class="fas fa-check" style="color: var(--success-color); margin-right: 8px;"></i> Test-taking strategies guide
+                                    <i class="fas fa-check" style="color: var(--success-color); margin-right: 8px;"></i> Quick reference tools
                                 </li>
                                 <li style="padding: 8px 0; color: var(--text-primary); font-size: 0.95rem;">
-                                    <i class="fas fa-check" style="color: var(--success-color); margin-right: 8px;"></i> Printable PDF study cards
+                                    <i class="fas fa-check" style="color: var(--success-color); margin-right: 8px;"></i> New content as released
                                 </li>
-                                <li style="padding: 8px 0; color: var(--text-primary); font-size: 0.95rem;">
-                                    <i class="fas fa-check" style="color: var(--success-color); margin-right: 8px;"></i> Customizable study planner
-                                </li>
-                                <li style="padding: 8px 0; color: var(--text-primary); font-size: 0.95rem;">
-                                    <i class="fas fa-check" style="color: var(--success-color); margin-right: 8px;"></i> Early access to new content
+                                <li style="padding: 8px 0; color: var(--text-primary); font-size: 0.95rem; font-weight: 600;">
+                                    <i class="fas fa-tag" style="color: var(--primary-color); margin-right: 8px;"></i> Perfect for one class
                                 </li>
                             </ul>
                         </div>
 
-                        <a href="store.html" class="btn btn-primary btn-pricing">
-                            Browse Classes
-                        </a>
+                        <button class="btn btn-primary btn-pricing" data-plan="semester-access">
+                            Get Semester Access
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Lifetime Access -->
+                <div>
+                    <div class="pricing-card" style="background: var(--card-background); border-radius: 20px; padding: 32px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); transition: all 0.3s ease; height: 100%; display: flex; flex-direction: column; border: 2px solid var(--border-color);">
+                        <div style="text-align: center; margin-bottom: 24px;">
+                            <div style="margin-bottom: 12px; font-size: 3rem; color: var(--primary-color);">
+                                <i class="fas fa-infinity"></i>
+                            </div>
+                            <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 8px; color: var(--text-primary);">Lifetime</h3>
+                            <p style="color: var(--text-secondary); font-size: 0.9rem; margin: 0;">Access forever</p>
+                        </div>
+
+                        <div style="text-align: center; margin-bottom: 24px;">
+                            <div style="font-size: 3rem; font-weight: 700; color: var(--primary-color);">$119</div>
+                            <p style="font-size: 0.9rem; color: var(--text-secondary); margin: 8px 0 0 0;">one-time • Never expires</p>
+                        </div>
+
+                        <div style="margin-bottom: 24px; flex-grow: 1;">
+                            <ul style="list-style: none; padding: 0; margin: 0;">
+                                <li style="padding: 8px 0; color: var(--text-primary); font-size: 0.95rem;">
+                                    <i class="fas fa-check" style="color: var(--success-color); margin-right: 8px;"></i> All study guides
+                                </li>
+                                <li style="padding: 8px 0; color: var(--text-primary); font-size: 0.95rem;">
+                                    <i class="fas fa-check" style="color: var(--success-color); margin-right: 8px;"></i> Clinical confidence resources
+                                </li>
+                                <li style="padding: 8px 0; color: var(--text-primary); font-size: 0.95rem;">
+                                    <i class="fas fa-check" style="color: var(--success-color); margin-right: 8px;"></i> Quick reference tools
+                                </li>
+                                <li style="padding: 8px 0; color: var(--text-primary); font-size: 0.95rem;">
+                                    <i class="fas fa-check" style="color: var(--success-color); margin-right: 8px;"></i> All future content
+                                </li>
+                                <li style="padding: 8px 0; color: var(--text-primary); font-size: 0.95rem; font-weight: 600;">
+                                    <i class="fas fa-heart" style="color: #e11d48; margin-right: 8px;"></i> Support our mission
+                                </li>
+                            </ul>
+                        </div>
+
+                        <button class="btn btn-outline-primary btn-pricing" data-plan="lifetime-access">
+                            Get Lifetime Access
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- What's Included -->
+            <div style="text-align: center; margin-top: 60px; max-width: 800px; margin-left: auto; margin-right: auto;">
+                <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 24px; color: var(--text-primary);">What You Get With Full Access</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
+                    <div style="padding: 20px; background: var(--background-light); border-radius: 12px;">
+                        <div style="font-size: 2rem; margin-bottom: 8px;">📚</div>
+                        <strong style="color: var(--text-primary);">Study Guides</strong>
+                        <p style="font-size: 0.9rem; color: var(--text-secondary); margin: 8px 0 0 0;">17+ comprehensive guides covering cardiovascular, respiratory, and more</p>
+                    </div>
+                    <div style="padding: 20px; background: var(--background-light); border-radius: 12px;">
+                        <div style="font-size: 2rem; margin-bottom: 8px;">🩺</div>
+                        <strong style="color: var(--text-primary);">Clinical Resources</strong>
+                        <p style="font-size: 0.9rem; color: var(--text-secondary); margin: 8px 0 0 0;">7 guides to help you feel confident in clinicals</p>
+                    </div>
+                    <div style="padding: 20px; background: var(--background-light); border-radius: 12px;">
+                        <div style="font-size: 2rem; margin-bottom: 8px;">📋</div>
+                        <strong style="color: var(--text-primary);">Quick References</strong>
+                        <p style="font-size: 0.9rem; color: var(--text-secondary); margin: 8px 0 0 0;">Lab values, vital signs, medications, and more</p>
                     </div>
                 </div>
             </div>
 
             <!-- Pricing Note -->
-            <div style="text-align: center; margin-top: 40px; padding: 24px; background: var(--background-light); border-radius: 12px;">
+            <div style="text-align: center; margin-top: 40px; padding: 24px; background: var(--background-light); border-radius: 12px; max-width: 800px; margin-left: auto; margin-right: auto;">
                 <p style="font-size: 1rem; color: var(--text-secondary); margin: 0;">
                     <i class="fas fa-shield-alt" style="color: var(--primary-color); margin-right: 8px;"></i>
-                    <strong>All purchases include lifetime access.</strong> Buy once, access forever. All packages include future content updates at no additional cost.
+                    <strong>Secure payment via Stripe.</strong> All plans include access to current content plus everything new we release during your subscription.
                 </p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Store Callout Section -->
-    <section style="padding: 60px 0; background: var(--background-light);">
-        <div class="container">
-            <div style="max-width: 900px; margin: 0 auto; text-align: center; background: var(--card-background); border-radius: 20px; padding: 60px 40px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
-                <div style="font-size: 3.5rem; margin-bottom: 20px;">🛒</div>
-                <h2 style="font-size: 2.2rem; font-weight: 700; margin-bottom: 16px;">Want to Build Your Own Collection?</h2>
-                <p style="font-size: 1.1rem; color: var(--text-secondary); margin-bottom: 32px; line-height: 1.6;">
-                    Not ready for a full class package? Browse our store and purchase individual study guides for <strong style="color: var(--primary-color);">$5.99 each</strong>. Mix and match to create your perfect study guide collection.
-                </p>
-                <a href="store.html" class="btn btn-primary btn-lg">
-                    <i class="fas fa-shopping-cart"></i> Browse Individual Guides
-                </a>
             </div>
         </div>
     </section>
@@ -486,82 +476,80 @@
         <div class="container">
             <div style="text-align: center; margin-bottom: 60px;">
                 <h2 style="font-size: 2.5rem; font-weight: 700; margin-bottom: 16px;">Frequently Asked Questions</h2>
-                <p style="font-size: 1.1rem; color: var(--text-secondary);">Everything you need to know about our class packages</p>
+                <p style="font-size: 1.1rem; color: var(--text-secondary);">Everything you need to know about our subscription plans</p>
             </div>
 
             <div style="max-width: 800px; margin: 0 auto;">
                 <div class="faq-item" style="margin-bottom: 16px; background: var(--card-background); border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color);">
                     <button class="faq-question" style="width: 100%; padding: 24px; text-align: left; background: none; border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
-                        <span style="font-size: 1.1rem; font-weight: 600; color: var(--text-primary);">How do class packages work?</span>
+                        <span style="font-size: 1.1rem; font-weight: 600; color: var(--text-primary);">What do I get with a subscription?</span>
                         <i class="fas fa-chevron-down" style="color: var(--primary-color); transition: transform 0.3s ease;"></i>
                     </button>
                     <div class="faq-answer" style="padding: 0 24px 24px; display: none;">
                         <p style="color: var(--text-secondary); line-height: 1.7; margin: 0;">
-                            Each package includes ALL study guides for that specific nursing class. When you purchase a package, you get instant access to all current guides for that class, PLUS any future guides we add to that class at no extra cost. It's a one-time payment for lifetime access.
+                            Every subscription gives you <strong>unlimited access</strong> to all our content: 17+ detailed study guides, 7 clinical confidence resources, 5 quick reference tools, and 5 nursing school survival guides. You also get access to any new content we release during your subscription.
                         </p>
                     </div>
                 </div>
 
                 <div class="faq-item" style="margin-bottom: 16px; background: var(--card-background); border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color);">
                     <button class="faq-question" style="width: 100%; padding: 24px; text-align: left; background: none; border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
-                        <span style="font-size: 1.1rem; font-weight: 600; color: var(--text-primary);">What's the difference between Full and Lite?</span>
+                        <span style="font-size: 1.1rem; font-weight: 600; color: var(--text-primary);">Which plan should I choose?</span>
                         <i class="fas fa-chevron-down" style="color: var(--primary-color); transition: transform 0.3s ease;"></i>
                     </button>
                     <div class="faq-answer" style="padding: 0 24px 24px; display: none;">
                         <p style="color: var(--text-secondary); line-height: 1.7; margin: 0;">
-                            <strong>Lite Package ($24.99):</strong> Includes all study guides, key concept summaries, quick reference cheat sheets, topic review quizzes, and a study schedule template - great for organized studying and content review.<br><br>
-                            <strong>Full Package ($49.99):</strong> Everything in Lite PLUS 200+ NCLEX-style practice questions with detailed answer explanations, test-taking strategies guide, printable PDF study cards, a customizable study planner, and early access to new content - the complete exam preparation toolkit.
+                            <strong>Monthly ($14.99/mo):</strong> Great if you want to try it out or only need access for a short time.<br><br>
+                            <strong>Semester ($44.99):</strong> Best value for a single class - 4 months of access at a 25% discount compared to monthly.<br><br>
+                            <strong>Lifetime ($119):</strong> One payment, access forever. Perfect if you're early in your program and want resources for multiple semesters.
                         </p>
                     </div>
                 </div>
 
                 <div class="faq-item" style="margin-bottom: 16px; background: var(--card-background); border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color);">
                     <button class="faq-question" style="width: 100%; padding: 24px; text-align: left; background: none; border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
-                        <span style="font-size: 1.1rem; font-weight: 600; color: var(--text-primary);">What are "Key Concept Summaries"?</span>
+                        <span style="font-size: 1.1rem; font-weight: 600; color: var(--text-primary);">Can I cancel my monthly subscription?</span>
                         <i class="fas fa-chevron-down" style="color: var(--primary-color); transition: transform 0.3s ease;"></i>
                     </button>
                     <div class="faq-answer" style="padding: 0 24px 24px; display: none;">
                         <p style="color: var(--text-secondary); line-height: 1.7; margin: 0;">
-                            Key Concept Summaries are bite-sized highlights of the most critical takeaways from each section. They're quick-reference boxes that organize essential information for faster review and better retention - perfect when you need to refresh your memory quickly before clinicals or exams.
+                            Yes, absolutely! You can cancel your monthly subscription anytime from your account settings. You'll keep access until the end of your current billing period. No hidden fees or cancellation penalties.
                         </p>
                     </div>
                 </div>
 
                 <div class="faq-item" style="margin-bottom: 16px; background: var(--card-background); border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color);">
                     <button class="faq-question" style="width: 100%; padding: 24px; text-align: left; background: none; border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
-                        <span style="font-size: 1.1rem; font-weight: 600; color: var(--text-primary);">Will I get access to new guides added later?</span>
+                        <span style="font-size: 1.1rem; font-weight: 600; color: var(--text-primary);">Will I get access to new content?</span>
                         <i class="fas fa-chevron-down" style="color: var(--primary-color); transition: transform 0.3s ease;"></i>
                     </button>
                     <div class="faq-answer" style="padding: 0 24px 24px; display: none;">
                         <p style="color: var(--text-secondary); line-height: 1.7; margin: 0;">
-                            Yes! When you purchase a class package, you automatically get access to ALL future guides we add to that class. No additional purchases needed. We're constantly adding new content, and you'll benefit from all updates.
+                            Yes! All subscribers get access to new study guides and resources as we release them. We're constantly adding new content, and you'll benefit from all updates during your subscription period (or forever, if you have lifetime access).
                         </p>
                     </div>
                 </div>
 
                 <div class="faq-item" style="margin-bottom: 16px; background: var(--card-background); border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color);">
                     <button class="faq-question" style="width: 100%; padding: 24px; text-align: left; background: none; border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
-                        <span style="font-size: 1.1rem; font-weight: 600; color: var(--text-primary);">Can I upgrade from Lite to Full later?</span>
+                        <span style="font-size: 1.1rem; font-weight: 600; color: var(--text-primary);">Can I upgrade from monthly to lifetime?</span>
                         <i class="fas fa-chevron-down" style="color: var(--primary-color); transition: transform 0.3s ease;"></i>
                     </button>
                     <div class="faq-answer" style="padding: 0 24px 24px; display: none;">
                         <p style="color: var(--text-secondary); line-height: 1.7; margin: 0;">
-                            Absolutely! You can upgrade from Lite to Full at any time by paying just the difference ($25). Your progress and access will be preserved, and you'll immediately unlock all the Full Package features including NCLEX questions and strategies.
+                            Yes! You can upgrade at any time. If you decide lifetime makes more sense for you, just purchase it and your monthly subscription will be automatically cancelled.
                         </p>
                     </div>
                 </div>
 
                 <div class="faq-item" style="margin-bottom: 16px; background: var(--card-background); border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color);">
                     <button class="faq-question" style="width: 100%; padding: 24px; text-align: left; background: none; border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
-                        <span style="font-size: 1.1rem; font-weight: 600; color: var(--text-primary);">Do I need to buy all packages? Will they match my professor's teaching?</span>
+                        <span style="font-size: 1.1rem; font-weight: 600; color: var(--text-primary);">Is there any free content?</span>
                         <i class="fas fa-chevron-down" style="color: var(--primary-color); transition: transform 0.3s ease;"></i>
                     </button>
                     <div class="faq-answer" style="padding: 0 24px 24px; display: none;">
-                        <p style="color: var(--text-secondary); line-height: 1.7; margin: 0 0 12px 0;">
-                            <strong>No, you don't need all packages!</strong> Purchase only what you need for your current classes. Each package is independent, and bundle discounts will be available soon.
-                        </p>
                         <p style="color: var(--text-secondary); line-height: 1.7; margin: 0;">
-                            Each class package covers major topics typically taught in that nursing course. However, every professor and program teaches differently and may emphasize different areas. Our guides provide comprehensive coverage aligned with standard nursing curricula and NCLEX test plans. Use them as a supplement to your class materials, not a replacement.
+                            Yes! We offer 5 free "Nursing School Survival" guides that are available to everyone without a subscription. Check out our <a href="/resources.html" style="color: var(--primary-color);">Resources page</a> to see them. They cover study tips, time management, care plans, and more.
                         </p>
                     </div>
                 </div>
@@ -569,20 +557,21 @@
         </div>
     </section>
 
-
-    <!-- More Classes Coming Soon -->
-    <section style="padding: 80px 0 100px; background: var(--background-default);">
+    <!-- CTA Section -->
+    <section style="padding: 80px 0 100px; background: var(--background-light);">
         <div class="container text-center">
-            <div style="display: inline-block; padding: 8px 20px; background: var(--primary-color); color: white; border-radius: 50px; font-size: 0.85rem; font-weight: 600; margin-bottom: 24px;">
-                <i class="fas fa-plus-circle"></i> COMING SOON
-            </div>
-            <h2 style="font-size: 2.5rem; font-weight: 700; margin-bottom: 20px;">More Classes on the Way</h2>
-            <p style="font-size: 1.1rem; color: var(--text-secondary); max-width: 700px; margin: 0 auto 40px;">
-                We're working on packages for Community Health, Leadership & Management, and specialty areas. Join our Discord to vote on which classes we should add next!
+            <h2 style="font-size: 2.5rem; font-weight: 700; margin-bottom: 20px;">Ready to Survive Nursing School?</h2>
+            <p style="font-size: 1.1rem; color: var(--text-secondary); max-width: 600px; margin: 0 auto 40px;">
+                Join thousands of nursing students who use our resources to feel more confident in class and clinicals.
             </p>
-            <a href="https://discord.gg/y2Mh77wAV2" class="btn btn-primary btn-lg">
-                <i class="fab fa-discord"></i> Join Discord Community
-            </a>
+            <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+                <a href="#" class="btn btn-primary btn-lg" id="cta-subscribe-btn">
+                    <i class="fas fa-rocket"></i> Get Started - $14.99/mo
+                </a>
+                <a href="/resources.html" class="btn btn-outline-primary btn-lg">
+                    <i class="fas fa-book-open"></i> Try Free Resources
+                </a>
+            </div>
         </div>
     </section>
 
