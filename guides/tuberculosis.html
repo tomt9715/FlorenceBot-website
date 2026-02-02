@@ -1,0 +1,1935 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tuberculosis Study Guide - The Nursing Collective</title>
+    <meta name="description" content="Comprehensive nursing study guide for Tuberculosis (TB). Learn to distinguish latent vs active TB infection, implement airborne isolation precautions, and understand RIPE therapy regimen.">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <style>
+        /* ============================================
+           PDF-STYLE STUDY GUIDE STYLES
+           ============================================ */
+
+        :root {
+            --primary-color: #EC4899;
+            --primary-dark: #DB2777;
+            --secondary-color: #6366F1;
+            --accent-color: #EF4444;
+            --text-primary: #1f2937;
+            --text-secondary: #4b5563;
+            --background: #ffffff;
+            --border-color: #e5e7eb;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Source Sans 3', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.7;
+            color: var(--text-primary);
+            background: #f3f4f6;
+        }
+
+        /* Download Bar - Fixed at top */
+        .download-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 12px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .download-bar-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 600;
+        }
+
+        .download-bar-brand img {
+            height: 32px;
+            width: auto;
+        }
+
+        .download-bar-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn-download {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background: white;
+            color: var(--primary-color);
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+        }
+
+        .btn-download:hover {
+            background: #f0f9ff;
+            transform: translateY(-1px);
+        }
+
+        .btn-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background: rgba(255,255,255,0.15);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+        }
+
+        .btn-back:hover {
+            background: rgba(255,255,255,0.25);
+        }
+
+        /* Document Container */
+        .document-container {
+            max-width: 850px;
+            margin: 80px auto 40px;
+            background: white;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+
+        /* Cover Page - Colors inspired by TB icon (pink lungs, purple text) */
+        .cover-page {
+            background: linear-gradient(135deg, #EC4899 0%, #DB2777 40%, #6366F1 100%);
+            color: white;
+            padding: 80px 60px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cover-page::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.5;
+        }
+
+        .cover-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cover-logo {
+            width: 80px;
+            height: 80px;
+            background: white;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            padding: 12px;
+        }
+
+        .cover-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .cover-category {
+            display: inline-block;
+            padding: 8px 24px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+        }
+
+        .cover-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.1;
+        }
+
+        .cover-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            max-width: 600px;
+            margin: 0 auto 40px;
+            line-height: 1.6;
+        }
+
+        .cover-meta {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .cover-meta-item {
+            text-align: center;
+        }
+
+        .cover-meta-item .label {
+            font-size: 0.8rem;
+            opacity: 0.8;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .cover-meta-item .value {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-top: 4px;
+        }
+
+        .cover-brand {
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+
+        /* Document Content */
+        .document-content {
+            padding: 60px;
+        }
+
+        /* Learning Objectives */
+        .learning-objectives {
+            background: linear-gradient(135deg, #ecfdf5, #d1fae5);
+            border: 2px solid #10b981;
+            border-radius: 12px;
+            padding: 28px;
+            margin-bottom: 40px;
+        }
+
+        .learning-objectives h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #059669;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .learning-objectives ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .learning-objectives li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 8px 0;
+            color: var(--text-primary);
+            font-size: 1rem;
+        }
+
+        .learning-objectives li i {
+            color: #10b981;
+            margin-top: 4px;
+            flex-shrink: 0;
+        }
+
+        /* Table of Contents */
+        .table-of-contents {
+            background: #f9fafb;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 28px;
+            margin-bottom: 40px;
+        }
+
+        .table-of-contents h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 16px;
+        }
+
+        .table-of-contents ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            columns: 2;
+            column-gap: 30px;
+        }
+
+        .table-of-contents li {
+            break-inside: avoid;
+            margin-bottom: 8px;
+        }
+
+        .table-of-contents a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 12px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            transition: all 0.2s ease;
+        }
+
+        .table-of-contents a:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .toc-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 22px;
+            height: 22px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 5px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        .table-of-contents a:hover .toc-number {
+            background: white;
+            color: var(--primary-color);
+        }
+
+        /* Content Sections */
+        .guide-section {
+            margin-bottom: 50px;
+            scroll-margin-top: 80px;
+        }
+
+        .guide-section h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .guide-section h3 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin: 28px 0 14px;
+        }
+
+        .guide-section h4 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin: 20px 0 10px;
+        }
+
+        .guide-section p {
+            color: var(--text-secondary);
+            font-size: 1.02rem;
+            margin-bottom: 14px;
+        }
+
+        .guide-section ul, .guide-section ol {
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+            padding-left: 24px;
+        }
+
+        .guide-section li {
+            margin-bottom: 8px;
+        }
+
+        .guide-section strong {
+            color: var(--text-primary);
+        }
+
+        /* Info Boxes */
+        .info-box {
+            border-radius: 10px;
+            padding: 18px 22px;
+            margin: 20px 0;
+            border-left: 4px solid;
+        }
+
+        .info-box.warning {
+            background: #fef2f2;
+            border-color: #ef4444;
+        }
+
+        .info-box.tip {
+            background: #ecfdf5;
+            border-color: #10b981;
+        }
+
+        .info-box.nclex-tip {
+            background: #f5f3ff;
+            border-color: #8b5cf6;
+        }
+
+        .info-box.mnemonic {
+            background: #fffbeb;
+            border-color: #f59e0b;
+        }
+
+        .info-box-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+        }
+
+        .info-box.warning .info-box-header { color: #ef4444; }
+        .info-box.tip .info-box-header { color: #059669; }
+        .info-box.nclex-tip .info-box-header { color: #7c3aed; }
+        .info-box.mnemonic .info-box-header { color: #d97706; }
+
+        .info-box p { margin: 0; color: var(--text-secondary); font-size: 0.98rem; }
+        .info-box ul { margin: 8px 0 0; padding-left: 18px; }
+        .info-box li { margin-bottom: 4px; font-size: 0.98rem; }
+
+        /* FlorenceBot Pro Tips */
+        .florencebot-tip {
+            background: linear-gradient(135deg, #fffbeb, #fef3c7);
+            border: 2px solid #f59e0b;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 24px 0;
+        }
+
+        .florencebot-tip-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .florencebot-tip-icon {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.9rem;
+        }
+
+        .florencebot-tip-label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #d97706;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .florencebot-tip-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #92400e;
+            margin-bottom: 8px;
+        }
+
+        .florencebot-tip-content {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Tables */
+        .guide-table-wrapper {
+            overflow-x: auto;
+            margin: 20px 0;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+        }
+
+        .guide-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.92rem;
+        }
+
+        .guide-table thead {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+        }
+
+        .guide-table th {
+            padding: 12px 14px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .guide-table tbody tr {
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .guide-table tbody tr:hover {
+            background: #f9fafb;
+        }
+
+        .guide-table td {
+            padding: 12px 14px;
+            color: var(--text-secondary);
+        }
+
+        .guide-table td:first-child {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        /* Comparison Cards */
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .comparison-card {
+            border-radius: 12px;
+            border: 2px solid var(--border-color);
+            overflow: hidden;
+        }
+
+        .comparison-card-header {
+            padding: 16px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 1.05rem;
+            color: white;
+        }
+
+        .comparison-card.latent .comparison-card-header {
+            background: linear-gradient(135deg, #10b981, #059669);
+        }
+
+        .comparison-card.active .comparison-card-header {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+        }
+
+        .comparison-card.primary .comparison-card-header {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+        }
+
+        .comparison-card.reactivation .comparison-card-header {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+        }
+
+        .comparison-card-body {
+            padding: 18px;
+        }
+
+        .comparison-card-body h4 {
+            font-size: 0.95rem;
+            margin: 0 0 10px;
+        }
+
+        .comparison-card-body ul {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 14px;
+        }
+
+        .comparison-card-body li {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            padding: 6px 0;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .comparison-card-body li:last-child { border-bottom: none; }
+        .comparison-card-body li i { color: var(--primary-color); margin-top: 3px; flex-shrink: 0; }
+
+        /* Interventions List */
+        .interventions-list {
+            background: #f9fafb;
+            border-radius: 12px;
+            padding: 22px;
+            margin: 20px 0;
+        }
+
+        .interventions-list h4 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1rem;
+            margin: 0 0 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .interventions-list h4 i { color: var(--primary-color); }
+
+        .intervention-item {
+            display: flex;
+            gap: 14px;
+            padding: 14px;
+            background: white;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            border: 1px solid var(--border-color);
+        }
+
+        .intervention-number {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+
+        .intervention-content h5 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin: 0 0 4px;
+        }
+
+        .intervention-content p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin: 0;
+        }
+
+        /* Quick Reference */
+        .quick-reference {
+            background: white;
+            border: 2px solid var(--primary-color);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 24px 0;
+        }
+
+        .quick-reference h3 {
+            font-size: 1.1rem;
+            color: var(--primary-color);
+            margin: 0 0 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .quick-reference-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .quick-ref-item {
+            background: #f9fafb;
+            padding: 12px;
+            border-radius: 8px;
+        }
+
+        .quick-ref-item .label {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-bottom: 2px;
+        }
+
+        .quick-ref-item .value {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        /* Isolation Box */
+        .isolation-box {
+            background: linear-gradient(135deg, #fef2f2, #fee2e2);
+            border: 2px solid #ef4444;
+            border-radius: 12px;
+            padding: 24px;
+            margin: 20px 0;
+        }
+
+        .isolation-box h4 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.1rem;
+            color: #dc2626;
+            margin: 0 0 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .isolation-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .isolation-step {
+            display: flex;
+            gap: 14px;
+            align-items: flex-start;
+            background: white;
+            padding: 14px;
+            border-radius: 8px;
+        }
+
+        .isolation-step-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background: #ef4444;
+            color: white;
+            border-radius: 50%;
+            font-size: 1rem;
+            flex-shrink: 0;
+        }
+
+        .isolation-step-content {
+            flex: 1;
+        }
+
+        .isolation-step-content strong {
+            color: #dc2626;
+        }
+
+        /* Key Points Summary */
+        .key-points-summary {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 12px;
+            padding: 28px;
+            margin: 40px 0 0;
+            color: white;
+        }
+
+        .key-points-summary h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.3rem;
+            margin: 0 0 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: white;
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .key-points-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 14px;
+        }
+
+        .key-point {
+            background: rgba(255,255,255,0.15);
+            padding: 14px;
+            border-radius: 10px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .key-point i { font-size: 1.1rem; margin-top: 2px; }
+        .key-point p { margin: 0; font-size: 0.92rem; line-height: 1.4; }
+
+        /* Footer */
+        .document-footer {
+            text-align: center;
+            padding: 32px 48px;
+            border-top: 1px solid var(--border-color);
+            background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+        }
+
+        .footer-logo {
+            height: 48px;
+            width: auto;
+            margin-bottom: 12px;
+        }
+
+        .footer-tagline {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+        }
+
+        .footer-copyright {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        /* Print Styles */
+        @page {
+            margin: 0.6in 0.4in;
+        }
+
+        @media print {
+            .download-bar { display: none !important; }
+
+            body {
+                background: white !important;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+
+            .document-container {
+                margin: 0 !important;
+                box-shadow: none !important;
+                max-width: 100% !important;
+                width: 100% !important;
+            }
+
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                color-adjust: exact !important;
+            }
+
+            .cover-page {
+                page-break-after: always;
+                break-after: page;
+            }
+
+            .info-box { page-break-inside: avoid; break-inside: avoid; }
+            .guide-table-wrapper { page-break-inside: avoid; break-inside: avoid; }
+            .comparison-card { page-break-inside: avoid; break-inside: avoid; }
+            .intervention-item { page-break-inside: avoid; break-inside: avoid; }
+            .quick-reference { page-break-inside: avoid; break-inside: avoid; }
+            .learning-objectives { page-break-inside: avoid; break-inside: avoid; }
+            .key-points-summary { page-break-inside: avoid; break-inside: avoid; }
+            .isolation-box { page-break-inside: avoid; break-inside: avoid; }
+            .florencebot-tip { page-break-inside: avoid; break-inside: avoid; }
+
+            h2, h3, h4 {
+                page-break-after: avoid;
+                break-after: avoid;
+            }
+
+            .comparison-grid { page-break-inside: auto; }
+            .interventions-list { page-break-inside: auto; }
+
+            a { text-decoration: underline; }
+
+            .document-footer {
+                page-break-inside: avoid;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .download-bar {
+                flex-direction: column;
+                gap: 12px;
+                padding: 12px 16px;
+            }
+            .download-bar-actions {
+                width: 100%;
+                justify-content: center;
+            }
+            .document-container { margin: 120px 10px 20px; }
+            .cover-page { padding: 50px 30px; }
+            .cover-title { font-size: 2.2rem; }
+            .cover-meta { flex-direction: column; gap: 20px; }
+            .document-content { padding: 30px 24px; }
+            .table-of-contents ul { columns: 1; }
+            .comparison-grid { grid-template-columns: 1fr; }
+            .quick-reference-grid { grid-template-columns: 1fr; }
+            .key-points-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+
+    <!-- Sidebar Styles (shared across all guides) -->
+    <link rel="stylesheet" href="guide-sidebar.css">
+</head>
+<body data-product-id="tuberculosis" data-guide-name="Tuberculosis">
+    <!-- Download Bar -->
+    <div class="download-bar">
+        <div class="download-bar-brand">
+            <i class="fas fa-book-medical"></i>
+            <span>The Nursing Collective Study Guide</span>
+        </div>
+        <div class="download-bar-actions">
+            <a href="../dashboard.html" class="btn-back">
+                <i class="fas fa-arrow-left"></i> Back to Dashboard
+            </a>
+            <button class="btn-download" id="download-pdf-btn">
+                <i class="fas fa-file-pdf"></i> Save as PDF
+            </button>
+        </div>
+    </div>
+
+    <!-- Document -->
+    <div class="document-container">
+
+        <!-- Cover Page -->
+        <div class="cover-page">
+            <div class="cover-content">
+                <div class="cover-logo">
+                    <img src="../assets/images/guide-icons/tuberculosis.webp" alt="Tuberculosis">
+                </div>
+                <div class="cover-category">Medical-Surgical Nursing</div>
+                <h1 class="cover-title">Tuberculosis</h1>
+                <p class="cover-subtitle">Comprehensive nursing study guide covering latent vs active TB infection, airborne isolation precautions, RIPE therapy regimen, and patient education for treatment adherence.</p>
+                <div class="cover-meta">
+                    <div class="cover-meta-item">
+                        <div class="label">Reading Time</div>
+                        <div class="value">20-25 minutes</div>
+                    </div>
+                    <div class="cover-meta-item">
+                        <div class="label">Difficulty Level</div>
+                        <div class="value">Intermediate</div>
+                    </div>
+                    <div class="cover-meta-item">
+                        <div class="label">Last Updated</div>
+                        <div class="value">February 2026</div>
+                    </div>
+                </div>
+                <div class="cover-brand">
+                    <i class="fas fa-graduation-cap"></i> The Nursing Collective
+                </div>
+            </div>
+        </div>
+
+        <!-- Document Content -->
+        <div class="document-content">
+
+            <!-- Learning Objectives -->
+            <section class="learning-objectives">
+                <h2><i class="fas fa-bullseye"></i> Learning Objectives</h2>
+                <ul>
+                    <li><i class="fas fa-check-circle"></i> Distinguish between latent TB infection (LTBI) and active TB disease</li>
+                    <li><i class="fas fa-check-circle"></i> Implement appropriate airborne isolation precautions for TB patients</li>
+                    <li><i class="fas fa-check-circle"></i> Understand the RIPE therapy regimen and its nursing implications</li>
+                    <li><i class="fas fa-check-circle"></i> Describe the pathophysiology of TB transmission and disease progression</li>
+                    <li><i class="fas fa-check-circle"></i> Recognize clinical manifestations and diagnostic findings in TB</li>
+                    <li><i class="fas fa-check-circle"></i> Educate patients about treatment adherence and infection control at home</li>
+                </ul>
+            </section>
+
+            <!-- Table of Contents -->
+            <nav class="table-of-contents">
+                <h2><i class="fas fa-list"></i> Table of Contents</h2>
+                <ul>
+                    <li><a href="#anatomy"><span class="toc-number">1</span> Respiratory Anatomy Review</a></li>
+                    <li><a href="#pathophysiology"><span class="toc-number">2</span> TB Pathophysiology</a></li>
+                    <li><a href="#latent-vs-active"><span class="toc-number">3</span> Latent vs Active TB</a></li>
+                    <li><a href="#clinical-manifestations"><span class="toc-number">4</span> Clinical Manifestations</a></li>
+                    <li><a href="#diagnostics"><span class="toc-number">5</span> Diagnostic Testing</a></li>
+                    <li><a href="#isolation"><span class="toc-number">6</span> Airborne Isolation</a></li>
+                    <li><a href="#ripe-therapy"><span class="toc-number">7</span> RIPE Therapy</a></li>
+                    <li><a href="#nursing-care"><span class="toc-number">8</span> Nursing Care & Education</a></li>
+                </ul>
+            </nav>
+
+            <!-- Section 1: Anatomy & Physiology -->
+            <section class="guide-section" id="anatomy">
+                <h2><span class="section-icon"><i class="fas fa-lungs"></i></span> Respiratory Anatomy Review</h2>
+
+                <p>Understanding normal respiratory structure helps explain why Mycobacterium tuberculosis has a predilection for the lungs and how the disease spreads through the respiratory system.</p>
+
+                <h3>Key Respiratory Structures Affected by TB</h3>
+
+                <ul>
+                    <li><strong>Alveoli:</strong> Primary site of TB infection - bacilli are inhaled and deposit in alveolar spaces where they are engulfed by macrophages</li>
+                    <li><strong>Bronchi & Bronchioles:</strong> Airways can become involved as disease progresses, leading to productive cough</li>
+                    <li><strong>Hilar Lymph Nodes:</strong> Drain the lungs and become enlarged during primary TB infection (Ghon complex)</li>
+                    <li><strong>Pleura:</strong> Can become involved leading to pleural effusion and pleurisy</li>
+                </ul>
+
+                <div class="info-box tip">
+                    <div class="info-box-header">
+                        <i class="fas fa-check-circle"></i> Anatomy Connection
+                    </div>
+                    <p>TB typically affects the <strong>upper lobes</strong> of the lungs, especially the apical and posterior segments. Why? The upper lobes have:</p>
+                    <ul>
+                        <li>Higher oxygen tension (TB bacilli are obligate aerobes)</li>
+                        <li>Decreased lymphatic drainage</li>
+                        <li>Less blood flow (less immune cell delivery)</li>
+                    </ul>
+                </div>
+
+                <h3>Normal Host Defense Mechanisms</h3>
+
+                <div class="guide-table-wrapper">
+                    <table class="guide-table">
+                        <thead>
+                            <tr>
+                                <th>Defense Mechanism</th>
+                                <th>Location</th>
+                                <th>How TB Evades</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Mucociliary Escalator</td>
+                                <td>Upper airways</td>
+                                <td>TB droplet nuclei are so small (1-5 μm) they bypass and reach alveoli</td>
+                            </tr>
+                            <tr>
+                                <td>Alveolar Macrophages</td>
+                                <td>Alveoli</td>
+                                <td>TB survives and replicates INSIDE macrophages</td>
+                            </tr>
+                            <tr>
+                                <td>Cell-Mediated Immunity</td>
+                                <td>Systemic</td>
+                                <td>TB forms granulomas that wall off infection but don't kill all bacilli</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Section 2: Pathophysiology -->
+            <section class="guide-section" id="pathophysiology">
+                <h2><span class="section-icon"><i class="fas fa-virus"></i></span> TB Pathophysiology</h2>
+
+                <p>Tuberculosis is caused by <strong>Mycobacterium tuberculosis</strong>, a slow-growing, acid-fast bacillus. Understanding the pathophysiology helps explain the clinical course, diagnostic approach, and treatment duration.</p>
+
+                <h3>Transmission</h3>
+
+                <div class="info-box warning">
+                    <div class="info-box-header">
+                        <i class="fas fa-exclamation-triangle"></i> Critical: Airborne Transmission
+                    </div>
+                    <p><strong>TB spreads through AIRBORNE DROPLET NUCLEI</strong> - tiny particles (1-5 micrometers) that remain suspended in air for hours. A single cough can produce 3,000 droplet nuclei!</p>
+                    <ul>
+                        <li>Generated when infectious person coughs, sneezes, speaks, or sings</li>
+                        <li>Can travel on air currents throughout a room or building</li>
+                        <li>Inhaled directly into the alveoli</li>
+                    </ul>
+                </div>
+
+                <h3>Disease Progression</h3>
+
+                <div class="interventions-list">
+                    <h4><i class="fas fa-route"></i> From Exposure to Disease</h4>
+
+                    <div class="intervention-item">
+                        <div class="intervention-number">1</div>
+                        <div class="intervention-content">
+                            <h5>Inhalation & Initial Infection</h5>
+                            <p>TB bacilli are inhaled and reach the alveoli. Alveolar macrophages engulf the bacteria, but TB has a waxy cell wall that prevents destruction.</p>
+                        </div>
+                    </div>
+
+                    <div class="intervention-item">
+                        <div class="intervention-number">2</div>
+                        <div class="intervention-content">
+                            <h5>Replication Inside Macrophages</h5>
+                            <p>TB multiplies INSIDE the macrophages for 2-12 weeks. Bacteria spread through lymphatics to hilar lymph nodes and potentially to bloodstream.</p>
+                        </div>
+                    </div>
+
+                    <div class="intervention-item">
+                        <div class="intervention-number">3</div>
+                        <div class="intervention-content">
+                            <h5>Immune Response & Granuloma Formation</h5>
+                            <p>T-lymphocytes activate macrophages. Granulomas form around infected cells - these are walled-off clusters of immune cells containing TB bacilli. The center becomes caseous (cheese-like) necrosis.</p>
+                        </div>
+                    </div>
+
+                    <div class="intervention-item">
+                        <div class="intervention-number">4</div>
+                        <div class="intervention-content">
+                            <h5>Latency or Active Disease</h5>
+                            <p>In 90% of people, immune response contains infection = LTBI (latent TB). In 10%, primary infection progresses to active disease. Later reactivation can occur if immunity weakens.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="florencebot-tip" id="tip-granuloma">
+                    <div class="florencebot-tip-header">
+                        <div class="florencebot-tip-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <span class="florencebot-tip-label">FlorenceBot Pro Tip</span>
+                    </div>
+                    <div class="florencebot-tip-title">Understanding Granulomas</div>
+                    <div class="florencebot-tip-content">
+                        <strong>Granulomas are the hallmark of TB pathology!</strong> Think of them as tiny "prisons" the immune system builds around TB bacteria. The granuloma has layers: a center of dead, cheese-like tissue (caseous necrosis) surrounded by macrophages, giant cells, and T-lymphocytes. This containment is good - it's why most people with TB exposure never get sick. But here's the catch: <strong>TB can remain dormant inside granulomas for decades</strong>, then reactivate if the immune system weakens. This is why we treat latent TB - to eliminate these sleeping bacteria before they can escape.
+                    </div>
+                </div>
+
+                <h3>Risk Factors for TB</h3>
+
+                <div class="guide-table-wrapper">
+                    <table class="guide-table">
+                        <thead>
+                            <tr>
+                                <th>Category</th>
+                                <th>Risk Factors</th>
+                                <th>Clinical Significance</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Exposure Risk</td>
+                                <td>Close contact with TB patient, healthcare workers, homeless shelters, prisons</td>
+                                <td>Screen high-risk populations regularly</td>
+                            </tr>
+                            <tr>
+                                <td>Immunocompromised</td>
+                                <td>HIV/AIDS, immunosuppressive drugs, organ transplant, malignancy</td>
+                                <td>Higher risk of active disease; HIV + TB = medical emergency</td>
+                            </tr>
+                            <tr>
+                                <td>Medical Conditions</td>
+                                <td>Diabetes, silicosis, chronic kidney disease, malnutrition</td>
+                                <td>Impaired immune function increases risk</td>
+                            </tr>
+                            <tr>
+                                <td>Demographics</td>
+                                <td>Foreign-born from high-prevalence areas, elderly, very young</td>
+                                <td>Target screening; consider reactivation in elderly</td>
+                            </tr>
+                            <tr>
+                                <td>Substance Use</td>
+                                <td>Alcohol abuse, IV drug use, smoking</td>
+                                <td>Impairs immunity; often co-occurs with housing instability</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="info-box nclex-tip">
+                    <div class="info-box-header">
+                        <i class="fas fa-graduation-cap"></i> NCLEX Alert: HIV + TB
+                    </div>
+                    <p><strong>HIV-positive patients are 20-30x more likely to develop active TB!</strong> TB is a leading cause of death among people with HIV. Always test HIV patients for TB and vice versa. TB can present atypically in HIV - lower lung involvement and extrapulmonary sites more common.</p>
+                </div>
+            </section>
+
+            <!-- Section 3: Latent vs Active TB -->
+            <section class="guide-section" id="latent-vs-active">
+                <h2><span class="section-icon"><i class="fas fa-balance-scale"></i></span> Latent vs Active TB</h2>
+
+                <p>One of the most important distinctions in TB management is differentiating between latent TB infection (LTBI) and active TB disease. This determines treatment approach, isolation requirements, and public health reporting.</p>
+
+                <div class="comparison-grid">
+                    <div class="comparison-card latent">
+                        <div class="comparison-card-header">
+                            <i class="fas fa-moon"></i> Latent TB Infection (LTBI)
+                        </div>
+                        <div class="comparison-card-body">
+                            <h4>Key Characteristics</h4>
+                            <ul>
+                                <li><i class="fas fa-check"></i> TB bacteria present but <strong>dormant</strong></li>
+                                <li><i class="fas fa-check"></i> <strong>NO symptoms</strong></li>
+                                <li><i class="fas fa-check"></i> <strong>NOT contagious</strong></li>
+                                <li><i class="fas fa-check"></i> Positive TB skin test or IGRA</li>
+                                <li><i class="fas fa-check"></i> Normal chest X-ray</li>
+                                <li><i class="fas fa-check"></i> Negative sputum cultures</li>
+                            </ul>
+                            <h4>Treatment</h4>
+                            <ul>
+                                <li><i class="fas fa-check"></i> Usually single drug therapy</li>
+                                <li><i class="fas fa-check"></i> 3-9 months depending on regimen</li>
+                                <li><i class="fas fa-check"></i> Prevents progression to active TB</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="comparison-card active">
+                        <div class="comparison-card-header">
+                            <i class="fas fa-sun"></i> Active TB Disease
+                        </div>
+                        <div class="comparison-card-body">
+                            <h4>Key Characteristics</h4>
+                            <ul>
+                                <li><i class="fas fa-check"></i> TB bacteria <strong>actively multiplying</strong></li>
+                                <li><i class="fas fa-check"></i> <strong>Symptomatic</strong> (cough, fever, night sweats)</li>
+                                <li><i class="fas fa-check"></i> <strong>CONTAGIOUS</strong> (pulmonary)</li>
+                                <li><i class="fas fa-check"></i> Positive TB skin test or IGRA</li>
+                                <li><i class="fas fa-check"></i> Abnormal chest X-ray</li>
+                                <li><i class="fas fa-check"></i> Positive sputum smear/culture</li>
+                            </ul>
+                            <h4>Treatment</h4>
+                            <ul>
+                                <li><i class="fas fa-check"></i> Multi-drug therapy (RIPE)</li>
+                                <li><i class="fas fa-check"></i> 6-9 months minimum</li>
+                                <li><i class="fas fa-check"></i> Requires isolation until non-infectious</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="florencebot-tip" id="tip-latent-active">
+                    <div class="florencebot-tip-header">
+                        <div class="florencebot-tip-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <span class="florencebot-tip-label">FlorenceBot Pro Tip</span>
+                    </div>
+                    <div class="florencebot-tip-title">Latent vs Active - The Key Distinction</div>
+                    <div class="florencebot-tip-content">
+                        <strong>Remember this simple rule: Latent TB is NEVER contagious, Active TB IS contagious!</strong> A patient with latent TB has the bacteria "sleeping" inside granulomas - they can't spread it to others, have no symptoms, and have normal chest X-rays. They only need treatment to prevent future reactivation. But a patient with active pulmonary TB is coughing up TB bacteria with every breath - they need <strong>airborne isolation immediately</strong> until proven non-infectious. For NCLEX, if you see a patient with positive TB test + symptoms + abnormal CXR = active TB = isolation first!
+                    </div>
+                </div>
+
+                <h3>Primary vs Reactivation TB</h3>
+
+                <div class="comparison-grid">
+                    <div class="comparison-card primary">
+                        <div class="comparison-card-header">
+                            <i class="fas fa-seedling"></i> Primary TB
+                        </div>
+                        <div class="comparison-card-body">
+                            <h4>Characteristics</h4>
+                            <ul>
+                                <li><i class="fas fa-check"></i> First infection with TB</li>
+                                <li><i class="fas fa-check"></i> Usually within 1-2 years of exposure</li>
+                                <li><i class="fas fa-check"></i> Middle or lower lung zones often affected</li>
+                                <li><i class="fas fa-check"></i> Hilar lymphadenopathy common</li>
+                                <li><i class="fas fa-check"></i> More common in children, immunocompromised</li>
+                                <li><i class="fas fa-check"></i> Ghon complex on imaging</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="comparison-card reactivation">
+                        <div class="comparison-card-header">
+                            <i class="fas fa-redo"></i> Reactivation TB
+                        </div>
+                        <div class="comparison-card-body">
+                            <h4>Characteristics</h4>
+                            <ul>
+                                <li><i class="fas fa-check"></i> Dormant TB becomes active again</li>
+                                <li><i class="fas fa-check"></i> Can occur years to decades after primary</li>
+                                <li><i class="fas fa-check"></i> <strong>Upper lobe</strong> involvement typical</li>
+                                <li><i class="fas fa-check"></i> Cavitary disease more common</li>
+                                <li><i class="fas fa-check"></i> Triggered by immune suppression</li>
+                                <li><i class="fas fa-check"></i> More infectious (higher bacterial load)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-box mnemonic">
+                    <div class="info-box-header">
+                        <i class="fas fa-brain"></i> Memory Aid: TB Types
+                    </div>
+                    <p><strong>"Primary = Pediatric & Lower, Reactivation = Return & Upper"</strong></p>
+                    <ul>
+                        <li><strong>Primary TB</strong> - More common in children, affects lower/middle lungs</li>
+                        <li><strong>Reactivation TB</strong> - TB "returns" to activity, affects upper lobes</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section 4: Clinical Manifestations -->
+            <section class="guide-section" id="clinical-manifestations">
+                <h2><span class="section-icon"><i class="fas fa-notes-medical"></i></span> Clinical Manifestations</h2>
+
+                <p>Active TB typically presents with a constellation of respiratory and systemic symptoms that develop gradually over weeks to months. Recognizing these symptoms early is crucial for prompt isolation and treatment.</p>
+
+                <h3>Classic Pulmonary TB Symptoms</h3>
+
+                <div class="guide-table-wrapper">
+                    <table class="guide-table">
+                        <thead>
+                            <tr>
+                                <th>Symptom</th>
+                                <th>Characteristics</th>
+                                <th>Pathophysiology</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Persistent Cough</strong></td>
+                                <td>≥3 weeks duration; initially dry, becomes productive</td>
+                                <td>Inflammation and tissue destruction in airways</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Hemoptysis</strong></td>
+                                <td>Blood-tinged to frank blood in sputum</td>
+                                <td>Erosion of blood vessels in cavitary lesions</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Night Sweats</strong></td>
+                                <td>Drenching sweats requiring clothing/linen change</td>
+                                <td>Immune response and cytokine release</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Fever</strong></td>
+                                <td>Low-grade, often afternoon/evening</td>
+                                <td>Inflammatory response to infection</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Weight Loss</strong></td>
+                                <td>Unintentional; "consumption" - historic term for TB</td>
+                                <td>Increased metabolic demands, decreased appetite</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Fatigue/Malaise</strong></td>
+                                <td>Progressive weakness and tiredness</td>
+                                <td>Chronic infection, anemia of chronic disease</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Chest Pain</strong></td>
+                                <td>Pleuritic pain that worsens with breathing</td>
+                                <td>Pleural involvement</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="info-box warning">
+                    <div class="info-box-header">
+                        <i class="fas fa-exclamation-triangle"></i> Red Flags: Suspect TB If...
+                    </div>
+                    <ul>
+                        <li>Cough persisting ≥3 weeks that doesn't respond to standard treatment</li>
+                        <li>Unexplained weight loss + night sweats + fever</li>
+                        <li>Hemoptysis in anyone (especially with risk factors)</li>
+                        <li>Any respiratory symptoms in HIV-positive patient</li>
+                        <li>Close contact with known TB case</li>
+                    </ul>
+                </div>
+
+                <h3>Extrapulmonary TB</h3>
+
+                <p>TB can spread beyond the lungs to virtually any organ. Extrapulmonary TB is more common in immunocompromised patients and children.</p>
+
+                <div class="guide-table-wrapper">
+                    <table class="guide-table">
+                        <thead>
+                            <tr>
+                                <th>Site</th>
+                                <th>Name</th>
+                                <th>Key Features</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Lymph Nodes</td>
+                                <td>Scrofula (TB lymphadenitis)</td>
+                                <td>Painless, swollen cervical lymph nodes; may drain</td>
+                            </tr>
+                            <tr>
+                                <td>Pleura</td>
+                                <td>TB pleurisy</td>
+                                <td>Pleural effusion, pleuritic chest pain</td>
+                            </tr>
+                            <tr>
+                                <td>Bones/Joints</td>
+                                <td>Pott's disease (spinal)</td>
+                                <td>Back pain, kyphosis, paraplegia risk</td>
+                            </tr>
+                            <tr>
+                                <td>Meninges</td>
+                                <td>TB meningitis</td>
+                                <td>Headache, altered mental status, cranial nerve palsies</td>
+                            </tr>
+                            <tr>
+                                <td>Kidneys</td>
+                                <td>Genitourinary TB</td>
+                                <td>Sterile pyuria, frequency, hematuria</td>
+                            </tr>
+                            <tr>
+                                <td>Disseminated</td>
+                                <td>Miliary TB</td>
+                                <td>Millet seed-like lesions throughout body; life-threatening</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="info-box nclex-tip">
+                    <div class="info-box-header">
+                        <i class="fas fa-graduation-cap"></i> NCLEX Priority
+                    </div>
+                    <p><strong>TB meningitis and miliary TB are medical emergencies!</strong> Miliary TB (disseminated) presents with diffuse tiny nodules on chest X-ray resembling millet seeds. It occurs when TB spreads through the bloodstream. Mortality is high without prompt treatment. Signs include: high fever, hepatosplenomegaly, multiple organ dysfunction.</p>
+                </div>
+            </section>
+
+            <!-- Section 5: Diagnostic Testing -->
+            <section class="guide-section" id="diagnostics">
+                <h2><span class="section-icon"><i class="fas fa-vial"></i></span> Diagnostic Testing</h2>
+
+                <p>TB diagnosis involves screening tests to detect exposure/infection, followed by confirmatory tests to identify active disease. Understanding these tests is crucial for nursing assessment and patient education.</p>
+
+                <h3>Screening Tests</h3>
+
+                <div class="guide-table-wrapper">
+                    <table class="guide-table">
+                        <thead>
+                            <tr>
+                                <th>Test</th>
+                                <th>Method</th>
+                                <th>Interpretation</th>
+                                <th>Nursing Considerations</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Mantoux TST (PPD)</strong></td>
+                                <td>Intradermal injection of purified protein derivative; read in 48-72 hours</td>
+                                <td>Measure INDURATION (not redness): ≥5mm, ≥10mm, or ≥15mm positive depending on risk</td>
+                                <td>Mark injection site; read within 72 hrs; measure only induration</td>
+                            </tr>
+                            <tr>
+                                <td><strong>IGRA (QuantiFERON, T-SPOT)</strong></td>
+                                <td>Blood test measuring interferon-gamma release when exposed to TB antigens</td>
+                                <td>Positive/Negative/Indeterminate</td>
+                                <td>Single visit; not affected by BCG vaccine; preferred in BCG-vaccinated</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="florencebot-tip" id="tip-tst-reading">
+                    <div class="florencebot-tip-header">
+                        <div class="florencebot-tip-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <span class="florencebot-tip-label">FlorenceBot Pro Tip</span>
+                    </div>
+                    <div class="florencebot-tip-title">TST Reading - Induration, Not Redness!</div>
+                    <div class="florencebot-tip-content">
+                        <strong>One of the most common mistakes: measuring redness instead of induration!</strong> When reading a TB skin test, you must measure the <strong>raised, hardened area (induration)</strong>, NOT the surrounding redness (erythema). Here's how: Palpate the injection site with your fingers to feel the raised area. Use a ruler to measure the widest diameter of the induration <strong>transversely</strong> (across the forearm). The criteria for positive depends on risk: <strong>≥5mm</strong> for HIV+, close contacts, immunosuppressed; <strong>≥10mm</strong> for healthcare workers, high-prevalence populations; <strong>≥15mm</strong> for those with no risk factors. Remember: the test must be read within 48-72 hours or results are invalid!
+                    </div>
+                </div>
+
+                <h3>TST Interpretation Criteria</h3>
+
+                <div class="quick-reference">
+                    <h3><i class="fas fa-bookmark"></i> TST Positive Cut-offs</h3>
+                    <div class="quick-reference-grid">
+                        <div class="quick-ref-item">
+                            <div class="label">≥5mm Positive If:</div>
+                            <div class="value">HIV+, close contacts, immunosuppressed, CXR changes</div>
+                        </div>
+                        <div class="quick-ref-item">
+                            <div class="label">≥10mm Positive If:</div>
+                            <div class="value">Healthcare workers, high-prevalence groups, IV drug users, children &lt;4</div>
+                        </div>
+                        <div class="quick-ref-item">
+                            <div class="label">≥15mm Positive If:</div>
+                            <div class="value">Persons with no known risk factors</div>
+                        </div>
+                        <div class="quick-ref-item">
+                            <div class="label">False Negative Causes:</div>
+                            <div class="value">Anergy, recent infection, improper technique, immunosuppression</div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>Confirmatory Tests for Active TB</h3>
+
+                <div class="guide-table-wrapper">
+                    <table class="guide-table">
+                        <thead>
+                            <tr>
+                                <th>Test</th>
+                                <th>Purpose</th>
+                                <th>Key Points</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Chest X-Ray</strong></td>
+                                <td>Detect pulmonary abnormalities</td>
+                                <td>Upper lobe infiltrates, cavities, hilar adenopathy; does NOT confirm TB alone</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Sputum AFB Smear</strong></td>
+                                <td>Rapid detection of acid-fast bacilli</td>
+                                <td>3 specimens on separate days; early morning best; positive = highly infectious</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Sputum Culture</strong></td>
+                                <td>GOLD STANDARD for diagnosis</td>
+                                <td>Takes 2-6 weeks for growth; confirms species and drug susceptibility</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Nucleic Acid Amplification (NAAT)</strong></td>
+                                <td>Rapid molecular detection</td>
+                                <td>Results in 2 hours; detects rifampin resistance; use with AFB smear</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Drug Susceptibility Testing</strong></td>
+                                <td>Identify drug-resistant strains</td>
+                                <td>Essential before/during treatment; guides therapy adjustments</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="info-box tip">
+                    <div class="info-box-header">
+                        <i class="fas fa-check-circle"></i> Sputum Collection Best Practices
+                    </div>
+                    <ul>
+                        <li>Collect <strong>3 specimens</strong> on separate days (8-24 hours apart)</li>
+                        <li><strong>Early morning</strong> specimens have highest yield</li>
+                        <li>Patient should <strong>rinse mouth</strong> first (avoid toothpaste)</li>
+                        <li>Deep cough from <strong>lungs, not throat</strong></li>
+                        <li>Collect in <strong>negative pressure room</strong> or outdoors</li>
+                        <li>Healthcare worker wears <strong>N95 respirator</strong></li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section 6: Airborne Isolation -->
+            <section class="guide-section" id="isolation">
+                <h2><span class="section-icon"><i class="fas fa-shield-virus"></i></span> Airborne Isolation Precautions</h2>
+
+                <p>Patients with suspected or confirmed pulmonary TB require immediate airborne isolation to prevent transmission. This is one of the most critical nursing interventions in TB care.</p>
+
+                <div class="isolation-box">
+                    <h4><i class="fas fa-door-closed"></i> Airborne Isolation Requirements</h4>
+                    <div class="isolation-steps">
+                        <div class="isolation-step">
+                            <div class="isolation-step-icon">
+                                <i class="fas fa-wind"></i>
+                            </div>
+                            <div class="isolation-step-content">
+                                <strong>Airborne Infection Isolation Room (AIIR)</strong> - Negative pressure room with at least 6-12 air exchanges per hour. Air exhausted outside or through HEPA filtration. Door must remain closed.
+                            </div>
+                        </div>
+                        <div class="isolation-step">
+                            <div class="isolation-step-icon">
+                                <i class="fas fa-head-side-mask"></i>
+                            </div>
+                            <div class="isolation-step-content">
+                                <strong>N95 Respirator</strong> - ALL persons entering room must wear fit-tested N95 or higher respirator. Standard surgical masks are NOT adequate for TB. Respirator must seal to face.
+                            </div>
+                        </div>
+                        <div class="isolation-step">
+                            <div class="isolation-step-icon">
+                                <i class="fas fa-mask"></i>
+                            </div>
+                            <div class="isolation-step-content">
+                                <strong>Patient Mask</strong> - Patient wears surgical mask when leaving room for essential transport. Cover coughs and sneezes. Minimize time outside negative pressure room.
+                            </div>
+                        </div>
+                        <div class="isolation-step">
+                            <div class="isolation-step-icon">
+                                <i class="fas fa-sign"></i>
+                            </div>
+                            <div class="isolation-step-content">
+                                <strong>Signage & Restricted Access</strong> - Post airborne precautions sign on door. Limit visitors. Educate all who enter about requirements.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="florencebot-tip" id="tip-n95-fit">
+                    <div class="florencebot-tip-header">
+                        <div class="florencebot-tip-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <span class="florencebot-tip-label">FlorenceBot Pro Tip</span>
+                    </div>
+                    <div class="florencebot-tip-title">N95 - Not Just Any Mask!</div>
+                    <div class="florencebot-tip-content">
+                        <strong>A surgical mask is NOT equivalent to an N95 for TB protection!</strong> Here's why: TB droplet nuclei are tiny (1-5 micrometers) and can be inhaled around the edges of a loose-fitting surgical mask. An N95 respirator filters at least 95% of airborne particles AND creates a seal against your face. Key points: You must be <strong>fit-tested</strong> for your N95 to ensure proper seal. Perform a <strong>seal check</strong> each time you don (inhale - mask should collapse; exhale - check for leaks around edges). Facial hair can break the seal. If you can smell something through your N95, it's not fitting properly!
+                    </div>
+                </div>
+
+                <h3>When to Discontinue Isolation</h3>
+
+                <div class="guide-table-wrapper">
+                    <table class="guide-table">
+                        <thead>
+                            <tr>
+                                <th>Criteria</th>
+                                <th>Requirement</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Treatment Duration</td>
+                                <td>Minimum 2 weeks of effective anti-TB therapy</td>
+                            </tr>
+                            <tr>
+                                <td>Clinical Improvement</td>
+                                <td>Fever resolved, cough improving</td>
+                            </tr>
+                            <tr>
+                                <td>Sputum Smears</td>
+                                <td>3 consecutive negative AFB smears collected 8-24 hours apart</td>
+                            </tr>
+                            <tr>
+                                <td>Drug Susceptibility</td>
+                                <td>No evidence of drug resistance</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="info-box warning">
+                    <div class="info-box-header">
+                        <i class="fas fa-exclamation-triangle"></i> MDR-TB Alert
+                    </div>
+                    <p><strong>Multi-drug resistant TB (MDR-TB)</strong> is resistant to at least isoniazid AND rifampin - the two most powerful first-line drugs. These patients remain infectious longer and require extended isolation until multiple negative smears confirm non-infectiousness. Suspect MDR-TB in:</p>
+                    <ul>
+                        <li>Patients from high MDR-TB prevalence areas</li>
+                        <li>Previous TB treatment (especially incomplete)</li>
+                        <li>Contact with known MDR-TB case</li>
+                        <li>Failure to respond to standard therapy</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section 7: RIPE Therapy -->
+            <section class="guide-section" id="ripe-therapy">
+                <h2><span class="section-icon"><i class="fas fa-pills"></i></span> RIPE Therapy</h2>
+
+                <p>Active TB requires multi-drug therapy to prevent resistance and ensure cure. The standard first-line regimen is known as RIPE therapy and lasts a minimum of 6 months.</p>
+
+                <div class="info-box mnemonic">
+                    <div class="info-box-header">
+                        <i class="fas fa-brain"></i> Memory Aid: RIPE
+                    </div>
+                    <p><strong>R</strong>ifampin + <strong>I</strong>soniazid + <strong>P</strong>yrazinamide + <strong>E</strong>thambutol</p>
+                    <p>"The fruit must be <strong>RIPE</strong> to treat TB!"</p>
+                </div>
+
+                <h3>First-Line TB Medications</h3>
+
+                <div class="guide-table-wrapper">
+                    <table class="guide-table">
+                        <thead>
+                            <tr>
+                                <th>Drug</th>
+                                <th>Mechanism</th>
+                                <th>Major Side Effects</th>
+                                <th>Nursing Considerations</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Rifampin (R)</strong></td>
+                                <td>Inhibits RNA synthesis</td>
+                                <td>Hepatotoxicity, orange body fluids, drug interactions</td>
+                                <td>Turns urine/tears/sweat orange; many drug interactions (OCP, warfarin); monitor LFTs</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Isoniazid (H)</strong></td>
+                                <td>Inhibits cell wall synthesis</td>
+                                <td>Hepatotoxicity, peripheral neuropathy</td>
+                                <td>Give pyridoxine (B6) to prevent neuropathy; monitor LFTs; avoid alcohol</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Pyrazinamide (Z)</strong></td>
+                                <td>Unknown; active in acidic environment</td>
+                                <td>Hepatotoxicity, hyperuricemia, arthralgias</td>
+                                <td>Used first 2 months only; monitor uric acid and LFTs</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Ethambutol (E)</strong></td>
+                                <td>Inhibits cell wall synthesis</td>
+                                <td>Optic neuritis (vision changes)</td>
+                                <td>Baseline and monthly vision testing; report blurred vision or color blindness immediately</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="florencebot-tip" id="tip-ripe-monitoring">
+                    <div class="florencebot-tip-header">
+                        <div class="florencebot-tip-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <span class="florencebot-tip-label">FlorenceBot Pro Tip</span>
+                    </div>
+                    <div class="florencebot-tip-title">RIPE Side Effects - What to Monitor</div>
+                    <div class="florencebot-tip-content">
+                        <strong>Three drugs (RIP) are hepatotoxic - monitor liver function closely!</strong> Here's what to watch for with each drug: <strong>Rifampin</strong> - Orange body fluids are NORMAL (warn patients!), but it causes major drug interactions - check all medications. <strong>Isoniazid</strong> - Peripheral neuropathy (tingling hands/feet); give <strong>vitamin B6 (pyridoxine)</strong> to prevent this. <strong>Pyrazinamide</strong> - Causes elevated uric acid and joint pain. <strong>Ethambutol</strong> - The "EYE" drug - causes optic neuritis. Ask about <strong>vision changes</strong> at every visit. Get baseline eye exam. If patient reports blurred vision, difficulty distinguishing red from green, or visual field changes - stop ethambutol and notify provider STAT!
+                    </div>
+                </div>
+
+                <h3>Treatment Duration</h3>
+
+                <div class="quick-reference">
+                    <h3><i class="fas fa-bookmark"></i> Standard TB Treatment Phases</h3>
+                    <div class="quick-reference-grid">
+                        <div class="quick-ref-item">
+                            <div class="label">Initial Phase (2 months)</div>
+                            <div class="value">All 4 drugs: RIPE</div>
+                        </div>
+                        <div class="quick-ref-item">
+                            <div class="label">Continuation Phase (4+ months)</div>
+                            <div class="value">Rifampin + Isoniazid only</div>
+                        </div>
+                        <div class="quick-ref-item">
+                            <div class="label">Total Duration (drug-susceptible)</div>
+                            <div class="value">6 months minimum</div>
+                        </div>
+                        <div class="quick-ref-item">
+                            <div class="label">Extended (9+ months if...)</div>
+                            <div class="value">Cavitary disease, HIV+, slow response</div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>Directly Observed Therapy (DOT)</h3>
+
+                <div class="info-box tip">
+                    <div class="info-box-header">
+                        <i class="fas fa-check-circle"></i> DOT - Gold Standard for Adherence
+                    </div>
+                    <p><strong>Directly Observed Therapy (DOT)</strong> means a healthcare worker watches the patient swallow every dose of medication. This is the recommended approach because:</p>
+                    <ul>
+                        <li>TB treatment is long (6+ months) and adherence drops over time</li>
+                        <li>Incomplete treatment leads to drug resistance</li>
+                        <li>Protects public health by ensuring treatment completion</li>
+                        <li>Allows early detection of side effects and non-adherence</li>
+                    </ul>
+                </div>
+
+                <div class="florencebot-tip" id="tip-adherence">
+                    <div class="florencebot-tip-header">
+                        <div class="florencebot-tip-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <span class="florencebot-tip-label">FlorenceBot Pro Tip</span>
+                    </div>
+                    <div class="florencebot-tip-title">Treatment Adherence is CRITICAL</div>
+                    <div class="florencebot-tip-content">
+                        <strong>The #1 reason for treatment failure and drug resistance is non-adherence!</strong> Patients often feel better after 2-3 weeks of treatment and want to stop - but the TB bacteria are NOT gone yet. If treatment is stopped early or taken inconsistently, the remaining bacteria can become drug-resistant, creating a strain that's much harder to treat. This is why <strong>DOT (Directly Observed Therapy)</strong> is recommended. For NCLEX, if a patient says "I feel better, can I stop taking these pills?" - the answer is always NO! Teach patients they must complete the FULL course even when symptoms resolve.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 8: Nursing Care & Education -->
+            <section class="guide-section" id="nursing-care">
+                <h2><span class="section-icon"><i class="fas fa-user-nurse"></i></span> Nursing Care & Patient Education</h2>
+
+                <p>Nursing care for TB patients extends beyond medication administration to include infection control, symptom management, patient education, and coordination with public health services.</p>
+
+                <h3>Priority Nursing Interventions</h3>
+
+                <div class="interventions-list">
+                    <h4><i class="fas fa-clipboard-list"></i> Key Nursing Actions</h4>
+
+                    <div class="intervention-item">
+                        <div class="intervention-number">1</div>
+                        <div class="intervention-content">
+                            <h5>Implement Airborne Precautions</h5>
+                            <p>Place patient in negative pressure room immediately upon suspicion of TB. Ensure N95 respirator is worn by all staff. Keep door closed. Minimize patient transport.</p>
+                        </div>
+                    </div>
+
+                    <div class="intervention-item">
+                        <div class="intervention-number">2</div>
+                        <div class="intervention-content">
+                            <h5>Administer Medications & Monitor for Side Effects</h5>
+                            <p>Give anti-TB medications as prescribed. Monitor LFTs regularly. Assess vision if on ethambutol. Provide pyridoxine with isoniazid. Report signs of hepatotoxicity.</p>
+                        </div>
+                    </div>
+
+                    <div class="intervention-item">
+                        <div class="intervention-number">3</div>
+                        <div class="intervention-content">
+                            <h5>Collect Sputum Specimens</h5>
+                            <p>Obtain 3 early morning specimens for AFB smear and culture. Ensure proper technique and biosafety precautions. Label specimens correctly.</p>
+                        </div>
+                    </div>
+
+                    <div class="intervention-item">
+                        <div class="intervention-number">4</div>
+                        <div class="intervention-content">
+                            <h5>Maintain Nutrition</h5>
+                            <p>Monitor weight regularly. Provide high-calorie, high-protein diet. Address nausea from medications. Small, frequent meals may be better tolerated.</p>
+                        </div>
+                    </div>
+
+                    <div class="intervention-item">
+                        <div class="intervention-number">5</div>
+                        <div class="intervention-content">
+                            <h5>Coordinate with Public Health</h5>
+                            <p>Report case to health department as required by law. Assist with contact investigation. Arrange for DOT upon discharge. Ensure follow-up appointments.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>Patient & Family Education</h3>
+
+                <div class="guide-table-wrapper">
+                    <table class="guide-table">
+                        <thead>
+                            <tr>
+                                <th>Topic</th>
+                                <th>Key Teaching Points</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Disease Understanding</td>
+                                <td>TB is curable with proper treatment; caused by bacteria spread through air; not spread by touching surfaces or sharing utensils</td>
+                            </tr>
+                            <tr>
+                                <td>Medication Adherence</td>
+                                <td>Take ALL medications exactly as prescribed for ENTIRE duration; stopping early causes drug resistance; report side effects but don't stop without provider guidance</td>
+                            </tr>
+                            <tr>
+                                <td>Infection Control at Home</td>
+                                <td>Cover mouth/nose when coughing; open windows for ventilation; wear surgical mask around others until non-infectious; sleep alone initially</td>
+                            </tr>
+                            <tr>
+                                <td>Expected Side Effects</td>
+                                <td>Orange urine/tears from rifampin is NORMAL; report: vision changes, numbness/tingling, nausea/vomiting, dark urine, yellowing skin</td>
+                            </tr>
+                            <tr>
+                                <td>Follow-Up Care</td>
+                                <td>Attend all appointments; sputum tests needed to confirm treatment working; continue until provider says treatment complete</td>
+                            </tr>
+                            <tr>
+                                <td>Contact Notification</td>
+                                <td>Close contacts need to be tested; health department will assist; this protects loved ones from developing TB</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="info-box nclex-tip">
+                    <div class="info-box-header">
+                        <i class="fas fa-graduation-cap"></i> NCLEX Priority: Contact Investigation
+                    </div>
+                    <p><strong>TB is a reportable disease!</strong> When a case is diagnosed, public health conducts a contact investigation to identify and test people who were exposed. Close contacts (household members, coworkers in enclosed spaces, etc.) are tested and offered treatment for latent TB if positive. This breaks the chain of transmission and is a critical public health intervention.</p>
+                </div>
+
+                <div class="info-box warning">
+                    <div class="info-box-header">
+                        <i class="fas fa-exclamation-triangle"></i> Signs of Hepatotoxicity - STOP Medications & Notify Provider!
+                    </div>
+                    <ul>
+                        <li><strong>Nausea, vomiting, loss of appetite</strong> persisting more than a few days</li>
+                        <li><strong>Dark urine</strong> (tea or cola-colored)</li>
+                        <li><strong>Jaundice</strong> (yellowing of skin or eyes)</li>
+                        <li><strong>Right upper quadrant pain</strong></li>
+                        <li><strong>Unexplained fatigue or weakness</strong></li>
+                        <li><strong>LFTs elevated >3-5x normal</strong> with symptoms</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Key Points Summary -->
+            <section class="key-points-summary">
+                <h2><i class="fas fa-star"></i> Key Takeaways</h2>
+                <div class="key-points-grid">
+                    <div class="key-point">
+                        <i class="fas fa-moon"></i>
+                        <p><strong>Latent TB</strong> = dormant bacteria, NOT contagious, treat to prevent reactivation</p>
+                    </div>
+                    <div class="key-point">
+                        <i class="fas fa-virus"></i>
+                        <p><strong>Active TB</strong> = symptomatic, CONTAGIOUS, requires multi-drug therapy</p>
+                    </div>
+                    <div class="key-point">
+                        <i class="fas fa-head-side-mask"></i>
+                        <p><strong>N95 respirator</strong> required for airborne precautions - surgical mask is NOT enough</p>
+                    </div>
+                    <div class="key-point">
+                        <i class="fas fa-pills"></i>
+                        <p><strong>RIPE therapy</strong> = Rifampin, Isoniazid, Pyrazinamide, Ethambutol</p>
+                    </div>
+                    <div class="key-point">
+                        <i class="fas fa-eye"></i>
+                        <p><strong>Ethambutol</strong> causes optic neuritis - monitor vision closely</p>
+                    </div>
+                    <div class="key-point">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <p><strong>Complete treatment</strong> is essential - stopping early causes drug resistance</p>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+
+        <!-- Document Footer -->
+        <div class="document-footer">
+            <img src="../assets/images/the-nursing-collective-logo.webp" alt="The Nursing Collective" class="footer-logo">
+            <p class="footer-tagline">Empowering nursing students with evidence-based study resources</p>
+            <p class="footer-copyright">&copy; 2026 The Nursing Collective. All rights reserved.</p>
+        </div>
+
+    </div>
+
+    <!-- Guide page scripts (external for CSP compliance) -->
+    <script src="configs/tuberculosis-config.js"></script>
+    <script src="guide-sidebar.js"></script>
+    <script src="guide-script.js"></script>
+</body>
+</html>
