@@ -692,6 +692,16 @@ function formatRelativeTime(dateString) {
     return formatDate(dateString);
 }
 
+// Check if a purchase is considered "new" (within the last 7 days)
+function isNewPurchase(purchasedAt) {
+    if (!purchasedAt) return false;
+    const purchaseDate = new Date(purchasedAt);
+    const now = new Date();
+    const diffMs = now - purchaseDate;
+    const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+    return diffDays <= 7;
+}
+
 // Category display configuration - includes Med-Surg subcategories
 const categoryConfig = {
     // Med-Surg Subcategories (body systems)
@@ -946,6 +956,7 @@ function renderCompactGuideCard(purchase, isFavoriteSection) {
     const isFavorited = favorites.includes(purchase.product_id);
     const lastStudied = getLastStudied(purchase.product_id);
     const lastStudiedText = formatRelativeTime(lastStudied);
+    const isNew = isNewPurchase(purchase.purchased_at);
 
     return `
         <div class="guide-row" data-product-id="${escapeHtml(purchase.product_id)}">
@@ -955,6 +966,7 @@ function renderCompactGuideCard(purchase, isFavoriteSection) {
                 </button>
                 <div class="guide-row-icon">${icon}</div>
                 <span class="guide-row-title">${escapeHtml(purchase.product_name)}</span>
+                ${isNew ? '<span class="guide-new-badge">New</span>' : ''}
             </div>
             <div class="guide-row-right">
                 <span class="guide-row-studied">${lastStudiedText || 'Not studied yet'}</span>

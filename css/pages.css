@@ -5699,6 +5699,28 @@ body.is-admin-user .purchase-history-section {
     text-overflow: ellipsis;
 }
 
+/* New purchase badge */
+.guide-new-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 2px 8px;
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-radius: 10px;
+    margin-left: 8px;
+    flex-shrink: 0;
+    box-shadow: 0 1px 3px rgba(16, 185, 129, 0.3);
+}
+
+[data-theme="dark"] .guide-new-badge {
+    background: linear-gradient(135deg, #34d399, #10b981);
+    box-shadow: 0 1px 3px rgba(52, 211, 153, 0.4);
+}
+
 .guide-row-right {
     display: flex;
     align-items: center;
