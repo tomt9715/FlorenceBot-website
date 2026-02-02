@@ -1,0 +1,1786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coronary Artery Disease Study Guide - The Nursing Collective</title>
+    <meta name="description" content="Comprehensive nursing study guide for Coronary Artery Disease. Learn to differentiate stable vs unstable angina, identify modifiable risk factors, and prepare patients for cardiac catheterization.">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <style>
+        /* ============================================
+           PDF-STYLE STUDY GUIDE STYLES
+           Coronary Artery Disease - Classic Document Layout
+           Colors inspired by icon: pink/magenta heart, cyan vessels, gold plaque
+           ============================================ */
+
+        :root {
+            --primary-color: #E91E63;
+            --primary-dark: #C2185B;
+            --secondary-color: #00BCD4;
+            --accent-color: #FFC107;
+            --text-primary: #1f2937;
+            --text-secondary: #4b5563;
+            --background: #ffffff;
+            --border-color: #e5e7eb;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Source Sans 3', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.7;
+            color: var(--text-primary);
+            background: #f3f4f6;
+        }
+
+        /* Download Bar - Fixed at top */
+        .download-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 12px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .download-bar-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 600;
+        }
+
+        .download-bar-brand img {
+            height: 32px;
+            width: auto;
+        }
+
+        .download-bar-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn-download {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background: white;
+            color: var(--primary-color);
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+        }
+
+        .btn-download:hover {
+            background: #f0f9ff;
+            transform: translateY(-1px);
+        }
+
+        .btn-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background: rgba(255,255,255,0.15);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+        }
+
+        .btn-back:hover {
+            background: rgba(255,255,255,0.25);
+        }
+
+        /* Document Container */
+        .document-container {
+            max-width: 850px;
+            margin: 80px auto 40px;
+            background: white;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+
+        /* Cover Page - Colors inspired by guide icon (pink heart, cyan vessels, gold plaque) */
+        .cover-page {
+            background: linear-gradient(135deg, #E91E63 0%, #00BCD4 50%, #FFC107 100%);
+            color: white;
+            padding: 80px 60px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cover-page::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.5;
+        }
+
+        .cover-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cover-logo {
+            width: 80px;
+            height: 80px;
+            background: white;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            padding: 12px;
+        }
+
+        .cover-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .cover-category {
+            display: inline-block;
+            padding: 8px 24px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+        }
+
+        .cover-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.1;
+        }
+
+        .cover-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            max-width: 600px;
+            margin: 0 auto 40px;
+            line-height: 1.6;
+        }
+
+        .cover-meta {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .cover-meta-item {
+            text-align: center;
+        }
+
+        .cover-meta-item .label {
+            font-size: 0.8rem;
+            opacity: 0.8;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .cover-meta-item .value {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-top: 4px;
+        }
+
+        .cover-brand {
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+
+        /* Document Content */
+        .document-content {
+            padding: 60px;
+        }
+
+        /* Learning Objectives */
+        .learning-objectives {
+            background: linear-gradient(135deg, #ecfdf5, #d1fae5);
+            border: 2px solid #10b981;
+            border-radius: 12px;
+            padding: 28px;
+            margin-bottom: 40px;
+        }
+
+        .learning-objectives h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #059669;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .learning-objectives ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .learning-objectives li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 8px 0;
+            color: var(--text-primary);
+            font-size: 1rem;
+        }
+
+        .learning-objectives li i {
+            color: #10b981;
+            margin-top: 4px;
+            flex-shrink: 0;
+        }
+
+        /* Table of Contents */
+        .table-of-contents {
+            background: #f9fafb;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 28px;
+            margin-bottom: 40px;
+        }
+
+        .table-of-contents h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 16px;
+        }
+
+        .table-of-contents ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            columns: 2;
+            column-gap: 30px;
+        }
+
+        .table-of-contents li {
+            break-inside: avoid;
+            margin-bottom: 8px;
+        }
+
+        .table-of-contents a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 12px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            transition: all 0.2s ease;
+        }
+
+        .table-of-contents a:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .toc-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 22px;
+            height: 22px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 5px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        .table-of-contents a:hover .toc-number {
+            background: white;
+            color: var(--primary-color);
+        }
+
+        /* Content Sections */
+        .guide-section {
+            margin-bottom: 50px;
+            scroll-margin-top: 80px;
+        }
+
+        .guide-section h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .guide-section h3 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin: 28px 0 14px;
+        }
+
+        .guide-section h4 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin: 20px 0 10px;
+        }
+
+        .guide-section p {
+            color: var(--text-secondary);
+            font-size: 1.02rem;
+            margin-bottom: 14px;
+        }
+
+        .guide-section ul, .guide-section ol {
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+            padding-left: 24px;
+        }
+
+        .guide-section li {
+            margin-bottom: 8px;
+        }
+
+        .guide-section strong {
+            color: var(--text-primary);
+        }
+
+        /* Info Boxes */
+        .info-box {
+            border-radius: 10px;
+            padding: 18px 22px;
+            margin: 20px 0;
+            border-left: 4px solid;
+        }
+
+        .info-box.clinical-pearl {
+            background: linear-gradient(135deg, #fffbeb, #fef3c7);
+            border-color: #f59e0b;
+        }
+
+        .info-box.warning {
+            background: #fef2f2;
+            border-color: #ef4444;
+        }
+
+        .info-box.tip {
+            background: #ecfdf5;
+            border-color: #10b981;
+        }
+
+        .info-box.nclex-tip {
+            background: #f5f3ff;
+            border-color: #8b5cf6;
+        }
+
+        .info-box.mnemonic {
+            background: #fffbeb;
+            border-color: #f59e0b;
+        }
+
+        .info-box-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+        }
+
+        .info-box.clinical-pearl .info-box-header { color: #d97706; }
+        .info-box.warning .info-box-header { color: #ef4444; }
+        .info-box.tip .info-box-header { color: #059669; }
+        .info-box.nclex-tip .info-box-header { color: #7c3aed; }
+        .info-box.mnemonic .info-box-header { color: #d97706; }
+
+        .info-box p { margin: 0; color: var(--text-secondary); font-size: 0.98rem; }
+        .info-box ul { margin: 8px 0 0; padding-left: 18px; }
+        .info-box li { margin-bottom: 4px; font-size: 0.98rem; }
+
+        /* Tables */
+        .guide-table-wrapper {
+            overflow-x: auto;
+            margin: 20px 0;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+        }
+
+        .guide-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.92rem;
+        }
+
+        .guide-table thead {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+        }
+
+        .guide-table th {
+            padding: 12px 14px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .guide-table tbody tr {
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .guide-table tbody tr:hover {
+            background: #f9fafb;
+        }
+
+        .guide-table td {
+            padding: 12px 14px;
+            color: var(--text-secondary);
+        }
+
+        .guide-table td:first-child {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        /* Comparison Cards */
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .comparison-card {
+            border-radius: 12px;
+            border: 2px solid var(--border-color);
+            overflow: hidden;
+        }
+
+        .comparison-card-header {
+            padding: 16px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 1.05rem;
+            color: white;
+        }
+
+        .comparison-card.stable .comparison-card-header {
+            background: linear-gradient(135deg, #10b981, #059669);
+        }
+
+        .comparison-card.unstable .comparison-card-header {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+        }
+
+        .comparison-card.pci .comparison-card-header {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+        }
+
+        .comparison-card.cabg .comparison-card-header {
+            background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+        }
+
+        .comparison-card-body {
+            padding: 18px;
+        }
+
+        .comparison-card-body h4 {
+            font-size: 0.95rem;
+            margin: 0 0 10px;
+        }
+
+        .comparison-card-body ul {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 14px;
+        }
+
+        .comparison-card-body li {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            padding: 6px 0;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .comparison-card-body li:last-child { border-bottom: none; }
+        .comparison-card-body li i { color: var(--primary-color); margin-top: 3px; flex-shrink: 0; }
+
+        /* Interventions List */
+        .interventions-list {
+            background: #f9fafb;
+            border-radius: 12px;
+            padding: 22px;
+            margin: 20px 0;
+        }
+
+        .interventions-list h4 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1rem;
+            margin: 0 0 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .interventions-list h4 i { color: var(--primary-color); }
+
+        .intervention-item {
+            display: flex;
+            gap: 14px;
+            padding: 14px;
+            background: white;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            border: 1px solid var(--border-color);
+        }
+
+        .intervention-number {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+
+        .intervention-content h5 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin: 0 0 4px;
+        }
+
+        .intervention-content p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin: 0;
+        }
+
+        /* Key Points Summary */
+        .key-points-summary {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 12px;
+            padding: 28px;
+            margin: 40px 0 0;
+            color: white;
+        }
+
+        .key-points-summary h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.3rem;
+            margin: 0 0 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: white;
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .key-points-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 14px;
+        }
+
+        .key-point {
+            background: rgba(255,255,255,0.15);
+            padding: 14px;
+            border-radius: 10px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .key-point i { font-size: 1.1rem; margin-top: 2px; }
+        .key-point p { margin: 0; font-size: 0.92rem; line-height: 1.4; }
+
+        /* Footer */
+        .document-footer {
+            text-align: center;
+            padding: 32px 48px;
+            border-top: 1px solid var(--border-color);
+            background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+        }
+
+        .footer-logo {
+            height: 48px;
+            width: auto;
+            margin-bottom: 12px;
+        }
+
+        .footer-tagline {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+        }
+
+        .footer-copyright {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        /* Print Styles */
+        @page {
+            margin: 0.6in 0.4in;
+        }
+
+        @media print {
+            .download-bar { display: none !important; }
+
+            body {
+                background: white !important;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+
+            .document-container {
+                margin: 0 !important;
+                box-shadow: none !important;
+                max-width: 100% !important;
+                width: 100% !important;
+            }
+
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                color-adjust: exact !important;
+            }
+
+            .cover-page {
+                page-break-after: always;
+                break-after: page;
+            }
+
+            .info-box { page-break-inside: avoid; break-inside: avoid; }
+            .guide-table-wrapper { page-break-inside: avoid; break-inside: avoid; }
+            .comparison-card { page-break-inside: avoid; break-inside: avoid; }
+            .intervention-item { page-break-inside: avoid; break-inside: avoid; }
+            .learning-objectives { page-break-inside: avoid; break-inside: avoid; }
+            .key-points-summary { page-break-inside: avoid; break-inside: avoid; }
+
+            h2, h3, h4 {
+                page-break-after: avoid;
+                break-after: avoid;
+            }
+
+            .comparison-grid { page-break-inside: auto; }
+            .interventions-list { page-break-inside: auto; }
+
+            a { text-decoration: underline; }
+
+            .document-footer {
+                page-break-inside: avoid;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .download-bar {
+                flex-direction: column;
+                gap: 12px;
+                padding: 12px 16px;
+            }
+            .download-bar-actions {
+                width: 100%;
+                justify-content: center;
+            }
+            .document-container { margin: 120px 10px 20px; }
+            .cover-page { padding: 50px 30px; }
+            .cover-title { font-size: 2.2rem; }
+            .cover-meta { flex-direction: column; gap: 20px; }
+            .document-content { padding: 30px 24px; }
+            .table-of-contents ul { columns: 1; }
+            .comparison-grid { grid-template-columns: 1fr; }
+            .key-points-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+
+    <!-- Sidebar Styles (shared across all guides) -->
+    <link rel="stylesheet" href="guide-sidebar.css">
+</head>
+<body data-product-id="coronary-artery-disease" data-guide-name="Coronary-Artery-Disease">
+    <!-- Download Bar -->
+    <div class="download-bar">
+        <div class="download-bar-brand">
+            <i class="fas fa-book-medical"></i>
+            <span>The Nursing Collective Study Guide</span>
+        </div>
+        <div class="download-bar-actions">
+            <a href="../dashboard.html" class="btn-back">
+                <i class="fas fa-arrow-left"></i> Back to Dashboard
+            </a>
+            <button class="btn-download" id="download-pdf-btn">
+                <i class="fas fa-file-pdf"></i> Save as PDF
+            </button>
+        </div>
+    </div>
+
+    <!-- Document -->
+    <div class="document-container">
+
+        <!-- Cover Page -->
+        <div class="cover-page">
+            <div class="cover-content">
+                <div class="cover-logo">
+                    <img src="../assets/images/guide-icons/coronary-artery-disease.webp" alt="Coronary Artery Disease">
+                </div>
+                <div class="cover-category">Medical-Surgical Nursing</div>
+                <h1 class="cover-title">Coronary Artery Disease</h1>
+                <p class="cover-subtitle">Comprehensive nursing study guide covering stable vs unstable angina differentiation, modifiable and non-modifiable risk factors, atherosclerosis pathophysiology, diagnostic testing, and patient preparation for cardiac catheterization.</p>
+                <div class="cover-meta">
+                    <div class="cover-meta-item">
+                        <div class="label">Reading Time</div>
+                        <div class="value">20-25 minutes</div>
+                    </div>
+                    <div class="cover-meta-item">
+                        <div class="label">Difficulty Level</div>
+                        <div class="value">Intermediate</div>
+                    </div>
+                    <div class="cover-meta-item">
+                        <div class="label">Last Updated</div>
+                        <div class="value">February 2026</div>
+                    </div>
+                </div>
+                <div class="cover-brand">
+                    <i class="fas fa-graduation-cap"></i> The Nursing Collective
+                </div>
+            </div>
+        </div>
+
+        <!-- Document Content -->
+        <div class="document-content">
+
+            <!-- Learning Objectives -->
+            <section class="learning-objectives">
+                <h2><i class="fas fa-bullseye"></i> Learning Objectives</h2>
+                <ul>
+                    <li><i class="fas fa-check-circle"></i> Explain the pathophysiology of coronary artery disease and atherosclerosis</li>
+                    <li><i class="fas fa-check-circle"></i> Differentiate between stable angina and unstable angina presentations</li>
+                    <li><i class="fas fa-check-circle"></i> Identify modifiable and non-modifiable risk factors for CAD</li>
+                    <li><i class="fas fa-check-circle"></i> Describe diagnostic tests used to evaluate coronary artery disease</li>
+                    <li><i class="fas fa-check-circle"></i> Prepare patients for cardiac catheterization and recognize potential complications</li>
+                    <li><i class="fas fa-check-circle"></i> Apply pharmacological and lifestyle interventions for CAD management</li>
+                    <li><i class="fas fa-check-circle"></i> Compare percutaneous coronary intervention (PCI) and coronary artery bypass grafting (CABG)</li>
+                </ul>
+            </section>
+
+            <!-- Table of Contents -->
+            <nav class="table-of-contents">
+                <h2><i class="fas fa-list"></i> Table of Contents</h2>
+                <ul>
+                    <li><a href="#anatomy"><span class="toc-number">1</span> Coronary Anatomy Review</a></li>
+                    <li><a href="#pathophysiology"><span class="toc-number">2</span> Pathophysiology of CAD</a></li>
+                    <li><a href="#risk-factors"><span class="toc-number">3</span> Risk Factors</a></li>
+                    <li><a href="#angina"><span class="toc-number">4</span> Stable vs Unstable Angina</a></li>
+                    <li><a href="#diagnostics"><span class="toc-number">5</span> Diagnostic Testing</a></li>
+                    <li><a href="#catheterization"><span class="toc-number">6</span> Cardiac Catheterization</a></li>
+                    <li><a href="#management"><span class="toc-number">7</span> Medical Management</a></li>
+                    <li><a href="#interventions"><span class="toc-number">8</span> Surgical Interventions</a></li>
+                </ul>
+            </nav>
+
+            <!-- Section 1: Coronary Anatomy Review -->
+            <section class="guide-section" id="anatomy">
+                <h2><span class="section-icon"><i class="fas fa-heart"></i></span> Coronary Anatomy Review</h2>
+
+                <p>Understanding coronary artery anatomy is fundamental to recognizing how coronary artery disease affects different regions of the heart and predicting clinical outcomes based on the location and extent of arterial occlusion.</p>
+
+                <h3>The Coronary Circulation</h3>
+
+                <p>The coronary arteries originate from the aortic root, just above the aortic valve cusps. They provide the myocardium with its oxygen and nutrient supply. The heart, despite making up only 0.5% of body weight, receives about 5% of cardiac output at rest.</p>
+
+                <div class="info-box clinical-pearl">
+                    <div class="info-box-header">
+                        <i class="fas fa-lightbulb"></i> Clinical Pearl: Coronary Perfusion Timing
+                    </div>
+                    <p>Unlike other organs, the heart receives most of its blood supply during <strong>diastole</strong>. During systole, the contracting myocardium compresses the coronary vessels. This is why tachycardia is dangerous in CAD patients - shortened diastole means less time for coronary perfusion!</p>
+                </div>
+
+                <h3>Major Coronary Arteries</h3>
+
+                <div class="guide-table-wrapper">
+                    <table class="guide-table">
+                        <thead>
+                            <tr>
+                                <th>Artery</th>
+                                <th>Area Supplied</th>
+                                <th>Clinical Significance</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Left Main Coronary</td>
+                                <td>Branches into LAD and LCx</td>
+                                <td>"Widow maker" - occlusion is often fatal</td>
+                            </tr>
+                            <tr>
+                                <td>Left Anterior Descending (LAD)</td>
+                                <td>Anterior LV wall, septum, bundle branches</td>
+                                <td>Most commonly affected in CAD; anterior MI</td>
+                            </tr>
+                            <tr>
+                                <td>Left Circumflex (LCx)</td>
+                                <td>Lateral and posterior LV walls</td>
+                                <td>Lateral or posterior MI</td>
+                            </tr>
+                            <tr>
+                                <td>Right Coronary Artery (RCA)</td>
+                                <td>Right ventricle, inferior LV, SA/AV nodes</td>
+                                <td>Inferior MI; can cause heart blocks</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>Collateral Circulation</h3>
+
+                <p>When coronary arteries become gradually narrowed over time, the heart can develop collateral vessels - small interconnecting branches that provide alternative blood flow routes. This is why some patients with severe CAD may have fewer symptoms than expected.</p>
+
+                <div class="info-box tip">
+                    <div class="info-box-header">
+                        <i class="fas fa-check-circle"></i> Good to Know
+                    </div>
+                    <p>Patients with <strong>chronic stable CAD</strong> often have better-developed collateral circulation than those with acute coronary events. This can partially protect the myocardium during periods of increased demand.</p>
+                </div>
+            </section>
+
+            <!-- Section 2: Pathophysiology -->
+            <section class="guide-section" id="pathophysiology">
+                <h2><span class="section-icon"><i class="fas fa-dna"></i></span> Pathophysiology of Coronary Artery Disease</h2>
+
+                <p>Coronary artery disease is a chronic, progressive condition primarily caused by atherosclerosis - the buildup of fatty plaques within the arterial walls that narrow the vessel lumen and reduce blood flow to the myocardium.</p>
+
+                <h3>The Atherosclerotic Process</h3>
+
+                <div class="interventions-list">
+                    <h4><i class="fas fa-timeline"></i> Stages of Atherosclerosis Development</h4>
+
+                    <div class="intervention-item">
+                        <div class="intervention-number">1</div>
+                        <div class="intervention-content">
+                            <h5>Endothelial Dysfunction</h5>
+                            <p>Risk factors (hypertension, smoking, diabetes, hyperlipidemia) damage the arterial endothelium, making it permeable to lipids and inflammatory cells.</p>
+                        </div>
+                    </div>
+
+                    <div class="intervention-item">
+                        <div class="intervention-number">2</div>
+                        <div class="intervention-content">
+                            <h5>Fatty Streak Formation</h5>
+                            <p>LDL cholesterol infiltrates the arterial wall and becomes oxidized. Macrophages engulf the oxidized LDL, becoming "foam cells" that accumulate as fatty streaks.</p>
+                        </div>
+                    </div>
+
+                    <div class="intervention-item">
+                        <div class="intervention-number">3</div>
+                        <div class="intervention-content">
+                            <h5>Fibrous Plaque Development</h5>
+                            <p>Smooth muscle cells migrate and proliferate, forming a fibrous cap over the lipid-rich core. The plaque progressively narrows the arterial lumen.</p>
+                        </div>
+                    </div>
+
+                    <div class="intervention-item">
+                        <div class="intervention-number">4</div>
+                        <div class="intervention-content">
+                            <h5>Complicated Lesion</h5>
+                            <p>Plaques may calcify, ulcerate, or rupture. Rupture exposes the thrombogenic core, triggering platelet aggregation and thrombus formation - leading to acute coronary syndrome.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="florencebot-tip" id="tip-plaque-stability">
+                    <div class="florencebot-tip-header">
+                        <div class="florencebot-tip-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <span class="florencebot-tip-label">FlorenceBot Pro Tip</span>
+                    </div>
+                    <div class="florencebot-tip-title">Plaque Stability Matters</div>
+                    <div class="florencebot-tip-content">
+                        <strong>It's not just about the size of the plaque - it's about stability!</strong> A large, stable plaque with a thick fibrous cap may cause chronic stable angina but is less likely to cause an acute event. A smaller plaque with a thin, inflamed fibrous cap is "vulnerable" and can rupture suddenly, triggering a heart attack. This is why some patients have MI with relatively mild CAD, while others with severe stenosis remain stable for years. Statins help by stabilizing plaques, not just lowering cholesterol numbers.
+                    </div>
+                </div>
+
+                <h3>Oxygen Supply vs Demand Imbalance</h3>
+
+                <p>CAD symptoms occur when myocardial oxygen demand exceeds supply. Understanding this balance is key to both diagnosis and treatment.</p>
+
+                <div class="guide-table-wrapper">
+                    <table class="guide-table">
+                        <thead>
+                            <tr>
+                                <th>Oxygen Supply Factors</th>
+                                <th>Oxygen Demand Factors</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Coronary blood flow (vessel patency)</td>
+                                <td>Heart rate (faster = more demand)</td>
+                            </tr>
+                            <tr>
+                                <td>Arterial oxygen content</td>
+                                <td>Myocardial contractility</td>
+                            </tr>
+                            <tr>
+                                <td>Hemoglobin level</td>
+                                <td>Wall tension (preload/afterload)</td>
+                            </tr>
+                            <tr>
+                                <td>Diastolic perfusion time</td>
+                                <td>Blood pressure (afterload)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="info-box nclex-tip">
+                    <div class="info-box-header">
+                        <i class="fas fa-graduation-cap"></i> NCLEX Tip: Treatment Rationale
+                    </div>
+                    <p>CAD treatment targets both sides of the equation: <strong>increase supply</strong> (nitrates dilate coronary arteries, oxygen if hypoxic) and <strong>decrease demand</strong> (beta-blockers reduce HR and contractility, rest reduces workload). Remember: "More supply, less demand!"</p>
+                </div>
+            </section>
+
+            <!-- Section 3: Risk Factors -->
+            <section class="guide-section" id="risk-factors">
+                <h2><span class="section-icon"><i class="fas fa-exclamation-triangle"></i></span> Risk Factors for CAD</h2>
+
+                <p>Identifying and modifying risk factors is essential for primary and secondary prevention of coronary artery disease. Risk factors are categorized as modifiable (changeable) and non-modifiable (unchangeable).</p>
+
+                <h3>Non-Modifiable Risk Factors</h3>
+
+                <div class="guide-table-wrapper">
+                    <table class="guide-table">
+                        <thead>
+                            <tr>
+                                <th>Risk Factor</th>
+                                <th>Details</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Age</td>
+                                <td>Men ≥45 years; Women ≥55 years (or premature menopause)</td>
+                            </tr>
+                            <tr>
+                                <td>Sex</td>
+                                <td>Men have higher risk; women's risk increases after menopause</td>
+                            </tr>
+                            <tr>
+                                <td>Family History</td>
+                                <td>First-degree relative with CAD: male &lt;55 or female &lt;65 years</td>
+                            </tr>
+                            <tr>
+                                <td>Race/Ethnicity</td>
+                                <td>Higher rates in African Americans, South Asians, Hispanics</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>Modifiable Risk Factors</h3>
+
+                <div class="guide-table-wrapper">
+                    <table class="guide-table">
+                        <thead>
+                            <tr>
+                                <th>Risk Factor</th>
+                                <th>Target Goals</th>
+                                <th>Interventions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Hypertension</td>
+                                <td>BP &lt;130/80 mmHg for most; &lt;140/90 if lower risk</td>
+                                <td>DASH diet, sodium restriction, medications</td>
+                            </tr>
+                            <tr>
+                                <td>Hyperlipidemia</td>
+                                <td>LDL &lt;70 mg/dL (high risk); &lt;100 mg/dL (moderate)</td>
+                                <td>Statins, lifestyle changes, diet modification</td>
+                            </tr>
+                            <tr>
+                                <td>Diabetes Mellitus</td>
+                                <td>HbA1c &lt;7% for most patients</td>
+                                <td>Glycemic control, SGLT2 inhibitors, GLP-1 agonists</td>
+                            </tr>
+                            <tr>
+                                <td>Smoking</td>
+                                <td>Complete cessation</td>
+                                <td>Counseling, nicotine replacement, varenicline</td>
+                            </tr>
+                            <tr>
+                                <td>Obesity</td>
+                                <td>BMI &lt;25 kg/m²; waist &lt;40" (M) or &lt;35" (F)</td>
+                                <td>Caloric restriction, exercise, weight loss surgery</td>
+                            </tr>
+                            <tr>
+                                <td>Physical Inactivity</td>
+                                <td>≥150 min moderate exercise/week</td>
+                                <td>Cardiac rehabilitation, structured exercise program</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="florencebot-tip" id="tip-risk-factor-modification">
+                    <div class="florencebot-tip-header">
+                        <div class="florencebot-tip-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <span class="florencebot-tip-label">FlorenceBot Pro Tip</span>
+                    </div>
+                    <div class="florencebot-tip-title">Risk Factor Modification is Powerful</div>
+                    <div class="florencebot-tip-content">
+                        <strong>Don't underestimate lifestyle changes!</strong> Smoking cessation reduces cardiovascular risk by 50% within just one year. Controlling blood pressure reduces stroke risk by 35-40% and heart attack risk by 20-25%. High-intensity statin therapy can reduce LDL by 50% and significantly lower cardiovascular events. When teaching patients, emphasize that these modifiable factors together account for the majority of CAD risk - and they have the power to change their trajectory!
+                    </div>
+                </div>
+
+                <div class="info-box mnemonic">
+                    <div class="info-box-header">
+                        <i class="fas fa-brain"></i> Memory Aid: CAD Risk Factors
+                    </div>
+                    <p><strong>CARDIAC</strong></p>
+                    <ul>
+                        <li><strong>C</strong>holesterol (elevated LDL)</li>
+                        <li><strong>A</strong>ge and family history</li>
+                        <li><strong>R</strong>aised blood pressure (hypertension)</li>
+                        <li><strong>D</strong>iabetes mellitus</li>
+                        <li><strong>I</strong>nactivity (sedentary lifestyle)</li>
+                        <li><strong>A</strong>bdominial obesity</li>
+                        <li><strong>C</strong>igarettes (smoking)</li>
+                    </ul>
+                </div>
+
+                <h3>Emerging Risk Factors</h3>
+
+                <ul>
+                    <li><strong>Elevated C-reactive protein (CRP):</strong> Marker of inflammation; associated with increased cardiovascular risk</li>
+                    <li><strong>Elevated homocysteine:</strong> Amino acid linked to endothelial damage</li>
+                    <li><strong>Lipoprotein(a):</strong> Genetic lipid abnormality that increases clotting risk</li>
+                    <li><strong>Metabolic syndrome:</strong> Cluster of risk factors (central obesity, elevated triglycerides, low HDL, hypertension, elevated fasting glucose)</li>
+                    <li><strong>Chronic kidney disease:</strong> Accelerates atherosclerosis</li>
+                    <li><strong>Obstructive sleep apnea:</strong> Associated with hypertension and arrhythmias</li>
+                </ul>
+            </section>
+
+            <!-- Section 4: Stable vs Unstable Angina -->
+            <section class="guide-section" id="angina">
+                <h2><span class="section-icon"><i class="fas fa-heartbeat"></i></span> Stable vs Unstable Angina</h2>
+
+                <p>Angina pectoris is chest pain or discomfort caused by myocardial ischemia. Distinguishing between stable and unstable angina is critical because they represent different points on the acute coronary syndrome spectrum and require different management approaches.</p>
+
+                <div class="comparison-grid">
+                    <div class="comparison-card stable">
+                        <div class="comparison-card-header">
+                            <i class="fas fa-check-circle"></i> Stable Angina
+                        </div>
+                        <div class="comparison-card-body">
+                            <h4>Characteristics</h4>
+                            <ul>
+                                <li><i class="fas fa-clock"></i> <strong>Predictable pattern</strong> - occurs with same triggers</li>
+                                <li><i class="fas fa-running"></i> <strong>Triggered by exertion</strong>, stress, cold, or meals</li>
+                                <li><i class="fas fa-hourglass-half"></i> <strong>Duration:</strong> 3-5 minutes (up to 15 min)</li>
+                                <li><i class="fas fa-pills"></i> <strong>Relieved</strong> by rest and/or nitroglycerin</li>
+                                <li><i class="fas fa-heartbeat"></i> <strong>No EKG changes</strong> at rest</li>
+                                <li><i class="fas fa-vial"></i> <strong>Troponin negative</strong></li>
+                            </ul>
+                            <h4>Management</h4>
+                            <p>Outpatient management with lifestyle modification, medications (nitrates PRN, beta-blockers, aspirin, statins), and elective workup.</p>
+                        </div>
+                    </div>
+
+                    <div class="comparison-card unstable">
+                        <div class="comparison-card-header">
+                            <i class="fas fa-exclamation-triangle"></i> Unstable Angina
+                        </div>
+                        <div class="comparison-card-body">
+                            <h4>Characteristics</h4>
+                            <ul>
+                                <li><i class="fas fa-random"></i> <strong>Unpredictable pattern</strong> - new, worsening, or at rest</li>
+                                <li><i class="fas fa-bed"></i> <strong>May occur at rest</strong> or with minimal exertion</li>
+                                <li><i class="fas fa-hourglass-end"></i> <strong>Duration:</strong> &gt;20 minutes</li>
+                                <li><i class="fas fa-times-circle"></i> <strong>Not fully relieved</strong> by rest or nitroglycerin</li>
+                                <li><i class="fas fa-wave-square"></i> <strong>EKG may show</strong> ST depression or T wave changes</li>
+                                <li><i class="fas fa-vial"></i> <strong>Troponin negative</strong> (positive = NSTEMI)</li>
+                            </ul>
+                            <h4>Management</h4>
+                            <p><strong>Part of ACS!</strong> Requires hospitalization, continuous monitoring, anticoagulation, and urgent cardiology evaluation.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-box warning">
+                    <div class="info-box-header">
+                        <i class="fas fa-exclamation-triangle"></i> Critical Distinction
+                    </div>
+                    <p><strong>Unstable angina is an EMERGENCY.</strong> It indicates that a coronary plaque is "unstable" and at risk for complete occlusion, which would cause a myocardial infarction. Patients with unstable angina should be admitted and treated as acute coronary syndrome.</p>
+                    <p><strong>Remember:</strong> Unstable angina + positive troponin = NSTEMI (myocardial infarction)</p>
+                </div>
+
+                <div class="florencebot-tip" id="tip-angina-pattern">
+                    <div class="florencebot-tip-header">
+                        <div class="florencebot-tip-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <span class="florencebot-tip-label">FlorenceBot Pro Tip</span>
+                    </div>
+                    <div class="florencebot-tip-title">Recognize Changing Angina Patterns</div>
+                    <div class="florencebot-tip-content">
+                        <strong>A stable patient becoming unstable is a red flag!</strong> Watch for any of these changes in a patient's angina pattern: (1) angina occurring at rest when it previously only occurred with exertion, (2) angina triggered by less activity than before, (3) angina lasting longer than usual, (4) angina not responding to nitroglycerin as well as before, or (5) new-onset angina. Any of these patterns suggests progression to unstable angina and requires immediate evaluation. Teach your patients to recognize these warning signs and seek care promptly.
+                    </div>
+                </div>
+
+                <h3>Classic Angina Presentation</h3>
+
+                <ul>
+                    <li><strong>Location:</strong> Substernal or left chest</li>
+                    <li><strong>Quality:</strong> Pressure, squeezing, tightness, heaviness ("elephant on chest")</li>
+                    <li><strong>Radiation:</strong> Left arm, jaw, neck, shoulder, back, or epigastrium</li>
+                    <li><strong>Associated symptoms:</strong> Dyspnea, diaphoresis, nausea, anxiety</li>
+                    <li><strong>Levine's sign:</strong> Patient places clenched fist over sternum when describing pain</li>
+                </ul>
+
+                <div class="info-box nclex-tip">
+                    <div class="info-box-header">
+                        <i class="fas fa-graduation-cap"></i> NCLEX Tip: Atypical Presentations
+                    </div>
+                    <p>Women, elderly, and diabetic patients often present <strong>atypically</strong>:</p>
+                    <ul>
+                        <li>Fatigue or weakness instead of chest pain</li>
+                        <li>Nausea, indigestion, or "heartburn"</li>
+                        <li>Dyspnea without chest discomfort</li>
+                        <li>Back or jaw pain only</li>
+                    </ul>
+                    <p><strong>Always maintain high suspicion in these populations!</strong></p>
+                </div>
+
+                <h3>Prinzmetal's (Variant) Angina</h3>
+
+                <p>A special form of angina caused by <strong>coronary artery spasm</strong> rather than fixed atherosclerotic obstruction:</p>
+                <ul>
+                    <li>Occurs primarily <strong>at rest</strong>, often in early morning hours</li>
+                    <li>Associated with <strong>ST elevation</strong> during episodes (transient)</li>
+                    <li>More common in smokers and cocaine users</li>
+                    <li>Treated with <strong>calcium channel blockers and nitrates</strong> (not beta-blockers, which can worsen spasm)</li>
+                </ul>
+            </section>
+
+            <!-- Section 5: Diagnostic Testing -->
+            <section class="guide-section" id="diagnostics">
+                <h2><span class="section-icon"><i class="fas fa-stethoscope"></i></span> Diagnostic Testing for CAD</h2>
+
+                <p>Multiple diagnostic modalities are used to detect CAD, assess severity, and guide treatment decisions. The choice of test depends on the patient's presentation, risk factors, and ability to exercise.</p>
+
+                <h3>Resting Studies</h3>
+
+                <div class="guide-table-wrapper">
+                    <table class="guide-table">
+                        <thead>
+                            <tr>
+                                <th>Test</th>
+                                <th>What It Shows</th>
+                                <th>Nursing Considerations</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>12-Lead EKG</td>
+                                <td>Arrhythmias, ischemia, prior MI (Q waves)</td>
+                                <td>May be normal at rest in stable CAD; compare to baseline</td>
+                            </tr>
+                            <tr>
+                                <td>Chest X-ray</td>
+                                <td>Heart size, pulmonary congestion, calcifications</td>
+                                <td>Cannot diagnose CAD directly; rules out other causes</td>
+                            </tr>
+                            <tr>
+                                <td>Echocardiogram</td>
+                                <td>Wall motion abnormalities, ejection fraction, valve function</td>
+                                <td>Resting echo may miss ischemia; stress echo more sensitive</td>
+                            </tr>
+                            <tr>
+                                <td>Lipid Panel</td>
+                                <td>LDL, HDL, triglycerides, total cholesterol</td>
+                                <td>Fasting preferred for accurate triglyceride level</td>
+                            </tr>
+                            <tr>
+                                <td>BMP/CMP</td>
+                                <td>Renal function, electrolytes, glucose</td>
+                                <td>Important for medication dosing (especially contrast)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>Stress Testing</h3>
+
+                <p>Stress tests provoke myocardial ischemia to detect CAD. They increase myocardial oxygen demand (exercise or pharmacologic stress) while monitoring for ischemia via EKG or imaging.</p>
+
+                <div class="guide-table-wrapper">
+                    <table class="guide-table">
+                        <thead>
+                            <tr>
+                                <th>Type</th>
+                                <th>Method</th>
+                                <th>Best Candidates</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Exercise EKG (Treadmill)</td>
+                                <td>Patient exercises on treadmill while monitored</td>
+                                <td>Patients who can exercise with interpretable EKG</td>
+                            </tr>
+                            <tr>
+                                <td>Exercise Echo</td>
+                                <td>Echo before and after exercise</td>
+                                <td>Patients who can exercise but have abnormal baseline EKG</td>
+                            </tr>
+                            <tr>
+                                <td>Nuclear Stress Test</td>
+                                <td>Radioactive tracer images perfusion at rest/stress</td>
+                                <td>Patients with uninterpretable EKG; more sensitive</td>
+                            </tr>
+                            <tr>
+                                <td>Pharmacologic Stress (Dobutamine)</td>
+                                <td>Drug increases HR/contractility</td>
+                                <td>Patients who cannot exercise; asthma (avoid adenosine)</td>
+                            </tr>
+                            <tr>
+                                <td>Pharmacologic Stress (Adenosine/Regadenoson)</td>
+                                <td>Coronary vasodilator with nuclear imaging</td>
+                                <td>Patients who cannot exercise (no asthma/COPD)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="florencebot-tip" id="tip-stress-test-prep">
+                    <div class="florencebot-tip-header">
+                        <div class="florencebot-tip-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <span class="florencebot-tip-label">FlorenceBot Pro Tip</span>
+                    </div>
+                    <div class="florencebot-tip-title">Stress Test Preparation</div>
+                    <div class="florencebot-tip-content">
+                        <strong>Patient preparation is crucial for accurate results!</strong> Instruct patients to: (1) avoid caffeine for 24-48 hours before adenosine/regadenoson tests (caffeine blocks the vasodilator effect), (2) hold beta-blockers if ordered (they limit heart rate response), (3) wear comfortable clothing and walking shoes, (4) fast for 4 hours before the test, and (5) bring their inhaler if they have asthma but notify the staff - adenosine can cause bronchospasm. A well-prepared patient means accurate results and fewer repeat tests!
+                    </div>
+                </div>
+
+                <h3>Coronary CT Angiography (CCTA)</h3>
+
+                <p>Non-invasive CT imaging of the coronary arteries with IV contrast:</p>
+                <ul>
+                    <li>Excellent for <strong>ruling out CAD</strong> in low-to-intermediate risk patients</li>
+                    <li>High negative predictive value - if normal, CAD is very unlikely</li>
+                    <li>Can visualize plaque burden and stenosis severity</li>
+                    <li>Requires slow, regular heart rate (beta-blockers often given)</li>
+                    <li>Involves contrast and radiation exposure</li>
+                </ul>
+
+                <div class="info-box warning">
+                    <div class="info-box-header">
+                        <i class="fas fa-exclamation-triangle"></i> Contrast Precautions
+                    </div>
+                    <p>Before any contrast study, verify:</p>
+                    <ul>
+                        <li><strong>Renal function:</strong> Hold metformin 48 hours post-contrast; adequate hydration</li>
+                        <li><strong>Allergies:</strong> Previous contrast reactions require premedication</li>
+                        <li><strong>Thyroid:</strong> Contrast can affect thyroid function in susceptible patients</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section 6: Cardiac Catheterization -->
+            <section class="guide-section" id="catheterization">
+                <h2><span class="section-icon"><i class="fas fa-syringe"></i></span> Cardiac Catheterization</h2>
+
+                <p>Cardiac catheterization with coronary angiography is the gold standard for diagnosing and assessing the severity of CAD. It directly visualizes the coronary arteries and can be combined with intervention (PCI) if significant stenosis is found.</p>
+
+                <h3>Indications for Cardiac Catheterization</h3>
+
+                <ul>
+                    <li>Acute coronary syndrome (STEMI, NSTEMI, unstable angina)</li>
+                    <li>Positive or high-risk stress test results</li>
+                    <li>Stable angina refractory to medical therapy</li>
+                    <li>Heart failure with suspected CAD</li>
+                    <li>Preoperative evaluation for non-cardiac surgery (selected patients)</li>
+                    <li>Sudden cardiac arrest survivors</li>
+                </ul>
+
+                <h3>Pre-Procedure Nursing Care</h3>
+
+                <div class="interventions-list">
+                    <h4><i class="fas fa-clipboard-check"></i> Before Cardiac Catheterization</h4>
+
+                    <div class="intervention-item">
+                        <div class="intervention-number">1</div>
+                        <div class="intervention-content">
+                            <h5>Verify Informed Consent</h5>
+                            <p>Ensure patient understands the procedure, risks (bleeding, contrast reaction, arrhythmia, MI, stroke, death), benefits, and alternatives.</p>
+                        </div>
+                    </div>
+
+                    <div class="intervention-item">
+                        <div class="intervention-number">2</div>
+                        <div class="intervention-content">
+                            <h5>NPO Status</h5>
+                            <p>Patient should be NPO for 6-8 hours before procedure. Clear liquids may be allowed up to 2 hours before.</p>
+                        </div>
+                    </div>
+
+                    <div class="intervention-item">
+                        <div class="intervention-number">3</div>
+                        <div class="intervention-content">
+                            <h5>Laboratory Assessment</h5>
+                            <p>Check CBC (platelets), BMP (creatinine for contrast), PT/INR, PTT. Type and screen if surgery possible.</p>
+                        </div>
+                    </div>
+
+                    <div class="intervention-item">
+                        <div class="intervention-number">4</div>
+                        <div class="intervention-content">
+                            <h5>Medication Review</h5>
+                            <p>Hold metformin day of and 48 hours after. Hold anticoagulants per protocol. May continue aspirin and statins.</p>
+                        </div>
+                    </div>
+
+                    <div class="intervention-item">
+                        <div class="intervention-number">5</div>
+                        <div class="intervention-content">
+                            <h5>IV Access and Allergy Assessment</h5>
+                            <p>Establish large-bore IV access. Document any contrast or shellfish allergies - may need steroid premedication.</p>
+                        </div>
+                    </div>
+
+                    <div class="intervention-item">
+                        <div class="intervention-number">6</div>
+                        <div class="intervention-content">
+                            <h5>Baseline Assessment</h5>
+                            <p>Document vital signs, peripheral pulses (especially at access site - femoral or radial), skin color, and neurovascular status of extremities.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="florencebot-tip" id="tip-cath-prep">
+                    <div class="florencebot-tip-header">
+                        <div class="florencebot-tip-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <span class="florencebot-tip-label">FlorenceBot Pro Tip</span>
+                    </div>
+                    <div class="florencebot-tip-title">Mark Those Pulses!</div>
+                    <div class="florencebot-tip-content">
+                        <strong>Always document baseline peripheral pulses before catheterization!</strong> Mark the location of pedal pulses (dorsalis pedis and posterior tibial) with a skin marker before the procedure. This makes post-procedure assessment much easier and allows for accurate comparison. If radial access is used, perform Allen's test to verify adequate ulnar collateral flow before the procedure. After the procedure, compare pulses to baseline - any decrease could indicate arterial occlusion or hematoma compression and requires immediate action.
+                    </div>
+                </div>
+
+                <h3>Post-Procedure Nursing Care</h3>
+
+                <div class="guide-table-wrapper">
+                    <table class="guide-table">
+                        <thead>
+                            <tr>
+                                <th>Access Site</th>
+                                <th>Position/Activity</th>
+                                <th>Key Monitoring</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Femoral</td>
+                                <td>Bed rest 2-6 hours; keep leg straight; HOB ≤30°</td>
+                                <td>Groin site, distal pulses, bleeding/hematoma every 15 min x4, then hourly</td>
+                            </tr>
+                            <tr>
+                                <td>Radial</td>
+                                <td>Can sit up immediately; wrist band in place 2-4 hours</td>
+                                <td>Radial pulse, hand color/sensation, bleeding, TR band pressure</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="info-box warning">
+                    <div class="info-box-header">
+                        <i class="fas fa-exclamation-triangle"></i> Post-Cath Complications to Watch For
+                    </div>
+                    <ul>
+                        <li><strong>Bleeding/Hematoma:</strong> Most common; hold pressure if active bleeding</li>
+                        <li><strong>Retroperitoneal bleed:</strong> Back/flank pain, hypotension, tachycardia - emergency!</li>
+                        <li><strong>Pseudoaneurysm:</strong> Pulsatile mass at access site with bruit</li>
+                        <li><strong>Arterial occlusion:</strong> Loss of pulse, pain, pallor, paresthesia distal to site</li>
+                        <li><strong>Contrast-induced nephropathy:</strong> Monitor creatinine at 24-48 hours; hydrate well</li>
+                        <li><strong>Arrhythmias:</strong> Keep on telemetry; have crash cart available</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section 7: Medical Management -->
+            <section class="guide-section" id="management">
+                <h2><span class="section-icon"><i class="fas fa-pills"></i></span> Medical Management of CAD</h2>
+
+                <p>Medical therapy for CAD focuses on relieving symptoms, preventing disease progression, reducing cardiovascular events, and improving survival. The "ABCDE" approach helps organize comprehensive CAD management.</p>
+
+                <div class="info-box mnemonic">
+                    <div class="info-box-header">
+                        <i class="fas fa-brain"></i> Memory Aid: ABCDE of CAD Management
+                    </div>
+                    <ul>
+                        <li><strong>A</strong>spirin (antiplatelet therapy) + ACE inhibitors</li>
+                        <li><strong>B</strong>eta-blockers + Blood pressure control</li>
+                        <li><strong>C</strong>holesterol management (statins) + Cigarette cessation</li>
+                        <li><strong>D</strong>iet and Diabetes management</li>
+                        <li><strong>E</strong>xercise</li>
+                    </ul>
+                </div>
+
+                <h3>Pharmacological Therapy</h3>
+
+                <div class="guide-table-wrapper">
+                    <table class="guide-table">
+                        <thead>
+                            <tr>
+                                <th>Drug Class</th>
+                                <th>Examples</th>
+                                <th>Purpose</th>
+                                <th>Key Nursing Points</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Antiplatelet</td>
+                                <td>Aspirin, clopidogrel, ticagrelor</td>
+                                <td>Prevent platelet aggregation and clot formation</td>
+                                <td>Watch for bleeding; aspirin 81 mg daily is standard</td>
+                            </tr>
+                            <tr>
+                                <td>Beta-blockers</td>
+                                <td>Metoprolol, carvedilol, bisoprolol</td>
+                                <td>Reduce HR, BP, and myocardial oxygen demand</td>
+                                <td>Monitor HR (hold if &lt;60), BP; do not stop abruptly</td>
+                            </tr>
+                            <tr>
+                                <td>Statins</td>
+                                <td>Atorvastatin, rosuvastatin</td>
+                                <td>Lower LDL, stabilize plaques</td>
+                                <td>Monitor liver function; report muscle pain (rhabdomyolysis)</td>
+                            </tr>
+                            <tr>
+                                <td>ACE Inhibitors</td>
+                                <td>Lisinopril, ramipril, enalapril</td>
+                                <td>Prevent remodeling, reduce afterload</td>
+                                <td>Monitor K+ and creatinine; watch for cough, angioedema</td>
+                            </tr>
+                            <tr>
+                                <td>Nitrates</td>
+                                <td>Nitroglycerin, isosorbide</td>
+                                <td>Dilate coronary arteries, reduce preload</td>
+                                <td>SL NTG: 3 doses 5 min apart; call 911 if no relief. Headache common</td>
+                            </tr>
+                            <tr>
+                                <td>Calcium Channel Blockers</td>
+                                <td>Amlodipine, diltiazem</td>
+                                <td>Reduce BP, prevent spasm (Prinzmetal's)</td>
+                                <td>Monitor HR with diltiazem/verapamil; ankle edema common</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="florencebot-tip" id="tip-med-teaching">
+                    <div class="florencebot-tip-header">
+                        <div class="florencebot-tip-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <span class="florencebot-tip-label">FlorenceBot Pro Tip</span>
+                    </div>
+                    <div class="florencebot-tip-title">Nitroglycerin Patient Teaching</div>
+                    <div class="florencebot-tip-content">
+                        <strong>Your NTG teaching can save a life!</strong> Teach patients: (1) Keep NTG tablets in the original dark glass container - light degrades them. (2) Replace every 6 months or if they don't cause the slight "fizzing" or burning sensation under the tongue. (3) For chest pain: sit or lie down, take one tablet sublingual, wait 5 minutes - if pain continues, take second tablet and wait 5 more minutes - if still having pain after third tablet (15 minutes total), <strong>call 911 immediately</strong>. The old "take 3 then call" rule is outdated - if pain isn't improving, emergency services should be activated earlier!
+                    </div>
+                </div>
+
+                <h3>Lifestyle Modifications</h3>
+
+                <ul>
+                    <li><strong>Smoking cessation:</strong> Most important modifiable risk factor; reduces risk by 50% within 1 year</li>
+                    <li><strong>Diet:</strong> Mediterranean diet, DASH diet; limit saturated fats, increase omega-3s</li>
+                    <li><strong>Exercise:</strong> 150 minutes moderate aerobic activity per week; cardiac rehab referral</li>
+                    <li><strong>Weight management:</strong> Goal BMI &lt;25; even 5-10% weight loss improves CV risk</li>
+                    <li><strong>Alcohol:</strong> Moderate consumption (1 drink/day women, 2/day men) or abstain</li>
+                    <li><strong>Stress management:</strong> Chronic stress contributes to HTN and unhealthy behaviors</li>
+                </ul>
+
+                <div class="info-box tip">
+                    <div class="info-box-header">
+                        <i class="fas fa-check-circle"></i> Cardiac Rehabilitation
+                    </div>
+                    <p>Cardiac rehab is a <strong>class I recommendation</strong> for all patients with CAD. It includes supervised exercise training, education, and counseling. Studies show 20-30% reduction in mortality with cardiac rehab participation, yet it remains underutilized. Advocate for referral!</p>
+                </div>
+            </section>
+
+            <!-- Section 8: Surgical Interventions -->
+            <section class="guide-section" id="interventions">
+                <h2><span class="section-icon"><i class="fas fa-user-md"></i></span> Interventional & Surgical Treatment</h2>
+
+                <p>When medical therapy is insufficient or CAD is severe, revascularization procedures restore blood flow to the ischemic myocardium. The two main approaches are percutaneous coronary intervention (PCI) and coronary artery bypass grafting (CABG).</p>
+
+                <div class="comparison-grid">
+                    <div class="comparison-card pci">
+                        <div class="comparison-card-header">
+                            <i class="fas fa-stethoscope"></i> PCI (Angioplasty + Stent)
+                        </div>
+                        <div class="comparison-card-body">
+                            <h4>Procedure</h4>
+                            <ul>
+                                <li><i class="fas fa-heart"></i> Catheter-based; less invasive</li>
+                                <li><i class="fas fa-compress-arrows-alt"></i> Balloon inflates to open stenosis</li>
+                                <li><i class="fas fa-ring"></i> Stent placed to keep artery open</li>
+                                <li><i class="fas fa-clock"></i> Short recovery (1-2 days)</li>
+                            </ul>
+                            <h4>Best Candidates</h4>
+                            <ul>
+                                <li><i class="fas fa-check"></i> 1-2 vessel disease</li>
+                                <li><i class="fas fa-check"></i> Acute STEMI (primary PCI)</li>
+                                <li><i class="fas fa-check"></i> High surgical risk patients</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="comparison-card cabg">
+                        <div class="comparison-card-header">
+                            <i class="fas fa-lungs"></i> CABG Surgery
+                        </div>
+                        <div class="comparison-card-body">
+                            <h4>Procedure</h4>
+                            <ul>
+                                <li><i class="fas fa-heart"></i> Open heart surgery</li>
+                                <li><i class="fas fa-route"></i> Grafts bypass blocked arteries</li>
+                                <li><i class="fas fa-user-injured"></i> Uses LIMA, saphenous vein, or radial artery</li>
+                                <li><i class="fas fa-clock"></i> Longer recovery (weeks-months)</li>
+                            </ul>
+                            <h4>Best Candidates</h4>
+                            <ul>
+                                <li><i class="fas fa-check"></i> Left main disease (≥50% stenosis)</li>
+                                <li><i class="fas fa-check"></i> 3-vessel disease, especially with diabetes</li>
+                                <li><i class="fas fa-check"></i> Reduced ejection fraction</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>Post-PCI Nursing Care</h3>
+
+                <ul>
+                    <li><strong>Dual antiplatelet therapy (DAPT):</strong> Aspirin + P2Y12 inhibitor (clopidogrel, ticagrelor, prasugrel) for 6-12 months minimum</li>
+                    <li><strong>Access site care:</strong> Same as diagnostic cath (see catheterization section)</li>
+                    <li><strong>Monitor for stent thrombosis:</strong> Recurrent chest pain, EKG changes - emergency!</li>
+                    <li><strong>Education:</strong> Do NOT stop DAPT early without cardiology guidance - stent thrombosis can be fatal</li>
+                </ul>
+
+                <div class="florencebot-tip" id="tip-dapt-compliance">
+                    <div class="florencebot-tip-header">
+                        <div class="florencebot-tip-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <span class="florencebot-tip-label">FlorenceBot Pro Tip</span>
+                    </div>
+                    <div class="florencebot-tip-title">DAPT Compliance is Life or Death</div>
+                    <div class="florencebot-tip-content">
+                        <strong>Stopping dual antiplatelet therapy early can be fatal!</strong> When a stent is placed, the metal is a foreign body that's highly thrombogenic until the endothelium covers it (6-12 months). Stopping clopidogrel/ticagrelor early dramatically increases the risk of acute stent thrombosis - essentially causing a heart attack at the stent site with mortality rates of 20-40%. Make sure every stent patient understands: <strong>NEVER stop your antiplatelet medications without talking to your cardiologist first</strong> - even for dental work or minor surgery. Coordination with all healthcare providers is essential.
+                    </div>
+                </div>
+
+                <h3>Post-CABG Nursing Care</h3>
+
+                <div class="guide-table-wrapper">
+                    <table class="guide-table">
+                        <thead>
+                            <tr>
+                                <th>System</th>
+                                <th>Key Monitoring Points</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Cardiac</td>
+                                <td>Continuous telemetry; watch for arrhythmias (especially A-fib), tamponade signs</td>
+                            </tr>
+                            <tr>
+                                <td>Respiratory</td>
+                                <td>Ventilator weaning; incentive spirometry; prevent atelectasis and pneumonia</td>
+                            </tr>
+                            <tr>
+                                <td>Neurologic</td>
+                                <td>Assess for stroke (pump-related emboli); delirium common in elderly</td>
+                            </tr>
+                            <tr>
+                                <td>Renal</td>
+                                <td>Monitor I&O, creatinine; contrast and pump can cause AKI</td>
+                            </tr>
+                            <tr>
+                                <td>Wounds</td>
+                                <td>Sternal incision, leg harvest site; watch for infection, dehiscence</td>
+                            </tr>
+                            <tr>
+                                <td>Pain</td>
+                                <td>Adequate pain control essential for mobility and pulmonary toileting</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="info-box warning">
+                    <div class="info-box-header">
+                        <i class="fas fa-exclamation-triangle"></i> Post-CABG Sternal Precautions
+                    </div>
+                    <p>The sternum is wired together after surgery and takes 6-8 weeks to heal. Teach patients:</p>
+                    <ul>
+                        <li>No lifting more than 5-10 pounds for 6-8 weeks</li>
+                        <li>No pushing or pulling heavy objects</li>
+                        <li>Hug a pillow when coughing to splint the incision</li>
+                        <li>No driving for 4-6 weeks (airbag and steering wheel risk)</li>
+                        <li>Report any clicking, popping, or drainage from sternal wound</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Key Points Summary -->
+            <section class="key-points-summary">
+                <h2><i class="fas fa-star"></i> Key Takeaways</h2>
+                <div class="key-points-grid">
+                    <div class="key-point">
+                        <i class="fas fa-dna"></i>
+                        <p><strong>Atherosclerosis</strong> is the underlying process in CAD - plaque buildup narrows coronary arteries over time.</p>
+                    </div>
+                    <div class="key-point">
+                        <i class="fas fa-heartbeat"></i>
+                        <p><strong>Stable angina</strong> is predictable and relieved by rest/NTG; <strong>unstable angina</strong> is an emergency.</p>
+                    </div>
+                    <div class="key-point">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <p>Major <strong>modifiable risk factors:</strong> HTN, hyperlipidemia, diabetes, smoking, obesity, inactivity.</p>
+                    </div>
+                    <div class="key-point">
+                        <i class="fas fa-syringe"></i>
+                        <p><strong>Cardiac cath</strong> is gold standard for CAD diagnosis; careful pre/post care prevents complications.</p>
+                    </div>
+                    <div class="key-point">
+                        <i class="fas fa-pills"></i>
+                        <p><strong>ABCDE:</strong> Aspirin/ACEi, Beta-blockers/BP, Cholesterol/Cigarettes, Diet/Diabetes, Exercise.</p>
+                    </div>
+                    <div class="key-point">
+                        <i class="fas fa-ring"></i>
+                        <p><strong>Post-stent DAPT</strong> (aspirin + clopidogrel/ticagrelor) is essential - never stop early!</p>
+                    </div>
+                    <div class="key-point">
+                        <i class="fas fa-stethoscope"></i>
+                        <p><strong>PCI</strong> for 1-2 vessel disease; <strong>CABG</strong> for left main or 3-vessel disease.</p>
+                    </div>
+                    <div class="key-point">
+                        <i class="fas fa-user-md"></i>
+                        <p><strong>Patient education</strong> on risk factor modification and medication adherence is crucial for outcomes.</p>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+
+        <!-- Document Footer -->
+        <div class="document-footer">
+            <img src="../assets/images/the-nursing-collective-logo.webp" alt="The Nursing Collective" class="footer-logo">
+            <p class="footer-tagline">Empowering nursing students with evidence-based study resources</p>
+            <p class="footer-copyright">&copy; 2026 The Nursing Collective. All rights reserved.</p>
+        </div>
+
+    </div>
+
+    <!-- Guide page scripts (external for CSP compliance) -->
+    <script src="configs/coronary-artery-disease-config.js"></script>
+    <script src="guide-sidebar.js"></script>
+    <script src="guide-script.js"></script>
+</body>
+</html>
