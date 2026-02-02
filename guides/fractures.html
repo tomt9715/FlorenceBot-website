@@ -1623,9 +1623,17 @@
                 max-width: 100%;
             }
 
-            .cover-page {
+            /* Preserve colors in print */
+            * {
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
+                color-adjust: exact !important;
+            }
+
+            /* Cover page - always on its own page */
+            .cover-page {
+                page-break-after: always;
+                break-after: page;
             }
 
             /* Remove text shadows for clean PDF rendering */
@@ -1641,33 +1649,107 @@
                 user-select: none;
             }
 
-            .guide-section {
-                page-break-inside: avoid;
-            }
-
-            .emergency-alert {
-                page-break-inside: avoid;
-            }
-
-            .florencebot-tip {
-                break-inside: avoid;
-                page-break-inside: avoid;
-            }
-
-            .key-points-summary {
-                -webkit-print-color-adjust: exact !important;
-                print-color-adjust: exact !important;
-                page-break-inside: avoid;
-            }
-
-            h3 {
+            /* Section headings - never break after */
+            h2, h3, h4 {
                 page-break-after: avoid;
+                break-after: avoid;
             }
 
+            /* Keep headings with their following content */
+            h2 + *,
+            h3 + *,
+            h4 + * {
+                page-break-before: avoid;
+                break-before: avoid;
+            }
+
+            /* Tables - avoid breaking inside */
+            .guide-table-wrapper {
+                page-break-inside: avoid;
+                break-inside: avoid;
+            }
+
+            table {
+                page-break-inside: avoid;
+                break-inside: avoid;
+            }
+
+            thead {
+                display: table-header-group;
+            }
+
+            tr {
+                page-break-inside: avoid;
+                break-inside: avoid;
+            }
+
+            /* Info boxes - never break inside */
+            .info-box {
+                page-break-inside: avoid;
+                break-inside: avoid;
+            }
+
+            /* Cards - never break inside */
             .body-region-card,
             .intervention-card,
-            .complication-card {
+            .complication-card,
+            .healing-stage-card {
                 page-break-inside: avoid;
+                break-inside: avoid;
+            }
+
+            /* Card grids - allow breaking between cards but not inside */
+            .body-region-grid,
+            .intervention-grid,
+            .complication-grid {
+                page-break-inside: auto;
+                break-inside: auto;
+            }
+
+            /* Emergency alerts - never break */
+            .emergency-alert {
+                page-break-inside: avoid;
+                break-inside: avoid;
+            }
+
+            /* FlorenceBot tips - never break */
+            .florencebot-tip {
+                page-break-inside: avoid;
+                break-inside: avoid;
+            }
+
+            /* Learning objectives - keep together */
+            .learning-objectives {
+                page-break-inside: avoid;
+                break-inside: avoid;
+            }
+
+            /* Key points summary - keep together */
+            .key-points-summary {
+                page-break-inside: avoid;
+                break-inside: avoid;
+            }
+
+            .key-point-item {
+                page-break-inside: avoid;
+                break-inside: avoid;
+            }
+
+            /* Guide sections - allow breaking but avoid orphaned headings */
+            .guide-section {
+                page-break-inside: auto;
+                break-inside: auto;
+            }
+
+            /* Timeline items */
+            .healing-timeline {
+                page-break-inside: auto;
+            }
+
+            /* Pediatric section boxes */
+            .info-box.pediatric {
+                page-break-inside: avoid;
+                break-inside: avoid;
             }
         }
 
