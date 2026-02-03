@@ -58,8 +58,6 @@
     position: sticky;
     top: 100px;
     height: fit-content;
-    max-height: calc(100vh - 140px);
-    overflow-y: auto;
 }
 
 /* Right column - Payment Details (wider, ~60%) */
