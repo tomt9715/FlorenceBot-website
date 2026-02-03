@@ -181,20 +181,54 @@
     </nav>
 
     <main id="main-content">
-    <!-- Pricing Hero - Minimal/Compact -->
-    <section class="pricing-hero" style="padding: 120px 0 50px; text-align: center;">
-        <div class="container">
-            <h1 style="font-size: 2.5rem; font-weight: 700; margin-bottom: 12px; line-height: 1.2;">
-                Simple, Transparent Pricing
-            </h1>
-            <p style="font-size: 1.1rem; color: rgba(255, 255, 255, 0.9); max-width: 500px; margin: 0 auto;">
-                One subscription. All content. No surprises.
-            </p>
+    <!-- Pricing Hero - Split Layout with Stats -->
+    <section class="pricing-hero" style="padding: 140px 0 80px; position: relative; overflow: hidden;">
+        <!-- Subtle background pattern -->
+        <div style="position: absolute; top: 0; right: 0; width: 50%; height: 100%; background: rgba(255,255,255,0.03); clip-path: polygon(20% 0, 100% 0, 100% 100%, 0% 100%);"></div>
+
+        <div class="container" style="position: relative; z-index: 1;">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;">
+                <!-- Left: Value Proposition -->
+                <div>
+                    <div style="display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.15); padding: 8px 16px; border-radius: 30px; font-size: 0.85rem; font-weight: 600; margin-bottom: 24px;">
+                        <i class="fas fa-unlock"></i> UNLIMITED ACCESS
+                    </div>
+                    <h1 style="font-size: 2.75rem; font-weight: 700; margin-bottom: 20px; line-height: 1.2;">
+                        Everything You Need.<br>One Simple Price.
+                    </h1>
+                    <p style="font-size: 1.15rem; color: rgba(255, 255, 255, 0.9); margin-bottom: 32px; line-height: 1.6;">
+                        Stop buying guides one at a time. Get unlimited access to our entire library of study guides, clinical resources, and quick reference tools.
+                    </p>
+                    <a href="#plans" class="btn btn-light btn-lg" style="padding: 14px 28px; font-weight: 600;">
+                        <i class="fas fa-arrow-down"></i> See Plans
+                    </a>
+                </div>
+
+                <!-- Right: Stats Grid -->
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                    <div style="background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border-radius: 16px; padding: 24px; text-align: center; border: 1px solid rgba(255,255,255,0.15);">
+                        <div style="font-size: 2.5rem; font-weight: 700; margin-bottom: 4px;">17+</div>
+                        <div style="font-size: 0.9rem; opacity: 0.9;">Study Guides</div>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border-radius: 16px; padding: 24px; text-align: center; border: 1px solid rgba(255,255,255,0.15);">
+                        <div style="font-size: 2.5rem; font-weight: 700; margin-bottom: 4px;">7</div>
+                        <div style="font-size: 0.9rem; opacity: 0.9;">Clinical Guides</div>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border-radius: 16px; padding: 24px; text-align: center; border: 1px solid rgba(255,255,255,0.15);">
+                        <div style="font-size: 2.5rem; font-weight: 700; margin-bottom: 4px;">5</div>
+                        <div style="font-size: 0.9rem; opacity: 0.9;">Quick References</div>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border-radius: 16px; padding: 24px; text-align: center; border: 1px solid rgba(255,255,255,0.15);">
+                        <div style="font-size: 2.5rem; font-weight: 700; margin-bottom: 4px;"><i class="fas fa-infinity" style="font-size: 2rem;"></i></div>
+                        <div style="font-size: 0.9rem; opacity: 0.9;">Updates Included</div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- Subscription Plans -->
-    <section style="padding: 60px 0 80px;">
+    <section id="plans" style="padding: 60px 0 80px; scroll-margin-top: 80px;">
         <div class="container">
             <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 1000px; margin: 0 auto;">
 
@@ -543,5 +577,38 @@
 
     <script src="script.js"></script>
     <script src="pricing-script.js"></script>
+
+    <!-- Responsive styles for pricing hero -->
+    <style>
+        @media (max-width: 968px) {
+            .pricing-hero .container > div {
+                grid-template-columns: 1fr !important;
+                gap: 40px !important;
+                text-align: center;
+            }
+            .pricing-hero h1 {
+                font-size: 2.25rem !important;
+            }
+            .pricing-hero h1 br {
+                display: none;
+            }
+        }
+        @media (max-width: 768px) {
+            .pricing-hero {
+                padding: 120px 0 60px !important;
+            }
+            .pricing-hero h1 {
+                font-size: 2rem !important;
+            }
+            /* Make pricing cards stack on mobile */
+            #plans .container > div {
+                grid-template-columns: 1fr !important;
+                max-width: 400px !important;
+            }
+            #plans .pricing-card {
+                transform: none !important;
+            }
+        }
+    </style>
 </body>
 </html>
