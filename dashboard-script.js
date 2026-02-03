@@ -843,8 +843,8 @@ async function loadAccessibleGuides(user) {
                     </div>
                     <h3>Start Your NCLEX Journey</h3>
                     <p>Browse our collection of comprehensive study guides designed to help you pass the NCLEX on your first try.</p>
-                    <button class="btn btn-secondary" data-navigate="store.html">
-                        <i class="fas fa-store"></i> Visit Store
+                    <button class="btn btn-secondary" data-navigate="pricing.html">
+                        <i class="fas fa-rocket"></i> View Plans
                     </button>
                 </div>
             `;
@@ -1914,8 +1914,8 @@ function renderPurchaseHistory() {
                     <i class="fas fa-receipt"></i>
                     <h4>No Purchase History</h4>
                     <p>You haven't made any purchases yet.</p>
-                    <button class="btn btn-secondary" onclick="window.location.href='store.html'">
-                        <i class="fas fa-store"></i> Browse Store
+                    <button class="btn btn-secondary" onclick="window.location.href='pricing.html'">
+                        <i class="fas fa-rocket"></i> View Plans
                     </button>
                 </div>
             `;

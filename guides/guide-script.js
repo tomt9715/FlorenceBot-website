@@ -45,8 +45,8 @@ function showAccessDenied(message, showLoginButton = true) {
                 <a href="../dashboard.html" class="btn-secondary">
                     <i class="fas fa-arrow-left"></i> Go to Dashboard
                 </a>
-                <a href="../store.html" class="btn-tertiary">
-                    <i class="fas fa-shopping-cart"></i> View Store
+                <a href="../pricing.html" class="btn-tertiary">
+                    <i class="fas fa-rocket"></i> View Plans
                 </a>
             </div>
         </div>

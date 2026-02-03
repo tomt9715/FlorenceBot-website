@@ -23,7 +23,6 @@ The CSS is already included in `css/bundle.css`. If you need it separately:
 
 ### Pages that need these scripts:
 - index.html ✅ (already added)
-- store.html
 - pricing.html
 - study-guides.html
 - guides.html
@@ -201,7 +200,6 @@ When adding the cookie consent and analytics to each page, add this before `</bo
 ```
 
 ### Files to update:
-- [ ] store.html
 - [ ] pricing.html
 - [ ] study-guides.html
 - [ ] guides.html

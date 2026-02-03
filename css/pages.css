@@ -5701,8 +5701,8 @@
 /* ==================== Admin Dashboard Customization ==================== */
 /* Hide certain sections for admin users on the dashboard */
 
-/* Hide Visit Store button */
-body.is-admin-user .action-card-hero[data-navigate="store.html"] {
+/* Hide View Plans button */
+body.is-admin-user .action-card-hero[data-navigate="pricing.html"] {
     display: none !important;
 }
 

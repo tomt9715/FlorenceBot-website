@@ -671,8 +671,8 @@ function showEmptyCartMessage() {
             <img src="assets/images/bag.webp" alt="Empty cart" style="width: 80px; height: 80px; margin-bottom: 20px; opacity: 0.6;">
             <h3 style="color: var(--text-primary); margin-bottom: 12px; font-size: 1.4rem;">Your cart is empty</h3>
             <p style="color: var(--text-secondary); margin-bottom: 28px; font-size: 1rem;">Add some study guides to get started!</p>
-            <a href="store.html" class="btn btn-primary" style="padding: 14px 28px; font-size: 1rem;">
-                <i class="fas fa-shopping-cart"></i> Browse Store
+            <a href="pricing.html" class="btn btn-primary" style="padding: 14px 28px; font-size: 1rem;">
+                <i class="fas fa-rocket"></i> View Plans
             </a>
         </div>
     `;
@@ -1031,8 +1031,8 @@ function updateOrderTotals(discountInfo) {
                     <div style="width: ${progress}%; height: 100%; background: linear-gradient(90deg, #6366f1, #8b5cf6); border-radius: 3px;"></div>
                 </div>
                 <div style="text-align: right; margin-top: 6px;">
-                    <a href="store.html" style="font-size: 0.75rem; color: #6366f1; text-decoration: none;">
-                        <i class="fas fa-plus" style="margin-right: 4px;"></i>Add more guides
+                    <a href="pricing.html" style="font-size: 0.75rem; color: #6366f1; text-decoration: none;">
+                        <i class="fas fa-rocket" style="margin-right: 4px;"></i>Upgrade plan
                     </a>
                 </div>
             </div>

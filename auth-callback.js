@@ -1,33 +1,9 @@
 // Auth Callback Script
 // Handles OAuth callback processing for Google/Discord sign in
 
-// CRITICAL: Capture guest cart IMMEDIATELY before any other code runs
-// This must happen before tokens are stored (which changes auth state)
-// and before cart-service.js DOMContentLoaded can interfere
-const GUEST_CART_KEY_CAPTURE = 'florencebot_guest_cart';
-let capturedGuestCart = null;
-
 // DEBUG: Log that auth-callback.js is running
 console.log('=== AUTH CALLBACK SCRIPT LOADED ===');
 console.log('Auth callback: Current URL:', window.location.href);
-
-try {
-    const storedGuestCart = localStorage.getItem(GUEST_CART_KEY_CAPTURE);
-    console.log('Auth callback: Raw guest cart from localStorage:', storedGuestCart);
-
-    // DEBUG: Also log all localStorage keys to see what's there
-    console.log('Auth callback: All localStorage keys:', Object.keys(localStorage));
-
-    if (storedGuestCart) {
-        capturedGuestCart = JSON.parse(storedGuestCart);
-        console.log('Auth callback: Parsed guest cart:', JSON.stringify(capturedGuestCart));
-        console.log('Auth callback: Guest cart has', capturedGuestCart.items?.length || 0, 'items');
-    } else {
-        console.log('Auth callback: NO GUEST CART FOUND in localStorage');
-    }
-} catch (e) {
-    console.error('Auth callback: Failed to capture guest cart:', e);
-}
 
 // Parse URL parameters
 // Note: refresh_token is now set as an httpOnly cookie by the backend, not in URL
@@ -101,39 +77,8 @@ function initAuthCallback() {
                     localStorage.setItem('user', JSON.stringify(data.user));
                     console.log('User data stored:', data.user.email);
 
-                    // Store guest cart item IDs BEFORE merging so checkout can identify newly added items
-                    // Use the capturedGuestCart that was read at script load time (before any interference)
-                    console.log('Auth callback: Using captured guest cart:', JSON.stringify(capturedGuestCart));
-
-                    if (capturedGuestCart && capturedGuestCart.items && capturedGuestCart.items.length > 0) {
-                        const newlyAddedIds = capturedGuestCart.items.map(item => item.product_id);
-                        sessionStorage.setItem('newlyAddedCartItems', JSON.stringify(newlyAddedIds));
-                        console.log('Auth callback: Stored newly added item IDs in sessionStorage:', newlyAddedIds);
-                        // Verify it was stored
-                        const verification = sessionStorage.getItem('newlyAddedCartItems');
-                        console.log('Auth callback: Verification - sessionStorage now contains:', verification);
-                    } else {
-                        console.log('Auth callback: No guest cart items found to store');
-                        console.log('Auth callback: capturedGuestCart value:', capturedGuestCart);
-                        console.log('Auth callback: capturedGuestCart.items:', capturedGuestCart?.items);
-                    }
-
-                    // Now merge guest cart with user's cart via API
-                    try {
-                        if (typeof cartManager !== 'undefined') {
-                            console.log('Auth callback: Merging guest cart after OAuth login...');
-                            await cartManager.mergeGuestCart();
-                            console.log('Auth callback: Guest cart merged successfully');
-                        } else {
-                            console.warn('Auth callback: cartManager not defined');
-                        }
-                    } catch (cartError) {
-                        console.error('Cart merge error (non-fatal):', cartError);
-                        // Continue with redirect even if cart merge fails
-                    }
-
                     // Determine redirect URL based on priority:
-                    // 1. Stored redirect from before OAuth (e.g., store, checkout)
+                    // 1. Stored redirect from before OAuth (e.g., checkout)
                     // 2. Order to claim
                     // 3. Default to dashboard
                     let redirectUrl = 'dashboard.html';

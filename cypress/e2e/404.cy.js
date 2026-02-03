@@ -29,10 +29,10 @@ describe('404 Error Page', () => {
             .should('have.attr', 'href', 'index.html');
     });
 
-    it('should have Browse Store button', () => {
+    it('should have View Plans button', () => {
         cy.get('.error-actions')
-            .contains('Browse Store')
-            .should('have.attr', 'href', 'store.html');
+            .contains('View Plans')
+            .should('have.attr', 'href', 'pricing.html');
     });
 
     it('should display popular pages section', () => {

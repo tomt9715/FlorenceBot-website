@@ -45,11 +45,6 @@ describe('Homepage', () => {
             cy.url().should('include', 'pricing');
         });
 
-        it('should navigate to Store page', () => {
-            cy.get('.nav-links').contains('Store').click();
-            cy.url().should('include', 'store');
-        });
-
         it('should navigate to Login page', () => {
             cy.get('.nav-links').contains('Login').click();
             cy.url().should('include', 'login');
@@ -138,7 +133,6 @@ describe('Homepage', () => {
 
         it('should have aria-labels on icon buttons', () => {
             cy.get('#theme-toggle').should('have.attr', 'aria-label');
-            cy.get('.cart-icon-container').should('have.attr', 'aria-label');
         });
     });
 

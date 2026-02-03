@@ -5,7 +5,7 @@
 const guidePreviewContent = {
     'heart-failure': {
         title: 'Heart Failure',
-        storeUrl: 'store.html?highlight=heart-failure',
+        storeUrl: 'pricing.html#heart-failure',
         content: `
 # Heart Failure Study Guide
 
@@ -70,7 +70,7 @@ Often results from left-sided failure. The right ventricle cannot effectively pu
     },
     'eating-disorders': {
         title: 'Eating Disorders',
-        storeUrl: 'store.html?highlight=eating-disorders',
+        storeUrl: 'pricing.html#eating-disorders',
         content: `
 # Eating Disorders Study Guide
 

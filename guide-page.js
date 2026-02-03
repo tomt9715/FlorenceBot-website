@@ -392,7 +392,7 @@ function showPurchasePrompt(guideId, accessResponse) {
     const productName = accessResponse.product_name || guideId.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
     const price = accessResponse.price || 5.99;
     const description = accessResponse.description || 'Comprehensive nursing study guide with evidence-based content.';
-    const purchaseUrl = accessResponse.purchase_url || `store.html?product=${guideId}`;
+    const purchaseUrl = accessResponse.purchase_url || `pricing.html`;
 
     contentElement.innerHTML = `
         <div style="text-align: center; padding: 60px 20px; max-width: 600px; margin: 0 auto;">
@@ -768,7 +768,7 @@ function renderRelatedGuides(currentGuideId, currentCategory) {
                                 <div class="related-guide-actions">
                                     ${isOwned
                                         ? `<a href="${htmlGuides.includes(guideId) ? `guides/${guideId}.html` : `guide.html?id=${guideId}`}" class="btn-view-guide"><i class="fas fa-book-reader"></i> Open Guide</a>`
-                                        : `<a href="store.html?highlight=${guideId}" class="btn-purchase-guide"><i class="fas fa-cart-plus"></i> Add to Cart</a>`
+                                        : `<a href="pricing.html" class="btn-purchase-guide"><i class="fas fa-rocket"></i> Subscribe</a>`
                                     }
                                 </div>
                             </div>

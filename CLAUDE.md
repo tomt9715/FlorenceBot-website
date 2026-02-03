@@ -117,7 +117,6 @@ nursing-collective-website/
 ├── login.html          # Auth page (Google, Discord, Email)
 ├── dashboard.html      # User dashboard (requires auth)
 ├── admin.html          # Admin panel (requires admin role)
-├── store.html          # Product catalog
 ├── pricing.html        # Subscription tiers
 ├── checkout.html       # Stripe checkout flow
 ├── success.html        # Post-payment success page

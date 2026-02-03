@@ -8,7 +8,6 @@ Allow: /
 Allow: /index.html
 Allow: /guides.html
 Allow: /pricing.html
-Allow: /store.html
 Allow: /about-florencebot.html
 Allow: /login.html
 Allow: /privacy.html

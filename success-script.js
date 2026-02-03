@@ -365,9 +365,9 @@ function showTimeoutState() {
                 <i class="fab fa-discord"></i>
                 Contact Support
             </a>
-            <a href="store.html" class="btn btn-light">
-                <i class="fas fa-arrow-left"></i>
-                Back to Store
+            <a href="index.html" class="btn btn-light">
+                <i class="fas fa-home"></i>
+                Back to Home
             </a>
         </div>
     `;
@@ -489,9 +489,9 @@ function showSuccessState(order) {
                 <i class="fas fa-book-open"></i>
                 Go to My Dashboard
             </a>
-            <a href="store.html" class="btn btn-light">
-                <i class="fas fa-shopping-bag"></i>
-                Continue Shopping
+            <a href="resources.html" class="btn btn-light">
+                <i class="fas fa-book-open"></i>
+                Browse Resources
             </a>
         `;
     }
@@ -578,9 +578,9 @@ function showErrorState(message) {
                     <i class="fab fa-discord"></i>
                     Contact Support
                 </a>
-                <a href="store.html" class="btn btn-light">
-                    <i class="fas fa-arrow-left"></i>
-                    Back to Store
+                <a href="index.html" class="btn btn-light">
+                    <i class="fas fa-home"></i>
+                    Back to Home
                 </a>
             </div>
         </div>
