@@ -398,16 +398,204 @@ function displaySubscriptionDetails(plan, planId) {
     if (subtotalEl) subtotalEl.textContent = `$${plan.price.toFixed(2)}`;
     if (totalEl) totalEl.textContent = `$${plan.price.toFixed(2)}`;
 
-    // Hide promo section for now (Stripe handles it)
+    // Show promo code input section
     const promoSection = document.getElementById('promo-section');
     if (promoSection) {
         promoSection.innerHTML = `
-            <div style="display: flex; align-items: center; gap: 8px; padding: 12px; background: linear-gradient(135deg, rgba(16, 185, 129, 0.08), rgba(16, 185, 129, 0.03)); border-radius: 8px; border: 1px solid rgba(16, 185, 129, 0.2);">
-                <i class="fas fa-ticket-alt" style="color: #10b981;"></i>
-                <span style="font-size: 0.85rem; color: var(--text-secondary);">Have a promo code? You can enter it on the payment form below.</span>
+            <div class="subscription-promo-container" style="
+                background: linear-gradient(135deg, rgba(99, 102, 241, 0.06), rgba(139, 92, 246, 0.04));
+                border: 1px solid rgba(99, 102, 241, 0.15);
+                border-radius: 12px;
+                padding: 16px;
+            ">
+                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px;">
+                    <i class="fas fa-ticket-alt" style="color: #6366f1;"></i>
+                    <span style="font-size: 0.9rem; font-weight: 500; color: var(--text-primary);">Have a promo code?</span>
+                </div>
+                <div class="promo-input-row" style="display: flex; gap: 10px;">
+                    <input type="text"
+                           id="subscription-promo-code"
+                           placeholder="Enter code"
+                           style="
+                               flex: 1;
+                               padding: 10px 14px;
+                               border: 2px solid var(--border-color);
+                               border-radius: 8px;
+                               font-size: 0.95rem;
+                               background: var(--background-white);
+                               color: var(--text-primary);
+                               text-transform: uppercase;
+                           "
+                    />
+                    <button type="button"
+                            id="apply-subscription-promo"
+                            class="btn btn-secondary"
+                            style="padding: 10px 20px; white-space: nowrap;"
+                    >
+                        Apply
+                    </button>
+                </div>
+                <div id="subscription-promo-message" style="margin-top: 10px; font-size: 0.85rem; min-height: 20px;"></div>
+                <div id="subscription-promo-applied" style="display: none; margin-top: 10px;"></div>
             </div>
         `;
+
+        // Add promo code event listeners
+        setupSubscriptionPromoListeners(plan, planId);
     }
+}
+
+/**
+ * Setup promo code listeners for subscription checkout
+ */
+function setupSubscriptionPromoListeners(plan, planId) {
+    const promoInput = document.getElementById('subscription-promo-code');
+    const applyBtn = document.getElementById('apply-subscription-promo');
+    const messageEl = document.getElementById('subscription-promo-message');
+    const appliedEl = document.getElementById('subscription-promo-applied');
+
+    if (!promoInput || !applyBtn) return;
+
+    // Apply button click
+    applyBtn.addEventListener('click', async () => {
+        const code = promoInput.value.trim().toUpperCase();
+        if (!code) {
+            messageEl.innerHTML = '<span style="color: #ef4444;">Please enter a promo code</span>';
+            return;
+        }
+
+        // Show loading state
+        applyBtn.disabled = true;
+        applyBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+        messageEl.innerHTML = '<span style="color: var(--text-secondary);">Validating code...</span>';
+
+        try {
+            // Validate promo code with backend
+            const response = await fetch(`${API_URL}/api/validate-promo`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    promo_code: code,
+                    plan_id: planId
+                })
+            });
+
+            const data = await response.json();
+
+            if (response.ok && data.valid) {
+                // Promo code is valid - store it for checkout
+                window.subscriptionPromoCode = code;
+
+                // Show success state
+                messageEl.innerHTML = '';
+                promoInput.style.display = 'none';
+                applyBtn.style.display = 'none';
+
+                // Calculate discounted price
+                let discountText = '';
+                let newPrice = plan.price;
+
+                if (data.percent_off) {
+                    newPrice = plan.price * (1 - data.percent_off / 100);
+                    discountText = `${data.percent_off}% off`;
+                } else if (data.amount_off) {
+                    newPrice = Math.max(0, plan.price - data.amount_off);
+                    discountText = `$${data.amount_off.toFixed(2)} off`;
+                }
+
+                appliedEl.style.display = 'block';
+                appliedEl.innerHTML = `
+                    <div style="
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                        padding: 12px;
+                        background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(16, 185, 129, 0.05));
+                        border: 1px solid rgba(16, 185, 129, 0.3);
+                        border-radius: 8px;
+                    ">
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                            <i class="fas fa-check-circle" style="color: #10b981;"></i>
+                            <span style="font-weight: 600; color: #10b981;">${code}</span>
+                            <span style="color: var(--text-secondary); font-size: 0.85rem;">(${discountText})</span>
+                        </div>
+                        <button type="button" id="remove-subscription-promo" style="
+                            background: none;
+                            border: none;
+                            color: var(--text-secondary);
+                            cursor: pointer;
+                            padding: 4px 8px;
+                            border-radius: 4px;
+                            transition: all 0.2s;
+                        " onmouseover="this.style.background='rgba(239,68,68,0.1)';this.style.color='#ef4444';"
+                           onmouseout="this.style.background='none';this.style.color='var(--text-secondary)';">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                `;
+
+                // Update displayed total
+                const totalEl = document.getElementById('total');
+                const subtotalEl = document.getElementById('subtotal');
+                if (totalEl) {
+                    totalEl.innerHTML = `
+                        <span style="text-decoration: line-through; color: var(--text-secondary); font-size: 0.9rem;">$${plan.price.toFixed(2)}</span>
+                        <span style="color: #10b981; margin-left: 8px;">$${newPrice.toFixed(2)}</span>
+                    `;
+                }
+
+                // Add remove promo listener
+                document.getElementById('remove-subscription-promo')?.addEventListener('click', () => {
+                    removeSubscriptionPromo(plan);
+                });
+
+            } else {
+                // Invalid promo code
+                messageEl.innerHTML = `<span style="color: #ef4444;">${data.error || 'Invalid promo code'}</span>`;
+            }
+
+        } catch (error) {
+            console.error('Promo validation error:', error);
+            messageEl.innerHTML = '<span style="color: #ef4444;">Failed to validate code. Please try again.</span>';
+        } finally {
+            applyBtn.disabled = false;
+            applyBtn.innerHTML = 'Apply';
+        }
+    });
+
+    // Enter key to apply
+    promoInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            applyBtn.click();
+        }
+    });
+}
+
+/**
+ * Remove applied subscription promo code
+ */
+function removeSubscriptionPromo(plan) {
+    window.subscriptionPromoCode = null;
+
+    const promoInput = document.getElementById('subscription-promo-code');
+    const applyBtn = document.getElementById('apply-subscription-promo');
+    const messageEl = document.getElementById('subscription-promo-message');
+    const appliedEl = document.getElementById('subscription-promo-applied');
+    const totalEl = document.getElementById('total');
+
+    // Reset UI
+    if (promoInput) {
+        promoInput.style.display = 'block';
+        promoInput.value = '';
+    }
+    if (applyBtn) applyBtn.style.display = 'block';
+    if (messageEl) messageEl.innerHTML = '';
+    if (appliedEl) {
+        appliedEl.style.display = 'none';
+        appliedEl.innerHTML = '';
+    }
+    if (totalEl) totalEl.textContent = `$${plan.price.toFixed(2)}`;
 }
 
 /**
@@ -1225,6 +1413,11 @@ async function createPaymentIntent() {
             return_url: `${window.location.origin}/success.html?plan=${planId}`
         };
 
+        // Include promo code if one was applied
+        if (window.subscriptionPromoCode) {
+            payload.promo_code = window.subscriptionPromoCode;
+        }
+
         const response = await fetch(`${API_URL}/api/create-subscription-intent`, {
             method: 'POST',
             headers,
@@ -1398,19 +1591,27 @@ async function handleSubmit(event) {
                 buttonText.textContent = 'Activating subscription...';
 
                 try {
+                    // Build activation payload with promo code if applied
+                    const activationPayload = {
+                        setup_intent_id: setupIntent.id,
+                        customer_id: stripeCustomerId,
+                        price_id: stripePriceId,
+                        plan_id: planId,
+                        email: email
+                    };
+
+                    // Include promo code if one was applied
+                    if (window.subscriptionPromoCode) {
+                        activationPayload.promo_code = window.subscriptionPromoCode;
+                    }
+
                     const subResponse = await fetch(`${API_URL}/api/activate-subscription`, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
                             'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
                         },
-                        body: JSON.stringify({
-                            setup_intent_id: setupIntent.id,
-                            customer_id: stripeCustomerId,
-                            price_id: stripePriceId,
-                            plan_id: planId,
-                            email: email
-                        })
+                        body: JSON.stringify(activationPayload)
                     });
 
                     if (!subResponse.ok) {
