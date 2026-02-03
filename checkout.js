@@ -535,8 +535,24 @@ function displayCartItems() {
 
     productDetailsEl.innerHTML = html;
 
-    // Calculate discounts using cartManager
-    const discountInfo = cartManager.getDiscountInfo();
+    // Calculate discounts - use cartManager for cart mode, manual calc for single product mode
+    let discountInfo;
+    if (singleProductMode) {
+        // Single product mode (subscriptions) - calculate from cartItems directly
+        const subtotal = cartItems.reduce((sum, item) => sum + parseFloat(item.price), 0);
+        discountInfo = {
+            hasDiscount: false,
+            originalSubtotal: subtotal,
+            discountedSubtotal: subtotal,
+            totalDiscount: 0,
+            individualGuideCount: 0,
+            hasPackage: false,
+            nextTierInfo: null
+        };
+    } else {
+        // Cart mode - use cartManager
+        discountInfo = cartManager.getDiscountInfo();
+    }
 
     // Update the order totals section with discount info
     updateOrderTotals(discountInfo);
