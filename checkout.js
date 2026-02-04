@@ -1765,6 +1765,8 @@ function updateNavbarForAuth(user) {
     const userMenu = document.getElementById('user-menu');
     const dropdownUserName = document.getElementById('dropdown-user-name');
     const dropdownUserEmail = document.getElementById('dropdown-user-email');
+    const dropdownGuestContent = document.getElementById('dropdown-guest-content');
+    const dropdownUserContent = document.getElementById('dropdown-user-content');
 
     // Hide login link, show dashboard link
     if (navLoginLink) {
@@ -1772,6 +1774,14 @@ function updateNavbarForAuth(user) {
     }
     if (navDashboardLink) {
         navDashboardLink.style.display = 'inline';
+    }
+
+    // Switch dropdown from guest to logged-in content
+    if (dropdownGuestContent) {
+        dropdownGuestContent.style.display = 'none';
+    }
+    if (dropdownUserContent) {
+        dropdownUserContent.style.display = 'block';
     }
 
     // Show user menu
