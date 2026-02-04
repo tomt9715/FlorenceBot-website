@@ -1410,7 +1410,7 @@ async function createPaymentIntent() {
         const payload = {
             plan_id: planId,
             email: checkoutEmail,
-            return_url: `${window.location.origin}/success.html?plan=${planId}`
+            return_url: `${window.location.origin}/success.html?plan=${planId}&type=subscription`
         };
 
         // Include promo code if one was applied
@@ -1570,7 +1570,7 @@ async function handleSubmit(event) {
         const planId = urlParams.get('plan');
         let returnUrl = `${window.location.origin}/success.html`;
         if (planId) {
-            returnUrl += `?plan=${planId}`;
+            returnUrl += `?plan=${planId}&type=subscription`;
         }
 
         // Handle SetupIntent (for recurring subscriptions) vs PaymentIntent
@@ -1623,7 +1623,7 @@ async function handleSubmit(event) {
                     buttonText.textContent = 'Subscription Activated!';
 
                     // Redirect to success page
-                    window.location.href = `success.html?subscription=${subData.subscriptionId}&plan=${planId}`;
+                    window.location.href = `success.html?subscription=${subData.subscriptionId}&plan=${planId}&type=subscription`;
                 } catch (subError) {
                     console.error('Subscription activation error:', subError);
                     showError('Payment method saved, but failed to activate subscription. Please contact support.');
@@ -1660,7 +1660,7 @@ async function handleSubmit(event) {
 
                 // Redirect to success page
                 const successUrl = planId
-                    ? `success.html?payment_intent=${paymentIntent.id}&plan=${planId}`
+                    ? `success.html?payment_intent=${paymentIntent.id}&plan=${planId}&type=subscription`
                     : `success.html?payment_intent=${paymentIntent.id}`;
                 window.location.href = successUrl;
             } else if (paymentIntent && paymentIntent.status === 'requires_action') {
@@ -1668,7 +1668,7 @@ async function handleSubmit(event) {
             } else if (paymentIntent && paymentIntent.status === 'processing') {
                 buttonText.textContent = 'Processing...';
                 const successUrl = planId
-                    ? `success.html?payment_intent=${paymentIntent.id}&plan=${planId}`
+                    ? `success.html?payment_intent=${paymentIntent.id}&plan=${planId}&type=subscription`
                     : `success.html?payment_intent=${paymentIntent.id}`;
                 window.location.href = successUrl;
             } else {

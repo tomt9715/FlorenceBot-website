@@ -28,7 +28,11 @@ async function initSuccessPage() {
     }
 
     // Handle subscription purchases differently
-    if (purchaseType === 'subscription') {
+    // Detect subscription by type param OR presence of plan param
+    const planId = urlParams.get('plan');
+    const isSubscription = purchaseType === 'subscription' || planId;
+
+    if (isSubscription) {
         await verifySubscription(sessionId);
     } else {
         await verifyPayment(paymentIntent, sessionId);
