@@ -62,7 +62,7 @@ function initAuthCallback() {
             localStorage.setItem('accessToken', accessToken);
 
             // Fetch user data
-            fetch('https://api.thenursingcollective.pro/auth/me', {
+            fetch(`${API_URL}/user/profile`, {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${accessToken}`,

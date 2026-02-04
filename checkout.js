@@ -74,7 +74,7 @@ async function initCheckout() {
         if (!accountEmail) {
             console.log('User email missing from localStorage, fetching from API...');
             try {
-                const response = await fetch(`${API_URL}/auth/me`, {
+                const response = await fetch(`${API_URL}/user/profile`, {
                     method: 'GET',
                     headers: {
                         'Authorization': `Bearer ${localStorage.getItem('accessToken')}`,
