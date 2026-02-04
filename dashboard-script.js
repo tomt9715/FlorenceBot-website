@@ -10,9 +10,6 @@ document.addEventListener('DOMContentLoaded', async function() {
     // Load user profile from API
     await loadUserProfile();
 
-    // Check for order claim from URL parameter (from success page redirect)
-    await checkForOrderClaim();
-
     // User menu dropdown toggle
     const userMenuBtn = document.getElementById('user-menu-btn');
     const userDropdown = document.getElementById('user-dropdown');
@@ -90,14 +87,133 @@ function updatePurchasesWidget(user) {
     // Keeping function for backward compatibility
 }
 
+// ==================== Subscription Status Cache ====================
+let cachedSubscriptionStatus = null;
+
+async function getSubscriptionStatusCached() {
+    if (!cachedSubscriptionStatus) {
+        cachedSubscriptionStatus = await checkSubscriptionStatus();
+    }
+    return cachedSubscriptionStatus;
+}
+
+// ==================== Subscription Helper Functions ====================
+
+// Convert product ID to display name (e.g., 'heart-failure' -> 'Heart Failure')
+function formatGuideName(productId) {
+    const words = productId.split('-').map(word =>
+        word.charAt(0).toUpperCase() + word.slice(1)
+    );
+    return words.join(' ');
+}
+
+// Render a locked category preview for non-subscribers
+function renderLockedCategoryPreview() {
+    const categories = {};
+    for (const [id, info] of Object.entries(guideCategoryMap)) {
+        if (!categories[info.category]) {
+            categories[info.category] = { count: 0, config: categoryConfig[info.category] };
+        }
+        categories[info.category].count++;
+    }
+
+    return Object.entries(categories)
+        .sort((a, b) => (a[1].config?.order || 99) - (b[1].config?.order || 99))
+        .map(([cat, data]) => `
+            <div class="locked-category-item">
+                <i class="fas ${data.config?.icon || 'fa-book'}"></i>
+                <span>${data.config?.label || cat}</span>
+                <span class="locked-count">${data.count} guides</span>
+            </div>
+        `).join('');
+}
+
+// Subscription plan display name mapping
+const planDisplayNames = {
+    'monthly-access': 'Monthly',
+    'semester-access': 'Semester',
+    'lifetime-access': 'Lifetime'
+};
+
+const planDisplayNamesFull = {
+    'monthly-access': 'Monthly Access',
+    'semester-access': 'Semester Access',
+    'lifetime-access': 'Lifetime Access'
+};
+
+// Update quick stats for subscribers
+function updateQuickStatsSubscriber(allGuides, subscription) {
+    const planEl = document.getElementById('stat-subscription-plan');
+    const statusEl = document.getElementById('stat-subscription-status');
+    if (planEl && subscription) {
+        planEl.textContent = planDisplayNames[subscription.plan_id] || subscription.plan_name;
+        if (statusEl) {
+            statusEl.textContent = subscription.cancel_at_period_end ? 'Cancelling' : 'Active';
+        }
+    }
+
+    // Last studied
+    const lastStudiedEl = document.getElementById('stat-last-studied');
+    if (lastStudiedEl) {
+        let mostRecentStudy = null;
+        allGuides.forEach(g => {
+            const lastStudied = getLastStudied(g.product_id);
+            if (lastStudied) {
+                const studyDate = new Date(lastStudied);
+                if (!mostRecentStudy || studyDate > mostRecentStudy) {
+                    mostRecentStudy = studyDate;
+                }
+            }
+        });
+        lastStudiedEl.textContent = mostRecentStudy
+            ? (formatRelativeTime(mostRecentStudy.toISOString()) || 'Today')
+            : 'Not yet';
+    }
+
+    // Top category based on study activity
+    const topCategoryEl = document.getElementById('stat-top-category');
+    if (topCategoryEl && allGuides.length > 0) {
+        const categoryCounts = {};
+        allGuides.forEach(g => {
+            if (getLastStudied(g.product_id)) {
+                const catInfo = guideCategoryMap[g.product_id];
+                if (catInfo) {
+                    categoryCounts[catInfo.category] = (categoryCounts[catInfo.category] || 0) + 1;
+                }
+            }
+        });
+        let topCategory = null;
+        let maxCount = 0;
+        for (const [category, count] of Object.entries(categoryCounts)) {
+            if (count > maxCount) { maxCount = count; topCategory = category; }
+        }
+        topCategoryEl.textContent = topCategory && categoryConfig[topCategory]
+            ? categoryConfig[topCategory].label : '--';
+    }
+}
+
+// Update quick stats for non-subscribers
+function updateQuickStatsNoSubscription() {
+    const planEl = document.getElementById('stat-subscription-plan');
+    const statusEl = document.getElementById('stat-subscription-status');
+    if (planEl) planEl.textContent = 'None';
+    if (statusEl) statusEl.textContent = 'Not Subscribed';
+
+    const lastStudiedEl = document.getElementById('stat-last-studied');
+    if (lastStudiedEl) lastStudiedEl.textContent = '--';
+
+    const topCategoryEl = document.getElementById('stat-top-category');
+    if (topCategoryEl) topCategoryEl.textContent = '--';
+}
+
 function updateCompactStats(user) {
     const guidesCountElement = document.getElementById('guides-count');
     const memberSinceElement = document.getElementById('member-since');
 
-    // Guide count is now updated by loadAccessibleGuides which fetches from backend
-    // Just set placeholder for now - it will be updated after API call
+    // Subscription status is updated by loadAccessibleGuides
+    // Just set placeholder for now
     if (guidesCountElement) {
-        guidesCountElement.textContent = '...';
+        guidesCountElement.textContent = 'Loading...';
     }
 
     if (memberSinceElement && user.created_at) {
@@ -238,8 +354,36 @@ async function loadUserProfile() {
         // Show getting started card for new users (less than 2 days old)
         showGettingStartedCard(user);
 
+        // Update subscription action button for premium users
+        if (user.is_premium) {
+            const subActionBtn = document.getElementById('subscription-action-btn');
+            const subActionTitle = document.getElementById('subscription-action-title');
+            const subActionDesc = document.getElementById('subscription-action-desc');
+            if (subActionBtn && subActionTitle && subActionDesc) {
+                subActionBtn.removeAttribute('data-navigate');
+                subActionTitle.textContent = 'Manage Subscription';
+                subActionDesc.textContent = 'Billing & cancellation';
+                subActionBtn.querySelector('.action-icon-large i').className = 'fas fa-cog';
+                subActionBtn.addEventListener('click', async function() {
+                    try {
+                        const response = await apiCall('/api/subscription/manage', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ return_url: window.location.href })
+                        });
+                        if (response.url) window.location.href = response.url;
+                    } catch (error) {
+                        console.error('Error opening subscription management:', error);
+                    }
+                });
+            }
+        }
+
         // Load accessible guides based on user subscription
         loadAccessibleGuides(user);
+
+        // Load subscription management section
+        loadSubscriptionManagement();
 
         // Load purchase history
         loadPurchaseHistory();
@@ -482,71 +626,6 @@ function showGettingStartedCard(user) {
     }
 }
 
-// Guides data - synced with guides.js
-// All guides cost $5.99 each, users purchase individually
-const guidesData = [
-    {
-        id: 'electrolytes',
-        title: 'Electrolyte Management Guide',
-        description: 'Essential electrolyte ranges, nursing interventions, and clinical priorities. Includes sodium, potassium, calcium, magnesium, and phosphorus management.',
-        category: 'lab-values',
-        icon: '⚡',
-        file: 'content/guides/electrolytes.md',
-        topics: ['Sodium', 'Potassium', 'Calcium', 'Magnesium', 'Phosphorus'],
-        readTime: '8 min',
-        difficulty: 'Intermediate',
-        price: 5.99
-    },
-    {
-        id: 'vital-signs',
-        title: 'Vital Signs Assessment Guide',
-        description: 'Normal ranges, assessment techniques, and critical values for all age groups. Covers heart rate, blood pressure, respiratory rate, temperature, and oxygen saturation.',
-        category: 'clinical-skills',
-        icon: '💓',
-        file: 'content/guides/vital-signs.md',
-        topics: ['Heart Rate', 'Blood Pressure', 'Respiratory Rate', 'Temperature', 'SpO₂'],
-        readTime: '7 min',
-        difficulty: 'Beginner',
-        price: 5.99
-    },
-    {
-        id: 'critical-lab-values',
-        title: 'Critical Laboratory Values',
-        description: 'Life-threatening lab values that require immediate notification and intervention. Essential reference for clinical practice and NCLEX preparation.',
-        category: 'lab-values',
-        icon: '🧪',
-        file: 'content/guides/critical-lab-values.md',
-        topics: ['Critical Values', 'Lab Ranges', 'Emergency Response'],
-        readTime: '6 min',
-        difficulty: 'Intermediate',
-        price: 5.99
-    },
-    {
-        id: 'isolation-precautions',
-        title: 'Isolation Precautions Guide',
-        description: 'Comprehensive guide to standard, contact, droplet, and airborne precautions. Includes PPE requirements and infection control protocols.',
-        category: 'safety',
-        icon: '🛡️',
-        file: 'content/guides/isolation-precautions.md',
-        topics: ['Standard Precautions', 'Contact', 'Droplet', 'Airborne', 'PPE'],
-        readTime: '9 min',
-        difficulty: 'Intermediate',
-        price: 5.99
-    },
-    {
-        id: 'medication-math',
-        title: 'Medication Dosage Calculations',
-        description: 'Essential drug calculations with step-by-step examples and practice problems. Covers dosage calculations, IV rates, and weight-based dosing.',
-        category: 'medications',
-        icon: '🧮',
-        file: 'content/guides/medication-math.md',
-        topics: ['Dosage Calculations', 'IV Flow Rates', 'Weight-Based Dosing', 'Conversions'],
-        readTime: '12 min',
-        difficulty: 'Advanced',
-        price: 5.99
-    }
-];
-
 // Category mapping for guide cards - now with proper Med-Surg subcategories
 const guideCategoryMap = {
     // Cardiovascular
@@ -692,77 +771,6 @@ function formatRelativeTime(dateString) {
     return formatDate(dateString);
 }
 
-// Check if a purchase is considered "new" (within the last 7 days)
-function isNewPurchase(purchasedAt) {
-    if (!purchasedAt) return false;
-    const purchaseDate = new Date(purchasedAt);
-    const now = new Date();
-    const diffMs = now - purchaseDate;
-    const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
-    return diffDays <= 7;
-}
-
-// Update enhanced quick stats in the account widget
-function updateQuickStats(purchases) {
-    // Guides owned count
-    const guidesOwnedEl = document.getElementById('stat-guides-owned');
-    if (guidesOwnedEl) {
-        guidesOwnedEl.textContent = purchases.length;
-    }
-
-    // Last studied - find most recent from localStorage
-    const lastStudiedEl = document.getElementById('stat-last-studied');
-    if (lastStudiedEl) {
-        let mostRecentStudy = null;
-        purchases.forEach(p => {
-            const lastStudied = getLastStudied(p.product_id);
-            if (lastStudied) {
-                const studyDate = new Date(lastStudied);
-                if (!mostRecentStudy || studyDate > mostRecentStudy) {
-                    mostRecentStudy = studyDate;
-                }
-            }
-        });
-
-        if (mostRecentStudy) {
-            const relativeTime = formatRelativeTime(mostRecentStudy.toISOString());
-            lastStudiedEl.textContent = relativeTime || 'Today';
-        } else {
-            lastStudiedEl.textContent = 'Not yet';
-        }
-    }
-
-    // Top category - find category with most guides
-    const topCategoryEl = document.getElementById('stat-top-category');
-    if (topCategoryEl && purchases.length > 0) {
-        const categoryCounts = {};
-        purchases.forEach(p => {
-            const categoryInfo = guideCategoryMap[p.product_id];
-            if (categoryInfo && categoryInfo.category) {
-                categoryCounts[categoryInfo.category] = (categoryCounts[categoryInfo.category] || 0) + 1;
-            }
-        });
-
-        let topCategory = null;
-        let maxCount = 0;
-        for (const [category, count] of Object.entries(categoryCounts)) {
-            if (count > maxCount) {
-                maxCount = count;
-                topCategory = category;
-            }
-        }
-
-        if (topCategory && categoryConfig[topCategory]) {
-            topCategoryEl.textContent = categoryConfig[topCategory].label;
-        } else if (topCategory) {
-            // Capitalize first letter
-            topCategoryEl.textContent = topCategory.charAt(0).toUpperCase() + topCategory.slice(1);
-        } else {
-            topCategoryEl.textContent = '—';
-        }
-    }
-}
-
 // Category display configuration - includes Med-Surg subcategories
 const categoryConfig = {
     // Med-Surg Subcategories (body systems)
@@ -787,75 +795,93 @@ const categoryConfig = {
 async function loadAccessibleGuides(user) {
     const foldersContainer = document.getElementById('guides-folders-container');
     const searchBar = document.getElementById('guides-search-bar');
-    const favoritesSection = document.getElementById('guides-favorites-section');
 
     if (!foldersContainer) return;
 
     try {
-        // Fetch purchases from backend API
-        const purchaseData = await apiCall('/cart/purchases', { method: 'GET' });
-        const purchases = purchaseData.purchases || [];
+        // Check subscription status (cached to avoid duplicate API calls)
+        const { hasAccess, subscription } = await getSubscriptionStatusCached();
 
         // Remove skeleton loader
         const skeleton = foldersContainer.querySelector('.skeleton-loader');
         if (skeleton) skeleton.remove();
 
-        // Update study guides stat in compact header
-        const guidesCountStat = document.getElementById('guides-count');
-        if (guidesCountStat) {
-            guidesCountStat.textContent = purchases.length;
-        }
+        if (hasAccess) {
+            // SUBSCRIBER: Show ALL guides from guideCategoryMap
+            const allGuides = Object.entries(guideCategoryMap).map(([productId, info]) => ({
+                product_id: productId,
+                product_name: formatGuideName(productId),
+                category: info.category,
+            }));
 
-        // Update enhanced quick stats
-        updateQuickStats(purchases);
+            const totalGuides = allGuides.length;
 
-        // Store purchased IDs in localStorage for other pages
-        const purchasedIds = purchases.map(p => p.product_id);
-        localStorage.setItem('purchasedGuides', JSON.stringify(purchasedIds));
+            // Update header stat
+            const guidesCountStat = document.getElementById('guides-count');
+            if (guidesCountStat) {
+                guidesCountStat.textContent = `Full Access (${totalGuides} Guides)`;
+            }
 
-        // Store all purchases for filtering
-        allPurchasedGuides = purchases;
+            // Update quick stats for subscribers
+            updateQuickStatsSubscriber(allGuides, subscription);
 
-        // If user has purchased guides, render folder system
-        if (purchases.length > 0) {
-            // Show search bar and update count
+            // Store all guide IDs in localStorage for other pages
+            const allIds = allGuides.map(g => g.product_id);
+            localStorage.setItem('purchasedGuides', JSON.stringify(allIds));
+
+            // Store all guides for filtering
+            allPurchasedGuides = allGuides;
+
+            // Show search bar
             if (searchBar) searchBar.style.display = 'flex';
             const countEl = document.getElementById('filtered-guides-count');
-            if (countEl) countEl.textContent = purchases.length;
+            if (countEl) countEl.textContent = totalGuides;
 
-            // Render favorites section
-            renderFavoritesSection(purchases);
+            // Render favorites
+            renderFavoritesSection(allGuides);
 
             // Render category folders
-            renderCategoryFolders(purchases);
+            renderCategoryFolders(allGuides);
 
-            // Setup search functionality
-            setupFolderSearch(purchases);
-
-            // Setup view toggle (for future use)
+            // Setup search and view toggle
+            setupFolderSearch(allGuides);
             setupViewToggle();
         } else {
-            // Show enhanced empty state
+            // NON-SUBSCRIBER: Show locked empty state
+            const guidesCountStat = document.getElementById('guides-count');
+            if (guidesCountStat) {
+                guidesCountStat.textContent = 'No Subscription';
+            }
+
+            updateQuickStatsNoSubscription();
+
             foldersContainer.innerHTML = `
-                <div class="guides-empty-state">
+                <div class="guides-empty-state subscription-required">
                     <div class="empty-icon">
-                        <i class="fas fa-book-open"></i>
+                        <i class="fas fa-lock"></i>
                     </div>
-                    <h3>Start Your NCLEX Journey</h3>
-                    <p>Browse our collection of comprehensive study guides designed to help you pass the NCLEX on your first try.</p>
-                    <button class="btn btn-secondary" data-navigate="pricing.html">
-                        <i class="fas fa-rocket"></i> View Plans
-                    </button>
+                    <h3>Subscribe to Access All Study Guides</h3>
+                    <p>Get unlimited access to all ${Object.keys(guideCategoryMap).length}+ study guides, clinical resources, and quick reference tools with a subscription.</p>
+                    <div class="subscription-cta-buttons">
+                        <button class="btn btn-primary" data-navigate="pricing.html">
+                            <i class="fas fa-rocket"></i> View Subscription Plans
+                        </button>
+                    </div>
+                    <div class="locked-preview">
+                        <h4>What you'll get access to:</h4>
+                        ${renderLockedCategoryPreview()}
+                    </div>
                 </div>
             `;
-            // Setup navigation for empty state button
-            foldersContainer.querySelector('[data-navigate]')?.addEventListener('click', function() {
-                window.location.href = this.dataset.navigate;
+            // Setup navigation for CTA button
+            foldersContainer.querySelectorAll('[data-navigate]').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    window.location.href = this.dataset.navigate;
+                });
             });
         }
     } catch (error) {
-        console.error('Error loading purchases:', error);
-        // Remove skeleton and show error
+        console.error('Error loading guides:', error);
         const skeleton = foldersContainer.querySelector('.skeleton-loader');
         if (skeleton) skeleton.remove();
 
@@ -865,13 +891,12 @@ async function loadAccessibleGuides(user) {
                     <i class="fas fa-exclamation-circle"></i>
                 </div>
                 <h3>Unable to Load Guides</h3>
-                <p>There was an error loading your purchased guides. Please try refreshing the page.</p>
+                <p>There was an error loading your guides. Please try refreshing the page.</p>
                 <button class="btn btn-secondary" data-action="reload">
                     <i class="fas fa-redo"></i> Refresh Page
                 </button>
             </div>
         `;
-        // Setup reload button
         foldersContainer.querySelector('[data-action="reload"]')?.addEventListener('click', function() {
             window.location.reload();
         });
@@ -1014,7 +1039,6 @@ function renderCompactGuideCard(purchase, isFavoriteSection) {
     const isFavorited = favorites.includes(purchase.product_id);
     const lastStudied = getLastStudied(purchase.product_id);
     const lastStudiedText = formatRelativeTime(lastStudied);
-    const isNew = isNewPurchase(purchase.purchased_at);
 
     return `
         <div class="guide-row" data-product-id="${escapeHtml(purchase.product_id)}">
@@ -1024,7 +1048,6 @@ function renderCompactGuideCard(purchase, isFavoriteSection) {
                 </button>
                 <div class="guide-row-icon">${icon}</div>
                 <span class="guide-row-title">${escapeHtml(purchase.product_name)}</span>
-                ${isNew ? '<span class="guide-new-badge">New</span>' : ''}
             </div>
             <div class="guide-row-right">
                 <span class="guide-row-studied">${lastStudiedText || 'Not studied yet'}</span>
@@ -1603,144 +1626,146 @@ function escapeHtml(text) {
     return div.innerHTML;
 }
 
-// ==================== Claim Order Functions ====================
+// ==================== Subscription Management ====================
 
-// Check if user arrived with an order to claim (from success page redirect)
-async function checkForOrderClaim() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const orderNumber = urlParams.get('order');
-
-    if (orderNumber) {
-        console.log('Found order to claim from URL:', orderNumber);
-
-        // Pre-fill the claim input
-        const input = document.getElementById('claim-order-input');
-        if (input) {
-            // Extract just the code portion (remove TNC- prefix if present)
-            let orderCode = orderNumber.toUpperCase();
-            if (orderCode.startsWith('TNC-')) {
-                orderCode = orderCode.substring(4);
-            }
-            input.value = orderCode;
-
-            // Scroll to claim section
-            const claimSection = document.querySelector('.claim-order-section');
-            if (claimSection) {
-                claimSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            }
-
-            // Auto-claim the order
-            setTimeout(async () => {
-                await claimOrder();
-
-                // Clear the URL parameter after claiming
-                const newUrl = window.location.pathname;
-                window.history.replaceState({}, document.title, newUrl);
-            }, 500);
-        }
-    }
-}
-
-// Claim order functionality
-async function claimOrder() {
-    const input = document.getElementById('claim-order-input');
-    const button = document.getElementById('claim-order-btn');
-    const messageDiv = document.getElementById('claim-message');
-
-    // Get the order number and validate
-    let orderCode = input.value.trim().toUpperCase();
-
-    // Remove TNC- prefix if user entered it
-    if (orderCode.startsWith('TNC-')) {
-        orderCode = orderCode.substring(4);
-    }
-
-    // Validate format (6 alphanumeric characters)
-    if (!orderCode || orderCode.length !== 6 || !/^[A-Z0-9]+$/.test(orderCode)) {
-        showClaimMessage('Please enter a valid 6-character order code (e.g., 123456).', 'error');
-        return;
-    }
-
-    const fullOrderNumber = `TNC-${orderCode}`;
-
-    // Disable button and show loading
-    const originalText = button.innerHTML;
-    button.disabled = true;
-    button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Claiming...';
+async function loadSubscriptionManagement() {
+    const container = document.getElementById('subscription-management-container');
+    if (!container) return;
 
     try {
-        const response = await apiCall('/cart/orders/claim', {
-            method: 'POST',
-            body: JSON.stringify({ order_number: fullOrderNumber })
-        });
+        const { hasAccess, subscription } = await getSubscriptionStatusCached();
 
-        if (response.success) {
-            // Success
-            showClaimMessage(`Order ${fullOrderNumber} claimed successfully! ${response.products_added.length} product(s) added to your account.`, 'success');
-            input.value = '';
+        // Remove skeleton
+        const skeleton = container.querySelector('.skeleton-loader');
+        if (skeleton) skeleton.remove();
 
-            // Refresh the guides list and purchase history
-            const user = JSON.parse(localStorage.getItem('user') || '{}');
-            await loadAccessibleGuides(user);
-            await loadPurchaseHistory();
-        } else {
-            // Handle specific error types
-            let message = response.message || 'Failed to claim order.';
-            showClaimMessage(message, 'error');
-        }
-    } catch (error) {
-        console.error('Claim order error:', error);
-        // Map error codes to friendly messages
-        const errorMessages = {
-            'already_yours': 'This order is already linked to your account. Your guides should appear above!',
-            'order_not_found': 'Order not found. Please check the order number and try again.',
-            'already_claimed': 'This order has already been claimed by another account.',
-            'invalid_order': 'Invalid order number format.'
-        };
-        let message = errorMessages[error.message] || error.message || 'Failed to claim order. Please try again.';
-        showClaimMessage(message, 'error');
-    } finally {
-        button.disabled = false;
-        button.innerHTML = originalText;
-    }
-}
+        if (subscription) {
+            const planName = planDisplayNamesFull[subscription.plan_id] || subscription.plan_name;
+            const isActive = subscription.is_active;
+            const isLifetime = subscription.plan_id === 'lifetime-access';
+            const isCancelling = subscription.cancel_at_period_end;
 
-// Show claim message
-function showClaimMessage(message, type) {
-    const messageDiv = document.getElementById('claim-message');
-    if (!messageDiv) return;
-
-    messageDiv.innerHTML = `
-        <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'}"></i>
-        <span>${escapeHtml(message)}</span>
-    `;
-    messageDiv.className = `claim-message ${type}`;
-    messageDiv.style.display = 'flex';
-
-    // Auto-hide after 5 seconds for success, keep error visible longer
-    if (type === 'success') {
-        setTimeout(() => {
-            messageDiv.style.display = 'none';
-        }, 5000);
-    }
-}
-
-// Handle Enter key on claim input
-document.addEventListener('DOMContentLoaded', function() {
-    const claimInput = document.getElementById('claim-order-input');
-    if (claimInput) {
-        claimInput.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                claimOrder();
+            // Build status badge
+            let statusBadge;
+            if (isActive && isCancelling) {
+                statusBadge = '<span class="sub-status-badge cancelling"><i class="fas fa-clock"></i> Cancelling</span>';
+            } else if (isActive) {
+                statusBadge = '<span class="sub-status-badge active"><i class="fas fa-check-circle"></i> Active</span>';
+            } else {
+                statusBadge = '<span class="sub-status-badge expired"><i class="fas fa-times-circle"></i> Expired</span>';
             }
-        });
 
-        // Auto-uppercase as user types
-        claimInput.addEventListener('input', function(e) {
-            this.value = this.value.toUpperCase().replace(/[^A-Z0-9]/g, '');
-        });
+            // Build dates section
+            let datesHtml = '';
+            if (subscription.starts_at) {
+                datesHtml += `<div class="sub-info-row"><span class="sub-label">Started</span><span class="sub-value">${formatDate(subscription.starts_at)}</span></div>`;
+            }
+
+            if (isLifetime) {
+                datesHtml += `<div class="sub-info-row"><span class="sub-label">Expires</span><span class="sub-value"><i class="fas fa-infinity"></i> Never</span></div>`;
+            } else if (subscription.expires_at) {
+                const label = isCancelling ? 'Access Until' : (subscription.plan_id === 'monthly-access' ? 'Next Billing' : 'Expires');
+                datesHtml += `<div class="sub-info-row"><span class="sub-label">${label}</span><span class="sub-value">${formatDate(subscription.expires_at)}</span></div>`;
+            }
+
+            if (subscription.cancelled_at) {
+                datesHtml += `<div class="sub-info-row"><span class="sub-label">Cancelled On</span><span class="sub-value">${formatDate(subscription.cancelled_at)}</span></div>`;
+            }
+
+            // Build action buttons
+            let actionsHtml = '';
+            if (isActive && !isLifetime) {
+                actionsHtml = `<button class="btn btn-primary" id="manage-subscription-btn"><i class="fas fa-cog"></i> Manage Subscription</button>`;
+            } else if (!isActive) {
+                actionsHtml = `<button class="btn btn-primary" data-navigate="pricing.html"><i class="fas fa-rocket"></i> Resubscribe</button>`;
+            } else if (isLifetime) {
+                actionsHtml = `<span class="lifetime-badge"><i class="fas fa-gem"></i> Lifetime Member</span>`;
+            }
+
+            container.innerHTML = `
+                <div class="subscription-status-card">
+                    <div class="sub-card-header">
+                        <div class="sub-plan-info">
+                            <h3>${escapeHtml(planName)}</h3>
+                            ${statusBadge}
+                        </div>
+                    </div>
+                    <div class="sub-card-details">
+                        ${datesHtml}
+                    </div>
+                    <div class="sub-card-actions">
+                        ${actionsHtml}
+                    </div>
+                </div>
+            `;
+
+            // Setup manage subscription button (opens Stripe portal)
+            const manageBtn = document.getElementById('manage-subscription-btn');
+            if (manageBtn) {
+                manageBtn.addEventListener('click', async function() {
+                    this.disabled = true;
+                    this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Opening...';
+                    try {
+                        const response = await apiCall('/api/subscription/manage', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({
+                                return_url: window.location.href
+                            })
+                        });
+                        if (response.url) {
+                            window.location.href = response.url;
+                        }
+                    } catch (error) {
+                        console.error('Error opening subscription management:', error);
+                        showAlert('Error', 'Unable to open subscription management. Please try again.', 'error');
+                        this.disabled = false;
+                        this.innerHTML = '<i class="fas fa-cog"></i> Manage Subscription';
+                    }
+                });
+            }
+
+            // Setup navigation buttons
+            container.querySelectorAll('[data-navigate]').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    window.location.href = this.dataset.navigate;
+                });
+            });
+
+        } else {
+            // No subscription at all
+            container.innerHTML = `
+                <div class="subscription-status-card no-subscription">
+                    <div class="sub-empty-state">
+                        <i class="fas fa-crown" style="font-size: 32px; color: var(--accent-color); margin-bottom: 16px;"></i>
+                        <h3>No Active Subscription</h3>
+                        <p>Subscribe to get unlimited access to all study guides, clinical resources, and quick reference tools.</p>
+                        <button class="btn btn-primary" data-navigate="pricing.html">
+                            <i class="fas fa-rocket"></i> View Plans
+                        </button>
+                    </div>
+                </div>
+            `;
+            container.querySelectorAll('[data-navigate]').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    window.location.href = this.dataset.navigate;
+                });
+            });
+        }
+
+    } catch (error) {
+        console.error('Error loading subscription management:', error);
+        const skeleton = container.querySelector('.skeleton-loader');
+        if (skeleton) skeleton.remove();
+        container.innerHTML = `
+            <div class="subscription-status-card error-state">
+                <p>Unable to load subscription information.</p>
+                <button class="btn btn-secondary" data-action="reload"><i class="fas fa-redo"></i> Retry</button>
+            </div>
+        `;
+        container.querySelector('[data-action="reload"]')?.addEventListener('click', () => window.location.reload());
     }
-});
+}
 
 // ==================== Purchase History Functions ====================
 
@@ -2322,21 +2347,15 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Collapsible section toggle (Claim a Purchase)
-    const claimSectionToggle = document.getElementById('claim-section-toggle');
-    if (claimSectionToggle) {
-        claimSectionToggle.addEventListener('click', function() {
+    // Collapsible section toggle (Purchase History)
+    const purchaseHistoryToggle = document.getElementById('purchase-history-toggle');
+    if (purchaseHistoryToggle) {
+        purchaseHistoryToggle.addEventListener('click', function() {
             const section = this.closest('.collapsible');
             if (section) {
                 section.classList.toggle('collapsed');
             }
         });
-    }
-
-    // Claim order button
-    const claimOrderBtn = document.getElementById('claim-order-btn');
-    if (claimOrderBtn) {
-        claimOrderBtn.addEventListener('click', claimOrder);
     }
 
     // Close admin modal button

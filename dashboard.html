@@ -93,7 +93,7 @@
                             </div>
                         </div>
                         <div class="user-dropdown-divider"></div>
-                        <a href="dashboard.html#purchases"><i class="fas fa-book-medical"></i> My Purchases</a>
+                        <a href="dashboard.html#subscription"><i class="fas fa-crown"></i> My Subscription</a>
                         <a href="settings.html"><i class="fas fa-cog"></i> Account Settings</a>
                         <div class="user-dropdown-divider"></div>
                         <a href="contact.html"><i class="fas fa-question-circle"></i> Help & Support</a>
@@ -127,9 +127,9 @@
                     <span id="admin-badge"></span>
                 </h1>
                 <div class="user-stats-compact">
-                    <span class="stat-inline">
-                        <i class="fas fa-book-medical"></i>
-                        <span id="guides-count">0</span> Guides
+                    <span class="stat-inline" id="subscription-status-inline">
+                        <i class="fas fa-crown"></i>
+                        <span id="guides-count">--</span>
                     </span>
                     <span class="stat-inline">
                         <i class="fas fa-calendar-alt"></i>
@@ -162,10 +162,10 @@
                         <h3>Browse Study Guides</h3>
                         <p>Explore NCLEX resources</p>
                     </button>
-                    <button class="action-card-hero" data-navigate="pricing.html">
+                    <button class="action-card-hero" id="subscription-action-btn" data-navigate="pricing.html">
                         <div class="action-icon-large"><i class="fas fa-rocket"></i></div>
-                        <h3>View Plans</h3>
-                        <p>Upgrade your subscription</p>
+                        <h3 id="subscription-action-title">View Plans</h3>
+                        <p id="subscription-action-desc">Get a subscription</p>
                     </button>
                     <button class="action-card-hero" data-external="https://discord.gg/y2Mh77wAV2">
                         <div class="action-icon-large"><i class="fab fa-discord"></i></div>
@@ -203,9 +203,9 @@
                             <p style="font-size: 0.9rem; opacity: 0.9;">Connect with fellow nursing students on Discord</p>
                         </div>
                         <div style="background: rgba(255,255,255,0.15); padding: 20px; border-radius: 12px;">
-                            <i class="fas fa-store" style="font-size: 32px; margin-bottom: 12px;"></i>
-                            <h4 style="color: white; font-size: 1rem; margin-bottom: 8px;">Browse the Store</h4>
-                            <p style="font-size: 0.9rem; opacity: 0.9;">Purchase individual guides or full class packages</p>
+                            <i class="fas fa-rocket" style="font-size: 32px; margin-bottom: 12px;"></i>
+                            <h4 style="color: white; font-size: 1rem; margin-bottom: 8px;">Choose a Plan</h4>
+                            <p style="font-size: 0.9rem; opacity: 0.9;">Subscribe to unlock all study guides and resources</p>
                         </div>
                     </div>
                     <button style="background: white; color: #667eea; border: none; padding: 12px 24px; border-radius: 8px; font-weight: 600; margin-top: 20px; cursor: pointer;" id="dismiss-getting-started-btn">
@@ -291,13 +291,13 @@
                         </div>
                         <!-- Right: Quick Stats -->
                         <div class="account-stats-section">
-                            <div class="quick-stat-card">
+                            <div class="quick-stat-card" id="stat-subscription-card">
                                 <div class="quick-stat-icon guides">
-                                    <i class="fas fa-book-open"></i>
+                                    <i class="fas fa-crown"></i>
                                 </div>
                                 <div class="quick-stat-info">
-                                    <span class="quick-stat-number" id="stat-guides-owned">0</span>
-                                    <span class="quick-stat-label">Guides Owned</span>
+                                    <span class="quick-stat-number" id="stat-subscription-plan">--</span>
+                                    <span class="quick-stat-label" id="stat-subscription-status">Subscription</span>
                                 </div>
                             </div>
                             <div class="quick-stat-card">
@@ -322,76 +322,63 @@
                     </div>
                 </div>
 
-                <!-- Collapsible Claim Order Section -->
-                <section class="dashboard-section claim-order-section collapsible collapsed">
-                    <button class="collapsible-header" id="claim-section-toggle">
-                        <div class="collapsible-title">
-                            <i class="fas fa-ticket-alt"></i>
-                            <span>Claim a Purchase</span>
-                        </div>
-                        <i class="fas fa-chevron-down collapsible-icon"></i>
-                    </button>
-                    <div class="collapsible-content">
-                        <div class="claim-order-card">
-                            <p class="claim-description">Have an order number from a previous purchase? Enter it below to add those guides to your account.</p>
-                            <div class="claim-form">
-                                <div class="claim-input-group">
-                                    <span class="claim-prefix">TNC-</span>
-                                    <input type="text" id="claim-order-input" placeholder="123456" maxlength="6" autocomplete="off" />
-                                </div>
-                                <button class="btn btn-primary" id="claim-order-btn">
-                                    <i class="fas fa-plus-circle"></i> Claim Order
-                                </button>
-                            </div>
-                            <div id="claim-message" class="claim-message" style="display: none;"></div>
+                <!-- Subscription Management Section -->
+                <section class="dashboard-section subscription-management-section" id="subscription-section">
+                    <div class="section-header-enhanced">
+                        <h2><i class="fas fa-crown"></i> Subscription</h2>
+                    </div>
+                    <div class="subscription-management-container" id="subscription-management-container">
+                        <!-- Loading skeleton -->
+                        <div class="skeleton-loader">
+                            <div class="skeleton skeleton-card" style="margin-bottom: 12px;"></div>
                         </div>
                     </div>
                 </section>
 
-                <!-- Purchase History Section -->
-                <section class="dashboard-section purchase-history-section">
-                    <div class="section-header-enhanced">
-                        <h2><i class="fas fa-receipt"></i> Purchase History</h2>
-                    </div>
-                    <div class="purchase-history-container">
-                        <!-- Filters and Search -->
-                        <div class="purchase-history-controls">
-                            <div class="purchase-search-box">
-                                <i class="fas fa-search"></i>
-                                <input type="text" id="purchase-search-input" placeholder="Search orders..." />
-                            </div>
-                            <div class="purchase-filters">
-                                <select id="purchase-date-filter">
-                                    <option value="all">All Time</option>
-                                    <option value="30">Last 30 Days</option>
-                                    <option value="90">Last 90 Days</option>
-                                    <option value="365">Last Year</option>
-                                </select>
-                            </div>
+                <!-- Purchase History (collapsed, secondary) -->
+                <section class="dashboard-section purchase-history-section collapsible collapsed">
+                    <button class="collapsible-header" id="purchase-history-toggle">
+                        <div class="collapsible-title">
+                            <i class="fas fa-receipt"></i>
+                            <span>Purchase History</span>
                         </div>
-                        <!-- Order Count -->
-                        <div class="purchase-history-summary" id="purchase-history-summary">
-                            <span>Loading...</span>
-                        </div>
-                        <!-- Scrollable List -->
-                        <div class="purchase-history-scroll" id="purchase-history-scroll">
-                            <div class="purchase-history-list" id="purchase-history-list">
-                                <!-- Loading skeleton -->
-                                <div class="skeleton-loader">
-                                    <div class="skeleton skeleton-card" style="margin-bottom: 12px;"></div>
-                                    <div class="skeleton skeleton-card" style="margin-bottom: 12px;"></div>
+                        <i class="fas fa-chevron-down collapsible-icon"></i>
+                    </button>
+                    <div class="collapsible-content">
+                        <div class="purchase-history-container">
+                            <div class="purchase-history-controls">
+                                <div class="purchase-search-box">
+                                    <i class="fas fa-search"></i>
+                                    <input type="text" id="purchase-search-input" placeholder="Search orders..." />
+                                </div>
+                                <div class="purchase-filters">
+                                    <select id="purchase-date-filter">
+                                        <option value="all">All Time</option>
+                                        <option value="30">Last 30 Days</option>
+                                        <option value="90">Last 90 Days</option>
+                                        <option value="365">Last Year</option>
+                                    </select>
                                 </div>
                             </div>
-                        </div>
-                        <!-- Pagination -->
-                        <div class="purchase-pagination" id="purchase-pagination" style="display: none;">
-                            <button class="pagination-btn" id="purchase-prev-btn" disabled>
-                                <i class="fas fa-chevron-left"></i> Previous
-                            </button>
-                            <span class="pagination-info" id="purchase-page-info">Page 1 of 1</span>
-                            <button class="pagination-btn" id="purchase-next-btn" disabled>
-                                Next <i class="fas fa-chevron-right"></i>
-                            </button>
+                            <div class="purchase-history-summary" id="purchase-history-summary">
+                                <span>Loading...</span>
+                            </div>
+                            <div class="purchase-history-scroll" id="purchase-history-scroll">
+                                <div class="purchase-history-list" id="purchase-history-list">
+                                    <div class="skeleton-loader">
+                                        <div class="skeleton skeleton-card" style="margin-bottom: 12px;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="purchase-pagination" id="purchase-pagination" style="display: none;">
+                                <button class="pagination-btn" id="purchase-prev-btn" disabled>
+                                    <i class="fas fa-chevron-left"></i> Previous
+                                </button>
+                                <span class="pagination-info" id="purchase-page-info">Page 1 of 1</span>
+                                <button class="pagination-btn" id="purchase-next-btn" disabled>
+                                    Next <i class="fas fa-chevron-right"></i>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </section>

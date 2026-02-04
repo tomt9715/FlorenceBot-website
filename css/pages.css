@@ -6681,3 +6681,227 @@ body.is-admin-user .purchase-history-section {
 [data-theme="dark"] .guides-empty-state {
     background: var(--card-bg);
 }
+
+/* ==================== Subscription Management Card ==================== */
+.subscription-management-container {
+    margin-bottom: 8px;
+}
+
+.subscription-status-card {
+    background: var(--card-bg);
+    border-radius: 16px;
+    padding: 28px;
+    border: 1px solid var(--border-color);
+}
+
+.sub-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.sub-plan-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.sub-plan-info h3 {
+    font-size: 1.3rem;
+    margin: 0;
+    color: var(--text-primary);
+}
+
+.sub-status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.sub-status-badge.active {
+    background: rgba(16, 185, 129, 0.1);
+    color: #10b981;
+}
+
+.sub-status-badge.cancelling {
+    background: rgba(245, 158, 11, 0.1);
+    color: #f59e0b;
+}
+
+.sub-status-badge.expired {
+    background: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+}
+
+.sub-card-details {
+    margin-bottom: 20px;
+}
+
+.sub-info-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.sub-info-row:last-child {
+    border-bottom: none;
+}
+
+.sub-label {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.sub-value {
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.sub-card-actions {
+    margin-top: 16px;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.lifetime-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.sub-empty-state {
+    text-align: center;
+    padding: 32px;
+}
+
+.sub-empty-state h3 {
+    margin: 0 0 8px 0;
+    color: var(--text-primary);
+}
+
+.sub-empty-state p {
+    color: var(--text-secondary);
+    margin-bottom: 20px;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.subscription-status-card.no-subscription {
+    border-style: dashed;
+}
+
+.subscription-status-card.error-state {
+    text-align: center;
+    padding: 24px;
+    color: var(--text-secondary);
+}
+
+/* Locked category preview for non-subscribers */
+.locked-preview {
+    margin-top: 24px;
+    text-align: left;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.locked-preview h4 {
+    margin-bottom: 12px;
+    font-size: 1rem;
+    color: var(--text-secondary);
+    text-align: center;
+}
+
+.locked-category-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 16px;
+    background: var(--background-color);
+    border-radius: 8px;
+    margin-bottom: 6px;
+}
+
+.locked-category-item i {
+    color: var(--primary-color);
+    width: 20px;
+    text-align: center;
+}
+
+.locked-category-item span:first-of-type {
+    flex: 1;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.locked-count {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+}
+
+.subscription-required .empty-icon {
+    background: linear-gradient(135deg, #f59e0b, #d97706) !important;
+}
+
+.subscription-cta-buttons {
+    margin: 20px 0;
+}
+
+/* Dark mode overrides for subscription card */
+[data-theme="dark"] .subscription-status-card {
+    background: var(--card-bg);
+    border-color: var(--border-color);
+}
+
+[data-theme="dark"] .locked-category-item {
+    background: var(--background-color);
+}
+
+[data-theme="dark"] .sub-status-badge.active {
+    background: rgba(16, 185, 129, 0.15);
+}
+
+[data-theme="dark"] .sub-status-badge.cancelling {
+    background: rgba(245, 158, 11, 0.15);
+}
+
+[data-theme="dark"] .sub-status-badge.expired {
+    background: rgba(239, 68, 68, 0.15);
+}
+
+@media (max-width: 480px) {
+    .subscription-status-card {
+        padding: 20px;
+    }
+
+    .sub-plan-info {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    .sub-plan-info h3 {
+        font-size: 1.1rem;
+    }
+
+    .sub-card-actions .btn {
+        width: 100%;
+        text-align: center;
+    }
+}
