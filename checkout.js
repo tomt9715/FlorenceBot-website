@@ -1806,6 +1806,18 @@ function updateNavbarForAuth(user) {
             dropdownUserEmail.textContent = userEmail;
         }
 
+        // Update avatar with user's initial
+        const initial = user.first_name ? user.first_name.charAt(0).toUpperCase() :
+                       (userName ? userName.charAt(0).toUpperCase() : 'U');
+        const userAvatar = document.querySelector('.user-avatar');
+        if (userAvatar) {
+            userAvatar.innerHTML = `<span style="font-weight: 600; font-size: 18px;">${initial}</span>`;
+        }
+        const userAvatarLarge = document.querySelector('.user-avatar-large');
+        if (userAvatarLarge) {
+            userAvatarLarge.innerHTML = `<span style="font-weight: 600; font-size: 24px;">${initial}</span>`;
+        }
+
         // Setup user menu toggle
         const userMenuBtn = document.getElementById('user-menu-btn');
         const userDropdown = document.getElementById('user-dropdown');
