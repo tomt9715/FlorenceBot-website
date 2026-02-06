@@ -25,14 +25,6 @@
         <priority>0.8</priority>
     </url>
 
-    <!-- Individual Guide Page Template -->
-    <url>
-        <loc>https://thenursingcollective.pro/guide.html</loc>
-        <lastmod>2026-01-23</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.7</priority>
-    </url>
-
     <!-- Pricing -->
     <url>
         <loc>https://thenursingcollective.pro/pricing.html</loc>

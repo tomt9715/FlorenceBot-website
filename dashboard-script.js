@@ -1427,17 +1427,8 @@ function continueStudying(productId) {
         console.error('Error saving last studied:', e);
     }
 
-    // Check if HTML guide exists for this product
-    // HTML guides are in /guides/{product-id}.html format
-    const htmlGuides = ['heart-failure', 'assessment-skills', 'myocardial-infarction', 'copd', 'stroke', 'gi-bleeding', 'fractures', 'hip-knee-replacement', 'arrhythmias', 'hypertension', 'coronary-artery-disease', 'peripheral-vascular-disease', 'asthma', 'pneumonia', 'oxygen-therapy', 'tuberculosis', 'chest-tubes']; // Add more as they're created
-
-    if (htmlGuides.includes(productId)) {
-        // Navigate to the standalone HTML guide
-        window.location.href = `guides/${productId}.html`;
-    } else {
-        // Fall back to markdown guide viewer
-        window.location.href = `guide.html?id=${productId}`;
-    }
+    // Navigate to the standalone HTML guide
+    window.location.href = `guides/${productId}.html`;
 }
 
 // Download a guide by getting a secure download link from R2 storage
