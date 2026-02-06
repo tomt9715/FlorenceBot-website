@@ -28,6 +28,7 @@ class QuizEngine {
         this.submitted = new Set(); // question IDs that have been submitted
         this.activeQuestions = [];   // current question set (may be subset for review-missed)
         this.isReviewMode = false;
+        this._shuffledOptions = new Map(); // questionId -> shuffled options array
 
         this._boundBeforeUnload = this._handleBeforeUnload.bind(this);
         this._boundClickHandler = this._handleClick.bind(this);
@@ -52,6 +53,7 @@ class QuizEngine {
         this.submitted.clear();
         this.activeQuestions = [...this.questions];
         this.isReviewMode = false;
+        this._shuffleAllOptions();
         window.addEventListener('beforeunload', this._boundBeforeUnload);
         this._renderQuestion();
     }
@@ -101,6 +103,7 @@ class QuizEngine {
         this.answers.clear();
         this.results.clear();
         this.submitted.clear();
+        this._shuffleAllOptions();
         window.addEventListener('beforeunload', this._boundBeforeUnload);
         this._renderQuestion();
     }
@@ -119,6 +122,7 @@ class QuizEngine {
         this.answers.clear();
         this.results.clear();
         this.submitted.clear();
+        this._shuffleAllOptions();
         window.addEventListener('beforeunload', this._boundBeforeUnload);
         this._renderQuestion();
     }
@@ -307,7 +311,7 @@ class QuizEngine {
                 </div>
                 ${this.mode === 'practice' && q.labValues && q.labValues.length > 0 ? this._renderLabReference(q.labValues) : ''}
                 <div class="quiz-options" role="${isSATA ? 'group' : 'radiogroup'}" aria-label="Answer options">
-                    ${q.options.map(opt => this._renderOption(q, opt, inputType)).join('')}
+                    ${(this._getShuffledOptions(q.id) || q.options).map((opt, idx) => this._renderOption(q, opt, inputType, idx)).join('')}
                 </div>
                 <div class="quiz-actions">
                     <button class="quiz-btn quiz-btn--primary" data-quiz-action="submit" disabled>
@@ -324,13 +328,14 @@ class QuizEngine {
         if (stem) stem.focus({ preventScroll: true });
     }
 
-    _renderOption(q, opt, inputType) {
+    _renderOption(q, opt, inputType, positionIndex) {
         const isCheckbox = inputType === 'checkbox';
+        const displayLetter = this._getDisplayLetter(q.id, opt.id);
         return `
             <label class="quiz-option ${isCheckbox ? 'quiz-option--checkbox' : ''}" tabindex="0" role="${isCheckbox ? 'checkbox' : 'radio'}" aria-checked="false">
                 <input type="${inputType}" name="quiz-q-${q.id}" value="${this._escapeAttr(opt.id)}" tabindex="-1">
                 <span class="quiz-option-marker"></span>
-                <span class="quiz-option-letter">${opt.id.toUpperCase()}.</span>
+                <span class="quiz-option-letter">${displayLetter.toUpperCase()}.</span>
                 <span class="quiz-option-text">${this._escapeHtml(opt.text)}</span>
             </label>
         `;
@@ -474,7 +479,8 @@ class QuizEngine {
             html += `<div class="quiz-feedback-section">`;
             html += `<div class="quiz-feedback-label">${q.type === 'sata' ? 'Option explanations' : 'Why the other options are wrong'}</div>`;
             wrongRationales.forEach(r => {
-                html += `<div class="quiz-feedback-rationale-item"><strong>${r.id.toUpperCase()}.</strong> ${this._escapeHtml(r.text)}</div>`;
+                const letter = this._getDisplayLetter(q.id, r.id);
+                html += `<div class="quiz-feedback-rationale-item"><strong>${letter.toUpperCase()}.</strong> ${this._escapeHtml(r.text)}</div>`;
             });
             html += `</div>`;
         }
@@ -687,11 +693,11 @@ class QuizEngine {
         let userAnswerDisplay, correctAnswerDisplay;
         if (q.type === 'sata') {
             const ua = Array.isArray(result.userAnswer) ? result.userAnswer : [];
-            userAnswerDisplay = ua.map(a => a.toUpperCase()).join(', ') || 'None';
-            correctAnswerDisplay = Array.isArray(q.correct) ? q.correct.map(a => a.toUpperCase()).join(', ') : '';
+            userAnswerDisplay = ua.map(a => this._getDisplayLetter(q.id, a).toUpperCase()).join(', ') || 'None';
+            correctAnswerDisplay = Array.isArray(q.correct) ? q.correct.map(a => this._getDisplayLetter(q.id, a).toUpperCase()).join(', ') : '';
         } else {
-            userAnswerDisplay = result.userAnswer ? result.userAnswer.toUpperCase() : 'None';
-            correctAnswerDisplay = q.correct ? q.correct.toUpperCase() : '';
+            userAnswerDisplay = result.userAnswer ? this._getDisplayLetter(q.id, result.userAnswer).toUpperCase() : 'None';
+            correctAnswerDisplay = q.correct ? this._getDisplayLetter(q.id, q.correct).toUpperCase() : '';
         }
 
         let detailHtml = `
@@ -930,5 +936,32 @@ class QuizEngine {
             [arr[i], arr[j]] = [arr[j], arr[i]];
         }
         return arr;
+    }
+
+    _shuffleAllOptions() {
+        this._shuffledOptions.clear();
+        const letters = 'abcdefghijklmnopqrstuvwxyz';
+        this.activeQuestions.forEach(q => {
+            const shuffled = this._shuffleArray([...q.options]);
+            // Map: original option id -> display letter based on new position
+            const letterMap = {};
+            shuffled.forEach((opt, i) => {
+                letterMap[opt.id] = letters[i];
+            });
+            this._shuffledOptions.set(q.id, { options: shuffled, letterMap: letterMap });
+        });
+    }
+
+    _getDisplayLetter(questionId, optionId) {
+        const data = this._shuffledOptions.get(questionId);
+        if (data && data.letterMap[optionId]) {
+            return data.letterMap[optionId];
+        }
+        return optionId; // fallback to original
+    }
+
+    _getShuffledOptions(questionId) {
+        const data = this._shuffledOptions.get(questionId);
+        return data ? data.options : null;
     }
 }
