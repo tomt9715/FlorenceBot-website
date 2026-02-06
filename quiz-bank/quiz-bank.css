@@ -529,6 +529,13 @@
     font-size: 0.82rem;
 }
 
+.qb-builder-desc {
+    font-size: 0.78rem;
+    color: var(--qb-text-light);
+    line-height: 1.45;
+    margin-top: 6px;
+}
+
 .qb-builder-chips {
     display: flex;
     flex-wrap: wrap;
@@ -1199,13 +1206,6 @@
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
-}
-
-.qb-preconfig-mode-hint {
-    font-size: 0.8rem;
-    color: var(--qb-text-light);
-    margin-top: 6px;
-    font-style: italic;
 }
 
 .qb-preconfig-start {

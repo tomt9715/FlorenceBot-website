@@ -248,6 +248,7 @@ var QuizBank = (function () {
             html += '<button class="qb-chip" data-qb-action="toggle-chip" data-chip-type="difficulty" data-chip-value="' + d.toLowerCase() + '">' + d + '</button>';
         });
         html += '</div>';
+        html += '<div class="qb-builder-desc">Knowledge = recall facts. Application = apply concepts to a scenario. Analysis = interpret data and prioritize.</div>';
         html += '</div>';
 
         // Question types
@@ -258,6 +259,7 @@ var QuizBank = (function () {
             html += '<button class="qb-chip" data-qb-action="toggle-chip" data-chip-type="qtype" data-chip-value="' + pair[1] + '">' + pair[0] + '</button>';
         });
         html += '</div>';
+        html += '<div class="qb-builder-desc">Single = pick one best answer. Ordering = arrange steps in sequence. Matrix = match findings to categories.</div>';
         html += '</div>';
 
         // Set size
@@ -287,6 +289,7 @@ var QuizBank = (function () {
         html += '<button class="qb-chip" data-qb-action="set-mode" data-mode="practice">Practice</button>';
         html += '<button class="qb-chip" data-qb-action="set-mode" data-mode="exam">Exam</button>';
         html += '</div>';
+        html += '<div class="qb-builder-desc">Practice = see rationale after each question. Exam = no feedback until the end, simulates real test conditions.</div>';
         html += '</div>';
 
         // Match count & start
@@ -1136,6 +1139,7 @@ var QuizBank = (function () {
             html += '<button class="qb-chip" data-qb-action="toggle-preconfig-type" data-ptype="' + pair[1] + '">' + pair[0] + '</button>';
         });
         html += '</div>';
+        html += '<div class="qb-builder-desc">Multiple Choice = pick one best answer. Ordering = arrange steps in sequence. Matrix = match findings to categories.</div>';
         html += '</div>';
 
         // Set size — count available questions for this topic
@@ -1157,7 +1161,7 @@ var QuizBank = (function () {
         html += '<button class="qb-chip" data-qb-action="set-preconfig-mode" data-pmode="practice">Practice</button>';
         html += '<button class="qb-chip" data-qb-action="set-preconfig-mode" data-pmode="exam">Exam</button>';
         html += '</div>';
-        html += '<div class="qb-preconfig-mode-hint" id="qb-preconfig-mode-hint">Shows rationale after each question.</div>';
+        html += '<div class="qb-builder-desc">Practice = see rationale after each question. Exam = no feedback until the end, simulates real test conditions.</div>';
         html += '</div>';
 
         // Start
@@ -1168,10 +1172,7 @@ var QuizBank = (function () {
 
         _root.innerHTML = html;
 
-        // Store config state
-        _root._preconfigTypes = ['single', 'ordering', 'matrix'];
-        _root._preconfigSize = 5;
-        _root._preconfigMode = 'practice';
+        // Config state already nulled at top of function — leave unselected
     }
 
     function _getChapterInfo(chapterId) {
@@ -1245,12 +1246,6 @@ var QuizBank = (function () {
         btn.parentElement.querySelectorAll('.qb-chip').forEach(function (c) { c.classList.remove('qb-chip--active'); });
         btn.classList.add('qb-chip--active');
         _root._preconfigMode = btn.dataset.pmode;
-        var hint = document.getElementById('qb-preconfig-mode-hint');
-        if (hint) {
-            hint.textContent = btn.dataset.pmode === 'practice'
-                ? 'Shows rationale after each question.'
-                : 'No feedback until the end. Simulates real exam conditions.';
-        }
         _updatePreconfigStart();
     }
 
