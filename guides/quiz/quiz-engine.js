@@ -532,11 +532,14 @@ class QuizEngine {
         const perfMsg = this._getPerformanceMessage(pct);
         const missedCount = total - correctCount;
 
+        const isPerfect = pct === 100;
+
         let html = `
             <a href="../${this.guideSlug}.html" class="quiz-back-link">
                 <i class="fas fa-arrow-left"></i> Back to Study Guide
             </a>
-            <div class="quiz-results">
+            <div class="quiz-results ${isPerfect ? 'quiz-celebration' : ''}">
+                ${isPerfect ? '<canvas class="quiz-confetti-canvas" id="quiz-confetti"></canvas>' : ''}
                 <div class="quiz-results-header">
                     <div class="quiz-score-ring-wrap">
                         <div class="quiz-score-ring">
@@ -555,6 +558,51 @@ class QuizEngine {
                     <div class="quiz-performance-msg">${this._escapeHtml(perfMsg)}</div>
                 </div>
         `;
+
+        // Celebration banner for perfect scores
+        if (isPerfect) {
+            const celebMsg = this.mode === 'practice'
+                ? 'You\'re ready to test yourself under real exam conditions. Try Exam Mode to simulate the NCLEX experience!'
+                : 'You aced every question under exam conditions. This topic is locked in!';
+            html += `
+                <div class="quiz-celebration-banner">
+                    <div class="quiz-celebration-icon">&#127881;</div>
+                    <div class="quiz-celebration-title">Congratulations!</div>
+                    <div class="quiz-celebration-subtitle">${celebMsg}</div>
+                </div>
+            `;
+        }
+
+        // Next step CTA based on mode and score
+        if (this.mode === 'practice' && pct >= 70) {
+            html += `
+                <div class="quiz-next-step">
+                    <div class="quiz-next-step-icon"><i class="fas fa-clipboard-check"></i></div>
+                    <div class="quiz-next-step-content">
+                        <div class="quiz-next-step-title">${isPerfect ? 'Challenge Yourself' : 'Ready for the Next Level?'}</div>
+                        <div class="quiz-next-step-desc">${isPerfect
+                            ? 'Take Exam Mode — no rationales, no hints, just like the real NCLEX.'
+                            : 'Try Exam Mode to test yourself without rationales, simulating real test conditions.'}</div>
+                    </div>
+                    <button class="quiz-btn quiz-btn--primary" data-quiz-action="start-exam">
+                        <i class="fas fa-graduation-cap"></i> Exam Mode
+                    </button>
+                </div>
+            `;
+        } else if (this.mode === 'exam' && pct >= 90) {
+            html += `
+                <div class="quiz-next-step">
+                    <div class="quiz-next-step-icon"><i class="fas fa-th-list"></i></div>
+                    <div class="quiz-next-step-content">
+                        <div class="quiz-next-step-title">Keep the Momentum Going</div>
+                        <div class="quiz-next-step-desc">You're crushing it! Try a quiz on another topic to broaden your knowledge.</div>
+                    </div>
+                    <a href="../../study-guides.html" class="quiz-btn quiz-btn--primary">
+                        <i class="fas fa-arrow-right"></i> More Quizzes
+                    </a>
+                </div>
+            `;
+        }
 
         // Weak areas
         if (missedCount > 0) {
@@ -607,6 +655,11 @@ class QuizEngine {
         </div>`;
 
         this.container.innerHTML = html;
+
+        // Launch confetti for perfect scores
+        if (isPerfect) {
+            this._launchConfetti();
+        }
 
         // Scroll to top
         window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -677,6 +730,74 @@ class QuizEngine {
         `;
     }
 
+    // ── Confetti Animation ────────────────────────────────────
+
+    _launchConfetti() {
+        const canvas = document.getElementById('quiz-confetti');
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+        const parent = canvas.parentElement;
+        canvas.width = parent.offsetWidth;
+        canvas.height = parent.offsetHeight;
+
+        const colors = ['#059669', '#10b981', '#2E86AB', '#f59e0b', '#ec4899', '#8b5cf6', '#ef4444'];
+        const pieces = [];
+        const count = 80;
+
+        for (let i = 0; i < count; i++) {
+            pieces.push({
+                x: canvas.width * Math.random(),
+                y: -20 - Math.random() * 200,
+                w: 6 + Math.random() * 6,
+                h: 4 + Math.random() * 4,
+                color: colors[Math.floor(Math.random() * colors.length)],
+                vy: 2 + Math.random() * 3,
+                vx: (Math.random() - 0.5) * 2,
+                rot: Math.random() * 360,
+                rv: (Math.random() - 0.5) * 8,
+                opacity: 1
+            });
+        }
+
+        let frame = 0;
+        const maxFrames = 180; // ~3 seconds at 60fps
+
+        const animate = () => {
+            frame++;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            let alive = false;
+            pieces.forEach(p => {
+                p.y += p.vy;
+                p.x += p.vx;
+                p.rot += p.rv;
+                p.vy += 0.05; // gravity
+                if (frame > maxFrames - 60) {
+                    p.opacity = Math.max(0, p.opacity - 0.02);
+                }
+
+                if (p.opacity > 0 && p.y < canvas.height + 20) {
+                    alive = true;
+                    ctx.save();
+                    ctx.globalAlpha = p.opacity;
+                    ctx.translate(p.x, p.y);
+                    ctx.rotate((p.rot * Math.PI) / 180);
+                    ctx.fillStyle = p.color;
+                    ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+                    ctx.restore();
+                }
+            });
+
+            if (alive && frame < maxFrames) {
+                requestAnimationFrame(animate);
+            } else {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+            }
+        };
+
+        requestAnimationFrame(animate);
+    }
+
     // ── Scoring Helpers ─────────────────────────────────────
 
     _checkAnswer(q, userAnswer) {
@@ -734,6 +855,7 @@ class QuizEngine {
     }
 
     _getPerformanceMessage(pct) {
+        if (pct === 100) return 'Perfect score! You nailed every single question.';
         if (pct >= 90) return 'Excellent! You\'ve mastered this topic. Keep up the great work!';
         if (pct >= 70) return 'Good work! Review the topics below to strengthen your understanding.';
         return 'Keep studying! Use the review links below to revisit key concepts, then try again.';

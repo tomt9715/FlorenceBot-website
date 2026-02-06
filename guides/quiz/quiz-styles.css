@@ -1366,6 +1366,134 @@ body {
 }
 
 /* ============================================
+   PERFECT SCORE CELEBRATION
+   ============================================ */
+.quiz-celebration {
+    position: relative;
+    overflow: hidden;
+}
+
+.quiz-confetti-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.quiz-celebration .quiz-results-header {
+    position: relative;
+    z-index: 2;
+}
+
+.quiz-celebration-banner {
+    background: linear-gradient(135deg, #059669 0%, #10b981 50%, #34d399 100%);
+    border-radius: var(--quiz-radius);
+    padding: 24px 28px;
+    margin-bottom: 24px;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+    animation: quiz-celebrationPulse 2s ease-in-out;
+}
+
+.quiz-celebration-icon {
+    font-size: 2.5rem;
+    margin-bottom: 8px;
+    animation: quiz-celebrationBounce 0.6s ease-out;
+}
+
+.quiz-celebration-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 6px;
+}
+
+.quiz-celebration-subtitle {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.5;
+}
+
+@keyframes quiz-celebrationBounce {
+    0% { transform: scale(0); opacity: 0; }
+    50% { transform: scale(1.3); }
+    70% { transform: scale(0.9); }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes quiz-celebrationPulse {
+    0% { transform: scale(0.95); opacity: 0; }
+    60% { transform: scale(1.02); }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+/* Next Step CTA (shown after results) */
+.quiz-next-step {
+    background: var(--quiz-card-bg);
+    border: 2px solid var(--quiz-primary);
+    border-radius: var(--quiz-radius);
+    padding: 20px 24px;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    position: relative;
+    z-index: 2;
+}
+
+.quiz-next-step-icon {
+    width: 48px;
+    height: 48px;
+    min-width: 48px;
+    background: linear-gradient(135deg, var(--quiz-primary), #1d6d96);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 1.2rem;
+}
+
+.quiz-next-step-content {
+    flex: 1;
+}
+
+.quiz-next-step-title {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--quiz-text-primary);
+    margin-bottom: 4px;
+}
+
+.quiz-next-step-desc {
+    font-size: 0.88rem;
+    color: var(--quiz-text-secondary);
+    line-height: 1.4;
+}
+
+.quiz-next-step .quiz-btn {
+    white-space: nowrap;
+}
+
+@media (max-width: 480px) {
+    .quiz-next-step {
+        flex-direction: column;
+        text-align: center;
+    }
+    .quiz-next-step .quiz-btn {
+        width: 100%;
+    }
+    .quiz-celebration-banner { padding: 20px 16px; }
+    .quiz-celebration-title { font-size: 1.15rem; }
+}
+
+/* ============================================
    LAB REFERENCE PANEL (Practice Mode only)
    ============================================ */
 .quiz-lab-reference {
