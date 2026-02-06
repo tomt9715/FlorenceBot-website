@@ -447,6 +447,11 @@
             border-color: #f59e0b;
         }
 
+        .info-box.pediatric {
+            background: linear-gradient(135deg, #fdf2f8 0%, #fce7f3 100%);
+            border-color: #ec4899;
+        }
+
         .info-box-header {
             display: flex;
             align-items: center;
@@ -461,6 +466,7 @@
         .info-box.tip .info-box-header { color: #059669; }
         .info-box.nclex-tip .info-box-header { color: #7c3aed; }
         .info-box.mnemonic .info-box-header { color: #d97706; }
+        .info-box.pediatric .info-box-header { color: #db2777; }
 
         .info-box p { margin: 0; color: var(--text-secondary); font-size: 0.98rem; }
         .info-box ul { margin: 8px 0 0; padding-left: 18px; }
@@ -909,11 +915,13 @@
                     <li><strong>Assessment is the FIRST step of the nursing process</strong> (Assessment → Diagnosis → Planning → Implementation → Evaluation). Everything else depends on accurate assessment.</li>
                     <li><strong>Subjective data</strong> = what the patient tells you (symptoms, history). <strong>Objective data</strong> = what you observe/measure (vital signs, lab values, physical findings).</li>
                     <li><strong>Vital signs normal ranges:</strong> HR 60–100, RR 12–20, BP ~120/80, Temp 97.8–99.1°F (36.5–37.3°C), SpO2 95–100%.</li>
-                    <li><strong>Inspection, Auscultation, Percussion, Palpation</strong> — this is the order for abdominal assessment (auscultate BEFORE palpating/percussing to avoid altering bowel sounds).</li>
-                    <li><strong>Head-to-toe assessment:</strong> Neuro (LOC, pupils, orientation) → Head/Neck → Respiratory → Cardiovascular → GI → GU → Musculoskeletal → Skin → Psychosocial.</li>
-                    <li><strong>Focused assessment</strong> = targeted assessment based on chief complaint. Used for specific problems, post-procedure checks, and change-in-condition evaluations.</li>
-                    <li><strong>Abnormal lung sounds:</strong> Crackles (fluid — HF, pneumonia), Wheezes (bronchospasm — asthma, COPD), Stridor (upper airway obstruction — emergency!), Rhonchi (secretions — need suctioning).</li>
-                    <li><strong>Glasgow Coma Scale (GCS):</strong> Eye opening (1–4) + Verbal response (1–5) + Motor response (1–6) = 3–15. GCS ≤ 8 = severe, intubation likely needed.</li>
+                    <li><strong>IPPA order:</strong> Inspect, Palpate, Percuss, Auscultate. <strong>Exception:</strong> Abdomen — auscultate BEFORE palpating to avoid altering bowel sounds.</li>
+                    <li><strong>Glasgow Coma Scale (GCS):</strong> Eye (1–4) + Verbal (1–5) + Motor (1–6) = 3–15. <strong>GCS ≤ 8 = intubate.</strong> Document as E_V_M_, not just the total.</li>
+                    <li><strong>Braden Scale:</strong> Predicts pressure injury risk. Six subscales, scored 6-23. ≤12 = high risk, ≤9 = very high risk. Lower score = more risk. Reassess every shift.</li>
+                    <li><strong>Wound assessment:</strong> Use MEASURE framework — Measure, Exudate, Appearance, Suffering, Undermining, Re-evaluate, Edge. Document size in cm (L x W x D).</li>
+                    <li><strong>Pain assessment tools:</strong> NRS (verbal adults), Wong-Baker FACES (children 3+), FLACC (nonverbal children), CPOT (intubated/ICU), Abbey (dementia). Reassess 30 min PO, 15 min IV.</li>
+                    <li><strong>Pediatric vital signs</strong> vary by age — know the ranges. Tachycardia is the EARLIEST sign of decompensation. BP drops LAST. Children compensate then crash fast.</li>
+                    <li><strong>Mental status:</strong> AVPU for LOC, orientation x4 (time lost first, person lost last). Always screen for suicidal ideation — asking does NOT increase risk.</li>
                     <li><strong>Critical findings require IMMEDIATE notification:</strong> Absent pulses, acute mental status change, respiratory distress, chest pain, unresponsiveness, significant vital sign changes.</li>
                     <li><strong>Common mistake:</strong> Palpating the abdomen before auscultating — palpation can stimulate peristalsis and give you inaccurate bowel sound assessment.</li>
                 </ul>
@@ -927,10 +935,16 @@
                     <li><a href="#introduction"><span class="toc-number">1</span> Introduction to Assessment</a></li>
                     <li><a href="#data-collection"><span class="toc-number">2</span> Data Collection Methods</a></li>
                     <li><a href="#vital-signs"><span class="toc-number">3</span> Vital Signs Assessment</a></li>
-                    <li><a href="#head-to-toe"><span class="toc-number">4</span> Head-to-Toe Assessment</a></li>
-                    <li><a href="#focused-assessment"><span class="toc-number">5</span> Focused Assessment</a></li>
-                    <li><a href="#documentation"><span class="toc-number">6</span> Documentation Techniques</a></li>
-                    <li><a href="#critical-findings"><span class="toc-number">7</span> Critical Findings</a></li>
+                    <li><a href="#gcs-assessment"><span class="toc-number">4</span> Glasgow Coma Scale (GCS)</a></li>
+                    <li><a href="#braden-scale"><span class="toc-number">5</span> Braden Scale</a></li>
+                    <li><a href="#wound-assessment"><span class="toc-number">6</span> Wound Assessment</a></li>
+                    <li><a href="#pain-assessment"><span class="toc-number">7</span> Pain Assessment Tools</a></li>
+                    <li><a href="#pediatric-vitals"><span class="toc-number">8</span> Pediatric Vital Sign Ranges</a></li>
+                    <li><a href="#head-to-toe"><span class="toc-number">9</span> Head-to-Toe Assessment</a></li>
+                    <li><a href="#focused-assessment"><span class="toc-number">10</span> Focused Assessment</a></li>
+                    <li><a href="#documentation"><span class="toc-number">11</span> Documentation Techniques</a></li>
+                    <li><a href="#mental-status"><span class="toc-number">12</span> Mental Status Assessment</a></li>
+                    <li><a href="#critical-findings"><span class="toc-number">13</span> Critical Findings</a></li>
                 </ul>
             </nav>
 
@@ -1296,7 +1310,611 @@
                 <div class="bottom-line">🎯 Bottom Line: Vital signs are vital for a reason — they're often the earliest indicators of deterioration. Know the normal ranges, recognize trends (not just single values), and report significant changes immediately.</div>
             </section>
 
-            <!-- Section 4: Head-to-Toe Assessment -->
+            <!-- Section 4: Glasgow Coma Scale (GCS) -->
+            <section class="guide-section" id="gcs-assessment">
+                <h2><span class="section-icon"><i class="fas fa-brain"></i></span> Glasgow Coma Scale (GCS)</h2>
+
+                <p>The Glasgow Coma Scale is the most widely used tool for assessing <strong>level of consciousness</strong> in patients with neurological injury. It evaluates three components: eye opening, verbal response, and motor response. Total scores range from 3 (deep coma) to 15 (fully alert).</p>
+
+                <h3>GCS Scoring Breakdown</h3>
+
+                <div class="guide-table-wrapper">
+                    <table class="guide-table">
+                        <thead>
+                            <tr>
+                                <th>Component</th>
+                                <th>Response</th>
+                                <th>Score</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td rowspan="4"><strong>Eye Opening (E)</strong></td>
+                                <td>Spontaneous — eyes open without stimulation</td>
+                                <td><strong>4</strong></td>
+                            </tr>
+                            <tr>
+                                <td>To voice — eyes open when spoken to</td>
+                                <td><strong>3</strong></td>
+                            </tr>
+                            <tr>
+                                <td>To pain — eyes open only with painful stimulus</td>
+                                <td><strong>2</strong></td>
+                            </tr>
+                            <tr>
+                                <td>None — no eye opening</td>
+                                <td><strong>1</strong></td>
+                            </tr>
+                            <tr>
+                                <td rowspan="5"><strong>Verbal Response (V)</strong></td>
+                                <td>Oriented — knows who, where, when, why</td>
+                                <td><strong>5</strong></td>
+                            </tr>
+                            <tr>
+                                <td>Confused — speaks in sentences but disoriented</td>
+                                <td><strong>4</strong></td>
+                            </tr>
+                            <tr>
+                                <td>Inappropriate words — random words, no conversation</td>
+                                <td><strong>3</strong></td>
+                            </tr>
+                            <tr>
+                                <td>Incomprehensible sounds — moaning, groaning only</td>
+                                <td><strong>2</strong></td>
+                            </tr>
+                            <tr>
+                                <td>None — no verbal response</td>
+                                <td><strong>1</strong></td>
+                            </tr>
+                            <tr>
+                                <td rowspan="6"><strong>Motor Response (M)</strong></td>
+                                <td>Obeys commands — performs requested movements</td>
+                                <td><strong>6</strong></td>
+                            </tr>
+                            <tr>
+                                <td>Localizes pain — reaches toward and attempts to remove pain source</td>
+                                <td><strong>5</strong></td>
+                            </tr>
+                            <tr>
+                                <td>Withdrawal (flexion) — pulls away from painful stimulus</td>
+                                <td><strong>4</strong></td>
+                            </tr>
+                            <tr>
+                                <td>Abnormal flexion (decorticate) — arms flex inward, wrists flex</td>
+                                <td><strong>3</strong></td>
+                            </tr>
+                            <tr>
+                                <td>Extension (decerebrate) — arms extend, internally rotate</td>
+                                <td><strong>2</strong></td>
+                            </tr>
+                            <tr>
+                                <td>None — no motor response</td>
+                                <td><strong>1</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>Key GCS Scores to Remember</h3>
+
+                <div class="guide-table-wrapper">
+                    <table class="guide-table">
+                        <thead>
+                            <tr>
+                                <th>Score</th>
+                                <th>Classification</th>
+                                <th>Clinical Significance</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>15</strong></td>
+                                <td>Normal</td>
+                                <td>Fully alert and oriented</td>
+                            </tr>
+                            <tr>
+                                <td><strong>13-14</strong></td>
+                                <td>Mild injury</td>
+                                <td>Minor impairment; monitor closely for changes</td>
+                            </tr>
+                            <tr>
+                                <td><strong>9-12</strong></td>
+                                <td>Moderate injury</td>
+                                <td>Significant impairment; frequent neuro checks needed</td>
+                            </tr>
+                            <tr>
+                                <td><strong>≤ 8</strong></td>
+                                <td>Severe injury</td>
+                                <td><strong>Cannot protect airway — INTUBATION likely needed!</strong></td>
+                            </tr>
+                            <tr>
+                                <td><strong>3</strong></td>
+                                <td>Lowest possible</td>
+                                <td>Deep coma or brain death; no responses to any stimuli</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="info-box nclex-tip">
+                    <div class="info-box-header">
+                        <i class="fas fa-graduation-cap"></i> NCLEX Rule: GCS ≤ 8 = Intubate
+                    </div>
+                    <p><strong>A GCS of 8 or below means the patient cannot reliably protect their airway.</strong> The gag and cough reflexes are impaired, and aspiration risk is extremely high. This is the threshold for considering endotracheal intubation. Think: "GCS less than 8, intubate!" This is one of the most tested GCS concepts on the NCLEX.</p>
+                </div>
+
+                <div class="info-box clinical-pearl">
+                    <div class="info-box-header">
+                        <i class="fas fa-gem"></i> Clinical Pearl: Factors That Interfere with GCS
+                    </div>
+                    <p><strong>Several factors can make GCS unreliable:</strong></p>
+                    <ul>
+                        <li><strong>Intubated patients:</strong> Cannot assess verbal response — document as "E_V<strong>T</strong>M_" (T = tube) and note "verbal not testable"</li>
+                        <li><strong>Sedation/paralysis:</strong> Medications mask true neurological status — note medications and timing</li>
+                        <li><strong>Orbital/facial swelling:</strong> Cannot assess eye opening — document "eye opening not testable (swelling)"</li>
+                        <li><strong>Spinal cord injury:</strong> Motor response may be absent below injury level — assess above the level of injury</li>
+                        <li><strong>Pre-existing conditions:</strong> Aphasia, hearing impairment, dementia — document baseline and compare to it</li>
+                    </ul>
+                </div>
+
+                <div class="florencebot-tip" id="tip-gcs-documentation">
+                    <div class="florencebot-tip-header">
+                        <div class="florencebot-tip-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <span class="florencebot-tip-label">FlorenceBot Pro Tip</span>
+                    </div>
+                    <div class="florencebot-tip-title">Always Document Component Scores</div>
+                    <div class="florencebot-tip-content">
+                        <strong>Never document just "GCS 12" — always break it down as E_V_M_ (e.g., E3V4M5 = 12).</strong> Why? Because two patients can both have a GCS of 8, but one might be E2V2M4 (eyes open to pain, incomprehensible sounds, withdraws from pain) while another is E1V1M6 (no eye opening, no verbal, but obeys commands). These are very different clinical pictures requiring different interventions. The component breakdown shows exactly which neurological function changed, making it easier to detect subtle deterioration. A drop of even 1-2 points in any component is clinically significant and should be reported immediately.
+                    </div>
+                </div>
+
+                <div class="bottom-line">🎯 Bottom Line: GCS assesses Eye (4) + Verbal (5) + Motor (6) = 3-15. GCS ≤ 8 means the patient cannot protect their airway — anticipate intubation. Always document component scores (E_V_M_), not just the total, and report any decline of 2+ points immediately.</div>
+            </section>
+
+            <!-- Section 5: Braden Scale -->
+            <section class="guide-section" id="braden-scale">
+                <h2><span class="section-icon"><i class="fas fa-bed"></i></span> Braden Scale for Pressure Injury Risk</h2>
+
+                <p>The Braden Scale is the most widely used tool to assess a patient's <strong>risk for developing pressure injuries</strong> (formerly called pressure ulcers or decubitus ulcers). It evaluates six risk factors, with lower scores indicating higher risk.</p>
+
+                <h3>The Six Braden Subscales</h3>
+
+                <div class="guide-table-wrapper">
+                    <table class="guide-table">
+                        <thead>
+                            <tr>
+                                <th>Subscale</th>
+                                <th>What It Measures</th>
+                                <th>Score Range</th>
+                                <th>Key Considerations</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Sensory Perception</strong></td>
+                                <td>Ability to feel and respond to pressure-related discomfort</td>
+                                <td>1-4</td>
+                                <td>Patients with neuropathy, spinal cord injury, or sedation score low</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Moisture</strong></td>
+                                <td>Degree to which skin is exposed to moisture</td>
+                                <td>1-4</td>
+                                <td>Incontinence, diaphoresis, wound drainage increase risk</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Activity</strong></td>
+                                <td>Degree of physical activity</td>
+                                <td>1-4</td>
+                                <td>Bedfast (1) vs. walks frequently (4)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Mobility</strong></td>
+                                <td>Ability to change and control body position</td>
+                                <td>1-4</td>
+                                <td>Completely immobile (1) vs. makes frequent major position changes (4)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Nutrition</strong></td>
+                                <td>Usual food intake pattern</td>
+                                <td>1-4</td>
+                                <td>NPO, poor oral intake, or inadequate protein = higher risk</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Friction &amp; Shear</strong></td>
+                                <td>Degree of sliding and skin friction</td>
+                                <td>1-3</td>
+                                <td>Patients who slide down in bed or need assistance repositioning</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>Score Interpretation</h3>
+
+                <div class="guide-table-wrapper">
+                    <table class="guide-table">
+                        <thead>
+                            <tr>
+                                <th>Total Score</th>
+                                <th>Risk Level</th>
+                                <th>Nursing Interventions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>19-23</strong></td>
+                                <td><span style="color: #10b981; font-weight: 600;">No Risk / Mild Risk</span></td>
+                                <td>Standard preventive care; skin assessment every shift; encourage mobility</td>
+                            </tr>
+                            <tr>
+                                <td><strong>15-18</strong></td>
+                                <td><span style="color: #f59e0b; font-weight: 600;">Mild Risk</span></td>
+                                <td>Reposition every 2 hours; pressure-reducing mattress; moisture management; nutritional assessment</td>
+                            </tr>
+                            <tr>
+                                <td><strong>13-14</strong></td>
+                                <td><span style="color: #f97316; font-weight: 600;">Moderate Risk</span></td>
+                                <td>All above PLUS heel elevation; foam wedges; incontinence care protocol; wound care consult if needed</td>
+                            </tr>
+                            <tr>
+                                <td><strong>10-12</strong></td>
+                                <td><span style="color: #ef4444; font-weight: 600;">High Risk</span></td>
+                                <td>All above PLUS specialty mattress (low-air-loss or alternating pressure); frequent skin checks; dietary consult for protein supplementation</td>
+                            </tr>
+                            <tr>
+                                <td><strong>≤ 9</strong></td>
+                                <td><span style="color: #dc2626; font-weight: 600;">Very High Risk</span></td>
+                                <td>All above PLUS maximum interventions; consider specialty bed; aggressive nutrition; wound care team involvement</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="info-box warning">
+                    <div class="info-box-header">
+                        <i class="fas fa-exclamation-triangle"></i> Remember: Lower Score = Higher Risk
+                    </div>
+                    <p><strong>The Braden Scale is counterintuitive!</strong> Unlike most clinical scales where higher = worse, the Braden Scale uses <strong>lower scores to indicate higher risk</strong>. A patient scoring 9 is at MUCH higher risk than a patient scoring 19. Think of it this way: the score reflects the patient's <strong>ability</strong> to protect themselves — lower ability = higher risk.</p>
+                </div>
+
+                <div class="florencebot-tip" id="tip-braden-reassessment">
+                    <div class="florencebot-tip-header">
+                        <div class="florencebot-tip-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <span class="florencebot-tip-label">FlorenceBot Pro Tip</span>
+                    </div>
+                    <div class="florencebot-tip-title">Braden Score Changes Rapidly</div>
+                    <div class="florencebot-tip-content">
+                        <strong>A patient's Braden score can change dramatically within a single shift!</strong> A patient admitted walking independently (Activity = 4) who undergoes surgery requiring sedation and bed rest may suddenly score Activity = 1, Mobility = 1, and Sensory = 2. That's a swing of 8+ points. Reassess the Braden every shift and whenever the patient's status changes — new surgery, intubation, change to NPO, onset of incontinence, or initiation of sedation can all drastically increase risk. Don't rely on yesterday's score for today's care plan.
+                    </div>
+                </div>
+
+                <div class="bottom-line">🎯 Bottom Line: The Braden Scale assesses 6 risk factors for pressure injury. Lower score = higher risk (counterintuitive!). ≤12 = high risk, ≤9 = very high risk. Reassess every shift and with any status change. Prevention is always easier than treatment.</div>
+            </section>
+
+            <!-- Section 6: Wound Assessment -->
+            <section class="guide-section" id="wound-assessment">
+                <h2><span class="section-icon"><i class="fas fa-band-aid"></i></span> Wound Assessment</h2>
+
+                <p>Accurate wound assessment is essential for tracking healing progress and determining appropriate interventions. Use a systematic approach to ensure complete documentation every time.</p>
+
+                <h3>MEASURE Framework</h3>
+
+                <div class="info-box mnemonic">
+                    <div class="info-box-header">
+                        <i class="fas fa-brain"></i> Mnemonic: MEASURE
+                    </div>
+                    <ul>
+                        <li><strong>M</strong>easure — Length x Width x Depth in centimeters (use consistent clock-face orientation: 12 o'clock = head)</li>
+                        <li><strong>E</strong>xudate — Amount (none, scant, moderate, copious), type (serous, sanguineous, serosanguineous, purulent), odor</li>
+                        <li><strong>A</strong>ppearance — Wound bed tissue type and percentage (granulation, slough, eschar, epithelial)</li>
+                        <li><strong>S</strong>uffering — Pain level at rest and during dressing changes; assess with appropriate pain tool</li>
+                        <li><strong>U</strong>ndermining — Tissue destruction beneath intact wound edges; document using clock positions and depth</li>
+                        <li><strong>R</strong>e-evaluate — Monitor healing trajectory; wounds should show measurable progress every 2-4 weeks</li>
+                        <li><strong>E</strong>dge — Wound edges (attached, rolled/epibole, undermined, macerated) and periwound skin condition</li>
+                    </ul>
+                </div>
+
+                <h3>Wound Bed Appearance</h3>
+
+                <div class="guide-table-wrapper">
+                    <table class="guide-table">
+                        <thead>
+                            <tr>
+                                <th>Tissue Type</th>
+                                <th>Color</th>
+                                <th>What It Means</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Granulation</strong></td>
+                                <td>Beefy red, moist</td>
+                                <td>Healthy healing tissue; new blood vessels forming</td>
+                                <td>Protect! Keep moist, avoid disrupting</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Epithelial</strong></td>
+                                <td>Pink/pearly</td>
+                                <td>New skin growing from wound edges inward</td>
+                                <td>Protect; wound is in final healing phase</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Slough</strong></td>
+                                <td>Yellow/tan, stringy</td>
+                                <td>Dead tissue (moist necrotic); delays healing</td>
+                                <td>Debridement needed (autolytic, enzymatic, or sharp)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Eschar</strong></td>
+                                <td>Black/brown, hard, leathery</td>
+                                <td>Dead tissue (dry necrotic); prevents healing</td>
+                                <td>Usually needs debridement unless stable heel eschar (leave intact)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Hypergranulation</strong></td>
+                                <td>Dark red, raised above wound edge</td>
+                                <td>Overgrowth of granulation tissue; prevents epithelialization</td>
+                                <td>May need silver nitrate, corticosteroid, or surgical correction</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>Drainage Types</h3>
+
+                <div class="guide-table-wrapper">
+                    <table class="guide-table">
+                        <thead>
+                            <tr>
+                                <th>Type</th>
+                                <th>Appearance</th>
+                                <th>Significance</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Serous</strong></td>
+                                <td>Clear, watery, straw-colored</td>
+                                <td>Normal in early wound healing; plasma leakage</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Sanguineous</strong></td>
+                                <td>Red, bloody</td>
+                                <td>Active bleeding; expected early post-op, concerning if delayed</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Serosanguineous</strong></td>
+                                <td>Pink, blood-tinged</td>
+                                <td>Normal healing; mixture of serous and blood</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Purulent</strong></td>
+                                <td>Thick, yellow/green, often foul-smelling</td>
+                                <td><strong>Infection!</strong> Notify provider; obtain wound culture</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="florencebot-tip" id="tip-wound-documentation">
+                    <div class="florencebot-tip-header">
+                        <div class="florencebot-tip-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <span class="florencebot-tip-label">FlorenceBot Pro Tip</span>
+                    </div>
+                    <div class="florencebot-tip-title">Consistent Wound Measurement</div>
+                    <div class="florencebot-tip-content">
+                        <strong>Always measure wounds the same way to track progress accurately!</strong> Use the clock-face method: 12 o'clock is always toward the patient's head, 6 o'clock toward the feet. Measure length (12 to 6 o'clock direction) x width (3 to 9 o'clock direction, perpendicular to length) x depth (deepest point using a sterile cotton-tipped applicator). Document in centimeters, not inches. Take a photo with a measuring ruler if your facility allows it. Inconsistent measurement technique is the #1 reason wound healing appears to stall — it might actually be healing, but measured differently each time.
+                    </div>
+                </div>
+
+                <div class="bottom-line">🎯 Bottom Line: Use MEASURE for systematic wound assessment. Red granulation = healthy (protect it). Yellow slough and black eschar = necrotic (needs debridement). Purulent drainage = infection (culture and notify). Always measure consistently using the clock-face method in centimeters.</div>
+            </section>
+
+            <!-- Section 7: Pain Assessment Tools -->
+            <section class="guide-section" id="pain-assessment">
+                <h2><span class="section-icon"><i class="fas fa-thermometer-half"></i></span> Pain Assessment Tools</h2>
+
+                <p>Pain is the "5th vital sign" and must be assessed regularly using <strong>validated, age- and population-appropriate tools</strong>. The right tool depends on the patient's ability to self-report.</p>
+
+                <h3>Choosing the Right Pain Assessment Tool</h3>
+
+                <div class="guide-table-wrapper">
+                    <table class="guide-table">
+                        <thead>
+                            <tr>
+                                <th>Tool</th>
+                                <th>Population</th>
+                                <th>Type</th>
+                                <th>Scale</th>
+                                <th>Key Features</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>NRS (Numeric Rating Scale)</strong></td>
+                                <td>Verbal adults and children ≥8 years</td>
+                                <td>Self-report</td>
+                                <td>0-10</td>
+                                <td>Most common; quick; "Rate your pain 0-10." 0 = no pain, 10 = worst possible</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Wong-Baker FACES</strong></td>
+                                <td>Children ages 3-8; cognitively impaired adults</td>
+                                <td>Self-report</td>
+                                <td>0-10 (6 faces)</td>
+                                <td>Patient points to face matching their pain. Avoid saying "happy/sad" — use "no hurt" to "hurts worst"</td>
+                            </tr>
+                            <tr>
+                                <td><strong>FLACC</strong></td>
+                                <td>Infants and nonverbal children (2 mo - 7 yr)</td>
+                                <td>Behavioral observation</td>
+                                <td>0-10</td>
+                                <td><strong>F</strong>ace, <strong>L</strong>egs, <strong>A</strong>ctivity, <strong>C</strong>ry, <strong>C</strong>onsolability — each scored 0-2</td>
+                            </tr>
+                            <tr>
+                                <td><strong>CPOT (Critical-Care Pain Observation)</strong></td>
+                                <td>Intubated/unconscious ICU adults</td>
+                                <td>Behavioral observation</td>
+                                <td>0-8</td>
+                                <td>Facial expression, body movements, muscle tension, ventilator compliance (or vocalization)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Abbey Pain Scale</strong></td>
+                                <td>Patients with advanced dementia</td>
+                                <td>Behavioral observation</td>
+                                <td>0-18</td>
+                                <td>Vocalization, facial expression, body language, behavioral change, physiological change, physical change</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="info-box nclex-tip">
+                    <div class="info-box-header">
+                        <i class="fas fa-graduation-cap"></i> NCLEX Rule: Self-Report Is the Gold Standard
+                    </div>
+                    <p><strong>The patient's self-report of pain is ALWAYS the most reliable indicator.</strong> If a patient says their pain is 8/10 but they're smiling and chatting, do NOT dismiss or downgrade their pain score. People cope with pain differently — some laugh, some become quiet, some cry. Behavioral observation tools (FLACC, CPOT) are only used when the patient CANNOT self-report. On the NCLEX, if the patient can verbalize, their report takes priority over your observation.</p>
+                </div>
+
+                <div class="info-box mnemonic">
+                    <div class="info-box-header">
+                        <i class="fas fa-brain"></i> Mnemonic: PQRST for Comprehensive Pain Assessment
+                    </div>
+                    <ul>
+                        <li><strong>P</strong>rovokes/Palliates — What makes it worse? What makes it better?</li>
+                        <li><strong>Q</strong>uality — What does it feel like? (sharp, dull, burning, aching, pressure, stabbing)</li>
+                        <li><strong>R</strong>adiates/Region — Where is it? Does it spread anywhere else?</li>
+                        <li><strong>S</strong>everity — Rate it 0-10 (or use appropriate tool)</li>
+                        <li><strong>T</strong>iming — When did it start? Constant or intermittent? Getting better or worse?</li>
+                    </ul>
+                </div>
+
+                <div class="florencebot-tip" id="tip-pain-reassessment">
+                    <div class="florencebot-tip-header">
+                        <div class="florencebot-tip-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <span class="florencebot-tip-label">FlorenceBot Pro Tip</span>
+                    </div>
+                    <div class="florencebot-tip-title">Pain Reassessment: The Step Most Nurses Miss</div>
+                    <div class="florencebot-tip-content">
+                        <strong>Assessment without reassessment is incomplete!</strong> After administering pain medication, you MUST reassess: <strong>30 minutes after oral medication</strong> and <strong>15 minutes after IV medication</strong> (aligned with peak onset times). Document BOTH the initial score, the intervention, AND the reassessment score. If pain is not adequately managed, try non-pharmacological interventions (repositioning, ice, distraction, relaxation) and notify the provider if pain remains uncontrolled. The goal is not always 0/10 — work with the patient to establish a <strong>comfort-function goal</strong> (the pain level at which they can participate in recovery activities like deep breathing and ambulation).
+                    </div>
+                </div>
+
+                <div class="bottom-line">🎯 Bottom Line: Match the pain tool to the patient: NRS for verbal adults, FACES for children 3+, FLACC for nonverbal children, CPOT for intubated patients, and Abbey for dementia patients. Always reassess after interventions (30 min PO, 15 min IV) and document both scores.</div>
+            </section>
+
+            <!-- Section 8: Pediatric Vital Sign Ranges -->
+            <section class="guide-section" id="pediatric-vitals">
+                <h2><span class="section-icon"><i class="fas fa-child"></i></span> Pediatric Vital Sign Ranges</h2>
+
+                <div class="info-box pediatric">
+                    <div class="info-box-header">
+                        <i class="fas fa-baby"></i> Why Pediatric Ranges Are Different
+                    </div>
+                    <p><strong>Children are not small adults.</strong> Their vital sign ranges differ significantly from adults due to developmental physiology. Infants have higher heart and respiratory rates because of higher metabolic demands, smaller cardiac stroke volumes, and less compliant lungs. Blood pressure is lower in young children and gradually increases with age. Using adult ranges to assess a child can cause you to <strong>miss critical deterioration</strong> or create unnecessary alarm.</p>
+                </div>
+
+                <h3>Normal Vital Sign Ranges by Age</h3>
+
+                <div class="guide-table-wrapper">
+                    <table class="guide-table">
+                        <thead>
+                            <tr>
+                                <th>Age Group</th>
+                                <th>Heart Rate (bpm)</th>
+                                <th>Respiratory Rate (/min)</th>
+                                <th>Systolic BP (mmHg)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Newborn (0-28 days)</td>
+                                <td>100-160</td>
+                                <td>30-60</td>
+                                <td>60-80</td>
+                            </tr>
+                            <tr>
+                                <td>Infant (1-12 months)</td>
+                                <td>100-150</td>
+                                <td>25-50</td>
+                                <td>70-100</td>
+                            </tr>
+                            <tr>
+                                <td>Toddler (1-3 years)</td>
+                                <td>90-130</td>
+                                <td>20-30</td>
+                                <td>80-110</td>
+                            </tr>
+                            <tr>
+                                <td>Preschool (3-5 years)</td>
+                                <td>80-120</td>
+                                <td>20-25</td>
+                                <td>80-110</td>
+                            </tr>
+                            <tr>
+                                <td>School Age (6-12 years)</td>
+                                <td>70-110</td>
+                                <td>18-22</td>
+                                <td>85-120</td>
+                            </tr>
+                            <tr>
+                                <td>Adolescent (13-18 years)</td>
+                                <td>60-100</td>
+                                <td>12-20</td>
+                                <td>100-130</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="info-box warning">
+                    <div class="info-box-header">
+                        <i class="fas fa-exclamation-triangle"></i> Critical Alert: Tachycardia Is the Earliest Sign
+                    </div>
+                    <p><strong>Tachycardia is the EARLIEST and most reliable sign of decompensation in children.</strong> Children initially compensate for shock, hypoxia, and dehydration by increasing their heart rate. Blood pressure is often the LAST vital sign to drop because children maintain vascular tone through intense sympathetic response. By the time a child becomes hypotensive, they are in <strong>decompensated shock</strong> and cardiovascular collapse may be imminent.</p>
+                    <p><strong>Key rule:</strong> A tachycardic child is a sick child until proven otherwise. Do not be reassured by a "normal" blood pressure in a tachycardic child.</p>
+                </div>
+
+                <div class="info-box clinical-pearl">
+                    <div class="info-box-header">
+                        <i class="fas fa-lightbulb"></i> Clinical Pearl: Children Compensate Until They Don't
+                    </div>
+                    <p><strong>Pediatric patients can look deceptively well right before they crash.</strong> Unlike adults who show a gradual decline, children maintain their vital signs through powerful compensatory mechanisms — until those mechanisms are exhausted. When compensation fails, deterioration is rapid and dramatic. This means:</p>
+                    <ul>
+                        <li>A child can be in compensated shock with near-normal blood pressure</li>
+                        <li>By the time BP drops, they may be minutes from cardiac arrest</li>
+                        <li>Look for subtle early signs: tachycardia, prolonged capillary refill (&gt;2-3 sec), mottled or pale skin, decreased urine output, irritability or lethargy</li>
+                        <li>Trust the trend, not a single reassuring set of vital signs</li>
+                    </ul>
+                </div>
+
+                <div class="florencebot-tip" id="tip-peds-vital-trends">
+                    <div class="florencebot-tip-header">
+                        <div class="florencebot-tip-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <span class="florencebot-tip-label">FlorenceBot Pro Tip</span>
+                    </div>
+                    <div class="florencebot-tip-title">Age-Appropriate Vital Sign Assessment</div>
+                    <div class="florencebot-tip-content">
+                        <strong>How you assess pediatric vital signs matters as much as the numbers!</strong> Here's the trick: <strong>count respirations FIRST, before touching the child.</strong> Once you touch or disturb an infant or toddler, they'll start crying, which makes respiratory rate impossible to assess accurately. Use this order: (1) Observe respirations while the child is calm or sleeping, (2) Auscultate heart rate for a full 60 seconds (apical pulse is the standard for children under 2), (3) Then take blood pressure and temperature last since these are the most distressing. Also, <strong>always use age-appropriate cuff sizes</strong> for blood pressure — too small a cuff gives falsely high readings, just like in adults. Having a parent hold the child during assessment can reduce anxiety significantly.
+                    </div>
+                </div>
+
+                <div class="bottom-line">🎯 Bottom Line: Pediatric vital signs vary significantly by age — know the normal ranges. Tachycardia is the earliest warning sign of trouble. Children compensate well then crash fast, so never be falsely reassured by a "normal" BP in a tachycardic child. Count respirations before disturbing the child.</div>
+            </section>
+
+            <!-- Section 9: Head-to-Toe Assessment -->
             <section class="guide-section" id="head-to-toe">
                 <h2><span class="section-icon"><i class="fas fa-user"></i></span> Systematic Head-to-Toe Assessment</h2>
 
@@ -1640,7 +2258,163 @@
                 <div class="bottom-line">🎯 Bottom Line: If you didn't document it, it didn't happen. Use objective language, avoid subjective interpretations, document findings in real-time, and follow your facility's charting system (narrative, SBAR, DAR, etc.).</div>
             </section>
 
-            <!-- Section 7: Critical Findings -->
+            <!-- Section 12: Mental Status Assessment -->
+            <section class="guide-section" id="mental-status">
+                <h2><span class="section-icon"><i class="fas fa-head-side-virus"></i></span> Mental Status Assessment</h2>
+
+                <p>Mental status assessment evaluates a patient's <strong>cognitive function, emotional state, and behavioral presentation</strong>. It is a critical component of the neurological exam and should be incorporated into every nursing assessment, particularly when patients present with altered behavior, confusion, or psychiatric symptoms.</p>
+
+                <h3>Level of Consciousness (LOC) — AVPU Scale</h3>
+
+                <div class="guide-table-wrapper">
+                    <table class="guide-table">
+                        <thead>
+                            <tr>
+                                <th>Level</th>
+                                <th>Description</th>
+                                <th>Clinical Implication</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>A</strong> - Alert</td>
+                                <td>Awake, eyes open spontaneously, interacts appropriately</td>
+                                <td>Normal consciousness</td>
+                            </tr>
+                            <tr>
+                                <td><strong>V</strong> - Verbal</td>
+                                <td>Responds to verbal stimuli; may open eyes or speak when called</td>
+                                <td>Decreased consciousness; further evaluation needed</td>
+                            </tr>
+                            <tr>
+                                <td><strong>P</strong> - Pain</td>
+                                <td>Responds only to painful stimuli (sternal rub, nail bed pressure)</td>
+                                <td>Significantly impaired; consider GCS and urgent evaluation</td>
+                            </tr>
+                            <tr>
+                                <td><strong>U</strong> - Unresponsive</td>
+                                <td>No response to any stimuli</td>
+                                <td>Medical emergency; activate rapid response/code team</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>Orientation Assessment</h3>
+
+                <p>Orientation is assessed across <strong>four domains</strong>, documented as "oriented x4" (or x3, x2, x1 if impaired):</p>
+
+                <div class="guide-table-wrapper">
+                    <table class="guide-table">
+                        <thead>
+                            <tr>
+                                <th>Domain</th>
+                                <th>Assessment Question Examples</th>
+                                <th>Notes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Person</strong></td>
+                                <td>"What is your name?" "What is your date of birth?"</td>
+                                <td>Usually the LAST to be lost; present even in moderate confusion</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Place</strong></td>
+                                <td>"Where are you right now?" "What type of building is this?"</td>
+                                <td>Commonly impaired in delirium and dementia</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Time</strong></td>
+                                <td>"What is today's date?" "What day of the week is it?" "What year is it?"</td>
+                                <td>Usually the FIRST to be lost; most sensitive indicator of confusion</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Situation</strong></td>
+                                <td>"Why are you in the hospital?" "What happened to bring you here?"</td>
+                                <td>Tests awareness of current circumstances and insight</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="info-box mnemonic">
+                    <div class="info-box-header">
+                        <i class="fas fa-brain"></i> Memory Aid: Orientation Order of Loss
+                    </div>
+                    <p>Orientation is typically lost in this order: <strong>Time → Place → Situation → Person</strong></p>
+                    <p>And regained in the reverse order: <strong>Person → Situation → Place → Time</strong></p>
+                    <p>Think: <strong>"Time goes first, self goes last."</strong> A patient who doesn't know their own name is significantly more impaired than one who doesn't know the date.</p>
+                </div>
+
+                <h3>Components of Mental Status Exam</h3>
+
+                <h4>Mood and Affect</h4>
+                <ul>
+                    <li><strong>Mood:</strong> The patient's subjective emotional state ("I feel sad," "I feel anxious")</li>
+                    <li><strong>Affect:</strong> The observable expression of emotion (flat, blunted, labile, appropriate)</li>
+                    <li><strong>Congruence:</strong> Does the affect match the mood? Incongruent affect (laughing while describing sadness) is clinically significant</li>
+                </ul>
+
+                <h4>Speech</h4>
+                <ul>
+                    <li><strong>Rate:</strong> Normal, rapid (pressured), or slow</li>
+                    <li><strong>Rhythm:</strong> Regular, stuttering, or dysarthric</li>
+                    <li><strong>Volume:</strong> Normal, loud, or soft/whispered</li>
+                    <li><strong>Clarity:</strong> Clear, slurred, or mumbled</li>
+                </ul>
+
+                <h4>Thought Process and Content</h4>
+                <ul>
+                    <li><strong>Process:</strong> Logical and goal-directed vs. tangential, circumstantial, disorganized, or loose associations</li>
+                    <li><strong>Content:</strong> Presence of delusions, paranoia, obsessions, phobias, or suicidal/homicidal ideation</li>
+                    <li><strong>Perceptions:</strong> Hallucinations (auditory, visual, tactile) — ask "Do you ever see or hear things that others don't?"</li>
+                </ul>
+
+                <h4>Memory</h4>
+                <ul>
+                    <li><strong>Immediate:</strong> Repeat 3 words back to you right now (tests attention/registration)</li>
+                    <li><strong>Recent (Short-term):</strong> "What did you have for breakfast?" or recall 3 words after 5 minutes</li>
+                    <li><strong>Remote (Long-term):</strong> "Where were you born?" "Where did you go to school?"</li>
+                </ul>
+
+                <h4>Judgment and Insight</h4>
+                <ul>
+                    <li><strong>Judgment:</strong> Can the patient make appropriate decisions? ("What would you do if you smelled smoke in your house?")</li>
+                    <li><strong>Insight:</strong> Does the patient understand their condition? ("Why do you think you're in the hospital?")</li>
+                </ul>
+
+                <div class="info-box warning">
+                    <div class="info-box-header">
+                        <i class="fas fa-exclamation-triangle"></i> Always Screen for Suicidal Ideation
+                    </div>
+                    <p><strong>Asking about suicidal ideation does NOT increase the risk of suicide.</strong> It opens the door for patients to share what they may be afraid to bring up on their own. When assessing mental status, incorporate screening for:</p>
+                    <ul>
+                        <li><strong>Suicidal ideation:</strong> "Are you having thoughts of harming yourself?" "Have you thought about ending your life?"</li>
+                        <li><strong>Plan:</strong> "Do you have a plan for how you would do it?"</li>
+                        <li><strong>Means:</strong> "Do you have access to medications, firearms, or other means?"</li>
+                        <li><strong>Intent:</strong> "Do you intend to act on these thoughts?"</li>
+                    </ul>
+                    <p>If the patient endorses suicidal ideation, <strong>do not leave them alone</strong>. Initiate safety precautions, remove sharps and dangerous items from the room, and notify the provider immediately.</p>
+                </div>
+
+                <div class="florencebot-tip" id="tip-mental-status-baseline">
+                    <div class="florencebot-tip-header">
+                        <div class="florencebot-tip-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <span class="florencebot-tip-label">FlorenceBot Pro Tip</span>
+                    </div>
+                    <div class="florencebot-tip-title">Know Your Patient's Baseline</div>
+                    <div class="florencebot-tip-content">
+                        <strong>Mental status changes are only meaningful when compared to the patient's baseline!</strong> A patient with dementia who is "oriented x2" may be at THEIR normal. But if that same patient is usually oriented x2 and is now oriented x0, that's a critical change. Always ask the family or review the chart: "Is this how they normally are?" New confusion (delirium) in someone who was previously alert is a <strong>medical emergency</strong> — it could indicate infection, hypoxia, medication toxicity, stroke, or metabolic crisis. Document the patient's baseline mental status on admission and compare to it at every assessment. The <strong>CAM (Confusion Assessment Method)</strong> tool can help differentiate delirium from dementia if you suspect a change.
+                    </div>
+                </div>
+
+                <div class="bottom-line">🎯 Bottom Line: Mental status assessment includes LOC (AVPU), orientation x4 (person, place, time, situation), mood/affect, speech, thought process/content, memory, and judgment. Time orientation is lost first and regained last. Always screen for suicidal ideation, and know your patient's baseline to detect meaningful changes.</div>
+            </section>
+
+            <!-- Section 13: Critical Findings -->
             <section class="guide-section" id="critical-findings">
                 <h2><span class="section-icon"><i class="fas fa-exclamation-circle"></i></span> Critical Findings</h2>
 
@@ -1814,16 +2588,24 @@
                         <p><strong>Trends matter</strong> more than single vital sign readings - compare to baseline</p>
                     </div>
                     <div class="key-point">
-                        <i class="fas fa-comments"></i>
-                        <p><strong>Subjective</strong> = patient reports; <strong>Objective</strong> = you observe/measure</p>
+                        <i class="fas fa-brain"></i>
+                        <p><strong>GCS ≤ 8 = Intubate.</strong> Document component scores (E_V_M_), not just the total</p>
+                    </div>
+                    <div class="key-point">
+                        <i class="fas fa-bed"></i>
+                        <p><strong>Braden ≤ 12 = High risk.</strong> Lower score = more risk. Reassess every shift</p>
+                    </div>
+                    <div class="key-point">
+                        <i class="fas fa-thermometer-half"></i>
+                        <p><strong>Pain tools by population:</strong> NRS (adults), FACES (kids 3+), FLACC (infants), CPOT (ICU)</p>
+                    </div>
+                    <div class="key-point">
+                        <i class="fas fa-child"></i>
+                        <p><strong>Peds: tachycardia first.</strong> Children compensate then crash. BP drops LAST</p>
                     </div>
                     <div class="key-point">
                         <i class="fas fa-file-alt"></i>
                         <p><strong>Document objectively</strong> - avoid vague terms, use measurements</p>
-                    </div>
-                    <div class="key-point">
-                        <i class="fas fa-phone"></i>
-                        <p><strong>SBAR</strong> for provider communication: Situation, Background, Assessment, Recommendation</p>
                     </div>
                     <div class="key-point">
                         <i class="fas fa-exclamation-triangle"></i>
