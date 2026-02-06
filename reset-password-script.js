@@ -11,10 +11,31 @@ const RESET_API_URL = (typeof API_URL !== 'undefined' ? API_URL : (
 const urlParams = new URLSearchParams(window.location.search);
 const resetToken = urlParams.get('token');
 
-// Check if token exists
+// Check if token exists — hide form and show error if missing
 if (!resetToken) {
-    showMessage('Invalid or missing reset token. Please request a new password reset.', 'error');
-    document.getElementById('reset-submit-btn').disabled = true;
+    const resetForm = document.getElementById('reset-password-form');
+    if (resetForm) resetForm.style.display = 'none';
+
+    const authHeader = document.querySelector('.auth-header');
+    if (authHeader) {
+        authHeader.querySelector('h1').textContent = 'Invalid Reset Link';
+        authHeader.querySelector('p').textContent = 'This password reset link is invalid or has expired.';
+    }
+
+    const messageDiv = document.getElementById('reset-message');
+    if (messageDiv) {
+        messageDiv.style.display = 'block';
+        messageDiv.className = 'error-message';
+        messageDiv.innerHTML = `
+            <i class="fas fa-exclamation-circle"></i>
+            <span>Please request a new password reset from the login page.</span>
+        `;
+    }
+
+    const footer = document.querySelector('.auth-footer .toggle-mode');
+    if (footer) {
+        footer.innerHTML = '<a href="login.html">Back to Login</a>';
+    }
 }
 
 // Password strength indicator
