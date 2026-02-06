@@ -609,7 +609,7 @@ class QuizEngine {
                 : 'You aced every question under exam conditions. This topic is locked in!';
             html += `
                 <div class="quiz-celebration-banner">
-                    <div class="quiz-celebration-icon">&#127881;</div>
+                    <div class="quiz-celebration-icon"><img src="../../assets/images/congratulations.png" alt="Congratulations" class="quiz-celebration-img"></div>
                     <div class="quiz-celebration-title">Congratulations!</div>
                     <div class="quiz-celebration-subtitle">${celebMsg}</div>
                 </div>
