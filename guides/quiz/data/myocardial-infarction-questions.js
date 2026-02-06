@@ -1,7 +1,7 @@
 /**
  * Myocardial Infarction Quiz — Question Data
  * Extracted from guides/myocardial-infarction.html practice questions section.
- * 8 NCLEX-style questions: 3 Single, 2 SATA, 2 Priority, 1 Knowledge
+ * 8 NCLEX-style questions: 4 Single, 2 Priority, 1 Ordering, 1 Matrix
  */
 
 /* exported myocardialInfarctionQuizData */
@@ -60,27 +60,27 @@ var myocardialInfarctionQuizData = {
         },
         {
             id: 3,
-            type: "sata",
+            type: "ordering",
             subtype: null,
-            difficulty: "knowledge",
-            stem: "A patient is being evaluated for thrombolytic therapy following a STEMI. Which findings would be ABSOLUTE contraindications to tPA administration? Select all that apply.",
+            difficulty: "application",
+            stem: "A 58-year-old patient presents with crushing substernal chest pain radiating to the left arm, diaphoresis, and ST elevation in leads II, III, and aVF. Place the nursing actions in the correct sequence.",
             options: [
-                { id: "a", text: "History of hemorrhagic stroke 5 years ago" },
-                { id: "b", text: "Blood pressure of 168/94 mmHg" },
-                { id: "c", text: "Suspected aortic dissection" },
-                { id: "d", text: "Major abdominal surgery 2 weeks ago" },
-                { id: "e", text: "Active peptic ulcer with GI bleeding" }
+                { id: "a", text: "Obtain a 12-lead ECG" },
+                { id: "b", text: "Administer aspirin 325 mg chewed" },
+                { id: "c", text: "Establish IV access and draw baseline labs (troponin, CBC, BMP, coags)" },
+                { id: "d", text: "Administer nitroglycerin sublingual as ordered (after ruling out RV involvement)" },
+                { id: "e", text: "Prepare for cardiac catheterization and PCI" }
             ],
-            correct: ["a", "c", "e"],
+            correct: ["a", "b", "c", "d", "e"],
             rationale: {
-                correct: "Absolute contraindications to tPA include prior intracranial hemorrhage at any time, suspected aortic dissection, and active bleeding or known bleeding diathesis.",
-                a: "CORRECT \u2014 Prior intracranial hemorrhage at ANY time is an absolute contraindication. There is no time limit on this exclusion.",
-                b: "INCORRECT \u2014 Severe uncontrolled hypertension (SBP > 180 or DBP > 110) is a relative contraindication, not absolute. This patient\u2019s BP of 168/94 does not meet that threshold.",
-                c: "CORRECT \u2014 Suspected aortic dissection is an absolute contraindication. Thrombolytics would cause uncontrolled hemorrhage into the dissection.",
-                d: "INCORRECT \u2014 Major surgery within 3 weeks is a relative (not absolute) contraindication. The risk-benefit ratio must be weighed by the provider.",
-                e: "CORRECT \u2014 Active bleeding or known bleeding diathesis is an absolute contraindication. Active GI hemorrhage would be worsened by thrombolytics."
+                correct: "The correct sequence prioritizes rapid diagnosis (ECG), immediate antiplatelet therapy (aspirin), vascular access for medications and labs, symptom management (nitroglycerin), and preparation for definitive reperfusion therapy (PCI). Time is muscle.",
+                a: "FIRST \u2014 The 12-lead ECG must be obtained within 10 minutes of arrival to confirm STEMI and identify the infarct location. ST elevation in II, III, aVF indicates inferior MI \u2014 essential for guiding nitrate use.",
+                b: "SECOND \u2014 Aspirin 325 mg chewed (not swallowed whole) inhibits platelet aggregation at the culprit lesion. Chewing ensures rapid buccal absorption.",
+                c: "THIRD \u2014 IV access is essential for medication administration. Troponin confirms myocardial injury, coagulation studies guide anticoagulation.",
+                d: "FOURTH \u2014 Nitroglycerin reduces preload and myocardial oxygen demand. In inferior MI (II, III, aVF), right ventricular involvement must be ruled out first with V4R \u2014 NTG is contraindicated if RV is involved.",
+                e: "FIFTH \u2014 PCI is the definitive treatment for STEMI with a door-to-balloon goal of <90 minutes. Preparation includes activating the cath lab, obtaining consent, and administering heparin."
             },
-            testTakingTip: "Remember HEADS for absolute contraindications: Hemorrhagic stroke (ever), Extreme BP (uncontrolled, relative), Aortic dissection, Disorder of bleeding, Surgery/trauma (recent, relative). Absolute = never give. Relative = provider weighs risks.",
+            testTakingTip: "STEMI sequencing: diagnose (ECG) \u2192 treat (aspirin) \u2192 access (IV) \u2192 manage symptoms (nitro with caution in inferior MI) \u2192 definitive therapy (PCI). Always check for RV involvement in inferior MIs before giving nitrates.",
             guideSection: "Section 6 \u2014 Thrombolytic Therapy",
             guideSectionId: "thrombolytics"
         },
@@ -132,27 +132,26 @@ var myocardialInfarctionQuizData = {
         },
         {
             id: 6,
-            type: "sata",
+            type: "matrix",
             subtype: null,
-            difficulty: "application",
-            stem: "A patient is admitted with a STEMI and is 5 days post-MI. The nurse should closely monitor for which complications during this time frame? Select all that apply.",
+            difficulty: "analysis",
+            matrixColumns: ["Expected Effect", "Report to Provider"],
+            stem: "A patient is recovering from a STEMI and is on standard post-MI medications including metoprolol, enalapril, aspirin, and atorvastatin. For each finding, indicate whether it is an expected effect of the medication regimen or should be reported to the provider.",
             options: [
-                { id: "a", text: "Ventricular septal rupture" },
-                { id: "b", text: "Papillary muscle rupture" },
-                { id: "c", text: "Ventricular fibrillation" },
-                { id: "d", text: "Cardiac tamponade from free wall rupture" },
-                { id: "e", text: "Dressler\u2019s syndrome (post-MI pericarditis)" }
+                { id: "a", text: "Blood pressure of 108/68 mmHg (baseline was 138/86 mmHg)" },
+                { id: "b", text: "Resting heart rate of 52 bpm" },
+                { id: "c", text: "Persistent dry cough that started after beginning enalapril" },
+                { id: "d", text: "Recurrent chest pain with exertion despite taking all medications as prescribed" }
             ],
-            correct: ["a", "b", "d"],
+            correct: { a: "Expected Effect", b: "Report to Provider", c: "Report to Provider", d: "Report to Provider" },
             rationale: {
-                correct: "At 5 days post-MI, mechanical complications are the primary concern. Necrotic tissue is at its weakest during this period, making structural ruptures most likely.",
-                a: "CORRECT \u2014 Ventricular septal rupture occurs 3-5 days post-MI when necrotic tissue is at its weakest. It presents as a new harsh systolic murmur with rapid hemodynamic deterioration.",
-                b: "CORRECT \u2014 Papillary muscle rupture occurs 2-7 days post-MI, causing acute severe mitral regurgitation with sudden pulmonary edema and a new murmur.",
-                c: "INCORRECT \u2014 VF is most likely in the first 4 hours after MI (the leading cause of death in the first hour). By day 5, the highest-risk arrhythmia window has passed.",
-                d: "CORRECT \u2014 Free wall rupture occurs 5-14 days post-MI. It causes sudden cardiac tamponade and often pulseless electrical activity (PEA) arrest. It is frequently fatal.",
-                e: "INCORRECT \u2014 Dressler\u2019s syndrome is autoimmune pericarditis that occurs weeks to months after MI, not at 5 days. It presents with fever, pleuritic chest pain, and pericardial effusion."
+                correct: "A modest BP reduction is expected with ACE inhibitors and beta-blockers. However, significant bradycardia, persistent ACE inhibitor cough, and recurrent chest pain all warrant provider notification for possible medication adjustment or further evaluation.",
+                a: "EXPECTED EFFECT \u2014 Both metoprolol and enalapril lower blood pressure. A drop from 138/86 to 108/68 is a therapeutic response \u2014 the BP remains adequate for organ perfusion.",
+                b: "REPORT TO PROVIDER \u2014 While metoprolol lowers heart rate, a resting HR of 52 bpm is at the lower limit and may cause symptoms. The provider may need to adjust the dose.",
+                c: "REPORT TO PROVIDER \u2014 A dry, persistent cough occurs in 5\u201320% of patients on ACE inhibitors due to bradykinin accumulation. The provider typically switches to an ARB (e.g., losartan).",
+                d: "REPORT TO PROVIDER \u2014 Recurrent chest pain with exertion despite optimal medical therapy is a red flag for ongoing ischemia or stent thrombosis. This requires urgent evaluation."
             },
-            testTakingTip: "Mechanical complications cluster at 3-7 days post-MI when necrotic tissue is most friable. Watch for sudden hemodynamic collapse or new murmurs. Electrical complications (VF) peak in the first hours. Autoimmune complications (Dressler\u2019s) occur weeks later.",
+            testTakingTip: "Post-MI medication monitoring: a lower BP is usually expected and therapeutic. But always report: HR <50 or symptomatic bradycardia, ACE inhibitor cough (switch to ARB), and ANY recurrent chest pain.",
             guideSection: "Section 8 \u2014 Complications of MI",
             guideSectionId: "complications"
         },

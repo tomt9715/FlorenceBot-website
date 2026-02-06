@@ -1,7 +1,7 @@
 /**
  * Coronary Artery Disease Quiz — Question Data
  * Extracted from guides/coronary-artery-disease.html practice questions section.
- * 8 NCLEX-style questions: 4 Single, 2 SATA, 2 Priority
+ * 8 NCLEX-style questions: 4 Single, 2 Priority, 1 Ordering, 1 Matrix
  */
 
 /* exported coronaryArteryDiseaseQuizData */
@@ -60,27 +60,27 @@ var coronaryArteryDiseaseQuizData = {
         },
         {
             id: 3,
-            type: "sata",
+            type: "ordering",
             subtype: null,
             difficulty: "application",
-            stem: "A nurse is preparing a patient for a cardiac catheterization via the right femoral artery. Which nursing actions are appropriate? (Select all that apply.)",
+            stem: "A patient with known stable angina reports substernal chest pressure that began 5 minutes ago while walking in the hallway. Place the nursing actions in the correct sequence.",
             options: [
-                { id: "a", text: "Assess and mark the location of bilateral pedal pulses" },
-                { id: "b", text: "Verify that informed consent has been signed" },
-                { id: "c", text: "Hold metformin for 48 hours before the procedure" },
-                { id: "d", text: "Confirm allergy status, especially to iodine and shellfish" },
-                { id: "e", text: "Place the patient on bedrest with the affected leg straight after the procedure" }
+                { id: "a", text: "Stop activity and have the patient sit or lie down to rest" },
+                { id: "b", text: "Administer one sublingual nitroglycerin tablet" },
+                { id: "c", text: "Reassess pain after 5 minutes" },
+                { id: "d", text: "Administer a second sublingual nitroglycerin if pain persists" },
+                { id: "e", text: "Call 911 or activate rapid response if pain is unrelieved after 3 doses" }
             ],
-            correct: ["a", "b", "d", "e"],
+            correct: ["a", "b", "c", "d", "e"],
             rationale: {
-                correct: "Marking pedal pulses before the procedure establishes a baseline for post-cath neurovascular checks. Informed consent is required for all invasive procedures. Contrast dye is iodine-based; allergy assessment prevents anaphylaxis. Post-femoral cath: bedrest 4\u20136 hours with leg straight and HOB \u226430\u00b0 to prevent bleeding.",
-                a: "CORRECT \u2014 Marking pedal pulses before the procedure establishes a baseline for post-cath neurovascular checks.",
-                b: "CORRECT \u2014 Informed consent is required for all invasive procedures.",
-                c: "INCORRECT \u2014 Metformin is held for 48 hours after the procedure (not before) due to the risk of contrast-induced nephropathy combined with metformin leading to lactic acidosis. Metformin is resumed when renal function is confirmed normal.",
-                d: "CORRECT \u2014 Contrast dye is iodine-based; allergy assessment prevents anaphylaxis.",
-                e: "CORRECT \u2014 Post-femoral cath: bedrest 4\u20136 hours with leg straight and HOB \u226430\u00b0 to prevent bleeding."
+                correct: "The correct sequence follows the angina response protocol: eliminate the precipitating factor (stop activity), administer vasodilator (NTG), assess for response, repeat if needed, and escalate to emergency care if unrelieved.",
+                a: "FIRST \u2014 Stopping activity immediately reduces myocardial oxygen demand, the underlying cause of stable angina.",
+                b: "SECOND \u2014 After the patient is resting, administer sublingual NTG. NTG causes vasodilation, reducing preload and afterload. The patient should be seated to prevent orthostatic hypotension.",
+                c: "THIRD \u2014 Wait 5 minutes and reassess pain. Sublingual NTG peaks at about 5 minutes. This determines whether the episode is resolving or escalating.",
+                d: "FOURTH \u2014 If pain persists, administer a second sublingual NTG. Per current AHA guidelines, calling 911 is recommended after the first unrelieved dose for outpatients.",
+                e: "FIFTH \u2014 If pain remains unrelieved after maximum NTG doses, this is a potential ACS event. Call 911 or activate rapid response for emergent evaluation."
             },
-            testTakingTip: "For cardiac cath questions, remember the timing: metformin held AFTER (not before). Mark pulses BEFORE (baseline). Keep leg straight AFTER femoral approach. The #1 complication is bleeding at the access site.",
+            testTakingTip: "Angina protocol: REST \u2192 NTG \u2192 REASSESS \u2192 REPEAT \u2192 RESCUE. NTG is contraindicated if SBP <90 or if patient took a PDE5 inhibitor (Viagra/Cialis) within 24\u201348 hours.",
             guideSection: "Section 6 \u2014 Cardiac Catheterization & PCI",
             guideSectionId: "catheterization"
         },
@@ -132,27 +132,26 @@ var coronaryArteryDiseaseQuizData = {
         },
         {
             id: 6,
-            type: "sata",
+            type: "matrix",
             subtype: null,
             difficulty: "application",
-            stem: "A patient with newly diagnosed coronary artery disease is being discharged on the \"ABCDE\" secondary prevention regimen. Which statements by the patient indicate correct understanding? (Select all that apply.)",
+            matrixColumns: ["Modifiable Risk Factor", "Non-Modifiable Risk Factor"],
+            stem: "A nurse is educating a patient about coronary artery disease risk factors. For each factor, indicate whether it is modifiable or non-modifiable.",
             options: [
-                { id: "a", text: "\"I need to take my aspirin and ACE inhibitor every day.\"" },
-                { id: "b", text: "\"My LDL cholesterol goal is below 100.\"" },
-                { id: "c", text: "\"I should start a cardiac rehab exercise program.\"" },
-                { id: "d", text: "\"My beta-blocker will help control my heart rate and blood pressure.\"" },
-                { id: "e", text: "\"I can continue smoking as long as I cut down to half a pack per day.\"" }
+                { id: "a", text: "Smoking one pack of cigarettes per day for 15 years" },
+                { id: "b", text: "Father had a myocardial infarction at age 50" },
+                { id: "c", text: "Total cholesterol 260 mg/dL with LDL 180 mg/dL" },
+                { id: "d", text: "Male patient who is 58 years old" }
             ],
-            correct: ["a", "c", "d"],
+            correct: { a: "Modifiable Risk Factor", b: "Non-Modifiable Risk Factor", c: "Modifiable Risk Factor", d: "Non-Modifiable Risk Factor" },
             rationale: {
-                correct: "ABCDE: A = Aspirin/Antiplatelet + ACE inhibitor \u2014 both are standard secondary prevention. E = Exercise \u2014 cardiac rehab reduces mortality 20\u201330%. B = Beta-blockers/BP control \u2014 beta-blockers reduce myocardial oxygen demand and control heart rate.",
-                a: "CORRECT \u2014 ABCDE: A = Aspirin/Antiplatelet + ACE inhibitor \u2014 both are standard secondary prevention.",
-                b: "INCORRECT \u2014 For established CAD/ACS, the LDL target is <70 mg/dL (not <100). The <100 target is for primary prevention in high-risk patients without established disease.",
-                c: "CORRECT \u2014 E = Exercise \u2014 cardiac rehab reduces mortality 20\u201330%.",
-                d: "CORRECT \u2014 B = Beta-blockers/BP control \u2014 beta-blockers reduce myocardial oxygen demand and control heart rate.",
-                e: "INCORRECT \u2014 Complete smoking cessation is required \u2014 there is no \"safe\" level of smoking. The C in ABCDE stands for Cholesterol AND Cigarettes (quit completely). Reducing intake still carries significant cardiovascular risk."
+                correct: "Modifiable risk factors are those the patient can change through lifestyle or medical intervention. Non-modifiable factors cannot be changed but awareness allows for aggressive management of modifiable factors.",
+                a: "MODIFIABLE \u2014 Smoking is the single most preventable cause of cardiovascular death. Within 1 year of quitting, cardiovascular risk decreases by 50%. Complete cessation is the goal.",
+                b: "NON-MODIFIABLE \u2014 A first-degree male relative with CAD before age 55 is a significant non-modifiable risk factor. Genetic predisposition cannot be changed.",
+                c: "MODIFIABLE \u2014 Hyperlipidemia is treatable through diet, exercise, weight loss, and statin therapy. For established CAD, the LDL target is <70 mg/dL.",
+                d: "NON-MODIFIABLE \u2014 Age is the strongest non-modifiable risk factor. Risk increases significantly in males >45 and females >55 (post-menopausal)."
             },
-            testTakingTip: "Memorize ABCDE: Aspirin/ACEi, Beta-blockers/BP, Cholesterol/Cigarettes, Diet/Diabetes, Exercise. Know that established CAD requires LDL <70 (stricter than primary prevention).",
+            testTakingTip: "Modifiable CAD risk factors: smoking, hyperlipidemia, hypertension, diabetes, obesity, sedentary lifestyle. Non-modifiable: age (M >45, F >55), sex, family history. The NCLEX tests which factors the nurse should focus education on.",
             guideSection: "Section 5 \u2014 Risk Factor Modification",
             guideSectionId: "risk-factors"
         },

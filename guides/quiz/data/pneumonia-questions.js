@@ -1,7 +1,7 @@
 /**
  * Pneumonia Quiz — Question Data
  * Extracted from guides/pneumonia.html practice questions section.
- * 8 NCLEX-style questions: 4 Single, 2 SATA, 2 Priority
+ * 8 NCLEX-style questions: 4 Single, 2 Priority, 1 Ordering, 1 Matrix
  */
 
 /* exported pneumoniaQuizData */
@@ -60,27 +60,27 @@ var pneumoniaQuizData = {
         },
         {
             id: 3,
-            type: "sata",
+            type: "ordering",
             subtype: null,
             difficulty: "application",
-            stem: "A nurse is implementing nursing interventions for a patient hospitalized with pneumonia. Which actions are appropriate? (Select all that apply.)",
+            stem: "A 72-year-old patient is admitted from the ED with community-acquired pneumonia \u2014 temperature 102.4\u00b0F, productive cough with rust-colored sputum, SpO2 89% on room air, and RR 28. Place the nursing priorities in the correct order.",
             options: [
-                { id: "a", text: "Position the patient in semi-Fowler\u2019s or high-Fowler\u2019s position" },
-                { id: "b", text: "Encourage deep breathing and coughing exercises every 2 hours" },
-                { id: "c", text: "Restrict fluid intake to reduce pulmonary secretions" },
-                { id: "d", text: "Administer antibiotics as prescribed within the recommended time frame" },
-                { id: "e", text: "Encourage early ambulation as tolerated" }
+                { id: "a", text: "Apply supplemental oxygen to maintain SpO2 \u226594%" },
+                { id: "b", text: "Obtain blood cultures BEFORE starting antibiotics" },
+                { id: "c", text: "Obtain sputum specimen for culture and sensitivity" },
+                { id: "d", text: "Administer prescribed antibiotics within 1 hour of admission" },
+                { id: "e", text: "Initiate IV fluids for hydration" }
             ],
-            correct: ["a", "b", "d", "e"],
+            correct: ["a", "b", "c", "d", "e"],
             rationale: {
-                correct: "Elevated positioning promotes lung expansion and improves gas exchange. Deep breathing and coughing help mobilize secretions and prevent atelectasis. Timely antibiotics are critical. Early mobility reduces complications and shortens hospital stay.",
-                a: "CORRECT \u2014 Elevated positioning promotes lung expansion and improves gas exchange.",
-                b: "CORRECT \u2014 Deep breathing and coughing (IS, C&DB) help mobilize secretions and prevent atelectasis.",
-                c: "INCORRECT \u2014 Fluids should be ENCOURAGED, not restricted. Adequate hydration (at least 3L/day unless contraindicated) thins secretions, making them easier to expectorate. Fluid restriction would make secretions thick and difficult to clear, worsening the infection.",
-                d: "CORRECT \u2014 Timely antibiotics are critical \u2014 CAP guidelines recommend first dose within 4 hours (within 1 hour if severe sepsis).",
-                e: "CORRECT \u2014 Early mobility reduces complications, improves lung expansion, and shortens hospital stay."
+                correct: "Pneumonia admission priorities follow ABCs combined with the evidence-based care bundle. Oxygenation first, then cultures BEFORE antibiotics, then timely antibiotic administration, then supportive hydration.",
+                a: "FIRST \u2014 SpO2 of 89% with tachypnea indicates significant hypoxemia. Apply supplemental oxygen targeting SpO2 \u226594%. Oxygenation is always the top priority.",
+                b: "SECOND \u2014 Blood cultures (2 sets from 2 sites) must be drawn BEFORE the first antibiotic dose. Antibiotics can sterilize blood within minutes, making cultures falsely negative.",
+                c: "THIRD \u2014 Obtain sputum from a deep cough for culture and Gram stain before antibiotics are given. This helps identify the causative organism.",
+                d: "FOURTH \u2014 Administer antibiotics as soon as cultures are obtained. CMS quality measures require antibiotics within 4 hours (within 1 hour for severe cases).",
+                e: "FIFTH \u2014 IV hydration supports increased metabolic needs from fever and tachypnea, thins secretions, and maintains hemodynamic stability."
             },
-            testTakingTip: "Pneumonia care priorities: Oxygenation (positioning + O2) \u2192 Airway clearance (hydration + C&DB + early mobility) \u2192 Antibiotics (timely administration) \u2192 Monitoring (vitals, SpO2, sputum character). ENCOURAGE fluids in pneumonia; RESTRICT fluids in heart failure.",
+            testTakingTip: "Pneumonia bundle: O2 first (ABCs) \u2192 Cultures BEFORE antibiotics \u2192 Antibiotics within 1 hour \u2192 IV fluids. The 'cultures before antibiotics' rule is one of the most tested pneumonia concepts.",
             guideSection: "Section 8 \u2014 Nursing Interventions",
             guideSectionId: "interventions"
         },
@@ -132,27 +132,26 @@ var pneumoniaQuizData = {
         },
         {
             id: 6,
-            type: "sata",
+            type: "matrix",
             subtype: null,
             difficulty: "application",
-            stem: "A post-operative patient is at high risk for aspiration pneumonia. Which nursing interventions help prevent aspiration? (Select all that apply.)",
+            matrixColumns: ["Typical (Bacterial) Pneumonia", "Atypical Pneumonia"],
+            stem: "A nurse is comparing the presentations of two patients with pneumonia. For each finding, indicate whether it is more characteristic of typical (bacterial) pneumonia or atypical pneumonia.",
             options: [
-                { id: "a", text: "Keep the head of bed elevated at least 30 degrees during and after meals" },
-                { id: "b", text: "Assess swallowing ability before offering oral intake" },
-                { id: "c", text: "Provide oral care every 2 hours and before meals" },
-                { id: "d", text: "Administer a sedative before meals to reduce anxiety about eating" },
-                { id: "e", text: "Verify NG tube placement before administering tube feedings" }
+                { id: "a", text: "Sudden onset with high fever and productive purulent sputum" },
+                { id: "b", text: "Gradual onset with low-grade fever and dry hacking cough" },
+                { id: "c", text: "Lobar consolidation on chest X-ray" },
+                { id: "d", text: "Diffuse bilateral infiltrates on chest X-ray" }
             ],
-            correct: ["a", "b", "c", "e"],
+            correct: { a: "Typical (Bacterial) Pneumonia", b: "Atypical Pneumonia", c: "Typical (Bacterial) Pneumonia", d: "Atypical Pneumonia" },
             rationale: {
-                correct: "HOB elevation, dysphagia screening, oral care, and NG tube placement verification are all evidence-based aspiration prevention strategies.",
-                a: "CORRECT \u2014 HOB elevation \u226530\u00b0 uses gravity to prevent reflux and aspiration.",
-                b: "CORRECT \u2014 Dysphagia screening identifies patients at aspiration risk before allowing oral intake.",
-                c: "CORRECT \u2014 Oral care reduces bacterial colonization of the oropharynx, decreasing the bacterial load if aspiration occurs.",
-                d: "INCORRECT \u2014 Sedatives INCREASE aspiration risk by depressing the gag reflex, reducing alertness, and impairing the cough reflex. Patients should be fully alert during meals. Sedation before meals is contraindicated in patients at aspiration risk.",
-                e: "CORRECT \u2014 Confirming NG tube placement (pH testing, X-ray) prevents feeding directly into the lungs."
+                correct: "Typical bacterial pneumonia and atypical pneumonia have distinctly different presentations, onset patterns, and radiographic findings.",
+                a: "TYPICAL \u2014 Bacterial pneumonia (most commonly S. pneumoniae) presents with acute, sudden onset of high fever, shaking chills, and productive cough with purulent or rust-colored sputum.",
+                b: "ATYPICAL \u2014 Atypical pneumonia (Mycoplasma, Chlamydophila, Legionella) has gradual onset with low-grade fever, malaise, and persistent dry cough. Often called 'walking pneumonia.'",
+                c: "TYPICAL \u2014 Bacterial pneumonia causes dense consolidation confined to a single lobe (lobar pneumonia) with air bronchograms on chest X-ray.",
+                d: "ATYPICAL \u2014 Atypical pneumonia causes diffuse, patchy, bilateral interstitial infiltrates. The 'X-ray looks worse than the patient' pattern is a hallmark of atypical pneumonia."
             },
-            testTakingTip: "Aspiration prevention bundle: HOB \u226530\u00b0 + swallow screen + oral care + alert patient + tube placement verification. The #1 preventable cause of HAP is aspiration. Oral care is an evidence-based intervention that significantly reduces pneumonia risk in ventilated patients.",
+            testTakingTip: "Typical = sudden, high fever, productive sputum, lobar consolidation. Atypical = gradual, low-grade fever, dry cough, diffuse infiltrates. Key clue: if the CXR looks worse than the patient appears, think atypical.",
             guideSection: "Section 8 \u2014 Nursing Interventions",
             guideSectionId: "interventions"
         },

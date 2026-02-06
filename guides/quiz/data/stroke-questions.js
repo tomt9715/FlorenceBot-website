@@ -1,6 +1,6 @@
 /**
  * Stroke Quiz — Question Data
- * 10 NCLEX-style questions: 3 Single, 3 SATA, 2 Priority, 2 Analysis
+ * 10 NCLEX-style questions: 4 Single, 3 Priority, 2 Matrix, 1 Ordering
  */
 
 /* exported strokeQuizData */
@@ -41,27 +41,26 @@ var strokeQuizData = {
         },
         {
             id: 2,
-            type: "sata",
+            type: "matrix",
             subtype: null,
             difficulty: "application",
-            stem: "A nurse is assessing a patient using the BE-FAST stroke recognition tool. Which findings would the nurse identify as potential stroke indicators? (Select all that apply.)",
+            matrixColumns: ["Positive Indicator", "Negative Indicator"],
+            stem: "A nurse is assessing a patient using the BE-FAST stroke recognition tool. Classify each finding as a positive stroke indicator (abnormal) or a negative indicator (normal).",
             options: [
                 { id: "a", text: "The patient suddenly cannot maintain balance and lists to the right side" },
-                { id: "b", text: "The patient reports a sudden, severe headache with no known cause" },
-                { id: "c", text: "The patient's left eye shows sudden vision loss" },
-                { id: "d", text: "The patient smiles and both sides of the face rise symmetrically" },
-                { id: "e", text: "The patient asks to repeat 'The sky is blue in Cincinnati' and says it clearly without slurring" },
-                { id: "f", text: "The patient holds both arms outstretched and the left arm drifts downward" }
+                { id: "b", text: "The patient's left eye shows sudden vision loss" },
+                { id: "c", text: "The patient smiles and both sides of the face rise symmetrically" },
+                { id: "d", text: "The patient asks to repeat 'The sky is blue in Cincinnati' and says it clearly without slurring" },
+                { id: "e", text: "The patient holds both arms outstretched and the left arm drifts downward" }
             ],
-            correct: ["a", "c", "f"],
+            correct: { a: "Positive Indicator", b: "Positive Indicator", c: "Negative Indicator", d: "Negative Indicator", e: "Positive Indicator" },
             rationale: {
-                correct: "Balance loss, sudden vision changes, and unilateral arm drift are all positive stroke indicators in the BE-FAST assessment.",
-                a: "CORRECT — 'B' = Balance. Sudden loss of balance, coordination, or dizziness is a stroke indicator. The patient listing to one side suggests cerebellar or brainstem involvement.",
-                b: "This is a potential stroke indicator (especially hemorrhagic stroke — 'worst headache of my life'), but it is not part of the standard BE-FAST mnemonic. It is sometimes added as an additional warning sign.",
-                c: "CORRECT — 'E' = Eyes. Sudden vision changes including blurred vision, double vision, or vision loss in one or both eyes indicates possible stroke affecting the visual pathways.",
-                d: "NORMAL — Symmetric facial movement is a NEGATIVE finding. A positive 'F' (Face) would show asymmetry — one side drooping when the patient smiles.",
-                e: "NORMAL — Clear speech without slurring is a NEGATIVE finding. A positive 'S' (Speech) would show slurred, garbled, or absent speech.",
-                f: "CORRECT — 'A' = Arms. Arm drift (one arm drifting downward when both are held outstretched with eyes closed for 10 seconds) indicates contralateral motor weakness, a key stroke sign."
+                correct: "Balance loss, sudden vision changes, and unilateral arm drift are all positive (abnormal) stroke indicators in the BE-FAST assessment. Symmetric facial movement and clear speech are negative (normal) findings.",
+                a: "POSITIVE INDICATOR — 'B' = Balance. Sudden loss of balance, coordination, or dizziness is a stroke indicator. The patient listing to one side suggests cerebellar or brainstem involvement.",
+                b: "POSITIVE INDICATOR — 'E' = Eyes. Sudden vision changes including blurred vision, double vision, or vision loss in one or both eyes indicates possible stroke affecting the visual pathways.",
+                c: "NEGATIVE INDICATOR — Symmetric facial movement is a NORMAL finding. A positive 'F' (Face) would show asymmetry — one side drooping when the patient smiles.",
+                d: "NEGATIVE INDICATOR — Clear speech without slurring is a NORMAL finding. A positive 'S' (Speech) would show slurred, garbled, or absent speech.",
+                e: "POSITIVE INDICATOR — 'A' = Arms. Arm drift (one arm drifting downward when both are held outstretched with eyes closed for 10 seconds) indicates contralateral motor weakness, a key stroke sign."
             },
             testTakingTip: "BE-FAST: Balance, Eyes, Face (droop), Arms (drift), Speech (slurred), Time (call 911). For NCLEX, remember that NORMAL findings are negative — only ABNORMAL findings are stroke indicators. Don't be tricked by answer options describing normal exam findings.",
             guideSection: "Section 3 — FAST Assessment Tool",
@@ -92,29 +91,25 @@ var strokeQuizData = {
         },
         {
             id: 4,
-            type: "sata",
+            type: "ordering",
             subtype: null,
             difficulty: "analysis",
-            stem: "A patient received IV tPA for acute ischemic stroke 2 hours ago. The nurse performs a neurological check and finds that the patient's level of consciousness has decreased, the previously affected arm is now completely flaccid, and the patient vomits. Which actions should the nurse take? (Select all that apply.)",
+            stem: "A patient received IV tPA for acute ischemic stroke 2 hours ago. The nurse finds that the patient's level of consciousness has decreased, the previously affected arm is now completely flaccid, and the patient vomits. Place the nurse's actions in the correct priority sequence.",
             options: [
-                { id: "a", text: "Stop the tPA infusion if it is still running" },
-                { id: "b", text: "Obtain a stat CT scan of the head" },
-                { id: "c", text: "Check blood pressure — it should be maintained below 180/105 mmHg" },
-                { id: "d", text: "Administer a second dose of tPA to improve clot dissolution" },
-                { id: "e", text: "Position the patient on their side to protect the airway" },
-                { id: "f", text: "Notify the stroke team/provider immediately" }
+                { id: "a", text: "Stop the tPA infusion immediately" },
+                { id: "b", text: "Position the patient on their side to protect the airway" },
+                { id: "c", text: "Notify the stroke team/provider of the acute deterioration" },
+                { id: "d", text: "Obtain a stat CT scan of the head to evaluate for hemorrhagic conversion" }
             ],
-            correct: ["a", "b", "e", "f"],
+            correct: ["a", "b", "c", "d"],
             rationale: {
-                correct: "Neurological deterioration after tPA (decreased LOC, worsening deficits, vomiting) is a warning sign of hemorrhagic conversion — the most dangerous complication of tPA. Immediate actions: stop tPA, get a stat CT to confirm, protect the airway, and notify the stroke team.",
-                a: "CORRECT — If the tPA infusion is still running, it must be stopped immediately. The clinical picture suggests hemorrhagic conversion, and continuing tPA would worsen bleeding.",
-                b: "CORRECT — A stat (emergent) CT scan is needed to determine if intracranial hemorrhage has occurred. This is the definitive diagnostic step and guides all subsequent treatment.",
-                c: "While BP management is important, this statement describes the POST-tPA maintenance goal. In the setting of acute neurological deterioration suggesting hemorrhage, the immediate priority is stopping tPA, imaging, and airway protection — not BP monitoring.",
-                d: "INCORRECT — A second dose of tPA is NEVER given. If the patient is deteriorating after tPA, hemorrhagic conversion is suspected. Additional tPA would be catastrophic.",
-                e: "CORRECT — The patient is vomiting with a decreased level of consciousness, creating a high aspiration risk. Lateral positioning protects the airway from aspiration.",
-                f: "CORRECT — This is a medical emergency requiring immediate physician and stroke team involvement. The patient may need emergent neurosurgical intervention, blood product transfusion, or other life-saving measures."
+                correct: "The correct sequence follows the mnemonic STOP-SIDE-SIGNAL-SCAN: stop the causative agent first, protect the airway, activate the team, then obtain definitive imaging.",
+                a: "FIRST — If the tPA infusion is still running, it must be stopped immediately. The clinical picture suggests hemorrhagic conversion, and continuing tPA would worsen any bleeding. Removing the causative agent is the most time-critical action.",
+                b: "SECOND — The patient is vomiting with a decreased level of consciousness, creating a high aspiration risk. Lateral positioning protects the airway from aspiration. Airway protection is always a top priority after stopping the harmful agent.",
+                c: "THIRD — Notify the stroke team/provider immediately. This is a medical emergency requiring physician involvement for possible emergent neurosurgical intervention, blood product transfusion, or other life-saving measures. The team must be aware to order and interpret the CT scan.",
+                d: "FOURTH — A stat CT scan is needed to determine if intracranial hemorrhage has occurred. This is the definitive diagnostic step and guides all subsequent treatment. It requires the team to be notified first so they can order and act on the results."
             },
-            testTakingTip: "Post-tPA neurological deterioration = hemorrhagic conversion until proven otherwise. The mnemonic: STOP (infusion), SCAN (CT), SIDE (position), SIGNAL (notify team). Never give more tPA.",
+            testTakingTip: "Post-tPA neurological deterioration = hemorrhagic conversion until proven otherwise. The mnemonic: STOP (infusion), SIDE (position), SIGNAL (notify team), SCAN (CT). A second dose of tPA is NEVER given — additional thrombolytics would be catastrophic.",
             guideSection: "Section 5 — Priority Nursing Interventions",
             guideSectionId: "interventions"
         },
@@ -143,10 +138,11 @@ var strokeQuizData = {
         },
         {
             id: 6,
-            type: "sata",
+            type: "matrix",
             subtype: null,
             difficulty: "application",
-            stem: "A nurse is evaluating a patient for tPA eligibility. Which findings would EXCLUDE the patient from receiving tPA? (Select all that apply.)",
+            matrixColumns: ["Inclusion Criterion", "Exclusion Criterion"],
+            stem: "A nurse is evaluating a patient for tPA eligibility. Classify each finding as an inclusion criterion (supports tPA administration) or an exclusion criterion (prevents tPA administration).",
             options: [
                 { id: "a", text: "Symptom onset was 5 hours ago" },
                 { id: "b", text: "Platelet count of 85,000/mm³" },
@@ -154,14 +150,14 @@ var strokeQuizData = {
                 { id: "d", text: "The patient had major abdominal surgery 10 days ago" },
                 { id: "e", text: "INR of 1.4 on chronic low-dose warfarin" }
             ],
-            correct: ["a", "b", "d"],
+            correct: { a: "Exclusion Criterion", b: "Exclusion Criterion", c: "Inclusion Criterion", d: "Exclusion Criterion", e: "Inclusion Criterion" },
             rationale: {
-                correct: "Symptom onset >4.5 hours, platelets <100,000, and major surgery within 14 days are all exclusion criteria for tPA administration.",
-                a: "EXCLUDE — The standard tPA window is 0-3 hours (extended to 4.5 hours with additional criteria). At 5 hours, the patient is outside the treatment window.",
-                b: "EXCLUDE — Platelets must be ≥100,000/mm³ for tPA. A count of 85,000 increases the risk of hemorrhagic complications. tPA works by breaking down clots, and inadequate platelets cannot provide hemostasis if bleeding occurs.",
-                c: "This is an INCLUSION criterion, not an exclusion. A CT scan must show NO hemorrhage before tPA can be given. Hemorrhage on CT is the #1 absolute contraindication.",
-                d: "EXCLUDE — Major surgery or serious trauma within 14 days is a contraindication due to the risk of surgical site hemorrhage. The tPA could dissolve clots at the surgical site, causing life-threatening bleeding.",
-                e: "NOT an exclusion — INR must be >1.7 to exclude a patient from tPA. An INR of 1.4 is below the cutoff and does not preclude tPA administration."
+                correct: "Symptom onset >4.5 hours, platelets <100,000, and major surgery within 14 days are exclusion criteria. A negative CT for hemorrhage and INR ≤1.7 are inclusion criteria that support tPA eligibility.",
+                a: "EXCLUSION CRITERION — The standard tPA window is 0-3 hours (extended to 4.5 hours with additional criteria). At 5 hours, the patient is outside the treatment window.",
+                b: "EXCLUSION CRITERION — Platelets must be >=100,000/mm3 for tPA. A count of 85,000 increases the risk of hemorrhagic complications. tPA works by breaking down clots, and inadequate platelets cannot provide hemostasis if bleeding occurs.",
+                c: "INCLUSION CRITERION — A CT scan must show NO hemorrhage before tPA can be given. Hemorrhage on CT is the #1 absolute contraindication, so the absence of hemorrhage is a required inclusion criterion.",
+                d: "EXCLUSION CRITERION — Major surgery or serious trauma within 14 days is a contraindication due to the risk of surgical site hemorrhage. The tPA could dissolve clots at the surgical site, causing life-threatening bleeding.",
+                e: "INCLUSION CRITERION — INR must be <=1.7 for tPA eligibility. An INR of 1.4 is below the cutoff and does not preclude tPA administration, making this a finding that supports eligibility."
             },
             labValues: [
                 { name: "INR (tPA cutoff)", normal: "Must be ≤1.7" },

@@ -1,7 +1,7 @@
 /**
  * Heart Failure Quiz — Question Data
  * Extracted from guides/heart-failure.html practice questions section.
- * 8 NCLEX-style questions: 4 Single, 2 SATA, 2 Priority
+ * 8 NCLEX-style questions: 4 Single, 2 Priority, 1 Ordering, 1 Matrix
  */
 
 /* exported heartFailureQuizData */
@@ -60,29 +60,27 @@ var heartFailureQuizData = {
         },
         {
             id: 3,
-            type: "sata",
+            type: "ordering",
             subtype: null,
             difficulty: "application",
-            stem: "A patient is admitted with acute decompensated heart failure. The nurse anticipates which of the following interventions?",
+            stem: "A patient arrives in the ED with acute decompensated heart failure \u2014 severe dyspnea, crackles throughout all lung fields, SpO2 84%, and BP 158/96 mmHg. Place the following nursing interventions in priority order.",
             options: [
-                { id: "a", text: "Place the patient in high Fowler\u2019s position" },
-                { id: "b", text: "Administer IV furosemide (Lasix) as ordered" },
-                { id: "c", text: "Encourage high-sodium foods to increase blood volume" },
-                { id: "d", text: "Administer supplemental oxygen to maintain SpO2 > 94%" },
-                { id: "e", text: "Administer nitroglycerin as ordered to reduce preload" },
-                { id: "f", text: "Encourage ambulation to improve circulation" }
+                { id: "a", text: "Position the patient upright (high Fowler\u2019s position)" },
+                { id: "b", text: "Apply high-flow supplemental oxygen" },
+                { id: "c", text: "Obtain IV access and administer IV furosemide as ordered" },
+                { id: "d", text: "Obtain a 12-lead ECG" },
+                { id: "e", text: "Notify the provider and obtain further orders" }
             ],
-            correct: ["a", "b", "d", "e"],
+            correct: ["a", "b", "c", "d", "e"],
             rationale: {
-                correct: "The LMNOP mnemonic for acute decompensated HF covers Lasix, Morphine, Nitrates, Oxygen, and Position (high Fowler\u2019s). Every correct answer maps to a letter in this mnemonic.",
-                a: "CORRECT \u2014 High Fowler\u2019s position reduces venous return (preload) and improves lung expansion. This is the \"P\" in the LMNOP mnemonic (Position).",
-                b: "CORRECT \u2014 IV loop diuretics are the first-line treatment for acute fluid overload. IV furosemide removes excess fluid rapidly.",
-                c: "INCORRECT \u2014 Sodium restriction (2-3 g/day) is essential in HF. High-sodium foods worsen fluid retention and congestion.",
-                d: "CORRECT \u2014 Oxygen therapy addresses hypoxia from pulmonary congestion. The \"O\" in LMNOP.",
-                e: "CORRECT \u2014 Nitroglycerin reduces preload through venodilation, decreasing pulmonary congestion. The \"N\" in LMNOP.",
-                f: "INCORRECT \u2014 During acute decompensation, activity increases myocardial oxygen demand. Bed rest with clustered care is appropriate during the acute phase."
+                correct: "The correct sequence follows ABCs and immediate stabilization: position upright to reduce preload and improve breathing, oxygenate the hypoxic patient, establish access and begin diuresis, obtain diagnostic data, then communicate with the provider for ongoing management.",
+                a: "FIRST \u2014 Positioning the patient upright is the fastest intervention a nurse can perform independently. High Fowler\u2019s reduces venous return (preload), decreases pulmonary congestion, and improves diaphragm excursion.",
+                b: "SECOND \u2014 SpO2 of 84% is critically low and must be addressed immediately after positioning. Supplemental oxygen corrects life-threatening hypoxia.",
+                c: "THIRD \u2014 IV access is needed for medication administration. IV furosemide is the first-line drug for acute fluid overload and begins removing excess fluid from the pulmonary vasculature.",
+                d: "FOURTH \u2014 A 12-lead ECG identifies whether an acute cardiac event (MI, arrhythmia) triggered the decompensation. This is essential diagnostic data but comes after life-saving interventions are initiated.",
+                e: "FIFTH \u2014 After stabilizing interventions are underway and initial data is gathered, the nurse notifies the provider with a complete SBAR report to obtain orders for ongoing management."
             },
-            testTakingTip: "For acute decompensated HF, remember LMNOP: Lasix, Morphine, Nitrates, Oxygen, Position. Every correct answer in this question maps to a letter in the mnemonic.",
+            testTakingTip: "For ordering questions, think ABCs first: Airway/positioning, then Breathing/oxygen, then Circulation/medications. Quick independent nursing actions (positioning, O2) come before actions requiring orders or equipment setup.",
             guideSection: "Section 6 \u2014 Priority Nursing Interventions",
             guideSectionId: "interventions"
         },
@@ -143,27 +141,26 @@ var heartFailureQuizData = {
         },
         {
             id: 6,
-            type: "sata",
+            type: "matrix",
             subtype: null,
-            difficulty: "application",
-            stem: "A nurse is providing discharge teaching to a patient with chronic heart failure. Which statements by the patient indicate correct understanding?",
+            difficulty: "analysis",
+            matrixColumns: ["Correct Understanding", "Needs More Teaching"],
+            stem: "A nurse is evaluating a heart failure patient\u2019s understanding of discharge instructions. For each patient statement, indicate whether it demonstrates correct understanding or needs more teaching.",
             options: [
-                { id: "a", text: "\"I will weigh myself every morning before breakfast using the same scale.\"" },
-                { id: "b", text: "\"I should call my doctor if I gain more than 5 pounds in one day.\"" },
-                { id: "c", text: "\"I need to avoid taking ibuprofen for my arthritis pain.\"" },
-                { id: "d", text: "\"I can use salt substitutes freely since I need to limit sodium.\"" },
-                { id: "e", text: "\"I should take my furosemide in the morning to avoid nighttime urination.\"" }
+                { id: "a", text: "\"I weigh myself every morning before breakfast on the same scale and write it down.\"" },
+                { id: "b", text: "\"I stopped taking my lisinopril because I feel fine now and my blood pressure is normal.\"" },
+                { id: "c", text: "\"I limit my fluids to what my doctor recommended and I measure my intake each day.\"" },
+                { id: "d", text: "\"I rest all day and avoid any physical activity so I don\u2019t stress my heart.\"" }
             ],
-            correct: ["a", "c", "e"],
+            correct: { a: "Correct Understanding", b: "Needs More Teaching", c: "Correct Understanding", d: "Needs More Teaching" },
             rationale: {
-                correct: "Correct understanding includes daily morning weights on the same scale, avoiding NSAIDs, and taking diuretics in the morning to prevent nocturia.",
-                a: "CORRECT \u2014 Daily weights at the same time, on the same scale, in similar clothing is the most sensitive indicator of fluid retention. Morning before breakfast is the standard timing.",
-                b: "INCORRECT \u2014 The threshold is 2 lbs in one day or 5 lbs in one week, not 5 lbs in one day. A 5-lb gain in a single day would be a medical emergency.",
-                c: "CORRECT \u2014 NSAIDs (ibuprofen, naproxen) cause sodium and water retention AND reduce the effectiveness of ACE inhibitors and diuretics. HF patients should avoid them.",
-                d: "INCORRECT \u2014 Many salt substitutes contain potassium chloride. Patients taking ACE inhibitors or ARBs are already at risk for hyperkalemia, so using potassium-based salt substitutes could push K+ to dangerous levels.",
-                e: "CORRECT \u2014 Taking diuretics in the morning prevents nocturia and promotes daytime diuresis when the patient is active and near the bathroom."
+                correct: "Daily weights and fluid restriction adherence demonstrate proper self-management. Stopping medications independently and complete avoidance of activity are dangerous misconceptions requiring re-education.",
+                a: "CORRECT UNDERSTANDING \u2014 Daily weights at the same time, on the same scale, in similar clothing is the gold standard for monitoring fluid retention. A gain of >2 lbs/day or >5 lbs/week = call provider.",
+                b: "NEEDS MORE TEACHING \u2014 ACE inhibitors like lisinopril are taken for life in HF, regardless of how the patient feels. They reduce afterload, prevent cardiac remodeling, and improve survival. The medication IS the reason the patient feels better.",
+                c: "CORRECT UNDERSTANDING \u2014 Fluid restriction (typically 1.5\u20132 L/day) reduces cardiac workload and prevents fluid overload. Measuring daily intake shows active engagement with the treatment plan.",
+                d: "NEEDS MORE TEACHING \u2014 While patients should avoid overexertion, moderate physical activity (walking, cardiac rehab) is recommended for stable HF patients. Complete bed rest leads to deconditioning, muscle wasting, and DVT risk."
             },
-            testTakingTip: "For SATA questions, evaluate each option independently as true or false. Don\u2019t let one \"obviously correct\" answer make you rush through the others. The salt substitute trap (potassium + ACE inhibitor) is a high-yield NCLEX concept.",
+            testTakingTip: "Watch for two common HF misconceptions: (1) stopping medications when feeling better, and (2) complete activity avoidance. Both are \"needs more teaching\" red flags on the NCLEX.",
             guideSection: "Section 7 \u2014 Pharmacological Management",
             guideSectionId: "medications"
         },

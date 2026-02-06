@@ -1,7 +1,7 @@
 /**
  * Arrhythmias Quiz — Question Data
  * Extracted from guides/arrhythmias.html practice questions section.
- * 10 NCLEX-style questions: 5 Single, 2 SATA, 2 Priority, 1 Analysis
+ * 10 NCLEX-style questions: 6 Single, 2 Priority, 1 Matrix, 1 Ordering
  */
 
 /* exported arrhythmiasQuizData */
@@ -83,27 +83,26 @@ var arrhythmiasQuizData = {
         },
         {
             id: 4,
-            type: "sata",
+            type: "matrix",
             subtype: null,
-            difficulty: "application",
-            stem: "A patient with new-onset atrial fibrillation is being admitted to the telemetry unit. Which nursing interventions should the nurse anticipate? Select all that apply.",
+            difficulty: "analysis",
+            matrixColumns: ["Immediate Defibrillation", "Synchronized Cardioversion"],
+            stem: "A nurse is reviewing cardiac rhythms and their emergency interventions. For each rhythm, indicate whether the primary treatment is immediate defibrillation (unsynchronized shock) or synchronized cardioversion.",
             options: [
-                { id: "a", text: "Initiate anticoagulation therapy as ordered" },
-                { id: "b", text: "Administer adenosine 6 mg rapid IV push" },
-                { id: "c", text: "Administer rate-control medication (diltiazem or metoprolol) as ordered" },
-                { id: "d", text: "Prepare for immediate defibrillation" },
-                { id: "e", text: "Monitor potassium and magnesium levels" }
+                { id: "a", text: "Ventricular fibrillation" },
+                { id: "b", text: "Unstable supraventricular tachycardia with a pulse" },
+                { id: "c", text: "Pulseless ventricular tachycardia" },
+                { id: "d", text: "Unstable atrial fibrillation with rapid ventricular response and hypotension" }
             ],
-            correct: ["a", "c", "e"],
+            correct: { a: "Immediate Defibrillation", b: "Synchronized Cardioversion", c: "Immediate Defibrillation", d: "Synchronized Cardioversion" },
             rationale: {
-                correct: "A-fib management has 3 pillars: (1) rate control, (2) rhythm control (if indicated), and (3) stroke prevention with anticoagulation. Monitoring electrolytes (K+, Mg2+) is essential for any arrhythmia.",
-                a: "CORRECT \u2014 Atrial fibrillation causes blood to pool in the fibrillating atria, forming clots that can embolize to the brain (stroke). Anticoagulation is essential to reduce this risk.",
-                b: "INCORRECT \u2014 Adenosine is first-line for SVT, not atrial fibrillation. A-fib is managed with rate control (beta-blockers, calcium channel blockers) or rhythm control (amiodarone, cardioversion).",
-                c: "CORRECT \u2014 Rate control with diltiazem or metoprolol slows the ventricular response rate, allowing the heart to fill more effectively and reducing myocardial oxygen demand.",
-                d: "INCORRECT \u2014 Defibrillation is for pulseless rhythms (V-fib, pulseless V-tach). If this patient is hemodynamically unstable, synchronized cardioversion (not defibrillation) would be indicated. The question describes an admission, suggesting the patient is stable.",
-                e: "CORRECT \u2014 Low potassium and magnesium contribute to atrial fibrillation and other arrhythmias. Correcting electrolyte imbalances is a priority nursing intervention for any arrhythmia."
+                correct: "Pulseless rhythms (V-fib and pulseless V-tach) require immediate unsynchronized defibrillation. Unstable rhythms with a pulse (SVT, A-fib with RVR) require synchronized cardioversion, which times the shock to the R wave to avoid the vulnerable T-wave period.",
+                a: "IMMEDIATE DEFIBRILLATION \u2014 Ventricular fibrillation is a pulseless, chaotic rhythm with no identifiable QRS complexes. Unsynchronized defibrillation is the only option. CPR + early defibrillation is the standard of care.",
+                b: "SYNCHRONIZED CARDIOVERSION \u2014 This patient has SVT with hemodynamic instability but still has a pulse. Synchronized cardioversion delivers the shock timed to the R wave, avoiding the vulnerable T-wave period.",
+                c: "IMMEDIATE DEFIBRILLATION \u2014 Pulseless V-tach is treated identically to V-fib per ACLS protocol. The patient has no cardiac output, so immediate unsynchronized defibrillation is indicated.",
+                d: "SYNCHRONIZED CARDIOVERSION \u2014 Unstable A-fib with rapid ventricular response and hypotension requires urgent rhythm control. The patient has a pulse, so synchronized cardioversion is used."
             },
-            testTakingTip: "A-fib management has 3 pillars: (1) rate control, (2) rhythm control (if indicated), and (3) stroke prevention with anticoagulation. Always check electrolytes (K+, Mg2+) for any arrhythmia.",
+            testTakingTip: "The key distinction: pulse or no pulse? No pulse = defibrillation (unsynchronized). Pulse present but unstable = synchronized cardioversion. Remember that most defibrillators reset the sync button after each shock.",
             guideSection: "Section 4 \u2014 Atrial Arrhythmias",
             guideSectionId: "atrial-rhythms"
         },
@@ -201,27 +200,27 @@ var arrhythmiasQuizData = {
         },
         {
             id: 9,
-            type: "sata",
+            type: "ordering",
             subtype: null,
             difficulty: "application",
-            stem: "A nurse is preparing to administer adenosine to a patient with SVT. Which nursing actions are appropriate? Select all that apply.",
+            stem: "A nurse finds a patient unresponsive in bed with no pulse. The cardiac monitor shows ventricular fibrillation. Place the resuscitation actions in the correct sequence per ACLS protocol.",
             options: [
-                { id: "a", text: "Use an IV site as close to the heart as possible (antecubital preferred)" },
-                { id: "b", text: "Administer the drug slowly over 1-2 minutes by IV infusion" },
-                { id: "c", text: "Follow immediately with a 20 mL rapid normal saline flush" },
-                { id: "d", text: "Warn the patient about transient chest discomfort and a sense of impending doom" },
-                { id: "e", text: "Have the defibrillator at bedside in case of rhythm deterioration" }
+                { id: "a", text: "Call a code and activate the emergency response system" },
+                { id: "b", text: "Begin high-quality chest compressions (push hard, push fast)" },
+                { id: "c", text: "Deliver an unsynchronized defibrillation shock as soon as the defibrillator is available" },
+                { id: "d", text: "Establish IV/IO access and administer epinephrine 1 mg" },
+                { id: "e", text: "Reassess the rhythm after 2 minutes of CPR" }
             ],
-            correct: ["a", "c", "d", "e"],
+            correct: ["a", "b", "c", "d", "e"],
             rationale: {
-                correct: "Adenosine administration requires a proximal IV site, rapid push with immediate saline flush, patient warning about transient side effects, and emergency equipment at bedside.",
-                a: "CORRECT \u2014 Adenosine has a half-life of less than 10 seconds. Using the most proximal IV site (antecubital or higher) ensures the drug reaches the heart before it is metabolized.",
-                b: "INCORRECT \u2014 Adenosine must be given as a rapid IV push, NOT a slow infusion. Due to its ultra-short half-life, slow administration means the drug is broken down before it reaches the heart and will be ineffective.",
-                c: "CORRECT \u2014 A rapid 20 mL saline flush immediately after the adenosine push propels the drug quickly into the central circulation before it is metabolized.",
-                d: "CORRECT \u2014 Adenosine causes a brief period of asystole (seconds) as it resets the cardiac conduction. Patients often experience transient chest discomfort, facial flushing, and a feeling of \"impending doom.\" Warning the patient reduces anxiety.",
-                e: "CORRECT \u2014 While rare, adenosine can trigger dangerous arrhythmias including V-fib. Emergency equipment should always be at the bedside during administration."
+                correct: "The correct sequence follows ACLS protocol for V-fib arrest: activate the emergency response, begin CPR immediately, defibrillate at the earliest opportunity, administer vasopressors, and reassess rhythm after each 2-minute cycle.",
+                a: "FIRST \u2014 Calling a code activates the full resuscitation team and ensures the defibrillator, crash cart, and additional personnel are en route.",
+                b: "SECOND \u2014 High-quality chest compressions must begin immediately. Rate: 100\u2013120/min, depth: at least 2 inches, full chest recoil, minimal interruptions. CPR is the bridge to defibrillation.",
+                c: "THIRD \u2014 V-fib is a shockable rhythm. Defibrillation is delivered as soon as the defibrillator is available. For every minute without defibrillation, survival decreases by 7\u201310%.",
+                d: "FOURTH \u2014 After the first shock and resumption of CPR, IV or IO access is established. Epinephrine 1 mg IV/IO enhances coronary and cerebral perfusion pressure during CPR.",
+                e: "FIFTH \u2014 After 2 minutes of CPR, the rhythm is reassessed. If V-fib persists, another shock is delivered. This 2-minute cycle continues throughout the resuscitation."
             },
-            testTakingTip: "Adenosine = \"rapid push, rapid flush, closest IV site.\" The 10-second half-life is the key fact. If any answer choice suggests slow administration, it\u2019s automatically wrong.",
+            testTakingTip: "ACLS V-fib protocol: Call \u2192 CPR \u2192 Shock \u2192 Epi \u2192 Reassess. CPR comes BEFORE defibrillation because it takes time to set up the defibrillator. Epinephrine is given DURING CPR, not as a pause.",
             guideSection: "Section 8 \u2014 Nursing Interventions",
             guideSectionId: "interventions"
         },

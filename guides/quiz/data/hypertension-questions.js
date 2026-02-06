@@ -1,7 +1,7 @@
 /**
  * Hypertension Quiz — Question Data
  * Extracted from guides/hypertension.html practice questions section.
- * 8 NCLEX-style questions: 5 Single Best Answer, 2 SATA, 1 Priority
+ * 8 NCLEX-style questions: 5 Single, 1 Priority, 1 Matrix, 1 Ordering
  */
 
 /* exported hypertensionQuizData */
@@ -63,27 +63,26 @@ var hypertensionQuizData = {
         },
         {
             id: 3,
-            type: "sata",
+            type: "matrix",
             subtype: null,
             difficulty: "application",
-            stem: "A patient with newly diagnosed Stage 1 hypertension asks the nurse about lifestyle modifications. Which recommendations should the nurse include? Select all that apply.",
+            matrixColumns: ["Evidence-Based \u2014 Recommend", "Not Evidence-Based \u2014 Do Not Recommend"],
+            stem: "A nurse is counseling a patient newly diagnosed with Stage 1 hypertension on lifestyle modifications. For each recommendation, indicate whether it is evidence-based or not evidence-based.",
             options: [
-                { id: "a", text: "Follow the DASH diet rich in fruits, vegetables, and low-fat dairy" },
-                { id: "b", text: "Restrict sodium intake to less than 2,300 mg per day" },
-                { id: "c", text: "Engage in 90-150 minutes of aerobic exercise per week" },
-                { id: "d", text: "Eliminate all caffeine permanently" },
-                { id: "e", text: "Limit alcohol to 2 or fewer drinks per day for men, 1 for women" }
+                { id: "a", text: "Follow the DASH diet emphasizing fruits, vegetables, whole grains, and low-fat dairy" },
+                { id: "b", text: "Limit sodium intake to less than 2,300 mg per day" },
+                { id: "c", text: "Drink one glass of red wine daily to promote heart health" },
+                { id: "d", text: "Engage in at least 150 minutes per week of moderate-intensity aerobic exercise" }
             ],
-            correct: ["a", "b", "c", "e"],
+            correct: { a: "Evidence-Based \u2014 Recommend", b: "Evidence-Based \u2014 Recommend", c: "Not Evidence-Based \u2014 Do Not Recommend", d: "Evidence-Based \u2014 Recommend" },
             rationale: {
-                correct: "Combined lifestyle modifications can lower SBP by 20+ mmHg \u2014 as effective as many medications! For Stage 1 HTN without high cardiovascular risk, guidelines recommend 3-6 months of lifestyle modifications alone before adding medication.",
-                a: "CORRECT \u2014 The DASH diet alone can reduce SBP by approximately 11 mmHg. It emphasizes fruits, vegetables, whole grains, and low-fat dairy while limiting saturated fat.",
-                b: "CORRECT \u2014 Sodium restriction to < 2,300 mg/day (ideally < 1,500 mg/day) can reduce SBP by 5-6 mmHg.",
-                c: "CORRECT \u2014 Regular aerobic exercise (90-150 min/week) can reduce SBP by 5-8 mmHg.",
-                d: "INCORRECT \u2014 Complete caffeine elimination is not a standard recommendation. While patients should avoid excessive caffeine and not consume it before BP measurements, moderate caffeine intake is generally acceptable.",
-                e: "CORRECT \u2014 Alcohol moderation (\u2264 2 drinks/day for men, \u2264 1 for women) can reduce SBP by approximately 4 mmHg."
+                correct: "The DASH diet, sodium restriction, and regular aerobic exercise are all evidence-based lifestyle modifications proven to lower blood pressure. Drinking red wine daily is not an evidence-based recommendation \u2014 alcohol raises blood pressure.",
+                a: "EVIDENCE-BASED \u2014 The DASH diet alone can reduce SBP by approximately 11 mmHg. It is one of the most effective non-pharmacological interventions for hypertension.",
+                b: "EVIDENCE-BASED \u2014 Sodium restriction to <2,300 mg/day (ideally <1,500 mg/day for greater effect) can reduce SBP by 5\u20136 mmHg.",
+                c: "NOT EVIDENCE-BASED \u2014 No guideline recommends initiating alcohol intake for blood pressure management. Alcohol actually raises blood pressure. Guidelines recommend limiting, not starting, alcohol.",
+                d: "EVIDENCE-BASED \u2014 Regular aerobic exercise of 90\u2013150 minutes per week at moderate intensity can reduce SBP by 5\u20138 mmHg."
             },
-            testTakingTip: "Combined lifestyle modifications can lower SBP by 20+ mmHg \u2014 as effective as many medications! For Stage 1 HTN without high cardiovascular risk, guidelines recommend 3-6 months of lifestyle modifications alone before adding medication.",
+            testTakingTip: "Be cautious of 'health myths' on the NCLEX \u2014 recommending alcohol for heart health is NOT evidence-based nursing practice. Focus on proven modifications: DASH diet, sodium restriction, exercise, weight loss, and alcohol limitation.",
             guideSection: "Section 6 \u2014 Lifestyle Modifications",
             guideSectionId: "lifestyle"
         },
@@ -158,29 +157,29 @@ var hypertensionQuizData = {
         },
         {
             id: 7,
-            type: "sata",
+            type: "ordering",
             subtype: null,
             difficulty: "analysis",
-            stem: "A nurse is assessing a 28-year-old patient with a BP of 186/110 mmHg who is resistant to three antihypertensive medications. Which findings would suggest secondary hypertension? Select all that apply.",
+            stem: "A patient arrives at the emergency department with a blood pressure of 230/130 mmHg, severe headache, blurred vision, and chest pain. Place the nursing actions in priority order.",
             options: [
-                { id: "a", text: "Unexplained hypokalemia" },
-                { id: "b", text: "Family history of hypertension" },
-                { id: "c", text: "Episodic severe headaches with diaphoresis and palpitations" },
-                { id: "d", text: "Sedentary lifestyle with high sodium diet" },
-                { id: "e", text: "Abdominal bruit on auscultation" }
+                { id: "a", text: "Assess for end-organ damage \u2014 perform a focused neurological check and place on cardiac monitor" },
+                { id: "b", text: "Establish IV access with a large-bore catheter" },
+                { id: "c", text: "Administer IV antihypertensive (e.g., nicardipine or labetalol drip) per protocol" },
+                { id: "d", text: "Initiate continuous blood pressure monitoring every 5\u201315 minutes" },
+                { id: "e", text: "Obtain stat laboratory studies including troponin, BMP, and urinalysis" }
             ],
-            correct: ["a", "c", "e"],
+            correct: ["a", "b", "c", "d", "e"],
             rationale: {
-                correct: "Young age, treatment-resistant HTN, and specific clinical findings all point to secondary hypertension, which has an identifiable underlying cause.",
-                a: "CORRECT \u2014 Unexplained hypokalemia suggests hyperaldosteronism (Conn\u2019s syndrome). Excess aldosterone causes sodium and water retention (increasing BP) while promoting potassium excretion.",
-                b: "INCORRECT \u2014 Family history of hypertension is a risk factor for primary (essential) hypertension, which accounts for 90-95% of cases. It does not suggest a secondary cause.",
-                c: "CORRECT \u2014 Episodic headaches, diaphoresis, and palpitations with BP spikes are the classic triad of pheochromocytoma \u2014 a catecholamine-secreting adrenal tumor. This is a secondary cause of hypertension.",
-                d: "INCORRECT \u2014 Sedentary lifestyle and high sodium diet are modifiable risk factors for primary hypertension, not indicators of a secondary cause.",
-                e: "CORRECT \u2014 An abdominal bruit suggests renal artery stenosis, which causes renovascular hypertension. The narrowed renal artery triggers RAAS activation, driving up blood pressure. This is one of the most common secondary causes."
+                correct: "The correct sequence prioritizes rapid assessment, then intervention, then ongoing monitoring and diagnostics. First assess for end-organ damage, then establish vascular access, administer antihypertensive, monitor response, and obtain labs.",
+                a: "FIRST \u2014 Assessing for end-organ damage determines the urgency and type of intervention. A quick neuro check and cardiac monitoring identify stroke, MI, or aortic dissection.",
+                b: "SECOND \u2014 IV access must be established before IV medications can be administered. A large-bore catheter allows rapid infusion of antihypertensive drips.",
+                c: "THIRD \u2014 Once IV access is secured, administer the IV antihypertensive per protocol. The goal is to reduce MAP by no more than 25% in the first hour.",
+                d: "FOURTH \u2014 Continuous BP monitoring every 5\u201315 minutes evaluates the response and prevents overly rapid reduction, which could cause organ ischemia.",
+                e: "FIFTH \u2014 Stat labs help identify end-organ damage extent and guide ongoing management."
             },
-            testTakingTip: "Suspect secondary HTN when the patient is young (< 30), has sudden-onset severe HTN, or is resistant to 3+ medications. Key red flags: unexplained hypokalemia (hyperaldosteronism), episodic symptoms triad (pheochromocytoma), abdominal bruit (renal artery stenosis).",
-            guideSection: "Section 3 \u2014 Primary vs Secondary HTN",
-            guideSectionId: "types"
+            testTakingTip: "In hypertensive emergency: ASSESS \u2192 ACCESS \u2192 ACT \u2192 MONITOR \u2192 LABS. The exception: aortic dissection requires SBP <120 in 20 min vs. the standard 25% MAP reduction in 1 hour.",
+            guideSection: "Section 8 \u2014 Hypertensive Crisis",
+            guideSectionId: "crisis"
         },
         {
             id: 8,

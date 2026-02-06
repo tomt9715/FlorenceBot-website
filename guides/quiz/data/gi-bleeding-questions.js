@@ -1,6 +1,6 @@
 /**
  * GI Bleeding Quiz — Question Data
- * 10 NCLEX-style questions: 3 Single, 3 SATA, 2 Priority, 2 Analysis
+ * 10 NCLEX-style questions: 5 Single, 3 Priority, 1 Ordering, 1 Matrix
  */
 
 /* exported giBleedingQuizData */
@@ -63,29 +63,27 @@ var giBleedingQuizData = {
         },
         {
             id: 3,
-            type: "sata",
+            type: "ordering",
             subtype: null,
             difficulty: "application",
-            stem: "A nurse is caring for a patient with an acute upper GI bleed who is being resuscitated. Which interventions should the nurse anticipate? (Select all that apply.)",
+            stem: "A patient presents with acute upper GI bleeding, hematemesis, and hemodynamic instability. Place the nurse's resuscitation actions in the correct priority sequence.",
             options: [
-                { id: "a", text: "Insert two large-bore (16-18 gauge) peripheral IV catheters" },
-                { id: "b", text: "Send blood for type and crossmatch, CBC, BMP, and coagulation studies" },
-                { id: "c", text: "Insert a Foley catheter to monitor urine output" },
-                { id: "d", text: "Administer oral proton pump inhibitor (PPI) immediately" },
-                { id: "e", text: "Place the patient on continuous cardiac monitoring" },
-                { id: "f", text: "Administer morphine IV for abdominal pain management" }
+                { id: "a", text: "Establish two large-bore (16-18 gauge) peripheral IV lines and initiate fluid resuscitation with crystalloids" },
+                { id: "b", text: "Draw blood for type and crossmatch, CBC, BMP, and coagulation studies" },
+                { id: "c", text: "Place the patient on continuous cardiac monitoring and pulse oximetry" },
+                { id: "d", text: "Insert a Foley catheter to monitor hourly urine output (target >0.5 mL/kg/hr)" },
+                { id: "e", text: "Administer IV proton pump inhibitor (pantoprazole 80 mg bolus) and prepare for emergent endoscopy" }
             ],
-            correct: ["a", "b", "c", "e"],
+            correct: ["a", "b", "c", "d", "e"],
             rationale: {
-                correct: "Resuscitation for acute GI bleeding includes large-bore IV access, comprehensive lab work including type and crossmatch, Foley catheter for UOP monitoring, and continuous cardiac monitoring.",
-                a: "CORRECT — Two large-bore IVs allow simultaneous fluid resuscitation and blood product administration. 16G or larger is preferred for rapid transfusion.",
-                b: "CORRECT — Type and crossmatch (for 2-6 units PRBCs STAT), CBC (baseline Hgb/Hct), BMP (electrolytes, BUN — elevated BUN in upper GI bleed from blood protein digestion), and coagulation studies (PT/INR, PTT) are all essential initial labs.",
-                c: "CORRECT — A Foley catheter allows precise hourly urine output measurement. Target UOP is >0.5 mL/kg/hour as an indicator of adequate organ perfusion. Declining UOP suggests worsening shock.",
-                d: "INCORRECT — In the acute resuscitation phase, an IV PPI (not oral) is the route of choice. Oral medications may not be absorbed in a patient who is vomiting blood and may be NPO for endoscopy. The standard is IV pantoprazole 80 mg bolus followed by 8 mg/hour infusion for 72 hours.",
-                e: "CORRECT — Continuous cardiac monitoring detects arrhythmias that can result from hemodynamic instability, electrolyte imbalances (especially from massive transfusion), or myocardial ischemia from reduced oxygen delivery.",
-                f: "INCORRECT — Morphine can cause hypotension (vasodilation) and respiratory depression, both of which are dangerous in a hemorrhaging patient. Pain management should be cautious and may include non-opioid options or carefully titrated small doses."
+                correct: "The correct sequence prioritizes vascular access and volume restoration first, then obtaining essential labs, establishing monitoring, assessing end-organ perfusion, and initiating pharmacological therapy with endoscopy preparation.",
+                a: "FIRST — Establishing vascular access is the highest circulation priority. Two large-bore IVs (16G or larger, preferably in antecubital veins) allow simultaneous fluid resuscitation and blood product administration. Without IV access, no other interventions can be delivered.",
+                b: "SECOND — Labs should be drawn AT THE SAME TIME as IV lines are established. Type and crossmatch enables blood transfusion, CBC provides baseline hemoglobin, BMP reveals BUN elevation (upper GI bleed marker), and coagulation studies guide blood product selection.",
+                c: "THIRD — Continuous cardiac monitoring detects arrhythmias from hemodynamic instability, electrolyte imbalances, or myocardial ischemia from reduced oxygen delivery. This establishes ongoing surveillance once access and labs are in place.",
+                d: "FOURTH — A Foley catheter allows precise hourly urine output measurement as an indicator of end-organ perfusion. Declining UOP suggests worsening shock and the need for more aggressive resuscitation.",
+                e: "FIFTH — Once the patient is being resuscitated and monitored, an IV PPI (not oral) is administered to reduce gastric acid and promote hemostasis. The standard is IV pantoprazole 80 mg bolus followed by 8 mg/hour infusion. Endoscopy preparation begins concurrently for definitive diagnosis and treatment."
             },
-            testTakingTip: "GI bleed resuscitation priorities: Two large-bore IVs, type & crossmatch, CBC/BMP/coags, Foley catheter (UOP goal >0.5 mL/kg/hr), cardiac monitor, NPO for endoscopy. Remember: IV PPI, not oral, in the acute setting.",
+            testTakingTip: "GI bleed resuscitation priorities: Two large-bore IVs, type & crossmatch, CBC/BMP/coags, Foley catheter (UOP goal >0.5 mL/kg/hr), cardiac monitor, NPO for endoscopy. Remember: IV PPI, not oral, in the acute setting. Morphine is avoided due to hypotension risk.",
             guideSection: "Section 6 — Priority Nursing Interventions",
             guideSectionId: "interventions"
         },
@@ -114,25 +112,23 @@ var giBleedingQuizData = {
         },
         {
             id: 5,
-            type: "sata",
+            type: "single",
             subtype: null,
             difficulty: "analysis",
-            stem: "A patient is admitted with a GI bleed. Vital signs: BP 100/68, HR 118, RR 22. Labs drawn on admission 2 hours ago showed Hgb 11.8 g/dL. The patient continues to have melena stools. The nurse knows that the hemoglobin level may not accurately reflect the degree of blood loss. Why? (Select all that apply.)",
+            stem: "A patient is admitted with a GI bleed. Vital signs: BP 100/68, HR 118, RR 22. Labs drawn on admission 2 hours ago showed Hgb 11.8 g/dL. The patient continues to have melena stools. The nurse understands that the hemoglobin level may not accurately reflect the severity of blood loss. Which statement BEST explains why the initial hemoglobin is misleading in acute hemorrhage?",
             options: [
-                { id: "a", text: "Hemoglobin does not drop immediately because both red blood cells and plasma are lost proportionally in acute hemorrhage" },
-                { id: "b", text: "Hemodilution has not yet occurred — it takes 24-72 hours for interstitial fluid to shift into the vascular space" },
-                { id: "c", text: "IV fluid resuscitation has not yet been initiated" },
-                { id: "d", text: "Hemoglobin levels are only accurate when drawn from an arterial line" },
-                { id: "e", text: "The patient's tachycardia and relative hypotension suggest greater blood loss than the hemoglobin indicates" }
+                { id: "a", text: "Both red blood cells and plasma are lost proportionally in acute hemorrhage, so the hemoglobin concentration remains unchanged until hemodilution occurs over 24-72 hours" },
+                { id: "b", text: "Hemoglobin levels are only accurate when drawn from an arterial blood gas sample, not a venous draw" },
+                { id: "c", text: "The lab equipment cannot accurately measure hemoglobin when the sample contains digested blood products" },
+                { id: "d", text: "Acute hemorrhage causes the bone marrow to immediately release reticulocytes, which are not counted in the standard hemoglobin assay" }
             ],
-            correct: ["a", "b", "e"],
+            correct: "a",
             rationale: {
-                correct: "In acute hemorrhage, the initial hemoglobin is misleadingly normal because whole blood (RBCs + plasma) is lost proportionally, and the compensatory fluid shift (hemodilution) that reveals the true hemoglobin drop takes 24-72 hours. The vital signs are a more accurate reflection of blood loss severity.",
-                a: "CORRECT — In acute hemorrhage, the patient loses whole blood (cells + plasma in equal proportion). The hemoglobin concentration (ratio of RBCs to plasma) doesn't change initially because the denominator (plasma) drops along with the numerator (RBCs).",
-                b: "CORRECT — Over 24-72 hours, the body compensates by shifting interstitial fluid into the vascular space (transcapillary refill) and retaining water via ADH and aldosterone. This dilutes the remaining red blood cells, causing the hemoglobin to drop — the 'hemodilution' effect.",
-                c: "While IV fluids do cause hemodilution, the question asks why the hemoglobin is misleading, which is primarily a physiologic phenomenon (options A and B). IV fluids may accelerate the process but are not the primary reason the initial Hgb is unreliable.",
-                d: "INCORRECT — Hemoglobin can be accurately measured from venous, arterial, or capillary samples. The source of the blood draw does not significantly affect hemoglobin accuracy.",
-                e: "CORRECT — The vital signs (HR 118, BP 100/68) suggest Class II-III hemorrhagic shock (15-40% blood volume loss). These hemodynamic changes are more sensitive early indicators of blood loss than the hemoglobin level."
+                correct: "In acute hemorrhage, the patient loses whole blood (RBCs + plasma in equal proportion). Because both the numerator (red blood cells) and denominator (plasma volume) decrease together, the hemoglobin CONCENTRATION remains unchanged initially. It takes 24-72 hours for the body to shift interstitial fluid into the vascular space (transcapillary refill) and retain water via ADH/aldosterone, which dilutes the remaining RBCs and reveals the true hemoglobin drop. This is why the vital signs (HR 118, BP 100/68 suggesting Class II-III shock) are more reliable early indicators of blood loss severity than the lab value.",
+                a: "This is the correct physiologic explanation. Hemoglobin is a CONCENTRATION (g/dL) — if both the solute (RBCs) and solvent (plasma) decrease proportionally, the concentration stays the same. Only when the body replaces the lost plasma volume with interstitial fluid (hemodilution) does the Hgb drop to reflect the true loss.",
+                b: "Hemoglobin can be accurately measured from venous, arterial, or capillary samples. The source of the blood draw does not significantly affect hemoglobin accuracy.",
+                c: "Standard laboratory hemoglobin assays are not affected by digested blood products in the patient's GI tract. The blood sample drawn from the vein measures circulating hemoglobin, which is independent of GI contents.",
+                d: "While the bone marrow does increase reticulocyte production in response to blood loss, this process takes days to weeks, not hours. Additionally, reticulocytes ARE counted in standard hemoglobin measurements."
             },
             labValues: [
                 { name: "Hemoglobin", normal: "Male: 14–18 g/dL; Female: 12–16 g/dL" },
@@ -190,10 +186,11 @@ var giBleedingQuizData = {
         },
         {
             id: 8,
-            type: "sata",
+            type: "matrix",
             subtype: null,
             difficulty: "application",
-            stem: "A nurse is caring for a patient with upper GI bleeding who is receiving a massive transfusion protocol (6 units of packed red blood cells). Which complications should the nurse monitor for? (Select all that apply.)",
+            matrixColumns: ["Monitor For", "Not a Concern"],
+            stem: "A nurse is caring for a patient with upper GI bleeding who is receiving a massive transfusion protocol (6 units of packed red blood cells). Classify each potential complication as something the nurse should actively monitor for or something that is not a clinical concern during massive transfusion.",
             options: [
                 { id: "a", text: "Hypocalcemia from citrate in the transfused blood" },
                 { id: "b", text: "Hyperkalemia from potassium released by stored red blood cells" },
@@ -201,14 +198,14 @@ var giBleedingQuizData = {
                 { id: "d", text: "Hyperglycemia from dextrose in the blood storage solution" },
                 { id: "e", text: "Coagulopathy from dilution of clotting factors and platelets" }
             ],
-            correct: ["a", "b", "c", "e"],
+            correct: { a: "Monitor For", b: "Monitor For", c: "Monitor For", d: "Not a Concern", e: "Monitor For" },
             rationale: {
-                correct: "Massive transfusion complications include hypocalcemia (citrate binds calcium), hyperkalemia (potassium leaks from stored RBCs), hypothermia (cold products), and dilutional coagulopathy (clotting factors and platelets are diluted/consumed).",
-                a: "CORRECT — Citrate is the anticoagulant used to preserve stored blood. During massive transfusion, excess citrate binds ionized calcium in the patient's blood, causing hypocalcemia. Signs include circumoral tingling, muscle cramping, and QT prolongation.",
-                b: "CORRECT — Stored red blood cells leak potassium into the storage solution over time. Rapid transfusion of multiple units delivers a potassium load that can cause hyperkalemia, especially in patients with renal impairment. ECG changes include peaked T waves.",
-                c: "CORRECT — Blood products are stored at 1-6°C. Rapid infusion of cold products can cause hypothermia, which worsens coagulopathy (the \"triad of death\": hypothermia, acidosis, coagulopathy). Blood warmers should be used.",
-                d: "INCORRECT — Blood storage solutions contain a small amount of dextrose, but this is negligible and does not cause clinically significant hyperglycemia. This is not a recognized massive transfusion complication.",
-                e: "CORRECT — PRBCs do not contain significant clotting factors or platelets. Replacing blood volume with only RBCs dilutes the remaining clotting factors, leading to coagulopathy. This is why massive transfusion protocols include FFP and platelets in addition to PRBCs."
+                correct: "Massive transfusion complications to monitor for include hypocalcemia (citrate binds calcium), hyperkalemia (potassium leaks from stored RBCs), hypothermia (cold products), and dilutional coagulopathy. Hyperglycemia from storage dextrose is not a clinically significant concern.",
+                a: "MONITOR FOR — Citrate is the anticoagulant used to preserve stored blood. During massive transfusion, excess citrate binds ionized calcium in the patient's blood, causing hypocalcemia. Signs include circumoral tingling, muscle cramping, and QT prolongation.",
+                b: "MONITOR FOR — Stored red blood cells leak potassium into the storage solution over time. Rapid transfusion of multiple units delivers a potassium load that can cause hyperkalemia, especially in patients with renal impairment. ECG changes include peaked T waves.",
+                c: "MONITOR FOR — Blood products are stored at 1-6 degrees C. Rapid infusion of cold products can cause hypothermia, which worsens coagulopathy (the 'triad of death': hypothermia, acidosis, coagulopathy). Blood warmers should be used.",
+                d: "NOT A CONCERN — Blood storage solutions contain a small amount of dextrose, but this is negligible and does not cause clinically significant hyperglycemia. This is not a recognized massive transfusion complication.",
+                e: "MONITOR FOR — PRBCs do not contain significant clotting factors or platelets. Replacing blood volume with only RBCs dilutes the remaining clotting factors, leading to coagulopathy. This is why massive transfusion protocols include FFP and platelets in addition to PRBCs."
             },
             labValues: [
                 { name: "Calcium (ionized)", normal: "4.5–5.5 mg/dL" },

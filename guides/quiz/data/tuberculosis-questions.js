@@ -1,6 +1,6 @@
 /**
  * Tuberculosis Quiz — Question Data
- * 10 NCLEX-style questions: 4 Single, 3 SATA, 2 Priority, 1 Ordering
+ * 10 NCLEX-style questions: 5 Single, 3 Priority, 1 Ordering, 1 Matrix
  */
 
 /* exported tuberculosisQuizData */
@@ -59,29 +59,27 @@ var tuberculosisQuizData = {
         },
         {
             id: 3,
-            type: "sata",
+            type: "ordering",
             subtype: null,
             difficulty: "application",
-            stem: "A nurse is caring for a patient newly diagnosed with active pulmonary tuberculosis. Which interventions should the nurse implement? (Select all that apply.)",
+            stem: "A patient is newly diagnosed with active pulmonary tuberculosis. Place the following nursing actions in the correct sequence for initiating airborne isolation precautions.",
             options: [
-                { id: "a", text: "Place the patient in a negative-pressure airborne infection isolation room (AIIR)" },
-                { id: "b", text: "Wear an N95 respirator when entering the room" },
-                { id: "c", text: "Place a surgical mask on the patient when transporting outside the room" },
-                { id: "d", text: "Wear a surgical mask instead of an N95 if the patient is on treatment" },
-                { id: "e", text: "Initiate contact tracing of close contacts" },
-                { id: "f", text: "Discontinue isolation once the patient has been on antibiotics for 24 hours" }
+                { id: "a", text: "Place a surgical mask on the patient" },
+                { id: "b", text: "Don an N95 respirator (fit-tested)" },
+                { id: "c", text: "Transfer the patient to a negative-pressure AIIR" },
+                { id: "d", text: "Verify the room has 6–12 air exchanges per hour and negative pressure" },
+                { id: "e", text: "Collect three sputum specimens for AFB smear and culture" }
             ],
-            correct: ["a", "b", "c", "e"],
+            correct: ["a", "b", "c", "d", "e"],
             rationale: {
-                correct: "Active pulmonary TB requires airborne precautions (AIIR with negative pressure, N95 for staff), a surgical mask on the patient during transport, and prompt contact tracing to identify exposed individuals.",
-                a: "CORRECT — Negative-pressure AIIR with 6-12 air exchanges per hour is required to prevent TB transmission. The negative pressure prevents airborne particles from escaping into hallways.",
-                b: "CORRECT — An N95 respirator (fit-tested) is required for all personnel entering the room. A surgical mask is NOT adequate protection against airborne TB particles.",
-                c: "CORRECT — The patient wears a surgical mask during essential transport to contain respiratory droplet nuclei. Transport should be minimized.",
-                d: "INCORRECT — An N95 is always required for healthcare workers regardless of treatment status. A surgical mask does not filter the tiny (1-5 micron) droplet nuclei that transmit TB.",
-                e: "CORRECT — Public health authorities must be notified for contact tracing. Close contacts need TST/IGRA testing and possible prophylactic treatment.",
-                f: "INCORRECT — Isolation requires at minimum 2 weeks of effective therapy PLUS 3 consecutive negative AFB sputum smears collected 8-24 hours apart PLUS clinical improvement. 24 hours of antibiotics is grossly insufficient."
+                correct: "Contain the source first (mask the patient), protect yourself (N95), move the patient to the correct environment (AIIR), confirm the room is functioning properly (negative pressure + air exchanges), then obtain diagnostic specimens.",
+                a: "FIRST — Masking the patient immediately reduces droplet nuclei released into the shared environment. This is the fastest way to limit exposure to others.",
+                b: "SECOND — The nurse must don a fit-tested N95 respirator before close contact. A surgical mask does NOT filter the 1–5 micron droplet nuclei that transmit TB.",
+                c: "THIRD — Transfer the patient to a negative-pressure airborne infection isolation room. Negative pressure prevents airborne particles from escaping into hallways.",
+                d: "FOURTH — Verify the room is functioning: negative pressure (check smoke tube or pressure monitor) and 6–12 air exchanges/hour. A non-functioning AIIR provides no protection.",
+                e: "FIFTH — Collect three sputum specimens 8–24 hours apart for AFB smear and culture. These confirm the diagnosis and determine infectiousness. This step requires a functioning AIIR."
             },
-            testTakingTip: "TB isolation criteria for discontinuation: 2+ weeks therapy, 3 negative AFB smears, clinical improvement, no drug resistance. The '24-hour rule' applies to bacterial meningitis and pertussis — NOT tuberculosis.",
+            testTakingTip: "Isolation sequence: contain the source (mask patient) → protect the nurse (N95) → correct environment (AIIR) → verify room function → obtain specimens. Think: 'mask, respirator, room, verify, collect.'",
             guideSection: "Section 6 — Airborne Isolation Precautions",
             guideSectionId: "isolation"
         },
@@ -115,27 +113,24 @@ var tuberculosisQuizData = {
         },
         {
             id: 5,
-            type: "sata",
+            type: "single",
             subtype: null,
             difficulty: "application",
-            stem: "A nurse is teaching a patient about RIPE therapy for tuberculosis. Which statements indicate the patient needs additional teaching? (Select all that apply.)",
+            stem: "A nurse is teaching a patient about RIPE therapy for tuberculosis. Which statement by the patient indicates a need for additional teaching?",
             options: [
                 { id: "a", text: "\"I will take vitamin B6 with my isoniazid to prevent nerve damage.\"" },
                 { id: "b", text: "\"My tears and sweat may turn orange while taking rifampin.\"" },
                 { id: "c", text: "\"I can stop taking the medications once I feel better, usually after 2 months.\"" },
-                { id: "d", text: "\"I should report any changes in my vision to my doctor immediately.\"" },
-                { id: "e", text: "\"I will use a backup method of birth control since rifampin can reduce the effectiveness of oral contraceptives.\"" }
+                { id: "d", text: "\"I should report any changes in my vision to my doctor immediately.\"" }
             ],
-            correct: ["c"],
+            correct: "c",
             rationale: {
-                correct: "Only option C reflects incorrect understanding. The patient CANNOT stop medications when they feel better. TB treatment requires a full 6-9 month course to prevent relapse and drug resistance.",
-                a: "CORRECT understanding — Isoniazid depletes vitamin B6 (pyridoxine), causing peripheral neuropathy. B6 supplementation is standard practice.",
-                b: "CORRECT understanding — Rifampin causes harmless orange-red discoloration of tears, urine, sweat, and saliva. Patients should be warned so they don't mistake it for bleeding.",
-                c: "INCORRECT understanding — The initial phase (2 months, all 4 drugs) is followed by a continuation phase (4+ months, rifampin + isoniazid). Stopping early is the #1 cause of drug-resistant TB. Total minimum treatment is 6 months.",
-                d: "CORRECT understanding — Ethambutol can cause optic neuritis (decreased visual acuity, red-green color blindness). Vision changes must be reported immediately, and baseline eye exams are recommended.",
-                e: "CORRECT understanding — Rifampin is a potent CYP450 inducer that reduces the effectiveness of oral contraceptives, warfarin, and many other drugs. Backup contraception is essential."
+                correct: "Stopping TB medications after 2 months — even if the patient feels better — is the #1 cause of drug-resistant TB. The initial phase (2 months, all 4 drugs) must be followed by a continuation phase (4+ months, rifampin + isoniazid) for a total minimum of 6 months.",
+                a: "This is CORRECT understanding. Isoniazid depletes vitamin B6 (pyridoxine), causing peripheral neuropathy. B6 supplementation is standard practice during RIPE therapy.",
+                b: "This is CORRECT understanding. Rifampin causes harmless orange-red discoloration of tears, urine, sweat, and saliva. Patients should be warned so they don't mistake it for bleeding.",
+                d: "This is CORRECT understanding. Ethambutol can cause optic neuritis (decreased visual acuity, red-green color blindness). Vision changes must be reported immediately, and baseline eye exams are recommended."
             },
-            testTakingTip: "Read the question carefully — it asks for 'needs additional teaching,' meaning INCORRECT statements. A common NCLEX trap is flipping the correct/incorrect logic. Only one answer here shows misunderstanding.",
+            testTakingTip: "Read the question carefully — it asks for 'needs additional teaching,' meaning the INCORRECT statement. Only one answer shows misunderstanding: stopping meds early. TB treatment is always 6+ months minimum.",
             guideSection: "Section 7 — RIPE Therapy",
             guideSectionId: "ripe-therapy"
         },
@@ -187,31 +182,35 @@ var tuberculosisQuizData = {
         },
         {
             id: 8,
-            type: "sata",
+            type: "matrix",
             subtype: null,
             difficulty: "analysis",
-            stem: "A nurse is monitoring a patient on RIPE therapy for side effects. Which findings should the nurse report to the provider immediately? (Select all that apply.)",
+            stem: "A nurse is monitoring a patient on RIPE therapy for side effects. For each finding, indicate whether it is an expected effect (reassure the patient) or an adverse effect (notify the provider).",
+            matrixColumns: ["Expected Effect — Reassure Patient", "Adverse Effect — Notify Provider"],
             options: [
                 { id: "a", text: "Orange-colored urine" },
                 { id: "b", text: "Tingling and numbness in the feet" },
                 { id: "c", text: "Blurred vision and difficulty distinguishing red from green" },
-                { id: "d", text: "Elevated uric acid level of 9.2 mg/dL with joint pain" },
-                { id: "e", text: "Mild nausea when taking medications on an empty stomach" }
+                { id: "d", text: "Elevated uric acid level of 9.2 mg/dL with joint pain" }
             ],
-            correct: ["b", "c", "d"],
+            correct: {
+                a: "Expected Effect — Reassure Patient",
+                b: "Adverse Effect — Notify Provider",
+                c: "Adverse Effect — Notify Provider",
+                d: "Adverse Effect — Notify Provider"
+            },
             rationale: {
-                correct: "Peripheral neuropathy (isoniazid), visual changes (ethambutol), and hyperuricemia with gout-like symptoms (pyrazinamide) are adverse effects requiring provider notification and potential medication adjustment.",
-                a: "EXPECTED — Orange-colored urine, tears, and sweat are a benign, expected effect of rifampin. The patient should be educated about this in advance but it does not require urgent notification.",
-                b: "REPORT — Tingling and numbness indicate peripheral neuropathy from isoniazid (INH). This occurs due to B6 depletion and may require increased pyridoxine supplementation or medication adjustment.",
-                c: "REPORT — Blurred vision and red-green color blindness are signs of optic neuritis caused by ethambutol. This is potentially irreversible and the drug must be stopped immediately.",
-                d: "REPORT — Pyrazinamide inhibits uric acid excretion, causing hyperuricemia. An elevated uric acid (normal: 3.5-7.2 mg/dL in males) with joint pain suggests gout and requires medication review.",
-                e: "EXPECTED — Mild GI upset is common with TB medications. Taking them with food (if allowed per medication guidelines) or at bedtime can help. This does not require urgent provider notification unless severe."
+                correct: "Orange body fluids are a benign expected effect of rifampin. Peripheral neuropathy (isoniazid), visual changes (ethambutol), and hyperuricemia (pyrazinamide) are adverse effects that require provider notification and possible drug adjustment.",
+                a: "EXPECTED — Orange-colored urine, tears, and sweat are a benign, expected effect of rifampin. Patients should be educated about this in advance so they don't confuse it with hematuria.",
+                b: "ADVERSE — Tingling and numbness indicate peripheral neuropathy from isoniazid (INH) due to B6 depletion. May require increased pyridoxine supplementation or medication adjustment.",
+                c: "ADVERSE — Blurred vision and red-green color blindness are signs of optic neuritis caused by ethambutol. This is potentially irreversible — the drug must be stopped immediately.",
+                d: "ADVERSE — Pyrazinamide inhibits uric acid excretion, causing hyperuricemia. An elevated uric acid (normal: 3.5–7.2 mg/dL in males) with joint pain suggests gout and requires medication review."
             },
             labValues: [
                 { name: "Uric Acid (Male)", normal: "3.5–7.2 mg/dL" },
                 { name: "Uric Acid (Female)", normal: "2.6–6.0 mg/dL" }
             ],
-            testTakingTip: "Match each RIPE drug to its signature side effect: Rifampin = Red/orange secretions (expected); Isoniazid = peripheral neuropathy + hepatotoxicity; Pyrazinamide = hyperuricemia + hepatotoxicity; Ethambutol = Eye (optic neuritis). The mnemonic: RIPE = Red, Isoniazid-neuropathy, Pee-uric acid, Eyes.",
+            testTakingTip: "Match each RIPE drug to its signature side effect: Rifampin = Red/orange secretions (expected); Isoniazid = peripheral neuropathy + hepatotoxicity; Pyrazinamide = hyperuricemia + hepatotoxicity; Ethambutol = Eye (optic neuritis). Mnemonic: RIPE = Red, Isoniazid-neuropathy, Pee-uric acid, Eyes.",
             guideSection: "Section 7 — RIPE Therapy",
             guideSectionId: "ripe-therapy"
         },

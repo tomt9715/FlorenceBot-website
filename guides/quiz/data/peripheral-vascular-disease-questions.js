@@ -1,7 +1,7 @@
 /**
  * Peripheral Vascular Disease Quiz — Question Data
  * Extracted from guides/peripheral-vascular-disease.html practice questions section.
- * 8 NCLEX-style questions: 4 Single Best Answer, 2 SATA, 2 Priority
+ * 8 NCLEX-style questions: 4 Single, 2 Priority, 1 Matrix, 1 Ordering
  */
 
 /* exported peripheralVascularDiseaseQuizData */
@@ -63,29 +63,28 @@ var peripheralVascularDiseaseQuizData = {
         },
         {
             id: 3,
-            type: "sata",
+            type: "matrix",
             subtype: null,
             difficulty: "application",
-            stem: "A nurse is caring for a patient with a newly diagnosed deep vein thrombosis (DVT) in the left leg. Which nursing interventions are appropriate? (Select all that apply.)",
+            matrixColumns: ["Arterial Insufficiency", "Venous Insufficiency"],
+            stem: "A nurse is assessing two patients with peripheral vascular disease. For each finding, indicate whether it is characteristic of arterial insufficiency or venous insufficiency.",
             options: [
-                { id: "a", text: "Elevate the affected leg above heart level" },
-                { id: "b", text: "Apply warm, moist compresses to the affected leg" },
-                { id: "c", text: "Massage the affected calf to relieve discomfort" },
-                { id: "d", text: "Administer anticoagulation therapy as prescribed" },
-                { id: "e", text: "Measure bilateral calf circumferences daily" }
+                { id: "a", text: "Pale, cool extremity with diminished or absent pedal pulses" },
+                { id: "b", text: "Brown discoloration around the ankles with bilateral lower extremity edema" },
+                { id: "c", text: "Cramping leg pain that occurs with walking and is relieved by rest" },
+                { id: "d", text: "Stasis dermatitis with weeping, crusted skin and superficial ulceration near the medial malleolus" }
             ],
-            correct: ["a", "b", "d", "e"],
+            correct: { a: "Arterial Insufficiency", b: "Venous Insufficiency", c: "Arterial Insufficiency", d: "Venous Insufficiency" },
             rationale: {
-                correct: "Elevation promotes venous return and reduces edema. Warm compresses promote vasodilation and comfort (cold is for arterial). Anticoagulation (heparin then transition to warfarin/DOAC) prevents clot propagation and new clot formation. Daily calf measurements monitor for progression or resolution of the DVT.",
-                a: "CORRECT \u2014 Elevation promotes venous return and reduces edema.",
-                b: "CORRECT \u2014 Warm compresses promote vasodilation and comfort. Cold is for arterial disease.",
-                c: "INCORRECT \u2014 NEVER massage a leg with a known DVT. Massage can dislodge the clot, causing it to travel to the lungs as a pulmonary embolism \u2014 a potentially fatal complication.",
-                d: "CORRECT \u2014 Anticoagulation (heparin then transition to warfarin/DOAC) prevents clot propagation and new clot formation.",
-                e: "CORRECT \u2014 Daily calf measurements monitor for progression or resolution of the DVT."
+                correct: "Arterial insufficiency results from inadequate blood flow TO the extremities (pallor, coolness, absent pulses, claudication). Venous insufficiency results from inadequate blood return FROM the extremities (edema, brown staining, dermatitis, stasis ulcers).",
+                a: "ARTERIAL \u2014 Reduced arterial blood flow causes poor perfusion. The skin becomes pale or cyanotic, cool to touch, with thin shiny skin and hair loss. Pulses are diminished or absent.",
+                b: "VENOUS \u2014 Brown discoloration (hemosiderin staining) occurs when red blood cells leak from congested veins and break down, depositing iron pigment. Bilateral edema results from venous hypertension.",
+                c: "ARTERIAL \u2014 Intermittent claudication is the hallmark symptom of PAD. During exercise, muscles demand more oxygen, but narrowed arteries cannot increase supply. Pain is reproducible and relieved by rest.",
+                d: "VENOUS \u2014 Stasis dermatitis occurs from chronic venous hypertension. Venous ulcers typically form near the medial malleolus, are shallow and irregularly shaped with a moist base."
             },
-            testTakingTip: "DVT rule: No massage, no vigorous exercise of the affected leg. For temperature application: venous = warm (promotes flow), arterial = avoid heat (increases O2 demand in ischemic tissue). This is a commonly tested concept.",
-            guideSection: "Section 6 \u2014 Deep Vein Thrombosis",
-            guideSectionId: "dvt"
+            testTakingTip: "Arterial vs. Venous: Arterial = cool, pale, pulseless, painful with activity, legs DOWN. Venous = warm, edematous, brown, aching relieved by elevation, legs UP. Ulcer location: arterial = toes/dorsum; venous = medial malleolus.",
+            guideSection: "Section 2 \u2014 Arterial vs Venous Disease",
+            guideSectionId: "arterial-venous"
         },
         {
             id: 4,
@@ -162,27 +161,29 @@ var peripheralVascularDiseaseQuizData = {
         },
         {
             id: 7,
-            type: "sata",
+            type: "ordering",
             subtype: null,
-            difficulty: "application",
-            stem: "Which components make up Virchow\u2019s Triad for venous thromboembolism risk? (Select all that apply.)",
+            difficulty: "analysis",
+            stem: "A patient with peripheral arterial disease has a dry, non-healing ulcer on the dorsum of the foot with an ABI of 0.5. Place the wound care priorities in the correct order.",
             options: [
-                { id: "a", text: "Venous stasis (immobility, prolonged bed rest)" },
-                { id: "b", text: "Arterial plaque formation (atherosclerosis)" },
-                { id: "c", text: "Endothelial injury (trauma, surgery, IV catheters)" },
-                { id: "d", text: "Hypercoagulability (cancer, oral contraceptives, genetic disorders)" }
+                { id: "a", text: "Assess and document wound characteristics \u2014 size, depth, color, drainage, and surrounding skin" },
+                { id: "b", text: "Obtain a vascular surgery consult for possible revascularization" },
+                { id: "c", text: "Position the extremity flat or slightly dependent \u2014 elevate the head of bed, not the legs" },
+                { id: "d", text: "Keep the wound clean and dry with a non-adherent dressing" },
+                { id: "e", text: "Avoid aggressive debridement until vascular status is optimized" }
             ],
-            correct: ["a", "c", "d"],
+            correct: ["a", "b", "c", "d", "e"],
             rationale: {
-                correct: "Virchow\u2019s Triad describes the three factors that contribute to venous thrombosis: Venous stasis \u2014 blood pooling from immobility. Endothelial injury \u2014 damage to the vessel wall triggers clotting. Hypercoagulability \u2014 increased tendency for blood to clot. All three factors increase DVT risk, and they\u2019re additive.",
-                a: "CORRECT \u2014 Venous stasis (blood pooling from immobility) is a key component of Virchow\u2019s Triad.",
-                b: "INCORRECT \u2014 Arterial plaque formation (atherosclerosis) is the pathophysiology of peripheral ARTERIAL disease, not venous thrombosis. Virchow\u2019s Triad specifically addresses venous thromboembolism risk factors.",
-                c: "CORRECT \u2014 Endothelial injury (damage to the vessel wall from trauma, surgery, IV catheters) triggers clotting.",
-                d: "CORRECT \u2014 Hypercoagulability (increased tendency for blood to clot from cancer, oral contraceptives, genetic disorders) is the third component."
+                correct: "The correct sequence prioritizes assessment, then addressing the root cause (poor perfusion), supportive positioning, wound protection, and avoiding interventions that could worsen ischemic tissue. An ABI of 0.5 indicates moderate-to-severe arterial disease.",
+                a: "FIRST \u2014 Thorough wound assessment establishes the baseline and guides all subsequent care. Document dimensions, depth, tissue color, drainage, and periwound condition.",
+                b: "SECOND \u2014 With an ABI of 0.5 and a non-healing ulcer, the root cause is inadequate arterial perfusion. Vascular surgery consult for revascularization is the most critical intervention for healing.",
+                c: "THIRD \u2014 Keep legs flat or slightly dependent (gravity assists arterial perfusion). NEVER elevate \u2014 that is for venous disease.",
+                d: "FOURTH \u2014 Arterial ulcers should be kept clean and dry with non-adherent dressings. Unlike venous ulcers, moist environments in ischemic tissue promote bacterial growth.",
+                e: "FIFTH \u2014 Aggressive debridement of ischemic tissue is dangerous without adequate perfusion. Defer until after revascularization restores blood flow (typically ABI >0.7)."
             },
-            testTakingTip: "Remember SEH: Stasis + Endothelial injury + Hypercoagulability = Virchow\u2019s Triad. Common NCLEX scenarios: post-operative patients (stasis + injury), cancer patients on birth control (hypercoagulability x2), long-haul flights (stasis).",
-            guideSection: "Section 6 \u2014 Deep Vein Thrombosis",
-            guideSectionId: "dvt"
+            testTakingTip: "PAD wounds: ASSESS \u2192 FIX THE PLUMBING \u2192 POSITION \u2192 PROTECT \u2192 DON'T HARM. Arterial ulcers = keep DRY; venous ulcers = keep MOIST. Never apply compression dressings to arterial wounds.",
+            guideSection: "Section 8 \u2014 Treatment & Nursing Care",
+            guideSectionId: "interventions"
         },
         {
             id: 8,

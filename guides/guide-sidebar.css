@@ -868,7 +868,6 @@
 }
 
 .pq-type-tag--single { background: #dbeafe; color: #1e40af; }
-.pq-type-tag--sata   { background: #fef3c7; color: #92400e; }
 .pq-type-tag--priority { background: #fce7f3; color: #9d174d; }
 
 .pq-difficulty {
@@ -911,14 +910,6 @@
 
 .pq-choices li strong {
     color: #111827;
-}
-
-/* SATA instruction */
-.pq-sata-instruction {
-    font-size: 0.82rem;
-    font-style: italic;
-    color: #7c3aed;
-    margin: 0 0 10px 0;
 }
 
 /* Show Answer button */

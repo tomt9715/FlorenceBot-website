@@ -1,6 +1,6 @@
 /**
  * Oxygen Therapy Quiz — Question Data
- * 10 NCLEX-style questions: 4 Single, 3 SATA, 2 Priority, 1 Analysis
+ * 10 NCLEX-style questions: 5 Single, 2 Priority, 2 Matrix, 1 Ordering
  */
 
 /* exported oxygenTherapyQuizData */
@@ -59,25 +59,29 @@ var oxygenTherapyQuizData = {
         },
         {
             id: 3,
-            type: "sata",
+            type: "matrix",
             subtype: null,
             difficulty: "application",
-            stem: "A nurse is caring for a patient receiving oxygen via non-rebreather mask at 12 L/min. Which assessments and actions are appropriate? (Select all that apply.)",
+            stem: "A nurse is caring for a patient receiving oxygen via non-rebreather mask at 12 L/min. For each nursing action, indicate whether it is appropriate or inappropriate.",
+            matrixColumns: ["Appropriate", "Inappropriate"],
             options: [
                 { id: "a", text: "Ensure the reservoir bag remains at least two-thirds full during inspiration" },
                 { id: "b", text: "Monitor SpO2 continuously and report if below 94%" },
-                { id: "c", text: "Assess for signs of oxygen toxicity if FiO2 exceeds 50% for more than 24-48 hours" },
-                { id: "d", text: "Remove the mask for 5 minutes every hour to prevent CO2 buildup" },
-                { id: "e", text: "Post an 'Oxygen in Use' sign at the bedside and ensure no open flames are nearby" }
+                { id: "c", text: "Remove the mask for 5 minutes every hour to prevent CO2 buildup" },
+                { id: "d", text: "Post an 'Oxygen in Use' sign and ensure no open flames are nearby" }
             ],
-            correct: ["a", "b", "c", "e"],
+            correct: {
+                a: "Appropriate",
+                b: "Appropriate",
+                c: "Inappropriate",
+                d: "Appropriate"
+            },
             rationale: {
-                correct: "Appropriate care for a patient on a non-rebreather includes maintaining reservoir bag inflation, continuous SpO2 monitoring, oxygen toxicity surveillance, and fire safety precautions.",
-                a: "CORRECT — If the reservoir bag deflates below two-thirds, the patient is rebreathing exhaled CO2. The bag must remain inflated; if it collapses, increase the flow rate or troubleshoot the system.",
-                b: "CORRECT — Continuous SpO2 monitoring is essential for patients on high-flow oxygen. Target SpO2 is typically ≥94% for most patients (88-92% for COPD).",
-                c: "CORRECT — A non-rebreather delivers 80-95% FiO2. Prolonged exposure to FiO2 >50% for >24-48 hours risks oxygen toxicity, which can cause alveolar damage and ARDS. The team should aim to wean to the lowest effective FiO2.",
-                d: "INCORRECT — Removing the mask would expose a critically ill patient (anyone on a NRB is in significant respiratory distress) to room air (21% FiO2), potentially causing dangerous desaturation. The one-way valves on the NRB already prevent CO2 rebreathing.",
-                e: "CORRECT — Oxygen supports combustion. Fire safety precautions include posting signs, removing open flames, ensuring electrical equipment is grounded, and keeping flammable materials away."
+                correct: "Appropriate NRB care includes maintaining reservoir bag inflation, continuous SpO2 monitoring, and fire safety. Removing the mask from a critically ill patient is dangerous and unnecessary — one-way valves already prevent CO2 rebreathing.",
+                a: "APPROPRIATE — If the reservoir bag deflates below two-thirds, the patient is rebreathing exhaled CO2. The bag must remain inflated; if it collapses, increase the flow rate or troubleshoot the system.",
+                b: "APPROPRIATE — Continuous SpO2 monitoring is essential for patients on high-flow oxygen. Target SpO2 is typically ≥94% for most patients (88–92% for COPD patients).",
+                c: "INAPPROPRIATE — Removing the mask would expose a critically ill patient to room air (21% FiO2), potentially causing dangerous desaturation. The one-way valves on the NRB already prevent CO2 rebreathing.",
+                d: "APPROPRIATE — Oxygen supports combustion. Fire safety precautions include posting signs, removing open flames, ensuring electrical equipment is grounded, and keeping flammable materials away."
             },
             testTakingTip: "Non-rebreather mask = highest FiO2 before mechanical ventilation. Key nursing priorities: bag stays inflated, monitor for O2 toxicity, fire safety. Never remove high-flow oxygen from a distressed patient.",
             guideSection: "Section 4 — Oxygen Delivery Devices",
@@ -136,27 +140,31 @@ var oxygenTherapyQuizData = {
         },
         {
             id: 6,
-            type: "sata",
+            type: "matrix",
             subtype: null,
             difficulty: "knowledge",
-            stem: "A nursing student is reviewing oxygen delivery devices. Which statements about flow rates are correct? (Select all that apply.)",
+            stem: "A nursing student is reviewing oxygen delivery devices. For each statement, indicate whether it is correct or incorrect.",
+            matrixColumns: ["Correct", "Incorrect"],
             options: [
-                { id: "a", text: "A nasal cannula can deliver 1 to 6 L/min, providing approximately 24-44% FiO2" },
+                { id: "a", text: "A nasal cannula delivers 1–6 L/min, providing approximately 24–44% FiO2" },
                 { id: "b", text: "A simple face mask must run at a minimum of 5 L/min to prevent CO2 rebreathing" },
                 { id: "c", text: "A Venturi mask delivers variable FiO2 depending on the patient's breathing pattern" },
-                { id: "d", text: "A non-rebreather mask should be set at 10-15 L/min to deliver 80-95% FiO2" },
-                { id: "e", text: "A partial rebreather delivers higher FiO2 than a non-rebreather at the same flow rate" }
+                { id: "d", text: "A non-rebreather mask should be set at 10–15 L/min to deliver 80–95% FiO2" }
             ],
-            correct: ["a", "b", "d"],
-            rationale: {
-                correct: "Correct statements include nasal cannula flow rates/FiO2, simple mask minimum flow requirement, and non-rebreather settings.",
-                a: "CORRECT — Each L/min of nasal cannula flow adds approximately 4% FiO2 above room air (21%). At 1 L/min ≈ 24%, at 6 L/min ≈ 44%. Maximum safe flow is 6 L/min.",
-                b: "CORRECT — Below 5 L/min, the simple mask's dead space traps exhaled CO2, which the patient then rebreathes. The minimum 5 L/min ensures adequate CO2 washout.",
-                c: "INCORRECT — The Venturi mask delivers PRECISE, FIXED FiO2 using calibrated color-coded adapters. It entrains a specific ratio of room air to oxygen regardless of the patient's breathing pattern. This is its defining advantage.",
-                d: "CORRECT — Non-rebreather masks require 10-15 L/min to keep the reservoir bag inflated and deliver the highest non-invasive FiO2 (80-95%).",
-                e: "INCORRECT — The non-rebreather has one-way valves that prevent exhaled air from mixing with the reservoir oxygen, delivering HIGHER FiO2 (80-95%) than the partial rebreather (60-75%), which allows some exhaled air to mix back."
+            correct: {
+                a: "Correct",
+                b: "Correct",
+                c: "Incorrect",
+                d: "Correct"
             },
-            testTakingTip: "Build a mental table: NC (1-6 L, 24-44%), Simple mask (5-10 L, 40-60%), Partial rebreather (6-10 L, 60-75%), NRB (10-15 L, 80-95%), Venturi (4-12 L, precise 24-50%). This chart is NCLEX gold.",
+            rationale: {
+                correct: "Nasal cannula flow/FiO2 ranges, simple mask minimum flow requirements, and NRB settings are all accurate. The Venturi mask delivers PRECISE, FIXED FiO2 — not variable — using calibrated color-coded adapters.",
+                a: "CORRECT — Each L/min of nasal cannula flow adds approximately 4% FiO2 above room air (21%). At 1 L/min ≈ 24%, at 6 L/min ≈ 44%. Maximum safe flow is 6 L/min.",
+                b: "CORRECT — Below 5 L/min, the simple mask's dead space traps exhaled CO2. The minimum 5 L/min ensures adequate CO2 washout from the mask.",
+                c: "INCORRECT — The Venturi mask delivers PRECISE, FIXED FiO2 using calibrated color-coded adapters. It entrains a specific ratio of room air to oxygen regardless of the patient's breathing pattern. This is its defining advantage, especially for COPD patients.",
+                d: "CORRECT — Non-rebreather masks require 10–15 L/min to keep the reservoir bag inflated and deliver the highest non-invasive FiO2 (80–95%)."
+            },
+            testTakingTip: "Build a mental table: NC (1–6 L, 24–44%), Simple mask (5–10 L, 40–60%), Partial rebreather (6–10 L, 60–75%), NRB (10–15 L, 80–95%), Venturi (4–12 L, precise 24–50%). This chart is NCLEX gold.",
             guideSection: "Section 4 — Oxygen Delivery Devices",
             guideSectionId: "delivery-devices"
         },
@@ -185,25 +193,25 @@ var oxygenTherapyQuizData = {
         },
         {
             id: 8,
-            type: "sata",
+            type: "ordering",
             subtype: null,
             difficulty: "application",
-            stem: "A nurse is interpreting an arterial blood gas (ABG) result for a patient on supplemental oxygen: pH 7.28, PaCO2 58 mmHg, PaO2 72 mmHg, HCO3 26 mEq/L. Which interpretations are correct? (Select all that apply.)",
+            stem: "A nurse receives the following ABG result for a patient on supplemental oxygen: pH 7.28, PaCO2 58 mmHg, PaO2 72 mmHg, HCO3 26 mEq/L. Place the ABG interpretation steps in the correct order.",
             options: [
-                { id: "a", text: "The patient has respiratory acidosis" },
-                { id: "b", text: "The PaCO2 indicates CO2 retention" },
-                { id: "c", text: "The HCO3 shows the kidneys have fully compensated" },
-                { id: "d", text: "The PaO2 is within the normal range for a patient on supplemental oxygen" },
-                { id: "e", text: "The patient may need increased ventilatory support" }
+                { id: "a", text: "Evaluate pH: 7.28 is acidotic (below 7.35)" },
+                { id: "b", text: "Check PaCO2: 58 mmHg is elevated — matches the acidosis (respiratory cause)" },
+                { id: "c", text: "Check HCO3: 26 mEq/L is normal — kidneys have NOT compensated" },
+                { id: "d", text: "Interpret: Uncompensated respiratory acidosis with CO2 retention" },
+                { id: "e", text: "Evaluate PaO2: 72 mmHg on supplemental O2 indicates ongoing hypoxemia" }
             ],
-            correct: ["a", "b", "e"],
+            correct: ["a", "b", "c", "d", "e"],
             rationale: {
-                correct: "The ABG shows uncompensated respiratory acidosis with CO2 retention. The patient needs ventilatory support to improve CO2 clearance.",
-                a: "CORRECT — pH 7.28 (acidotic, normal 7.35-7.45) + PaCO2 58 (elevated, normal 35-45) = respiratory acidosis. The CO2 is causing the pH to drop.",
-                b: "CORRECT — PaCO2 of 58 mmHg is significantly above normal (35-45 mmHg), indicating the lungs are not adequately eliminating CO2.",
-                c: "INCORRECT — HCO3 of 26 mEq/L is within normal range (22-26 mEq/L), meaning the kidneys have NOT yet compensated. If fully compensated, the HCO3 would be elevated (>26) to buffer the excess CO2, and the pH would be closer to normal.",
-                d: "INCORRECT — PaO2 of 72 mmHg on supplemental oxygen is below normal (expected 80-100 mmHg on room air, higher on supplemental O2). This patient is still hypoxemic despite supplemental oxygen.",
-                e: "CORRECT — Uncompensated respiratory acidosis with CO2 retention and ongoing hypoxemia despite oxygen suggests the patient may need CPAP/BiPAP or mechanical ventilation to improve alveolar ventilation."
+                correct: "Systematic ABG interpretation follows a structured approach: assess pH first to identify the primary disturbance, then determine the cause (respiratory vs metabolic), check for compensation, formulate the interpretation, and finally evaluate oxygenation status.",
+                a: "FIRST — Always start with pH to determine acidosis (<7.35) or alkalosis (>7.45). This patient's pH of 7.28 clearly indicates acidosis.",
+                b: "SECOND — Check PaCO2 to see if the respiratory system matches the pH disturbance. PaCO2 of 58 (elevated, normal 35–45) matches the acidosis → respiratory cause identified.",
+                c: "THIRD — Check HCO3 to assess metabolic compensation. HCO3 of 26 mEq/L is within normal range (22–26), meaning the kidneys have not yet compensated. If compensated, HCO3 would be elevated.",
+                d: "FOURTH — Synthesize: acidotic pH + elevated CO2 + normal HCO3 = uncompensated respiratory acidosis. The patient is retaining CO2 and the kidneys haven't had time to buffer.",
+                e: "FIFTH — Evaluate oxygenation last. PaO2 of 72 mmHg while ON supplemental oxygen is below normal, indicating the patient remains hypoxemic despite treatment. This patient may need escalation to CPAP/BiPAP."
             },
             labValues: [
                 { name: "pH", normal: "7.35–7.45" },
@@ -211,7 +219,7 @@ var oxygenTherapyQuizData = {
                 { name: "PaO2", normal: "80–100 mmHg" },
                 { name: "HCO3", normal: "22–26 mEq/L" }
             ],
-            testTakingTip: "ABG interpretation in 3 steps: (1) Is pH acidotic or alkalotic? (2) Which system matches — respiratory (CO2) or metabolic (HCO3)? (3) Is the other system compensating? Here: acidotic pH + high CO2 + normal HCO3 = uncompensated respiratory acidosis.",
+            testTakingTip: "ABG interpretation in 5 steps: (1) pH → acidotic or alkalotic? (2) PaCO2 → does respiratory match? (3) HCO3 → does metabolic match or compensate? (4) Name the disturbance. (5) Evaluate PaO2 for oxygenation. This systematic approach works for any ABG question.",
             guideSection: "Section 5 — FiO2 Calculations",
             guideSectionId: "fio2-calculations"
         },

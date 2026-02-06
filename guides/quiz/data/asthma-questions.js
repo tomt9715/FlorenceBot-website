@@ -1,7 +1,7 @@
 /**
  * Asthma Quiz — Question Data
  * Extracted from guides/asthma.html practice questions section.
- * 8 NCLEX-style questions: 4 Single Best Answer, 2 SATA, 2 Priority
+ * 8 NCLEX-style questions: 4 Single, 2 Priority, 1 Ordering, 1 Matrix
  */
 
 /* exported asthmaQuizData */
@@ -83,27 +83,27 @@ var asthmaQuizData = {
         },
         {
             id: 4,
-            type: "sata",
+            type: "ordering",
             subtype: null,
             difficulty: "application",
-            stem: "A nurse is teaching a patient about asthma trigger avoidance. Which triggers should the patient be educated about? (Select all that apply.)",
+            stem: "A patient with moderate persistent asthma is experiencing an acute exacerbation at home \u2014 wheezing, shortness of breath, and peak flow at 55% of personal best. Place the asthma action plan steps in the correct order.",
             options: [
-                { id: "a", text: "Dust mites \u2014 use allergen-proof mattress and pillow covers" },
-                { id: "b", text: "Cold, dry air \u2014 wear a scarf over the mouth and nose in winter" },
-                { id: "c", text: "Exercise \u2014 avoid all physical activity to prevent attacks" },
-                { id: "d", text: "NSAIDs (aspirin, ibuprofen) \u2014 can trigger bronchospasm in some patients" },
-                { id: "e", text: "Strong emotions and stress \u2014 can trigger or worsen symptoms" }
+                { id: "a", text: "Use rescue inhaler (albuterol) 2\u20134 puffs" },
+                { id: "b", text: "Wait 20 minutes and reassess peak flow" },
+                { id: "c", text: "Repeat rescue inhaler if peak flow remains below 80%" },
+                { id: "d", text: "Take oral corticosteroid as prescribed in action plan" },
+                { id: "e", text: "Contact healthcare provider or go to ED if no improvement" }
             ],
-            correct: ["a", "b", "d", "e"],
+            correct: ["a", "b", "c", "d", "e"],
             rationale: {
-                correct: "Dust mites, cold air, NSAIDs, and emotional stress are all recognized asthma triggers. The key is to educate about avoidance strategies, not to avoid activity entirely.",
-                a: "CORRECT \u2014 Dust mites are a major allergen trigger; allergen-proof covers reduce exposure.",
-                b: "CORRECT \u2014 Cold, dry air triggers bronchospasm; warming air before it reaches the airways helps.",
-                c: "INCORRECT \u2014 Exercise-induced bronchospasm (EIB) is common, but the correct management is to use a SABA 15 minutes before exercise and warm up gradually \u2014 NOT to avoid all physical activity. Regular exercise improves cardiovascular fitness and is beneficial for asthma patients. Complete avoidance is inappropriate.",
-                d: "CORRECT \u2014 Aspirin-exacerbated respiratory disease (AERD) affects up to 20% of adult asthmatics \u2014 NSAIDs can cause severe bronchospasm.",
-                e: "CORRECT \u2014 Emotional stress and strong emotions (laughing, crying) can trigger hyperventilation and bronchospasm."
+                correct: "The asthma action plan follows a stepwise escalation: rescue medication, reassessment, repeat if needed, oral corticosteroids for sustained inflammation control, and emergency care if failing to improve.",
+                a: "FIRST \u2014 At 55% peak flow (Yellow Zone), use rescue inhaler. Albuterol provides rapid bronchodilation within 5\u201315 minutes.",
+                b: "SECOND \u2014 Wait 20 minutes to allow the medication to take full effect, then reassess peak flow to determine if escalation is needed.",
+                c: "THIRD \u2014 If peak flow remains below 80% after the first dose, repeat albuterol 2\u20134 puffs. Persistent limitation indicates a more significant exacerbation.",
+                d: "FOURTH \u2014 If repeated rescue use is needed, take the prescribed oral corticosteroid (e.g., prednisone). Oral steroids address underlying airway inflammation that bronchodilators alone cannot resolve.",
+                e: "FIFTH \u2014 If symptoms persist despite rescue inhaler and oral corticosteroid, or if peak flow drops below 50% (Red Zone), contact the healthcare provider or go to the ED."
             },
-            testTakingTip: "Asthma patients should NOT avoid exercise \u2014 they should pretreat with SABA 15 min before activity. Common NCLEX distractor: any answer that says \"avoid all exercise\" is almost always WRONG. Remember aspirin sensitivity \u2014 offer acetaminophen as an alternative.",
+            testTakingTip: "Asthma action plan: Rescue \u2192 Wait and reassess \u2192 Repeat \u2192 Oral steroid \u2192 Seek emergency care. Peak flow zones: Green (80\u2013100%) = go, Yellow (50\u201380%) = caution, Red (<50%) = emergency.",
             guideSection: "Section 3 \u2014 Pathophysiology & Triggers",
             guideSectionId: "pathophysiology"
         },
@@ -155,29 +155,28 @@ var asthmaQuizData = {
         },
         {
             id: 7,
-            type: "sata",
+            type: "matrix",
             subtype: null,
             difficulty: "application",
-            stem: "A 6-year-old child with asthma is being discharged. Which elements should be included in the asthma action plan? (Select all that apply.)",
+            stem: "A nurse is educating a patient about asthma medications. For each medication, indicate whether it is a controller (maintenance) medication or a rescue (quick-relief) medication.",
+            matrixColumns: ["Controller (Maintenance)", "Rescue (Quick-Relief)"],
             options: [
-                { id: "a", text: "Daily controller medications and when to take them" },
-                { id: "b", text: "Peak flow zones with corresponding actions (green/yellow/red)" },
-                { id: "c", text: "Instructions to avoid all outdoor play to prevent attacks" },
-                { id: "d", text: "When to use the rescue inhaler and when to call 911" },
-                { id: "e", text: "A copy for the school nurse and physical education teacher" }
+                { id: "a", text: "Inhaled corticosteroid (e.g., fluticasone)" },
+                { id: "b", text: "Short-acting beta2-agonist (e.g., albuterol)" },
+                { id: "c", text: "Long-acting beta2-agonist (e.g., salmeterol)" },
+                { id: "d", text: "Ipratropium bromide (anticholinergic)" }
             ],
-            correct: ["a", "b", "d", "e"],
+            correct: { a: "Controller (Maintenance)", b: "Rescue (Quick-Relief)", c: "Controller (Maintenance)", d: "Rescue (Quick-Relief)" },
             rationale: {
-                correct: "A comprehensive asthma action plan should include daily controller medications, peak flow zones, rescue medication instructions, emergency criteria, and copies for all caregivers.",
-                a: "CORRECT \u2014 The action plan must list all controller medications, doses, and timing.",
-                b: "CORRECT \u2014 Peak flow zone monitoring guides self-management decisions (green = go, yellow = caution, red = emergency).",
-                c: "INCORRECT \u2014 Children with asthma should be encouraged to participate in physical activity with appropriate management (pre-treatment with SABA, warm-up period). Restricting outdoor play is unnecessary, socially isolating, and not recommended by guidelines.",
-                d: "CORRECT \u2014 Clear instructions for rescue medication use and emergency criteria prevent delays in care.",
-                e: "CORRECT \u2014 School personnel need the action plan so the child can receive timely medication during school hours."
+                correct: "Controllers are taken daily to prevent symptoms (ICS, LABAs). Rescue medications provide rapid relief during acute episodes (SABAs, ipratropium). Knowing this distinction is essential for patient education.",
+                a: "CONTROLLER \u2014 Inhaled corticosteroids are the most effective first-line controller medications. They reduce airway inflammation and are taken daily. Rinse mouth after use to prevent oral candidiasis.",
+                b: "RESCUE \u2014 Short-acting beta2-agonists like albuterol provide rapid bronchodilation within 5\u201315 minutes. Used PRN for acute symptoms. Needing SABA >2 days/week indicates poorly controlled asthma.",
+                c: "CONTROLLER \u2014 Long-acting beta2-agonists provide sustained bronchodilation for 12 hours. Must ALWAYS be combined with an ICS (never as monotherapy) due to FDA Black Box Warning about increased risk when used alone.",
+                d: "RESCUE \u2014 Ipratropium bromide is a short-acting anticholinergic used as adjunct quick-relief therapy in acute exacerbations, often nebulized with albuterol (DuoNeb) for synergistic bronchodilation."
             },
-            testTakingTip: "Written asthma action plans improve outcomes and reduce ED visits. Every asthma patient (especially children) should have one. Key components: daily meds, peak flow zones, rescue plan, emergency criteria, and copies for all caregivers including school staff.",
-            guideSection: "Section 9 \u2014 Pediatric Considerations",
-            guideSectionId: "pediatrics"
+            testTakingTip: "Controllers = daily (ICS, LABAs, leukotriene modifiers). Rescue = PRN (SABAs, ipratropium). Critical safety: LABAs must NEVER be used alone \u2014 always with an ICS.",
+            guideSection: "Section 5 \u2014 Rescue vs Controller Medications",
+            guideSectionId: "medications"
         },
         {
             id: 8,

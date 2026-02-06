@@ -1,6 +1,6 @@
 /**
  * Chest Tubes Quiz — Question Data
- * 10 NCLEX-style questions: 3 Single, 3 SATA, 2 Priority, 2 Analysis
+ * 10 NCLEX-style questions: 4 Single, 3 Priority, 2 Matrix, 1 Ordering
  */
 
 /* exported chestTubesQuizData */
@@ -59,29 +59,28 @@ var chestTubesQuizData = {
         },
         {
             id: 3,
-            type: "sata",
+            type: "matrix",
             subtype: null,
             difficulty: "application",
-            stem: "A nurse is performing a systematic assessment of a patient with a chest tube. Which findings should the nurse report to the provider IMMEDIATELY? (Select all that apply.)",
+            matrixColumns: ["Expected Finding", "Report Immediately"],
+            stem: "A nurse is performing a systematic assessment of a patient with a chest tube. Classify each assessment finding as an expected finding or one that requires immediate reporting to the provider.",
             options: [
                 { id: "a", text: "Drainage output of 250 mL of bright red blood in the last hour" },
                 { id: "b", text: "Gentle tidaling in the water-seal chamber" },
                 { id: "c", text: "Subcutaneous emphysema (crepitus) spreading from the insertion site to the neck" },
                 { id: "d", text: "Serous drainage totaling 150 mL over the last 8-hour shift" },
-                { id: "e", text: "Sudden cessation of all drainage with increasing respiratory distress" },
-                { id: "f", text: "Mild tenderness at the insertion site" }
+                { id: "e", text: "Sudden cessation of all drainage with increasing respiratory distress" }
             ],
-            correct: ["a", "c", "e"],
+            correct: { a: "Report Immediately", b: "Expected Finding", c: "Report Immediately", d: "Expected Finding", e: "Report Immediately" },
             rationale: {
-                correct: "Excessive hemorrhagic drainage, spreading subcutaneous emphysema, and sudden drainage cessation with respiratory distress all require immediate provider notification.",
-                a: "REPORT — More than 200 mL/hour of bloody drainage (or a sudden increase) may indicate hemorrhage or injury to an intercostal vessel. This rate of blood loss requires urgent evaluation.",
-                b: "EXPECTED — Tidaling is normal and indicates a patent, functioning chest tube. This is a reassuring finding.",
-                c: "REPORT — Subcutaneous emphysema (air trapped under the skin causing a crackling sensation) that is SPREADING suggests a significant air leak or malpositioned tube. Involvement of the neck raises concern for mediastinal air tracking.",
-                d: "EXPECTED — Serous (clear/straw-colored) drainage of 150 mL over 8 hours is a normal finding, especially in the first 24-48 hours after insertion.",
-                e: "REPORT — Sudden cessation of all drainage combined with respiratory distress suggests the tube is obstructed (blood clot, kink, or dependent loop). The accumulating fluid or air cannot escape, causing worsening symptoms.",
-                f: "EXPECTED — Mild tenderness at the insertion site is common and expected. The nurse should assess for signs of infection (redness, warmth, purulent drainage) but mild tenderness alone does not require urgent notification."
+                correct: "Tidaling and moderate serous drainage are expected chest tube findings, while excessive bloody output, spreading subcutaneous emphysema, and sudden drainage cessation with respiratory distress all require immediate provider notification.",
+                a: "REPORT IMMEDIATELY — More than 200 mL/hour of bloody drainage (or a sudden increase) may indicate hemorrhage or injury to an intercostal vessel. This rate of blood loss requires urgent evaluation.",
+                b: "EXPECTED FINDING — Tidaling is normal and indicates a patent, functioning chest tube. The water level rises during inspiration and falls during expiration, confirming the tube is communicating with the pleural space.",
+                c: "REPORT IMMEDIATELY — Subcutaneous emphysema (air trapped under the skin causing a crackling sensation) that is SPREADING suggests a significant air leak or malpositioned tube. Involvement of the neck raises concern for mediastinal air tracking.",
+                d: "EXPECTED FINDING — Serous (clear/straw-colored) drainage of 150 mL over 8 hours is a normal finding, especially in the first 24-48 hours after insertion.",
+                e: "REPORT IMMEDIATELY — Sudden cessation of all drainage combined with respiratory distress suggests the tube is obstructed (blood clot, kink, or dependent loop). The accumulating fluid or air cannot escape, causing worsening symptoms."
             },
-            testTakingTip: "For chest tube drainage: Notify if >200 mL/hour (hemorrhage), sudden increase in volume, change from serous to bloody, or sudden stop with symptoms. Serous drainage of 100-300 mL/shift in the first 24-48 hours is typically expected.",
+            testTakingTip: "For chest tube drainage: Notify if >200 mL/hour (hemorrhage), sudden increase in volume, change from serous to bloody, or sudden stop with symptoms. Serous drainage of 100-300 mL/shift in the first 24-48 hours is typically expected. Tidaling is always a reassuring sign of tube patency.",
             guideSection: "Section 6 — Systematic Assessment",
             guideSectionId: "assessment"
         },
@@ -110,27 +109,27 @@ var chestTubesQuizData = {
         },
         {
             id: 5,
-            type: "sata",
+            type: "ordering",
             subtype: null,
             difficulty: "application",
-            stem: "A nurse is preparing a patient for chest tube removal. The provider has determined the chest tube is ready to be removed based on the chest X-ray and clinical status. Which nursing actions are appropriate during the removal process? (Select all that apply.)",
+            stem: "A nurse is preparing a patient for chest tube removal. Place the following nursing actions in the correct sequence for the chest tube removal process.",
             options: [
-                { id: "a", text: "Administer prescribed analgesic 30 minutes before the procedure" },
-                { id: "b", text: "Instruct the patient to perform a Valsalva maneuver during removal" },
-                { id: "c", text: "Have petroleum gauze and an occlusive dressing ready at the bedside" },
-                { id: "d", text: "Instruct the patient to inhale deeply and hold while the tube is being pulled" },
-                { id: "e", text: "Monitor vital signs and breath sounds after removal" }
+                { id: "a", text: "Administer prescribed analgesic and allow time for peak effect" },
+                { id: "b", text: "Have petroleum gauze and an occlusive dressing ready at the bedside" },
+                { id: "c", text: "Instruct the patient to perform a Valsalva maneuver (bear down) as the provider removes the tube" },
+                { id: "d", text: "Apply the occlusive dressing immediately over the insertion site, taped on all four sides" },
+                { id: "e", text: "Monitor vital signs, breath sounds, and SpO2; obtain a post-removal chest X-ray" }
             ],
-            correct: ["a", "b", "c", "e"],
+            correct: ["a", "b", "c", "d", "e"],
             rationale: {
-                correct: "Appropriate nursing actions include pre-medicating for pain, instructing Valsalva maneuver, preparing occlusive dressing materials, and post-removal monitoring.",
-                a: "CORRECT — Chest tube removal is painful. Administering analgesics (typically IV morphine or oral opioid) 30 minutes before allows peak effect during the procedure.",
-                b: "CORRECT — The Valsalva maneuver (bearing down against a closed glottis) increases intrathoracic pressure, which prevents air from being sucked into the pleural space during the brief moment the tube is removed.",
-                c: "CORRECT — An occlusive dressing (petroleum gauze covered with sterile gauze, taped on ALL four sides) must be applied immediately after the tube is pulled. This seals the site since no ongoing air escape is expected post-removal.",
-                d: "INCORRECT — Deep inhalation creates NEGATIVE intrathoracic pressure, which would draw air INTO the pleural space through the open insertion site during removal. The correct instruction is to Valsalva or exhale and hold, NOT inhale.",
-                e: "CORRECT — Post-removal assessment includes vital signs, breath sounds (to detect pneumothorax), SpO2, respiratory effort, and a post-removal chest X-ray (typically within 1-2 hours) to confirm full lung expansion."
+                correct: "The correct sequence ensures pain control first, then preparation of supplies, then airway pressure management during removal, immediate site sealing, and post-procedure assessment.",
+                a: "FIRST — Administer analgesics (typically IV morphine or oral opioid) 30 minutes before the procedure to allow peak effect. Chest tube removal is painful, and pre-medication is essential.",
+                b: "SECOND — Prepare all supplies (petroleum gauze, sterile gauze, tape) at the bedside BEFORE tube removal begins. Having everything ready prevents delays in sealing the site after the tube is pulled.",
+                c: "THIRD — During the actual removal, the patient performs a Valsalva maneuver, which increases intrathoracic pressure and prevents air from being sucked into the pleural space. Note: deep INHALATION is contraindicated as it creates negative pressure that draws air IN.",
+                d: "FOURTH — The occlusive dressing must be applied IMMEDIATELY after tube removal to seal the insertion site. Tape on ALL four sides (unlike the three-sided dressing used for accidental dislodgement) because no ongoing air escape is expected.",
+                e: "FIFTH — After the site is sealed, assess vital signs, breath sounds (to detect pneumothorax), SpO2, and respiratory effort. A post-removal chest X-ray is typically obtained within 1-2 hours to confirm full lung expansion."
             },
-            testTakingTip: "During chest tube removal: Valsalva = increased pressure = air stays OUT. Deep inhalation = negative pressure = air gets sucked IN. This is a classic NCLEX question. Always pick Valsalva or exhale-and-hold.",
+            testTakingTip: "During chest tube removal: Valsalva = increased pressure = air stays OUT. Deep inhalation = negative pressure = air gets sucked IN. Post-removal dressing is taped on ALL FOUR sides (not three) because the tube has been intentionally removed and no air escape is needed.",
             guideSection: "Section 9 — Chest Tube Removal",
             guideSectionId: "removal"
         },
@@ -182,10 +181,11 @@ var chestTubesQuizData = {
         },
         {
             id: 8,
-            type: "sata",
+            type: "matrix",
             subtype: null,
             difficulty: "application",
-            stem: "A nurse is caring for a patient with a chest tube to water-seal drainage. The patient needs to ambulate to the bathroom. Which actions by the nurse are appropriate? (Select all that apply.)",
+            matrixColumns: ["Appropriate", "Inappropriate"],
+            stem: "A nurse is caring for a patient with a chest tube to water-seal drainage. The patient needs to ambulate to the bathroom. Classify each nursing action as appropriate or inappropriate during ambulation.",
             options: [
                 { id: "a", text: "Clamp the chest tube before the patient stands up" },
                 { id: "b", text: "Keep the drainage system below chest level during ambulation" },
@@ -193,14 +193,14 @@ var chestTubesQuizData = {
                 { id: "d", text: "Disconnect the chest tube from the drainage system temporarily for easier movement" },
                 { id: "e", text: "Monitor the patient for dyspnea, chest pain, or changes in respiratory status during ambulation" }
             ],
-            correct: ["b", "c", "e"],
+            correct: { a: "Inappropriate", b: "Appropriate", c: "Appropriate", d: "Inappropriate", e: "Appropriate" },
             rationale: {
-                correct: "During ambulation, the nurse should keep the drainage system below chest level, secure all connections, and monitor the patient's respiratory status throughout.",
-                a: "INCORRECT — Clamping the chest tube during ambulation is NOT recommended. Clamping prevents air and fluid from draining and can lead to tension pneumothorax if there is an ongoing air leak. The tube should remain open to water seal.",
-                b: "CORRECT — The system must remain below the patient's chest to prevent backflow of drainage. The patient or a staff member can carry the unit at a low level, or it can be placed on a mobile IV pole hook at the appropriate height.",
-                c: "CORRECT — Before any movement, verify that all connections are tight and secure to prevent accidental disconnection, which would expose the pleural space to atmospheric air.",
-                d: "INCORRECT — The chest tube should NEVER be disconnected from the drainage system during ambulation. Disconnection exposes the pleural space to air and can cause pneumothorax. If disconnection occurs accidentally, the tube end should be submerged in sterile water immediately.",
-                e: "CORRECT — The patient should be monitored for any signs of respiratory compromise during and after ambulation, including increased dyspnea, chest pain, decreased SpO2, or changes in drainage."
+                correct: "During ambulation, the nurse should keep the drainage system below chest level, secure all connections, and monitor respiratory status. Clamping and disconnecting the tube are both dangerous actions that could lead to tension pneumothorax.",
+                a: "INAPPROPRIATE — Clamping the chest tube during ambulation is NOT recommended. Clamping prevents air and fluid from draining and can lead to tension pneumothorax if there is an ongoing air leak. The tube should remain open to water seal.",
+                b: "APPROPRIATE — The system must remain below the patient's chest to prevent backflow of drainage. The patient or a staff member can carry the unit at a low level, or it can be placed on a mobile IV pole hook at the appropriate height.",
+                c: "APPROPRIATE — Before any movement, verify that all connections are tight and secure to prevent accidental disconnection, which would expose the pleural space to atmospheric air.",
+                d: "INAPPROPRIATE — The chest tube should NEVER be disconnected from the drainage system during ambulation. Disconnection exposes the pleural space to air and can cause pneumothorax. If disconnection occurs accidentally, the tube end should be submerged in sterile water immediately.",
+                e: "APPROPRIATE — The patient should be monitored for any signs of respiratory compromise during and after ambulation, including increased dyspnea, chest pain, decreased SpO2, or changes in drainage."
             },
             testTakingTip: "Two things to NEVER do with a chest tube during ambulation: (1) clamp it, (2) disconnect it. Keep it below chest level, keep connections tight, and monitor the patient. Think: open, low, secure, and watch.",
             guideSection: "Section 6 — Systematic Assessment",

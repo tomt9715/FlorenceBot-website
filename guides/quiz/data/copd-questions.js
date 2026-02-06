@@ -1,7 +1,7 @@
 /**
  * COPD Quiz — Question Data
  * Extracted from guides/copd.html practice questions section.
- * 8 NCLEX-style questions: 4 Single, 2 SATA, 2 Priority
+ * 8 NCLEX-style questions: 4 Single, 2 Priority, 1 Ordering, 1 Matrix
  */
 
 /* exported copdQuizData */
@@ -83,27 +83,27 @@ var copdQuizData = {
         },
         {
             id: 4,
-            type: "sata",
+            type: "ordering",
             subtype: null,
             difficulty: "application",
-            stem: "A patient with COPD uses multiple inhalers daily. Which statements indicate correct understanding of inhaler use? (Select all that apply.)",
+            stem: "A patient with COPD arrives at the ED with acute exacerbation \u2014 increased dyspnea, purulent sputum production, and SpO2 of 85% on room air. Place the nursing interventions in priority order.",
             options: [
-                { id: "a", text: "\"I use my albuterol inhaler first, then wait a few minutes before my steroid inhaler.\"" },
-                { id: "b", text: "\"I rinse my mouth with water after using my steroid inhaler.\"" },
-                { id: "c", text: "\"I use my steroid inhaler first because it\u2019s the most important medication.\"" },
-                { id: "d", text: "\"I shake my MDI before each use.\"" },
-                { id: "e", text: "\"I use my rescue inhaler on a regular schedule four times a day.\"" }
+                { id: "a", text: "Apply low-flow oxygen to target SpO2 88\u201392%" },
+                { id: "b", text: "Obtain arterial blood gas (ABG)" },
+                { id: "c", text: "Administer nebulized bronchodilator per protocol" },
+                { id: "d", text: "Administer systemic corticosteroids as ordered" },
+                { id: "e", text: "Obtain sputum culture if infectious exacerbation suspected" }
             ],
-            correct: ["a", "b", "d"],
+            correct: ["a", "b", "c", "d", "e"],
             rationale: {
-                correct: "Bronchodilators (SABA like albuterol) should always be used BEFORE corticosteroids to open the airways first, allowing the steroid to deposit deeper in the lungs. Rinsing the mouth after inhaled corticosteroids prevents oral candidiasis (thrush) and hoarseness. MDIs must be shaken before use to ensure proper medication mixing.",
-                a: "CORRECT \u2014 Bronchodilators (SABA like albuterol) should always be used BEFORE corticosteroids to open the airways first, allowing the steroid to deposit deeper in the lungs.",
-                b: "CORRECT \u2014 Rinsing the mouth after inhaled corticosteroids prevents oral candidiasis (thrush) and hoarseness.",
-                c: "INCORRECT \u2014 Corticosteroids should be used AFTER bronchodilators, not first. Using the steroid first means it deposits in constricted airways rather than reaching the lower lungs where it\u2019s most effective.",
-                d: "CORRECT \u2014 MDIs must be shaken before use to ensure proper medication mixing.",
-                e: "INCORRECT \u2014 Rescue inhalers (SABAs) are used PRN (as needed) for acute symptoms, not on a scheduled basis. Scheduled use of SABAs suggests uncontrolled disease requiring a step-up in controller therapy. Using SABAs >2 times per week indicates poor control."
+                correct: "Prioritize ABCs \u2014 oxygenation first with COPD-specific targets (88\u201392%). Then assess ventilation (ABG), treat bronchospasm (nebulizer), reduce inflammation (steroids), and collect diagnostic specimens.",
+                a: "FIRST \u2014 SpO2 of 85% requires immediate oxygen therapy. In COPD, use LOW-flow oxygen targeting SpO2 88\u201392%. High-flow oxygen risks suppressing the hypoxic ventilatory drive and causing CO2 narcosis.",
+                b: "SECOND \u2014 Once oxygen is initiated, obtain an ABG to evaluate PaCO2, pH, and PaO2. The ABG guides treatment decisions (e.g., need for BiPAP if CO2 is critically elevated).",
+                c: "THIRD \u2014 Nebulized short-acting bronchodilators (albuterol + ipratropium) relieve bronchospasm and improve airflow.",
+                d: "FOURTH \u2014 Systemic corticosteroids reduce airway inflammation, shorten recovery time, and reduce treatment failure. They take hours to reach full effect, so early administration is important.",
+                e: "FIFTH \u2014 Sputum culture identifies the causative organism for guiding antibiotic therapy. It is diagnostic and does not directly stabilize the patient."
             },
-            testTakingTip: "Inhaler order: Bronchodilator FIRST, steroid SECOND. Always rinse mouth after ICS to prevent thrush. Needing rescue inhaler >2x/week (or >2 canisters/year) = poorly controlled disease. These are heavily tested concepts.",
+            testTakingTip: "COPD exacerbation: O2 (low-flow, 88\u201392%) \u2192 ABG \u2192 Bronchodilator \u2192 Steroids \u2192 Culture. Remember: COPD patients get LOW-flow O2, never high-flow.",
             guideSection: "Section 7 \u2014 Medication Management",
             guideSectionId: "medications"
         },
@@ -158,27 +158,26 @@ var copdQuizData = {
         },
         {
             id: 7,
-            type: "sata",
+            type: "matrix",
             subtype: null,
             difficulty: "application",
-            stem: "A patient with COPD is being assessed for signs of a respiratory infection triggering an acute exacerbation. Which findings would indicate a COPD exacerbation? (Select all that apply.)",
+            stem: "A nurse is comparing the clinical presentations of two patients with COPD. For each finding, indicate whether it is more characteristic of emphysema or chronic bronchitis.",
+            matrixColumns: ["Emphysema (Pink Puffer)", "Chronic Bronchitis (Blue Bloater)"],
             options: [
-                { id: "a", text: "Increased sputum volume and purulence (yellow-green)" },
-                { id: "b", text: "Worsening dyspnea beyond the patient\u2019s usual baseline" },
-                { id: "c", text: "Decreased respiratory rate to 10 breaths per minute" },
-                { id: "d", text: "Increased use of accessory muscles to breathe" },
-                { id: "e", text: "New onset of peripheral edema and JVD" }
+                { id: "a", text: "Barrel chest with pursed-lip breathing" },
+                { id: "b", text: "Chronic productive cough with copious sputum" },
+                { id: "c", text: "Significant weight loss and muscle wasting" },
+                { id: "d", text: "Peripheral edema and cyanosis" }
             ],
-            correct: ["a", "b", "d"],
+            correct: { a: "Emphysema (Pink Puffer)", b: "Chronic Bronchitis (Blue Bloater)", c: "Emphysema (Pink Puffer)", d: "Chronic Bronchitis (Blue Bloater)" },
             rationale: {
-                correct: "The three cardinal signs of COPD exacerbation are increased dyspnea, increased sputum volume, and increased sputum purulence. Increased accessory muscle use indicates significantly increased work of breathing from worsening airflow obstruction.",
-                a: "CORRECT \u2014 Increased sputum volume and change to purulent (yellow-green) color is a cardinal sign of infection-triggered exacerbation.",
-                b: "CORRECT \u2014 Worsening dyspnea beyond usual baseline is the most common presenting symptom of exacerbation.",
-                c: "INCORRECT \u2014 A COPD exacerbation causes INCREASED respiratory rate (tachypnea), not decreased. A decreased rate would suggest respiratory fatigue/failure or CO2 narcosis \u2014 a late, ominous sign requiring immediate intervention.",
-                d: "CORRECT \u2014 Increased accessory muscle use indicates significantly increased work of breathing from worsening airflow obstruction.",
-                e: "INCORRECT \u2014 Peripheral edema and JVD indicate right-sided heart failure (cor pulmonale), which is a chronic complication of COPD, not an acute exacerbation. While it can occur concurrently, it\u2019s a separate finding."
+                correct: "Emphysema patients ('Pink Puffers') present with hyperinflation, weight loss, and increased work of breathing. Chronic bronchitis patients ('Blue Bloaters') present with productive cough, cyanosis, and right-sided heart failure signs.",
+                a: "EMPHYSEMA \u2014 Alveolar destruction causes air trapping and lung hyperinflation, leading to increased AP diameter (barrel chest). Pursed-lip breathing creates auto-PEEP to keep airways open.",
+                b: "CHRONIC BRONCHITIS \u2014 Defined by a chronic productive cough for at least 3 months in 2 consecutive years. Inflammation and hypertrophy of mucus glands cause excessive mucus production.",
+                c: "EMPHYSEMA \u2014 Increased work of breathing dramatically increases caloric expenditure. Combined with decreased appetite from dyspnea, patients develop cachexia.",
+                d: "CHRONIC BRONCHITIS \u2014 Chronic hypoxemia leads to cyanosis. Prolonged hypoxemia causes pulmonary hypertension and right-sided heart failure (cor pulmonale), manifesting as peripheral edema and JVD."
             },
-            testTakingTip: "3 cardinal signs of COPD exacerbation: Increased dyspnea + increased sputum volume + increased sputum purulence. A DROPPING respiratory rate in an exacerbation is a danger sign (fatigue/impending arrest), not a sign of improvement.",
+            testTakingTip: "Pink Puffer (emphysema) = thin, barrel chest, pursed-lip breathing, dyspnea, weight loss. Blue Bloater (chronic bronchitis) = overweight, productive cough, cyanosis, edema, cor pulmonale.",
             guideSection: "Section 4 \u2014 Acute Exacerbations",
             guideSectionId: "assessment"
         },
