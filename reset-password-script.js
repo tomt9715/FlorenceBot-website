@@ -1,7 +1,11 @@
 // Reset Password Page Handler
 
-// API Configuration
-const API_URL = 'https://api.thenursingcollective.pro';
+// API Configuration — use global API_URL from api-service.js if available, otherwise detect environment
+const RESET_API_URL = (typeof API_URL !== 'undefined' ? API_URL : (
+    window.location.hostname === 'thenursingcollective.pro'
+        ? 'https://api.thenursingcollective.pro'
+        : 'https://staging-backend-production-365a.up.railway.app'
+));
 
 // Get token from URL
 const urlParams = new URLSearchParams(window.location.search);
@@ -85,7 +89,7 @@ if (resetForm) {
         submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i><span>Resetting...</span>';
 
         try {
-            const response = await fetch(`${API_URL}/auth/reset-password`, {
+            const response = await fetch(`${RESET_API_URL}/auth/reset-password`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

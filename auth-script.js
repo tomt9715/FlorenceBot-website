@@ -445,11 +445,18 @@ document.addEventListener('DOMContentLoaded', function() {
                     <i class="fas fa-exclamation-circle"></i>
                     <div>
                         <span>${error.message || 'Failed to send reset email. Please try again.'}</span>
-                        <button class="retry-button" onclick="document.getElementById('forgot-password-form').requestSubmit()">
+                        <button class="retry-button" id="forgot-retry-btn">
                             <i class="fas fa-redo"></i> Try Again
                         </button>
                     </div>
                 `;
+                // Attach event listener to retry button
+                const retryBtn = document.getElementById('forgot-retry-btn');
+                if (retryBtn) {
+                    retryBtn.addEventListener('click', function() {
+                        document.getElementById('forgot-password-form').requestSubmit();
+                    });
+                }
             } finally {
                 submitBtn.disabled = false;
                 submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i><span>Send Reset Link</span>';

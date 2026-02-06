@@ -450,7 +450,7 @@ function showGuideNotFound(guideId) {
             </div>
             <h2 style="margin-bottom: 16px;">Guide Not Found</h2>
             <p style="color: var(--text-secondary); margin-bottom: 24px;">
-                The study guide "${guideId}" could not be found. It may have been moved or removed.
+                The requested study guide could not be found. It may have been moved or removed.
             </p>
             <a href="study-guides.html" class="btn btn-primary">
                 <i class="fas fa-arrow-left me-2"></i>Browse All Guides

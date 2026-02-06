@@ -1,6 +1,11 @@
 // Email Verification Handler
 (function() {
-    const API_BASE = 'https://api.thenursingcollective.pro/auth';
+    // Use the global API_URL from api-service.js if available, otherwise detect environment
+    const API_BASE = (typeof API_URL !== 'undefined' ? API_URL : (
+        window.location.hostname === 'thenursingcollective.pro'
+            ? 'https://api.thenursingcollective.pro'
+            : 'https://staging-backend-production-365a.up.railway.app'
+    )) + '/auth';
 
     const statusIcon = document.getElementById('status-icon');
     const statusTitle = document.getElementById('status-title');

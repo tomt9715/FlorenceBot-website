@@ -406,7 +406,7 @@ async function loadUserProfile() {
             <div>
                 <strong>Profile Load Failed</strong><br>
                 <span>Failed to load your profile. This might be a temporary network issue.</span>
-                <button class="retry-button" onclick="window.location.reload()">
+                <button class="retry-button" id="profile-retry-btn">
                     <i class="fas fa-redo"></i> Retry
                 </button>
             </div>
@@ -415,6 +415,14 @@ async function loadUserProfile() {
         const container = document.querySelector('.container');
         if (container) {
             container.insertBefore(errorDiv, container.firstChild);
+        }
+
+        // Attach event listener to retry button (no inline onclick due to CSP)
+        const retryBtn = document.getElementById('profile-retry-btn');
+        if (retryBtn) {
+            retryBtn.addEventListener('click', function() {
+                window.location.reload();
+            });
         }
     }
 }
