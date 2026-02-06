@@ -811,12 +811,36 @@ var QuizBank = (function () {
         // Record mastery
         var resultEntries = _currentQuestions.map(function (q) {
             var r = _results[q.id];
-            return { questionId: q.id, correct: r ? r.correct : false };
+            return { questionId: q.id, correct: r ? r.correct : false, topic: q.topic };
         });
 
         var masteryResult = null;
+        var multiTopicResults = [];
         if (_currentTopicId) {
+            // Single-topic quiz (preconfig path)
             masteryResult = MasteryTracker.recordSetResult(_currentTopicId, resultEntries);
+        } else if (_isCustom) {
+            // Custom/multi-topic quiz — group by topic and record each
+            var byTopic = {};
+            resultEntries.forEach(function (r) {
+                if (!r.topic) return;
+                if (!byTopic[r.topic]) byTopic[r.topic] = [];
+                byTopic[r.topic].push(r);
+            });
+            var topicIds = Object.keys(byTopic);
+            topicIds.forEach(function (tid) {
+                var res = MasteryTracker.recordSetResult(tid, byTopic[tid]);
+                res.topicId = tid;
+                res.topicLabel = MasteryTracker.getTopicLabel(tid);
+                multiTopicResults.push(res);
+            });
+            // If all questions were from one topic, treat as single result
+            if (multiTopicResults.length === 1) {
+                masteryResult = multiTopicResults[0];
+                _currentTopicId = multiTopicResults[0].topicId;
+                _currentTopicLabel = multiTopicResults[0].topicLabel;
+                multiTopicResults = [];
+            }
         }
 
         var total = _currentQuestions.length;
@@ -850,7 +874,7 @@ var QuizBank = (function () {
         html += '<div class="qb-perf-msg">' + _esc(perfMsg) + '</div>';
         html += '</div>';
 
-        // Mastery update
+        // Mastery update — single topic
         if (masteryResult) {
             html += '<div class="qb-mastery-result">';
             if (masteryResult.pointsEarned > 0) {
@@ -868,6 +892,22 @@ var QuizBank = (function () {
             if (masteryResult.pointsToNext > 0 && masteryResult.pointsToNext <= 5) {
                 html += '<div class="qb-near-level">' + masteryResult.pointsToNext + ' point' + (masteryResult.pointsToNext !== 1 ? 's' : '') + ' from Level ' + (masteryResult.newLevel + 1) + '!</div>';
             }
+            html += '</div>';
+        }
+
+        // Mastery update — multi-topic (custom quiz spanning topics)
+        if (multiTopicResults.length > 0) {
+            html += '<div class="qb-mastery-result">';
+            multiTopicResults.forEach(function (mr) {
+                if (mr.pointsEarned > 0) {
+                    html += '<div class="qb-mastery-points">+' + mr.pointsEarned + ' pts &rarr; ' + _esc(mr.topicLabel || mr.topicId) + ' (' + mr.correctCount + '/' + mr.totalCount + ')</div>';
+                } else {
+                    html += '<div class="qb-mastery-points qb-mastery-points--zero">' + _esc(mr.topicLabel || mr.topicId) + ': ' + mr.correctCount + '/' + mr.totalCount + ' &mdash; no points</div>';
+                }
+                if (mr.leveledUp) {
+                    html += '<div class="qb-level-up"><i class="fas fa-arrow-up"></i> ' + _esc(mr.topicLabel || mr.topicId) + ' &rarr; Level ' + mr.newLevel + ' (' + _esc(mr.levelName) + ')!</div>';
+                }
+            });
             html += '</div>';
         }
 
