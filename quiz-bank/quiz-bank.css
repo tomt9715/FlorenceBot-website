@@ -1386,45 +1386,133 @@
 .qb-score-pct { font-family: 'Outfit', sans-serif; font-size: 1.25rem; font-weight: 600; color: var(--qb-text); margin-bottom: 6px; }
 .qb-perf-msg { font-size: 1rem; color: var(--qb-text-secondary); line-height: 1.5; max-width: 440px; margin: 0 auto; }
 
-/* Mastery result banner */
-.qb-mastery-result {
+/* Mastery card */
+.qb-mastery-card {
     background: var(--qb-card-bg);
-    border: 2px solid var(--qb-primary);
+    border: 1px solid var(--qb-border);
     border-radius: var(--qb-radius);
-    padding: 20px;
-    margin-bottom: 24px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    box-shadow: var(--qb-shadow-sm);
+}
+.qb-mastery-card--leveled {
+    border-color: var(--qb-correct);
+    box-shadow: 0 0 0 1px var(--qb-correct), var(--qb-shadow-md);
+}
+.qb-mastery-levelup {
+    background: linear-gradient(135deg, #059669, #10b981);
+    color: #fff;
     text-align: center;
-}
-
-.qb-mastery-points {
+    padding: 10px 16px;
     font-family: 'Outfit', sans-serif;
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: var(--qb-correct);
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
 }
-
-.qb-mastery-points--zero {
+.qb-mastery-levelup i { font-size: 1.1rem; }
+.qb-mastery-card-body { padding: 20px; }
+.qb-mastery-topic {
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: var(--qb-text-secondary);
+    margin-bottom: 8px;
+}
+.qb-mastery-level-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+}
+.qb-mastery-level-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px 12px;
+    border-radius: 20px;
+    color: #fff;
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    white-space: nowrap;
+}
+.qb-mastery-level-name {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--qb-text);
+}
+.qb-mastery-progress { margin-bottom: 14px; }
+.qb-mastery-progress-track {
+    height: 8px;
+    background: var(--qb-border);
+    border-radius: 4px;
+    overflow: hidden;
+}
+.qb-mastery-progress-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 1s ease;
+}
+.qb-mastery-progress-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    color: var(--qb-text-light);
+    margin-top: 4px;
+}
+.qb-mastery-earned {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.qb-mastery-earned-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--qb-correct-bg);
+    color: var(--qb-correct);
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 4px 10px;
+    border-radius: 6px;
+    border: 1px solid var(--qb-correct-border);
+}
+.qb-mastery-earned-text {
+    font-size: 0.88rem;
     color: var(--qb-text-secondary);
 }
-
-.qb-level-up {
-    margin-top: 12px;
-    padding: 10px 16px;
-    background: linear-gradient(135deg, #059669, #10b981);
-    border-radius: var(--qb-radius-sm);
-    color: #fff;
+.qb-mastery-earned-text--zero {
+    color: var(--qb-text-light);
+    font-style: italic;
+}
+.qb-mastery-hint {
+    margin-top: 10px;
+    font-size: 0.82rem;
     font-weight: 600;
-    font-size: 1rem;
-    display: inline-flex;
+    color: var(--qb-accent);
+    display: flex;
     align-items: center;
     gap: 6px;
 }
-
-.qb-near-level {
-    margin-top: 8px;
-    font-size: 0.88rem;
-    color: var(--qb-accent);
+.qb-mastery-multi { margin-bottom: 24px; }
+.qb-mastery-multi-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1rem;
     font-weight: 600;
+    color: var(--qb-text);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
 /* Results breakdown */
@@ -1592,9 +1680,9 @@
     .qb-score-value { font-size: 1.7rem; }
     .qb-score-pct { font-size: 1.1rem; }
     .qb-perf-msg { font-size: 0.92rem; }
-    .qb-mastery-result { padding: 16px; }
-    .qb-mastery-points { font-size: 1rem; }
-    .qb-level-up { font-size: 0.92rem; padding: 8px 14px; }
+    .qb-mastery-card-body { padding: 16px; }
+    .qb-mastery-level-name { font-size: 1.1rem; }
+    .qb-mastery-earned { flex-wrap: wrap; }
 
     .qb-btn { padding: 12px 18px; font-size: 0.9rem; min-height: 48px; }
     .qb-results-actions { gap: 8px; }

@@ -24,6 +24,7 @@ var QuizBank = (function () {
     var _answers = {};             // questionId -> userAnswer
     var _results = {};             // questionId -> { correct, userAnswer, correctAnswer }
     var _submitted = {};           // questionId -> true
+    var _firstAttemptResults = {}; // questionId -> { correct } — only first attempt, used for mastery
     var _setSize = null;
     var _currentTopicId = null;
     var _currentTopicLabel = null;
@@ -427,6 +428,7 @@ var QuizBank = (function () {
         _answers = {};
         _results = {};
         _submitted = {};
+        _firstAttemptResults = {};
         _currentTopicId = topicId;
         _currentTopicLabel = topicLabel;
         _currentChapterId = chapterId;
@@ -574,6 +576,11 @@ var QuizBank = (function () {
             userAnswer: userAnswer,
             correctAnswer: q.type === 'matrix' ? _getMatrixCorrectMap(q) : q.correct
         };
+
+        // Track first attempt only (used for mastery scoring)
+        if (!_firstAttemptResults[q.id]) {
+            _firstAttemptResults[q.id] = { correct: isCorrect };
+        }
 
         _showSubmitFeedback(q, userAnswer, isCorrect);
     }
@@ -792,6 +799,79 @@ var QuizBank = (function () {
         return html;
     }
 
+    // ── Mastery Card Builder ──────────────────────────────
+
+    function _buildMasteryCard(mr, topicLabel) {
+        var thresholds = MasteryTracker.LEVEL_THRESHOLDS;
+        var levelNames = MasteryTracker.LEVEL_NAMES;
+        var color = MasteryTracker.getMasteryColor(mr.newLevel);
+        var nextLevelName = levelNames[mr.newLevel + 1] || null;
+
+        // Calculate progress within current level
+        var currentLevelPts = thresholds[mr.newLevel] || 0;
+        var nextLevelPts = thresholds[mr.newLevel + 1] || currentLevelPts;
+        var levelRange = nextLevelPts - currentLevelPts;
+        var progressInLevel = mr.newPoints - currentLevelPts;
+        var progressPct = mr.newLevel >= 10 ? 100 : (levelRange > 0 ? Math.min(100, Math.round((progressInLevel / levelRange) * 100)) : 0);
+
+        var h = '';
+        h += '<div class="qb-mastery-card' + (mr.leveledUp ? ' qb-mastery-card--leveled' : '') + '">';
+
+        // Level-up celebration banner
+        if (mr.leveledUp) {
+            h += '<div class="qb-mastery-levelup">';
+            h += '<i class="fas fa-star"></i> Level Up!';
+            h += '</div>';
+        }
+
+        h += '<div class="qb-mastery-card-body">';
+
+        // Topic name
+        h += '<div class="qb-mastery-topic">' + _esc(topicLabel) + '</div>';
+
+        // Level badge + name
+        h += '<div class="qb-mastery-level-row">';
+        h += '<span class="qb-mastery-level-badge" style="background:' + color + '">Lv ' + mr.newLevel + '</span>';
+        h += '<span class="qb-mastery-level-name">' + _esc(mr.levelName) + '</span>';
+        h += '</div>';
+
+        // Progress bar
+        h += '<div class="qb-mastery-progress">';
+        h += '<div class="qb-mastery-progress-track">';
+        h += '<div class="qb-mastery-progress-fill" style="width:' + progressPct + '%;background:' + color + '"></div>';
+        h += '</div>';
+        if (mr.newLevel < 10) {
+            h += '<div class="qb-mastery-progress-label">';
+            h += '<span>' + mr.newPoints + ' pts</span>';
+            h += '<span>' + nextLevelPts + ' pts (Lv ' + (mr.newLevel + 1) + ')</span>';
+            h += '</div>';
+        } else {
+            h += '<div class="qb-mastery-progress-label"><span>Max Level Reached</span></div>';
+        }
+        h += '</div>';
+
+        // Points earned this session
+        h += '<div class="qb-mastery-earned">';
+        if (mr.pointsEarned > 0) {
+            h += '<span class="qb-mastery-earned-badge">+' + mr.pointsEarned + '</span>';
+            h += '<span class="qb-mastery-earned-text">points earned (' + mr.accuracy + '% accuracy)</span>';
+        } else {
+            h += '<span class="qb-mastery-earned-text qb-mastery-earned-text--zero">Score 70%+ to earn mastery points</span>';
+        }
+        h += '</div>';
+
+        // Near next level hint
+        if (mr.pointsToNext > 0 && mr.pointsToNext <= 5 && !mr.leveledUp) {
+            h += '<div class="qb-mastery-hint">';
+            h += '<i class="fas fa-bolt"></i> ' + mr.pointsToNext + ' point' + (mr.pointsToNext !== 1 ? 's' : '') + ' to ' + _esc(nextLevelName || ('Level ' + (mr.newLevel + 1)));
+            h += '</div>';
+        }
+
+        h += '</div>'; // card-body
+        h += '</div>'; // card
+        return h;
+    }
+
     // ── Next & Results ─────────────────────────────────────
 
     function _nextQuestion() {
@@ -808,10 +888,10 @@ var QuizBank = (function () {
         _showResultsHeader(_currentTopicLabel || 'Results');
         window.removeEventListener('beforeunload', _boundBeforeUnload);
 
-        // Record mastery
+        // Record mastery — use first-attempt results only
         var resultEntries = _currentQuestions.map(function (q) {
-            var r = _results[q.id];
-            return { questionId: q.id, correct: r ? r.correct : false, topic: q.topic };
+            var fa = _firstAttemptResults[q.id];
+            return { questionId: q.id, correct: fa ? fa.correct : false, topic: q.topic };
         });
 
         var masteryResult = null;
@@ -876,37 +956,15 @@ var QuizBank = (function () {
 
         // Mastery update — single topic
         if (masteryResult) {
-            html += '<div class="qb-mastery-result">';
-            if (masteryResult.pointsEarned > 0) {
-                html += '<div class="qb-mastery-points">+' + masteryResult.pointsEarned + ' points &rarr; ' + _esc(_currentTopicLabel || _currentTopicId) + '</div>';
-            } else {
-                html += '<div class="qb-mastery-points qb-mastery-points--zero">Below 70% &mdash; no mastery points earned</div>';
-            }
-
-            if (masteryResult.leveledUp) {
-                html += '<div class="qb-level-up">';
-                html += '<i class="fas fa-arrow-up"></i> ' + _esc(_currentTopicLabel || _currentTopicId) + ' &rarr; Level ' + masteryResult.newLevel + ' (' + _esc(masteryResult.levelName) + ')!';
-                html += '</div>';
-            }
-
-            if (masteryResult.pointsToNext > 0 && masteryResult.pointsToNext <= 5) {
-                html += '<div class="qb-near-level">' + masteryResult.pointsToNext + ' point' + (masteryResult.pointsToNext !== 1 ? 's' : '') + ' from Level ' + (masteryResult.newLevel + 1) + '!</div>';
-            }
-            html += '</div>';
+            html += _buildMasteryCard(masteryResult, _currentTopicLabel || _currentTopicId);
         }
 
         // Mastery update — multi-topic (custom quiz spanning topics)
         if (multiTopicResults.length > 0) {
-            html += '<div class="qb-mastery-result">';
+            html += '<div class="qb-mastery-multi">';
+            html += '<div class="qb-mastery-multi-title"><i class="fas fa-layer-group"></i> Mastery Progress</div>';
             multiTopicResults.forEach(function (mr) {
-                if (mr.pointsEarned > 0) {
-                    html += '<div class="qb-mastery-points">+' + mr.pointsEarned + ' pts &rarr; ' + _esc(mr.topicLabel || mr.topicId) + ' (' + mr.correctCount + '/' + mr.totalCount + ')</div>';
-                } else {
-                    html += '<div class="qb-mastery-points qb-mastery-points--zero">' + _esc(mr.topicLabel || mr.topicId) + ': ' + mr.correctCount + '/' + mr.totalCount + ' &mdash; no points</div>';
-                }
-                if (mr.leveledUp) {
-                    html += '<div class="qb-level-up"><i class="fas fa-arrow-up"></i> ' + _esc(mr.topicLabel || mr.topicId) + ' &rarr; Level ' + mr.newLevel + ' (' + _esc(mr.levelName) + ')!</div>';
-                }
+                html += _buildMasteryCard(mr, mr.topicLabel || mr.topicId);
             });
             html += '</div>';
         }
@@ -1658,6 +1716,7 @@ var QuizBank = (function () {
         _answers = {};
         _results = {};
         _submitted = {};
+        _firstAttemptResults = {};
         _currentTopicId = null; // null = no mastery recording
         _shuffleAllOptions();
         window.addEventListener('beforeunload', _boundBeforeUnload);
