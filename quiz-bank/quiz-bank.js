@@ -24,7 +24,7 @@ var QuizBank = (function () {
     var _answers = {};             // questionId -> userAnswer
     var _results = {};             // questionId -> { correct, userAnswer, correctAnswer }
     var _submitted = {};           // questionId -> true
-    var _setSize = 10;
+    var _setSize = 5;
     var _currentTopicId = null;
     var _currentTopicLabel = null;
     var _currentChapterId = null;
@@ -261,9 +261,10 @@ var QuizBank = (function () {
         html += '<div class="qb-builder-group">';
         html += '<label class="qb-builder-label">Set Size</label>';
         html += '<div class="qb-builder-chips">';
-        html += '<button class="qb-chip qb-chip--active" data-qb-action="set-size" data-size="10">10 Questions</button>';
-        html += '<button class="qb-chip" data-qb-action="set-size" data-size="20">20 Questions</button>';
-        html += '<button class="qb-chip" data-qb-action="set-size" data-size="max">Max</button>';
+        html += '<button class="qb-chip qb-chip--active" data-qb-action="set-size" data-size="5">5 Questions</button>';
+        html += '<button class="qb-chip" data-qb-action="set-size" data-size="10">10 Questions</button>';
+        html += '<button class="qb-chip" data-qb-action="set-size" data-size="15">15 Questions</button>';
+        html += '<button class="qb-chip" data-qb-action="set-size" data-size="max">Max (<span id="qb-builder-max-count">0</span>)</button>';
         html += '</div>';
         html += '</div>';
 
@@ -344,6 +345,10 @@ var QuizBank = (function () {
         var count = MasteryTracker.countAvailableQuestions(_getBuilderFilters());
         countEl.textContent = count + ' question' + (count !== 1 ? 's' : '') + ' match';
         startBtn.disabled = count === 0;
+
+        // Update the Max button count
+        var maxCountEl = document.getElementById('qb-builder-max-count');
+        if (maxCountEl) maxCountEl.textContent = count;
     }
 
     function _getBuilderFilters() {
@@ -1103,13 +1108,15 @@ var QuizBank = (function () {
         html += '</div>';
         html += '</div>';
 
-        // Set size
+        // Set size — count available questions for this topic
+        var topicQuestionCount = _countQuestionsForTopic(topicId);
         html += '<div class="qb-preconfig-group">';
         html += '<label class="qb-preconfig-label"><i class="fas fa-hashtag"></i> Number of Questions</label>';
         html += '<div class="qb-preconfig-chips">';
-        html += '<button class="qb-chip qb-chip--active" data-qb-action="set-preconfig-size" data-psize="10">10</button>';
-        html += '<button class="qb-chip" data-qb-action="set-preconfig-size" data-psize="20">20</button>';
-        html += '<button class="qb-chip" data-qb-action="set-preconfig-size" data-psize="max">Max</button>';
+        html += '<button class="qb-chip qb-chip--active" data-qb-action="set-preconfig-size" data-psize="5">5</button>';
+        html += '<button class="qb-chip" data-qb-action="set-preconfig-size" data-psize="10">10</button>';
+        html += '<button class="qb-chip" data-qb-action="set-preconfig-size" data-psize="15">15</button>';
+        html += '<button class="qb-chip" data-qb-action="set-preconfig-size" data-psize="max">Max (' + topicQuestionCount + ')</button>';
         html += '</div>';
         html += '</div>';
 
@@ -1133,7 +1140,7 @@ var QuizBank = (function () {
 
         // Store config state
         _root._preconfigTypes = ['single', 'ordering', 'matrix'];
-        _root._preconfigSize = 10;
+        _root._preconfigSize = 5;
         _root._preconfigMode = 'practice';
     }
 
@@ -1270,6 +1277,13 @@ var QuizBank = (function () {
         var size = _setSize;
         _isCustom = true;
         _startQuiz(questions, null, 'Custom Quiz', null, mode, size);
+    }
+
+    function _countQuestionsForTopic(topicId) {
+        if (!window.QUIZ_BANK_QUESTIONS) return 0;
+        return window.QUIZ_BANK_QUESTIONS.filter(function (q) {
+            return q.topic === topicId;
+        }).length;
     }
 
     function _getQuestionsForTopic(topicId, types) {

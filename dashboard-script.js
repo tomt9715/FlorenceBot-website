@@ -354,6 +354,12 @@ async function loadUserProfile() {
         // Show getting started card for new users (less than 2 days old)
         showGettingStartedCard(user);
 
+        // Show Quiz Bank card for premium users
+        if (user.is_premium) {
+            const quizBankBtn = document.getElementById('quiz-bank-action-btn');
+            if (quizBankBtn) quizBankBtn.style.display = '';
+        }
+
         // Update subscription action button for premium users
         if (user.is_premium) {
             const subActionBtn = document.getElementById('subscription-action-btn');
