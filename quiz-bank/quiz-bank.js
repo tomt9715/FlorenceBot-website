@@ -951,8 +951,10 @@ var QuizBank = (function () {
                     _handleReviewMissed();
                     break;
                 case 'quick-10':
+                    _handleQuick10();
+                    break;
                 case 'weak-focus':
-                    // No questions available yet — these are disabled
+                    _handleWeakFocus();
                     break;
                 case 'scroll-builder':
                     var builder = document.getElementById('qb-builder');
@@ -1222,14 +1224,87 @@ var QuizBank = (function () {
             return;
         }
 
-        // TODO: Load question file for topicId and filter by types
-        // For now, no question files exist
-        alert('Questions for this topic are coming soon!');
+        var questions = _getQuestionsForTopic(topicId, types);
+        if (questions.length === 0) {
+            alert('Questions for this topic are coming soon!');
+            return;
+        }
+
+        _shuffleArray(questions);
+        var topicLabel = MasteryTracker.getTopicLabel(topicId);
+        _isCustom = false;
+        _startQuiz(questions, topicId, topicLabel, chapterId, mode, size);
     }
 
     function _handleStartCustom() {
-        // No questions yet — disabled button, but guard anyway
-        alert('No questions are available yet. Questions are coming soon!');
+        if (!window.QUIZ_BANK_QUESTIONS || window.QUIZ_BANK_QUESTIONS.length === 0) {
+            alert('No questions are available yet. Questions are coming soon!');
+            return;
+        }
+
+        var filters = _getBuilderFilters();
+        var questions = window.QUIZ_BANK_QUESTIONS.filter(function (q) {
+            if (filters.topics && filters.topics.length > 0) {
+                if (filters.topics.indexOf(q.topic) === -1) return false;
+            }
+            if (filters.chapters && filters.chapters.length > 0) {
+                if (filters.chapters.indexOf(q.category) === -1) return false;
+            }
+            if (filters.difficulties && filters.difficulties.length > 0) {
+                if (filters.difficulties.indexOf(q.difficulty) === -1) return false;
+            }
+            if (filters.types && filters.types.length > 0) {
+                if (filters.types.indexOf(q.type) === -1) return false;
+            }
+            return true;
+        });
+
+        if (questions.length === 0) {
+            alert('No questions match your filters. Try adjusting your selections.');
+            return;
+        }
+
+        _shuffleArray(questions);
+
+        var mode = _mode || 'practice';
+        var size = _setSize;
+        _isCustom = true;
+        _startQuiz(questions, null, 'Custom Quiz', null, mode, size);
+    }
+
+    function _getQuestionsForTopic(topicId, types) {
+        if (!window.QUIZ_BANK_QUESTIONS) return [];
+        return window.QUIZ_BANK_QUESTIONS.filter(function (q) {
+            if (q.topic !== topicId) return false;
+            if (types && types.length > 0 && types.indexOf(q.type) === -1) return false;
+            return true;
+        });
+    }
+
+    function _handleQuick10() {
+        if (!window.QUIZ_BANK_QUESTIONS || window.QUIZ_BANK_QUESTIONS.length === 0) return;
+        var questions = window.QUIZ_BANK_QUESTIONS.slice();
+        _shuffleArray(questions);
+        _isCustom = true;
+        _startQuiz(questions, null, 'Quick 10', null, 'practice', 10);
+    }
+
+    function _handleWeakFocus() {
+        if (!window.QUIZ_BANK_QUESTIONS || window.QUIZ_BANK_QUESTIONS.length === 0) return;
+        var stats = MasteryTracker.getOverallStats();
+        var weakTopicIds = stats.weakestTopics.map(function (t) { return t.id; });
+        var questions;
+        if (weakTopicIds.length > 0) {
+            questions = window.QUIZ_BANK_QUESTIONS.filter(function (q) {
+                return weakTopicIds.indexOf(q.topic) !== -1;
+            });
+        }
+        if (!questions || questions.length === 0) {
+            questions = window.QUIZ_BANK_QUESTIONS.slice();
+        }
+        _shuffleArray(questions);
+        _isCustom = true;
+        _startQuiz(questions, null, 'Weak Spot Focus', null, 'practice', 20);
     }
 
     function _handleReviewMissed() {

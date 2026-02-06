@@ -17,9 +17,9 @@ var QUIZ_BANK_REGISTRY = {
             label: "Cardiovascular",
             emoji: "\u2764\ufe0f",
             topics: [
-                { id: "heart-failure", label: "Heart Failure", file: null, hasGuide: true, guideUrl: "heart-failure.html" },
-                { id: "mi", label: "Myocardial Infarction", file: null, hasGuide: true, guideUrl: "mi.html" },
-                { id: "arrhythmias", label: "Arrhythmias", file: null, hasGuide: true, guideUrl: "arrhythmias.html" },
+                { id: "heart-failure", label: "Heart Failure", file: "cardiovascular/heart-failure.js", hasGuide: true, guideUrl: "heart-failure.html" },
+                { id: "mi", label: "Myocardial Infarction", file: "cardiovascular/mi.js", hasGuide: true, guideUrl: "mi.html" },
+                { id: "arrhythmias", label: "Arrhythmias", file: "cardiovascular/arrhythmias.js", hasGuide: true, guideUrl: "arrhythmias.html" },
                 { id: "hypertension", label: "Hypertension", file: null, hasGuide: true, guideUrl: "hypertension.html" },
                 { id: "cad", label: "Coronary Artery Disease", file: null, hasGuide: true, guideUrl: "cad.html" },
                 { id: "pvd", label: "Peripheral Vascular Disease", file: null, hasGuide: true, guideUrl: "pvd.html" },
