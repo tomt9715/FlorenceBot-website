@@ -67,13 +67,15 @@ class QuizEngine {
         this.submitted.add(q.id);
 
         const isCorrect = this._checkAnswer(q, userAnswer);
+        const isPartial = !isCorrect && q.type === 'sata' && this._hasSATAPartialCredit(q, userAnswer);
         this.results.set(q.id, {
             correct: isCorrect,
+            partial: isPartial,
             userAnswer: userAnswer,
             correctAnswer: q.correct
         });
 
-        this._showSubmitFeedback(q, userAnswer, isCorrect);
+        this._showSubmitFeedback(q, userAnswer, isCorrect, isPartial);
     }
 
     nextQuestion() {
@@ -356,7 +358,7 @@ class QuizEngine {
 
     // ── Submit Feedback ─────────────────────────────────────
 
-    _showSubmitFeedback(q, userAnswer, isCorrect) {
+    _showSubmitFeedback(q, userAnswer, isCorrect, isPartial) {
         // Disable all options
         this.container.querySelectorAll('.quiz-option').forEach(opt => {
             opt.classList.add('quiz-option--disabled');
@@ -404,9 +406,9 @@ class QuizEngine {
         if (!feedbackArea) return;
 
         if (this.mode === 'practice') {
-            feedbackArea.innerHTML = this._buildPracticeFeedback(q, userAnswer, isCorrect);
+            feedbackArea.innerHTML = this._buildPracticeFeedback(q, userAnswer, isCorrect, isPartial);
         } else {
-            feedbackArea.innerHTML = this._buildExamIndicator(isCorrect);
+            feedbackArea.innerHTML = this._buildExamIndicator(isCorrect, isPartial);
         }
 
         // Focus feedback for accessibility
@@ -417,10 +419,21 @@ class QuizEngine {
         }
     }
 
-    _buildPracticeFeedback(q, userAnswer, isCorrect) {
-        const statusClass = isCorrect ? 'quiz-feedback--correct' : 'quiz-feedback--incorrect';
-        const statusIcon = isCorrect ? 'fa-check-circle' : 'fa-times-circle';
-        const statusText = isCorrect ? 'Correct!' : 'Incorrect';
+    _buildPracticeFeedback(q, userAnswer, isCorrect, isPartial) {
+        let statusClass, statusIcon, statusText;
+        if (isCorrect) {
+            statusClass = 'quiz-feedback--correct';
+            statusIcon = 'fa-check-circle';
+            statusText = 'Correct!';
+        } else if (isPartial) {
+            statusClass = 'quiz-feedback--partial';
+            statusIcon = 'fa-star-half-alt';
+            statusText = 'Almost There!';
+        } else {
+            statusClass = 'quiz-feedback--incorrect';
+            statusIcon = 'fa-times-circle';
+            statusText = 'Incorrect';
+        }
 
         let html = `<div class="quiz-feedback ${statusClass}">`;
         html += `<div class="quiz-feedback-header"><i class="fas ${statusIcon}"></i> ${statusText}</div>`;
@@ -473,10 +486,21 @@ class QuizEngine {
         return html;
     }
 
-    _buildExamIndicator(isCorrect) {
-        const cls = isCorrect ? 'quiz-exam-indicator--correct' : 'quiz-exam-indicator--incorrect';
-        const icon = isCorrect ? 'fa-check' : 'fa-times';
-        const text = isCorrect ? 'Correct' : 'Incorrect';
+    _buildExamIndicator(isCorrect, isPartial) {
+        let cls, icon, text;
+        if (isCorrect) {
+            cls = 'quiz-exam-indicator--correct';
+            icon = 'fa-check';
+            text = 'Correct';
+        } else if (isPartial) {
+            cls = 'quiz-exam-indicator--partial';
+            icon = 'fa-star-half-alt';
+            text = 'Partially Correct';
+        } else {
+            cls = 'quiz-exam-indicator--incorrect';
+            icon = 'fa-times';
+            text = 'Incorrect';
+        }
         return `<div class="quiz-exam-indicator ${cls}"><i class="fas ${icon}"></i> ${text}</div>`;
     }
 
@@ -577,8 +601,18 @@ class QuizEngine {
         if (!result) return '';
 
         const isCorrect = result.correct;
-        const iconClass = isCorrect ? 'quiz-result-icon--correct' : 'quiz-result-icon--incorrect';
-        const icon = isCorrect ? 'fa-check' : 'fa-times';
+        const isPartial = result.partial;
+        let iconClass, icon;
+        if (isCorrect) {
+            iconClass = 'quiz-result-icon--correct';
+            icon = 'fa-check';
+        } else if (isPartial) {
+            iconClass = 'quiz-result-icon--partial';
+            icon = 'fa-star-half-alt';
+        } else {
+            iconClass = 'quiz-result-icon--incorrect';
+            icon = 'fa-times';
+        }
         const truncatedStem = q.stem.length > 120 ? q.stem.substring(0, 120) + '...' : q.stem;
 
         let userAnswerDisplay, correctAnswerDisplay;
@@ -638,6 +672,12 @@ class QuizEngine {
                    sortedUser.every((v, i) => v === sortedCorrect[i]);
         }
         return userAnswer === q.correct;
+    }
+
+    _hasSATAPartialCredit(q, userAnswer) {
+        if (!Array.isArray(userAnswer) || !Array.isArray(q.correct)) return false;
+        const correctSelected = userAnswer.filter(a => q.correct.includes(a)).length;
+        return correctSelected > 0;
     }
 
     _getSATAPartialCredit(q, userAnswer) {
