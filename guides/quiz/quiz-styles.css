@@ -80,7 +80,7 @@ body {
 
 /* --- Layout --- */
 .quiz-container {
-    max-width: 720px;
+    max-width: 1100px;
     margin: 0 auto;
     padding: 24px 16px 80px;
     min-height: 100vh;
@@ -158,6 +158,9 @@ body {
    ============================================ */
 .quiz-start {
     animation: quiz-fadeIn 0.3s ease;
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 @keyframes quiz-fadeIn {
@@ -426,6 +429,45 @@ body {
     padding: 28px 24px;
     box-shadow: var(--quiz-shadow-sm);
     animation: quiz-fadeIn 0.3s ease;
+    max-width: 780px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.quiz-question--has-labs {
+    max-width: none;
+}
+
+/* --- Lab Reference Side Panel Layout --- */
+.quiz-question-main {
+    min-width: 0; /* prevent grid blowout */
+}
+
+.quiz-lab-side {
+    display: none;
+}
+
+@media (min-width: 1024px) {
+    .quiz-lab-inline {
+        display: none;
+    }
+
+    .quiz-lab-side {
+        display: block;
+    }
+
+    .quiz-question--has-labs {
+        display: grid;
+        grid-template-columns: 1fr 280px;
+        gap: 24px;
+        align-items: start;
+    }
+
+    .quiz-lab-side .quiz-lab-reference {
+        position: sticky;
+        top: 24px;
+        margin: 0;
+    }
 }
 
 .quiz-question-header {
@@ -942,29 +984,6 @@ body {
     box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.3);
 }
 
-/* Inline next button at end of feedback */
-.quiz-feedback-next {
-    margin-top: 20px;
-    padding-top: 16px;
-    border-top: 1px solid rgba(0, 0, 0, 0.08);
-}
-
-.quiz-feedback--correct .quiz-feedback-next {
-    border-top-color: var(--quiz-correct-border);
-}
-
-.quiz-feedback--incorrect .quiz-feedback-next {
-    border-top-color: var(--quiz-incorrect-border);
-}
-
-.quiz-feedback--partial .quiz-feedback-next {
-    border-top-color: var(--quiz-partial-border);
-}
-
-.quiz-feedback-next .quiz-btn {
-    width: 100%;
-}
-
 /* ============================================
    COLLAPSIBLE WRONG-ANSWER RATIONALES
    ============================================ */
@@ -1048,6 +1067,9 @@ body {
    ============================================ */
 .quiz-results {
     animation: quiz-fadeIn 0.3s ease;
+    max-width: 780px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .quiz-results-header {
@@ -1538,11 +1560,6 @@ body {
         padding: 10px 14px;
     }
 
-    .quiz-feedback-next {
-        margin-top: 16px;
-        padding-top: 12px;
-    }
-
     /* Sticky bar */
     .quiz-sticky-next {
         padding: 10px 12px;
@@ -1650,7 +1667,7 @@ body {
     .quiz-back-link,
     .quiz-start-modes,
     .quiz-sticky-next,
-    .quiz-feedback-next {
+    .quiz-lab-side {
         display: none;
     }
 

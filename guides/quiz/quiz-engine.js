@@ -297,6 +297,8 @@ class QuizEngine {
         const typeName = this._getTypeName(q);
         const typeClass = this._getTypeClass(q);
         const reviewLabel = this.isReviewMode ? ' (Review)' : '';
+        const hasLabs = this.mode === 'practice' && q.labValues && q.labValues.length > 0;
+        const labHtml = hasLabs ? this._renderLabReference(q.labValues) : '';
 
         this.container.innerHTML = `
             <a href="../${this.guideSlug}.html" class="quiz-back-link">
@@ -311,26 +313,29 @@ class QuizEngine {
                     <div class="quiz-progress-fill" style="width: ${pct}%"></div>
                 </div>
             </div>
-            <div class="quiz-question">
-                <div class="quiz-question-header">
-                    <span class="quiz-question-badge">${num}</span>
-                    <span class="quiz-question-type ${typeClass}">${typeName}</span>
-                    <span class="quiz-question-difficulty">${this._capitalize(q.difficulty)}</span>
+            <div class="quiz-question ${hasLabs ? 'quiz-question--has-labs' : ''}">
+                <div class="quiz-question-main">
+                    <div class="quiz-question-header">
+                        <span class="quiz-question-badge">${num}</span>
+                        <span class="quiz-question-type ${typeClass}">${typeName}</span>
+                        <span class="quiz-question-difficulty">${this._capitalize(q.difficulty)}</span>
+                    </div>
+                    <div class="quiz-question-stem">
+                        ${this._escapeHtml(q.stem)}
+                        ${isSATA ? '<span class="quiz-sata-instruction">Select all that apply.</span>' : ''}
+                    </div>
+                    ${hasLabs ? `<div class="quiz-lab-inline">${labHtml}</div>` : ''}
+                    <div class="quiz-options" role="${isSATA ? 'group' : 'radiogroup'}" aria-label="Answer options">
+                        ${(this._getShuffledOptions(q.id) || q.options).map((opt, idx) => this._renderOption(q, opt, inputType, idx)).join('')}
+                    </div>
+                    <div class="quiz-actions">
+                        <button class="quiz-btn quiz-btn--primary" data-quiz-action="submit" disabled>
+                            ${isSATA ? 'Submit Answers' : 'Submit Answer'}
+                        </button>
+                    </div>
+                    <div id="quiz-feedback-area"></div>
                 </div>
-                <div class="quiz-question-stem">
-                    ${this._escapeHtml(q.stem)}
-                    ${isSATA ? '<span class="quiz-sata-instruction">Select all that apply.</span>' : ''}
-                </div>
-                ${this.mode === 'practice' && q.labValues && q.labValues.length > 0 ? this._renderLabReference(q.labValues) : ''}
-                <div class="quiz-options" role="${isSATA ? 'group' : 'radiogroup'}" aria-label="Answer options">
-                    ${(this._getShuffledOptions(q.id) || q.options).map((opt, idx) => this._renderOption(q, opt, inputType, idx)).join('')}
-                </div>
-                <div class="quiz-actions">
-                    <button class="quiz-btn quiz-btn--primary" data-quiz-action="submit" disabled>
-                        ${isSATA ? 'Submit Answers' : 'Submit Answer'}
-                    </button>
-                </div>
-                <div id="quiz-feedback-area"></div>
+                ${hasLabs ? `<div class="quiz-lab-side">${labHtml}</div>` : ''}
             </div>
         `;
 
@@ -441,13 +446,6 @@ class QuizEngine {
         } else {
             feedbackHtml = this._buildExamIndicator(isCorrect, isPartial);
         }
-
-        // Add inline next button at end of feedback
-        feedbackHtml += `
-            <div class="quiz-feedback-next">
-                <button class="quiz-btn ${nextBtnClass}" data-quiz-action="next">${nextBtnLabel}</button>
-            </div>
-        `;
 
         feedbackArea.innerHTML = feedbackHtml;
 
