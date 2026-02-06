@@ -224,7 +224,7 @@ class QuizEngine {
                 </div>
 
                 <div class="quiz-difficulty-breakdown">
-                    <div class="quiz-difficulty-title">Difficulty Breakdown</div>
+                    <div class="quiz-difficulty-title">Question Complexity</div>
                     <div class="quiz-difficulty-bars">
                         ${this._renderDifficultyRow('Knowledge', difficultyCount.knowledge, total, 'knowledge')}
                         ${this._renderDifficultyRow('Application', difficultyCount.application, total, 'application')}
