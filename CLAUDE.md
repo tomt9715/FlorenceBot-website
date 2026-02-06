@@ -118,19 +118,16 @@ nursing-collective-website/
 ├── dashboard.html      # User dashboard (requires auth)
 ├── admin.html          # Admin panel (requires admin role)
 ├── pricing.html        # Subscription tiers
-├── checkout.html       # Stripe checkout flow
 ├── success.html        # Post-payment success page
 ├── study-guides.html   # Study guides landing
-├── guides.html         # Browse all guides
-├── guide.html          # Individual guide viewer
+├── guides.html         # Redirects to study-guides.html
+├── about.html          # About The Nursing Collective
 ├── css/
 │   ├── main.css        # Core styles, variables, utilities
 │   ├── components.css  # Reusable component styles
-│   ├── pages.css       # Page-specific styles
-│   └── cart.css        # Shopping cart styles
+│   └── pages.css       # Page-specific styles
 ├── api-service.js      # Central API client (all backend calls go through here)
-├── auth-script.js      # Firebase auth handling
-├── cart-service.js     # Shopping cart logic
+├── auth-script.js      # Auth handling (custom JWT)
 ├── dashboard-script.js # Dashboard functionality
 ├── admin-script.js     # Admin panel logic
 ├── success-script.js   # Payment verification

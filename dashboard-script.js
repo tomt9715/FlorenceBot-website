@@ -715,6 +715,18 @@ const guideCategoryMap = {
     'medication-math': { category: 'pharmacology', label: 'Pharmacology', description: 'Dosage calculations, IV rates, and conversions.' }
 };
 
+// Guides that have published HTML pages (update when new guides are created)
+const AVAILABLE_GUIDES = new Set([
+    'heart-failure', 'myocardial-infarction', 'arrhythmias', 'hypertension',
+    'coronary-artery-disease', 'peripheral-vascular-disease',
+    'copd', 'asthma', 'pneumonia', 'oxygen-therapy', 'tuberculosis', 'chest-tubes',
+    'stroke', 'fractures', 'hip-knee-replacement', 'gi-bleeding', 'assessment-skills'
+]);
+
+function guideHasPage(productId) {
+    return AVAILABLE_GUIDES.has(productId);
+}
+
 // Get favorites from localStorage
 function getFavorites() {
     try {
@@ -933,9 +945,13 @@ function renderFavoriteItem(purchase) {
             </button>
             <div class="favorite-icon">${icon}</div>
             <span class="favorite-title">${escapeHtml(purchase.product_name.replace(' Guide', ''))}</span>
-            <button class="favorite-open" data-study="${escapeHtml(purchase.product_id)}">
-                Open
-            </button>
+            ${guideHasPage(purchase.product_id) ? `
+                <button class="favorite-open" data-study="${escapeHtml(purchase.product_id)}">
+                    Open
+                </button>
+            ` : `
+                <span class="guide-coming-soon"><i class="fas fa-clock"></i> Soon</span>
+            `}
         </div>
     `;
 }
@@ -1051,13 +1067,17 @@ function renderCompactGuideCard(purchase, isFavoriteSection) {
                 <span class="guide-row-title">${escapeHtml(purchase.product_name)}</span>
             </div>
             <div class="guide-row-right">
-                <span class="guide-row-studied">${lastStudiedText || 'Not studied yet'}</span>
-                <button class="btn-row-open" data-study="${escapeHtml(purchase.product_id)}">
-                    Open
-                </button>
-                <button class="btn-row-pdf" data-download="${escapeHtml(purchase.product_id)}" title="Download PDF">
-                    <i class="fas fa-download"></i>
-                </button>
+                ${guideHasPage(purchase.product_id) ? `
+                    <span class="guide-row-studied">${lastStudiedText || 'Not studied yet'}</span>
+                    <button class="btn-row-open" data-study="${escapeHtml(purchase.product_id)}">
+                        Open
+                    </button>
+                    <button class="btn-row-pdf" data-download="${escapeHtml(purchase.product_id)}" title="Download PDF">
+                        <i class="fas fa-download"></i>
+                    </button>
+                ` : `
+                    <span class="guide-coming-soon"><i class="fas fa-clock"></i> Coming Soon</span>
+                `}
             </div>
         </div>
     `;
@@ -1392,12 +1412,16 @@ function filterAndRenderGuides() {
                     ${lastStudiedText ? `<span class="guide-meta-item last-studied"><i class="fas fa-clock"></i> Studied ${lastStudiedText}</span>` : ''}
                 </div>
                 <div class="guide-card-actions">
-                    <button class="btn-continue" data-study="${escapeHtml(purchase.product_id)}">
-                        <i class="fas fa-book-reader"></i> Open Guide
-                    </button>
-                    <button class="btn-download-secondary download-btn" data-download="${escapeHtml(purchase.product_id)}">
-                        <i class="fas fa-download"></i> PDF
-                    </button>
+                    ${guideHasPage(purchase.product_id) ? `
+                        <button class="btn-continue" data-study="${escapeHtml(purchase.product_id)}">
+                            <i class="fas fa-book-reader"></i> Open Guide
+                        </button>
+                        <button class="btn-download-secondary download-btn" data-download="${escapeHtml(purchase.product_id)}">
+                            <i class="fas fa-download"></i> PDF
+                        </button>
+                    ` : `
+                        <span class="guide-coming-soon"><i class="fas fa-clock"></i> Coming Soon</span>
+                    `}
                 </div>
             </div>
         </div>
@@ -1418,6 +1442,11 @@ function updateGuidesCount(count) {
 
 // Continue studying - navigates to guide and updates last studied
 function continueStudying(productId) {
+    // Check if guide page exists
+    if (!guideHasPage(productId)) {
+        return;
+    }
+
     // Update last studied timestamp
     try {
         const lastStudied = JSON.parse(localStorage.getItem('guideLastStudied') || '{}');

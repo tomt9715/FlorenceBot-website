@@ -7,8 +7,14 @@
 (function() {
     'use strict';
 
-    // Configuration - matches CONTENT_ACCESS in api-service.js
-    const API_URL = 'https://api.thenursingcollective.pro';
+    // Configuration - auto-detect environment (matches api-service.js pattern)
+    const API_URL = (function() {
+        const hostname = window.location.hostname;
+        if (hostname === 'thenursingcollective.pro' || hostname === 'www.thenursingcollective.pro') {
+            return 'https://api.thenursingcollective.pro';
+        }
+        return 'https://staging-backend-production-365a.up.railway.app';
+    })();
 
     // Free content paths that don't require gating
     const FREE_PATHS = [

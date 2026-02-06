@@ -212,14 +212,11 @@ Footer must still be perfectly centered
 1. Click "Join The Nursing Collective" (hero)
    → Should go to Discord: https://discord.gg/y2Mh77wAV2
 
-2. Click "View Guide" on Electrolytes
-   → Should go to guides.html#electrolytes
+2. Click "View All Study Guides"
+   → Should go to study-guides.html
 
-3. Click "View All Study Guides"
-   → Should go to guides.html
-
-4. Click footer "Study Guides" link
-   → Should go to guides.html
+3. Click footer "Study Guides" link
+   → Should go to study-guides.html
 
 5. Click footer Discord link
    → Should open Discord invite

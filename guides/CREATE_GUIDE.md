@@ -84,9 +84,10 @@ To:
 const htmlGuides = ['heart-failure', 'assessment-skills', 'myocardial-infarction', '[new-product-id]'];
 ```
 
-**Why both locations matter:**
-- `continueStudying()`: When user clicks "Continue Studying" on dashboard, it checks this array to decide whether to navigate to `/guides/[product-id].html` (for HTML guides) or `/guide.html?id=[product-id]` (for markdown guides)
-- `downloadGuide()`: When user clicks the PDF button on dashboard, it checks this array to decide whether to use server-side PDF generation (`/api/guides/[product-id]/pdf`) or the legacy download endpoint
+**Why this matters:**
+- `continueStudying()`: When user clicks "Open" on dashboard, it navigates to `/guides/[product-id].html`
+- `AVAILABLE_GUIDES`: The set at the top of dashboard-script.js controls which guides show "Open" vs "Coming Soon" — add the new guide ID here too
+- `downloadGuide()`: When user clicks the PDF button on dashboard, it uses server-side PDF generation (`/api/guides/[product-id]/pdf`)
 
 ### 6. Update Backend (guide_routes.py)
 

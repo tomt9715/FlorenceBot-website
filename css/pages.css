@@ -5867,6 +5867,20 @@ body.is-admin-user .dashboard-section-featured {
     white-space: nowrap;
 }
 
+.guide-coming-soon {
+    font-size: 0.78rem;
+    color: #9ca3af;
+    white-space: nowrap;
+    font-style: italic;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.guide-coming-soon i {
+    font-size: 0.7rem;
+}
+
 /* Favorite button in row */
 .favorite-btn-row {
     width: 28px;

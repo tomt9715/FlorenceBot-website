@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About FlorenceBot - The Nursing Collective</title>
-    <meta name="description" content="Learn about FlorenceBot, your AI-powered nursing study companion living in Discord.">
+    <title>About Us - The Nursing Collective</title>
+    <meta name="description" content="Learn about The Nursing Collective — who we are, why we built this platform, and our mission to help nursing students succeed.">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://thenursingcollective.pro/about-florencebot.html">
-    <meta property="og:title" content="About FlorenceBot - The Nursing Collective">
-    <meta property="og:description" content="Learn about FlorenceBot, your AI-powered nursing study companion living in Discord.">
+    <meta property="og:url" content="https://thenursingcollective.pro/about.html">
+    <meta property="og:title" content="About Us - The Nursing Collective">
+    <meta property="og:description" content="Built by nursing students, for nursing students. Learn about The Nursing Collective.">
     <meta property="og:image" content="https://thenursingcollective.pro/assets/images/og-preview.png">
 
     <!-- Favicon -->
@@ -29,15 +29,226 @@
     <!-- Bundled CSS (Bootstrap + custom styles, purged and minified) -->
     <link rel="stylesheet" href="css/bundle.min.css">
 
-
-    <!-- Bootstrap 5 CSS -->
-
-
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        .about-page {
+            padding: 120px 0 80px;
+            min-height: 100vh;
+        }
+
+        .about-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .about-header h1 {
+            font-size: 2.5rem;
+            color: var(--text-primary);
+            margin-bottom: 16px;
+        }
+
+        .about-header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .about-section {
+            max-width: 800px;
+            margin: 0 auto 48px;
+        }
+
+        .about-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border: 1px solid var(--border-color);
+        }
+
+        .about-card h2 {
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .about-card h2 i {
+            color: var(--primary-color);
+            font-size: 1.3rem;
+        }
+
+        .about-card p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 16px;
+            font-size: 1.05rem;
+        }
+
+        .about-card p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Story / founder section with optional photo */
+        .founder-section {
+            display: flex;
+            align-items: flex-start;
+            gap: 32px;
+        }
+
+        .founder-photo {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            object-fit: cover;
+            flex-shrink: 0;
+            border: 4px solid var(--primary-color);
+        }
+
+        .founder-text {
+            flex: 1;
+        }
+
+        /* Values grid */
+        .values-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .value-item {
+            padding: 24px;
+            background: var(--background-light);
+            border-radius: 12px;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .value-item:nth-child(2) {
+            border-left-color: var(--secondary-color);
+        }
+
+        .value-item:nth-child(3) {
+            border-left-color: var(--accent-color);
+        }
+
+        .value-item:nth-child(4) {
+            border-left-color: #10b981;
+        }
+
+        .value-item h3 {
+            color: var(--text-primary);
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .value-item p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin: 0;
+            font-size: 0.95rem;
+        }
+
+        /* CTA section */
+        .about-cta {
+            text-align: center;
+            margin-top: 48px;
+        }
+
+        .about-cta .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 32px;
+            border-radius: 12px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            margin: 0 8px;
+        }
+
+        .about-cta .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .about-cta .btn-primary {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .about-cta .btn-secondary {
+            background: var(--card-bg);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+        }
+
+        /* Bottom Links */
+        .about-bottom-links {
+            margin-top: 48px;
+            padding-top: 32px;
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .about-bottom-links a {
+            color: var(--primary-color);
+            text-decoration: none;
+            margin: 0 12px;
+            font-size: 0.9rem;
+            transition: opacity 0.2s ease;
+        }
+
+        .about-bottom-links a:hover {
+            opacity: 0.8;
+        }
+
+        @media (max-width: 768px) {
+            .about-card {
+                padding: 28px 20px;
+            }
+
+            .about-header h1 {
+                font-size: 2rem;
+            }
+
+            .founder-section {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .founder-photo {
+                width: 120px;
+                height: 120px;
+            }
+
+            .values-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-cta .btn {
+                display: flex;
+                justify-content: center;
+                margin: 8px auto;
+                max-width: 280px;
+            }
+        }
+    </style>
     <!-- Sentry Error Tracking (load first) -->
     <script src="https://browser.sentry-cdn.com/8.40.0/bundle.min.js" crossorigin="anonymous"></script>
     <script src="sentry-init.js"></script>
@@ -61,7 +272,7 @@
                 <a href="resources.html">Resources</a>
                 <a href="pricing.html">Pricing</a>
                 <a href="about.html">About</a>
-                <a href="about-florencebot.html" class="active">About Bot</a>
+                <a href="about-florencebot.html">About FlorenceBot</a>
                 <!-- Authenticated nav item (shown when logged in) -->
                 <a href="dashboard.html" id="nav-dashboard-link" style="display: none;">Dashboard</a>
                 <!-- User menu (always visible, content changes based on login state) -->
@@ -138,203 +349,81 @@
         </div>
     </nav>
 
-    <!-- About Hero Section -->
-    <section class="about-hero">
+    <!-- About Page Content -->
+    <section class="about-page">
         <div class="container">
-            <div class="hero-content">
-                <div class="bot-icon">
-                    <i class="fas fa-robot"></i>
-                </div>
-                <h1>Meet FlorenceBot Pro</h1>
-                <p class="hero-subtitle">Your AI-powered nursing study companion living in Discord</p>
+            <div class="about-header">
+                <h1>About The Nursing Collective</h1>
+                <p>Built by nursing students, for nursing students.</p>
             </div>
-        </div>
-    </section>
 
-    <!-- FlorenceBot Intro Section -->
-    <section class="florencebot-intro">
-        <div class="container">
-            <div class="two-column-layout">
-                <div class="content-column">
-                    <h2>What is FlorenceBot?</h2>
-                    <p>FlorenceBot is an advanced Discord bot specifically designed for nursing students. Get instant access to clinical references, lab values, medication information, and NCLEX prep materials right in your Discord server.</p>
-
-                    <h3>Why Discord?</h3>
-                    <p>Discord is where nursing students collaborate, study together, and support each other. FlorenceBot brings professional clinical references directly into this environment, making it easier than ever to access critical information while studying with peers.</p>
-
-                    <div class="feature-highlights">
-                        <div class="highlight-item">
-                            <i class="fas fa-bolt"></i>
-                            <div>
-                                <h4>Instant Responses</h4>
-                                <p>Get lab values, vital signs, and medication info in seconds with simple slash commands.</p>
-                            </div>
-                        </div>
-                        <div class="highlight-item">
-                            <i class="fas fa-users"></i>
-                            <div>
-                                <h4>Study with Friends</h4>
-                                <p>Access FlorenceBot in your study group servers for collaborative learning.</p>
-                            </div>
-                        </div>
-                        <div class="highlight-item">
-                            <i class="fas fa-shield-alt"></i>
-                            <div>
-                                <h4>Always Available</h4>
-                                <p>24/7 access to clinical references whenever you need them, day or night.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="discord-preview-column">
-                    <div class="mock-discord-window">
-                        <div class="discord-titlebar">
-                            <i class="fab fa-discord"></i>
-                            <span>Discord</span>
-                            <div class="titlebar-buttons">
-                                <span class="titlebar-btn">─</span>
-                                <span class="titlebar-btn">□</span>
-                                <span class="titlebar-btn">×</span>
-                            </div>
-                        </div>
-                        <div class="discord-header">
-                            <span class="channel-icon">#</span>
-                            <span class="channel-name">clinical-help</span>
-                        </div>
-                        <div class="discord-messages">
-                            <div class="message user-message">
-                                <div class="avatar user-avatar">👩‍⚕️</div>
-                                <div class="message-content">
-                                    <div class="message-header">
-                                        <strong class="username">Sarah_RN2026</strong>
-                                        <span class="timestamp">Today at 2:45 PM</span>
-                                    </div>
-                                    <div class="message-text">/electrolytes</div>
-                                </div>
-                            </div>
-
-                            <div class="message bot-message typing-animation">
-                                <div class="avatar bot-avatar">🤖</div>
-                                <div class="message-content">
-                                    <div class="message-header">
-                                        <strong class="bot-username">The Nursing Collective</strong>
-                                        <span class="bot-badge">BOT</span>
-                                        <span class="timestamp">Today at 2:45 PM</span>
-                                    </div>
-                                    <div class="embed-preview">
-                                        <div class="embed-accent"></div>
-                                        <div class="embed-content">
-                                            <div class="embed-title">⚡ Electrolytes Quick Reference</div>
-                                            <div class="embed-field">
-                                                <div class="field-name">Potassium (K+)</div>
-                                                <div class="field-value">3.5-5.0 mEq/L</div>
-                                            </div>
-                                            <div class="embed-field">
-                                                <div class="field-name">Sodium (Na+)</div>
-                                                <div class="field-value">135-145 mEq/L</div>
-                                            </div>
-                                            <div class="embed-field">
-                                                <div class="field-name">Calcium (Ca2+)</div>
-                                                <div class="field-value">8.5-10.5 mg/dL</div>
-                                            </div>
-                                            <div class="embed-field">
-                                                <div class="field-name">Magnesium (Mg2+)</div>
-                                                <div class="field-value">1.5-2.5 mEq/L</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="message user-message" style="animation-delay: 0.5s;">
-                                <div class="avatar user-avatar">👩‍⚕️</div>
-                                <div class="message-content">
-                                    <div class="message-header">
-                                        <strong class="username">Sarah_RN2026</strong>
-                                        <span class="timestamp">Today at 2:46 PM</span>
-                                    </div>
-                                    <div class="message-text">Perfect! Thanks! 🎉</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="discord-input">
-                            <div class="input-area">
-                                <span class="input-placeholder">Message #clinical-help</span>
-                            </div>
+            <!-- Our Story -->
+            <div class="about-section">
+                <div class="about-card">
+                    <h2><i class="fas fa-heart"></i> Our Story</h2>
+                    <div class="founder-section">
+                        <!-- TODO: Replace with your photo (optional — delete if you don't want one) -->
+                        <!-- <img src="assets/images/founder.jpg" alt="Founder photo" class="founder-photo"> -->
+                        <div class="founder-text">
+                            <!-- TODO: Replace the paragraphs below with your personal story -->
+                            <p>The Nursing Collective started because we know how overwhelming nursing school can be. Between clinical rotations, stacks of textbooks, and high-stakes exams, finding clear and organized study materials shouldn't be another source of stress.</p>
+                            <p>We created this platform to give nursing students the study tools we wished we had — well-organized, clinically relevant, and designed to actually help you understand the material, not just memorize it.</p>
+                            <p>Every guide is built around how nurses actually think through patient care, so you're not just studying for exams — you're building the clinical reasoning skills you'll use every day.</p>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <!-- Commands Section -->
-    <section class="commands-section">
-        <div class="container">
-            <h2>Popular Commands</h2>
-            <p class="section-subtitle">Quick access to essential clinical information</p>
-
-            <div class="commands-grid">
-                <div class="command-card">
-                    <div class="command-header">
-                        <code>/labvalues</code>
-                    </div>
-                    <p>Get comprehensive lab value reference ranges instantly</p>
-                </div>
-
-                <div class="command-card">
-                    <div class="command-header">
-                        <code>/vitals</code>
-                    </div>
-                    <p>Access normal vital sign ranges by age group</p>
-                </div>
-
-                <div class="command-card">
-                    <div class="command-header">
-                        <code>/electrolytes</code>
-                    </div>
-                    <p>View electrolyte normal ranges and imbalance signs</p>
-                </div>
-
-                <div class="command-card">
-                    <div class="command-header">
-                        <code>/abg</code>
-                    </div>
-                    <p>Interpret arterial blood gas results with guidance</p>
-                </div>
-
-                <div class="command-card">
-                    <div class="command-header">
-                        <code>/medmath</code>
-                    </div>
-                    <p>Calculate medication dosages and IV drip rates</p>
-                </div>
-
-                <div class="command-card">
-                    <div class="command-header">
-                        <code>/isolation</code>
-                    </div>
-                    <p>Review isolation precautions and PPE requirements</p>
+            <!-- Mission -->
+            <div class="about-section">
+                <div class="about-card">
+                    <h2><i class="fas fa-bullseye"></i> Our Mission</h2>
+                    <!-- TODO: Customize this if you'd like -->
+                    <p>We believe every nursing student deserves access to high-quality study materials that make complex topics click. Our mission is to bridge the gap between classroom learning and clinical practice with guides that are clear, comprehensive, and built around real nursing priorities.</p>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <!-- CTA Section -->
-    <section class="florencebot-cta">
-        <div class="container">
-            <div class="cta-content">
-                <h2>Ready to Study Smarter?</h2>
-                <p>Join nursing students using The Nursing Collective in Discord</p>
-                <div class="cta-buttons">
-                    <a href="https://discord.gg/y2Mh77wAV2" class="btn btn-large btn-primary" target="_blank">
-                        <i class="fab fa-discord"></i> Join Discord Server
-                    </a>
-                    <a href="study-guides.html" class="btn btn-large btn-secondary">
-                        <i class="fas fa-book-open"></i> Browse Study Guides
-                    </a>
+            <!-- What We Offer -->
+            <div class="about-section">
+                <div class="about-card">
+                    <h2><i class="fas fa-book-medical"></i> What We Offer</h2>
+                    <div class="values-grid">
+                        <div class="value-item">
+                            <h3><i class="fas fa-file-alt"></i> Study Guides</h3>
+                            <p>Comprehensive, clinically-focused guides covering every major nursing topic from cardiovascular to mental health.</p>
+                        </div>
+                        <div class="value-item">
+                            <h3><i class="fas fa-robot"></i> FlorenceBot</h3>
+                            <p>Our AI-powered study assistant on Discord that helps you review concepts, quiz yourself, and prepare for exams.</p>
+                        </div>
+                        <div class="value-item">
+                            <h3><i class="fas fa-users"></i> Community</h3>
+                            <p>A supportive Discord community where nursing students help each other, share tips, and stay motivated together.</p>
+                        </div>
+                        <div class="value-item">
+                            <h3><i class="fas fa-sync-alt"></i> Always Improving</h3>
+                            <p>Our guides are regularly updated based on student feedback and the latest evidence-based practice guidelines.</p>
+                        </div>
+                    </div>
                 </div>
+            </div>
+
+            <!-- CTA -->
+            <div class="about-cta">
+                <a href="pricing.html" class="btn btn-primary">
+                    <i class="fas fa-crown"></i> View Our Plans
+                </a>
+                <a href="https://discord.gg/y2Mh77wAV2" class="btn btn-secondary" target="_blank" rel="noopener">
+                    <i class="fab fa-discord"></i> Join Our Community
+                </a>
+            </div>
+
+            <!-- Bottom Links -->
+            <div class="about-bottom-links">
+                <a href="index.html">Home</a> |
+                <a href="contact.html">Contact Us</a> |
+                <a href="terms.html">Terms of Service</a> |
+                <a href="privacy.html">Privacy Policy</a>
             </div>
         </div>
     </section>
@@ -399,7 +488,6 @@
 
     <!-- Dark Mode Manager -->
     <script src="dark-mode.js"></script>
-    <script src="api-service.js?v=1769142741"></script>
 
     <script src="script.js"></script>
 </body>

@@ -26,8 +26,6 @@ The CSS is already included in `css/bundle.css`. If you need it separately:
 - pricing.html
 - study-guides.html
 - guides.html
-- guide.html
-- checkout.html
 - dashboard.html
 - login.html
 - settings.html
@@ -203,8 +201,6 @@ When adding the cookie consent and analytics to each page, add this before `</bo
 - [ ] pricing.html
 - [ ] study-guides.html
 - [ ] guides.html
-- [ ] guide.html
-- [ ] checkout.html
 - [ ] dashboard.html
 - [ ] login.html
 - [ ] settings.html

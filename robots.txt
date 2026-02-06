@@ -6,8 +6,10 @@ User-agent: *
 # Allow public pages
 Allow: /
 Allow: /index.html
+Allow: /study-guides.html
 Allow: /guides.html
 Allow: /pricing.html
+Allow: /about.html
 Allow: /about-florencebot.html
 Allow: /login.html
 Allow: /privacy.html
@@ -21,8 +23,6 @@ Disallow: /settings.html
 Disallow: /auth-callback.html
 Disallow: /reset-password.html
 Disallow: /verify-email.html
-Disallow: /guide.html
-
 # Disallow test pages
 Disallow: /test-*.html
 
