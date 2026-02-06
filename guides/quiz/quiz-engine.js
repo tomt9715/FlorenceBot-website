@@ -51,7 +51,7 @@ class QuizEngine {
         this.answers.clear();
         this.results.clear();
         this.submitted.clear();
-        this.activeQuestions = [...this.questions];
+        this.activeQuestions = this._shuffleArray([...this.questions]);
         this.isReviewMode = false;
         this._shuffleAllOptions();
         window.addEventListener('beforeunload', this._boundBeforeUnload);
