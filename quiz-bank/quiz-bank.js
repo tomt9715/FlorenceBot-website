@@ -263,6 +263,7 @@ var QuizBank = (function () {
         html += '<div class="qb-builder-chips">';
         html += '<button class="qb-chip qb-chip--active" data-qb-action="set-size" data-size="10">10 Questions</button>';
         html += '<button class="qb-chip" data-qb-action="set-size" data-size="20">20 Questions</button>';
+        html += '<button class="qb-chip" data-qb-action="set-size" data-size="max">Max</button>';
         html += '</div>';
         html += '</div>';
 
@@ -405,8 +406,9 @@ var QuizBank = (function () {
 
         _view = 'quiz';
         _mode = mode || 'practice';
-        _setSize = setSize || questions.length;
-        _currentQuestions = questions.slice(0, _setSize);
+        var effectiveSize = (setSize === 'max' || !setSize) ? questions.length : Math.min(setSize, questions.length);
+        _setSize = effectiveSize;
+        _currentQuestions = questions.slice(0, effectiveSize);
         _currentIndex = 0;
         _answers = {};
         _results = {};
@@ -688,13 +690,49 @@ var QuizBank = (function () {
         var html = '<div class="qb-feedback ' + statusClass + '">';
         html += '<div class="qb-feedback-header"><i class="fas ' + statusIcon + '"></i> ' + statusText + '</div>';
 
-        // Ordering: show correct sequence
+        // Ordering: show side-by-side comparison
         if (q.type === 'ordering' && !isCorrect) {
-            var seqHtml = q.correct.map(function (id, i) {
-                var opt = q.options.find(function (o) { return o.id === id; });
-                return '<li>' + _esc(opt ? opt.text : id) + '</li>';
-            }).join('');
-            html += '<div class="qb-ordering-correct-sequence"><strong>Correct order:</strong><ol>' + seqHtml + '</ol></div>';
+            html += '<div class="qb-ordering-compare">';
+            html += '<div class="qb-ordering-compare-header">';
+            html += '<div class="qb-ordering-compare-col-title qb-ordering-compare-col-title--yours">Your Order</div>';
+            html += '<div class="qb-ordering-compare-col-title qb-ordering-compare-col-title--correct">Correct Order</div>';
+            html += '</div>';
+
+            var maxLen = Math.max(userAnswer.length, q.correct.length);
+            for (var step = 0; step < maxLen; step++) {
+                var userOptId = userAnswer[step];
+                var correctOptId = q.correct[step];
+                var userOpt = userOptId ? q.options.find(function (o) { return o.id === userOptId; }) : null;
+                var correctOpt = correctOptId ? q.options.find(function (o) { return o.id === correctOptId; }) : null;
+                var isStepCorrect = userOptId === correctOptId;
+
+                html += '<div class="qb-ordering-compare-row">';
+
+                // Your answer
+                html += '<div class="qb-ordering-compare-cell ' + (isStepCorrect ? 'qb-ordering-compare-cell--correct' : 'qb-ordering-compare-cell--incorrect') + '">';
+                html += '<span class="qb-ordering-compare-num">' + (step + 1) + '</span>';
+                html += '<span class="qb-ordering-compare-text">' + _esc(userOpt ? userOpt.text : '—') + '</span>';
+                html += '<span class="qb-ordering-compare-icon"><i class="fas ' + (isStepCorrect ? 'fa-check' : 'fa-times') + '"></i></span>';
+                html += '</div>';
+
+                // Correct answer
+                html += '<div class="qb-ordering-compare-cell qb-ordering-compare-cell--correct">';
+                html += '<span class="qb-ordering-compare-num">' + (step + 1) + '</span>';
+                html += '<span class="qb-ordering-compare-text">' + _esc(correctOpt ? correctOpt.text : '—') + '</span>';
+                html += '</div>';
+
+                html += '</div>'; // row
+
+                // Per-step rationale (if available)
+                if (correctOptId && q.rationale && q.rationale[correctOptId]) {
+                    html += '<div class="qb-ordering-step-rationale">';
+                    html += '<span class="qb-ordering-step-rationale-label">Step ' + (step + 1) + ':</span> ';
+                    html += _esc(q.rationale[correctOptId]);
+                    html += '</div>';
+                }
+            }
+
+            html += '</div>'; // compare
         }
 
         // Matrix partial
@@ -932,6 +970,18 @@ var QuizBank = (function () {
                 case 'start-custom':
                     _handleStartCustom();
                     break;
+                case 'toggle-preconfig-type':
+                    _handleTogglePreconfigType(actionBtn);
+                    break;
+                case 'set-preconfig-size':
+                    _handleSetPreconfigSize(actionBtn);
+                    break;
+                case 'set-preconfig-mode':
+                    _handleSetPreconfigMode(actionBtn);
+                    break;
+                case 'start-preconfig':
+                    _handleStartPreconfig(actionBtn);
+                    break;
                 case 'clear-ordering':
                     _orderingSequence = [];
                     _updateOrderingDisplay();
@@ -1016,6 +1066,83 @@ var QuizBank = (function () {
         }
     }
 
+    // ── Pre-Quiz Config Panel ─────────────────────────────
+
+    function _renderPreQuizPanel(topicId, chapterId) {
+        _view = 'config';
+        window.scrollTo({ top: 0 });
+
+        // Look up topic/chapter info
+        var topicLabel = MasteryTracker.getTopicLabel(topicId);
+        var chapterInfo = _getChapterInfo(chapterId);
+        var topicMastery = MasteryTracker.getTopicMastery(topicId);
+        var masteryColor = MasteryTracker.getMasteryColor(topicMastery.level);
+
+        var html = '<div class="qb-preconfig">';
+
+        // Header
+        html += '<button class="qb-preconfig-back" data-qb-action="back-to-hub"><i class="fas fa-arrow-left"></i> Back to Quiz Hub</button>';
+        html += '<div class="qb-preconfig-header">';
+        if (chapterInfo) html += '<span class="qb-preconfig-chapter">' + chapterInfo.emoji + ' ' + _esc(chapterInfo.label) + '</span>';
+        html += '<h2 class="qb-preconfig-title">' + _esc(topicLabel) + '</h2>';
+        html += '<div class="qb-preconfig-mastery" style="color:' + masteryColor + '">Level ' + topicMastery.level + ' &mdash; ' + _esc(topicMastery.levelName) + '</div>';
+        html += '</div>';
+
+        // Config card
+        html += '<div class="qb-preconfig-card">';
+
+        // Question types
+        html += '<div class="qb-preconfig-group">';
+        html += '<label class="qb-preconfig-label"><i class="fas fa-th-list"></i> Question Types</label>';
+        html += '<div class="qb-preconfig-chips">';
+        [['Multiple Choice', 'single'], ['Ordering', 'ordering'], ['Matrix', 'matrix']].forEach(function (pair) {
+            html += '<button class="qb-chip qb-chip--active" data-qb-action="toggle-preconfig-type" data-ptype="' + pair[1] + '">' + pair[0] + '</button>';
+        });
+        html += '</div>';
+        html += '</div>';
+
+        // Set size
+        html += '<div class="qb-preconfig-group">';
+        html += '<label class="qb-preconfig-label"><i class="fas fa-hashtag"></i> Number of Questions</label>';
+        html += '<div class="qb-preconfig-chips">';
+        html += '<button class="qb-chip qb-chip--active" data-qb-action="set-preconfig-size" data-psize="10">10</button>';
+        html += '<button class="qb-chip" data-qb-action="set-preconfig-size" data-psize="20">20</button>';
+        html += '<button class="qb-chip" data-qb-action="set-preconfig-size" data-psize="max">Max</button>';
+        html += '</div>';
+        html += '</div>';
+
+        // Mode
+        html += '<div class="qb-preconfig-group">';
+        html += '<label class="qb-preconfig-label"><i class="fas fa-cog"></i> Mode</label>';
+        html += '<div class="qb-preconfig-chips">';
+        html += '<button class="qb-chip qb-chip--active" data-qb-action="set-preconfig-mode" data-pmode="practice">Practice</button>';
+        html += '<button class="qb-chip" data-qb-action="set-preconfig-mode" data-pmode="exam">Exam</button>';
+        html += '</div>';
+        html += '<div class="qb-preconfig-mode-hint" id="qb-preconfig-mode-hint">Shows rationale after each question.</div>';
+        html += '</div>';
+
+        // Start
+        html += '<button class="qb-btn qb-btn--primary qb-btn--lg qb-preconfig-start" data-qb-action="start-preconfig" data-topic="' + _esc(topicId) + '" data-chapter="' + _esc(chapterId) + '"><i class="fas fa-play"></i> Start Quiz</button>';
+
+        html += '</div>'; // card
+        html += '</div>'; // preconfig
+
+        _root.innerHTML = html;
+
+        // Store config state
+        _root._preconfigTypes = ['single', 'ordering', 'matrix'];
+        _root._preconfigSize = 10;
+        _root._preconfigMode = 'practice';
+    }
+
+    function _getChapterInfo(chapterId) {
+        if (!QUIZ_BANK_REGISTRY || !QUIZ_BANK_REGISTRY.chapters) return null;
+        for (var i = 0; i < QUIZ_BANK_REGISTRY.chapters.length; i++) {
+            if (QUIZ_BANK_REGISTRY.chapters[i].id === chapterId) return QUIZ_BANK_REGISTRY.chapters[i];
+        }
+        return null;
+    }
+
     // ── Action Handlers ────────────────────────────────────
 
     function _toggleChapter(btn) {
@@ -1028,9 +1155,7 @@ var QuizBank = (function () {
     function _handleStartTopic(btn) {
         var topicId = btn.dataset.topic;
         var chapterId = btn.dataset.chapter;
-        // TODO: Load question file and start quiz
-        // For now, no questions available so this won't fire
-        alert('Questions for this topic are coming soon!');
+        _renderPreQuizPanel(topicId, chapterId);
     }
 
     function _handleToggleChip(btn) {
@@ -1048,13 +1173,58 @@ var QuizBank = (function () {
     function _handleSetSize(btn) {
         btn.parentElement.querySelectorAll('.qb-chip').forEach(function (c) { c.classList.remove('qb-chip--active'); });
         btn.classList.add('qb-chip--active');
-        _setSize = parseInt(btn.dataset.size, 10) || 10;
+        _setSize = btn.dataset.size === 'max' ? 'max' : (parseInt(btn.dataset.size, 10) || 10);
     }
 
     function _handleSetMode(btn) {
         btn.parentElement.querySelectorAll('.qb-chip').forEach(function (c) { c.classList.remove('qb-chip--active'); });
         btn.classList.add('qb-chip--active');
         _mode = btn.dataset.mode || 'practice';
+    }
+
+    function _handleTogglePreconfigType(btn) {
+        btn.classList.toggle('qb-chip--active');
+        // Update stored types
+        var types = [];
+        _root.querySelectorAll('[data-qb-action="toggle-preconfig-type"].qb-chip--active').forEach(function (el) {
+            types.push(el.dataset.ptype);
+        });
+        _root._preconfigTypes = types;
+    }
+
+    function _handleSetPreconfigSize(btn) {
+        btn.parentElement.querySelectorAll('.qb-chip').forEach(function (c) { c.classList.remove('qb-chip--active'); });
+        btn.classList.add('qb-chip--active');
+        _root._preconfigSize = btn.dataset.psize === 'max' ? 'max' : parseInt(btn.dataset.psize, 10);
+    }
+
+    function _handleSetPreconfigMode(btn) {
+        btn.parentElement.querySelectorAll('.qb-chip').forEach(function (c) { c.classList.remove('qb-chip--active'); });
+        btn.classList.add('qb-chip--active');
+        _root._preconfigMode = btn.dataset.pmode;
+        var hint = document.getElementById('qb-preconfig-mode-hint');
+        if (hint) {
+            hint.textContent = btn.dataset.pmode === 'practice'
+                ? 'Shows rationale after each question.'
+                : 'No feedback until the end. Simulates real exam conditions.';
+        }
+    }
+
+    function _handleStartPreconfig(btn) {
+        var topicId = btn.dataset.topic;
+        var chapterId = btn.dataset.chapter;
+        var types = _root._preconfigTypes || ['single', 'ordering', 'matrix'];
+        var size = _root._preconfigSize || 10;
+        var mode = _root._preconfigMode || 'practice';
+
+        if (types.length === 0) {
+            alert('Please select at least one question type.');
+            return;
+        }
+
+        // TODO: Load question file for topicId and filter by types
+        // For now, no question files exist
+        alert('Questions for this topic are coming soon!');
     }
 
     function _handleStartCustom() {
