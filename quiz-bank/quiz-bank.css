@@ -1264,6 +1264,17 @@
     color: var(--qb-primary);
 }
 
+.qb-btn--ghost {
+    background: transparent;
+    color: var(--qb-muted);
+    border: none;
+    font-size: 0.85rem;
+}
+.qb-btn--ghost:hover {
+    color: var(--qb-text);
+    background: var(--qb-bg-alt);
+}
+
 .qb-btn--success {
     background: linear-gradient(135deg, #059669, #10b981);
     color: #fff;

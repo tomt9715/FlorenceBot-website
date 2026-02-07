@@ -32,6 +32,7 @@ var QuizBank = (function () {
     var _isCustom = false;         // custom quiz builder session
     var _orderingSequence = [];    // ordering click order
     var _shuffledOptions = {};     // questionId -> { options, letterMap }
+    var _lastQuizParams = null;    // saved params for "retry same quiz"
     var _boundClickHandler = null;
     var _boundKeyHandler = null;
     var _boundBeforeUnload = null;
@@ -413,6 +414,17 @@ var QuizBank = (function () {
     }
 
     function _doStartQuiz(questions, topicId, topicLabel, chapterId, mode, setSize) {
+        // Save params for "retry same quiz"
+        _lastQuizParams = {
+            questions: questions.slice(), // copy before slicing
+            topicId: topicId,
+            topicLabel: topicLabel,
+            chapterId: chapterId,
+            mode: mode,
+            setSize: setSize,
+            isCustom: _isCustom
+        };
+
         _view = 'quiz';
         _mode = mode || 'practice';
         var effectiveSize = (setSize === 'max' || !setSize) ? questions.length : Math.min(setSize, questions.length);
@@ -1017,12 +1029,14 @@ var QuizBank = (function () {
         });
         html += '</div>';
 
-        // Action buttons — "Start Another Set" first
+        // Action buttons
         html += '<div class="qb-results-actions">';
-        html += '<button class="qb-btn qb-btn--primary" data-qb-action="back-to-hub"><i class="fas fa-play-circle"></i> Start Another Set</button>';
+        html += '<button class="qb-btn qb-btn--primary" data-qb-action="retry-same"><i class="fas fa-redo"></i> Retry Same Quiz</button>';
         if (missedCount > 0) {
-            html += '<button class="qb-btn qb-btn--secondary" data-qb-action="review-missed"><i class="fas fa-redo"></i> Review Missed (' + missedCount + ')</button>';
+            html += '<button class="qb-btn qb-btn--secondary" data-qb-action="review-missed"><i class="fas fa-sync-alt"></i> Review Missed (' + missedCount + ')</button>';
         }
+        html += '<button class="qb-btn qb-btn--secondary" data-qb-action="scroll-builder"><i class="fas fa-sliders-h"></i> New Custom Quiz</button>';
+        html += '<button class="qb-btn qb-btn--ghost" data-qb-action="back-to-hub"><i class="fas fa-th-large"></i> Back to Hub</button>';
         html += '</div>';
 
         html += '</div>';
@@ -1082,6 +1096,9 @@ var QuizBank = (function () {
                     break;
                 case 'back-to-hub':
                     renderHub();
+                    break;
+                case 'retry-same':
+                    _handleRetrySame();
                     break;
                 case 'review-missed':
                     _handleReviewMissed();
@@ -1750,6 +1767,18 @@ var QuizBank = (function () {
         _shuffleAllOptions();
         window.addEventListener('beforeunload', _boundBeforeUnload);
         _renderQuestion();
+    }
+
+    function _handleRetrySame() {
+        if (!_lastQuizParams) {
+            renderHub();
+            return;
+        }
+        var p = _lastQuizParams;
+        var questions = p.questions.slice();
+        _shuffleArray(questions);
+        _isCustom = p.isCustom;
+        _startQuiz(questions, p.topicId, p.topicLabel, p.chapterId, p.mode, p.setSize);
     }
 
     // ── Builder Modal ─────────────────────────────────────
