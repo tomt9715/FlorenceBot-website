@@ -118,34 +118,46 @@
 .qb-mastery-hero {
     text-align: center;
     margin-bottom: 56px;
+    padding-top: 24px;
     animation: qb-fadeIn 0.4s ease;
 }
 
 /* ── Profile Avatar inside Mastery Ring ──────── */
 .qb-mastery-ring--with-avatar {
-    width: 160px;
-    height: 160px;
+    width: 180px;
+    height: 180px;
 }
 
 .qb-ring-avatar {
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 100%;
+    height: 100%;
 }
 
 .qb-ring-avatar .profile-pic {
-    width: 80px;
-    height: 80px;
+    width: 120px;
+    height: 120px;
     border-radius: 50%;
     border: none;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    box-shadow: none;
     object-fit: cover;
     background: var(--qb-bg-white, #fff);
 }
 
 [data-theme="dark"] .qb-ring-avatar .profile-pic {
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+    box-shadow: none;
     background: var(--qb-card-bg, #1f2937);
+}
+
+/* Thinner, subtler background track when avatar is inside the ring */
+.qb-mastery-ring--with-avatar .qb-mastery-ring-bg {
+    stroke-width: 6;
+    stroke: var(--qb-border-light);
+}
+.qb-mastery-ring--with-avatar .qb-mastery-ring-fill {
+    stroke-width: 6;
 }
 
 /* Greeting + Level below the ring */
@@ -2259,8 +2271,8 @@
     .qb-hero-stats-row { gap: 20px; }
     .qb-hero-stat-value { font-size: 1.4rem; }
     .qb-mastery-ring { width: 150px; height: 150px; }
-    .qb-mastery-ring--with-avatar { width: 140px; height: 140px; }
-    .qb-ring-avatar .profile-pic { width: 68px; height: 68px; }
+    .qb-mastery-ring--with-avatar { width: 150px; height: 150px; }
+    .qb-ring-avatar .profile-pic { width: 100px; height: 100px; }
     .qb-mastery-ring-level { font-size: 2rem; }
 }
 
