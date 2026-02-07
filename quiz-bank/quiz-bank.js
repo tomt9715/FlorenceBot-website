@@ -366,7 +366,7 @@ var QuizBank = (function () {
         // Check subscription status asynchronously
         if (typeof checkSubscriptionStatus === 'function') {
             checkSubscriptionStatus().then(function (sub) {
-                if (sub && sub.is_active) {
+                if (sub && sub.hasAccess) {
                     _doStartQuiz(questions, topicId, topicLabel, chapterId, mode, setSize);
                 } else {
                     _showSubscriptionPrompt('subscribe');
