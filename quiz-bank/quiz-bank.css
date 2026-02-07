@@ -36,6 +36,15 @@
     --qb-radius-sm: 8px;
     --qb-radius-lg: 16px;
     --qb-transition: 0.25s ease;
+
+    /* New variables for redesign */
+    --qb-shadow-card: 0 2px 8px rgba(0, 0, 0, 0.06);
+    --qb-shadow-card-hover: 0 4px 16px rgba(0, 0, 0, 0.1);
+    --qb-badge-bronze: #CD7F32;
+    --qb-badge-silver: #C0C0C0;
+    --qb-badge-gold: #FFD700;
+    --qb-badge-emerald: #50C878;
+    --qb-badge-diamond: #B9F2FF;
 }
 
 [data-theme="dark"] {
@@ -56,6 +65,8 @@
     --qb-incorrect-border: #991b1b;
     --qb-partial-bg: #78350f;
     --qb-partial-border: #92400e;
+    --qb-shadow-card: 0 2px 8px rgba(0, 0, 0, 0.2);
+    --qb-shadow-card-hover: 0 4px 16px rgba(0, 0, 0, 0.3);
 }
 
 /* ============================================
@@ -81,16 +92,16 @@
    SECTION BASE
    ============================================ */
 .qb-section {
-    margin-bottom: 40px;
+    margin-bottom: 56px;
     animation: qb-fadeIn 0.3s ease;
 }
 
 .qb-section-title {
     font-family: 'Outfit', 'Source Sans 3', sans-serif;
-    font-size: 1.35rem;
+    font-size: 1.5rem;
     font-weight: 700;
     color: var(--qb-text);
-    margin-bottom: 20px;
+    margin-bottom: 24px;
     display: flex;
     align-items: center;
     gap: 10px;
@@ -99,6 +110,553 @@
 .qb-section-title i {
     color: var(--qb-primary);
     font-size: 1.1rem;
+}
+
+/* ============================================
+   MASTERY RING HERO (Hub Hero Section)
+   ============================================ */
+.qb-mastery-hero {
+    text-align: center;
+    margin-bottom: 56px;
+    animation: qb-fadeIn 0.4s ease;
+}
+
+.qb-mastery-ring-wrap {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 24px;
+}
+
+.qb-mastery-ring {
+    width: 180px;
+    height: 180px;
+    position: relative;
+}
+
+.qb-mastery-ring svg {
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+}
+
+.qb-mastery-ring-bg {
+    fill: none;
+    stroke: var(--qb-border);
+    stroke-width: 10;
+}
+
+.qb-mastery-ring-fill {
+    fill: none;
+    stroke: var(--qb-primary);
+    stroke-width: 10;
+    stroke-linecap: round;
+    transition: stroke-dashoffset 1.2s ease;
+}
+
+.qb-mastery-ring-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.qb-mastery-ring-level {
+    font-family: 'Outfit', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--qb-text);
+    line-height: 1;
+    display: block;
+}
+
+.qb-mastery-ring-label {
+    font-size: 0.78rem;
+    color: var(--qb-text-secondary);
+    margin-top: 4px;
+    display: block;
+}
+
+/* ============================================
+   HUB STATS ROW (below mastery ring)
+   ============================================ */
+.qb-hero-stats-row {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    flex-wrap: wrap;
+}
+
+.qb-hero-stat {
+    text-align: center;
+}
+
+.qb-hero-stat-value {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--qb-text);
+    line-height: 1.2;
+}
+
+.qb-hero-stat-label {
+    font-size: 0.78rem;
+    color: var(--qb-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-top: 2px;
+}
+
+/* Streak Flame States */
+.qb-streak-flame {
+    display: inline;
+    font-size: 1.4rem;
+    vertical-align: middle;
+}
+
+.qb-streak-flame--dim {
+    color: var(--qb-text-light);
+}
+
+.qb-streak-flame--active {
+    color: #f59e0b;
+    animation: qb-flamePulse 2s ease-in-out infinite;
+}
+
+.qb-streak-flame--hot {
+    color: #ef4444;
+    animation: qb-flamePulse 1.5s ease-in-out infinite;
+}
+
+.qb-streak-flame--blazing {
+    background: linear-gradient(135deg, #3b82f6, #93c5fd, #ffffff, #93c5fd, #3b82f6);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: qb-flameShimmer 2s ease-in-out infinite;
+}
+
+@keyframes qb-flamePulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.7; transform: scale(1.15); }
+}
+
+@keyframes qb-flameShimmer {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* ============================================
+   MASTERY BADGES (CSS-only 28px shields)
+   ============================================ */
+.qb-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    font-size: 0.65rem;
+    font-weight: 700;
+    flex-shrink: 0;
+    position: relative;
+    transition: transform var(--qb-transition);
+}
+
+.qb-badge--0 {
+    border: 2px dashed var(--qb-text-light);
+    background: none;
+    color: var(--qb-text-light);
+}
+
+.qb-badge--1,
+.qb-badge--2 {
+    border: 2px solid var(--qb-badge-bronze);
+    background: none;
+    color: var(--qb-badge-bronze);
+    border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
+}
+
+.qb-badge--3,
+.qb-badge--4 {
+    border: 2px solid var(--qb-badge-silver);
+    background: linear-gradient(135deg, #e8e8e8, #c0c0c0);
+    color: #555;
+    border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
+}
+
+.qb-badge--5,
+.qb-badge--6 {
+    border: 2px solid var(--qb-badge-gold);
+    background: linear-gradient(135deg, #fff7cc, #ffd700);
+    color: #8b6914;
+    border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
+}
+
+.qb-badge--5::after,
+.qb-badge--6::after {
+    content: '\f005';
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    font-size: 0.5rem;
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    color: var(--qb-badge-gold);
+}
+
+.qb-badge--7,
+.qb-badge--8 {
+    border: 2px solid var(--qb-badge-emerald);
+    background: linear-gradient(135deg, #d1fae5, #50c878);
+    color: #1a5c34;
+    border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
+}
+
+.qb-badge--7::after,
+.qb-badge--8::after {
+    content: '\f005 \f005';
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    font-size: 0.4rem;
+    position: absolute;
+    top: -5px;
+    right: -6px;
+    color: var(--qb-badge-emerald);
+    letter-spacing: -2px;
+}
+
+.qb-badge--9 {
+    border: 2px solid var(--qb-badge-diamond);
+    background: linear-gradient(135deg, #e0f7fa, #b9f2ff, #e0f7fa);
+    color: #0e7490;
+    border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
+    box-shadow: 0 0 8px rgba(185, 242, 255, 0.6);
+}
+
+.qb-badge--10 {
+    border: 2px solid #e5e7eb;
+    background: linear-gradient(135deg, #f0f0f0, #d4d4d8, #a1a1aa, #d4d4d8, #f0f0f0);
+    background-size: 200% 200%;
+    color: #3f3f46;
+    border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
+    animation: qb-platinumPulse 3s ease-in-out infinite;
+    box-shadow: 0 0 12px rgba(161, 161, 170, 0.4);
+}
+
+.qb-badge--10::after {
+    content: 'MASTERED';
+    position: absolute;
+    bottom: -16px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.5rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    color: #71717a;
+    white-space: nowrap;
+}
+
+@keyframes qb-platinumPulse {
+    0%, 100% { background-position: 0% 50%; box-shadow: 0 0 12px rgba(161, 161, 170, 0.4); }
+    50% { background-position: 100% 50%; box-shadow: 0 0 20px rgba(161, 161, 170, 0.6); }
+}
+
+/* Results badge row */
+.qb-results-badge-row {
+    display: flex;
+    justify-content: center;
+    margin: 16px 0;
+}
+
+.qb-results-badge-row .qb-badge {
+    width: 56px;
+    height: 56px;
+    font-size: 1.2rem;
+}
+
+/* ============================================
+   CHAPTER MASTERY BAR
+   ============================================ */
+.qb-chapter-bar {
+    height: 4px;
+    background: var(--qb-border);
+    border-radius: 2px;
+    overflow: hidden;
+    margin-top: 8px;
+    width: 100%;
+}
+
+.qb-chapter-bar-fill {
+    height: 100%;
+    border-radius: 2px;
+    background: linear-gradient(90deg, var(--qb-primary), var(--qb-secondary));
+    transition: width 0.6s ease;
+}
+
+/* ============================================
+   RUNNING ACCURACY PILL (quiz view)
+   ============================================ */
+.qb-accuracy-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.qb-accuracy-pill--good {
+    background: var(--qb-correct-bg);
+    color: var(--qb-correct);
+    border: 1px solid var(--qb-correct-border);
+}
+
+.qb-accuracy-pill--ok {
+    background: var(--qb-partial-bg);
+    color: #92400e;
+    border: 1px solid var(--qb-partial-border);
+}
+
+.qb-accuracy-pill--low {
+    background: var(--qb-incorrect-bg);
+    color: var(--qb-incorrect);
+    border: 1px solid var(--qb-incorrect-border);
+}
+
+/* ============================================
+   CORRECT / INCORRECT MICRO-ANIMATIONS
+   ============================================ */
+@keyframes qb-correctBounce {
+    0% { transform: scale(1); }
+    30% { transform: scale(1.02); }
+    60% { transform: scale(0.99); }
+    100% { transform: scale(1); }
+}
+
+@keyframes qb-incorrectShake {
+    0%, 100% { transform: translateX(0); }
+    15% { transform: translateX(-4px); }
+    30% { transform: translateX(4px); }
+    45% { transform: translateX(-3px); }
+    60% { transform: translateX(3px); }
+    75% { transform: translateX(-1px); }
+    90% { transform: translateX(1px); }
+}
+
+.qb-option--animate-correct {
+    animation: qb-correctBounce 0.4s ease;
+}
+
+.qb-option--animate-incorrect {
+    animation: qb-incorrectShake 0.4s ease;
+}
+
+/* ============================================
+   QUICK START CARD MODIFIERS
+   ============================================ */
+.qb-quick-card--primary .qb-quick-icon {
+    background: linear-gradient(135deg, var(--qb-primary), #60a5fa);
+}
+
+.qb-quick-card--warning .qb-quick-icon {
+    background: linear-gradient(135deg, #f59e0b, #fbbf24);
+}
+
+.qb-quick-card--neutral .qb-quick-icon {
+    background: linear-gradient(135deg, #6366f1, #a78bfa);
+}
+
+/* ============================================
+   CONFETTI ANIMATION
+   ============================================ */
+.qb-confetti-container {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9999;
+    overflow: hidden;
+}
+
+.qb-confetti-piece {
+    position: absolute;
+    top: -5%;
+    border-radius: 2px;
+    animation: qb-confettiFall 3s ease-in forwards;
+    opacity: 0;
+}
+
+@keyframes qb-confettiFall {
+    0% {
+        transform: translateY(-10%) translateX(0) rotate(0deg);
+        opacity: 1;
+    }
+    25% { opacity: 1; }
+    100% {
+        transform: translateY(110vh) translateX(30px) rotate(720deg);
+        opacity: 0;
+    }
+}
+
+/* ============================================
+   LEVEL-UP MODAL
+   ============================================ */
+.qb-levelup-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9998;
+    background: rgba(0, 0, 0, 0.55);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.qb-levelup-overlay--visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.qb-levelup-modal {
+    background: var(--qb-card-bg);
+    border-radius: var(--qb-radius-lg);
+    max-width: 400px;
+    width: 90%;
+    padding: 40px 32px;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+}
+
+.qb-levelup-overlay--visible .qb-levelup-modal {
+    transform: scale(1);
+}
+
+.qb-levelup-badge {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    animation: qb-badgeReveal 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.qb-levelup-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--qb-text);
+    margin-bottom: 4px;
+}
+
+.qb-levelup-level {
+    font-size: 0.92rem;
+    color: var(--qb-text-secondary);
+    line-height: 1.5;
+    margin-bottom: 24px;
+}
+
+@keyframes qb-badgeReveal {
+    0% { transform: scale(0); opacity: 0; }
+    60% { transform: scale(1.15); opacity: 1; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+/* ============================================
+   CUSTOM BUILDER MODAL
+   ============================================ */
+.qb-builder-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9000;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+}
+
+.qb-builder-overlay--visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.qb-builder-modal {
+    background: var(--qb-card-bg);
+    border-radius: var(--qb-radius-lg) var(--qb-radius-lg) 0 0;
+    max-width: 600px;
+    width: 100%;
+    max-height: 80vh;
+    overflow-y: auto;
+    padding: 0;
+    box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.2);
+    transform: translateY(100%);
+    transition: transform 0.35s cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+.qb-builder-overlay--visible .qb-builder-modal {
+    transform: translateY(0);
+}
+
+.qb-builder-modal-header {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    background: var(--qb-card-bg);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 24px;
+    border-bottom: 1px solid var(--qb-border);
+}
+
+.qb-builder-modal-header .qb-section-title {
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+.qb-builder-close {
+    background: none;
+    border: none;
+    font-size: 1.1rem;
+    color: var(--qb-text-light);
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 6px;
+    transition: color 0.2s, background 0.2s;
+}
+
+.qb-builder-close:hover {
+    color: var(--qb-text);
+    background: var(--qb-border-light);
+}
+
+/* Desktop: center the modal */
+@media (min-width: 769px) {
+    .qb-builder-overlay {
+        align-items: center;
+    }
+
+    .qb-builder-modal {
+        border-radius: var(--qb-radius-lg);
+        max-height: 80vh;
+    }
 }
 
 /* ============================================
@@ -238,13 +796,17 @@
     margin: 0 auto;
 }
 
+.qb-empty-actions {
+    margin-top: 20px;
+}
+
 /* ============================================
    SECTION B: QUICK START CARDS
    ============================================ */
 .qb-quick-cards {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 14px;
+    gap: 16px;
 }
 
 .qb-quick-card {
@@ -258,12 +820,13 @@
     font-family: inherit;
     color: inherit;
     -webkit-tap-highlight-color: transparent;
+    box-shadow: var(--qb-shadow-card);
 }
 
 .qb-quick-card:hover:not([disabled]) {
     border-color: var(--qb-primary);
-    box-shadow: var(--qb-shadow-md);
-    transform: translateY(-2px);
+    box-shadow: var(--qb-shadow-card-hover);
+    transform: translateY(-3px);
 }
 
 .qb-quick-card--disabled {
@@ -308,9 +871,15 @@
 .qb-chapter {
     border: 1px solid var(--qb-border);
     border-radius: var(--qb-radius);
-    margin-bottom: 8px;
+    margin-bottom: 10px;
     overflow: hidden;
     background: var(--qb-card-bg);
+    box-shadow: var(--qb-shadow-card);
+    transition: box-shadow var(--qb-transition);
+}
+
+.qb-chapter:hover {
+    box-shadow: var(--qb-shadow-card-hover);
 }
 
 .qb-chapter-header {
@@ -501,13 +1070,19 @@
 }
 
 /* ============================================
-   SECTION D: CUSTOM QUIZ BUILDER
+   SECTION D: CUSTOM QUIZ BUILDER (inline & modal)
    ============================================ */
 .qb-builder-form {
     background: var(--qb-card-bg);
+    border: none;
+    border-radius: 0;
+    padding: 24px;
+}
+
+/* When builder is standalone (not in modal), restore card styling */
+.qb-builder .qb-builder-form {
     border: 1px solid var(--qb-border);
     border-radius: var(--qb-radius-lg);
-    padding: 24px;
 }
 
 .qb-builder-group {
@@ -774,7 +1349,7 @@
     border: 1px solid var(--qb-border);
     border-radius: var(--qb-radius-lg);
     padding: 28px 24px;
-    box-shadow: var(--qb-shadow-sm);
+    box-shadow: var(--qb-shadow-card);
 }
 
 .qb-q-header {
@@ -1369,7 +1944,7 @@
     animation: qb-fadeIn 0.3s ease;
 }
 
-.qb-results-header { text-align: center; margin-bottom: 24px; }
+.qb-results-header { text-align: center; margin-bottom: 32px; }
 
 .qb-score-ring-wrap { display: flex; justify-content: center; margin-bottom: 16px; }
 .qb-score-ring { width: 160px; height: 160px; position: relative; }
@@ -1621,6 +2196,10 @@
     .qb-stats-grid { grid-template-columns: repeat(2, 1fr); }
     .qb-quick-cards { grid-template-columns: 1fr; }
     .qb-weak-strong { grid-template-columns: 1fr; }
+    .qb-hero-stats-row { gap: 20px; }
+    .qb-hero-stat-value { font-size: 1.4rem; }
+    .qb-mastery-ring { width: 150px; height: 150px; }
+    .qb-mastery-ring-level { font-size: 2rem; }
 }
 
 @media (max-width: 480px) {
@@ -2030,6 +2609,9 @@ body.qb-quiz-active .qb-container {
     .qb-container { max-width: 100%; padding: 0; }
     .qb-question-card, .qb-result-item { break-inside: avoid; box-shadow: none; }
     .qb-result-detail { max-height: none; }
+    .qb-confetti-container { display: none; }
+    .qb-levelup-overlay { display: none; }
+    .qb-builder-overlay { display: none; }
 }
 
 /* ── Subscription Gate Overlay ─────────────────────── */

@@ -2179,12 +2179,22 @@ function loadQuizBankDashboard() {
     var accuracyEl = document.getElementById('qb-accuracy');
     var streakEl = document.getElementById('qb-streak');
 
-    if (avgLevelEl) avgLevelEl.textContent = stats.averageLevel;
+    if (avgLevelEl) {
+        avgLevelEl.textContent = stats.averageLevel.toFixed(1);
+        var avgColor = MasteryTracker.getMasteryColor(Math.floor(stats.averageLevel));
+        avgLevelEl.style.color = avgColor;
+    }
     if (practicedEl) practicedEl.textContent = stats.topicsPracticed;
     if (masteredEl) masteredEl.textContent = stats.topicsMastered;
-    if (answeredEl) answeredEl.textContent = stats.totalQuestionsAnswered;
+    if (answeredEl) answeredEl.textContent = stats.totalQuestionsAnswered.toLocaleString();
     if (accuracyEl) accuracyEl.textContent = stats.accuracy + '%';
-    if (streakEl) streakEl.textContent = stats.streak;
+    if (streakEl) {
+        var streakFlameClass = 'qb-streak-flame--dim';
+        if (stats.streak >= 14) streakFlameClass = 'qb-streak-flame--blazing';
+        else if (stats.streak >= 7) streakFlameClass = 'qb-streak-flame--hot';
+        else if (stats.streak >= 1) streakFlameClass = 'qb-streak-flame--active';
+        streakEl.innerHTML = '<i class="fas fa-fire qb-streak-flame ' + streakFlameClass + '"></i> ' + stats.streak;
+    }
 
     // Build chapter summaries
     buildChapterSummaries();

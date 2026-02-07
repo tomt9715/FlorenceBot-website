@@ -73,60 +73,38 @@ var QuizBank = (function () {
 
         var html = '';
 
-        // ── Section A: Mastery Overview ──────────────────
-        html += '<section class="qb-section qb-mastery-overview">';
-        html += '<h2 class="qb-section-title"><i class="fas fa-chart-line"></i> My Mastery Overview</h2>';
+        // ── Section A: Mastery Hero ──────────────────
+        html += '<section class="qb-section qb-mastery-hero">';
 
         if (!isSignedIn) {
             html += '<div class="qb-empty-state">';
             html += '<div class="qb-empty-icon"><i class="fas fa-user-lock"></i></div>';
             html += '<div class="qb-empty-title">Sign in to track your mastery progress</div>';
             html += '<div class="qb-empty-desc">Your quiz results and mastery levels will appear here once you sign in.</div>';
-            html += '<div class="qb-empty-actions"><a href="../login.html" class="btn btn-primary">Sign In</a></div>';
+            html += '<div class="qb-empty-actions"><a href="../login.html" class="qb-btn qb-btn--primary">Sign In</a></div>';
             html += '</div>';
         } else if (hasData) {
-            html += '<div class="qb-stats-grid">';
-            html += _statCard('fas fa-layer-group', 'Average Level', stats.averageLevel.toFixed(1), MasteryTracker.getMasteryColorClass(Math.floor(stats.averageLevel)));
-            html += _statCard('fas fa-book-open', 'Chapters Started', chaptersInProgress + ' of 15', '');
-            html += _statCard('fas fa-trophy', 'Topics Mastered', stats.topicsMastered + ' of ' + totalTopics, '');
-            html += _statCard('fas fa-question-circle', 'Questions Answered', stats.totalQuestionsAnswered.toLocaleString(), '');
-            html += _statCard('fas fa-bullseye', 'Accuracy', stats.accuracy + '%', '');
-            html += _statCard('fas fa-fire', 'Study Streak', stats.streak + ' day' + (stats.streak !== 1 ? 's' : ''), '');
+            // Mastery Ring
+            html += _buildMasteryRing(stats.averageLevel, 10);
+
+            // Stats Row
+            var streakClass = 'qb-streak-flame--dim';
+            if (stats.streak >= 14) streakClass = 'qb-streak-flame--blazing';
+            else if (stats.streak >= 7) streakClass = 'qb-streak-flame--hot';
+            else if (stats.streak >= 1) streakClass = 'qb-streak-flame--active';
+
+            html += '<div class="qb-hero-stats-row">';
+            html += '<div class="qb-hero-stat"><div class="qb-hero-stat-value">' + stats.accuracy + '%</div><div class="qb-hero-stat-label">Accuracy</div></div>';
+            html += '<div class="qb-hero-stat"><div class="qb-hero-stat-value">' + stats.totalQuestionsAnswered.toLocaleString() + '</div><div class="qb-hero-stat-label">Answered</div></div>';
+            html += '<div class="qb-hero-stat"><div class="qb-hero-stat-value">' + stats.topicsMastered + '/' + totalTopics + '</div><div class="qb-hero-stat-label">Mastered</div></div>';
+            html += '<div class="qb-hero-stat"><div class="qb-hero-stat-value"><i class="fas fa-fire qb-streak-flame ' + streakClass + '"></i> ' + stats.streak + '</div><div class="qb-hero-stat-label">Day Streak</div></div>';
             html += '</div>';
-
-            // Weakest & strongest
-            if (stats.weakestTopics.length > 0) {
-                html += '<div class="qb-weak-strong">';
-                html += '<div class="qb-weak-col">';
-                html += '<div class="qb-weak-strong-title"><i class="fas fa-exclamation-triangle"></i> Weakest Topics</div>';
-                stats.weakestTopics.forEach(function (t) {
-                    var label = MasteryTracker.getTopicLabel(t.id);
-                    var color = MasteryTracker.getMasteryColor(t.level);
-                    html += '<div class="qb-weak-item">';
-                    html += '<span class="qb-weak-name">' + _esc(label) + '</span>';
-                    html += '<span class="qb-weak-level" style="color:' + color + '">Level ' + t.level + '</span>';
-                    html += '</div>';
-                });
-                html += '</div>';
-
-                html += '<div class="qb-strong-col">';
-                html += '<div class="qb-weak-strong-title"><i class="fas fa-star"></i> Strongest Topics</div>';
-                stats.strongestTopics.forEach(function (t) {
-                    var label = MasteryTracker.getTopicLabel(t.id);
-                    var color = MasteryTracker.getMasteryColor(t.level);
-                    html += '<div class="qb-weak-item">';
-                    html += '<span class="qb-weak-name">' + _esc(label) + '</span>';
-                    html += '<span class="qb-weak-level" style="color:' + color + '">Level ' + t.level + '</span>';
-                    html += '</div>';
-                });
-                html += '</div>';
-                html += '</div>';
-            }
         } else {
             html += '<div class="qb-empty-state">';
             html += '<div class="qb-empty-icon"><i class="fas fa-rocket"></i></div>';
             html += '<div class="qb-empty-title">Start your first quiz to begin tracking mastery</div>';
             html += '<div class="qb-empty-desc">Complete question sets to earn mastery points across 15 chapters and 129 topics.</div>';
+            html += '<div class="qb-empty-actions"><button class="qb-btn qb-btn--primary" data-qb-action="quick-10"><i class="fas fa-play"></i> Start Quick 10</button></div>';
             html += '</div>';
         }
         html += '</section>';
@@ -142,17 +120,17 @@ var QuizBank = (function () {
         html += _quickCard(
             'fas fa-play-circle', 'Quick 10',
             '10 questions weighted toward weak topics',
-            disableQuickStart, 'quick-10'
+            disableQuickStart, 'quick-10', 'qb-quick-card--primary'
         );
         html += _quickCard(
             'fas fa-crosshairs', 'Weak Spot Focus',
             'Drill your 3 lowest mastery topics',
-            disableQuickStart, 'weak-focus'
+            disableQuickStart, 'weak-focus', 'qb-quick-card--warning'
         );
         html += _quickCard(
             'fas fa-sliders-h', 'Build Custom Quiz',
             'Choose chapters, topics, difficulty & more',
-            false, 'scroll-builder'
+            false, 'scroll-builder', 'qb-quick-card--neutral'
         );
 
         html += '</div>';
@@ -172,18 +150,22 @@ var QuizBank = (function () {
             html += '<button class="qb-chapter-header" data-qb-action="toggle-chapter" data-chapter="' + _esc(chapter.id) + '" aria-expanded="false">';
             html += '<span class="qb-chapter-emoji">' + chapter.emoji + '</span>';
             html += '<span class="qb-chapter-label">' + _esc(chapter.label) + '</span>';
-            html += '<span class="qb-chapter-meta">' + totalTopicsInChapter + ' topics</span>';
 
+            var chapterBarHtml = '';
             if (availableTopics > 0 && isSignedIn) {
                 var mastColor = MasteryTracker.getMasteryColor(Math.floor(chapterMastery.averageLevel));
+                var barPct = Math.min(100, (chapterMastery.averageLevel / 10) * 100);
                 html += '<span class="qb-chapter-mastery" style="color:' + mastColor + '">Level ' + chapterMastery.averageLevel.toFixed(1) + '</span>';
+                chapterBarHtml = '<div class="qb-chapter-bar"><div class="qb-chapter-bar-fill" style="width:' + barPct + '%;background:' + mastColor + '"></div></div>';
             } else if (availableTopics > 0) {
                 html += '<span class="qb-chapter-meta">' + availableTopics + ' available</span>';
             } else {
                 html += '<span class="qb-chapter-badge qb-badge-coming-soon"><i class="fas fa-lock"></i> Coming Soon</span>';
             }
 
+            html += '<span class="qb-chapter-meta">' + totalTopicsInChapter + ' topics</span>';
             html += '<i class="fas fa-chevron-down qb-chapter-arrow"></i>';
+            html += chapterBarHtml;
             html += '</button>';
 
             html += '<div class="qb-chapter-topics">';
@@ -226,124 +208,37 @@ var QuizBank = (function () {
 
         html += '</section>';
 
-        // ── Section D: Custom Quiz Builder ───────────────
-        html += '<section class="qb-section qb-builder" id="qb-builder">';
-        html += '<h2 class="qb-section-title"><i class="fas fa-sliders-h"></i> Custom Quiz Builder</h2>';
-
-        if (!isSignedIn) {
-            html += '<div class="qb-empty-state">';
-            html += '<div class="qb-empty-icon"><i class="fas fa-lock"></i></div>';
-            html += '<div class="qb-empty-title">Sign in to build custom quizzes</div>';
-            html += '<div class="qb-empty-desc">Subscribers can build custom quizzes by chapter, difficulty, question type, and more.</div>';
-            html += '<div class="qb-empty-actions"><a href="../login.html" class="btn btn-primary">Sign In</a></div>';
-            html += '</div>';
-            html += '</section>';
-        } else {
-
-        html += '<div class="qb-builder-form">';
-
-        // Chapters multi-select
-        html += '<div class="qb-builder-group">';
-        html += '<label class="qb-builder-label">Chapters</label>';
-        html += '<div class="qb-builder-chips" id="qb-chapter-chips">';
-        QUIZ_BANK_REGISTRY.chapters.forEach(function (chapter) {
-            var availCount = chapter.topics.filter(function (t) { return t.file !== null; }).length;
-            html += '<button class="qb-chip" data-qb-action="toggle-chip" data-chip-type="chapter" data-chip-value="' + _esc(chapter.id) + '"' + (availCount === 0 ? ' disabled' : '') + '>';
-            html += chapter.emoji + ' ' + _esc(chapter.label);
-            if (availCount === 0) html += ' (0)';
-            html += '</button>';
-        });
-        html += '</div>';
-        html += '</div>';
-
-        // Topics within selected chapters
-        html += '<div class="qb-builder-group">';
-        html += '<label class="qb-builder-label">Topics <span class="qb-builder-hint">(select chapters first)</span></label>';
-        html += '<div class="qb-builder-chips" id="qb-topic-chips">';
-        html += '<div class="qb-builder-placeholder">Select one or more chapters above to see available topics.</div>';
-        html += '</div>';
-        html += '</div>';
-
-        // Difficulty
-        html += '<div class="qb-builder-group">';
-        html += '<label class="qb-builder-label">Difficulty</label>';
-        html += '<div class="qb-builder-chips" id="qb-difficulty-chips">';
-        ['Knowledge', 'Application', 'Analysis'].forEach(function (d) {
-            html += '<button class="qb-chip" data-qb-action="toggle-chip" data-chip-type="difficulty" data-chip-value="' + d.toLowerCase() + '">' + d + '</button>';
-        });
-        html += '</div>';
-        html += '<div class="qb-builder-desc">Knowledge = recall facts. Application = apply concepts to a scenario. Analysis = interpret data and prioritize.</div>';
-        html += '</div>';
-
-        // Question types
-        html += '<div class="qb-builder-group">';
-        html += '<label class="qb-builder-label">Question Types</label>';
-        html += '<div class="qb-builder-chips" id="qb-type-chips">';
-        [['Single', 'single'], ['Ordering', 'ordering'], ['Matrix', 'matrix']].forEach(function (pair) {
-            html += '<button class="qb-chip" data-qb-action="toggle-chip" data-chip-type="qtype" data-chip-value="' + pair[1] + '">' + pair[0] + '</button>';
-        });
-        html += '</div>';
-        html += '<div class="qb-builder-desc">Single = pick one best answer. Ordering = arrange steps in sequence. Matrix = match findings to categories.</div>';
-        html += '</div>';
-
-        // Set size
-        html += '<div class="qb-builder-group">';
-        html += '<label class="qb-builder-label">Set Size</label>';
-        html += '<div class="qb-builder-chips" id="qb-size-chips">';
-        html += '<button class="qb-chip" data-qb-action="set-size" data-size="5" data-size-value="5" disabled>5 Questions</button>';
-        html += '<button class="qb-chip" data-qb-action="set-size" data-size="10" data-size-value="10" disabled>10 Questions</button>';
-        html += '<button class="qb-chip" data-qb-action="set-size" data-size="15" data-size-value="15" disabled>15 Questions</button>';
-        html += '<button class="qb-chip" data-qb-action="set-size" data-size="max">Max (<span id="qb-builder-max-count">0</span>)</button>';
-        html += '</div>';
-        html += '</div>';
-
-        // Toggles
-        html += '<div class="qb-builder-group">';
-        html += '<label class="qb-builder-label">Preferences</label>';
-        html += '<div class="qb-builder-toggles">';
-        html += '<label class="qb-toggle"><input type="checkbox" id="qb-pref-weak" checked> Prioritize weak topics</label>';
-        html += '<label class="qb-toggle"><input type="checkbox" id="qb-pref-unseen" checked> Unseen questions first</label>';
-        html += '</div>';
-        html += '</div>';
-
-        // Mode
-        html += '<div class="qb-builder-group">';
-        html += '<label class="qb-builder-label">Mode</label>';
-        html += '<div class="qb-builder-chips">';
-        html += '<button class="qb-chip" data-qb-action="set-mode" data-mode="practice">Practice</button>';
-        html += '<button class="qb-chip" data-qb-action="set-mode" data-mode="exam">Exam</button>';
-        html += '</div>';
-        html += '<div class="qb-builder-desc">Practice = see rationale after each question. Exam = no feedback until the end, simulates real test conditions.</div>';
-        html += '</div>';
-
-        // Match count & start
-        html += '<div class="qb-builder-footer">';
-        html += '<div class="qb-builder-count" id="qb-match-count">0 questions match</div>';
-        html += '<button class="qb-btn qb-btn--primary qb-btn--lg" data-qb-action="start-custom" disabled>Start Quiz</button>';
-        html += '</div>';
-
-        html += '</div>';
-        html += '</section>';
-        } // end isSignedIn else for builder
+        // Section D removed: Custom Quiz Builder is now a modal (triggered by scroll-builder action)
 
         _root.innerHTML = html;
-
-        // Update match count
-        if (isSignedIn) _updateBuilderCount();
     }
 
     // ── Hub Helpers ────────────────────────────────────────
 
-    function _statCard(icon, label, value, colorClass) {
-        return '<div class="qb-stat-card ' + (colorClass || '') + '">' +
-            '<div class="qb-stat-icon"><i class="' + icon + '"></i></div>' +
-            '<div class="qb-stat-value">' + value + '</div>' +
-            '<div class="qb-stat-label">' + _esc(label) + '</div>' +
-            '</div>';
+    function _buildMasteryRing(level, maxLevel) {
+        var circumference = 2 * Math.PI * 72; // r=72
+        var pct = Math.min(level / maxLevel, 1);
+        var offset = circumference - (pct * circumference);
+        var color = MasteryTracker.getMasteryColor(Math.floor(level));
+        return '<div class="qb-mastery-ring-wrap"><div class="qb-mastery-ring">' +
+            '<svg viewBox="0 0 160 160">' +
+            '<circle class="qb-mastery-ring-bg" cx="80" cy="80" r="72"></circle>' +
+            '<circle class="qb-mastery-ring-fill" cx="80" cy="80" r="72" ' +
+            'stroke-dasharray="' + circumference + '" stroke-dashoffset="' + offset + '" ' +
+            'style="stroke:' + color + '"></circle>' +
+            '</svg>' +
+            '<div class="qb-mastery-ring-center">' +
+            '<div class="qb-mastery-ring-level" style="color:' + color + '">' + level.toFixed(1) + '</div>' +
+            '<div class="qb-mastery-ring-label">Average Level</div>' +
+            '</div></div></div>';
     }
 
-    function _quickCard(icon, title, desc, disabled, action) {
-        var cls = 'qb-quick-card' + (disabled ? ' qb-quick-card--disabled' : '');
+    function _getMasteryBadgeHtml(level) {
+        return '<span class="qb-badge qb-badge--' + level + '" title="Level ' + level + '"></span>';
+    }
+
+    function _quickCard(icon, title, desc, disabled, action, modifier) {
+        var cls = 'qb-quick-card' + (modifier ? ' ' + modifier : '') + (disabled ? ' qb-quick-card--disabled' : '');
         return '<button class="' + cls + '" data-qb-action="' + action + '"' + (disabled ? ' disabled' : '') + '>' +
             '<div class="qb-quick-icon"><i class="' + icon + '"></i></div>' +
             '<div class="qb-quick-title">' + _esc(title) + '</div>' +
@@ -369,15 +264,16 @@ var QuizBank = (function () {
     }
 
     function _updateBuilderCount() {
+        var builderScope = document.getElementById('qb-builder-overlay') || _root;
         var countEl = document.getElementById('qb-match-count');
-        var startBtn = _root.querySelector('[data-qb-action="start-custom"]');
+        var startBtn = builderScope.querySelector('[data-qb-action="start-custom"]');
         if (!countEl || !startBtn) return;
 
         var count = MasteryTracker.countAvailableQuestions(_getBuilderFilters());
         countEl.textContent = count + ' question' + (count !== 1 ? 's' : '') + ' match';
 
         // Enable/disable set-size buttons based on available question count
-        _root.querySelectorAll('[data-qb-action="set-size"][data-size-value]').forEach(function (btn) {
+        builderScope.querySelectorAll('[data-qb-action="set-size"][data-size-value]').forEach(function (btn) {
             var sizeVal = parseInt(btn.dataset.sizeValue, 10);
             var tooFew = sizeVal > count;
             btn.disabled = tooFew;
@@ -388,7 +284,7 @@ var QuizBank = (function () {
             }
         });
         // Max button: disable if 0 questions
-        var maxBtn = _root.querySelector('[data-qb-action="set-size"][data-size="max"]');
+        var maxBtn = builderScope.querySelector('[data-qb-action="set-size"][data-size="max"]');
         if (maxBtn) maxBtn.disabled = count === 0;
 
         // Disable start if no questions match OR if mode/set-size not chosen
@@ -401,21 +297,22 @@ var QuizBank = (function () {
     }
 
     function _getBuilderFilters() {
+        var builderScope = document.getElementById('qb-builder-overlay') || _root;
         var chapters = [];
         var topics = [];
         var difficulties = [];
         var types = [];
 
-        _root.querySelectorAll('#qb-chapter-chips .qb-chip--active').forEach(function (el) {
+        builderScope.querySelectorAll('#qb-chapter-chips .qb-chip--active').forEach(function (el) {
             chapters.push(el.dataset.chipValue);
         });
-        _root.querySelectorAll('#qb-topic-chips .qb-chip--active').forEach(function (el) {
+        builderScope.querySelectorAll('#qb-topic-chips .qb-chip--active').forEach(function (el) {
             topics.push(el.dataset.chipValue);
         });
-        _root.querySelectorAll('#qb-difficulty-chips .qb-chip--active').forEach(function (el) {
+        builderScope.querySelectorAll('#qb-difficulty-chips .qb-chip--active').forEach(function (el) {
             difficulties.push(el.dataset.chipValue);
         });
-        _root.querySelectorAll('#qb-type-chips .qb-chip--active').forEach(function (el) {
+        builderScope.querySelectorAll('#qb-type-chips .qb-chip--active').forEach(function (el) {
             types.push(el.dataset.chipValue);
         });
 
@@ -423,11 +320,12 @@ var QuizBank = (function () {
     }
 
     function _updateTopicChips() {
+        var builderScope = document.getElementById('qb-builder-overlay') || _root;
         var container = document.getElementById('qb-topic-chips');
         if (!container) return;
 
         var selectedChapters = [];
-        _root.querySelectorAll('#qb-chapter-chips .qb-chip--active').forEach(function (el) {
+        builderScope.querySelectorAll('#qb-chapter-chips .qb-chip--active').forEach(function (el) {
             selectedChapters.push(el.dataset.chipValue);
         });
 
@@ -586,8 +484,10 @@ var QuizBank = (function () {
             optionsHtml += '</div>';
         }
 
+        var accuracyPct = answeredSoFar > 0 ? Math.round((correctSoFar / answeredSoFar) * 100) : 0;
+        var pillClass = accuracyPct >= 80 ? 'qb-accuracy-pill--good' : accuracyPct >= 60 ? 'qb-accuracy-pill--ok' : 'qb-accuracy-pill--low';
         var scoreHtml = answeredSoFar > 0
-            ? '<span class="qb-progress-score">' + correctSoFar + '/' + answeredSoFar + ' correct</span>'
+            ? '<span class="qb-accuracy-pill ' + pillClass + '">' + correctSoFar + '/' + answeredSoFar + ' <i class="fas fa-check"></i></span>'
             : '';
 
         var html = '<div class="qb-quiz-view">';
@@ -761,8 +661,13 @@ var QuizBank = (function () {
                 opt.classList.add('qb-option--disabled');
                 var input = opt.querySelector('input');
                 var val = input ? input.value : '';
-                if (val === q.correct) opt.classList.add('qb-option--correct');
-                else if (val === userAnswer) opt.classList.add('qb-option--incorrect');
+                if (val === q.correct) {
+                    opt.classList.add('qb-option--correct');
+                    opt.classList.add('qb-option--animate-correct');
+                } else if (val === userAnswer) {
+                    opt.classList.add('qb-option--incorrect');
+                    opt.classList.add('qb-option--animate-incorrect');
+                }
                 opt.classList.remove('qb-option--selected');
             });
         }
@@ -1050,6 +955,13 @@ var QuizBank = (function () {
         html += '<div class="qb-perf-msg">' + _esc(perfMsg) + '</div>';
         html += '</div>';
 
+        // Mastery badge display
+        if (masteryResult) {
+            html += '<div class="qb-results-badge-row">';
+            html += _getMasteryBadgeHtml(masteryResult.newLevel);
+            html += '</div>';
+        }
+
         // Mastery update — single topic
         if (masteryResult) {
             html += _buildMasteryCard(masteryResult, _currentTopicLabel || _currentTopicId);
@@ -1064,8 +976,6 @@ var QuizBank = (function () {
             });
             html += '</div>';
         }
-
-        // Quit mid-set warning (shouldn't appear here but just in case)
 
         // Per-question breakdown
         html += '<div class="qb-results-breakdown">';
@@ -1103,18 +1013,24 @@ var QuizBank = (function () {
         });
         html += '</div>';
 
-        // Action buttons
+        // Action buttons — "Start Another Set" first
         html += '<div class="qb-results-actions">';
+        html += '<button class="qb-btn qb-btn--primary" data-qb-action="back-to-hub"><i class="fas fa-play-circle"></i> Start Another Set</button>';
         if (missedCount > 0) {
-            html += '<button class="qb-btn qb-btn--primary" data-qb-action="review-missed"><i class="fas fa-redo"></i> Review Missed (' + missedCount + ')</button>';
+            html += '<button class="qb-btn qb-btn--secondary" data-qb-action="review-missed"><i class="fas fa-redo"></i> Review Missed (' + missedCount + ')</button>';
         }
-        html += '<button class="qb-btn qb-btn--secondary" data-qb-action="back-to-hub"><i class="fas fa-th-large"></i> Back to Quiz Hub</button>';
         html += '</div>';
 
         html += '</div>';
 
         _root.innerHTML = html;
         window.scrollTo({ top: 0, behavior: 'smooth' });
+
+        // Trigger confetti and level-up modal if mastery leveled up
+        if (masteryResult && masteryResult.leveledUp) {
+            _triggerConfetti();
+            _showLevelUpModal(masteryResult);
+        }
     }
 
     // ── Update Submit Button ───────────────────────────────
@@ -1173,8 +1089,10 @@ var QuizBank = (function () {
                     _handleWeakFocus();
                     break;
                 case 'scroll-builder':
-                    var builder = document.getElementById('qb-builder');
-                    if (builder) builder.scrollIntoView({ behavior: 'smooth' });
+                    _showBuilderModal();
+                    break;
+                case 'close-builder':
+                    _closeBuilderModal();
                     break;
                 case 'toggle-chip':
                     _handleToggleChip(actionBtn);
@@ -1383,8 +1301,18 @@ var QuizBank = (function () {
     function _toggleChapter(btn) {
         var chapterEl = btn.closest('.qb-chapter');
         if (!chapterEl) return;
-        var isOpen = chapterEl.classList.toggle('qb-chapter--open');
-        btn.setAttribute('aria-expanded', isOpen);
+        var wasOpen = chapterEl.classList.contains('qb-chapter--open');
+        // Close all chapters first (accordion behavior)
+        _root.querySelectorAll('.qb-chapter--open').forEach(function (c) {
+            c.classList.remove('qb-chapter--open');
+            var header = c.querySelector('.qb-chapter-header');
+            if (header) header.setAttribute('aria-expanded', 'false');
+        });
+        // If it wasn't open, open it
+        if (!wasOpen) {
+            chapterEl.classList.add('qb-chapter--open');
+            btn.setAttribute('aria-expanded', 'true');
+        }
     }
 
     function _handleStartTopic(btn) {
@@ -1818,6 +1746,222 @@ var QuizBank = (function () {
         _shuffleAllOptions();
         window.addEventListener('beforeunload', _boundBeforeUnload);
         _renderQuestion();
+    }
+
+    // ── Builder Modal ─────────────────────────────────────
+
+    function _showBuilderModal() {
+        var isSignedIn = !!localStorage.getItem('accessToken');
+
+        // If not signed in, show subscription prompt
+        if (!isSignedIn) {
+            _showSubscriptionPrompt('sign-in');
+            return;
+        }
+
+        // Build the modal overlay
+        var overlay = document.createElement('div');
+        overlay.className = 'qb-builder-overlay';
+        overlay.id = 'qb-builder-overlay';
+
+        var html = '<div class="qb-builder-modal">';
+        html += '<div class="qb-builder-modal-header">';
+        html += '<h2 class="qb-section-title"><i class="fas fa-sliders-h"></i> Custom Quiz Builder</h2>';
+        html += '<button class="qb-builder-close" data-qb-action="close-builder"><i class="fas fa-times"></i></button>';
+        html += '</div>';
+
+        html += '<div class="qb-builder-form">';
+
+        // Chapters multi-select
+        html += '<div class="qb-builder-group">';
+        html += '<label class="qb-builder-label">Chapters</label>';
+        html += '<div class="qb-builder-chips" id="qb-chapter-chips">';
+        QUIZ_BANK_REGISTRY.chapters.forEach(function (chapter) {
+            var availCount = chapter.topics.filter(function (t) { return t.file !== null; }).length;
+            html += '<button class="qb-chip" data-qb-action="toggle-chip" data-chip-type="chapter" data-chip-value="' + _esc(chapter.id) + '"' + (availCount === 0 ? ' disabled' : '') + '>';
+            html += chapter.emoji + ' ' + _esc(chapter.label);
+            if (availCount === 0) html += ' (0)';
+            html += '</button>';
+        });
+        html += '</div>';
+        html += '</div>';
+
+        // Topics within selected chapters
+        html += '<div class="qb-builder-group">';
+        html += '<label class="qb-builder-label">Topics <span class="qb-builder-hint">(select chapters first)</span></label>';
+        html += '<div class="qb-builder-chips" id="qb-topic-chips">';
+        html += '<div class="qb-builder-placeholder">Select one or more chapters above to see available topics.</div>';
+        html += '</div>';
+        html += '</div>';
+
+        // Difficulty
+        html += '<div class="qb-builder-group">';
+        html += '<label class="qb-builder-label">Difficulty</label>';
+        html += '<div class="qb-builder-chips" id="qb-difficulty-chips">';
+        ['Knowledge', 'Application', 'Analysis'].forEach(function (d) {
+            html += '<button class="qb-chip" data-qb-action="toggle-chip" data-chip-type="difficulty" data-chip-value="' + d.toLowerCase() + '">' + d + '</button>';
+        });
+        html += '</div>';
+        html += '<div class="qb-builder-desc">Knowledge = recall facts. Application = apply concepts to a scenario. Analysis = interpret data and prioritize.</div>';
+        html += '</div>';
+
+        // Question types
+        html += '<div class="qb-builder-group">';
+        html += '<label class="qb-builder-label">Question Types</label>';
+        html += '<div class="qb-builder-chips" id="qb-type-chips">';
+        [['Single', 'single'], ['Ordering', 'ordering'], ['Matrix', 'matrix']].forEach(function (pair) {
+            html += '<button class="qb-chip" data-qb-action="toggle-chip" data-chip-type="qtype" data-chip-value="' + pair[1] + '">' + pair[0] + '</button>';
+        });
+        html += '</div>';
+        html += '<div class="qb-builder-desc">Single = pick one best answer. Ordering = arrange steps in sequence. Matrix = match findings to categories.</div>';
+        html += '</div>';
+
+        // Set size
+        html += '<div class="qb-builder-group">';
+        html += '<label class="qb-builder-label">Set Size</label>';
+        html += '<div class="qb-builder-chips" id="qb-size-chips">';
+        html += '<button class="qb-chip" data-qb-action="set-size" data-size="5" data-size-value="5" disabled>5 Questions</button>';
+        html += '<button class="qb-chip" data-qb-action="set-size" data-size="10" data-size-value="10" disabled>10 Questions</button>';
+        html += '<button class="qb-chip" data-qb-action="set-size" data-size="15" data-size-value="15" disabled>15 Questions</button>';
+        html += '<button class="qb-chip" data-qb-action="set-size" data-size="max">Max (<span id="qb-builder-max-count">0</span>)</button>';
+        html += '</div>';
+        html += '</div>';
+
+        // Toggles
+        html += '<div class="qb-builder-group">';
+        html += '<label class="qb-builder-label">Preferences</label>';
+        html += '<div class="qb-builder-toggles">';
+        html += '<label class="qb-toggle"><input type="checkbox" id="qb-pref-weak" checked> Prioritize weak topics</label>';
+        html += '<label class="qb-toggle"><input type="checkbox" id="qb-pref-unseen" checked> Unseen questions first</label>';
+        html += '</div>';
+        html += '</div>';
+
+        // Mode
+        html += '<div class="qb-builder-group">';
+        html += '<label class="qb-builder-label">Mode</label>';
+        html += '<div class="qb-builder-chips">';
+        html += '<button class="qb-chip" data-qb-action="set-mode" data-mode="practice">Practice</button>';
+        html += '<button class="qb-chip" data-qb-action="set-mode" data-mode="exam">Exam</button>';
+        html += '</div>';
+        html += '<div class="qb-builder-desc">Practice = see rationale after each question. Exam = no feedback until the end, simulates real test conditions.</div>';
+        html += '</div>';
+
+        // Match count & start
+        html += '<div class="qb-builder-footer">';
+        html += '<div class="qb-builder-count" id="qb-match-count">0 questions match</div>';
+        html += '<button class="qb-btn qb-btn--primary qb-btn--lg" data-qb-action="start-custom" disabled>Start Quiz</button>';
+        html += '</div>';
+
+        html += '</div>'; // builder-form
+        html += '</div>'; // builder-modal
+
+        overlay.innerHTML = html;
+        document.body.appendChild(overlay);
+
+        // Animate in
+        requestAnimationFrame(function () { overlay.classList.add('qb-builder-overlay--visible'); });
+
+        // Dismiss on overlay background click
+        overlay.addEventListener('click', function (e) {
+            if (e.target === overlay) _closeBuilderModal();
+        });
+
+        // Close button handler
+        var closeBtn = overlay.querySelector('.qb-builder-close');
+        if (closeBtn) {
+            closeBtn.addEventListener('click', function (e) {
+                e.stopPropagation();
+                _closeBuilderModal();
+            });
+        }
+
+        // Delegate chip/size/mode/start clicks inside the modal
+        overlay.addEventListener('click', function (e) {
+            var actionBtn = e.target.closest('[data-qb-action]');
+            if (!actionBtn) return;
+            var action = actionBtn.dataset.qbAction;
+            switch (action) {
+                case 'toggle-chip':
+                    _handleToggleChip(actionBtn);
+                    break;
+                case 'set-size':
+                    _handleSetSize(actionBtn);
+                    break;
+                case 'set-mode':
+                    _handleSetMode(actionBtn);
+                    break;
+                case 'start-custom':
+                    _closeBuilderModal();
+                    _handleStartCustom();
+                    break;
+                case 'close-builder':
+                    _closeBuilderModal();
+                    break;
+            }
+        });
+
+        // Reset builder state
+        _setSize = null;
+        _mode = null;
+
+        // Update match count
+        _updateBuilderCount();
+    }
+
+    function _closeBuilderModal() {
+        var overlay = document.getElementById('qb-builder-overlay');
+        if (overlay) {
+            overlay.classList.remove('qb-builder-overlay--visible');
+            setTimeout(function () { if (overlay.parentNode) overlay.parentNode.removeChild(overlay); }, 300);
+        }
+    }
+
+    // ── Confetti & Level-Up ───────────────────────────────
+
+    function _triggerConfetti() {
+        var container = document.createElement('div');
+        container.className = 'qb-confetti-container';
+        var colors = ['#2E86AB', '#A23B72', '#f59e0b', '#059669', '#ef4444', '#6366f1', '#14b8a6'];
+        for (var i = 0; i < 50; i++) {
+            var piece = document.createElement('div');
+            piece.className = 'qb-confetti-piece';
+            piece.style.left = Math.random() * 100 + '%';
+            piece.style.animationDelay = Math.random() * 2 + 's';
+            piece.style.animationDuration = (2 + Math.random() * 2) + 's';
+            piece.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            piece.style.width = (6 + Math.random() * 6) + 'px';
+            piece.style.height = (6 + Math.random() * 6) + 'px';
+            container.appendChild(piece);
+        }
+        document.body.appendChild(container);
+        setTimeout(function () { if (container.parentNode) container.parentNode.removeChild(container); }, 4000);
+    }
+
+    function _showLevelUpModal(mr) {
+        var overlay = document.createElement('div');
+        overlay.className = 'qb-levelup-overlay';
+        var topicLabel = _currentTopicLabel || mr.topicId || '';
+        overlay.innerHTML =
+            '<div class="qb-levelup-modal">' +
+                '<div class="qb-levelup-badge qb-badge qb-badge--' + mr.newLevel + '"></div>' +
+                '<div class="qb-levelup-text">' +
+                    '<div class="qb-levelup-title">' + _esc(topicLabel) + '</div>' +
+                    '<div class="qb-levelup-level">Level ' + mr.newLevel + ' &mdash; ' + _esc(mr.levelName) + '</div>' +
+                '</div>' +
+                '<button class="qb-btn qb-btn--primary" data-qb-levelup-dismiss>Continue</button>' +
+            '</div>';
+        document.body.appendChild(overlay);
+        // Animate in
+        requestAnimationFrame(function () { overlay.classList.add('qb-levelup-overlay--visible'); });
+        // Dismiss handlers
+        var dismiss = function () {
+            overlay.classList.remove('qb-levelup-overlay--visible');
+            setTimeout(function () { if (overlay.parentNode) overlay.parentNode.removeChild(overlay); }, 300);
+        };
+        overlay.querySelector('[data-qb-levelup-dismiss]').addEventListener('click', dismiss);
+        overlay.addEventListener('click', function (e) { if (e.target === overlay) dismiss(); });
+        // Auto-dismiss after 5 seconds
+        setTimeout(dismiss, 5000);
     }
 
     // ── Ordering Display ───────────────────────────────────

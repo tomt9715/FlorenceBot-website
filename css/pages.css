@@ -6924,6 +6924,47 @@ body.is-admin-user .dashboard-section-featured {
     padding-top: 8px;
 }
 
+/* Streak Flame (dashboard widget) */
+.qb-streak-flame {
+    display: inline;
+    font-size: 1.2rem;
+    vertical-align: middle;
+}
+
+.qb-streak-flame--dim {
+    color: #9ca3af;
+}
+
+.qb-streak-flame--active {
+    color: #f59e0b;
+    animation: qb-flamePulse 2s ease-in-out infinite;
+}
+
+.qb-streak-flame--hot {
+    color: #ef4444;
+    animation: qb-flamePulse 1.5s ease-in-out infinite;
+}
+
+.qb-streak-flame--blazing {
+    background: linear-gradient(135deg, #3b82f6, #93c5fd, #ffffff, #93c5fd, #3b82f6);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: qb-flameShimmer 2s ease-in-out infinite;
+}
+
+@keyframes qb-flamePulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.7; transform: scale(1.15); }
+}
+
+@keyframes qb-flameShimmer {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
 @media (max-width: 768px) {
     .qb-stats-row {
         grid-template-columns: repeat(3, 1fr);
