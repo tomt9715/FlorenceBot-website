@@ -64,8 +64,9 @@ var QuizBank = (function () {
         window.removeEventListener('beforeunload', _boundBeforeUnload);
         window.scrollTo({ top: 0 });
 
+        var isSignedIn = !!localStorage.getItem('accessToken');
         var stats = MasteryTracker.getOverallStats();
-        var hasData = stats.totalSetsCompleted > 0;
+        var hasData = isSignedIn && stats.totalSetsCompleted > 0;
         var totalTopics = _countTotalTopics();
         var chaptersInProgress = MasteryTracker.getChaptersInProgress();
         var totalAvailableQuestions = _getTotalAvailableQuestions();
@@ -76,7 +77,14 @@ var QuizBank = (function () {
         html += '<section class="qb-section qb-mastery-overview">';
         html += '<h2 class="qb-section-title"><i class="fas fa-chart-line"></i> My Mastery Overview</h2>';
 
-        if (hasData) {
+        if (!isSignedIn) {
+            html += '<div class="qb-empty-state">';
+            html += '<div class="qb-empty-icon"><i class="fas fa-user-lock"></i></div>';
+            html += '<div class="qb-empty-title">Sign in to track your mastery progress</div>';
+            html += '<div class="qb-empty-desc">Your quiz results and mastery levels will appear here once you sign in.</div>';
+            html += '<div class="qb-empty-actions"><a href="../login.html" class="btn btn-primary">Sign In</a></div>';
+            html += '</div>';
+        } else if (hasData) {
             html += '<div class="qb-stats-grid">';
             html += _statCard('fas fa-layer-group', 'Average Level', stats.averageLevel.toFixed(1), MasteryTracker.getMasteryColorClass(Math.floor(stats.averageLevel)));
             html += _statCard('fas fa-book-open', 'Chapters Started', chaptersInProgress + ' of 15', '');
@@ -165,9 +173,11 @@ var QuizBank = (function () {
             html += '<span class="qb-chapter-label">' + _esc(chapter.label) + '</span>';
             html += '<span class="qb-chapter-meta">' + totalTopicsInChapter + ' topics</span>';
 
-            if (availableTopics > 0) {
+            if (availableTopics > 0 && isSignedIn) {
                 var mastColor = MasteryTracker.getMasteryColor(Math.floor(chapterMastery.averageLevel));
                 html += '<span class="qb-chapter-mastery" style="color:' + mastColor + '">Level ' + chapterMastery.averageLevel.toFixed(1) + '</span>';
+            } else if (availableTopics > 0) {
+                html += '<span class="qb-chapter-meta">' + availableTopics + ' available</span>';
             } else {
                 html += '<span class="qb-chapter-badge qb-badge-coming-soon"><i class="fas fa-lock"></i> Coming Soon</span>';
             }
@@ -185,12 +195,14 @@ var QuizBank = (function () {
                 html += '<div class="qb-topic-info">';
                 html += '<span class="qb-topic-name">' + _esc(topic.label) + '</span>';
 
-                if (hasQuestions) {
+                if (hasQuestions && isSignedIn) {
                     var topicColor = MasteryTracker.getMasteryColor(topicMastery.level);
                     html += '<div class="qb-topic-mastery-row">';
                     html += '<div class="qb-topic-bar"><div class="qb-topic-bar-fill" style="width:' + masteryBarPct + '%;background:' + topicColor + '"></div></div>';
                     html += '<span class="qb-topic-level" style="color:' + topicColor + '">Lv ' + topicMastery.level + '</span>';
                     html += '</div>';
+                } else if (hasQuestions) {
+                    html += '<span class="qb-topic-coming-soon" style="color: var(--text-muted, #999)"><i class="fas fa-question-circle"></i> Sign in to track</span>';
                 } else {
                     html += '<span class="qb-topic-coming-soon"><i class="fas fa-lock"></i> Coming Soon</span>';
                 }
