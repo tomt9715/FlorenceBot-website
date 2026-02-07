@@ -434,6 +434,63 @@ var QuizBank = (function () {
     function _startQuiz(questions, topicId, topicLabel, chapterId, mode, setSize) {
         if (!questions || questions.length === 0) return;
 
+        // Subscription gate: check if user has active subscription
+        var token = localStorage.getItem('accessToken');
+        if (!token) {
+            _showSubscriptionPrompt('sign-in');
+            return;
+        }
+
+        // Check subscription status asynchronously
+        if (typeof checkSubscriptionStatus === 'function') {
+            checkSubscriptionStatus().then(function (sub) {
+                if (sub && sub.is_active) {
+                    _doStartQuiz(questions, topicId, topicLabel, chapterId, mode, setSize);
+                } else {
+                    _showSubscriptionPrompt('subscribe');
+                }
+            }).catch(function () {
+                // On error, allow quiz to proceed (graceful degradation)
+                _doStartQuiz(questions, topicId, topicLabel, chapterId, mode, setSize);
+            });
+        } else {
+            // If checkSubscriptionStatus not available, proceed
+            _doStartQuiz(questions, topicId, topicLabel, chapterId, mode, setSize);
+        }
+    }
+
+    function _showSubscriptionPrompt(type) {
+        var title = type === 'sign-in' ? 'Sign In Required' : 'Subscription Required';
+        var message = type === 'sign-in'
+            ? 'Please sign in to access the Quiz Bank.'
+            : 'An active subscription is required to practice quiz questions. Browse the full quiz library for free!';
+        var btnText = type === 'sign-in' ? 'Sign In' : 'View Plans';
+        var btnHref = type === 'sign-in' ? '../login.html' : '../pricing.html';
+
+        var overlay = document.createElement('div');
+        overlay.className = 'qb-gate-overlay';
+        overlay.innerHTML =
+            '<div class="qb-gate-modal">' +
+                '<div class="qb-gate-icon"><i class="fas fa-' + (type === 'sign-in' ? 'sign-in-alt' : 'crown') + '"></i></div>' +
+                '<h3>' + title + '</h3>' +
+                '<p>' + message + '</p>' +
+                '<div class="qb-gate-actions">' +
+                    '<a href="' + btnHref + '" class="qb-btn qb-btn--primary">' + btnText + '</a>' +
+                    '<button class="qb-btn qb-btn--secondary qb-gate-close">Continue Browsing</button>' +
+                '</div>' +
+            '</div>';
+
+        overlay.querySelector('.qb-gate-close').addEventListener('click', function () {
+            overlay.remove();
+        });
+        overlay.addEventListener('click', function (e) {
+            if (e.target === overlay) overlay.remove();
+        });
+
+        document.body.appendChild(overlay);
+    }
+
+    function _doStartQuiz(questions, topicId, topicLabel, chapterId, mode, setSize) {
         _view = 'quiz';
         _mode = mode || 'practice';
         var effectiveSize = (setSize === 'max' || !setSize) ? questions.length : Math.min(setSize, questions.length);
