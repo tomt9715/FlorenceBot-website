@@ -87,8 +87,8 @@ var QUIZ_BANK_REGISTRY = {
             label: "Musculoskeletal",
             emoji: "\ud83e\uddb4",
             topics: [
-                { id: "fractures", label: "Fractures", file: null, hasGuide: true, guideUrl: "fractures.html" },
-                { id: "hip-knee-replacement", label: "Hip & Knee Replacement", file: null, hasGuide: true, guideUrl: "hip-knee-replacement.html" },
+                { id: "fractures", label: "Fractures", file: "musculoskeletal/fractures.js", hasGuide: true, guideUrl: "fractures.html" },
+                { id: "hip-knee-replacement", label: "Hip & Knee Replacement", file: "musculoskeletal/hip-knee.js", hasGuide: true, guideUrl: "hip-knee-replacement.html" },
                 { id: "osteoporosis", label: "Osteoporosis", file: null, hasGuide: false },
                 { id: "ra-vs-oa", label: "RA vs Osteoarthritis", file: null, hasGuide: false },
                 { id: "amputation", label: "Amputation", file: null, hasGuide: false },
