@@ -1059,29 +1059,8 @@
 .profile-pic--lg { width: 64px; height: 64px; }
 .profile-pic--xl { width: 96px; height: 96px; }
 
-/* Nav avatar override — replace the initial-letter circle with image */
-.user-avatar:has(.profile-pic) {
-    background: var(--background-light, #f0f0f0);
-}
-.user-avatar .profile-pic {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    object-fit: cover;
-}
-.user-avatar-large:has(.profile-pic) {
-    background: var(--background-light, #f0f0f0);
-}
-.user-avatar-large .profile-pic {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    object-fit: cover;
-}
-[data-theme="dark"] .user-avatar:has(.profile-pic),
-[data-theme="dark"] .user-avatar-large:has(.profile-pic) {
-    background: var(--card-bg, #2a2a2a);
-}
+/* Nav avatar overrides are placed after .user-avatar / .user-avatar-large
+   definitions below (search "PROFILE PIC AVATAR OVERRIDES") to win cascade */
 
 [data-theme="dark"] .profile-pic {
     background: var(--card-bg, #2a2a2a);
@@ -1202,6 +1181,34 @@
     font-size: 1.8rem;
     flex-shrink: 0;
     overflow: hidden;
+}
+
+/* --- PROFILE PIC AVATAR OVERRIDES ---
+   Must come AFTER .user-avatar / .user-avatar-large to win the cascade */
+.user-avatar:has(.profile-pic) {
+    background: var(--background-light, #f0f0f0);
+    border-color: var(--border-color, #ddd);
+}
+.user-avatar .profile-pic {
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+    flex-shrink: 1;
+    object-fit: cover;
+}
+.user-avatar-large:has(.profile-pic) {
+    background: var(--background-light, #f0f0f0);
+}
+.user-avatar-large .profile-pic {
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+    flex-shrink: 1;
+    object-fit: cover;
+}
+[data-theme="dark"] .user-avatar:has(.profile-pic),
+[data-theme="dark"] .user-avatar-large:has(.profile-pic) {
+    background: var(--card-bg, #2a2a2a);
 }
 
 .user-info {
