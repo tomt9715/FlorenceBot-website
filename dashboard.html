@@ -61,6 +61,7 @@
             <div class="nav-links">
                 <a href="index.html">Home</a>
                 <a href="resources.html">Resources</a>
+                <a href="quiz-bank/quiz-bank.html">Quiz Bank</a>
                 <a href="pricing.html">Pricing</a>
                 <a href="about.html">About</a>
                 <a href="about-florencebot.html">About FlorenceBot</a>
@@ -270,6 +271,71 @@
                     </div>
                 </section>
 
+                <!-- Quiz Bank Mastery Section -->
+                <section class="dashboard-section" id="quiz-bank-dashboard-section" style="grid-column: 1 / -1; display: none;">
+                    <div class="section-header-enhanced">
+                        <h2><i class="fas fa-brain"></i> Quiz Bank Mastery</h2>
+                        <div class="section-actions">
+                            <button class="btn btn-secondary" id="qb-continue-btn" data-navigate="quiz-bank/quiz-bank.html">
+                                <i class="fas fa-play"></i> Continue Practicing
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Empty State (no mastery data yet) -->
+                    <div id="qb-empty-state" style="display: none; text-align: center; padding: 40px 20px;">
+                        <div style="font-size: 48px; margin-bottom: 16px; opacity: 0.3;"><i class="fas fa-brain"></i></div>
+                        <h3 style="margin-bottom: 8px;">Track Your Mastery</h3>
+                        <p style="opacity: 0.7; margin-bottom: 20px;">Start your first quiz to see your progress here.</p>
+                        <button class="btn btn-primary" data-navigate="quiz-bank/quiz-bank.html">
+                            <i class="fas fa-rocket"></i> Start Practicing
+                        </button>
+                    </div>
+
+                    <!-- Mastery Overview (when data exists) -->
+                    <div id="qb-mastery-overview" style="display: none;">
+                        <!-- Compact Stats Row -->
+                        <div class="qb-stats-row">
+                            <div class="qb-stat-card">
+                                <div class="qb-stat-number" id="qb-avg-level">0</div>
+                                <div class="qb-stat-label">Avg Level</div>
+                            </div>
+                            <div class="qb-stat-card">
+                                <div class="qb-stat-number" id="qb-topics-practiced">0</div>
+                                <div class="qb-stat-label">Topics Practiced</div>
+                            </div>
+                            <div class="qb-stat-card">
+                                <div class="qb-stat-number" id="qb-topics-mastered">0</div>
+                                <div class="qb-stat-label">Mastered</div>
+                            </div>
+                            <div class="qb-stat-card">
+                                <div class="qb-stat-number" id="qb-total-answered">0</div>
+                                <div class="qb-stat-label">Answered</div>
+                            </div>
+                            <div class="qb-stat-card">
+                                <div class="qb-stat-number" id="qb-accuracy">0%</div>
+                                <div class="qb-stat-label">Accuracy</div>
+                            </div>
+                            <div class="qb-stat-card">
+                                <div class="qb-stat-number" id="qb-streak">0</div>
+                                <div class="qb-stat-label">Day Streak</div>
+                            </div>
+                        </div>
+
+                        <!-- Chapter Summaries -->
+                        <div id="qb-chapter-summaries" class="qb-chapter-list">
+                            <!-- Dynamically populated -->
+                        </div>
+
+                        <!-- Quick Actions -->
+                        <div class="qb-quick-actions">
+                            <button class="btn btn-secondary" id="qb-weak-spots-btn" data-navigate="quiz-bank/quiz-bank.html#weak-spots">
+                                <i class="fas fa-crosshairs"></i> Focus on Weak Spots
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
                 <!-- Account & Stats Widget -->
                 <div class="widget widget-account-enhanced">
                     <div class="widget-account-grid">
@@ -402,6 +468,7 @@
                     <ul>
                         <li><a href="index.html">Home</a></li>
                         <li><a href="resources.html">Resources</a></li>
+                        <li><a href="quiz-bank/quiz-bank.html">Quiz Bank</a></li>
                         <li><a href="pricing.html">Pricing</a></li>
                         <li><a href="about-florencebot.html">About Bot</a></li>
                         <li><a href="about.html">About Us</a></li>
@@ -455,6 +522,11 @@
 
 
     <script src="script.js?v=4.8.dashboard"></script>
-    <script src="dashboard-script.js?v=4.9.admin"></script>
+
+    <!-- Quiz Bank Mastery (registry + mastery tracker for dashboard section) -->
+    <script src="quiz-bank/data/registry.js"></script>
+    <script src="quiz-bank/mastery.js"></script>
+
+    <script src="dashboard-script.js?v=5.0.quizbank"></script>
 </body>
 </html>

@@ -393,6 +393,11 @@ async function loadUserProfile() {
         // Load accessible guides based on user subscription
         loadAccessibleGuides(user);
 
+        // Load Quiz Bank mastery section (for premium users)
+        if (user.is_premium) {
+            loadQuizBankDashboard();
+        }
+
         // Load subscription management section
         loadSubscriptionManagement();
 
@@ -2132,3 +2137,132 @@ document.addEventListener('DOMContentLoaded', function() {
         closeAdminModalBtn.addEventListener('click', closeAdminModal);
     }
 });
+
+// ==================== Quiz Bank Dashboard Section ====================
+
+function loadQuizBankDashboard() {
+    var section = document.getElementById('quiz-bank-dashboard-section');
+    if (!section) return;
+
+    // Show the section for premium users
+    section.style.display = '';
+
+    // Check if MasteryTracker is available
+    if (typeof MasteryTracker === 'undefined') {
+        console.warn('[Dashboard] MasteryTracker not loaded');
+        return;
+    }
+
+    var stats = MasteryTracker.getOverallStats();
+    var emptyState = document.getElementById('qb-empty-state');
+    var overview = document.getElementById('qb-mastery-overview');
+
+    // If no questions answered yet, show empty state
+    if (stats.totalQuestionsAnswered === 0) {
+        if (emptyState) emptyState.style.display = '';
+        if (overview) overview.style.display = 'none';
+        // Hide the "Continue Practicing" button in header
+        var continueBtn = document.getElementById('qb-continue-btn');
+        if (continueBtn) continueBtn.style.display = 'none';
+        return;
+    }
+
+    // Show mastery overview
+    if (emptyState) emptyState.style.display = 'none';
+    if (overview) overview.style.display = '';
+
+    // Populate stats
+    var avgLevelEl = document.getElementById('qb-avg-level');
+    var practicedEl = document.getElementById('qb-topics-practiced');
+    var masteredEl = document.getElementById('qb-topics-mastered');
+    var answeredEl = document.getElementById('qb-total-answered');
+    var accuracyEl = document.getElementById('qb-accuracy');
+    var streakEl = document.getElementById('qb-streak');
+
+    if (avgLevelEl) avgLevelEl.textContent = stats.averageLevel;
+    if (practicedEl) practicedEl.textContent = stats.topicsPracticed;
+    if (masteredEl) masteredEl.textContent = stats.topicsMastered;
+    if (answeredEl) answeredEl.textContent = stats.totalQuestionsAnswered;
+    if (accuracyEl) accuracyEl.textContent = stats.accuracy + '%';
+    if (streakEl) streakEl.textContent = stats.streak;
+
+    // Build chapter summaries
+    buildChapterSummaries();
+}
+
+function buildChapterSummaries() {
+    var container = document.getElementById('qb-chapter-summaries');
+    if (!container || typeof QUIZ_BANK_REGISTRY === 'undefined') return;
+
+    container.innerHTML = '';
+
+    QUIZ_BANK_REGISTRY.chapters.forEach(function (chapter) {
+        // Get topic IDs for this chapter
+        var topicIds = chapter.topics.map(function (t) { return t.id; });
+        var chapterMastery = MasteryTracker.getChapterMastery(topicIds);
+
+        // Count how many topics have been started
+        var startedCount = 0;
+        var totalWithQuestions = 0;
+        chapter.topics.forEach(function (topic) {
+            if (topic.file) {
+                totalWithQuestions++;
+                var tm = MasteryTracker.getTopicMastery(topic.id);
+                if (tm.setsCompleted > 0) startedCount++;
+            }
+        });
+
+        // Skip chapters with no questions available
+        if (totalWithQuestions === 0) return;
+
+        var row = document.createElement('div');
+        row.className = 'qb-chapter-row';
+
+        var barPercent = Math.min(100, (chapterMastery.averageLevel / 10) * 100);
+        var barColor = MasteryTracker.getMasteryColor(Math.round(chapterMastery.averageLevel));
+
+        row.innerHTML =
+            '<div class="qb-chapter-header">' +
+                '<div class="qb-chapter-info">' +
+                    '<span class="qb-chapter-emoji">' + chapter.emoji + '</span>' +
+                    '<span class="qb-chapter-name">' + chapter.label + '</span>' +
+                '</div>' +
+                '<span class="qb-chapter-meta">Level ' + chapterMastery.averageLevel.toFixed(1) +
+                    ' &middot; ' + startedCount + '/' + totalWithQuestions + ' topics</span>' +
+                '<i class="fas fa-chevron-down qb-chapter-expand-icon"></i>' +
+            '</div>' +
+            '<div class="qb-chapter-bar">' +
+                '<div class="qb-chapter-bar-fill" style="width: ' + barPercent + '%; background: ' + barColor + ';"></div>' +
+            '</div>' +
+            '<div class="qb-chapter-topics">' +
+                buildTopicRows(chapter.topics) +
+            '</div>';
+
+        // Toggle expand/collapse on click
+        row.addEventListener('click', function () {
+            var topics = row.querySelector('.qb-chapter-topics');
+            if (topics) {
+                topics.classList.toggle('expanded');
+                row.classList.toggle('expanded');
+            }
+        });
+
+        container.appendChild(row);
+    });
+}
+
+function buildTopicRows(topics) {
+    var html = '';
+    topics.forEach(function (topic) {
+        if (!topic.file) return; // Skip topics without questions
+        var tm = MasteryTracker.getTopicMastery(topic.id);
+        var levelName = MasteryTracker.LEVEL_NAMES[tm.level] || 'Starting';
+        var colorClass = MasteryTracker.getMasteryColorClass(tm.level);
+        html +=
+            '<div class="qb-topic-row">' +
+                '<span class="qb-topic-name">' + topic.label + '</span>' +
+                '<span class="qb-topic-level ' + colorClass + '">Lv ' + tm.level + ' &middot; ' + levelName + '</span>' +
+            '</div>';
+    });
+    return html;
+}
