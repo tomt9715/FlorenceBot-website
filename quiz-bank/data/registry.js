@@ -53,7 +53,7 @@ var QUIZ_BANK_REGISTRY = {
             label: "Neurological",
             emoji: "\ud83e\udde0",
             topics: [
-                { id: "stroke", label: "Stroke", file: null, hasGuide: true, guideUrl: "stroke.html" },
+                { id: "stroke", label: "Stroke", file: "neurological/stroke.js", hasGuide: true, guideUrl: "stroke.html" },
                 { id: "seizures", label: "Seizures / Epilepsy", file: null, hasGuide: false },
                 { id: "tbi-icp", label: "TBI / Increased ICP", file: null, hasGuide: false },
                 { id: "spinal-cord-injury", label: "Spinal Cord Injury", file: null, hasGuide: false },
@@ -70,7 +70,7 @@ var QUIZ_BANK_REGISTRY = {
             label: "Gastrointestinal",
             emoji: "\ud83d\udd2c",
             topics: [
-                { id: "gi-bleeding", label: "GI Bleeding", file: null, hasGuide: true, guideUrl: "gi-bleeding.html" },
+                { id: "gi-bleeding", label: "GI Bleeding", file: "gi/gi-bleeding.js", hasGuide: true, guideUrl: "gi-bleeding.html" },
                 { id: "cirrhosis", label: "Liver Cirrhosis / Hepatic Failure", file: null, hasGuide: false },
                 { id: "crohns-uc", label: "Crohn's vs Ulcerative Colitis", file: null, hasGuide: false },
                 { id: "pud-gerd", label: "Peptic Ulcer Disease / GERD", file: null, hasGuide: false },
@@ -194,7 +194,7 @@ var QUIZ_BANK_REGISTRY = {
             label: "Fundamentals",
             emoji: "\ud83d\udccb",
             topics: [
-                { id: "assessment-skills", label: "Assessment Skills", file: null, hasGuide: true, guideUrl: "assessment-skills.html" },
+                { id: "assessment-skills", label: "Assessment Skills", file: "fundamentals/assessment-skills.js", hasGuide: true, guideUrl: "assessment-skills.html" },
                 { id: "infection-control", label: "Infection Control", file: null, hasGuide: false },
                 { id: "iv-transfusions", label: "IV Therapy & Blood Transfusions", file: null, hasGuide: false },
                 { id: "delegation", label: "Delegation & Prioritization", file: null, hasGuide: false },
