@@ -774,7 +774,11 @@ var QuizBank = (function () {
         // Rationale
         if (q.rationale && q.rationale.correct) {
             html += '<div class="qb-feedback-section">';
-            html += '<div class="qb-feedback-label">Why ' + (isCorrect ? 'this is correct' : 'the correct answer is right') + '</div>';
+            var rationaleLabel = isCorrect ? 'Why this is correct'
+                : q.type === 'matrix' ? 'Explanation'
+                : q.type === 'ordering' ? 'Why this is the correct order'
+                : 'Why the correct answer is right';
+            html += '<div class="qb-feedback-label">' + rationaleLabel + '</div>';
             html += '<div class="qb-feedback-text">' + _esc(q.rationale.correct) + '</div>';
             html += '</div>';
         }
