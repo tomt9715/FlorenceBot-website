@@ -199,6 +199,15 @@ async function handleProfileUpdate(e) {
         // Update local storage
         localStorage.setItem('user', JSON.stringify(data.user));
 
+        // Update hero name
+        var heroName = document.getElementById('settings-hero-name');
+        if (heroName) {
+            var displayName = '';
+            if (data.user.first_name) displayName = data.user.first_name;
+            if (data.user.last_name) displayName += ' ' + data.user.last_name;
+            heroName.textContent = displayName.trim() || 'Your Name';
+        }
+
         // Show success message
         showSuccess('Profile updated successfully!');
 
@@ -540,6 +549,20 @@ function initProfilePicture(user) {
     updateProfilePicPreview(currentProfilePicture);
     populateIconGrid();
     setupProfilePicListeners();
+
+    // Populate hero name + email
+    var heroName = document.getElementById('settings-hero-name');
+    var heroEmail = document.getElementById('settings-hero-email');
+    if (heroName) {
+        var displayName = '';
+        if (user.first_name) displayName = user.first_name;
+        if (user.last_name) displayName += ' ' + user.last_name;
+        displayName = displayName.trim();
+        heroName.textContent = displayName || 'Your Name';
+    }
+    if (heroEmail) {
+        heroEmail.textContent = user.email || '';
+    }
 }
 
 function updateProfilePicPreview(value) {
@@ -681,6 +704,20 @@ async function handleProfilePicUpload(file) {
 }
 
 function setupProfilePicListeners() {
+    // Click on hero avatar → open icon picker modal
+    var avatarWrapper = document.getElementById('settings-avatar-wrapper');
+    if (avatarWrapper) {
+        avatarWrapper.addEventListener('click', function() {
+            document.getElementById('icon-picker-overlay').style.display = 'flex';
+        });
+        avatarWrapper.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                document.getElementById('icon-picker-overlay').style.display = 'flex';
+            }
+        });
+    }
+
     // "Choose Icon" button → open modal
     var chooseBtn = document.getElementById('choose-icon-btn');
     if (chooseBtn) {

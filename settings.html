@@ -35,7 +35,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
-        /* Fix form input readability */
+        /* ── Form Inputs ──────────────────────────────── */
         .form-control,
         input[type="text"],
         input[type="email"],
@@ -67,7 +67,7 @@
             opacity: 0.7 !important;
         }
 
-        /* Fix button styling */
+        /* ── Buttons ──────────────────────────────────── */
         .btn-primary {
             background: linear-gradient(135deg, #2E86AB, #A23B72) !important;
             color: white !important;
@@ -87,7 +87,7 @@
             box-shadow: 0 8px 20px rgba(46, 134, 171, 0.3) !important;
         }
 
-        /* Toggle Switch */
+        /* ── Toggle Switch ────────────────────────────── */
         .toggle-switch {
             position: relative;
             display: inline-block;
@@ -96,35 +96,20 @@
             flex-shrink: 0;
         }
 
-        .toggle-switch input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
+        .toggle-switch input { opacity: 0; width: 0; height: 0; }
 
         .toggle-slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
+            position: absolute; cursor: pointer;
+            top: 0; left: 0; right: 0; bottom: 0;
             background-color: var(--border-color, #ccc);
-            transition: 0.3s;
-            border-radius: 28px;
+            transition: 0.3s; border-radius: 28px;
         }
 
         .toggle-slider:before {
-            position: absolute;
-            content: "";
-            height: 22px;
-            width: 22px;
-            left: 3px;
-            bottom: 3px;
-            background-color: white;
-            transition: 0.3s;
-            border-radius: 50%;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            position: absolute; content: "";
+            height: 22px; width: 22px; left: 3px; bottom: 3px;
+            background-color: white; transition: 0.3s;
+            border-radius: 50%; box-shadow: 0 2px 4px rgba(0,0,0,0.2);
         }
 
         .toggle-switch input:checked + .toggle-slider {
@@ -139,26 +124,277 @@
             box-shadow: 0 0 0 3px rgba(46, 134, 171, 0.2);
         }
 
-        /* ── Profile Picture Editor ──────────────────── */
-        .profile-pic-editor {
-            display: flex;
-            align-items: center;
-            gap: 24px;
-            margin-bottom: 24px;
+        /* ══════════════════════════════════════════════
+           SETTINGS PROFILE HERO
+           ══════════════════════════════════════════════ */
+        .settings-hero {
+            background: linear-gradient(135deg, rgba(46, 134, 171, 0.06) 0%, rgba(162, 59, 114, 0.06) 100%);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 40px 32px 32px;
+            text-align: center;
+            margin-bottom: 32px;
         }
 
-        .profile-pic-current .profile-pic--xl {
-            width: 96px;
-            height: 96px;
-            border: 3px solid var(--border-color, #e0e0e0);
+        [data-theme="dark"] .settings-hero {
+            background: linear-gradient(135deg, rgba(46, 134, 171, 0.1) 0%, rgba(162, 59, 114, 0.1) 100%);
+        }
+
+        /* Avatar wrapper — clickable, with hover overlay */
+        .settings-avatar-wrapper {
+            position: relative;
+            width: 128px;
+            height: 128px;
+            margin: 0 auto 16px;
             border-radius: 50%;
-            object-fit: cover;
+            cursor: pointer;
+            overflow: hidden;
+            border: 4px solid var(--primary-color, #2E86AB);
+            background: var(--background-light, #f0f0f0);
+            transition: border-color 0.3s ease;
         }
 
-        .profile-pic-actions {
+        .settings-avatar-wrapper:hover {
+            border-color: var(--secondary-color, #A23B72);
+        }
+
+        .settings-avatar-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .settings-avatar-overlay {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
             display: flex;
             flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            opacity: 0;
+            transition: opacity 0.25s ease;
+        }
+
+        .settings-avatar-wrapper:hover .settings-avatar-overlay,
+        .settings-avatar-wrapper:focus .settings-avatar-overlay {
+            opacity: 1;
+        }
+
+        .settings-avatar-overlay i {
+            font-size: 22px;
+            color: white;
+        }
+
+        .settings-avatar-overlay span {
+            font-size: 12px;
+            font-weight: 600;
+            color: white;
+            letter-spacing: 0.5px;
+        }
+
+        .settings-hero-name {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+
+        .settings-hero-email {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .settings-hero-actions {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        /* ── Section Group Labels ─────────────────────── */
+        .settings-section-label {
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--text-light, #9ca3af);
+            margin-bottom: 12px;
+            padding-left: 4px;
+        }
+
+        /* ── Card Enhancements ────────────────────────── */
+        .settings-card {
+            background: var(--card-bg, #fff);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 28px 32px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+            transition: box-shadow 0.3s ease;
+        }
+
+        .settings-card:hover {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .settings-card-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 6px;
+        }
+
+        .settings-card-header i {
+            font-size: 1.1rem;
+            color: var(--primary-color, #2E86AB);
+            width: 20px;
+            text-align: center;
+        }
+
+        .settings-card-header h3 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin: 0;
+        }
+
+        .settings-card-desc {
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+            padding-left: 32px;
+        }
+
+        /* ── Setting Rows (notifications, connections) ── */
+        .setting-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px;
+            background: var(--background-light);
+            border-radius: 12px;
+            margin-bottom: 10px;
+            transition: background 0.2s ease;
+        }
+
+        .setting-row:last-child { margin-bottom: 0; }
+
+        .setting-row:hover { background: var(--background-light); }
+
+        .setting-row-info { flex: 1; min-width: 0; }
+
+        .setting-row-title {
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+        }
+
+        .setting-row-desc {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-top: 2px;
+        }
+
+        .setting-row-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex: 1;
+            min-width: 0;
+        }
+
+        .setting-row-icon {
+            font-size: 22px;
+            flex-shrink: 0;
+        }
+
+        /* ── Danger Zone ──────────────────────────────── */
+        .settings-card--danger {
+            border: 2px solid #fecaca;
+        }
+
+        .settings-card--danger .settings-card-header i {
+            color: #dc2626;
+        }
+
+        .settings-card--danger .settings-card-header h3 {
+            color: #dc2626;
+        }
+
+        .danger-zone-content {
+            padding: 20px;
+            background: #fef2f2;
+            border-radius: 12px;
+            border: 1px solid #fecaca;
+        }
+
+        [data-theme="dark"] .danger-zone-content {
+            background: rgba(220, 38, 38, 0.1);
+            border-color: rgba(220, 38, 38, 0.3);
+        }
+
+        .danger-zone-content p,
+        .danger-zone-content li {
+            color: #7f1d1d;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        [data-theme="dark"] .danger-zone-content p,
+        [data-theme="dark"] .danger-zone-content li {
+            color: #fecaca;
+        }
+
+        .danger-zone-warning {
+            padding: 12px;
+            background: #fee2e2;
+            border-radius: 8px;
+            margin-bottom: 16px;
+        }
+
+        [data-theme="dark"] .danger-zone-warning {
+            background: rgba(220, 38, 38, 0.15);
+        }
+
+        .danger-zone-warning p {
+            font-size: 0.85rem;
+            color: #991b1b;
+            margin: 0;
+        }
+
+        [data-theme="dark"] .danger-zone-warning p {
+            color: #fca5a5;
+        }
+
+        .btn-danger {
+            background: #dc2626;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
             gap: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .btn-danger:hover {
+            background: #b91c1c;
+            transform: translateY(-1px);
+        }
+
+        .btn-danger:disabled {
+            background: #fca5a5;
+            cursor: not-allowed;
+            transform: none;
         }
 
         /* ── Icon Picker Modal ───────────────────────── */
@@ -202,12 +438,9 @@
         }
 
         .icon-picker-close {
-            background: none;
-            border: none;
-            font-size: 20px;
-            cursor: pointer;
-            color: var(--text-secondary);
-            padding: 4px 8px;
+            background: none; border: none;
+            font-size: 20px; cursor: pointer;
+            color: var(--text-secondary); padding: 4px 8px;
         }
 
         .icon-picker-grid {
@@ -246,29 +479,20 @@
             border-radius: 50%;
         }
 
+        /* ── Responsive ───────────────────────────────── */
+        @media (max-width: 768px) {
+            .settings-hero { padding: 32px 20px 24px; }
+            .settings-card { padding: 24px 20px; }
+        }
+
         @media (max-width: 480px) {
-            .profile-pic-editor {
-                flex-direction: column;
-                text-align: center;
-            }
-            .profile-pic-actions {
-                flex-direction: row;
-            }
-            .icon-picker-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-        }
-
-        /* Danger Button */
-        .btn-danger:hover {
-            background: #b91c1c !important;
-            transform: translateY(-1px);
-        }
-
-        .btn-danger:disabled {
-            background: #fca5a5 !important;
-            cursor: not-allowed;
-            transform: none;
+            .settings-hero { padding: 28px 16px 20px; }
+            .settings-avatar-wrapper { width: 100px; height: 100px; }
+            .settings-hero-name { font-size: 1.25rem; }
+            .settings-hero-actions { flex-direction: column; align-items: center; }
+            .settings-card { padding: 20px 16px; }
+            .setting-row { flex-direction: column; align-items: flex-start; gap: 12px; }
+            .icon-picker-grid { grid-template-columns: repeat(3, 1fr); }
         }
     </style>
     <!-- Sentry Error Tracking (load first) -->
@@ -327,47 +551,55 @@
     <!-- Settings Section -->
     <section class="dashboard" style="padding-top: 20px;">
         <div class="container" style="max-width: 900px;">
-            <div class="dashboard-header" style="margin-bottom: 40px;">
-                <h1><i class="fas fa-cog"></i> Account Settings</h1>
-                <p style="color: var(--text-secondary); margin-top: 12px;">Manage your profile, security, and preferences</p>
+
+            <!-- ═══ Profile Hero ═══ -->
+            <div class="settings-hero">
+                <div class="settings-avatar-wrapper" id="settings-avatar-wrapper" tabindex="0" role="button" aria-label="Change profile picture">
+                    <img src="assets/images/default-profile/robot.png" alt="Your profile picture" id="current-profile-img">
+                    <div class="settings-avatar-overlay">
+                        <i class="fas fa-camera"></i>
+                        <span>Change</span>
+                    </div>
+                </div>
+                <div class="settings-hero-name" id="settings-hero-name">Loading...</div>
+                <div class="settings-hero-email" id="settings-hero-email">Loading...</div>
+                <div class="settings-hero-actions">
+                    <button type="button" class="btn-small secondary" id="choose-icon-btn">
+                        <i class="fas fa-icons"></i> Choose Icon
+                    </button>
+                    <button type="button" class="btn-small secondary" id="upload-photo-btn">
+                        <i class="fas fa-camera"></i> Upload Photo
+                    </button>
+                </div>
+                <input type="file" id="profile-pic-upload" accept="image/png,image/jpeg,image/webp" style="display:none;">
             </div>
 
+            <!-- Icon Picker Modal (hidden by default) -->
+            <div class="icon-picker-overlay" id="icon-picker-overlay" style="display:none;">
+                <div class="icon-picker-modal">
+                    <div class="icon-picker-header">
+                        <h4>Choose Your Icon</h4>
+                        <button type="button" class="icon-picker-close" id="icon-picker-close">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <div class="icon-picker-grid" id="icon-picker-grid">
+                        <!-- Icons populated by JS -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- ═══ Account Section ═══ -->
+            <div class="settings-section-label">Account</div>
+
             <!-- Profile Information Card -->
-            <div class="dashboard-card" style="margin-bottom: 24px;">
-                <h3><i class="fas fa-user"></i> Profile Information</h3>
-                <form id="profile-form" style="margin-top: 24px;">
-
-                    <!-- Profile Picture Section -->
-                    <div class="profile-pic-editor" id="profile-picture-section">
-                        <div class="profile-pic-current" id="profile-pic-current">
-                            <img src="assets/images/default-profile/robot.png" alt="Current profile picture" class="profile-pic profile-pic--xl" id="current-profile-img">
-                        </div>
-                        <div class="profile-pic-actions">
-                            <button type="button" class="btn-small secondary" id="choose-icon-btn">
-                                <i class="fas fa-icons"></i> Choose Icon
-                            </button>
-                            <button type="button" class="btn-small secondary" id="upload-photo-btn">
-                                <i class="fas fa-camera"></i> Upload Photo
-                            </button>
-                        </div>
-                        <input type="file" id="profile-pic-upload" accept="image/png,image/jpeg,image/webp" style="display:none;">
-                    </div>
-
-                    <!-- Icon Picker Modal (hidden by default) -->
-                    <div class="icon-picker-overlay" id="icon-picker-overlay" style="display:none;">
-                        <div class="icon-picker-modal">
-                            <div class="icon-picker-header">
-                                <h4>Choose Your Icon</h4>
-                                <button type="button" class="icon-picker-close" id="icon-picker-close">
-                                    <i class="fas fa-times"></i>
-                                </button>
-                            </div>
-                            <div class="icon-picker-grid" id="icon-picker-grid">
-                                <!-- Icons populated by JS -->
-                            </div>
-                        </div>
-                    </div>
-
+            <div class="settings-card">
+                <div class="settings-card-header">
+                    <i class="fas fa-user"></i>
+                    <h3>Profile Information</h3>
+                </div>
+                <div class="settings-card-desc">Update your name and nursing program details.</div>
+                <form id="profile-form">
                     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
                         <div class="form-group">
                             <label for="first-name" style="display: block; margin-bottom: 8px; color: var(--text-primary); font-weight: 500;">First Name</label>
@@ -404,9 +636,13 @@
             </div>
 
             <!-- Change Password Card -->
-            <div class="dashboard-card" style="margin-bottom: 24px;">
-                <h3><i class="fas fa-lock"></i> Change Password</h3>
-                <form id="password-form" style="margin-top: 24px;">
+            <div class="settings-card">
+                <div class="settings-card-header">
+                    <i class="fas fa-lock"></i>
+                    <h3>Change Password</h3>
+                </div>
+                <div class="settings-card-desc">Keep your account secure with a strong password.</div>
+                <form id="password-form">
                     <div class="form-group">
                         <label for="current-password" style="display: block; margin-bottom: 8px; color: var(--text-primary); font-weight: 500;">Current Password</label>
                         <input type="password" id="current-password" class="form-control" required>
@@ -430,35 +666,41 @@
                 </form>
             </div>
 
+            <!-- ═══ Preferences Section ═══ -->
+            <div class="settings-section-label" style="margin-top: 32px;">Preferences</div>
+
             <!-- Notification Preferences Card -->
-            <div class="dashboard-card" style="margin-bottom: 24px;">
-                <h3><i class="fas fa-bell"></i> Email Notifications</h3>
-                <p style="color: var(--text-secondary); margin-top: 8px; margin-bottom: 24px;">Choose which emails you'd like to receive. Order confirmations and security alerts will always be sent.</p>
-                <div id="notification-preferences" style="display: flex; flex-direction: column; gap: 16px;">
-                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 16px; background: var(--background-light); border-radius: 12px;">
-                        <div>
-                            <div style="font-weight: 600; color: var(--text-primary);">New Study Guides</div>
-                            <div style="font-size: 0.9rem; color: var(--text-secondary);">Get notified when new study guides are released</div>
+            <div class="settings-card">
+                <div class="settings-card-header">
+                    <i class="fas fa-bell"></i>
+                    <h3>Email Notifications</h3>
+                </div>
+                <div class="settings-card-desc">Choose which emails you'd like to receive. Order confirmations and security alerts will always be sent.</div>
+                <div id="notification-preferences">
+                    <div class="setting-row">
+                        <div class="setting-row-info">
+                            <div class="setting-row-title">New Study Guides</div>
+                            <div class="setting-row-desc">Get notified when new study guides are released</div>
                         </div>
                         <label class="toggle-switch">
                             <input type="checkbox" id="pref-new-guides" checked>
                             <span class="toggle-slider"></span>
                         </label>
                     </div>
-                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 16px; background: var(--background-light); border-radius: 12px;">
-                        <div>
-                            <div style="font-weight: 600; color: var(--text-primary);">Promotions & Discounts</div>
-                            <div style="font-size: 0.9rem; color: var(--text-secondary);">Receive exclusive deals and discount codes</div>
+                    <div class="setting-row">
+                        <div class="setting-row-info">
+                            <div class="setting-row-title">Promotions & Discounts</div>
+                            <div class="setting-row-desc">Receive exclusive deals and discount codes</div>
                         </div>
                         <label class="toggle-switch">
                             <input type="checkbox" id="pref-promotions" checked>
                             <span class="toggle-slider"></span>
                         </label>
                     </div>
-                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 16px; background: var(--background-light); border-radius: 12px;">
-                        <div>
-                            <div style="font-weight: 600; color: var(--text-primary);">Marketing & Updates</div>
-                            <div style="font-size: 0.9rem; color: var(--text-secondary);">Tips, study resources, and community updates</div>
+                    <div class="setting-row">
+                        <div class="setting-row-info">
+                            <div class="setting-row-title">Marketing & Updates</div>
+                            <div class="setting-row-desc">Tips, study resources, and community updates</div>
                         </div>
                         <label class="toggle-switch">
                             <input type="checkbox" id="pref-marketing" checked>
@@ -470,60 +712,67 @@
             </div>
 
             <!-- Connected Accounts Card -->
-            <div class="dashboard-card">
-                <h3><i class="fas fa-link"></i> Connected Accounts</h3>
-                <div style="margin-top: 24px;">
-                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 16px; background: var(--background-light); border-radius: 12px; margin-bottom: 12px;">
-                        <div style="display: flex; align-items: center; gap: 12px;">
-                            <i class="fab fa-discord" style="font-size: 24px; color: #5865F2;"></i>
-                            <div>
-                                <div style="font-weight: 600; color: var(--text-primary);">Discord</div>
-                                <div style="font-size: 0.9rem; color: var(--text-secondary);" id="discord-connection-status">Not connected</div>
-                            </div>
+            <div class="settings-card">
+                <div class="settings-card-header">
+                    <i class="fas fa-link"></i>
+                    <h3>Connected Accounts</h3>
+                </div>
+                <div class="settings-card-desc">Link your accounts for easier sign-in.</div>
+                <div class="setting-row">
+                    <div class="setting-row-left">
+                        <i class="fab fa-discord setting-row-icon" style="color: #5865F2;"></i>
+                        <div class="setting-row-info">
+                            <div class="setting-row-title">Discord</div>
+                            <div class="setting-row-desc" id="discord-connection-status">Not connected</div>
                         </div>
-                        <button class="btn-small secondary" id="discord-connect-btn">
-                            <i class="fab fa-discord"></i> Connect
-                        </button>
                     </div>
-                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 16px; background: var(--background-light); border-radius: 12px; margin-bottom: 12px;">
-                        <div style="display: flex; align-items: center; gap: 12px;">
-                            <i class="fab fa-google" style="font-size: 24px; color: #DB4437;"></i>
-                            <div>
-                                <div style="font-weight: 600; color: var(--text-primary);">Google</div>
-                                <div style="font-size: 0.9rem; color: var(--text-secondary);" id="google-connection-status">Not connected</div>
-                            </div>
+                    <button class="btn-small secondary" id="discord-connect-btn">
+                        <i class="fab fa-discord"></i> Connect
+                    </button>
+                </div>
+                <div class="setting-row">
+                    <div class="setting-row-left">
+                        <i class="fab fa-google setting-row-icon" style="color: #DB4437;"></i>
+                        <div class="setting-row-info">
+                            <div class="setting-row-title">Google</div>
+                            <div class="setting-row-desc" id="google-connection-status">Not connected</div>
                         </div>
-                        <button class="btn-small secondary" id="google-connect-btn">
-                            <i class="fab fa-google"></i> Connect
-                        </button>
                     </div>
+                    <button class="btn-small secondary" id="google-connect-btn">
+                        <i class="fab fa-google"></i> Connect
+                    </button>
                 </div>
             </div>
 
+            <!-- ═══ Danger Zone ═══ -->
+            <div class="settings-section-label" style="margin-top: 32px; color: #ef4444;">Danger Zone</div>
+
             <!-- Delete Account Card -->
-            <div class="dashboard-card" style="margin-top: 24px; border: 2px solid #fecaca;">
-                <h3 style="color: #dc2626;"><i class="fas fa-exclamation-triangle"></i> Danger Zone</h3>
-                <div style="margin-top: 24px;">
-                    <div style="padding: 20px; background: #fef2f2; border-radius: 12px; border: 1px solid #fecaca;">
-                        <div style="font-weight: 600; color: #dc2626; margin-bottom: 8px;">Delete Your Account</div>
-                        <p style="font-size: 0.9rem; color: #7f1d1d; margin-bottom: 16px; line-height: 1.6;">
-                            This action is <strong>permanent and cannot be undone</strong>. Deleting your account will:
+            <div class="settings-card settings-card--danger">
+                <div class="settings-card-header">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <h3>Delete Account</h3>
+                </div>
+                <div class="settings-card-desc" style="color: var(--text-secondary);">Permanently remove your account and all associated data.</div>
+                <div class="danger-zone-content">
+                    <p style="font-weight: 600; color: #dc2626; margin-bottom: 8px;">Delete Your Account</p>
+                    <p style="margin-bottom: 16px;">
+                        This action is <strong>permanent and cannot be undone</strong>. Deleting your account will:
+                    </p>
+                    <ul style="padding-left: 20px; line-height: 1.8; margin-bottom: 16px;">
+                        <li>Remove all your profile information</li>
+                        <li>Cancel your subscription and revoke access to <strong>all study guides</strong></li>
+                        <li>Delete your subscription history and download records</li>
+                        <li>Remove any connected accounts (Discord, Google)</li>
+                    </ul>
+                    <div class="danger-zone-warning">
+                        <p>
+                            <i class="fas fa-info-circle"></i> <strong>Important:</strong> Make sure to download any guides before deleting your account. You will lose access to all guides immediately upon deletion.
                         </p>
-                        <ul style="font-size: 0.9rem; color: #7f1d1d; margin-bottom: 16px; padding-left: 20px; line-height: 1.8;">
-                            <li>Remove all your profile information</li>
-                            <li>Cancel your subscription and revoke access to <strong>all study guides</strong></li>
-                            <li>Delete your subscription history and download records</li>
-                            <li>Remove any connected accounts (Discord, Google)</li>
-                        </ul>
-                        <div style="padding: 12px; background: #fee2e2; border-radius: 8px; margin-bottom: 16px;">
-                            <p style="font-size: 0.85rem; color: #991b1b; margin: 0;">
-                                <i class="fas fa-info-circle"></i> <strong>Important:</strong> Make sure to download any guides before deleting your account. You will lose access to all guides immediately upon deletion.
-                            </p>
-                        </div>
-                        <button class="btn-danger" id="delete-account-btn" style="background: #dc2626; color: white; border: none; padding: 12px 24px; border-radius: 8px; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; transition: all 0.2s ease;">
-                            <i class="fas fa-trash-alt"></i> Delete My Account
-                        </button>
                     </div>
+                    <button class="btn-danger" id="delete-account-btn">
+                        <i class="fas fa-trash-alt"></i> Delete My Account
+                    </button>
                 </div>
             </div>
 
