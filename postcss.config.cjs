@@ -63,6 +63,8 @@ module.exports = {
           /^pricing-hero/,
           /^florencebot-hero/,
           /^hero-/,
+          // Profile pictures (dynamically rendered via JS)
+          /^profile-pic/,
         ],
         greedy: [],
       },
