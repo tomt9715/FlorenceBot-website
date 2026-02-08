@@ -799,26 +799,14 @@ var QuizBank = (function () {
                 });
             }
 
-            // Hide submit button
-            var actions = _root.querySelector('.qb-actions');
-            if (actions) actions.innerHTML = '';
-
-            // Show brief "Answer recorded" confirmation
-            var feedbackArea = document.getElementById('qb-feedback-area');
-            if (feedbackArea) {
-                feedbackArea.innerHTML = '<div class="qb-exam-recorded"><i class="fas fa-check-circle"></i> Answer recorded</div>';
-            }
-
-            // Auto-advance after a short delay
+            // Immediately advance to next question (no feedback in exam mode)
             var isLast = _currentIndex >= _currentQuestions.length - 1;
-            setTimeout(function () {
-                if (isLast) {
-                    _showResults();
-                } else {
-                    _currentIndex++;
-                    _renderQuestion();
-                }
-            }, 600);
+            if (isLast) {
+                _showResults();
+            } else {
+                _currentIndex++;
+                _renderQuestion();
+            }
             return;
         }
 
