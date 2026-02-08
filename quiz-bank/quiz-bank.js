@@ -1000,7 +1000,6 @@ var QuizBank = (function () {
         var thresholds = MasteryTracker.LEVEL_THRESHOLDS;
         var levelNames = MasteryTracker.LEVEL_NAMES;
         var color = MasteryTracker.getMasteryColor(mr.newLevel);
-        var nextLevelName = levelNames[mr.newLevel + 1] || null;
 
         // Calculate progress within current level
         var currentLevelPts = thresholds[mr.newLevel] || 0;
@@ -1009,8 +1008,23 @@ var QuizBank = (function () {
         var progressInLevel = mr.newPoints - currentLevelPts;
         var progressPct = mr.newLevel >= 10 ? 100 : (levelRange > 0 ? Math.min(100, Math.round((progressInLevel / levelRange) * 100)) : 0);
 
+        // Calculate the STARTING width (before points were earned) for animation
+        var startPct = 0;
+        if (mr.pointsEarned > 0 && mr.newLevel < 10) {
+            if (mr.leveledUp) {
+                // Leveled up: bar was full (100%) at the OLD level, now show from 0 at new level
+                startPct = 0;
+            } else {
+                var startProgress = progressInLevel - mr.pointsEarned;
+                startPct = levelRange > 0 ? Math.max(0, Math.round((startProgress / levelRange) * 100)) : 0;
+            }
+        }
+
+        // Unique ID for this card so we can animate it
+        var cardId = 'mastery-card-' + (mr.topicId || topicLabel).replace(/[^a-zA-Z0-9]/g, '-');
+
         var h = '';
-        h += '<div class="qb-mastery-card' + (mr.leveledUp ? ' qb-mastery-card--leveled' : '') + '">';
+        h += '<div class="qb-mastery-card' + (mr.leveledUp ? ' qb-mastery-card--leveled' : '') + '" id="' + cardId + '">';
 
         // Level-up celebration banner
         if (mr.leveledUp) {
@@ -1030,40 +1044,58 @@ var QuizBank = (function () {
         h += '<span class="qb-mastery-level-name">' + _esc(mr.levelName) + '</span>';
         h += '</div>';
 
-        // Progress bar
+        // Progress bar (starts at previous width, animates to current)
         h += '<div class="qb-mastery-progress">';
         h += '<div class="qb-mastery-progress-track">';
-        h += '<div class="qb-mastery-progress-fill" style="width:' + progressPct + '%;background:' + color + '"></div>';
+        h += '<div class="qb-mastery-progress-fill" data-target-width="' + progressPct + '" style="width:' + startPct + '%;background:' + color + '"></div>';
         h += '</div>';
         if (mr.newLevel < 10) {
+            var ptsToNext = nextLevelPts - mr.newPoints;
             h += '<div class="qb-mastery-progress-label">';
             h += '<span>' + mr.newPoints + ' pts</span>';
-            h += '<span>' + nextLevelPts + ' pts (Lv ' + (mr.newLevel + 1) + ')</span>';
+            h += '<span>' + ptsToNext + ' pt' + (ptsToNext !== 1 ? 's' : '') + ' to next level</span>';
             h += '</div>';
         } else {
             h += '<div class="qb-mastery-progress-label"><span>Max Level Reached</span></div>';
         }
         h += '</div>';
 
-        // Points earned this session
+        // Points earned — shown as floating animation instead of static badge
         h += '<div class="qb-mastery-earned">';
         if (mr.pointsEarned > 0) {
-            h += '<span class="qb-mastery-earned-badge">+' + mr.pointsEarned + '</span>';
-            h += '<span class="qb-mastery-earned-text">points earned (' + mr.accuracy + '% accuracy)</span>';
+            h += '<span class="qb-mastery-earned-text">(' + mr.accuracy + '% accuracy)</span>';
         } else {
             h += '<span class="qb-mastery-earned-text qb-mastery-earned-text--zero">Score 70%+ to earn mastery points</span>';
         }
         h += '</div>';
 
-        // Near next level hint
-        if (mr.pointsToNext > 0 && mr.pointsToNext <= 5 && !mr.leveledUp) {
-            h += '<div class="qb-mastery-hint">';
-            h += '<i class="fas fa-bolt"></i> ' + mr.pointsToNext + ' point' + (mr.pointsToNext !== 1 ? 's' : '') + ' to ' + _esc(nextLevelName || ('Level ' + (mr.newLevel + 1)));
-            h += '</div>';
-        }
-
         h += '</div>'; // card-body
         h += '</div>'; // card
+
+        // Schedule the bar animation + floating points after DOM insert
+        if (mr.pointsEarned > 0) {
+            setTimeout(function () {
+                var card = document.getElementById(cardId);
+                if (!card) return;
+                var fill = card.querySelector('.qb-mastery-progress-fill');
+                if (!fill) return;
+
+                // Animate the bar from start to target width
+                fill.style.width = fill.dataset.targetWidth + '%';
+
+                // Show floating +N badge rising from the bar
+                var progressEl = card.querySelector('.qb-mastery-progress');
+                if (progressEl) {
+                    var floater = document.createElement('span');
+                    floater.className = 'qb-pts-floater';
+                    floater.textContent = '+' + mr.pointsEarned;
+                    progressEl.appendChild(floater);
+                    // Remove after animation completes
+                    setTimeout(function () { if (floater.parentNode) floater.parentNode.removeChild(floater); }, 2200);
+                }
+            }, 400);
+        }
+
         return h;
     }
 

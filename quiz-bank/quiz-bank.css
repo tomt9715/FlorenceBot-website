@@ -2089,7 +2089,10 @@
     font-weight: 700;
     color: var(--qb-text);
 }
-.qb-mastery-progress { margin-bottom: 14px; }
+.qb-mastery-progress {
+    margin-bottom: 14px;
+    position: relative;
+}
 .qb-mastery-progress-track {
     height: 8px;
     background: var(--qb-border);
@@ -2099,7 +2102,7 @@
 .qb-mastery-progress-fill {
     height: 100%;
     border-radius: 4px;
-    transition: width 1s ease;
+    transition: width 1.2s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .qb-mastery-progress-label {
     display: flex;
@@ -2108,6 +2111,48 @@
     color: var(--qb-text-light);
     margin-top: 4px;
 }
+
+/* Floating +N points animation */
+.qb-pts-floater {
+    position: absolute;
+    top: -4px;
+    left: 50%;
+    transform: translateX(-50%) translateY(0) scale(0.8);
+    background: var(--qb-correct);
+    color: #fff;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 800;
+    font-size: 1.1rem;
+    padding: 4px 14px;
+    border-radius: 20px;
+    pointer-events: none;
+    white-space: nowrap;
+    z-index: 10;
+    box-shadow: 0 2px 12px rgba(5, 150, 105, 0.4);
+    animation: qb-pts-float 1.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes qb-pts-float {
+    0% {
+        opacity: 0;
+        transform: translateX(-50%) translateY(0) scale(0.8);
+    }
+    15% {
+        opacity: 1;
+        transform: translateX(-50%) translateY(-10px) scale(1.1);
+    }
+    30% {
+        transform: translateX(-50%) translateY(-20px) scale(1);
+    }
+    75% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-48px) scale(0.9);
+    }
+}
+
 .qb-mastery-earned {
     display: flex;
     align-items: center;
