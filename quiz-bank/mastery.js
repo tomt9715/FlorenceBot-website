@@ -481,6 +481,196 @@ var MasteryTracker = (function () {
         localStorage.removeItem(STREAK_KEY);
     }
 
+    // ── Server Sync (cross-device progress) ──────────────
+
+    var RETRY_QUEUE_KEY = 'nursingCollective_retryQueue';
+
+    function _isLoggedIn() {
+        return !!localStorage.getItem('accessToken');
+    }
+
+    function _laterDate(a, b) {
+        if (!a) return b;
+        if (!b) return a;
+        return a > b ? a : b;
+    }
+
+    function _mergeQuestionHistory(localH, remoteH) {
+        var merged = {};
+        var allQIds = {};
+        var k;
+        for (k in localH) { if (localH.hasOwnProperty(k)) allQIds[k] = true; }
+        for (k in remoteH) { if (remoteH.hasOwnProperty(k)) allQIds[k] = true; }
+
+        for (k in allQIds) {
+            if (!allQIds.hasOwnProperty(k)) continue;
+            var l = localH[k];
+            var r = remoteH[k];
+            if (!l) { merged[k] = r; continue; }
+            if (!r) { merged[k] = l; continue; }
+            merged[k] = {
+                seen: l.seen || r.seen,
+                lastResult: (l.timesSeen || 0) >= (r.timesSeen || 0) ? l.lastResult : r.lastResult,
+                timesSeen: Math.max(l.timesSeen || 0, r.timesSeen || 0),
+                timesCorrect: Math.max(l.timesCorrect || 0, r.timesCorrect || 0)
+            };
+        }
+        return merged;
+    }
+
+    function _mergeRetryQueues(localRQ, remoteRQ) {
+        var merged = {};
+        var allScopes = {};
+        var k;
+        for (k in localRQ) { if (localRQ.hasOwnProperty(k)) allScopes[k] = true; }
+        for (k in remoteRQ) { if (remoteRQ.hasOwnProperty(k)) allScopes[k] = true; }
+
+        for (k in allScopes) {
+            if (!allScopes.hasOwnProperty(k)) continue;
+            var l = localRQ[k];
+            var r = remoteRQ[k];
+            if (!l) { merged[k] = r; continue; }
+            if (!r) { merged[k] = l; continue; }
+
+            var sessionCounter = Math.max(l.sessionCounter || 0, r.sessionCounter || 0);
+
+            // Merge queue arrays by questionId
+            var queueMap = {};
+            var i, entry;
+            var lQueue = l.queue || [];
+            var rQueue = r.queue || [];
+            for (i = 0; i < lQueue.length; i++) {
+                entry = lQueue[i];
+                queueMap[entry.questionId] = entry;
+            }
+            for (i = 0; i < rQueue.length; i++) {
+                entry = rQueue[i];
+                var existing = queueMap[entry.questionId];
+                if (!existing || (entry.attempts || 0) > (existing.attempts || 0)) {
+                    queueMap[entry.questionId] = entry;
+                }
+            }
+
+            var mergedQueue = [];
+            for (var qId in queueMap) {
+                if (queueMap.hasOwnProperty(qId)) mergedQueue.push(queueMap[qId]);
+            }
+
+            merged[k] = { sessionCounter: sessionCounter, queue: mergedQueue };
+        }
+        return merged;
+    }
+
+    function _mergeFromServer(serverData) {
+        if (!serverData) return;
+
+        // Merge mastery data
+        var local = _loadAll();
+        var remote = serverData.mastery_data || {};
+        var merged = {};
+
+        var allTopics = {};
+        var k;
+        for (k in local) { if (local.hasOwnProperty(k)) allTopics[k] = true; }
+        for (k in remote) { if (remote.hasOwnProperty(k)) allTopics[k] = true; }
+
+        for (k in allTopics) {
+            if (!allTopics.hasOwnProperty(k)) continue;
+            var l = local[k];
+            var r = remote[k];
+
+            if (!l) { merged[k] = r; continue; }
+            if (!r) { merged[k] = l; continue; }
+
+            // Both exist: higher values win (points only go up)
+            merged[k] = {
+                points: Math.max(l.points || 0, r.points || 0),
+                level: 0,
+                totalQuestionsAnswered: Math.max(l.totalQuestionsAnswered || 0, r.totalQuestionsAnswered || 0),
+                totalCorrect: Math.max(l.totalCorrect || 0, r.totalCorrect || 0),
+                setsCompleted: Math.max(l.setsCompleted || 0, r.setsCompleted || 0),
+                questionHistory: _mergeQuestionHistory(l.questionHistory || {}, r.questionHistory || {}),
+                lastPracticed: _laterDate(l.lastPracticed, r.lastPracticed)
+            };
+            merged[k].level = _calculateLevel(merged[k].points);
+        }
+
+        _saveAll(merged);
+
+        // Merge streak
+        var localStreak = _loadStreak();
+        var remoteStreak = serverData.streak_data || { currentStreak: 0, lastPracticedDate: null };
+        var mergedStreak = {
+            currentStreak: Math.max(localStreak.currentStreak || 0, remoteStreak.currentStreak || 0),
+            lastPracticedDate: _laterDate(localStreak.lastPracticedDate, remoteStreak.lastPracticedDate)
+        };
+        _saveStreak(mergedStreak);
+
+        // Merge retry queue
+        try {
+            var localRetry = JSON.parse(localStorage.getItem(RETRY_QUEUE_KEY) || '{}');
+            var remoteRetry = serverData.retry_queue || {};
+            var mergedRetry = _mergeRetryQueues(localRetry, remoteRetry);
+            localStorage.setItem(RETRY_QUEUE_KEY, JSON.stringify(mergedRetry));
+        } catch (e) {
+            console.warn('[Mastery] Failed to merge retry queue:', e);
+        }
+    }
+
+    /**
+     * Push current localStorage progress to the server (fire-and-forget).
+     */
+    function syncToServer() {
+        if (!_isLoggedIn()) return;
+        if (typeof apiCall !== 'function') return;
+
+        var retryQueue;
+        try {
+            retryQueue = JSON.parse(localStorage.getItem(RETRY_QUEUE_KEY) || '{}');
+        } catch (e) {
+            retryQueue = {};
+        }
+
+        var payload = {
+            mastery_data: _loadAll(),
+            streak_data: _loadStreak(),
+            retry_queue: retryQueue
+        };
+
+        apiCall('/api/quiz/progress', {
+            method: 'PUT',
+            body: JSON.stringify(payload)
+        }).then(function (resp) {
+            console.log('[Mastery] Synced to server at', resp.updated_at);
+        }).catch(function (err) {
+            console.warn('[Mastery] Server sync failed (non-blocking):', err.message);
+        });
+    }
+
+    /**
+     * Pull server progress and merge into localStorage.
+     * Returns a Promise<boolean> — true if data was merged.
+     */
+    function pullFromServer() {
+        if (!_isLoggedIn()) return Promise.resolve(false);
+        if (typeof apiCall !== 'function') return Promise.resolve(false);
+
+        return apiCall('/api/quiz/progress', { method: 'GET' })
+            .then(function (serverData) {
+                if (serverData && serverData.updated_at) {
+                    _mergeFromServer(serverData);
+                    return true;
+                }
+                // No server data yet — push local data up
+                syncToServer();
+                return false;
+            })
+            .catch(function (err) {
+                console.warn('[Mastery] Pull from server failed:', err.message);
+                return false;
+            });
+    }
+
     // ── Public API ─────────────────────────────────────────
 
     return {
@@ -501,6 +691,10 @@ var MasteryTracker = (function () {
         getMasteryColorClass: getMasteryColorClass,
         getTopicLabel: getTopicLabel,
         countAvailableQuestions: countAvailableQuestions,
+
+        // Server sync
+        syncToServer: syncToServer,
+        pullFromServer: pullFromServer,
 
         // Utility
         resetAll: resetAll

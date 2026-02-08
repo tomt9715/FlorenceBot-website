@@ -43,6 +43,7 @@ var QuizBank = (function () {
     var _questionTimes = {};       // questionId -> seconds spent
     var _timerInterval = null;     // setInterval ref for timer display
     var _timerVisible = false;     // whether timer UI is shown (always true in exam)
+    var _serverSynced = false;     // true after first pull from server (prevents repeat pulls)
 
     var RETRY_STORAGE_KEY = 'nursingCollective_retryQueue';
 
@@ -79,6 +80,16 @@ var QuizBank = (function () {
         if (_timerInterval) { clearInterval(_timerInterval); _timerInterval = null; }
         window.removeEventListener('beforeunload', _boundBeforeUnload);
         window.scrollTo({ top: 0 });
+
+        // Pull server progress on first hub render (cross-device sync)
+        if (!_serverSynced && !!localStorage.getItem('accessToken')) {
+            _serverSynced = true;
+            MasteryTracker.pullFromServer().then(function (merged) {
+                if (merged) {
+                    renderHub(); // Re-render with merged data
+                }
+            });
+        }
 
         var isSignedIn = !!localStorage.getItem('accessToken');
         var stats = MasteryTracker.getOverallStats();
@@ -1142,6 +1153,9 @@ var QuizBank = (function () {
         // Update spaced repetition retry queue
         var scopeKey = _lastQuizParams ? _lastQuizParams.scopeKey : _getRetryScope();
         _updateRetryQueueAfterSession(scopeKey);
+
+        // Sync progress to server (non-blocking, fire-and-forget)
+        MasteryTracker.syncToServer();
 
         var total = _currentQuestions.length;
         var correctCount = 0;
