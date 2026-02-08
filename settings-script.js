@@ -636,7 +636,10 @@ async function selectIcon(iconFilename) {
     }
 }
 
-async function handleProfilePicUpload(file) {
+// ── Crop Modal State ─────────────────────────────
+var _cropper = null;
+
+function handleProfilePicUpload(file) {
     if (!file) return;
 
     // Client-side validation
@@ -645,20 +648,94 @@ async function handleProfilePicUpload(file) {
         showAlert('Invalid File', 'Please upload a PNG, JPG, or WEBP image.', 'error');
         return;
     }
-    if (file.size > 2 * 1024 * 1024) {
-        showAlert('File Too Large', 'Please upload an image under 2MB.', 'error');
+    if (file.size > 5 * 1024 * 1024) {
+        showAlert('File Too Large', 'Please upload an image under 5MB.', 'error');
         return;
     }
 
-    var formData = new FormData();
-    formData.append('profile_picture', file);
+    // Read file and open crop modal
+    var reader = new FileReader();
+    reader.onload = function(e) {
+        openCropModal(e.target.result);
+    };
+    reader.readAsDataURL(file);
+}
+
+function openCropModal(imageSrc) {
+    var overlay = document.getElementById('crop-modal-overlay');
+    var cropImage = document.getElementById('crop-image');
+    if (!overlay || !cropImage) return;
+
+    // Destroy previous cropper if any
+    if (_cropper) {
+        _cropper.destroy();
+        _cropper = null;
+    }
+
+    cropImage.src = imageSrc;
+    overlay.style.display = 'flex';
+
+    // Initialize Cropper.js after image loads
+    cropImage.onload = function() {
+        _cropper = new Cropper(cropImage, {
+            aspectRatio: 1,
+            viewMode: 1,
+            dragMode: 'move',
+            cropBoxResizable: true,
+            cropBoxMovable: true,
+            guides: false,
+            center: true,
+            highlight: false,
+            background: false,
+            autoCropArea: 0.85,
+            responsive: true
+        });
+    };
+}
+
+function closeCropModal() {
+    var overlay = document.getElementById('crop-modal-overlay');
+    if (overlay) overlay.style.display = 'none';
+    if (_cropper) {
+        _cropper.destroy();
+        _cropper = null;
+    }
+}
+
+async function saveCroppedImage() {
+    if (!_cropper) return;
+
+    var saveBtn = document.getElementById('crop-save-btn');
+    if (saveBtn) {
+        saveBtn.disabled = true;
+        saveBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Uploading...';
+    }
 
     try {
-        // Show loading state
-        var preview = document.getElementById('current-profile-img');
-        if (preview) preview.style.opacity = '0.5';
+        // Get cropped canvas at 256x256
+        var canvas = _cropper.getCroppedCanvas({
+            width: 256,
+            height: 256,
+            imageSmoothingEnabled: true,
+            imageSmoothingQuality: 'high'
+        });
 
-        // Upload — don't set Content-Type header, let browser add multipart boundary
+        if (!canvas) {
+            throw new Error('Could not generate cropped image');
+        }
+
+        // Convert canvas to blob
+        var blob = await new Promise(function(resolve, reject) {
+            canvas.toBlob(function(b) {
+                if (b) resolve(b);
+                else reject(new Error('Canvas to blob failed'));
+            }, 'image/webp', 0.9);
+        });
+
+        // Upload the cropped blob
+        var formData = new FormData();
+        formData.append('profile_picture', blob, 'profile.webp');
+
         var token = localStorage.getItem('accessToken');
         var response = await fetch(API_URL + '/user/profile-picture/upload', {
             method: 'POST',
@@ -683,7 +760,7 @@ async function handleProfilePicUpload(file) {
         userData.profile_picture = result.profile_picture;
         localStorage.setItem('user', JSON.stringify(userData));
 
-        // Update nav avatar immediately
+        // Update nav avatars
         var userAvatar = document.querySelector('.user-avatar');
         if (userAvatar && typeof renderProfilePicture === 'function') {
             userAvatar.innerHTML = renderProfilePicture(result.profile_picture, 'sm', userData.first_name || '');
@@ -693,13 +770,16 @@ async function handleProfilePicUpload(file) {
             userAvatarLarge.innerHTML = renderProfilePicture(result.profile_picture, 'lg', userData.first_name || '');
         }
 
-        if (preview) preview.style.opacity = '1';
+        closeCropModal();
         showAlert('Photo Uploaded', 'Your profile picture has been updated!', 'success');
     } catch (error) {
         console.error('Failed to upload profile picture:', error);
-        var previewEl = document.getElementById('current-profile-img');
-        if (previewEl) previewEl.style.opacity = '1';
         showAlert('Upload Failed', error.message || 'Could not upload your photo. Please try again.', 'error');
+    } finally {
+        if (saveBtn) {
+            saveBtn.disabled = false;
+            saveBtn.innerHTML = '<i class="fas fa-check"></i> Save';
+        }
     }
 }
 
@@ -753,8 +833,43 @@ function setupProfilePicListeners() {
         });
         fileInput.addEventListener('change', function() {
             if (this.files && this.files[0]) {
+                // Close icon picker before opening crop modal
+                var iconOverlay = document.getElementById('icon-picker-overlay');
+                if (iconOverlay) iconOverlay.style.display = 'none';
                 handleProfilePicUpload(this.files[0]);
                 this.value = ''; // Reset so same file can be re-selected
+            }
+        });
+    }
+
+    // Crop modal — Save button
+    var cropSaveBtn = document.getElementById('crop-save-btn');
+    if (cropSaveBtn) {
+        cropSaveBtn.addEventListener('click', function() {
+            saveCroppedImage();
+        });
+    }
+
+    // Crop modal — Cancel / Close buttons
+    var cropCancelBtn = document.getElementById('crop-cancel-btn');
+    var cropCloseBtn = document.getElementById('crop-close-btn');
+    var cropOverlay = document.getElementById('crop-modal-overlay');
+
+    if (cropCancelBtn) {
+        cropCancelBtn.addEventListener('click', function() {
+            closeCropModal();
+        });
+    }
+    if (cropCloseBtn) {
+        cropCloseBtn.addEventListener('click', function() {
+            closeCropModal();
+        });
+    }
+    // Click outside crop modal to close
+    if (cropOverlay) {
+        cropOverlay.addEventListener('click', function(e) {
+            if (e.target === cropOverlay) {
+                closeCropModal();
             }
         });
     }

@@ -34,6 +34,9 @@
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
+    <!-- Cropper.js (image crop tool for profile picture upload) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cropperjs@1.6.2/dist/cropper.min.css">
+
     <style>
         /* ── Form Inputs ──────────────────────────────── */
         .form-control,
@@ -494,6 +497,96 @@
             .setting-row { flex-direction: column; align-items: flex-start; gap: 12px; }
             .icon-picker-grid { grid-template-columns: repeat(3, 1fr); }
         }
+
+        /* ══════════════════════════════════════════════
+           CROP MODAL (Cropper.js)
+           ══════════════════════════════════════════════ */
+        .crop-modal-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .crop-modal {
+            background: var(--surface-color, #fff);
+            border-radius: 16px;
+            max-width: 520px;
+            width: 92%;
+            max-height: 90vh;
+            overflow: hidden;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
+        }
+
+        [data-theme="dark"] .crop-modal {
+            background: var(--card-bg, #1f2937);
+        }
+
+        .crop-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 24px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .crop-modal-header h4 {
+            margin: 0;
+            font-family: 'Outfit', sans-serif;
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .crop-container {
+            position: relative;
+            width: 100%;
+            height: 360px;
+            background: #1a1a1a;
+            overflow: hidden;
+        }
+
+        .crop-container img {
+            display: block;
+            max-width: 100%;
+        }
+
+        .crop-modal-footer {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            padding: 16px 24px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        /* Circular crop mask — override Cropper.js defaults */
+        .cropper-view-box,
+        .cropper-face {
+            border-radius: 50%;
+        }
+
+        .cropper-view-box {
+            outline: 2px solid rgba(255, 255, 255, 0.8);
+            outline-offset: -1px;
+        }
+
+        .cropper-face {
+            background: transparent;
+        }
+
+        .cropper-dashed {
+            display: none;
+        }
+
+        @media (max-width: 480px) {
+            .crop-container { height: 280px; }
+            .crop-modal-footer { padding: 12px 16px; }
+        }
     </style>
     <!-- Sentry Error Tracking (load first) -->
     <script src="https://browser.sentry-cdn.com/8.40.0/bundle.min.js" crossorigin="anonymous"></script>
@@ -585,6 +678,27 @@
                     </div>
                     <div class="icon-picker-grid" id="icon-picker-grid">
                         <!-- Icons populated by JS -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Crop Modal (hidden by default) -->
+            <div class="crop-modal-overlay" id="crop-modal-overlay" style="display:none;">
+                <div class="crop-modal">
+                    <div class="crop-modal-header">
+                        <h4>Crop Your Photo</h4>
+                        <button type="button" class="icon-picker-close" id="crop-close-btn">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <div class="crop-container">
+                        <img id="crop-image" alt="Crop preview">
+                    </div>
+                    <div class="crop-modal-footer">
+                        <button type="button" class="btn-small secondary" id="crop-cancel-btn">Cancel</button>
+                        <button type="button" class="btn-primary" id="crop-save-btn" style="padding: 10px 24px;">
+                            <i class="fas fa-check"></i> Save
+                        </button>
                     </div>
                 </div>
             </div>
@@ -899,6 +1013,10 @@
     <script src="api-service.js?v=1769142741"></script>
 
     <script src="script.js?v=4.8.settings"></script>
-    <script src="settings-script.js?v=4.8.settings"></script>
+
+    <!-- Cropper.js (image crop tool) -->
+    <script src="https://cdn.jsdelivr.net/npm/cropperjs@1.6.2/dist/cropper.min.js"></script>
+
+    <script src="settings-script.js?v=4.9.crop"></script>
 </body>
 </html>
