@@ -44,6 +44,8 @@ var QuizBank = (function () {
     var _timerInterval = null;     // setInterval ref for timer display
     var _timerVisible = false;     // whether timer UI is shown (always true in exam)
     var _serverSynced = false;     // true after first pull from server (prevents repeat pulls)
+    var _strikethroughMode = false; // true when eliminate/strikethrough tool is active
+    var _scratchpadOpen = false;    // true when scratchpad panel is visible
 
     var RETRY_STORAGE_KEY = 'nursingCollective_retryQueue';
     var BOOKMARKS_KEY = 'nursingCollective_bookmarks';
@@ -629,7 +631,6 @@ var QuizBank = (function () {
         } else {
             var shuffled = _getShuffledOptions(q.id) || q.options;
             optionsHtml = '<div class="qb-options" role="radiogroup" aria-label="Answer options">';
-            var kbdIndex = 1;
             shuffled.forEach(function (opt) {
                 var displayLetter = _getDisplayLetter(q.id, opt.id);
                 optionsHtml += '<label class="qb-option" tabindex="0" role="radio" aria-checked="false">';
@@ -637,9 +638,7 @@ var QuizBank = (function () {
                 optionsHtml += '<span class="qb-option-marker"></span>';
                 optionsHtml += '<span class="qb-option-letter">' + displayLetter.toUpperCase() + '.</span>';
                 optionsHtml += '<span class="qb-option-text">' + _esc(opt.text) + '</span>';
-                optionsHtml += '<span class="qb-kbd-hint">' + kbdIndex + '</span>';
                 optionsHtml += '</label>';
-                kbdIndex++;
             });
             optionsHtml += '</div>';
         }
@@ -676,6 +675,14 @@ var QuizBank = (function () {
         html += '<i class="' + (isFlagged ? 'fas' : 'far') + ' fa-bookmark"></i>';
         html += '<span>' + (isFlagged ? 'Bookmarked' : 'Bookmark') + '</span>';
         html += '</button>';
+        html += '<button type="button" class="qb-tool-btn" data-qb-action="toggle-strikethrough" title="Toggle strikethrough mode — click options to cross them out">';
+        html += '<i class="fas fa-strikethrough"></i>';
+        html += '<span>Eliminate</span>';
+        html += '</button>';
+        html += '<button type="button" class="qb-tool-btn" data-qb-action="toggle-scratchpad" title="Open scratchpad for notes">';
+        html += '<i class="fas fa-sticky-note"></i>';
+        html += '<span>Notes</span>';
+        html += '</button>';
         html += '</div>';
         html += '<div class="qb-q-toolbar-right">';
         // Timer always visible in exam mode; in practice mode, only if user toggled it on
@@ -690,10 +697,33 @@ var QuizBank = (function () {
         html += optionsHtml;
         html += '<div class="qb-actions"><button class="qb-btn qb-btn--primary" data-qb-action="submit" disabled>' + submitLabel + '</button></div>';
         html += '<div id="qb-feedback-area"></div>';
+
+        // Scratchpad panel (hidden by default)
+        html += '<div class="qb-scratchpad" id="qb-scratchpad" style="display:none;">';
+        html += '<div class="qb-scratchpad-header">';
+        html += '<span><i class="fas fa-sticky-note"></i> Scratchpad</span>';
+        html += '<button type="button" class="qb-scratchpad-close" data-qb-action="toggle-scratchpad"><i class="fas fa-times"></i></button>';
         html += '</div>';
+        html += '<textarea class="qb-scratchpad-textarea" placeholder="Jot down your thoughts, calculations, or reasoning..." rows="4"></textarea>';
+        html += '</div>';
+
+        html += '</div>'; // .qb-q-card
+        html += '</div>'; // .qb-question
+
+        // Keyboard shortcut guide bar (bottom of quiz view)
+        html += '<div class="qb-shortcut-bar">';
+        html += '<div class="qb-shortcut-item"><kbd>1</kbd>–<kbd>4</kbd> Select answer</div>';
+        html += '<div class="qb-shortcut-item"><kbd>Enter</kbd> Submit / Next</div>';
+        html += '<div class="qb-shortcut-item"><kbd>F</kbd> Bookmark</div>';
+        html += '<div class="qb-shortcut-item"><kbd>X</kbd> Eliminate</div>';
+        html += '<div class="qb-shortcut-item"><kbd>N</kbd> Notes</div>';
         html += '</div>';
 
         _root.innerHTML = html;
+
+        // Reset tool states for new question
+        _strikethroughMode = false;
+        _scratchpadOpen = false;
 
         // Start question timer
         _startQuestionTimer();
@@ -755,6 +785,40 @@ var QuizBank = (function () {
             var isFlagged = _flagged[q.id];
             flagBtn.className = 'qb-flag-btn' + (isFlagged ? ' qb-flag-btn--active' : '');
             flagBtn.innerHTML = '<i class="' + (isFlagged ? 'fas' : 'far') + ' fa-bookmark"></i><span>' + (isFlagged ? 'Bookmarked' : 'Bookmark') + '</span>';
+        }
+    }
+
+    function _toggleStrikethrough() {
+        _strikethroughMode = !_strikethroughMode;
+        var btn = _root.querySelector('[data-qb-action="toggle-strikethrough"]');
+        if (btn) {
+            btn.classList.toggle('qb-tool-btn--active', _strikethroughMode);
+        }
+        // Toggle cursor style on options
+        var options = _root.querySelectorAll('.qb-option');
+        options.forEach(function (opt) {
+            opt.classList.toggle('qb-option--eliminate-mode', _strikethroughMode);
+        });
+    }
+
+    function _handleOptionEliminate(optionEl) {
+        // Toggle the eliminated state on this option
+        optionEl.classList.toggle('qb-option--eliminated');
+    }
+
+    function _toggleScratchpad() {
+        _scratchpadOpen = !_scratchpadOpen;
+        var pad = document.getElementById('qb-scratchpad');
+        var btn = _root.querySelector('[data-qb-action="toggle-scratchpad"]');
+        if (pad) {
+            pad.style.display = _scratchpadOpen ? 'block' : 'none';
+            if (_scratchpadOpen) {
+                var textarea = pad.querySelector('textarea');
+                if (textarea) textarea.focus();
+            }
+        }
+        if (btn) {
+            btn.classList.toggle('qb-tool-btn--active', _scratchpadOpen);
         }
     }
 
@@ -1505,6 +1569,12 @@ var QuizBank = (function () {
                 case 'clear-bookmarks':
                     _handleClearBookmarks();
                     break;
+                case 'toggle-strikethrough':
+                    _toggleStrikethrough();
+                    break;
+                case 'toggle-scratchpad':
+                    _toggleScratchpad();
+                    break;
                 case 'quick-10':
                     _handleQuick10();
                     break;
@@ -1615,6 +1685,11 @@ var QuizBank = (function () {
         // Option click (single)
         var option = e.target.closest('.qb-option');
         if (option && !option.classList.contains('qb-option--disabled')) {
+            // Strikethrough mode: cross out instead of selecting
+            if (_strikethroughMode) {
+                _handleOptionEliminate(option);
+                return;
+            }
             var input = option.querySelector('input');
             if (!input) return;
             _root.querySelectorAll('.qb-option').forEach(function (o) { o.classList.remove('qb-option--selected'); });
@@ -1688,6 +1763,20 @@ var QuizBank = (function () {
         if (e.key === 'f' || e.key === 'F') {
             e.preventDefault();
             _toggleFlag();
+            return;
+        }
+
+        // X to toggle strikethrough/eliminate mode
+        if (e.key === 'x' || e.key === 'X') {
+            e.preventDefault();
+            _toggleStrikethrough();
+            return;
+        }
+
+        // N to toggle scratchpad/notes
+        if (e.key === 'n' || e.key === 'N') {
+            e.preventDefault();
+            _toggleScratchpad();
             return;
         }
     }

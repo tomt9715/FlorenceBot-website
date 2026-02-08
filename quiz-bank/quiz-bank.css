@@ -2871,43 +2871,7 @@ body.qb-quiz-active .qb-container {
     background: rgba(245, 158, 11, 0.1);
 }
 
-/* ── Keyboard shortcut hints ──────────────── */
-.qb-kbd-hint {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 20px;
-    height: 20px;
-    border-radius: 4px;
-    background: var(--qb-border-light);
-    color: var(--qb-text-light);
-    font-size: 0.7rem;
-    font-weight: 700;
-    font-family: 'Source Sans 3', monospace;
-    margin-left: auto;
-    flex-shrink: 0;
-    border: 1px solid var(--qb-border);
-    transition: all var(--qb-transition);
-}
-
-.qb-option:hover .qb-kbd-hint {
-    border-color: var(--qb-primary);
-    color: var(--qb-primary);
-    background: rgba(46, 134, 171, 0.08);
-}
-
-.qb-option--selected .qb-kbd-hint {
-    border-color: var(--qb-primary);
-    color: #fff;
-    background: var(--qb-primary);
-}
-
-.qb-option--disabled .qb-kbd-hint { display: none; }
-
-/* Hide keyboard hints on touch devices */
-@media (hover: none) and (pointer: coarse) {
-    .qb-kbd-hint { display: none; }
-}
+/* (kbd hints removed — shortcuts shown in guide bar instead) */
 
 /* ── Flagged question indicator in results ── */
 .qb-result-flag {
@@ -3244,5 +3208,168 @@ body.qb-quiz-active .qb-container {
     }
     .qb-saved-actions .qb-btn {
         width: 100%;
+    }
+}
+
+/* ── Tool Buttons (Eliminate, Notes) ─────── */
+.qb-tool-btn {
+    background: none;
+    border: 2px solid var(--qb-border);
+    border-radius: 8px;
+    padding: 6px 12px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--qb-text-light);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s ease;
+}
+
+.qb-tool-btn:hover {
+    border-color: var(--qb-primary);
+    color: var(--qb-primary);
+    background: rgba(46, 134, 171, 0.06);
+}
+
+.qb-tool-btn--active {
+    border-color: var(--qb-primary);
+    color: #fff;
+    background: var(--qb-primary);
+}
+
+.qb-tool-btn--active:hover {
+    background: var(--qb-primary-hover, #256f8f);
+}
+
+/* ── Strikethrough / Eliminate Mode ──────── */
+.qb-option--eliminate-mode {
+    cursor: crosshair;
+}
+
+.qb-option--eliminated {
+    opacity: 0.45;
+    text-decoration: line-through;
+    text-decoration-thickness: 2px;
+    text-decoration-color: var(--qb-incorrect, #ef4444);
+}
+
+.qb-option--eliminated .qb-option-letter {
+    opacity: 0.4;
+}
+
+/* ── Scratchpad ──────────────────────────── */
+.qb-scratchpad {
+    border: 2px solid var(--qb-border);
+    border-radius: 12px;
+    margin-top: 16px;
+    overflow: hidden;
+    background: var(--qb-surface, #fff);
+}
+
+.qb-scratchpad-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 16px;
+    background: var(--qb-border-light);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--qb-text-secondary);
+}
+
+.qb-scratchpad-header i {
+    margin-right: 6px;
+    color: var(--qb-primary);
+}
+
+.qb-scratchpad-close {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--qb-text-light);
+    font-size: 0.9rem;
+    padding: 2px 6px;
+    border-radius: 4px;
+    transition: color 0.15s, background 0.15s;
+}
+
+.qb-scratchpad-close:hover {
+    color: var(--qb-incorrect);
+    background: var(--qb-incorrect-bg);
+}
+
+.qb-scratchpad-textarea {
+    width: 100%;
+    border: none;
+    padding: 12px 16px;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    resize: vertical;
+    min-height: 80px;
+    background: var(--qb-surface, #fff);
+    color: var(--qb-text-primary, #1a1a1a);
+    outline: none;
+}
+
+.qb-scratchpad-textarea::placeholder {
+    color: var(--qb-text-light);
+}
+
+/* ── Keyboard Shortcut Guide Bar ─────────── */
+.qb-shortcut-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding: 10px 16px;
+    margin-top: 20px;
+    border-top: 1px solid var(--qb-border-light);
+    color: var(--qb-text-light);
+    font-size: 0.75rem;
+}
+
+.qb-shortcut-item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    white-space: nowrap;
+}
+
+.qb-shortcut-bar kbd {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 20px;
+    height: 20px;
+    padding: 0 5px;
+    border-radius: 4px;
+    background: var(--qb-border-light);
+    border: 1px solid var(--qb-border);
+    color: var(--qb-text-secondary);
+    font-size: 0.7rem;
+    font-weight: 700;
+    font-family: 'Source Sans 3', monospace;
+    line-height: 1;
+}
+
+/* Hide shortcut bar on touch devices */
+@media (hover: none) and (pointer: coarse) {
+    .qb-shortcut-bar { display: none; }
+}
+
+@media (max-width: 480px) {
+    .qb-shortcut-bar {
+        gap: 10px;
+        font-size: 0.7rem;
+    }
+    .qb-tool-btn span {
+        display: none;
+    }
+    .qb-tool-btn {
+        padding: 6px 8px;
     }
 }
