@@ -209,13 +209,7 @@
         .settings-hero-email {
             font-size: 0.9rem;
             color: var(--text-secondary);
-            margin-bottom: 20px;
-        }
-
-        .settings-hero-actions {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
+            margin-bottom: 0;
         }
 
         /* ── Section Group Labels ─────────────────────── */
@@ -482,6 +476,62 @@
             border-radius: 50%;
         }
 
+        .icon-picker-divider {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 20px 0 16px;
+        }
+
+        .icon-picker-divider::before,
+        .icon-picker-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border-color, #e5e7eb);
+        }
+
+        .icon-picker-divider span {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 500;
+        }
+
+        .icon-picker-upload-btn {
+            width: 100%;
+            padding: 14px;
+            border: 2px dashed var(--border-color, #d1d5db);
+            border-radius: 12px;
+            background: var(--background-light, #f9fafb);
+            color: var(--text-primary);
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .icon-picker-upload-btn:hover {
+            border-color: var(--primary-color, #2E86AB);
+            background: rgba(46, 134, 171, 0.06);
+            color: var(--primary-color, #2E86AB);
+        }
+
+        [data-theme="dark"] .icon-picker-upload-btn {
+            background: rgba(255, 255, 255, 0.04);
+            border-color: var(--border-color, #374151);
+        }
+
+        [data-theme="dark"] .icon-picker-upload-btn:hover {
+            background: rgba(46, 134, 171, 0.12);
+            border-color: var(--primary-color, #2E86AB);
+        }
+
         /* ── Responsive ───────────────────────────────── */
         @media (max-width: 768px) {
             .settings-hero { padding: 32px 20px 24px; }
@@ -492,7 +542,6 @@
             .settings-hero { padding: 28px 16px 20px; }
             .settings-avatar-wrapper { width: 100px; height: 100px; }
             .settings-hero-name { font-size: 1.25rem; }
-            .settings-hero-actions { flex-direction: column; align-items: center; }
             .settings-card { padding: 20px 16px; }
             .setting-row { flex-direction: column; align-items: flex-start; gap: 12px; }
             .icon-picker-grid { grid-template-columns: repeat(3, 1fr); }
@@ -656,22 +705,14 @@
                 </div>
                 <div class="settings-hero-name" id="settings-hero-name">Loading...</div>
                 <div class="settings-hero-email" id="settings-hero-email">Loading...</div>
-                <div class="settings-hero-actions">
-                    <button type="button" class="btn-small secondary" id="choose-icon-btn">
-                        <i class="fas fa-icons"></i> Choose Icon
-                    </button>
-                    <button type="button" class="btn-small secondary" id="upload-photo-btn">
-                        <i class="fas fa-camera"></i> Upload Photo
-                    </button>
-                </div>
                 <input type="file" id="profile-pic-upload" accept="image/png,image/jpeg,image/webp" style="display:none;">
             </div>
 
-            <!-- Icon Picker Modal (hidden by default) -->
+            <!-- Profile Picture Picker Modal (hidden by default) -->
             <div class="icon-picker-overlay" id="icon-picker-overlay" style="display:none;">
                 <div class="icon-picker-modal">
                     <div class="icon-picker-header">
-                        <h4>Choose Your Icon</h4>
+                        <h4>Change Profile Picture</h4>
                         <button type="button" class="icon-picker-close" id="icon-picker-close">
                             <i class="fas fa-times"></i>
                         </button>
@@ -679,6 +720,12 @@
                     <div class="icon-picker-grid" id="icon-picker-grid">
                         <!-- Icons populated by JS -->
                     </div>
+                    <div class="icon-picker-divider">
+                        <span>or</span>
+                    </div>
+                    <button type="button" class="icon-picker-upload-btn" id="upload-photo-btn">
+                        <i class="fas fa-camera"></i> Upload Your Own Photo
+                    </button>
                 </div>
             </div>
 

@@ -784,7 +784,7 @@ async function saveCroppedImage() {
 }
 
 function setupProfilePicListeners() {
-    // Click on hero avatar → open icon picker modal
+    // Click on hero avatar → open profile picture picker modal
     var avatarWrapper = document.getElementById('settings-avatar-wrapper');
     if (avatarWrapper) {
         avatarWrapper.addEventListener('click', function() {
@@ -795,14 +795,6 @@ function setupProfilePicListeners() {
                 e.preventDefault();
                 document.getElementById('icon-picker-overlay').style.display = 'flex';
             }
-        });
-    }
-
-    // "Choose Icon" button → open modal
-    var chooseBtn = document.getElementById('choose-icon-btn');
-    if (chooseBtn) {
-        chooseBtn.addEventListener('click', function() {
-            document.getElementById('icon-picker-overlay').style.display = 'flex';
         });
     }
 
@@ -824,7 +816,7 @@ function setupProfilePicListeners() {
         });
     }
 
-    // "Upload Photo" button → trigger file input
+    // "Upload Your Own Photo" button (inside the picker modal) → trigger file input
     var uploadBtn = document.getElementById('upload-photo-btn');
     var fileInput = document.getElementById('profile-pic-upload');
     if (uploadBtn && fileInput) {
