@@ -3,6 +3,154 @@
 
 // Guide preview content (realistic placeholder - preview of full guide)
 const guidePreviewContent = {
+    'cardiac-medications': {
+        title: 'Cardiac Medications',
+        storeUrl: 'pricing.html#cardiac-medications',
+        content: `
+# Cardiac Medications Study Guide
+
+## Overview
+The drug classes that run through every cardiac patient, organised around the one thing the question actually asks: what you check before you give it.
+
+## What You'll Learn
+
+### The hold parameters
+- **Beta-blockers and digoxin**: hold if the apical pulse is under 60, counted for a full minute
+- **ACE inhibitors, ARBs, ARNIs, aldosterone antagonists**: hold if potassium is above 5.5
+- **Nitroglycerin**: hold if systolic is under 90, or within 24 to 48 hours of a PDE5 inhibitor
+
+### The potassium fight
+- Loop diuretics push potassium **down**
+- ACE inhibitors, ARBs, ARNIs and aldosterone antagonists push it **up**
+- A low potassium turns a therapeutic digoxin level into a toxic one
+
+### Discrimination axes
+- ACE inhibitor or ARB: the dry cough is the axis
+- Dihydropyridine or non-dihydropyridine calcium channel blocker
+- Anticoagulant or antiplatelet: where the clot was made
+
+### Patient teaching that gets tested
+- Sublingual nitroglycerin: one tablet, wait 5 minutes, call 911 if unrelieved
+- A beta-blocker is never stopped abruptly
+- Warfarin means consistent vitamin K, not none
+
+### Numbers to have cold
+- Digoxin therapeutic range **0.5 to 2.0 ng/mL**
+- Warfarin INR target **2 to 3**
+- ARNI needs a **36 hour** washout from an ACE inhibitor
+`
+    },
+    'antibiotics-antivirals': {
+        title: 'Antibiotics & Antivirals',
+        storeUrl: 'pricing.html#antibiotics-antivirals',
+        content: `
+# Antibiotics and Antivirals Study Guide
+
+## Overview
+Anti-infectives sorted by the toxicity that has a name, the monitoring that goes with it, and the culture rule that comes before all of it.
+
+## What You'll Learn
+
+### The rule that comes first
+- **Culture before the first dose**, but never delay a septic patient to get one
+- Severe or septic: first antibiotic **within 1 hour**
+- Expect improvement in **48 to 72 hours**
+
+### The toxicity that has a name
+- **Vancomycin**: trough monitoring, kidneys and hearing, and the infusion reaction you fix by slowing the rate
+- **Aminoglycosides**: peak and trough, kidneys and hearing
+- **Fluoroquinolones**: tendon rupture, avoided in children
+- **Tetracyclines**: teeth in young children, photosensitivity, no dairy
+- **Sulfonamides**: hydration, and the rash that turns serious
+
+### C. difficile
+- **Soap and water, not alcohol gel**
+- Contact precautions, no antidiarrhoeals
+
+### Antivirals and antifungals
+- Oseltamivir works inside a **48 hour** window
+- Acyclovir needs hydration and a slow infusion
+- Amphotericin B and its infusion reaction
+
+### Stewardship
+- Finish the course
+- Viral illness does not answer to antibiotics
+- Asymptomatic bacteriuria is not treated except in pregnancy
+`
+    },
+    'pain-management': {
+        title: 'Pain Management',
+        storeUrl: 'pricing.html#pain-management',
+        content: `
+# Pain Management Study Guide
+
+## Overview
+Assessment, analgesics and the safety rule that decides more questions than any other: sedation comes before respiratory depression.
+
+## What You'll Learn
+
+### The safety rule
+- **Rising sedation is the early warning**; a falling respiratory rate comes after it
+- Check the sedation score before the next dose, not just the rate
+- Naloxone lasts **30 to 90 minutes**, shorter than most opioids, so expect resedation
+
+### Assessment
+- Self-report is the standard
+- The right tool for the patient: numeric, FLACC, PAINAD or Abbey
+- Reassess **15 minutes after IV**, **30 minutes after oral**
+
+### Non-opioids
+- Acetaminophen ceiling **4 g a day**, lower with liver disease
+- Count the hidden acetaminophen in combination products
+- NSAIDs: stomach, kidneys, bleeding
+
+### Opioids
+- Constipation never resolves with tolerance, so the bowel regimen starts with the opioid
+- Meperidine is avoided
+- PCA: **only the patient presses the button**
+
+### The discrimination that gets missed
+- Tolerance, physical dependence, addiction and pseudoaddiction are four different things
+- New or changed pain is a finding to assess, not a dose to raise
+`
+    },
+    'iv-medications': {
+        title: 'IV Medications',
+        storeUrl: 'pricing.html#iv-medications',
+        content: `
+# IV Medications Study Guide
+
+## Overview
+High-alert drugs, the complications you have to tell apart, and the administration rules that keep an IV line from becoming the emergency.
+
+## What You'll Learn
+
+### The rule that kills fastest
+- **Concentrated potassium is never given by IV push**
+- Always diluted, always on a pump
+- Never added to a bag that is already hanging
+
+### Complications, told apart
+- **Infiltration or extravasation**: a non-vesicant or a vesicant, and only one causes tissue necrosis
+- **Phlebitis or infiltration**: a red warm cord, or cool swelling
+- Air embolism: clamp the line, then left side and head down
+
+### High-alert medications
+- Insulin, heparin, opioids, concentrated electrolytes, chemotherapy
+- Independent double check
+- **Regular is the only insulin that goes IV**
+
+### Access and fluids
+- Vesicants, parenteral nutrition and long duration go central
+- Isotonic, hypotonic, hypertonic and what each does to the cell
+- Never hypotonic fluid in a head injury
+
+### Transfusion
+- Two staff verify at the bedside, normal saline only
+- **Stay for the first 15 minutes**
+- Finish a unit within 4 hours
+`
+    },
     'immune-deficiency-hiv': {
         title: 'Immune Deficiency, HIV & Anaphylaxis',
         storeUrl: 'pricing.html#immune-deficiency-hiv',

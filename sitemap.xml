@@ -273,4 +273,30 @@
         <priority>0.6</priority>
     </url>
 
+    <!-- Pharmacology Guides -->
+    <url>
+        <loc>https://thenursingcollective.pro/guides/cardiac-medications.html</loc>
+        <lastmod>2026-07-24</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://thenursingcollective.pro/guides/antibiotics-antivirals.html</loc>
+        <lastmod>2026-07-24</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://thenursingcollective.pro/guides/pain-management.html</loc>
+        <lastmod>2026-07-24</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://thenursingcollective.pro/guides/iv-medications.html</loc>
+        <lastmod>2026-07-24</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
 </urlset>

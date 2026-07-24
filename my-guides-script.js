@@ -28,7 +28,6 @@
                     ],
                     comingSoon: [
                         { name: 'Infection Control', icon: 'infection-control' },
-                        { name: 'IV Therapy', icon: 'iv-medications' },
                         { name: 'Delegation & Prioritization' },
                         { name: 'Patient Safety', icon: 'patient-safety' },
                         { name: 'Wound Care' }
@@ -60,7 +59,6 @@
                     comingSoon: [
                         { name: 'Valvular Heart Disease' },
                         { name: 'Shock' },
-                        { name: 'Cardiac Medications', icon: 'cardiac-medications' },
                         { name: 'Heart Sounds & Murmurs' }
                     ]
                 },
@@ -337,12 +335,13 @@
                     categoryIcon: 'pharmacology-icon',
                     icon: 'fa-pills',
                     colorClass: 'icon-pharmacology',
-                    guides: [],
+                    guides: [
+                        { name: 'Cardiac Medications', file: 'cardiac-medications' },
+                        { name: 'Antibiotics & Antivirals', file: 'antibiotics-antivirals' },
+                        { name: 'Pain Management', file: 'pain-management' },
+                        { name: 'IV Medications', file: 'iv-medications' }
+                    ],
                     comingSoon: [
-                        { name: 'Cardiac Medications', icon: 'cardiac-medications' },
-                        { name: 'Antibiotics & Antivirals', icon: 'antibiotics-antivirals' },
-                        { name: 'Pain Management', icon: 'pain-management' },
-                        { name: 'IV Medications', icon: 'iv-medications' },
                         { name: 'Psychotropic Medications', icon: 'psychotropic-medications' },
                         { name: 'Emergency Medications', icon: 'emergency-medications' }
                     ]

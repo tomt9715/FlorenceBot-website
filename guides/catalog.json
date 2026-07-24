@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-04-18T01:27:42.207816+00:00",
+  "generated_at": "2026-07-24T22:01:22.640655+00:00",
   "guides": {
     "assessment-skills": {
       "title": "Assessment Skills",
@@ -793,6 +793,64 @@
         "immunology",
         "pediatric",
         "rheumatology"
+      ]
+    },
+    "cardiac-medications": {
+      "title": "Cardiac Medications",
+      "class": "pharmacology",
+      "class_name": "Pharmacology",
+      "category": "pharmacology",
+      "category_name": "Pharmacology",
+      "population": "mixed",
+      "keywords": [
+        "cardiac",
+        "drugs",
+        "medications",
+        "pharmacology"
+      ]
+    },
+    "antibiotics-antivirals": {
+      "title": "Antibiotics & Antivirals",
+      "class": "pharmacology",
+      "class_name": "Pharmacology",
+      "category": "pharmacology",
+      "category_name": "Pharmacology",
+      "population": "mixed",
+      "keywords": [
+        "antibiotics",
+        "antivirals",
+        "drugs",
+        "medications",
+        "pharmacology"
+      ]
+    },
+    "pain-management": {
+      "title": "Pain Management",
+      "class": "pharmacology",
+      "class_name": "Pharmacology",
+      "category": "pharmacology",
+      "category_name": "Pharmacology",
+      "population": "mixed",
+      "keywords": [
+        "drugs",
+        "management",
+        "medications",
+        "pain",
+        "pharmacology"
+      ]
+    },
+    "iv-medications": {
+      "title": "IV Medications",
+      "class": "pharmacology",
+      "class_name": "Pharmacology",
+      "category": "pharmacology",
+      "category_name": "Pharmacology",
+      "population": "mixed",
+      "keywords": [
+        "drugs",
+        "iv",
+        "medications",
+        "pharmacology"
       ]
     }
   }
