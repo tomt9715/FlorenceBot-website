@@ -3,6 +3,147 @@
 
 // Guide preview content (realistic placeholder - preview of full guide)
 const guidePreviewContent = {
+    'infection-control': {
+        title: 'Infection Control',
+        storeUrl: 'pricing.html#infection-control',
+        content: `
+# Infection Control Study Guide
+
+## Overview
+One question decides almost every answer here: how does this organism travel. Route decides the room, the room decides the equipment.
+
+## What You'll Learn
+
+### Sorting the route
+- **Contact** moves on hands: MRSA, VRE, C. difficile, scabies, norovirus
+- **Droplet** falls out of the air within **3 to 6 feet**: influenza, pertussis, meningococcal
+- **Airborne** stays suspended: tuberculosis, measles, varicella, disseminated zoster
+
+### Hand hygiene, and when alcohol fails
+- Spores and visible soil are the two things alcohol cannot handle
+- **C. difficile means soap and water**, every time, plus bleach-based cleaning
+- Gloves are never a substitute for hand hygiene
+
+### Equipment, in order
+- On: gown, mask, eye protection, gloves
+- Off: **gloves first**, then eyes, then gown, then out the door and the respirator last
+- N95 fit tested annually, seal checked every single use
+
+### Which way the air moves
+- **Negative pressure** protects the unit from the patient
+- **Positive pressure** protects the patient from the unit
+- Ask who is being protected and the room chooses itself
+
+### Device infections
+- CAUTI, CLABSI, VAP and SSI, with one prevention each
+- The shared answer: ask every day whether the device is still needed
+`
+    },
+    'patient-safety': {
+        title: 'Patient Safety',
+        storeUrl: 'pricing.html#patient-safety',
+        content: `
+# Patient Safety Study Guide
+
+## Overview
+The topic where every option is something a decent nurse might do. You are being asked which one prevents harm first.
+
+## What You'll Learn
+
+### Identification
+- **Two identifiers that belong to the person**, never the room number
+- Have the patient state it, then check the band
+- Verify, mark the site, time out before any procedure
+
+### Falls
+- **Assess where they landed** before you move anyone
+- Neurological checks after any fall in an anticoagulated patient
+- Hourly rounding and scheduled toileting beat telling a confused patient to call
+
+### Restraints
+- Least restrictive first, and document what you tried
+- **A PRN restraint order is never valid**
+- Face-to-face within **1 hour**, checks every **15 minutes**, release every **2 hours**
+
+### Medication safety
+- Three label checks, independent double check for high-alert drugs
+- The banned abbreviations, and why 1.0 mg becomes 10 mg
+- An unclear order is clarified, never interpreted
+
+### When something goes wrong
+- Assess the patient, then correct, then notify, then chart the facts
+- **The chart never mentions the incident report**
+`
+    },
+    'mobility-transfers': {
+        title: 'Mobility and Transfers',
+        storeUrl: 'pricing.html#mobility-transfers',
+        content: `
+# Mobility and Transfers Study Guide
+
+## Overview
+Which side you stand on, which leg goes first, and why the patient who has not moved in three days is the sickest one on your list.
+
+## What You'll Learn
+
+### Transfers
+- **You stand on the weaker side**, because that is where they fall
+- **The chair goes on the stronger side**, because that side does the work
+- Lie, sit, **dangle 1 to 5 minutes**, stand. The dangle is the step people skip
+
+### Safe patient handling
+- Above about **35 pounds** of patient weight, equipment beats technique
+- Never lift by the arms or under the axillae
+- Slide and pivot rather than lift and twist
+
+### Assistive devices
+- **Cane in the hand opposite the weak leg**, moving with that leg
+- Crutch pads **2 to 3 finger widths** below the axilla, weight through the hands
+- Stairs: up with the good, down with the bad
+
+### Immobility
+- Eight systems, and early ambulation answers seven of them
+- Reposition **every 2 hours in bed, every hour in a chair**
+
+### Pressure injuries
+- Six categories, and the rule that decides staging
+- **If you cannot see the base, you cannot stage it**
+`
+    },
+    'documentation-charting': {
+        title: 'Documentation and Charting',
+        storeUrl: 'pricing.html#documentation-charting',
+        content: `
+# Documentation and Charting Study Guide
+
+## Overview
+One rule underneath all of it: write what you saw, not what you concluded. Everything else is that rule wearing different clothes.
+
+## What You'll Learn
+
+### Objective or subjective
+- Uncooperative becomes **refused at 0800 and 1000**
+- Confused becomes **could not state name, year or location**
+- The patient's own words belong, in quotation marks
+
+### Corrections
+- **One line, initials, date, time**, and the original stays readable
+- Never erase, white out, scribble over or delete
+- Late entries carry **two timestamps**, both true
+
+### Timing
+- Chart after the care, **never before it**
+- Care not given is still charted, with the reason and the notification
+
+### Telephone orders
+- Write it down, **read it back**, verify, record, countersign within **24 hours**
+- Same rule for critical laboratory results
+
+### Handoff and privacy
+- SBAR ends with a **specific request**, not a report
+- Minimum necessary, and if you are not caring for them, do not open the chart
+`
+    },
     'cardiac-medications': {
         title: 'Cardiac Medications',
         storeUrl: 'pricing.html#cardiac-medications',
@@ -97,7 +238,7 @@ Assessment, analgesics and the safety rule that decides more questions than any 
 ### Assessment
 - Self-report is the standard
 - The right tool for the patient: numeric, FLACC, PAINAD or Abbey
-- Reassess **15 minutes after IV**, **30 minutes after oral**
+- Reassess **15 to 30 minutes after IV**, **45 to 60 minutes after oral**
 
 ### Non-opioids
 - Acetaminophen ceiling **4 g a day**, lower with liver disease

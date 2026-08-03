@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-07-24T22:01:22.640655+00:00",
+  "generated_at": "2026-08-03T18:53:01.447607+00:00",
   "guides": {
     "assessment-skills": {
       "title": "Assessment Skills",
@@ -12,6 +12,70 @@
       "keywords": [
         "assessment",
         "clinical",
+        "fundamentals",
+        "skills"
+      ]
+    },
+    "infection-control": {
+      "title": "Infection Control",
+      "class": "fundamentals",
+      "class_name": "Fundamentals of Nursing",
+      "category": "assessment-clinical-skills",
+      "category_name": "Assessment & Clinical Skills",
+      "population": "mixed",
+      "keywords": [
+        "assessment",
+        "clinical",
+        "control",
+        "fundamentals",
+        "infection",
+        "skills"
+      ]
+    },
+    "patient-safety": {
+      "title": "Patient Safety",
+      "class": "fundamentals",
+      "class_name": "Fundamentals of Nursing",
+      "category": "assessment-clinical-skills",
+      "category_name": "Assessment & Clinical Skills",
+      "population": "mixed",
+      "keywords": [
+        "assessment",
+        "clinical",
+        "fundamentals",
+        "patient",
+        "safety",
+        "skills"
+      ]
+    },
+    "mobility-transfers": {
+      "title": "Mobility & Transfers",
+      "class": "fundamentals",
+      "class_name": "Fundamentals of Nursing",
+      "category": "assessment-clinical-skills",
+      "category_name": "Assessment & Clinical Skills",
+      "population": "mixed",
+      "keywords": [
+        "assessment",
+        "clinical",
+        "fundamentals",
+        "mobility",
+        "skills",
+        "transfers"
+      ]
+    },
+    "documentation-charting": {
+      "title": "Documentation & Charting",
+      "class": "fundamentals",
+      "class_name": "Fundamentals of Nursing",
+      "category": "assessment-clinical-skills",
+      "category_name": "Assessment & Clinical Skills",
+      "population": "mixed",
+      "keywords": [
+        "assessment",
+        "charting",
+        "clinical",
+        "documentation",
         "fundamentals",
         "skills"
       ]

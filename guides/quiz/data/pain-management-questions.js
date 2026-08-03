@@ -296,19 +296,19 @@ var painManagementQuizData = {
             difficulty: "knowledge",
             stem: "A patient received an oral opioid at 09:00 and an IV opioid at 13:00. When should each pain reassessment be documented?",
             options: [
-                { id: "a", text: "09:15 and 13:30" },
-                { id: "b", text: "09:30 and 13:15" },
-                { id: "c", text: "10:00 and 14:00" },
+                { id: "a", text: "09:15 and 14:00" },
+                { id: "b", text: "09:45 and 13:15" },
+                { id: "c", text: "11:00 and 15:00" },
                 { id: "d", text: "At the next scheduled vital sign check for both" }
             ],
             correct: "b",
             rationale: {
-                correct: "Reassess 30 minutes after an oral dose and 15 minutes after an intravenous dose. Those intervals match when each route reaches peak effect.",
+                correct: "Reassess 45 to 60 minutes after an oral dose and 15 to 30 minutes after an intravenous dose. Those intervals match when each route reaches peak effect, and oral drugs have not peaked at 30 minutes.",
                 a: "The intervals are reversed. IV peaks faster than oral, not slower.",
-                c: "An hour is too late to catch an ineffective dose or a developing adverse effect.",
+                c: "Both are too late to catch an ineffective dose or a developing adverse effect.",
                 d: "Reassessment is tied to the route and the peak effect, not to the vital sign schedule."
             },
-            testTakingTip: "30 minutes oral, 15 minutes IV. Chart the score before and after.",
+            testTakingTip: "45 to 60 minutes oral, 15 to 30 minutes IV. Chart the score before and after.",
             guideSection: "Section 03: Assessment and picking the tool",
             guideSectionId: "assessment"
         },

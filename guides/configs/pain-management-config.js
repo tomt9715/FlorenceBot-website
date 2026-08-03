@@ -21,7 +21,7 @@ const sidebarConfig = {
         { type: 'critical', icon: 'fa-bed', value: 'Level 3', label: 'Hold, reduce, notify', section: 'safety' },
         { type: 'warning', icon: 'fa-wind', value: '<12/min', label: 'Hold the next dose', section: 'safety' },
         { type: 'target', icon: 'fa-prescription-bottle', value: '4 g/day', label: 'Acetaminophen ceiling', section: 'non-opioids' },
-        { type: 'info', icon: 'fa-clock', value: '30 / 15 min', label: 'Reassess oral / IV', section: 'assessment' },
+        { type: 'info', icon: 'fa-clock', value: '45-60 / 15 min', label: 'Reassess oral / IV', section: 'assessment' },
         { type: 'warning', icon: 'fa-hand-paper', value: '5-15 min', label: 'Usual PCA lockout', section: 'pca' },
         { type: 'critical', icon: 'fa-syringe', value: '30-90 min', label: 'Naloxone outlasted', section: 'safety' }
     ],

@@ -24,12 +24,14 @@
                     icon: 'fa-clipboard-check',
                     colorClass: 'icon-fundamentals',
                     guides: [
-                        { name: 'Assessment Skills', file: 'assessment-skills' }
+                        { name: 'Assessment Skills', file: 'assessment-skills' },
+                        { name: 'Infection Control', file: 'infection-control' },
+                        { name: 'Patient Safety', file: 'patient-safety' },
+                        { name: 'Mobility & Transfers', file: 'mobility-transfers' },
+                        { name: 'Documentation & Charting', file: 'documentation-charting' }
                     ],
                     comingSoon: [
-                        { name: 'Infection Control', icon: 'infection-control' },
                         { name: 'Delegation & Prioritization' },
-                        { name: 'Patient Safety', icon: 'patient-safety' },
                         { name: 'Wound Care' }
                     ]
                 }

@@ -1,5 +1,11 @@
 # Claude Code Instructions
 
+## Work Log
+At the end of every session, add an entry to the TNC Work Log in Obsidian:
+- **Primary (date-first):** `/Users/tomthomas/Documents/Obsidian/Manhattanville Courses/TNC/Work Log.md` — new entry at the top, tagged with `[Launch]` `[Quiz Bank]` `[Dashboard]` `[Rounds]` `[AI Features]` `[Content]` `[Backend]` `[Obsidian/Notion]` etc.
+- **Category index:** `/Users/tomthomas/Documents/Obsidian/Manhattanville Courses/TNC/Work Log by Category.md` — add a row to the relevant section(s).
+Format: `## YYYY-MM-DD — Claude Code` followed by bullet points of what was done.
+
 ## Project Overview
 
 **The Nursing Collective** - An e-commerce platform for nursing students offering study guides, practice questions, and educational resources.
