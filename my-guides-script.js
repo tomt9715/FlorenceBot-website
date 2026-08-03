@@ -305,7 +305,7 @@
             name: 'Mental Health Nursing',
             classIcon: 'mental-health-nursing-class-icon',
             classFaIcon: 'fa-brain',
-            description: 'Therapeutic communication, crisis intervention, and psychiatric disorders.',
+            description: 'Therapeutic communication, mood and thought disorders, trauma, and psychiatric medication safety.',
             gradient: 'linear-gradient(135deg, #a78bfa, #8b5cf6)',
             topics: [
                 {
@@ -314,12 +314,18 @@
                     icon: 'fa-comments',
                     colorClass: 'icon-mental-health',
                     guides: [],
+                    // Topic list mirrors the NUR2010 Psychiatric Nursing course sequence.
                     comingSoon: [
-                        { name: 'Depression & Anxiety', icon: 'depression-anxiety' },
-                        { name: 'Crisis Intervention', icon: 'crisis-intervention' },
                         { name: 'Therapeutic Communication', icon: 'therapeutic-communication' },
-                        { name: 'Substance Abuse', icon: 'substance-abuse' },
-                        { name: 'Eating Disorders', icon: 'eating-disorders' }
+                        { name: 'Mood Disorders & Suicide', icon: 'depression-anxiety' },
+                        { name: 'Schizophrenia & Psychosis' },
+                        { name: 'Anxiety & OCD' },
+                        { name: 'Personality Disorders' },
+                        { name: 'Trauma, Abuse & Aggression', icon: 'crisis-intervention' },
+                        { name: 'Substance Use Disorders', icon: 'substance-abuse' },
+                        { name: 'Neurocognitive Disorders' },
+                        { name: 'Eating Disorders', icon: 'eating-disorders' },
+                        { name: 'Somatic & Dissociative Disorders' }
                     ]
                 }
             ]
