@@ -2,7 +2,7 @@
 """Verify a rebuilt guide against GUIDE_REBUILD_PLAN.md non-negotiables."""
 import re, sys, os, statistics, json
 
-ROOT = '/Users/tomthomas/Discord-and-Website/nursing-collective-website'
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 def css_classes():
     have = set()
