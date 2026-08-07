@@ -125,13 +125,13 @@ Test that:
 
 ```bash
 # Frontend
-cd /Users/tomthomas/Discord-and-Website/nursing-collective-website
+cd "/Users/tomthomas/Documents/TNC Projects/Discord-and-Website/nursing-collective-website"
 git add guides/[product-id].html dashboard-script.js
 git commit -m "Add [Topic] study guide"
 git push origin main
 
 # Backend (if needed)
-cd /Users/tomthomas/Discord-and-Website/nursing-collective-backend
+cd "/Users/tomthomas/Documents/TNC Projects/Discord-and-Website/nursing-collective-backend"
 git add backend/routes/guide_routes.py
 git commit -m "Add [Topic] to HTML guides list"
 git push origin main
