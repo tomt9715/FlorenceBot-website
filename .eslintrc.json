@@ -13,6 +13,9 @@
     "Sentry": "readonly",
     "marked": "readonly",
     "module": "readonly",
+    "Cropper": "readonly",
+    "flatpickr": "readonly",
+    "gtag": "readonly",
 
     "API_URL": "writable",
     "apiService": "writable",
@@ -42,8 +45,36 @@
 
     "captureError": "writable",
     "trackAction": "writable",
+    "trackBetaEvent": "writable",
 
-    "initializeDashboard": "writable"
+    "initializeDashboard": "writable",
+
+    "escapeHtml": "writable",
+    "formatDate": "writable",
+    "formatDateTime": "writable",
+    "copyToClipboard": "writable",
+
+    "ensureValidToken": "writable",
+    "isTokenStale": "writable",
+    "checkSubscriptionStatus": "writable",
+    "getSubscriptionStatusCached": "writable",
+    "createCheckoutIntent": "writable",
+    "createUpgradeCheckout": "writable",
+
+    "renderProfilePicture": "writable",
+    "getProfilePictureUrl": "writable",
+    "applyUserStamp": "writable",
+
+    "CookieConsent": "writable",
+    "MasteryTracker": "writable",
+
+    "loadStudyPlan": "writable",
+    "loadExamCountdown": "writable",
+    "loadTodaysRounds": "writable",
+    "openExamModal": "writable",
+    "closeExamModal": "writable",
+    "openSemesterModal": "writable",
+    "closeSemesterModal": "writable"
   },
   "rules": {
     "no-unused-vars": ["warn", {
@@ -81,6 +112,8 @@
   "ignorePatterns": [
     "node_modules/",
     "*.min.js",
-    "vendor/"
+    "vendor/",
+    "cypress.config.js",
+    "jest.config.js"
   ]
 }
